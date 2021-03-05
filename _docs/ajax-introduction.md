@@ -1,4 +1,10 @@
-# AJAX Getting Started
+---
+title: AJAX Introduction
+navTitle: Introduction
+category: Ajax
+order: 1
+layout: default
+---
 
 - [Introduction](#introduction)
 - [Including the framework](#framework-script)
@@ -15,15 +21,19 @@ The AJAX framework comes in two flavors, you may either use [the JavaScript API]
 <a name="framework-script"></a>
 ## Including the framework
 
-The AJAX framework is optional in your [CMS theme](../cms/themes), to use the library you should include it by placing the `{% framework %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts). This adds a reference to the Winter front-end JavaScript library. The library requires jQuery so it should be loaded first, for example:
+The AJAX framework is optional in your [CMS theme](../cms/themes), to use the library you should include it by placing the `{% raw %}{% framework %}{% endraw %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts). This adds a reference to the Winter front-end JavaScript library. The library requires jQuery so it should be loaded first, for example:
 
+{% raw %}
     <script src="{{ 'assets/javascript/jquery.js' | theme }}"></script>
 
     {% framework %}
+{% endraw %}
 
-The `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](../ajax/extras), including form validation and loading indicators.
+The `{% raw %}{% framework %}{% endraw %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](../ajax/extras), including form validation and loading indicators.
 
+{% raw %}
     {% framework extras %}
+{% endraw %}
 
 <a name="how-ajax-works"></a>
 ## How AJAX requests work

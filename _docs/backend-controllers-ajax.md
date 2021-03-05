@@ -1,4 +1,10 @@
-# Backend Controllers & AJAX
+---
+title: Backend Controllers & AJAX
+navTitle: Controllers & Ajax
+category: Backend
+order: 1
+layout: default
+---
 
 - [Introduction](#introduction)
     - [Class definition](#class-definition)

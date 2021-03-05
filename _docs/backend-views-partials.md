@@ -1,4 +1,10 @@
-# Backend Views & Partials
+---
+title: Backend Views & Partials
+navTitle: Views & Partials
+category: Backend
+order: 2
+layout: default
+---
 
 - [Partials and hints](#partials)
     - [Hint partials](#hints)

@@ -1,5 +1,10 @@
-# AJAX Updating Partials
-
+---
+title: Updating Partials via AJAX
+navTitle: Updating partials
+category: Ajax
+order: 3
+layout: default
+---
 - [Pulling partial updates](#pulling-updates)
     - [Update definition](#update-definition)
     - [Appending and prepending content](#appending-prepending)
@@ -13,7 +18,7 @@ When a handler executes it may prepare partials that are updated on the page, ei
 
 The client browser may request partials to be updated from the server when it performs an AJAX request, which is considered *pulling a content update*. The following code renders the **mytime** partial inside the `#myDiv` element on the page after calling the `onRefreshTime` [event handler](../ajax/handlers).
 
-    <div id="myDiv">{% partial 'mytime' %}</div>
+    <div id="myDiv">{% raw %}{% partial 'mytime' %}{% endraw %}</div>
 
 The [data attributes API](../ajax/attributes-api) uses the `data-request-update` attribute.
 

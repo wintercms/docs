@@ -1,4 +1,10 @@
-# AJAX Event Handlers
+---
+title: AJAX Event Handlers
+navTitle: Event handlers
+category: Ajax
+order: 2
+layout: default
+---
 
 - [AJAX handlers](#ajax-handlers)
     - [Calling a handler](#calling-handlers)

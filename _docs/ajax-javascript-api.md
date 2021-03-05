@@ -1,4 +1,10 @@
-# AJAX JavaScript API
+---
+title: AJAX JavaScript API
+navTitle: JavaScript API
+category: Ajax
+order: 4
+layout: default
+---
 
 - [JavaScript API](#javascript-api)
 - [Usage examples](#javascript-examples)

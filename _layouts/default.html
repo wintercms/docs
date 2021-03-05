@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ page.title }}</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@600;800&family=Heebo:wght@400;700&family=Cousine&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="off-canvas off-canvas-sidebar-show">
+        <!-- off-screen toggle button -->
+        <a class="off-canvas-toggle btn btn-primary btn-action" href="#sidebar-id">
+          <i class="icon icon-menu"></i>
+        </a>
+      
+        <div id="sidebar-id" class="off-canvas-sidebar">
+            {% assign allDocs = site.docs | group_by: 'category' %}
+            {% for category in allDocs %}
+            <h3 class="category">{{ category.name }}</h3>
+            <ul>
+                {% assign categoryDocs = category.items | sort: 'order' %}
+                {% for doc in categoryDocs %}
+                <li>
+                    <a href="{{ doc.url }}" title="{{ doc.navTitle }}">
+                        {{ doc.navTitle }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+      
+        <a class="off-canvas-overlay" href="#close"></a>
+      
+        <div class="off-canvas-content">
+            <div class="page-content">
+                {{ content }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
