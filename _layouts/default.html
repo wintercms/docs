@@ -26,7 +26,7 @@
                 {% assign categoryDocs = category.items | sort: 'order' %}
                 {% for doc in categoryDocs %}
                 <li>
-                    <a href="{{ doc.url }}" title="{{ doc.navTitle }}">
+                    <a href="{{ doc.url | prepend:site.baseurl }}" title="{{ doc.navTitle }}">
                         {{ doc.navTitle }}
                     </a>
                 </li>
