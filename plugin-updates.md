@@ -26,11 +26,11 @@ The change log is stored in a YAML file called `version.yaml` inside the **/upda
 <a name="update-process"></a>
 ## Update process
 
-During an update the system will notify the user about recent changes to plugins, it can also prompt them about [important or breaking changes](#important-updates). Any given migration or seed file will only be excuted once after a successful update. October executes the update process automatically when any of the following occurs:
+During an update the system will notify the user about recent changes to plugins, it can also prompt them about [important or breaking changes](#important-updates). Any given migration or seed file will only be excuted once after a successful update. Winter executes the update process automatically when any of the following occurs:
 
 1. When an administrator signs in to the back-end.
 1. When the system is updated using the update feature in the back-end area.
-1. When the [console command](../console/commands#console-up-command) `php artisan october:up` is called in the command line from the application directory.
+1. When the [console command](../console/commands#console-up-command) `php artisan winter:up` is called in the command line from the application directory.
 
 > **Note:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
 
@@ -51,7 +51,7 @@ In the example above the **Acme.Blog** plugin will not be updated until the **Ac
 <a name="version-file"></a>
 ## Plugin version file
 
-The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://octobercms.com/help/site/marketplace). Here is an example of a plugin version file:
+The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://wintercms.com/help/site/marketplace). Here is an example of a plugin version file:
 
     1.0.1: "First version"
     1.0.2: "Second version"
@@ -103,7 +103,7 @@ The update file name should use *snake_case* while the containing PHP class shou
     <?php namespace Acme\Blog\Updates;
 
     use Schema;
-    use October\Rain\Database\Updates\Migration;
+    use Winter\Storm\Database\Updates\Migration;
 
     /**
      * some_upgrade_file.php

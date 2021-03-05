@@ -76,7 +76,7 @@ Here the `setFirstNameAttribute` function will be called with the value `Sally`.
 <a name="date-mutators"></a>
 ## Date mutators
 
-By default, Models in October will convert the `created_at` and `updated_at` columns to instances of a [Carbon](https://github.com/briannesbitt/Carbon) object, which provides an assortment of helpful methods and extends the native PHP `DateTime` class.
+By default, Models in Winter will convert the `created_at` and `updated_at` columns to instances of a [Carbon](https://github.com/briannesbitt/Carbon) object, which provides an assortment of helpful methods and extends the native PHP `DateTime` class.
 
 You may customize which fields are automatically mutated, and even completely disable this mutation, by overriding the `$dates` property of your model:
 

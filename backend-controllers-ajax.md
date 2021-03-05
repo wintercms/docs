@@ -14,7 +14,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-October back-end implements the MVC pattern. Controllers manage back-end pages and implement various features like forms and lists. This article describes how to develop back-end controllers and how to configure controller behaviors.
+Winter back-end implements the MVC pattern. Controllers manage back-end pages and implement various features like forms and lists. This article describes how to develop back-end controllers and how to configure controller behaviors.
 
 Each controller is represented with a PHP script which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are `.htm` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
 
@@ -159,7 +159,7 @@ The AJAX request can be triggered with the data attributes API or the JavaScript
 
 You can define middleware in your Backend controllers, providing you with a convenient mechanism for making changes to the response of a HTTP request. For example, you may wish to specify a HTTP header for certain actions in your controller, or redirect users if they don't meet certain criteria.
 
-Controller middleware is executed after the request is processed by October CMS, but before the response is sent to the browser.
+Controller middleware is executed after the request is processed by Winter CMS, but before the response is sent to the browser.
 
 To define middleware for your controller, you may specify it in the `__construct()` method of your Backend controller by calling the `middleware()` method.
 

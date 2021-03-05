@@ -4,7 +4,7 @@ The `| resize` filter attempts to resize the provided image source using the pro
 
     <img src="{{ 'banner.jpg' | media | resize(1920, 1080) }}" />
 
-If the filter can successfully resize the provided image, then a URL to the October image resizer (`/resize/$id/$targetUrl`) will be rendered as the output of this filter until the image has been successfully resized. Once the image has been resized any future calls to this filter with the specific image and configuration combination will instead output a direct URL to the resized image.
+If the filter can successfully resize the provided image, then a URL to the Winter image resizer (`/resize/$id/$targetUrl`) will be rendered as the output of this filter until the image has been successfully resized. Once the image has been resized any future calls to this filter with the specific image and configuration combination will instead output a direct URL to the resized image.
 
 This means that the actual work of resizing the image is delayed until the browser requests a specific image which prevents the resizing of the images from blocking the rendering of a page. It also means that several resize requests can be handled at once in parallel as the browser will make multiple requests at the same time for resized images with each request able to handle just resizing its own image.
 

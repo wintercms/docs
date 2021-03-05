@@ -483,14 +483,14 @@ Filter scopes can declare dependencies on other scopes by defining the `dependsO
         label: Country
         type: group
         conditions: country_id in (:filtered)
-        modelClass: October\Test\Models\Location
+        modelClass: Winter\Test\Models\Location
         options: getCountryOptions
 
     city:
         label: City
         type: group
         conditions: city_id in (:filtered)
-        modelClass: October\Test\Models\Location
+        modelClass: Winter\Test\Models\Location
         options: getCityOptions
         dependsOn: country
 

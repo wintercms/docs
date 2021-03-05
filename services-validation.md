@@ -109,7 +109,7 @@ After calling the `messages` method on a `Validator` instance, you will receive 
 <a name="error-messages-and-views"></a>
 ## Error messages & views
 
-Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by October. Consider the following routes as an example:
+Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by Winter. Consider the following routes as an example:
 
     public function onRegister()
     {
@@ -124,7 +124,7 @@ Once you have performed validation, you will need an easy way to get the error m
 
 Note that when validation fails, we pass the `Validator` instance to the Redirect using the `withErrors` method. This method will flash the error messages to the session so that they are available on the next request.
 
-October will always check for errors in the session data, and automatically bind them to the view if they are available. **So, it is important to note that an `errors` variable will always be available in all of your pages, on every request**, allowing you to conveniently assume the `errors` variable is always defined and can be safely used. The `errors` variable will be an instance of `MessageBag`.
+Winter will always check for errors in the session data, and automatically bind them to the view if they are available. **So, it is important to note that an `errors` variable will always be available in all of your pages, on every request**, allowing you to conveniently assume the `errors` variable is always defined and can be safely used. The `errors` variable will be an instance of `MessageBag`.
 
 So, after redirection, you may utilize the automatically bound `errors` variable in your view:
 
@@ -567,7 +567,7 @@ Then in your call to `Validator::make` use the `Lang:get` to use your custom fil
 
 There are a variety of helpful validation rules; however, you may wish to specify some of your own.
 
-The recommended way of adding your own validation rule is to extend the Validator instance via the `extend` method. In an October CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
+The recommended way of adding your own validation rule is to extend the Validator instance via the `extend` method. In an Winter CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
 
 You can extend the Validator instance with your custom validation rule as a `Closure`, or as a `Rule` object.
 

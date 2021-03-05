@@ -7,7 +7,7 @@
 - [Theme dependencies](#dependencies)
 - [Localization](#localization)
 
-The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the OctoberCMS Marketplace.
+The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the Winter CMS Marketplace.
 
 <a name="theme-information"></a>
 ## Theme information file
@@ -27,16 +27,16 @@ Field | Description
 **homepage** | specifies the author website URL, required.
 **description** | the theme description, required.
 **previewImage** | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
-**code** | the theme code, optional. The value is used on the OctoberCMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
+**code** | the theme code, optional. The value is used on the Winter CMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
 **form** | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
 **require** | an array of plugin names used for [theme dependencies](#dependencies), optional.
 
 Example of the theme information file:
 
-    name: "OctoberCMS Demo"
+    name: "Winter CMS Demo"
     description: "Demonstrates the basic concepts of the front-end theming."
-    author: "OctoberCMS"
-    homepage: "http://octobercms.com"
+    author: "Winter CMS"
+    homepage: "http://wintercms.com"
     code: "demo"
 
 <a name="version-file"></a>
@@ -137,7 +137,7 @@ Using some example content inside **themes/yourtheme/assets/less/theme.less**:
 
 A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
 
-    name: "OctoberCMS Demo"
+    name: "Winter CMS Demo"
     # [...]
 
     require:
@@ -149,9 +149,9 @@ When the theme is installed for the first time, the system will attempt to insta
 <a name="localization"></a>
 ## Localization
 
-Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the October backend and can be used for form labels just like [plugin localization](../plugin/localization)
+Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the Winter backend and can be used for form labels just like [plugin localization](../plugin/localization)
    
-> **Note**: Translating frontend content should be handled with the [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) plugin.
+> **Note**: Translating frontend content should be handled with the [RainLab.Translate](https://wintercms.com/plugin/rainlab-translate) plugin.
 
 <a name="localization-file-structure"></a>
 ### Localization directory and file structure
@@ -171,7 +171,7 @@ The **lang.php** file should define and return an array of any depth, for exampl
 
     <?php return [
         'options' => [
-            'website_name' => 'OctoberCMS'
+            'website_name' => 'Winter CMS'
         ]
     ];
 

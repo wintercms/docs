@@ -15,7 +15,7 @@ The `request` method has a single required argument - the AJAX handler name. Exa
     <form onsubmit="$(this).request('onProcess'); return false;">
         ...
 
-The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
+The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the Winter framework:
 
 Option | Description
 ------------- | -------------

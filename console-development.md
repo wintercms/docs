@@ -243,13 +243,13 @@ If you need to register commands from within a [service provider](application#se
 
 Sometimes you may wish to call other commands from your command. You may do so using the `call` method:
 
-    $this->call('october:up');
+    $this->call('winter:up');
 
 You can also pass arguments as an array:
 
-    $this->call('plugin:refresh', ['name' => 'October.Demo']);
+    $this->call('plugin:refresh', ['name' => 'Winter.Demo']);
 
 As well as options:
 
-    $this->call('october:update', ['--force' => true]);
+    $this->call('winter:update', ['--force' => true]);
 

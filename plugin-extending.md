@@ -45,7 +45,7 @@ The same can be achieved by extending the model's constructor and using a local 
 
 You can fire events globally (through the Event service) or locally.
 
-Local events are fired by calling `fireEvent()` on an instance of an object that implements `October\Rain\Support\Traits\Emitter`. Since local events are only fired on a specific object instance, it is not required to namespace them as it is less likely that a given project would have multiple events with the same name being fired on the same objects within a local context.
+Local events are fired by calling `fireEvent()` on an instance of an object that implements `Winter\Storm\Support\Traits\Emitter`. Since local events are only fired on a specific object instance, it is not required to namespace them as it is less likely that a given project would have multiple events with the same name being fired on the same objects within a local context.
 
     $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
 
@@ -103,7 +103,7 @@ These are some practical examples of how events can be used.
 <a name="extending-user-model"></a>
 ### Extending a User model
 
-This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
+This example will modify the [`model.getAttribute`](https://wintercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
 
     class Plugin extends PluginBase
     {
@@ -142,7 +142,7 @@ This example will modify the [`model.getAttribute`](https://octobercms.com/docs/
 
 There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms#extend-form-behavior).
 
-This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
+This example will listen to the [`backend.form.extendFields`](https://wintercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
     class Plugin extends PluginBase
     {
@@ -183,12 +183,12 @@ This example will listen to the [`backend.form.extendFields`](https://octobercms
         }
     }
 
-> **Note:** In some cases (adding fields that should be made translatable by [RainLab.Translate](https://github.com/rainlab/translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://octobercms.com/docs/api/backend/form/extendfieldsbefore) event instead.
+> **Note:** In some cases (adding fields that should be made translatable by [RainLab.Translate](https://github.com/rainlab/translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://wintercms.com/docs/api/backend/form/extendfieldsbefore) event instead.
 
 <a name="extending-backend-list"></a>
 ### Extending a backend list
 
-This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
+This example will modify the [`backend.list.extendColumns`](https://wintercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
     class Plugin extends PluginBase
     {
@@ -265,13 +265,13 @@ This example will replace the label for CMS and Pages in the backend with *...*.
         {
             Event::listen('backend.menu.extendItems', function($manager) {
 
-                $manager->addMainMenuItems('October.Cms', [
+                $manager->addMainMenuItems('Winter.Cms', [
                     'cms' => [
                         'label' => '...'
                     ]
                 ]);
 
-                $manager->addSideMenuItems('October.Cms', 'cms', [
+                $manager->addSideMenuItems('Winter.Cms', 'cms', [
                     'pages' => [
                         'label' => '...'
                     ]
@@ -285,10 +285,10 @@ Similarly we can remove the menu items with the same event:
 
     Event::listen('backend.menu.extendItems', function($manager) {
 
-        $manager->removeMainMenuItem('October.Cms', 'cms');
-        $manager->removeSideMenuItem('October.Cms', 'cms', 'pages');
+        $manager->removeMainMenuItem('Winter.Cms', 'cms');
+        $manager->removeSideMenuItem('Winter.Cms', 'cms', 'pages');
 
-        $manager->removeSideMenuItems('October.Cms', 'cms', [
+        $manager->removeSideMenuItems('Winter.Cms', 'cms', [
             'pages',
             'partials'
         ]);

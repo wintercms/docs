@@ -176,7 +176,7 @@ For more information read the [polymorphic relationships](../database/relations#
 
 The example below uses [array validation](../services/validation#validating-arrays) to validate `$attachMany` relationships.
 
-    use October\Rain\Database\Traits\Validation;
+    use Winter\Storm\Database\Traits\Validation;
     use System\Models\File;
     use Model;
 
