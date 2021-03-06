@@ -1,5 +1,10 @@
-# Database Queries
-
+---
+title: Database Queries
+navTitle: Queries
+category: Database
+order: 3
+layout: default
+---
 - [Introduction](#introduction)
 - [Retrieving results](#retrieving-results)
     - [Chunking results](#chunking-results)

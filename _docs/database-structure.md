@@ -1,5 +1,10 @@
-# Database structure and seeding
-
+---
+title: Database Structure and Seeding
+navTitle: Structure
+category: Database
+order: 2
+layout: default
+---
 - [Introduction](#introduction)
 - [Migration structure](#migration-structure)
     - [Creating tables](#creating-tables)

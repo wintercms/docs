@@ -1,5 +1,10 @@
-# Database Traits
-
+---
+title: Database Traits
+navTitle: Traits
+category: Database
+order: 10
+layout: default
+---
 - [Hashable](#hashable)
 - [Purgeable](#purgeable)
 - [Encryptable](#encryptable)
@@ -215,7 +220,7 @@ Collections of models that use this trait will return the type of `Winter\Storm\
 
 In order to render all levels of items and their children, you can use recursive processing
 
-    {% macro renderChildren(item) %}
+    {% raw %}{% macro renderChildren(item) %}
         {% import _self as SELF %}
         {% if item.children is not empty %}
             <ul>
@@ -227,7 +232,7 @@ In order to render all levels of items and their children, you can use recursive
     {% endmacro %}
 
     {% import _self as SELF %}
-    {{ SELF.renderChildren(category) | raw }}
+    {{ SELF.renderChildren(category) | raw }}{% endraw %}
 
 <a name="nested-tree"></a>
 ## Nested Tree

@@ -1,4 +1,10 @@
-# Database Behaviors
+---
+title: Database Behaviors
+navTitle: Behaviors
+category: Database
+order: 11
+layout: default
+---
 
 - [Purgeable](#purgeable)
 - [Sortable](#sortable)

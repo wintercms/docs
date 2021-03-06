@@ -1,5 +1,10 @@
-# Database attachments
-
+---
+title: Database Attachments
+navTitle: Attachments
+category: Database
+order: 6
+layout: default
+---
 - [File attachments](#file-attachments)
     - [Creating new attachments](#creating-attachments)
     - [Viewing attachments](#viewing-attachments)

@@ -1,5 +1,10 @@
-# Model Serialization
-
+---
+title: Model Serialization
+navTitle: Serialization
+category: Database
+order: 9
+layout: default
+---
 - [Introduction](#introduction)
 - [Basic usage](#basic-usage)
 - [Hiding attributes from JSON](#hiding-attributes-from-json)

@@ -1,4 +1,10 @@
-# Database: Getting Started
+---
+title: Database Basic Usage
+navTitle: Basic Usage
+category: Database
+order: 1
+layout: default
+---
 
 - [Introduction](#introduction)
 - [Configuration](#configuration)

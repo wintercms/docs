@@ -1,4 +1,10 @@
-# Database Relationships
+---
+title: Database Relationships
+navTitle: Relationships
+category: Database
+order: 5
+layout: default
+---
 
 - [Introduction](#introduction)
 - [Defining relationships](#defining-relationships)

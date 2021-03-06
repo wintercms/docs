@@ -1,5 +1,10 @@
-# Model Mutators
-
+---
+title: Model Mutators
+navTitle: Mutators
+category: Database
+order: 8
+layout: default
+---
 - [Introduction](#introduction)
 - [Accessors & mutators](#accessors-and-mutators)
 - [Date mutators](#date-mutators)

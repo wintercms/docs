@@ -1,5 +1,10 @@
-# Database Collection
-
+---
+title: Database Collections
+navTitle: Collections
+category: Database
+order: 7
+layout: default
+---
 - [Introduction](#introduction)
 - [Available methods](#available-methods)
 - [Custom collections](#custom-collections)

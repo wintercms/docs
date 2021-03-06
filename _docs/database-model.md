@@ -1,5 +1,10 @@
-# Active Record Model
-
+---
+title: Database Models
+navTitle: Models
+category: Database
+order: 4
+layout: default
+---
 - [Introduction](#introduction)
 - [Defining models](#defining-models)
     - [Supported properties](#standard-properties)
