@@ -1,7 +1,7 @@
 ---
 title: AJAX Introduction
 navTitle: Introduction
-category: Ajax
+category: AJAX
 order: 1
 layout: default
 ---

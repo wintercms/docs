@@ -1,7 +1,7 @@
 ---
 title: AJAX Data Attributes API
 navTitle: Data attributes API
-category: Ajax
+category: AJAX
 order: 5
 layout: default
 ---

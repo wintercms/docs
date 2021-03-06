@@ -1,7 +1,7 @@
 ---
 title: Updating Partials via AJAX
 navTitle: Updating partials
-category: Ajax
+category: AJAX
 order: 3
 layout: default
 ---

@@ -1,7 +1,7 @@
 ---
 title: AJAX Event Handlers
 navTitle: Event handlers
-category: Ajax
+category: AJAX
 order: 2
 layout: default
 ---
