@@ -1,5 +1,10 @@
-# Relations
-
+---
+title: Backend Relations
+navTitle: Relations
+category: Backend
+order: 6
+layout: default
+---
 - [Introduction](#introduction)
 - [Configuring the relation behavior](#configuring-relation)
 - [Relationship types](#relationship-types)

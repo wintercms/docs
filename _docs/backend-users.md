@@ -1,5 +1,10 @@
-# Backend Users & Permissions
-
+---
+title: Users & Permissions
+navTitle: Users & Permissions
+category: Backend
+order: 9
+layout: default
+---
 - [Users and Permissions](#users-and-permissions)
 - [Backend user helper](#backend-auth-facade)
 - [Registering permissions](#permission-registration)

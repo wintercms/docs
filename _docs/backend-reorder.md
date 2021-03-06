@@ -1,5 +1,10 @@
-# Backend sorting and reordering
-
+---
+title: Sorting Records
+navTitle: Sorting records
+category: Backend
+order: 7
+layout: default
+---
 - [Introduction](#introduction)
 - [Configuring the reorder behavior](#configuring-reorder)
 - [Displaying the reorder page](#reorder-display)

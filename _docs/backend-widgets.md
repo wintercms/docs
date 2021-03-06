@@ -1,5 +1,10 @@
-# Widgets
-
+---
+title: Backend Widgets
+navTitle: Widgets
+category: Backend
+order: 5
+layout: default
+---
 - [Generic Widgets](#generic-widgets)
     - [Class definition](#generic-class-definition)
     - [AJAX handlers](#generic-ajax-handlers)
