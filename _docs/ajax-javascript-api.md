@@ -1,7 +1,7 @@
 ---
 title: AJAX JavaScript API
 navTitle: JavaScript API
-category: Ajax
+category: AJAX
 order: 4
 layout: default
 ---

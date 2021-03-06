@@ -1,7 +1,7 @@
 ---
 title: AJAX Extra Features
 navTitle: Extra features
-category: Ajax
+category: AJAX
 order: 6
 layout: default
 ---
