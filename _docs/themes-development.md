@@ -1,3 +1,11 @@
+---
+title: Developing themes
+navTitle: Developing themes
+category: Themes
+order: 1
+layout: default
+---
+
 # Developing themes
 
 - [Theme information file](#theme-information)
@@ -93,7 +101,7 @@ The following is an example of how to define a website name configuration field 
 
 The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup#default-variables) called `this.theme`.
 
-    <h1>Welcome to {{ this.theme.site_name }}!</h1>
+    <h1>Welcome to {% raw %}{{ this.theme.site_name }}{% endraw %}!</h1>
 
 You may also define the configuration in a separate file, where the path is relative to the theme. The following definition will source the form fields from the file **config/fields.yaml** inside the theme.
 
@@ -126,7 +134,7 @@ Assets combined using the `| theme` [filter and combiner](../markup/filter-theme
 
 In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
 
-    <link href="{{ ['assets/less/theme.less'] | theme }}" rel="stylesheet">
+    <link href="{% raw %}{{ ['assets/less/theme.less'] | theme }}{% endraw %}" rel="stylesheet">
 
 Using some example content inside **themes/yourtheme/assets/less/theme.less**:
 

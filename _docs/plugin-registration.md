@@ -1,3 +1,11 @@
+---
+title: Registration
+navTitle: Registration
+category: Plugins
+order: 1
+layout: default
+---
+
 # Plugin Registration
 
 - [Introduction](#introduction)

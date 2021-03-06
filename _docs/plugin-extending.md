@@ -1,3 +1,10 @@
+---
+title: Extending Plugins
+navTitle: Extending Plugins
+category: Plugins
+order: 7
+layout: default
+---
 # Extending plugins
 
 - [Extending with events](#extending-with-events)
@@ -243,7 +250,7 @@ This example will declare a new global event `rainlab.forum.topic.post` and loca
 Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts#dynamic-pages). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
 
     [topic]
-    slug = "{{ :slug }}"
+    slug = "{% raw %}{{ :slug }}{% endraw %}"
     ==
     function onInit()
     {

@@ -1,3 +1,10 @@
+---
+title: Version History
+navTitle: Version History
+category: Plugins
+order: 2
+layout: default
+---
 # Version history
 
 - [Introduction](#introduction)

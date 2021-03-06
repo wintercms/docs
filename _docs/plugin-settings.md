@@ -1,3 +1,10 @@
+---
+title: Plugin Settings
+navTitle: Settings & Config
+category: Plugins
+order: 4
+layout: default
+---
 # Plugin Settings & Configuration
 
 - [Introduction](#introduction)

@@ -1,3 +1,11 @@
+---
+title: Building Components
+navTitle: Building Components
+category: Plugins
+order: 3
+layout: default
+---
+
 # Component Development
 
 - [Introduction](#introduction)
@@ -52,7 +60,7 @@ The **component class file** defines the component functionality and [component 
             ];
         }
 
-        // This array becomes available on the page as {{ component.posts }}
+        // This array becomes available on the page as {% raw %}{{ component.posts }}{% endraw %}
         public function posts()
         {
             return ['First Post', 'Second Post', 'Third Post'];
@@ -70,9 +78,9 @@ When this [component is attached to a page or layout](../cms/components), the cl
 
 You would be able to access its `posts` method through the `blogPosts` variable. Note that Twig supports the property notation for methods, so that you don't need to use brackets.
 
-    {% for post in blogPosts.posts %}
+    {% raw %}{% for post in blogPosts.posts %}
         {{ post }}
-    {% endfor %}
+    {% endfor %}{% endraw %}
 
 <a name="component-registration"></a>
 ### Component registration
@@ -138,7 +146,7 @@ You can also load all the properties as array:
     
 To access the property from the Twig partials for the component, utilize the `__SELF__` variable which refers to the Component object:
 
-   `{{ __SELF__.property('maxItems') }}`
+   {% raw %}`{{ __SELF__.property('maxItems') }}`{% endraw %}
 
 <a name="dropdown-properties"></a>
 ### Dropdown and Set properties
@@ -252,8 +260,8 @@ Alternatively the value can be referenced dynamically from the page URL using an
 
     url = "/blog/:my_custom_parameter"
 
-    [blogPost]
-    id = "{{ :my_custom_parameter }}"
+    {% raw %}[blogPost]
+    id = "{{ :my_custom_parameter }}"{% endraw %}
 
 In both cases the value can be retrieved by using the `property` method:
 
@@ -340,19 +348,23 @@ If the alias for this component was *demoTodo* this handler can be accessed by `
 <a name="default-markup"></a>
 ## Default markup
 
-All components can come with default markup that is used when including it on a page with the `{% component %}` tag, although this is optional. Default markup is kept inside the **component partials directory**, which has the same name as the component class in lower case.
+All components can come with default markup that is used when including it on a page with the {% raw %}`{% component %}`{% endraw %} tag, although this is optional. Default markup is kept inside the **component partials directory**, which has the same name as the component class in lower case.
 
-The default component markup should be placed in a file named **default.htm**. For example, the default markup for the Demo ToDo component is defined in the file **/plugins/winter/demo/components/todo/default.htm**. It can then be inserted anywhere on the page by using the `{% component %}` tag:
+The default component markup should be placed in a file named **default.htm**. For example, the default markup for the Demo ToDo component is defined in the file **/plugins/winter/demo/components/todo/default.htm**. It can then be inserted anywhere on the page by using the {% raw %}`{% component %}`{% endraw %} tag:
 
     url = "/todo"
 
     [demoTodo]
     ==
-    {% component 'demoTodo' %}
+    {% raw %}
+        {% component 'demoTodo' %}
+    {% endraw %}
 
 The default markup can also take parameters that override the [component properties](#component-properties) at the time they are rendered.
 
-    {% component 'demoTodo' maxItems="7" %}
+    {% raw %}
+        {% component 'demoTodo' maxItems="7" %}
+    {% endraw %}
 
 These properties will not be available in the `onRun` method since they are established after the page cycle has completed. Instead they can be processed by overriding the `onRender` method in the component class. The CMS controller executes this method before the default markup is rendered.
 
@@ -369,49 +381,55 @@ These properties will not be available in the `onRun` method since they are esta
 
 In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/winter/demo/components/todo/pagination.htm** and displayed on the page using:
 
-    {% partial 'demoTodo::pagination' %}
+    {% raw %}
+        {% partial 'demoTodo::pagination' %}
+    {% endraw %}
 
 A relaxed method can be used that is contextual. If called inside a component partial, it will directly refer to itself. If called inside a theme partial, it will scan all components used on the page/layout for a matching partial name and use that.
 
-    {% partial '@pagination' %}
+    {% raw %}
+        {% partial '@pagination' %}
+    {% endraw %}
 
 Multiple components can share partials by placing the partial file in a directory called **components/partials**. The partials found in this directory are used as a fallback when the usual component partial cannot be found. For example, a shared partial located in **/plugins/acme/blog/components/partials/shared.htm** can be displayed on the page by any component using:
 
-    {% partial '@shared' %}
+    {% raw %}
+        {% partial '@shared' %}
+    {% endraw %}
 
 <a name="referencing-self"></a>
 ### Referencing "self"
 
 Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components#aliases).
 
-    <form data-request="{{__SELF__}}::onEventHandler">
+    <form data-request="{% raw %}{{__SELF__}}{% endraw %}::onEventHandler">
         [...]
     </form>
 
 Components can also reference their own properties.
 
-    {% for item in __SELF__.items() %}
+    {% raw %}{% for item in __SELF__.items() %}
         {{ item }}
-    {% endfor %}
+    {% endfor %}{% endraw %}
 
 If inside a component partial you need to render another component partial concatenate the `__SELF__` variable with the partial name:
 
-    {% partial __SELF__~"::screenshot-list" %}
+    {% raw %}{% partial __SELF__~"::screenshot-list" %}{% endraw %}
 
 <a name="unique-identifier"></a>
 ### Unique identifier
 
 If an identical component is called twice on the same page, an `id` property can be used to reference each instance.
 
-    {{__SELF__.id}}
+    {% raw %}{{__SELF__.id}}{% endraw %}
 
 The ID is unique each time the component is displayed.
 
     <!-- ID: demoTodo527c532e9161b -->
-    {% component 'demoTodo' %}
+    {% raw %}{% component 'demoTodo' %}{% endraw %}
 
     <!-- ID: demoTodo527c532ec4c33 -->
-    {% component 'demoTodo' %}
+    {% raw %}{% component 'demoTodo' %}{% endraw %}
 
 <a name="render-partial-method"></a>
 ## Rendering partials from code

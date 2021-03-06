@@ -1,3 +1,10 @@
+---
+title: Task Scheduling
+navTitle: Task Scheduling
+category: Plugins
+order: 6
+layout: default
+---
 # Task Scheduling
 
 - [Introduction](#introduction)

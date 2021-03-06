@@ -1,3 +1,10 @@
+---
+title: Localization
+navTitle: Localization
+category: Plugins
+order: 5
+layout: default
+---
 # Localization
 
 - [Localization directory and file structure](#file-structure)
