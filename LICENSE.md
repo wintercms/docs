@@ -1,4 +1,4 @@
-Copyright (c) 2013-2021.03.01 October CMS
+Copyright (c) 2013-2021.03.01 October CMS<br>
 Copyright (c) 2021 Winter CMS
 
 # Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
