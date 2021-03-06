@@ -1,5 +1,6 @@
 div.page-content {
     margin: 0 auto;
+    width: 100%;
     max-width: 1000px;
 
     h1,
@@ -28,6 +29,60 @@ h6 {
     font-weight: 600;
 }
 
+#logo {
+  margin: $layout-spacing-sm 0 $layout-spacing;
+  width: 100%;
+
+  img {
+    width: 222px;
+    height: 54px;
+    color: #fff;
+  }
+}
+
+// Main nav
+nav#main-nav {
+  width: 100%;
+
+  h3 {
+    font-weight: 700;
+    margin: $layout-spacing 0;
+  }
+
+  a {
+    position: relative;
+    text-decoration: none;
+    outline: none;
+    box-shadow: none;
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  h3.active,
+  a.active {
+    color: #DE8754 !important;
+  }
+
+  ul li a.active {
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 9px;
+      left: -15px;
+      width: 8px;
+      height: 8px;
+      background: #DE8754;
+      border-radius: 50%;
+    }
+  }
+}
+
+// Notes
 blockquote {
     @include toast-variant($gray-color);
     border-left: 3px solid $gray-color-dark;
@@ -84,7 +139,25 @@ blockquote {
 // Syntax highlighting
 pre.highlight {
     padding: $layout-spacing-sm;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: $primary-color darken($dark-color, 3%);
+  
+    &::-webkit-scrollbar {
+      width: 12px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: darken($dark-color, 3%);
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary-color;
+      border-radius: 20px;
+      border: 3px solid darken($dark-color, 3%);
+    }
 }
+
 .highlight pre { background-color: lighten($dark-color, 6%); }
 .highlight code { background: inherit; color: inherit; padding: 0; border-radius: 0; color: $light-color; }
 .highlight .hll { background-color: lighten($dark-color, 10%); }
