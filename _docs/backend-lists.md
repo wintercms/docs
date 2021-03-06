@@ -80,6 +80,7 @@ Option | Description
 **deleteMessage** | a message to display when records are bulk deleted, can refer to a [localization string](../plugin/localization).
 **noRecordsDeletedMessage** | a message to display when a bulk delete action is triggered, but no records were deleted, can refer to a [localization string](../plugin/localization).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 0
+**perPageOptions** | options to provide the user when selecting how many records to display per page. Default: `[20, 40, 80, 100, 120]`
 **showPageNumbers** | displays page numbers with pagination. Disable this to improve list performance when working with large tables. Default: true
 **toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
 **showSorting** | displays the sorting link on each column. Default: true
@@ -885,14 +886,14 @@ The lookup query for the list [database model](../database/model) can be extende
     {
         $query->withTrashed();
     }
-    
+
 When dealing with multiple lists definitions in a same controller, you can use the second parameter of `listExtendQuery` which contains the name of the definition :
 
     public $listConfig = [
         'inbox' => 'config_inbox_list.yaml',
         'trashed' => 'config_trashed_list.yaml'
     ];
-    
+
     public function listExtendQuery($query, $definition)
     {
         if ($definition === 'trashed') {
