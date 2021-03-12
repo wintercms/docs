@@ -75,6 +75,7 @@ Argument | Description
 **scope** | filters the relation using a supplied scope method.
 **push** | if set to false, this relation will not be saved via `push`, default: true.
 **delete** | if set to true, the related model will be deleted if the primary model is deleted or relationship is destroyed, default: false.
+**detach** | if set to false the related model will not be automatically detached if the primary model is deleted or the relationship is destroyed. Used by `belongsToMany` relationships only, default: true.
 **count** | if set to true, the result contains a `count` column only, used for counting relations, default: false.
 
 Example filter using **order** and **conditions**:
