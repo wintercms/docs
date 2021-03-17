@@ -320,4 +320,3 @@ Deletes records in "system_files" table that do not belong to any other model.
 To also delete records that have no associated file in the local storage, pass the `--missing-files` option.
 
     php artisan winter:util purge orphans --missing-files
-
