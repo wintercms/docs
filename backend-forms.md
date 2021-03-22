@@ -475,7 +475,20 @@ Supplying the dropdown options to the model class:
         return ['published' => 'Published', ...];
     }
 
+### Add icon to dropdown options
 
+In order to add an icon or an image for every option which will be rendered in the dropdown field the options have to be provided as a multidimensional array with the following format `'key' => ['label-text', 'icon-class'],`.
+
+```php
+    public function listStatuses($fieldName, $value, $formData)
+    {
+        return [
+            'published' => ['Published', 'icon-check-circle'],
+            'unpublished' => ['Unpublished', 'icon-minus-circle'],
+            'draft' => ['Draft', 'icon-clock-o']
+        ];
+    }
+```
 
 To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
 
