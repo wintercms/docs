@@ -9,7 +9,11 @@
 - [Custom error messages](#custom-error-messages)
 - [Custom validation rules](#custom-validation-rules)
 
-> This section is for detailing validation with the `Validator` class. Validating a model is handled slightly differently via a trait. Please see the [Validation Trait](../database/traits#validation) section for more information on validating models.
+## Introduction
+
+Validation can be used to cross-examine data and produce error messages against data by supplying it to the `Validator` class. Validation with the `Validator` class can be used for things such as form submissions, query string data and other sources, as well as Model validation (see note below). This section of the documentation explains how to use the `Validator` class to situate, customise and perform validation within your project.
+
+> This section is for detailing validation with the `Validator` class. Validating models is handled slightly differently via a trait. Please see the [Validation Trait](../database/traits#validation) section for more information on validating models.
 
 <a name="basic-usage"></a>
 ## Basic usage
