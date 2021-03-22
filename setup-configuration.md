@@ -73,6 +73,9 @@ Use the following code in **server** section. If you have installed Winter into 
     location ~ ^/robots\.txt { try_files $uri /index.php; }
     location ~ ^/humans\.txt { try_files $uri /index.php; }
 
+    # Block access to all dot files and folders except .well-known
+    location ~ /\.(?!well-known).* { deny all; }
+
     ## Let nginx return 404 if static file not exists
     location ~ ^/storage/app/uploads/public { try_files $uri 404; }
     location ~ ^/storage/app/media { try_files $uri 404; }
