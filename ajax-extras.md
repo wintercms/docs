@@ -1,4 +1,10 @@
-# AJAX Extra features
+---
+title: AJAX Extra Features
+navTitle: Extra features
+category: AJAX
+order: 6
+layout: default
+---
 
 - [Loading indicator](#loader-stripe)
 - [Form validation](#ajax-validation)
@@ -11,7 +17,9 @@
 
 When using the AJAX framework, you have the option to specify the **extras** suffix which includes additional StyleSheet and JavaScript files. These features are useful when working with AJAX requests in front-end CMS pages.
 
+{% raw %}
     {% framework extras %}
+{% endraw %}
 
 <a name="loader-stripe"></a>
 ## Loading indicator
@@ -121,6 +129,7 @@ Combined with use of the `Flash` facade in the event handler, a flash message wi
 
 To remain consistent with AJAX based flash messages, you can render a [standard flash message](../markup/tag-flash) when the page loads by placing this code in your page or layout.
 
+{% raw %}
     {% flash %}
         <p
             data-control="flash-message"
@@ -129,6 +138,7 @@ To remain consistent with AJAX based flash messages, you can render a [standard 
             {{ message }}
         </p>
     {% endflash %}
+{% endraw %}
 
 <a name="usage-example"></a>
 ## Usage example

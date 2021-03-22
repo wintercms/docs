@@ -11,7 +11,9 @@ Variables:
     markup/this-layout: "this.layout"
     markup/this-theme: "this.theme"
     markup/this-param: "this.param"
+    markup/this-controller: "this.controller"
     markup/this-environment: "this.environment"
+    markup/this-session: "this.session"
 
 Tags:
   icon: "icon-tags"
@@ -38,7 +40,7 @@ Filters:
     markup/filter-page: "| page"
     markup/filter-theme: "| theme"
     markup/filter-media: "| media"
-    markup/filter-reszize: "| resize"
+    markup/filter-resize: "| resize"
     markup/filter-image-width: "| imageWidth"
     markup/filter-image-height: "| imageHeight"
     markup/filter-md: "| md"

@@ -154,7 +154,7 @@ If you need to use a custom `Collection` object with your own extension methods,
 
 Once you have defined a `newCollection` method, you will receive an instance of your custom collection anytime the model returns a `Collection` instance. If you would like to use a custom collection for every model in your plugin or application, you should override the `newCollection` method on a model base class that is extended by all of your models.
 
-    use October\Rain\Database\Collection as CollectionBase;
+    use Winter\Storm\Database\Collection as CollectionBase;
 
     class CustomCollection extends CollectionBase
     {
@@ -172,7 +172,7 @@ The `DataFeed` class mimics a regular model and supports `limit` and `paginate` 
 
 The next example will combine the User, Post and Comment models in to a single collection and returns the first 10 records.
 
-    $feed = new October\Rain\Database\DataFeed;
+    $feed = new Winter\Storm\Database\DataFeed;
     $feed->add('user', new User);
     $feed->add('post', Post::where('category_id', 7));
 

@@ -15,7 +15,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-All websites have pages. In October, pages are represented with page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages, but the [PHP section](themes#php-section) is optional. Below, you can see the simplest home page example:
+All websites have pages. In Winter, pages are represented with page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages, but the [PHP section](themes#php-section) is optional. Below, you can see the simplest home page example:
 
     url = "/"
     ==
@@ -32,6 +32,7 @@ Parameter | Description
 **title** | the page title, required.
 **layout** | the page [layout](layouts), optional. If specified, should contain the name of the layout file, without extension, for example: `default`.
 **description** | the page description for the back-end interface, optional.
+**hidden** | hidden pages are accessible only by logged-in back-end users, optional.
 
 <a name="url-syntax"></a>
 ### URL syntax
@@ -40,7 +41,9 @@ The page URL is defined with the **url** configuration parameter. URLs should st
 
     url = "/blog"
 
-URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by October components or from the page [PHP code](themes#php-section) section.
+> **Note:** The page URL is case-insensitive by default.
+
+URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by Winter components or from the page [PHP code](themes#php-section) section.
 
     url = "/blog/post/:post_id"
 
@@ -94,7 +97,7 @@ For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brow
 <a name="dynamic-pages"></a>
 ## Dynamic pages
 
-Inside the [Twig section](themes#twig-section) of a page template, you can use any [functions, filters, and tags provided by October](../markup). Any dynamic page requires **variables**. In October, variables may be prepared by the page, layout [PHP section](themes#php-section), or by [Components](components). In this article, we describe how to prepare variables in the PHP section.
+Inside the [Twig section](themes#twig-section) of a page template, you can use any [functions, filters, and tags provided by Winter](../markup). Any dynamic page requires **variables**. In Winter, variables may be prepared by the page, layout [PHP section](themes#php-section), or by [Components](components). In this article, we describe how to prepare variables in the PHP section.
 
 <a name="page-life-cycle"></a>
 ### Page execution life cycle
@@ -129,7 +132,7 @@ The next example is more complicated. It shows how to load a blog post collectio
         {% endfor %}
     </ul>
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts#dynamic-layouts) article.
+The default variables and Twig extensions provided by Winter are described in the [Markup Guide](../markup). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts#dynamic-layouts) article.
 
 <a name="life-cycle-response"></a>
 ### Sending a custom response
@@ -168,7 +171,7 @@ The `onHandleForm` function can be defined in the page or layout [PHP section](t
 
 The handler loads the value with the `post` function and initializes the page's `lastValue` attribute variable which is displayed below the form in the first example.
 
-> **Note:** If a handler with the same name is defined in the page layout, the page, and a page [component](components), October will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
+> **Note:** If a handler with the same name is defined in the page layout, the page, and a page [component](components), Winter will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
 
 If you want to refer to a handler defined in a specific [component](components), use the component's name or alias in the handler reference:
 

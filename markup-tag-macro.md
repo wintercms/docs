@@ -70,7 +70,7 @@ When you want to use a macro inside another macro from the same template, you ne
 
 Macros don't have access to the current page variables.
 
-    <!-- October CMS -->
+    <!-- Winter CMS -->
     {{ site_name }} 
 
     {% macro myFunction() %}
@@ -86,5 +86,5 @@ You may pass the variables to the function using the special `_context` variable
 
     {% import _self as form %}
 
-    <!-- October CMS -->
+    <!-- Winter CMS -->
     {{ form.myFunction(_context) }}

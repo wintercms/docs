@@ -18,7 +18,7 @@ The queue configuration file is stored in `config/queue.php`. In this file you w
 
 ### Driver prerequisites
 
-Before using the Amazon SQS, Beanstalkd, IronMQ or Redis drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
+Before using the Amazon SQS, Beanstalkd, IronMQ or Redis drivers you will need to install [Drivers plugin](http://wintercms.com/plugin/winter-drivers).
 
 <a name="basic-usage"></a>
 ## Basic usage
@@ -129,7 +129,7 @@ When using Iron.io [push queues](#push-queues), you should take extra precaution
 <a name="running-the-queue-worker"></a>
 ## Running the queue worker
 
-October includes some [console commands](../console/commands) that will process jobs in the queue.
+Winter includes some [console commands](../console/commands) that will process jobs in the queue.
 
 To process new jobs as they are pushed onto the queue, run the `queue:work` command:
 
@@ -188,7 +188,7 @@ You may use the `php artisan help queue:work` command to view all of the availab
 
 ### Deploying with daemon queue workers
 
-The simplest way to deploy an application using daemon queue workers is to put the application in maintenance mode at the beginning of your deployment. This can be done using the back-end settings area. Once the application is in maintenance mode, October will not accept any new jobs off of the queue, but will continue to process existing jobs.
+The simplest way to deploy an application using daemon queue workers is to put the application in maintenance mode at the beginning of your deployment. This can be done using the back-end settings area. Once the application is in maintenance mode, Winter will not accept any new jobs off of the queue, but will continue to process existing jobs.
 
 The easiest way to restart your workers is to include the following command in your deployment script:
 
@@ -215,17 +215,17 @@ Supervisor is a process monitor for the Linux operating system, and will automat
 
 ### Configuring Supervisor
 
-Supervisor configuration files are typically stored in the `/etc/supervisor/conf.d` directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let's create a `october-worker.conf` file that starts and monitors a `queue:work` process:
+Supervisor configuration files are typically stored in the `/etc/supervisor/conf.d` directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let's create a `winter-worker.conf` file that starts and monitors a `queue:work` process:
 
-    [program:october-worker]
+    [program:winter-worker]
     process_name=%(program_name)s_%(process_num)02d
-    command=php /path/to/october/artisan queue:work --sleep=3 --tries=3
+    command=php /path/to/winter/artisan queue:work --sleep=3 --tries=3
     autostart=true
     autorestart=true
-    user=october
+    user=winter
     numprocs=8
     redirect_stderr=true
-    stdout_logfile=/path/to/october/worker.log
+    stdout_logfile=/path/to/winter/worker.log
     
 In this example, the `numprocs` directive will instruct Supervisor to run 8 `queue:work` processes and monitor all of them, automatically restarting them if they fail. Of course, you should change the `queue:work` portion of the command directive to reflect your desired queue connection. The `user` directive should be changed to the name of a user that has permission to run the command.
 
@@ -237,7 +237,7 @@ Once the configuration file has been created, you may update the Supervisor conf
 
     sudo supervisorctl update
 
-    sudo supervisorctl start october-worker:*
+    sudo supervisorctl start winter-worker:*
     
 For more information on Supervisor, consult the [Supervisor documentation](http://supervisord.org/index.html).
 

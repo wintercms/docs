@@ -31,9 +31,9 @@
 <a name="introduction"></a>
 ## Introduction
 
-Database tables are often related to one another. For example, a blog post may have many comments, or an order could be related to the user who placed it. October makes managing and working with these relationships easy and supports several different types of relationships.
+Database tables are often related to one another. For example, a blog post may have many comments, or an order could be related to the user who placed it. Winter makes managing and working with these relationships easy and supports several different types of relationships.
 
-> **Note:** If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, October cannot connect the relations.
+> **Note:** If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, Winter cannot connect the relations.
 
 <a name="defining-relationships"></a>
 ## Defining relationships
@@ -75,6 +75,7 @@ Argument | Description
 **scope** | filters the relation using a supplied scope method.
 **push** | if set to false, this relation will not be saved via `push`, default: true.
 **delete** | if set to true, the related model will be deleted if the primary model is deleted or relationship is destroyed, default: false.
+**detach** | if set to false the related model will not be automatically detached if the primary model is deleted or the relationship is destroyed. Used by `belongsToMany` relationships only, default: true.
 **count** | if set to true, the result contains a `count` column only, used for counting relations, default: false.
 
 Example filter using **order** and **conditions**:
@@ -361,7 +362,7 @@ Argument | Description
 **otherKey** | the key column name of the related model (inside pivot table). Default value is combined from model name and `_id` suffix, i.e. `role_id`
 **relatedKey** | the key column name of the related model (inside related model table). Default: id
 **pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
-**pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot`.
+**pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `Winter\Storm\Database\Pivot`.
 **timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
 
 <a name="has-many-through"></a>
@@ -669,7 +670,7 @@ By default, the fully qualified class name is used to store the related model ty
 
 Using a custom polymorphic type lets you decouple your database from your application's internal structure. You may define a relationship "morph map" to provide a custom name for each model instead of the class name:
 
-    use October\Rain\Database\Relations\Relation;
+    use Winter\Storm\Database\Relations\Relation;
 
     Relation::morphMap([
         'staff' => 'Acme\Blog\Models\Staff',
@@ -830,12 +831,12 @@ If you need to set additional query constraints on the eager loading query, you 
 <a name="inserting-related-models"></a>
 ## Inserting related models
 
-Just like you would [query a relationship](#querying-relations), October supports defining a relationship using a method or dynamic property approach. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship.
+Just like you would [query a relationship](#querying-relations), Winter supports defining a relationship using a method or dynamic property approach. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship.
 
 <a name="inserting-method"></a>
 ### Insert via relationship method
 
-October provides convenient methods for adding new models to relationships. Primarily models can be added to a relationship or removed from a relationship. In each case the relationship is associated or disassociated respectively.
+Winter provides convenient methods for adding new models to relationships. Primarily models can be added to a relationship or removed from a relationship. In each case the relationship is associated or disassociated respectively.
 
 #### Add method
 
@@ -1082,9 +1083,9 @@ If you are unable to supply the `$sessionKey` when saving, you can commit the bi
 
 Destroys all bindings that have not been committed and are older than 1 day:
 
-    October\Rain\Database\Models\DeferredBinding::cleanUp(1);
+    Winter\Storm\Database\Models\DeferredBinding::cleanUp(1);
 
-> **Note:** October automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
+> **Note:** Winter automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
 
 <a name="disable-deferred-binding"></a>
 ### Disable Deferred Binding

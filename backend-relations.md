@@ -83,6 +83,7 @@ Option | Type | Description
 **showSorting** | List | displays the sorting link on each column. Default: true
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 **recordsPerPage** | List | maximum rows to display for each page.
+**noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
 **scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The model that this relationship will be attached to (i.e. the **parent model**) is passed to this scope method as the second parameter (`$query` is the first).
 **filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists#list-filters).
@@ -167,8 +168,6 @@ For example, if a *User* belongs to many *Roles*, the target model is set as the
 
 <a name="belongs-to-many-pivot"></a>
 ### Belongs to many (with Pivot Data)
-
-> **Note:** Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist. If your relation behavior config has `deferredBinding: true`, the pivot data will **not** be available to use in the list configuration (ex.`pivot[attribute]`).
 
 1. Related records are displayed as a list (**view.list**).
 1. Clicking a record will display an update form (**pivot.form**).
@@ -285,9 +284,9 @@ The relation manager can then be displayed for a specified relation definition b
 You may instruct the relation manager to render in read only mode by passing the option as the second argument:
 
     <?= $this->relationRender('comments', ['readOnly' => true]) ?>
-    
+
 <a name="extend-relation-behavior"></a>
-## Extending relation behavior    
+## Extending relation behavior
 
 Sometimes you may wish to modify the default relation behavior and there are several ways you can do this.
 
@@ -301,7 +300,7 @@ Sometimes you may wish to modify the default relation behavior and there are sev
 <a name="extend-relation-config"></a>
 ### Extending relation configuration
 
-Provides an opportunity to manipulate the relation configuration. The following example can be used to inject a different columns.yaml file based on a property of your model. 
+Provides an opportunity to manipulate the relation configuration. The following example can be used to inject a different columns.yaml file based on a property of your model.
 
     public function relationExtendConfig($config, $field, $model)
     {
@@ -310,11 +309,11 @@ Provides an opportunity to manipulate the relation configuration. The following 
             return;
 
         // Show a different list for business customers
-        if ($model->mode == 'b2b') {  
+        if ($model->mode == 'b2b') {
             $config->view['list'] = '$/author/plugin_name/models/mymodel/b2b_columns.yaml';
         }
     }
-    
+
 <a name="extend-view-widget"></a>
 ### Extending the view widget
 
@@ -328,56 +327,56 @@ For example you might want to toggle showCheckboxes based on a property of your 
         // Make sure the model and field matches those you want to manipulate
         if (!$model instanceof MyModel || $field != 'myField')
             return;
-            
+
         if ($model->constant) {
             $widget->showCheckboxes = false;
         }
     }
 
 <a name="remove-column"></a>
-#### How to remove a column 
+#### How to remove a column
 Since the widget has not completed initializing at this point of the runtime cycle you can't call $widget->removeColumn(). The addColumns() method as described in the [ListController documentation](/docs/backend/lists#extend-list-columns) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the relationExtendViewWidget() method. The following example shows how to remove a column:
 
     public function relationExtendViewWidget($widget, $field, $model)
-    {               
+    {
         // Make sure the model and field matches those you want to manipulate
         if (!$model instanceof MyModel || $field != 'myField')
             return;
-            
+
         // Will not work!
         $widget->removeColumn('my_column');
-        
+
         // This will work
         $widget->bindEvent('list.extendColumns', function () use($widget) {
             $widget->removeColumn('my_column');
         });
     }
-    
+
 <a name="extend-manage-widget"></a>
 ### Extending the manage widget
 
-Provides an opportunity to manipulate the manage widget of your relation. 
+Provides an opportunity to manipulate the manage widget of your relation.
 
     public function relationExtendManageWidget($widget, $field, $model)
     {
         // Make sure the field is the expected one
         if ($field != 'myField')
-            return; 
-            
+            return;
+
         // manipulate widget as needed
     }
 
 <a name="extend-pivot-widget"></a>
 ### Extending the pivot widget
 
-Provides an opportunity to manipulate the pivot widget of your relation. 
+Provides an opportunity to manipulate the pivot widget of your relation.
 
     public function relationExtendPivotWidget($widget, $field, $model)
     {
         // Make sure the field is the expected one
         if ($field != 'myField')
-            return; 
-            
+            return;
+
         // manipulate widget as needed
     }
 
@@ -390,24 +389,24 @@ There are two filter widgets that may be extended using the following methods, o
     {
         // Extends the view filter widget
     }
-    
+
     public function relationExtendManageFilterWidget($widget, $field, $model)
     {
         // Extends the manage filter widget
     }
-    
+
 Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](/docs/backend/lists#extend-filter-scopes).
-    
+
 <a name="extend-refresh-results"></a>
 ### Extending the refresh results
 
-The view widget is often refreshed when the manage widget makes a change, you can use this method to inject additional containers when this process occurs. Return an array with the extra values to send to the browser, eg: 
+The view widget is often refreshed when the manage widget makes a change, you can use this method to inject additional containers when this process occurs. Return an array with the extra values to send to the browser, eg:
 
     public function relationExtendRefreshResults($field)
     {
         // Make sure the field is the expected one
         if ($field != 'myField')
             return;
-            
+
         return ['#myCounter' => 'Total records: 6'];
-    }    
+    }

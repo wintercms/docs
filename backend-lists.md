@@ -1,4 +1,10 @@
-# Backend lists
+---
+title: Backend Lists
+navTitle: Lists
+category: Backend
+order: 3
+layout: default
+---
 
 - [Introduction](#introduction)
 - [Configuring the list behavior](#configuring-list)
@@ -11,6 +17,7 @@
 - [Multiple list definitions](#multiple-list-definitions)
 - [Using list filters](#list-filters)
     - [Scope options](#filter-scope-options)
+    - [Filter Dependencies](#filter-scope-options)
     - [Available scope types](#scope-types)
 - [Extending list behavior](#extend-list-behavior)
     - [Overriding controller action](#overriding-action)
@@ -70,7 +77,10 @@ Option | Description
 **recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
 **recordOnClick** | custom JavaScript code to execute when clicking on a record.
 **noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
+**deleteMessage** | a message to display when records are bulk deleted, can refer to a [localization string](../plugin/localization).
+**noRecordsDeletedMessage** | a message to display when a bulk delete action is triggered, but no records were deleted, can refer to a [localization string](../plugin/localization).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 0
+**perPageOptions** | options to provide the user when selecting how many records to display per page. Default: `[20, 40, 80, 100, 120]`
 **showPageNumbers** | displays page numbers with pagination. Disable this to improve list performance when working with large tables. Default: true
 **toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
 **showSorting** | displays the sorting link on each column. Default: true
@@ -104,7 +114,7 @@ Option | Description
 ------------- | -------------
 **prompt** | a placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
 **mode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the search query, the first argument will contain the search term.
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the search query. The first argument will contain the query object (as per a regular scope method), the second will contain the search term, and the third will be an array of the columns to be searched.
 **searchOnEnter** | setting this to true will make the search widget wait for the Enter key to be pressed before it starts searching (the default behavior is that it starts searching automatically after someone enters something into the search field and then pauses for a short moment).  Default: false.
 
 The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
@@ -370,8 +380,9 @@ To display a column that shows the number of related records, use the `useRelati
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the column name is used as the partial name. Inside the partial these variables are available: `$value` is the default cell value, `$record` is the model used for the cell and `$column` is the configured class object `Backend\Classes\ListColumn`.
 
     content:
+        label: Content
         type: partial
-        path: ~/plugins/acme/blog/models/comments/_content_column.htm
+        path: ~/plugins/acme/blog/models/comment/_content_column.htm
 
 <a name="column-colorpicker"></a>
 ### Color Picker
@@ -479,14 +490,14 @@ Filter scopes can declare dependencies on other scopes by defining the `dependsO
         label: Country
         type: group
         conditions: country_id in (:filtered)
-        modelClass: October\Test\Models\Location
+        modelClass: Winter\Test\Models\Location
         options: getCountryOptions
 
     city:
         label: City
         type: group
         conditions: city_id in (:filtered)
-        modelClass: October\Test\Models\Location
+        modelClass: Winter\Test\Models\Location
         options: getCityOptions
         dependsOn: country
 
@@ -579,7 +590,11 @@ These types can be used to determine how the filter scope should be displayed.
 <a name="filter-date"></a>
 ### Date
 
-`date` - displays a date picker for a single date to be selected.
+`date` - displays a date picker for a single date to be selected. The values available to be used in the conditions property are:
+
+- `:filtered`: The selected date formatted as `Y-m-d`
+- `:before`: The selected date formatted as `Y-m-d 00:00:00`, converted from the backend timezone to the app timezone
+- `:after`: The selected date formatted as `Y-m-d 23:59:59`, converted from the backend timezone to the app timezone
 
     created_at:
         label: Date
@@ -592,7 +607,12 @@ These types can be used to determine how the filter scope should be displayed.
 <a name="filter-daterange"></a>
 ### Date Range
 
-`daterange` - displays a date picker for two dates to be selected as a date range. The conditions parameters are passed as `:before` and `:after`.
+`daterange` - displays a date picker for two dates to be selected as a date range. The values available to be used in the conditions property are:
+
+ - `:before`: The selected "before" date formatted as `Y-m-d H:i:s`
+ - `:beforeDate`: The selected "before" date formatted as `Y-m-d`
+ - `:after`: The selected "after" date formatted as `Y-m-d H:i:s`
+ - `:afterDate`: The selected "after" date formatted as `Y-m-d`
 
     published_at:
         label: Date
@@ -642,7 +662,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
 <a name="filter-number"></a>
 ### Number
 
-`number` - displays input for a single number to be entered.
+`number` - displays input for a single number to be entered. The value is available to be used in the conditions property as `:filtered`.
 
     age:
         label: Age
@@ -653,7 +673,12 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
 <a name="filter-numberrange"></a>
 ### Number Range
 
-`numberrange` - displays inputs for two numbers to be entered as a number range. The conditions parameters are passed as `:min` and `:max`. You may leave either the minimum value blank to search everything up to the maximum value, and vice versa, you may leave the maximum value blank to search everything at least the minimum value.
+`numberrange` - displays inputs for two numbers to be entered as a number range. The values available to be used in the conditions property are:
+
+- `:min`: The minimum value, defaults to -2147483647
+- `:max`: The maximum value, defaults to 2147483647
+
+You may leave either the minimum value blank to search everything up to the maximum value, and vice versa, you may leave the maximum value blank to search everything at least the minimum value.
 
     visitors:
         label: Visitor Count
@@ -860,6 +885,20 @@ The lookup query for the list [database model](../database/model) can be extende
     public function listExtendQuery($query)
     {
         $query->withTrashed();
+    }
+
+When dealing with multiple lists definitions in a same controller, you can use the second parameter of `listExtendQuery` which contains the name of the definition :
+
+    public $listConfig = [
+        'inbox' => 'config_inbox_list.yaml',
+        'trashed' => 'config_trashed_list.yaml'
+    ];
+
+    public function listExtendQuery($query, $definition)
+    {
+        if ($definition === 'trashed') {
+            $query->onlyTrashed();
+        }
     }
 
 The [list filter](#list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:

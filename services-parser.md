@@ -6,7 +6,7 @@
 - [Bracket parser](#bracket-parser)
 - [YAML configuration parser](#yaml-parser)
 - [Initialization (INI) configuration parser](#ini-parser)
-    - [October flavored INI](#october-ini)
+    - [Winter flavored INI](#winter-ini)
 - [Dynamic Syntax parser](#dynamic-syntax-parser)
     - [View mode](#syntax-view-mode)
     - [Editor mode](#syntax-editor-mode)
@@ -15,7 +15,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-October uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes) use the [Twig](#twig-parser) and [INI format](#ini-parser) in their template structure. Each parser is described in more detail below.
+Winter uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes) use the [Twig](#twig-parser) and [INI format](#ini-parser) in their template structure. Each parser is described in more detail below.
 
 <a name="markdown-parser"></a>
 ## Markdown parser
@@ -55,9 +55,9 @@ The Twig parser can be extended to register custom features via [the plugin regi
 <a name="bracket-parser"></a>
 ## Bracket parser
 
-October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content#content-variables). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
+Winter also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content#content-variables). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `Winter\Storm\Parse\Bracket` class should be used with the `parse` method.
 
-    use October\Rain\Parse\Bracket;
+    use Winter\Storm\Parse\Bracket;
 
     $html = Bracket::parse($content, ['foo' => 'bar']);
 
@@ -84,7 +84,7 @@ The array can be iterated using the following syntax:
 <a name="yaml-parser"></a>
 ## YAML configuration parser
 
-YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October, such as [form field](../backend/forms#form-fields) and [list column](../backend/lists##list-columns) definitions. An example of some YAML:
+YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of Winter, such as [form field](../backend/forms#form-fields) and [list column](../backend/lists##list-columns) definitions. An example of some YAML:
 
     receipt:     Acme Purchase Invoice
     date:        2015-10-02
@@ -128,8 +128,8 @@ The parser also supports operation in reverse, outputting INI format from a PHP 
 
     $iniString = Ini::render($array);
 
-<a name="october-ini"></a>
-### October flavored INI
+<a name="winter-ini"></a>
+### Winter flavored INI
 
 Traditionally, the INI parser used by the PHP function `parse_ini_string` is restricted to arrays that are 3 levels deep. For example:
 
@@ -141,7 +141,7 @@ Traditionally, the INI parser used by the PHP function `parse_ini_string` is res
     level2Array[] = "world"
     level2Object[level3Value] = "stop here"
 
-October has extended this functionality with *October flavored INI* to allow arrays of infinite depth, inspired by the syntax of HTML forms. Following on from the above example, the following syntax is supported:
+Winter has extended this functionality with *Winter flavored INI* to allow arrays of infinite depth, inspired by the syntax of HTML forms. Following on from the above example, the following syntax is supported:
 
     [level1Object]
     level2Object[level3Array][] = "Yay!"
@@ -153,13 +153,13 @@ October has extended this functionality with *October flavored INI* to allow arr
 <a name="dynamic-syntax-parser"></a>
 ## Dynamic Syntax parser
 
-Dynamic Syntax is a templating engine unique to October that fundamentally supports two modes of rendering. Parsing a template will produce two results, either a **view** or **editor** mode. Take this template text as an example, the inner part of the `{text}...{/text}` tags represents the default text for the **view** mode, while the inner attributes, `name` and `label`, are used as properties for the **editor** mode.
+Dynamic Syntax is a templating engine unique to Winter that fundamentally supports two modes of rendering. Parsing a template will produce two results, either a **view** or **editor** mode. Take this template text as an example, the inner part of the `{text}...{/text}` tags represents the default text for the **view** mode, while the inner attributes, `name` and `label`, are used as properties for the **editor** mode.
 
     <h1>{text name="websiteName" label="Website Name"}Our wonderful website{/text}</h1>
 
-There is no facade for this parser so the fully qualified `October\Rain\Parse\Syntax\Parser` class should be used with the `parse` method. The first argument of the `parse` method takes the template content as a string and returns a `Parser` object.
+There is no facade for this parser so the fully qualified `Winter\Storm\Parse\Syntax\Parser` class should be used with the `parse` method. The first argument of the `parse` method takes the template content as a string and returns a `Parser` object.
 
-    use October\Rain\Parse\Syntax\Parser as SyntaxParser;
+    use Winter\Storm\Parse\Syntax\Parser as SyntaxParser;
 
     $syntax = SyntaxParser::parse($content);
 
@@ -173,8 +173,8 @@ Let's say we used the first example above as the template content, calling the `
 
 Just like any templating engine, passing an array of variables to the first argument of `render` will replace the variables inside the template. Here the default value of `websiteName` is replaced with our new value:
 
-    echo $syntax->render(['websiteName' => 'OctoberCMS']);
-    // <h1>OctoberCMS</h1>
+    echo $syntax->render(['websiteName' => 'Winter CMS']);
+    // <h1>Winter CMS</h1>
 
 As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#twig-parser).
 
@@ -184,7 +184,7 @@ As a bonus feature, calling the `toTwig` method will output the template in a pr
 <a name="syntax-editor-mode"></a>
 ### Editor mode
 
-So far the Dynamic Syntax parser is not much different to a regular template engine, however the editor mode is where the utility of Dynamic Syntax becomes more apparent. The editor mode unlocks a new realm of possibility, for example, where [layouts inject custom form fields to pages](http://octobercms.com/plugin/rainlab-pages) that belong to them or for [dynamically built forms used in email campaigns](http://octobercms.com/plugin/responsiv-campaign).
+So far the Dynamic Syntax parser is not much different to a regular template engine, however the editor mode is where the utility of Dynamic Syntax becomes more apparent. The editor mode unlocks a new realm of possibility, for example, where [layouts inject custom form fields to pages](http://wintercms.com/plugin/rainlab-pages) that belong to them or for [dynamically built forms used in email campaigns](http://wintercms.com/plugin/responsiv-campaign).
 
 To continue with the examples above, calling the `toEditor` method on the `Parser` object will return a PHP array of properties that define how the variable should be populated, by a form builder for example.
 
@@ -227,6 +227,14 @@ Multiple line input for larger blocks of text.
 Renders a dropdown form field.
 
     {dropdown name="dropdown" label="Pick one" options="One|Two"}{/dropdown}
+
+Renders a dropdown form field with independent values and labels.
+
+    {dropdown name="dropdown" label="Pick one" options="one:One|two:Two"}{/dropdown}
+
+Renders a dropdown form field with an array returned by a static class method (the class must be a fully namespaced class).
+
+    {dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
 
 ### Radio
 
@@ -291,6 +299,12 @@ Renders in Twig as
 File uploader input for files. This tag value will contain the full path to the file.
 
     {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
+    
+#### Color picker
+
+Color picker widget for color selection. This tag will contain the selected hexadecimal value. You may optionally provide an `availableColors` attribute to define the available colours for selection.
+
+    {colorpicker name="bg_color" label="Background colour" allowEmpty="true" availableColors="#ffffff|#000000"}{/colorpicker}
 
 #### Repeater
 

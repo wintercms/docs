@@ -1,4 +1,10 @@
-# AJAX Getting Started
+---
+title: AJAX Introduction
+navTitle: Introduction
+category: AJAX
+order: 1
+layout: default
+---
 
 - [Introduction](#introduction)
 - [Including the framework](#framework-script)
@@ -8,22 +14,26 @@
 <a name="introduction"></a>
 ## Introduction
 
-October includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in [CMS themes](../cms/themes) and anywhere in the [back-end administration area](../backend/controllers-ajax#ajax).
+Winter includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in [CMS themes](../cms/themes) and anywhere in the [back-end administration area](../backend/controllers-ajax#ajax).
 
-The AJAX framework comes in two flavors, you may either use [the JavaScript API](../ajax/javascript-api) or [the data attributes API](../ajax/attributes-api). The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
+The AJAX framework comes in two flavors, you may either use [the JavaScript API](../ajax/javascript-api) or [the data attributes API](../ajax/attributes-api). The data attributes API doesn't require any JavaScript knowledge to use AJAX with Winter.
 
 <a name="framework-script"></a>
 ## Including the framework
 
-The AJAX framework is optional in your [CMS theme](../cms/themes), to use the library you should include it by placing the `{% framework %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts). This adds a reference to the October front-end JavaScript library. The library requires jQuery so it should be loaded first, for example:
+The AJAX framework is optional in your [CMS theme](../cms/themes), to use the library you should include it by placing the `{% raw %}{% framework %}{% endraw %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts). This adds a reference to the Winter front-end JavaScript library. The library requires jQuery so it should be loaded first, for example:
 
+{% raw %}
     <script src="{{ 'assets/javascript/jquery.js' | theme }}"></script>
 
     {% framework %}
+{% endraw %}
 
-The `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](../ajax/extras), including form validation and loading indicators.
+The `{% raw %}{% framework %}{% endraw %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](../ajax/extras), including form validation and loading indicators.
 
+{% raw %}
     {% framework extras %}
+{% endraw %}
 
 <a name="how-ajax-works"></a>
 ## How AJAX requests work

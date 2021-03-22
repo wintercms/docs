@@ -17,11 +17,11 @@ Model traits are used to implement common functionality.
 <a name="hashable"></a>
 ## Hashable
 
-Hashed attributes are hashed immediately when the attribute is first set on the model. To hash attributes in your model, apply the `October\Rain\Database\Traits\Hashable` trait and declare a `$hashable` property with an array containing the attributes to hash.
+Hashed attributes are hashed immediately when the attribute is first set on the model. To hash attributes in your model, apply the `Winter\Storm\Database\Traits\Hashable` trait and declare a `$hashable` property with an array containing the attributes to hash.
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\Hashable;
+        use \Winter\Storm\Database\Traits\Hashable;
 
         /**
          * @var array List of attributes to hash.
@@ -32,11 +32,11 @@ Hashed attributes are hashed immediately when the attribute is first set on the 
 <a name="purgeable"></a>
 ## Purgeable
 
-Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `October\Rain\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to purge.
+Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `Winter\Storm\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to purge.
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\Purgeable;
+        use \Winter\Storm\Database\Traits\Purgeable;
 
         /**
          * @var array List of attributes to purge.
@@ -51,11 +51,11 @@ The defined attributes will be purged when the model is saved, before the [model
 <a name="encryptable"></a>
 ## Encryptable
 
-Similar to the [hashable trait](#hashable), encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `October\Rain\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
+Similar to the [hashable trait](#hashable), encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `Winter\Storm\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\Encryptable;
+        use \Winter\Storm\Database\Traits\Encryptable;
 
         /**
          * @var array List of attributes to encrypt.
@@ -68,11 +68,11 @@ Similar to the [hashable trait](#hashable), encrypted attributes are encrypted w
 <a name="sluggable"></a>
 ## Sluggable
 
-Slugs are meaningful codes that are commonly used in page URLs. To automatically generate a unique slug for your model, apply the `October\Rain\Database\Traits\Sluggable` trait and declare a `$slugs` property.
+Slugs are meaningful codes that are commonly used in page URLs. To automatically generate a unique slug for your model, apply the `Winter\Storm\Database\Traits\Sluggable` trait and declare a `$slugs` property.
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\Sluggable;
+        use \Winter\Storm\Database\Traits\Sluggable;
 
         /**
          * @var array Generate slugs for these attributes.
@@ -115,11 +115,11 @@ Set the `$allowTrashedSlugs` attribute to `true` in order to take into account s
 <a name="revisionable"></a>
 ## Revisionable
 
-October models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `October\Rain\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](relations) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.
+Winter models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `Winter\Storm\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](relations) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\Revisionable;
+        use \Winter\Storm\Database\Traits\Revisionable;
 
         /**
          * @var array Monitor these attributes for changes.
@@ -161,11 +161,11 @@ The revision record optionally supports a user relationship using the `user_id` 
 <a name="sortable"></a>
 ## Sortable
 
-Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use (example: `$table->integer('sort_order')->default(0);`).
+Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To store a sort order for your models, apply the `Winter\Storm\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use (example: `$table->integer('sort_order')->default(0);`).
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\Sortable;
+        use \Winter\Storm\Database\Traits\Sortable;
     }
     
 
@@ -186,11 +186,11 @@ Use the `setSortableOrder` method to set the orders on a single record or multip
 <a name="simple-tree"></a>
 ## Simple Tree
 
-A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To use the simple tree, apply the `October\Rain\Database\Traits\SimpleTree` trait.
+A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To use the simple tree, apply the `Winter\Storm\Database\Traits\SimpleTree` trait.
 
     class Category extends Model
     {
-        use \October\Rain\Database\Traits\SimpleTree;
+        use \Winter\Storm\Database\Traits\SimpleTree;
     }
 
 This trait will automatically inject two [model relations](../database/relations) called `parent` and `children`, it is the equivalent of the following definitions:
@@ -207,7 +207,7 @@ You may modify the key name used to identify the parent by defining the `PARENT_
 
     const PARENT_ID = 'my_parent_column';
 
-Collections of models that use this trait will return the type of `October\Rain\Database\TreeCollection` which adds the `toNested` method. To build an eager loaded tree structure, return the records with the relations eager loaded.
+Collections of models that use this trait will return the type of `Winter\Storm\Database\TreeCollection` which adds the `toNested` method. To build an eager loaded tree structure, return the records with the relations eager loaded.
 
     Category::all()->toNested();
     
@@ -232,11 +232,11 @@ In order to render all levels of items and their children, you can use recursive
 <a name="nested-tree"></a>
 ## Nested Tree
 
-The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To use a nested set model, apply the `October\Rain\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
+The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To use a nested set model, apply the `Winter\Storm\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
 
     class Category extends Model
     {
-        use \October\Rain\Database\Traits\NestedTree;
+        use \Winter\Storm\Database\Traits\NestedTree;
     }
 
 ### Creating a root node
@@ -292,11 +292,11 @@ There are several methods for moving nodes around:
 <a name="validation"></a>
 ## Validation
 
-October models uses the built-in [Validator class](../services/validation). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`:
+Winter models uses the built-in [Validator class](../services/validation). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `Winter\Storm\Database\Traits\Validation`:
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\Validation;
+        use \Winter\Storm\Database\Traits\Validation;
 
         public $rules = [
             'name'                  => 'required|between:4,16',
@@ -306,7 +306,17 @@ October models uses the built-in [Validator class](../services/validation). The 
         ];
     }
 
-> **Note**: You're free to use the [array syntax](../services/validation#basic-usage) for validation rules as well.
+> **Note**: You're free to use the [array syntax](../services/validation#validating-arrays) for validation rules as well.
+
+    class User extends Model
+    {
+        use \Winter\Storm\Database\Traits\Validation;
+
+        public $rules = [
+            'links.*.url'    => 'required|url',
+            'links.*.anchor' => 'required'
+        ];
+    }
 
 Models validate themselves automatically when the `save` method is called.
 
@@ -350,6 +360,26 @@ Just like the Validator class, you can set custom error messages using the [same
         ];
     }
 
+You can also add custom error messages to the array syntax for validation rules as well.
+
+    class User extends Model
+    {
+        use \Winter\Storm\Database\Traits\Validation;
+
+        public $rules = [
+            'links.*.url'    => 'required|url',
+            'links.*.anchor' => 'required'
+        ];
+
+        public $customMessages = [
+            'links.*.url.required'    => 'The url is required',
+            'links.*.url.*'           => 'The url needs to be a valid url'
+            'links.*.anchor.required' => 'The anchor text is required',
+        ];
+    }
+
+In the above example you can write custom error messages to specific validation rules (here we used: `required`). Or you can use a `*` to select everything else (here we added a custom message to the `url` validation rule using the `*`).
+
 <a name="custom-attribute-names"></a>
 ### Custom attribute names
 
@@ -384,11 +414,11 @@ You can also create custom validation rules the [same way](../services/validatio
 <a name="soft-deleting"></a>
 ## Soft deleting
 
-When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDelete` trait to the model and add the deleted_at column to your `$dates` property:
+When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `Winter\Storm\Database\Traits\SoftDelete` trait to the model and add the deleted_at column to your `$dates` property:
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\SoftDelete;
+        use \Winter\Storm\Database\Traits\SoftDelete;
 
         protected $dates = ['deleted_at'];
     }
@@ -457,7 +487,7 @@ When two related models have soft deletes enabled, you can cascade the delete ev
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\SoftDelete;
+        use \Winter\Storm\Database\Traits\SoftDelete;
 
         public $hasMany = [
             'comments' => ['Acme\Blog\Models\Comment', 'softDelete' => true]
@@ -480,11 +510,11 @@ In order to make the model restoration less painful [checkout the Sluggable sect
 <a name="nullable"></a>
 ## Nullable
 
-Nullable attributes are set to `NULL` when left empty. To nullify attributes in your model, apply the `October\Rain\Database\Traits\Nullable` trait and declare a `$nullable` property with an array containing the attributes to nullify.
+Nullable attributes are set to `NULL` when left empty. To nullify attributes in your model, apply the `Winter\Storm\Database\Traits\Nullable` trait and declare a `$nullable` property with an array containing the attributes to nullify.
 
     class Product extends Model
     {
-        use \October\Rain\Database\Traits\Nullable;
+        use \Winter\Storm\Database\Traits\Nullable;
 
         /**
          * @var array Nullable attributes.

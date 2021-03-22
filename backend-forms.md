@@ -1,4 +1,10 @@
-# Backend forms
+---
+title: Backend Forms
+navTitle: Forms
+category: Backend
+order: 4
+layout: default
+---
 
 - [Introduction](#introduction)
 - [Configuring the form behavior](#configuring-form)
@@ -332,7 +338,7 @@ If you would like to validate this field server-side on save to ensure that it i
         'your_age' => 'numeric',
     ];
 
-For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
+For more information on model validation, please visit [the documentation page](https://wintercms.com/docs/services/validation#rule-numeric).
 
 <a name="field-password"></a>
 ### Password
@@ -361,7 +367,7 @@ If you would like to validate this field on save to ensure that it is a properly
         'user_email' => 'email',
     ];
 
-For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
+For more information on model validation, please visit [the documentation page](https://wintercms.com/docs/services/validation#rule-email).
 
 <a name="field-textarea"></a>
 ### Textarea
@@ -376,7 +382,22 @@ For more information on model validation, please visit [the documentation page](
 <a name="field-dropdown"></a>
 ### Dropdown
 
-`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines `options` directly in the YAML file:
+`dropdown` - renders a dropdown with specified options. There are 6 ways to provide the drop-down options.
+
+The first method defines `options` directly in the YAML file(two variants):
+
+(value only):
+
+    status_type:
+        label: Blog Post Status
+        type: dropdown
+        default: published
+        options:
+            draft
+            published
+            archived
+
+(key / value):
 
     status_type:
         label: Blog Post Status
@@ -387,7 +408,7 @@ For more information on model validation, please visit [the documentation page](
             published: Published
             archived: Archived
 
-The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model. Using the example above, the model should have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
+The second method defines options with a method declared in the model class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model. Using the example above, the model should have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
 
     status_type:
         label: Blog Post Status
@@ -412,7 +433,7 @@ The third global method `getDropdownOptions` can also be defined in the model, t
         }
     }
 
-The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
+The fourth method uses a specific method declared in the model class. In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
 
     status:
         label: Blog Post Status
@@ -425,6 +446,36 @@ Supplying the dropdown options to the model class:
     {
         return ['published' => 'Published', ...];
     }
+
+The fifth method allows you to specify a static method on a class to return the options:
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        options: \MyAuthor\MyPlugin\Classes\FormHelper::staticMethodOptions
+
+Supplying the dropdown options to the model class:
+
+    public static function staticMethodOptions($formWidget, $formField)
+    {
+        return ['published' => 'Published', ...];
+    }
+
+The sixth method allows you to specify a callable object via an array definition. If using PHP, you're able to provide an array with the first element being the object and the second element being the method you want to call on that object. If you're using YAML, you're limited to a static method defined as the second element and the namespaced reference to a class as the first element:
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        options: [\MyAuthor\MyPlugin\Classes\FormHelper, staticMethodOptions]
+
+Supplying the dropdown options to the model class:
+
+    public static function staticMethodOptions($formWidget, $formField)
+    {
+        return ['published' => 'Published', ...];
+    }
+
+
 
 To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
 
@@ -471,7 +522,7 @@ Radio lists can also support a secondary description.
             registered: [Registered only, Only logged in member will be able to access this page.]
             guests: [Guests only, Only guest users will be able to access this page.]
 
-Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
+Radio lists support the same methods for defining the options as the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
 <a name="field-balloon"></a>
 ### Balloon Selector
@@ -486,7 +537,7 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
             female: Female
             male: Male
 
-Balloon selectors support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown).
+Balloon selectors support the same methods for defining the options as the [dropdown field type](#field-dropdown).
 
 <a name="field-checkbox"></a>
 ### Checkbox
@@ -515,7 +566,7 @@ Balloon selectors support three ways of defining the options, exactly like the [
             close_account: Close account
             modify_account: Modify account
 
-Checkbox lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
+Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
 <a name="field-switch"></a>
 ### Switch
@@ -600,7 +651,7 @@ There are various form widgets included as standard, although it is common for p
 
 Option | Description
 ------------- | -------------
-**language** | code language, for example, php, css, js, html. Default: php.
+**language** | code language, for example, php, css, javascript, html. Default: php.
 **showGutter** | shows a gutter with line numbers. Default: true.
 **wrapWords** | breaks long lines on to a new line. Default true.
 **fontSize** | the text font size. Default: 12.
@@ -625,7 +676,7 @@ There are two ways to provide the available colors for the colorpicker. The firs
         type: colorpicker
         availableColors: ['#000000', '#111111', '#222222']
 
-The second method uses a specific method declared in the model's class.  This method should return an array of hex colors in the same format as in the example above. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form.
+The second method uses a specific method declared in the model class.  This method should return an array of hex colors in the same format as in the example above. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form.
 
     color:
         label: Background
@@ -679,7 +730,7 @@ Option | Description
 **dynamicHeight** | if `true`, the data table's height will extend or shrink depending on the records added, up to the maximum size defined by the `height` configuration value. Default: `false`.
 **fieldName** | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
 **height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the field container.
-**keyFrom** | the data attribute to use for keying each record. This should usually be set to `id`.
+**keyFrom** | the data attribute to use for keying each record. This should usually be set to `id`. Only supports integer values.
 **postbackHandlerName** | specifies the AJAX handler name in which the data table content will be sent with. When set to `null` (default), the handler name will be auto-detected from the request name used by the form which contains the data table. It is recommended to keep this as `null`.
 **recordsPerPage** | the number of records to show per page. If set to `false`, the pagination will be disabled.
 **searching** | allow records to be searched via a search box. Default: `false`.
@@ -738,8 +789,8 @@ Option | Description
 ------------- | -------------
 **mode** | the expected result, either date, datetime or time. Default: datetime.
 **format** | provide an explicit date display format. Eg: Y-m-d
-**minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
-**maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
+**minDate** | the minimum/earliest date that can be selected.
+**maxDate** | the maximum/latest date that can be selected.
 **firstDay** | the first day of the week. Default: 0 (Sunday).
 **showWeekNumber** | show week numbers at head of row. Default: false
 **ignoreTimezone** | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
@@ -747,7 +798,7 @@ Option | Description
 <a name="widget-fileupload"></a>
 ### File upload
 
-`fileupload` - renders a file uploader for images or regular files. **The field name must use an attachOne or attachMany relation.**
+`fileupload` - renders a file uploader for images or regular files.
 
     avatar:
         label: Avatar
@@ -777,6 +828,8 @@ Option | Description
 **prompt** | text to display for the upload button, applies to files only, optional.
 **thumbOptions** | options to pass to the thumbnail generating method for the file
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
+
+> **Note:** Unlike the [Media Finder FormWidget](#widget-mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown editor
@@ -809,7 +862,7 @@ Option | Description
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 
-> **Note:** Unlike the [File Upload form widget](#widget-fileupload), the Media Finder form widget stores its data as a string representing the path to the image selected within the Media Library.
+> **Note:** Unlike the [File Upload FormWidget](#widget-fileupload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
 
 <a name="widget-nestedform"></a>
 ### Nested Form
@@ -998,9 +1051,9 @@ Option | Description
 
 > **Note**: The group key is stored along with the saved data as the `_group` attribute.
 
-#### Repeater styles
+#### Repeater style
 
-The `styles` attribute of the repeater widget controls the behaviour of repeater items. There are three different types of styles available for developers:
+The `style` attribute of the repeater widget controls the behaviour of repeater items. There are three different types of styles available for developers:
 
 - **default:** Shows all the repeater items as expanded on page load. This is the default current behavior, and will be used if style is not defined in the repeater widget's configuration.
 - **collapsed:** Shows all the repeater items as collapsed (minimised) on page load. The user can collapse or expand items as they wish.
@@ -1053,7 +1106,7 @@ Option | Description
         type: taglist
         separator: space
 
-A tag list can support three ways of defining the `options`, exactly like the [dropdown field type](#field-dropdown).
+A tag list support the same methods for defining the options as the [dropdown field type](#field-dropdown).
 
     tags:
         type: taglist
@@ -1344,7 +1397,7 @@ You can specify the URL to redirect to after the model is saved by overriding th
 
     public function formGetRedirectUrl($context = null, $model = null)
     {
-        return 'https://octobercms.com';
+        return 'https://wintercms.com';
     }
 
 <a name="extend-model-query"></a>

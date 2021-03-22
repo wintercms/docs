@@ -19,7 +19,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-October provides a beautiful and simple Active Record implementation for working with your database, based on [Eloquent by Laravel](http://laravel.com/docs/eloquent). Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records into the table.
+Winter provides a beautiful and simple Active Record implementation for working with your database, based on [Eloquent by Laravel](http://laravel.com/docs/eloquent). Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records into the table.
 
 Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
 
@@ -163,7 +163,7 @@ When attributes names are passed to the `$jsonable` property, the values will be
 <a name="retrieving-models"></a>
 ## Retrieving models
 
-When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
+When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [Winter\Storm\Database\Builder](../api/winter/storm/database/builder).
 
 > **Note**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. While the cache should automatically invalidate itself most of the time, sometimes you will need to use the `$model->reload()` method to flush the cache for more complex use cases.
 
@@ -284,6 +284,17 @@ Updates can also be performed against any number of models that match a given qu
         ->update(['delayed' => true]);
 
 The `update` method expects an array of column and value pairs representing the columns that should be updated.
+
+#### Update or Insert / `upsert()` (Batch query to process multiple rows in one DB call)
+
+If you would like to perform multiple "upserts" in a single query, then you should use the `upsert` method instead. The method's first argument consists of the values to insert or update, while the second argument lists the column(s) that uniquely identify records within the associated table. The method's third and final argument is an array of the columns that should be updated if a matching record already exists in the database. The `upsert` method will automatically set the `created_at` and `updated_at` timestamps if timestamps are enabled on the model:
+
+    MyVendor\MyPlugin\Models\Flight::upsert([
+        ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' => 99],
+        ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
+    ], ['departure', 'destination'], ['price']);
+
+> **Note::** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
 
 <a name="mass-assignment"></a>
 ### Mass assignment
@@ -450,7 +461,7 @@ An example of using an event:
         $this->slug = Str::slug($this->name);
     }
 
-> **Note:** Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images->withDeferred(post('_session_key'))->get();`
+> **Note:** Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
 
 <a name="basic-usage"></a>
 ### Basic usage

@@ -82,7 +82,7 @@ Components must be registered by overriding the `registerComponents` method insi
     public function registerComponents()
     {
         return [
-            'October\Demo\Components\Todo' => 'demoTodo'
+            'Winter\Demo\Components\Todo' => 'demoTodo'
         ];
     }
 
@@ -213,7 +213,7 @@ In order to load the state list you should know what country is currently select
 <a name="page-list-properties"></a>
 ### Page list properties
 
-Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup#page-filter)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
+Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup#page-filter)). Winter includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
 
     public function defineProperties()
     {
@@ -279,7 +279,7 @@ Components can be involved in the Page execution cycle events by overriding the 
 <a name="page-cycle-handlers"></a>
 ### Page execution life cycle handlers
 
-When a page loads, October executes handler functions that could be defined in the layout and page [PHP section](../cms/themes#php-section) and component classes. The sequence the handlers are executed is following:
+When a page loads, Winter executes handler functions that could be defined in the layout and page [PHP section](../cms/themes#php-section) and component classes. The sequence the handlers are executed is following:
 
 1. Layout `onInit()` function.
 1. Page `onInit()` function.
@@ -342,7 +342,7 @@ If the alias for this component was *demoTodo* this handler can be accessed by `
 
 All components can come with default markup that is used when including it on a page with the `{% component %}` tag, although this is optional. Default markup is kept inside the **component partials directory**, which has the same name as the component class in lower case.
 
-The default component markup should be placed in a file named **default.htm**. For example, the default markup for the Demo ToDo component is defined in the file **/plugins/october/demo/components/todo/default.htm**. It can then be inserted anywhere on the page by using the `{% component %}` tag:
+The default component markup should be placed in a file named **default.htm**. For example, the default markup for the Demo ToDo component is defined in the file **/plugins/winter/demo/components/todo/default.htm**. It can then be inserted anywhere on the page by using the `{% component %}` tag:
 
     url = "/todo"
 
@@ -367,7 +367,7 @@ These properties will not be available in the `onRun` method since they are esta
 <a name="component-partials"></a>
 ## Component partials
 
-In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/october/demo/components/todo/pagination.htm** and displayed on the page using:
+In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/winter/demo/components/todo/pagination.htm** and displayed on the page using:
 
     {% partial 'demoTodo::pagination' %}
 
@@ -416,11 +416,11 @@ The ID is unique each time the component is displayed.
 <a name="render-partial-method"></a>
 ## Rendering partials from code
 
-You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables.
+You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same [path resolution logic](#component-partials) applies when you render a component partial in PHP as it does with Twig; use the `@` prefix to refer to partials within the component itself.
 
-    $content = $this->renderPartial('component-partial.htm');
+    $content = $this->renderPartial('@component-partial.htm');
 
-    $content = $this->renderPartial('component-partial.htm', [
+    $content = $this->renderPartial('@component-partial.htm', [
         'name' => 'John Smith'
     ]);
 
@@ -428,14 +428,14 @@ For example, to render a partial as a response to an [AJAX handler](../ajax/hand
 
     function onGetTemplate()
     {
-        return ['#someDiv' => $this->renderPartial('component-partial.htm')];
+        return ['#someDiv' => $this->renderPartial('@component-partial.htm')];
     }
 
 Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#page-cycle). This code will specifically return an XML response using the `Response` facade:
 
     public function onRun()
     {
-        $content = $this->renderPartial('default.htm');
+        $content = $this->renderPartial('@default.htm');
         return Response::make($content)->header('Content-Type', 'text/xml');
     }
 
