@@ -581,8 +581,7 @@ The easiest way to register custom validation rules is by adding the `registerVa
     }
 ```
 
-
-The recommended way of adding your own validation rule is to extend the Validator instance via the `extend` method. In an Winter CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
+Another way to register custom validation rules is by extending the Validator instance via the `extend` method. In an Winter CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
 
 You can extend the Validator instance with your custom validation rule as a `Closure`, or as a `Rule` object.
 
@@ -590,6 +589,7 @@ You can extend the Validator instance with your custom validation rule as a `Clo
 
 If you only need the functionality of a custom rule specified once throughout your plugin or application, you may use a Closure to define the rule. The first parameter defines the name of your rule, and the second parameter provides your Closure.
 
+```php
     use Validator;
 
     public function boot()
@@ -598,25 +598,31 @@ If you only need the functionality of a custom rule specified once throughout yo
             return $value == 'foo';
         });
     }
+```
 
 The custom validator Closure receives three arguments: the name of the `$attribute` being validated, the `$value` of the attribute, and an array of `$parameters` passed to the rule.
 
 You may also pass a class and method to the `extend` method instead of a Closure:
 
-    Validator::extend('foo', 'FooValidator@validate');
+```php
+Validator::extend('foo', 'FooValidator@validate');
+```
 
 Once the Validator has been extended with your custom rule, you will need to add it to your rules definition. For example, you may add it to the `$rules` array of your model.
 
+```php
     public $rules = [
         'field' => 'foo'
     ];
+```
 
 #### Using Rule objects
 
-A `Rule` object represents a single reusable validation rule for your models that implements the `Illuminate\Contracts\Validation\Rule` contract. Each rule object must provide three methods: a `passes` method which determines if a given value passes validation and a `message` method which defines the default fallback error message. `Rule` objects should extend the `October\Rain\Validation\Rule` abstract.
+A `Rule` object represents a single reusable validation rule for your models that implements the `Illuminate\Contracts\Validation\Rule` contract. Each rule object must provide three methods: a `passes` method which determines if a given value passes validation and a `message` method which defines the default fallback error message. `Rule` objects should extend the `Winter\Storm\Validation\Rule` abstract.
 
+```php
     <?php
-    use October\Rain\Validation\Rule;
+    use Winter\Storm\Validation\Rule;
 
     class Uppercase implements Rule
     {
@@ -642,40 +648,43 @@ A `Rule` object represents a single reusable validation rule for your models tha
             return 'The :attribute must be uppercase.';
         }
     }
+```
 
 To extend the Validator with your rule object, you may provide an instance of the class to the Validator `extend` method:
 
+```php
     Validator::extend('uppercase', Uppercase::class);
+```
 
 `Rule` objects should be stored in the **/rules** subdirectory inside your plugin directory.
 
 #### Defining the Error Message
 
-You will also need to define an error message for your custom rule. You can do so either using an inline custom message array or by adding an entry in the validation language file. This message should be placed in the first level of the array.
-
-    "foo" => "Your input was invalid!",
-
-    "accepted" => "The :attribute must be accepted.",
+You will also need to define an error message for your custom rule.
 
 With `Rule` objects, you can set a fallback error message by providing a `message` method that returns a string. This string can be a language string, which will allow the message to be translated as required.
 
 When creating a custom validation rule, you may sometimes need to define custom placeholder replacements for error messages. You may do so by making a call to the `replacer` method on the Validator facade. You may also do this within the `boot` method of your plugin.
 
+```php
     public function boot()
     {
         Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
             // return a message as a string
         });
     }
+```
 
 The callback receives 4 arguments: `$message` being the message returned by the validator, `$attribute` being the attribute which failed validation, `$rule` being the rule object and `$parameters` being the parameters defined with the validation rule. You may, for example, inject a column name into the message that was defined in the parameters:
 
+```php
     public function boot()
     {
         Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':column', $parameters[0], $message);
         });
     }
+```
 
 #### Registering a custom validator resolver
 
@@ -683,20 +692,26 @@ If you wish to provide a large number of custom rules to your application, you c
 
 To define a resolver, you may provide a Closure to the `resolver` method in the Validator facade.
 
+```php
     Validator::resolver(function($translator, $data, $rules, $messages, $customAttributes) {
         return new CustomValidator($translator, $data, $rules, $messages, $customAttributes);
     });
+```
 
 Each rule supported within a resolver is defined using a `validateXXX` method. For example, the `foo` validation rule would look for a method called `validateFoo`. The `validate` method should return a boolean on whether a given `$value` passes validation.
 
+```php
     public function validateFoo($attribute, $value, $parameters)
     {
         // return whether the value passes validation
     }
+```
 
 As with the Validator `replacer` method, you may sometimes need to define custom placeholder replacements for error messages. You may do this in a resolver by defining a `replaceXXX` method.
 
+```php
     protected function replaceFoo($message, $attribute, $rule, $parameters)
     {
         return str_replace(':foo', $parameters[0], $message);
     }
+```
