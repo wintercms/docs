@@ -1,6 +1,6 @@
 # Docs
 
-The documentation for Winter CMS, currently available at https://wintercms.github.io/docs/
+The documentation for Winter CMS, currently available at https://wintercms.com/docs/
 
 To allow for automatic content updates and integration with GitHub Pages, the docs now use Jekyll to power the documentation.
 
