@@ -98,18 +98,19 @@ Method | Description
 **pluginDetails()** | returns information about the plugin.
 **register()** | register method, called when the plugin is first registered.
 **boot()** | boot method, called right before the request route.
-**registerMarkupTags()** | registers [additional markup tags](#extending-twig) that can be used in the CMS.
 **registerComponents()** | registers any [front-end components](components#component-registration) used by this plugin.
-**registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
-**registerPermissions()** | registers any [back-end permissions](../backend/users#permission-registration) used by this plugin.
-**registerSettings()** | registers any [back-end configuration links](settings#link-registration) used by this plugin.
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
-**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
 **registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
 **registerMailLayouts()** | registers any [mail view layouts](mail#mail-template-registration) supplied by this plugin.
-**registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
 **registerMailPartials()** | registers any [mail view partials](mail#mail-template-registration) supplied by this plugin.
+**registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
+**registerMarkupTags()** | registers [additional markup tags](#extending-twig) that can be used in the CMS.
+**registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
+**registerPermissions()** | registers any [back-end permissions](../backend/users#permission-registration) used by this plugin.
+**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
 **registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
+**registerSettings()** | registers any [back-end configuration links](settings#link-registration) used by this plugin.
+**registerValidationRules()** | registers any [custom validators](../services/validation#custom-validation-rules) supplied by this plugin.
 
 <a name="basic-plugin-information"></a>
 ### Basic plugin information

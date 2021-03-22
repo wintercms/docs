@@ -567,6 +567,21 @@ Then in your call to `Validator::make` use the `Lang:get` to use your custom fil
 
 There are a variety of helpful validation rules; however, you may wish to specify some of your own.
 
+The easiest way to register custom validation rules is by adding the `registerValidationRules() : array` method in the [`Plugin.php` registration file](../plugin/registration#registration-methods) for your plugin. This method should return an array where the key is the validator rule name and the value is either a class that extends `Winter\Storm\Validation\Rule` or a callable function. The callable function receives four arguments, the name of the `$attribute` being validated, the `$value` of the attribute and an array of `$parameters` passed to the rule, and the `$validator` instance.
+
+```php
+    public function registerValidationRules()
+    {
+        return [
+            'be_like_bob' => \Winter\Tester\Rules\BeLikeBobRule::class,
+            'uppercase' => function ($attribute, $value, $parameters, $validator) {
+                return strtoupper($value) === $value;
+            },
+        ];
+    }
+```
+
+
 The recommended way of adding your own validation rule is to extend the Validator instance via the `extend` method. In an Winter CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
 
 You can extend the Validator instance with your custom validation rule as a `Closure`, or as a `Rule` object.
