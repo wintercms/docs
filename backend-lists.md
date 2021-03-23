@@ -1,4 +1,10 @@
-# Backend lists
+---
+title: Backend Lists
+navTitle: Lists
+category: Backend
+order: 3
+layout: default
+---
 
 - [Introduction](#introduction)
 - [Configuring the list behavior](#configuring-list)
@@ -74,6 +80,7 @@ Option | Description
 **deleteMessage** | a message to display when records are bulk deleted, can refer to a [localization string](../plugin/localization).
 **noRecordsDeletedMessage** | a message to display when a bulk delete action is triggered, but no records were deleted, can refer to a [localization string](../plugin/localization).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 0
+**perPageOptions** | options to provide the user when selecting how many records to display per page. Default: `[20, 40, 80, 100, 120]`
 **showPageNumbers** | displays page numbers with pagination. Disable this to improve list performance when working with large tables. Default: true
 **toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
 **showSorting** | displays the sorting link on each column. Default: true
@@ -373,8 +380,9 @@ To display a column that shows the number of related records, use the `useRelati
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the column name is used as the partial name. Inside the partial these variables are available: `$value` is the default cell value, `$record` is the model used for the cell and `$column` is the configured class object `Backend\Classes\ListColumn`.
 
     content:
+        label: Content
         type: partial
-        path: ~/plugins/acme/blog/models/comments/_content_column.htm
+        path: ~/plugins/acme/blog/models/comment/_content_column.htm
 
 <a name="column-colorpicker"></a>
 ### Color Picker
@@ -482,14 +490,14 @@ Filter scopes can declare dependencies on other scopes by defining the `dependsO
         label: Country
         type: group
         conditions: country_id in (:filtered)
-        modelClass: October\Test\Models\Location
+        modelClass: Winter\Test\Models\Location
         options: getCountryOptions
 
     city:
         label: City
         type: group
         conditions: city_id in (:filtered)
-        modelClass: October\Test\Models\Location
+        modelClass: Winter\Test\Models\Location
         options: getCityOptions
         dependsOn: country
 
@@ -885,14 +893,14 @@ The lookup query for the list [database model](../database/model) can be extende
     {
         $query->withTrashed();
     }
-    
+
 When dealing with multiple lists definitions in a same controller, you can use the second parameter of `listExtendQuery` which contains the name of the definition :
 
     public $listConfig = [
         'inbox' => 'config_inbox_list.yaml',
         'trashed' => 'config_trashed_list.yaml'
     ];
-    
+
     public function listExtendQuery($query, $definition)
     {
         if ($definition === 'trashed') {

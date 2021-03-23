@@ -10,7 +10,7 @@
 - [The "View Bag" component](#viewbag-component)
 - [Soft components](#soft-components)
 
-Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
+Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of Winter. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers) or [developing components](../plugin/components) as part of plugins.
 
@@ -29,7 +29,7 @@ If you use the back-end user interface you can add components to your pages, par
     ==
     ...
 
-This initializes the component with the properties that are defined in the component section. Many components have properties, but it is not a requirement. Some properties are required, and some properties have default values. If you are not sure what properties are supported by a component, refer to the documentation provided by the developer, or use the Inspector in the October back-end. The Inspector opens when you click a component in the page or layout component panel.
+This initializes the component with the properties that are defined in the component section. Many components have properties, but it is not a requirement. Some properties are required, and some properties have default values. If you are not sure what properties are supported by a component, refer to the documentation provided by the developer, or use the Inspector in the Winter back-end. The Inspector opens when you click a component in the page or layout component panel.
 
 When you refer a component, it automatically creates a page variable that matches the component name (`demoTodo` in the previous example). Components that provide HTML markup can be rendered on a page with the `{% component %}` tag, like this:
 
@@ -42,7 +42,7 @@ When you refer a component, it automatically creates a page variable that matche
 
 If there are two plugins that register components with the same name, you can attach a component by using its fully qualified class name and assigning it an *alias*:
 
-    [October\Demo\Components\Todo demoTodoAlias]
+    [Winter\Demo\Components\Todo demoTodoAlias]
     maxItems = 20
 
 The first parameter in the section is the class name, the second is the component alias name that will be used when attached to the page. If you specified a component alias you should use it everywhere in the page code when you refer to the component. Note that the next example refers to the component alias:
@@ -95,7 +95,7 @@ The page, the component belongs to, should have a corresponding [URL parameter](
 
     url = "/todo/:maxItems"
 
-In the October back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
+In the Winter back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
 
 <a name="component-variables"></a>
 ## Passing variables to components
@@ -172,7 +172,7 @@ Now we can override the **title.htm** partial by creating a file in our theme ca
 <a name="viewbag-component"></a>
 ## The "View Bag" component
 
-There is a special component included in October called `viewBag` that can be used on any page or layout. It allows ad hoc properties to be defined and accessed inside the markup area easily as variables. A good usage example is defining an active menu item inside a page:
+There is a special component included in Winter called `viewBag` that can be used on any page or layout. It allows ad hoc properties to be defined and accessed inside the markup area easily as variables. A good usage example is defining an active menu item inside a page:
 
     title = "About"
     url = "/about.html"

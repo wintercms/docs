@@ -413,7 +413,7 @@ The query above will produce the following SQL:
 
 #### JSON "where" statements
 
-October CMS also supports querying JSON column types on databases that provide support for JSON column types. To query a JSON column, use the `->` operator:
+Winter CMS also supports querying JSON column types on databases that provide support for JSON column types. To query a JSON column, use the `->` operator:
 
     $users = Db::table('users')
                     ->where('options->language', 'en')

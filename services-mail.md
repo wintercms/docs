@@ -16,11 +16,11 @@
 <a name="introduction"></a>
 ## Introduction
 
-October provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the back-end interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
+Winter provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the back-end interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
 
 ### Driver prerequisites
 
-Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
+Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](http://wintercms.com/plugin/winter-drivers).
 
 #### Mailgun driver
 
@@ -73,7 +73,7 @@ Since we are passing an array containing the `name` key in the example above, we
 
 #### Quick sending
 
-October also includes an alternative method called `sendTo` that can simplify sending mail:
+Winter also includes an alternative method called `sendTo` that can simplify sending mail:
 
     // Send to address using no name
     Mail::sendTo('admin@domain.tld', 'acme.blog::mail.message', $params);
@@ -117,7 +117,7 @@ As previously mentioned, the third argument given to the `send` method is a `Clo
 
     Mail::send('acme.blog::mail.welcome', $vars, function($message) {
 
-        $message->from('us@example.com', 'October');
+        $message->from('us@example.com', 'Winter');
         $message->to('foo@example.com')->cc('bar@example.com');
 
     });
@@ -259,7 +259,7 @@ If you wish to specify a specific queue on which to push the message, you may do
 <a name="message-content"></a>
 ## Message content
 
-Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
+Mail messages can be sent in Winter using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
 
 Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
@@ -277,7 +277,7 @@ Mail views reside in the file system and the code used represents the path to th
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:
 
-    subject = "Your product has been added to OctoberCMS project"
+    subject = "Your product has been added to Winter CMS project"
     ==
 
     Hi {{ name }},
@@ -297,7 +297,7 @@ The content inside a mail view file can include up to 3 sections: **configuratio
 
 The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
 
-    subject = "Your product has been added to OctoberCMS project"
+    subject = "Your product has been added to Winter CMS project"
     ==
 
     <p>Hi {{ name }},</p>
@@ -340,7 +340,7 @@ When a generated template is saved for the first time, the customized content wi
 
 Mail layouts can be created by selecting *Settings > Mail > Mail templates* and clicking the *Layouts* tab. These behave just like CMS layouts, they contain the scaffold for the mail message. Mail views and templates support the use of mail layouts.
 
-By default, October comes with two primary mail layouts:
+By default, Winter comes with two primary mail layouts:
 
 Layout | Code | Description
 ------------- | ------------- | -------------
@@ -389,7 +389,7 @@ The methods should return an array of [mail view names](#mail-views). The array 
 
 You may register variables that are globally available to all mail templates with the `View::share` method.
 
-    View::share('site_name', 'OctoberCMS');
+    View::share('site_name', 'Winter CMS');
 
 This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
 

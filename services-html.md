@@ -16,7 +16,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-October provides various helpful functions with the `Html` facade, useful for dealing with HTML and forms. While most of the examples will use the PHP language all of these features translate directly to [Twig markup](../markup) with a simple conversion.
+Winter provides various helpful functions with the `Html` facade, useful for dealing with HTML and forms. While most of the examples will use the PHP language all of these features translate directly to [Twig markup](../markup) with a simple conversion.
 
     // PHP
     <?= Form::open(..) ?>

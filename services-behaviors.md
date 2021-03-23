@@ -22,17 +22,17 @@ Where you might use a PHP trait like this:
 
     class MyClass
     {
-        use \October\Rain\UtilityFunctions;
-        use \October\Rain\DeferredBinding;
+        use \Winter\Storm\UtilityFunctions;
+        use \Winter\Storm\DeferredBinding;
     }
 
 A behavior is used in a similar fashion:
 
-    class MyClass extends \October\Rain\Extension\Extendable
+    class MyClass extends \Winter\Storm\Extension\Extendable
     {
         public $implement = [
-            'October.Rain.UtilityFunctions',
-            'October.Rain.DeferredBinding',
+            'Winter.Rain.UtilityFunctions',
+            'Winter.Rain.DeferredBinding',
         ];
     }
     
@@ -50,7 +50,7 @@ Where you might define a trait like this:
 
 A behavior is defined like this:
 
-    class UtilityFunctions extends \October\Rain\Extension\ExtensionBase
+    class UtilityFunctions extends \Winter\Storm\Extension\ExtensionBase
     {
         protected $parent;
 
@@ -68,8 +68,8 @@ A behavior is defined like this:
 The extended object is always passed as the first parameter to the Behavior's constructor. 
 
 To summarize:
-- Extend \October\Rain\Extension\ExtensionBase to declare your class as a Behaviour
-- The class wanting to -implement- the Behaviour needs to extend \October\Rain\Extension\Extendable
+- Extend \Winter\Storm\Extension\ExtensionBase to declare your class as a Behaviour
+- The class wanting to -implement- the Behaviour needs to extend \Winter\Storm\Extension\Extendable
 
 > **Note**: See [Using traits instead of base classes](#using-traits) 
 
@@ -90,7 +90,7 @@ Properties can be declared on an extendable object by calling `addDynamicPropert
         $model->addDynamicProperty('tagsCache', null);
     });
     
-> **Note**: Attempting to set undeclared properties through normal means (`$this->foo = 'bar';`) on an object that implements the **October\Rain\Extension\ExtendableTrait** will not work. It won't throw an exception, but it will not autodeclare the property either. `addDynamicProperty` must be called in order to set previously undeclared properties on extendable objects.
+> **Note**: Attempting to set undeclared properties through normal means (`$this->foo = 'bar';`) on an object that implements the **Winter\Storm\Extension\ExtendableTrait** will not work. It won't throw an exception, but it will not autodeclare the property either. `addDynamicProperty` must be called in order to set previously undeclared properties on extendable objects.
 
 #### Retrieving dynamic properties
 
@@ -185,7 +185,7 @@ This unique ability to extend constructors allows behaviors to be implemented dy
 
     <?php namespace MyNamespace\Behaviors;
 
-    class FormController extends \October\Rain\Extension\ExtensionBase
+    class FormController extends \Winter\Storm\Extension\ExtensionBase
     {
         /**
          * @var Reference to the extended object.
@@ -217,7 +217,7 @@ This `Controller` class will implement the `FormController` behavior and then th
 
     <?php namespace MyNamespace;
 
-    class Controller extends \October\Rain\Extension\Extendable
+    class Controller extends \Winter\Storm\Extension\Extendable
     {
 
         /**
@@ -280,14 +280,14 @@ Below is an example of dynamically extending a `UsersController` of a third-part
 
 If a behavior class does not exist, like a trait, a *Class not found* error will be thrown. In some cases you may wish to suppress this error, for conditional implementation if a behavior is present in the system. You can do this by placing an `@` symbol at the beginning of the class name.
 
-    class User extends \October\Rain\Extension\Extendable
+    class User extends \Winter\Storm\Extension\Extendable
     {
         public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
     }
 
 If the class name `RainLab\Translate\Behaviors\TranslatableModel` does not exist, no error will be thrown. This is the equivalent of the following code:
 
-    class User extends \October\Rain\Extension\Extendable
+    class User extends \Winter\Storm\Extension\Extendable
     {
         public $implement = [];
 
@@ -312,11 +312,11 @@ First let's create the class that will act as a Behaviour, ie. can be -implement
 
     class WaveBehaviour
     {
-        use \October\Rain\Extension\ExtensionTrait;
+        use \Winter\Storm\Extension\ExtensionTrait;
 
         /**
          * When using the Extensiontrait, your behaviour also has to implement this method
-         * @see \October\Rain\Extension\ExtensionBase
+         * @see \Winter\Storm\Extension\ExtensionBase
          */
         public static function extend(callable $callback)
         {
@@ -333,7 +333,7 @@ Now let's create the class that is able to -implement- behaviours using the Exte
 
     class AI
     {
-        use \October\Rain\Extension\ExtendableTrait;
+        use \Winter\Storm\Extension\ExtendableTrait;
 
         /**
          * @var array Extensions implemented by this class.

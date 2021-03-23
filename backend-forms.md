@@ -1,4 +1,10 @@
-# Backend forms
+---
+title: Backend Forms
+navTitle: Forms
+category: Backend
+order: 4
+layout: default
+---
 
 - [Introduction](#introduction)
 - [Configuring the form behavior](#configuring-form)
@@ -332,7 +338,7 @@ If you would like to validate this field server-side on save to ensure that it i
         'your_age' => 'numeric',
     ];
 
-For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
+For more information on model validation, please visit [the documentation page](https://wintercms.com/docs/services/validation#rule-numeric).
 
 <a name="field-password"></a>
 ### Password
@@ -361,7 +367,7 @@ If you would like to validate this field on save to ensure that it is a properly
         'user_email' => 'email',
     ];
 
-For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
+For more information on model validation, please visit [the documentation page](https://wintercms.com/docs/services/validation#rule-email).
 
 <a name="field-textarea"></a>
 ### Textarea
@@ -469,7 +475,20 @@ Supplying the dropdown options to the model class:
         return ['published' => 'Published', ...];
     }
 
+### Add icon to dropdown options
 
+In order to add an icon or an image for every option which will be rendered in the dropdown field the options have to be provided as a multidimensional array with the following format `'key' => ['label-text', 'icon-class'],`.
+
+```php
+    public function listStatuses($fieldName, $value, $formData)
+    {
+        return [
+            'published' => ['Published', 'icon-check-circle'],
+            'unpublished' => ['Unpublished', 'icon-minus-circle'],
+            'draft' => ['Draft', 'icon-clock-o']
+        ];
+    }
+```
 
 To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
 
@@ -1391,7 +1410,7 @@ You can specify the URL to redirect to after the model is saved by overriding th
 
     public function formGetRedirectUrl($context = null, $model = null)
     {
-        return 'https://octobercms.com';
+        return 'https://wintercms.com';
     }
 
 <a name="extend-model-query"></a>

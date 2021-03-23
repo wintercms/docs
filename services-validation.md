@@ -9,7 +9,11 @@
 - [Custom error messages](#custom-error-messages)
 - [Custom validation rules](#custom-validation-rules)
 
-> This section is for detailing validation with the `Validator` class. Validating a model is handled slightly differently via a trait. Please see the [Validation Trait](../database/traits#validation) section for more information on validating models.
+## Introduction
+
+Validation can be used to cross-examine data and produce error messages against data by supplying it to the `Validator` class. Validation with the `Validator` class can be used for things such as form submissions, query string data and other sources, as well as Model validation (see note below). This section of the documentation explains how to use the `Validator` class to situate, customise and perform validation within your project.
+
+> This section is for detailing validation with the `Validator` class. Validating models is handled slightly differently via a trait. Please see the [Validation Trait](../database/traits#validation) section for more information on validating models.
 
 <a name="basic-usage"></a>
 ## Basic usage
@@ -109,7 +113,7 @@ After calling the `messages` method on a `Validator` instance, you will receive 
 <a name="error-messages-and-views"></a>
 ## Error messages & views
 
-Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by October. Consider the following routes as an example:
+Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by Winter. Consider the following routes as an example:
 
     public function onRegister()
     {
@@ -124,7 +128,7 @@ Once you have performed validation, you will need an easy way to get the error m
 
 Note that when validation fails, we pass the `Validator` instance to the Redirect using the `withErrors` method. This method will flash the error messages to the session so that they are available on the next request.
 
-October will always check for errors in the session data, and automatically bind them to the view if they are available. **So, it is important to note that an `errors` variable will always be available in all of your pages, on every request**, allowing you to conveniently assume the `errors` variable is always defined and can be safely used. The `errors` variable will be an instance of `MessageBag`.
+Winter will always check for errors in the session data, and automatically bind them to the view if they are available. **So, it is important to note that an `errors` variable will always be available in all of your pages, on every request**, allowing you to conveniently assume the `errors` variable is always defined and can be safely used. The `errors` variable will be an instance of `MessageBag`.
 
 So, after redirection, you may utilize the automatically bound `errors` variable in your view:
 
@@ -567,7 +571,21 @@ Then in your call to `Validator::make` use the `Lang:get` to use your custom fil
 
 There are a variety of helpful validation rules; however, you may wish to specify some of your own.
 
-The recommended way of adding your own validation rule is to extend the Validator instance via the `extend` method. In an October CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
+The easiest way to register custom validation rules is by adding the `registerValidationRules() : array` method in the [`Plugin.php` registration file](../plugin/registration#registration-methods) for your plugin. This method should return an array where the key is the validator rule name and the value is either a class that extends `Winter\Storm\Validation\Rule` or a callable function. The callable function receives four arguments, the name of the `$attribute` being validated, the `$value` of the attribute and an array of `$parameters` passed to the rule, and the `$validator` instance.
+
+```php
+    public function registerValidationRules()
+    {
+        return [
+            'be_like_bob' => \Winter\Tester\Rules\BeLikeBobRule::class,
+            'uppercase' => function ($attribute, $value, $parameters, $validator) {
+                return strtoupper($value) === $value;
+            },
+        ];
+    }
+```
+
+Another way to register custom validation rules is by extending the Validator instance via the `extend` method. In an Winter CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
 
 You can extend the Validator instance with your custom validation rule as a `Closure`, or as a `Rule` object.
 
@@ -575,6 +593,7 @@ You can extend the Validator instance with your custom validation rule as a `Clo
 
 If you only need the functionality of a custom rule specified once throughout your plugin or application, you may use a Closure to define the rule. The first parameter defines the name of your rule, and the second parameter provides your Closure.
 
+```php
     use Validator;
 
     public function boot()
@@ -583,25 +602,31 @@ If you only need the functionality of a custom rule specified once throughout yo
             return $value == 'foo';
         });
     }
+```
 
 The custom validator Closure receives three arguments: the name of the `$attribute` being validated, the `$value` of the attribute, and an array of `$parameters` passed to the rule.
 
 You may also pass a class and method to the `extend` method instead of a Closure:
 
-    Validator::extend('foo', 'FooValidator@validate');
+```php
+Validator::extend('foo', 'FooValidator@validate');
+```
 
 Once the Validator has been extended with your custom rule, you will need to add it to your rules definition. For example, you may add it to the `$rules` array of your model.
 
+```php
     public $rules = [
         'field' => 'foo'
     ];
+```
 
 #### Using Rule objects
 
-A `Rule` object represents a single reusable validation rule for your models that implements the `Illuminate\Contracts\Validation\Rule` contract. Each rule object must provide three methods: a `passes` method which determines if a given value passes validation, a `validate` method which is called on validation and a `message` method which defines the default fallback error message.
+A `Rule` object represents a single reusable validation rule for your models that implements the `Illuminate\Contracts\Validation\Rule` contract. Each rule object must provide three methods: a `passes` method which determines if a given value passes validation and a `message` method which defines the default fallback error message. `Rule` objects should extend the `Winter\Storm\Validation\Rule` abstract.
 
+```php
     <?php
-    use Illuminate\Contracts\Validation\Rule;
+    use Winter\Storm\Validation\Rule;
 
     class Uppercase implements Rule
     {
@@ -618,19 +643,6 @@ A `Rule` object represents a single reusable validation rule for your models tha
         }
 
         /**
-         * Validation callback method.
-         *
-         * @param  string  $attribute
-         * @param  mixed  $value
-         * @param  array  $params
-         * @return bool
-         */
-        public function validate($attribute, $value, $params)
-        {
-            return $this->passes($attribute, $value);
-        }
-
-        /**
          * Get the validation error message.
          *
          * @return string
@@ -640,51 +652,43 @@ A `Rule` object represents a single reusable validation rule for your models tha
             return 'The :attribute must be uppercase.';
         }
     }
+```
 
 To extend the Validator with your rule object, you may provide an instance of the class to the Validator `extend` method:
 
+```php
     Validator::extend('uppercase', Uppercase::class);
+```
 
 `Rule` objects should be stored in the **/rules** subdirectory inside your plugin directory.
 
 #### Defining the Error Message
 
-You will also need to define an error message for your custom rule. You can do so either using an inline custom message array or by adding an entry in the validation language file. This message should be placed in the first level of the array.
+You will also need to define an error message for your custom rule.
 
-    "foo" => "Your input was invalid!",
-
-    "accepted" => "The :attribute must be accepted.",
-
-With `Rule` objects, you can set a fallback error message by providing a `message` method that returns a string.
+With `Rule` objects, you can set a fallback error message by providing a `message` method that returns a string. This string can be a language string, which will allow the message to be translated as required.
 
 When creating a custom validation rule, you may sometimes need to define custom placeholder replacements for error messages. You may do so by making a call to the `replacer` method on the Validator facade. You may also do this within the `boot` method of your plugin.
 
+```php
     public function boot()
     {
         Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
             // return a message as a string
         });
     }
+```
 
 The callback receives 4 arguments: `$message` being the message returned by the validator, `$attribute` being the attribute which failed validation, `$rule` being the rule object and `$parameters` being the parameters defined with the validation rule. You may, for example, inject a column name into the message that was defined in the parameters:
 
+```php
     public function boot()
     {
         Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':column', $parameters[0], $message);
         });
     }
-
-If you wish to support multiple languages with your error messages, you will need to listen for the `translator.beforeResolve` event in your plugin, as your plugin's `boot` method may be run before translation support is fully enabled.
-
-    public function boot()
-    {
-        Event::listen('translator.beforeResolve', function ($key, $replaces, $locale) {
-            if ($key === 'validation.uppercase') {
-                return Lang::get('plugin.name::lang.validation.uppercase');
-            }
-        });
-    }
+```
 
 #### Registering a custom validator resolver
 
@@ -692,20 +696,26 @@ If you wish to provide a large number of custom rules to your application, you c
 
 To define a resolver, you may provide a Closure to the `resolver` method in the Validator facade.
 
+```php
     Validator::resolver(function($translator, $data, $rules, $messages, $customAttributes) {
         return new CustomValidator($translator, $data, $rules, $messages, $customAttributes);
     });
+```
 
 Each rule supported within a resolver is defined using a `validateXXX` method. For example, the `foo` validation rule would look for a method called `validateFoo`. The `validate` method should return a boolean on whether a given `$value` passes validation.
 
+```php
     public function validateFoo($attribute, $value, $parameters)
     {
         // return whether the value passes validation
     }
+```
 
 As with the Validator `replacer` method, you may sometimes need to define custom placeholder replacements for error messages. You may do this in a resolver by defining a `replaceXXX` method.
 
+```php
     protected function replaceFoo($message, $attribute, $rule, $parameters)
     {
         return str_replace(':foo', $parameters[0], $message);
     }
+```

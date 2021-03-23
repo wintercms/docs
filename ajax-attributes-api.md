@@ -1,4 +1,10 @@
-# AJAX Data Attributes API
+---
+title: AJAX Data Attributes API
+navTitle: Data attributes API
+category: AJAX
+order: 5
+layout: default
+---
 
 - [Data attributes API](#data-attributes)
 - [Usage examples](#data-attribute-examples)

@@ -1,6 +1,6 @@
 # Templating
 
-October extends the [Twig template language](http://twig.sensiolabs.org/documentation) with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
+Winter extends the [Twig template language](http://twig.sensiolabs.org/documentation) with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
 
 ## Variables
 
@@ -16,7 +16,7 @@ Variables can be concatenated with the `~` character.
 
     {{ 'Your name: ' ~ name }}
 
-October provides global variables under the `this` variable, as listed under the **Variables** section.
+Winter provides global variables under the `this` variable, as listed under the **Variables** section.
 
 ## Tags
 
@@ -50,7 +50,7 @@ Filters can take arguments like a function.
 
 Filters can be applied in succession.
 
-    {{ 'October Glory'|upper|replace({'October': 'Morning'}) }}
+    {{ 'Winter Glory'|upper|replace({'Winter': 'Morning'}) }}
 
 Filters are listed under the **Filters** section.
 
@@ -79,9 +79,9 @@ The most important thing to learn about Twig is how it accesses the PHP layer. F
 
 ## Unsupported features
 
-There are some features offered by Twig that are not supported by October. They are listed below next to the equivalent feature.
+There are some features offered by Twig that are not supported by Winter. They are listed below next to the equivalent feature.
 
 Tag | Equivalent
 ------------- | -------------
-`{% extend %}` | Use [Layouts](http://octobercms.com/docs/cms/layouts) or `{% placeholder %}`
+`{% extend %}` | Use [Layouts](http://wintercms.com/docs/cms/layouts) or `{% placeholder %}`
 `{% include %}` | Use `{% partial %}` or `{% content %}`

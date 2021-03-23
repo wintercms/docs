@@ -16,7 +16,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-When you first start using OctoberCMS, error and exception handling is already configured for you. There are two ways the event log can be accessed:
+When you first start using Winter CMS, error and exception handling is already configured for you. There are two ways the event log can be accessed:
 
 1. The event log can be viewed in the file system by opening the file `storage/logs/system.log`.
 1. Alternatively it can be viewed via the Administration area by navigating to *System > Logs > Event Log*.
@@ -47,19 +47,19 @@ For local development, you should set the `debug` value to `true`. In your produ
 
 #### Log file modes
 
-October supports `single`, `daily`, `syslog` and `errorlog` logging modes. For example, if you wish to use daily log files instead of a single file, you should simply set the `log` value in your `config/app.php` configuration file:
+Winter supports `single`, `daily`, `syslog` and `errorlog` logging modes. For example, if you wish to use daily log files instead of a single file, you should simply set the `log` value in your `config/app.php` configuration file:
 
     'log' => 'daily'
 
 <a name="exception-types"></a>
 ## Available exceptions
 
-October comes with several basic exception types out of the box.
+Winter comes with several basic exception types out of the box.
 
 <a name="application-exception"></a>
 ### Application exception
 
-The `October\Rain\Exception\ApplicationException` class, aliased as `ApplicationException`, is the most common exception type that is used when a simple application condition has failed.
+The `Winter\Storm\Exception\ApplicationException` class, aliased as `ApplicationException`, is the most common exception type that is used when a simple application condition has failed.
 
     throw new ApplicationException('You must be logged in to do that!');
 
@@ -68,7 +68,7 @@ The error message will be simplified and will never include any sensitive inform
 <a name="system-exception"></a>
 ### System exception
 
-The `October\Rain\Exception\SystemException` class, aliased as `SystemException`, is used for errors that are critical to the system functioning and are always logged.
+The `Winter\Storm\Exception\SystemException` class, aliased as `SystemException`, is used for errors that are critical to the system functioning and are always logged.
 
     throw new SystemException('Unable to contact the mail server API');
 
@@ -77,7 +77,7 @@ When this exception is thrown a detailed error message is shown with the file an
 <a name="validation-exception"></a>
 ### Validation exception
 
-The `October\Rain\Exception\ValidationException` class, aliased as `ValidationException`, is used for errors that relate directly to a form submission and an invalid field. The message should contain an array with fields and error messages.
+The `Winter\Storm\Exception\ValidationException` class, aliased as `ValidationException`, is used for errors that relate directly to a form submission and an invalid field. The message should contain an array with fields and error messages.
 
     throw new ValidationException(['username' => 'Sorry that username is already taken!']);
 
@@ -94,7 +94,7 @@ When this exception is thrown the [AJAX framework](../ajax/introduction) will pr
 <a name="ajax-exception"></a>
 ### AJAX exception
 
-The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is considered a "smart error" and will return the HTTP code 406. This allows them to pass response contents as if they were a successful response.
+The `Winter\Storm\Exception\AjaxException` class, aliased as `AjaxException`, is considered a "smart error" and will return the HTTP code 406. This allows them to pass response contents as if they were a successful response.
 
     throw new AjaxException(['#flashMessages' => $this->renderPartial(...)]);
 
@@ -103,7 +103,7 @@ When this exception is thrown the [AJAX framework](../ajax/introduction) will fo
 <a name="exception-handling"></a>
 ## Exception handling
 
-All exceptions are handled by the `October\Rain\Foundation\Exception\Handler` class. This class contains two methods: `report` and `render` that dictate if an error should be logged and how to respond to an error.
+All exceptions are handled by the `Winter\Storm\Foundation\Exception\Handler` class. This class contains two methods: `report` and `render` that dictate if an error should be logged and how to respond to an error.
 
 However, you may specify custom handlers if needed using the `App::error` method. Handlers are called based on the type-hint of the Exception they handle. For example, you may create a handler that only handles `RuntimeException` instances:
 
@@ -150,7 +150,7 @@ By default any errors will be shown with a detailed error page containing the fi
 <a name="logging"></a>
 ## Logging
 
-By default October is configured to create a single log file for your application which is stored in the `storage/logs` directory. You may write information to the logs using the `Log` facade:
+By default Winter is configured to create a single log file for your application which is stored in the `storage/logs` directory. You may write information to the logs using the `Log` facade:
 
     $user = User::find(1);
     Log::info('Showing user profile for user: '.$user->name);

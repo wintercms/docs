@@ -13,7 +13,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-Themes define the appearance of your website or web application built with October. October themes are completely file-backed and can be managed with any version control system, for example, Git. This page gives you the high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
+Themes define the appearance of your website or web application built with Winter. Winter themes are completely file-backed and can be managed with any version control system, for example, Git. This page gives you the high-level description of Winter themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
 
 >**NOTE:** Themes can store templates in the database if `cms.databaseTemplates` is enabled, see the [database driven themes](#database-driven-themes) section for more information.
 
@@ -30,7 +30,7 @@ Object | Description
 <a name="directory-structure"></a>
 ## Directory structure
 
-Below, you can see an example theme directory structure. Each October theme is represented with a separate directory and generally, one active theme is used for displaying the website. This example displays the "website" theme directory.
+Below, you can see an example theme directory structure. Each Winter theme is represented with a separate directory and generally, one active theme is used for displaying the website. This example displays the "website" theme directory.
 
     themes/
       website/           <=== Theme starts here
@@ -53,7 +53,7 @@ Below, you can see an example theme directory structure. Each October theme is r
 <a name="subdirectories"></a>
 ### Subdirectories
 
-October supports single level subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have any structure. This simplifies the organization of large websites. In the example directory structure below, you can see that the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
+Winter supports single level subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have any structure. This simplifies the organization of large websites. In the example directory structure below, you can see that the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
 
     themes/
       website/
@@ -160,14 +160,14 @@ As a general way of setting variables, you should use the array access method on
 <a name="twig-section"></a>
 ### Twig markup section
 
-The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October](../markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
+The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by Winter](../markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
 
 More information can be found [in the Markup guide](../markup).
 
 <a name="theme-logging"></a>
 ## Theme Logging
 
-October CMS comes with a very useful feature, disabled by default, called Theme Logging. 
+Winter CMS comes with a very useful feature, disabled by default, called Theme Logging. 
 
 Since layouts and pages store most of the data in flat files, it's possible for you or your clients to accidentally lose content. For example, switching the layout of a page will modify the scaffold of the page, and, as such, will result in data loss. 
 
@@ -178,7 +178,7 @@ The theme changelog can be viewed at **Settings -> Theme log**. Each change has 
 <a name="database-driven-themes"></a>
 ## Database Driven Themes
     
-October CMS comes with another very useful feature, disabled by default, called Database Driven Themes. When this feature is enabled (by setting `cms.databaseTemplates` to `true`, or `null` when `app.debug` is `false`); the database layer stores all modified CMS files in the database. Files that are not modified continue to be loaded from the filesystem. There is a [`theme:sync $themeDir`](../console/commands#theme-sync-command) console command that can be used to sync changes between the filesystem and database.
+Winter CMS comes with another very useful feature, disabled by default, called Database Driven Themes. When this feature is enabled (by setting `cms.databaseTemplates` to `true`, or `null` when `app.debug` is `false`); the database layer stores all modified CMS files in the database. Files that are not modified continue to be loaded from the filesystem. There is a [`theme:sync $themeDir`](../console/commands#theme-sync-command) console command that can be used to sync changes between the filesystem and database.
 
 Files modified in the database are cached to indicate that they should be loaded from the database.
 

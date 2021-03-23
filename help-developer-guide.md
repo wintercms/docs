@@ -24,7 +24,7 @@
 <a name="writing-docs"></a>
 ## Writing documentation
 
-Your contributions to the October documentation are very welcome. Please follow the next rules if you want to contribute. How to style perfect October documentation pages:
+Your contributions to the Winter documentation are very welcome. Please follow the next rules if you want to contribute. How to style perfect Winter documentation pages:
 
 1. Each page that has at least one H2 header should have a TOC list. The TOC list should be the first element after the H1 header. The TOC should have links to all H2 headers on the page.
 1. There should be an introductory text below the TOC, even if there is the Introduction section. You may want to get rid of the Introduction section if it's not really needed. Don't leave the TOC alone.
@@ -36,17 +36,17 @@ Your contributions to the October documentation are very welcome. Please follow 
 1. Use the inline `code` tags for everything related to code - variable names, function names, syntax examples, etc.
 1. Use the **strong** tag for everything else.
 1. Don't hesitate to make cross links to other documentation articles. Adding links to the same article in the same paragraph is not necessary.
-1. See the [cms-pages.md](https://github.com/octobercms/docs/blob/master/cms-pages.md) or [cms-themes.md](https://github.com/octobercms/docs/blob/master/cms-themes.md) files for your reference.
+1. See the [cms-pages.md](https://github.com/wintercms/docs/blob/master/cms-pages.md) or [cms-themes.md](https://github.com/wintercms/docs/blob/master/cms-themes.md) files for your reference.
 
 <a name="psr-exceptions"></a>
 ## Exceptions to PSR standards
 
-There are some exceptions to the PSR standard used by October.
+There are some exceptions to the PSR standard used by Winter.
 
 <a name="psr-exception-methods"></a>
 ### Controller methods can have a single underscore
 
-PSR-2 states that methods must be in **camelCase**. However, in Backend controllers October will prefix AJAX handlers with the action name to define a controlled context. For example:
+PSR-2 states that methods must be in **camelCase**. However, in Backend controllers Winter will prefix AJAX handlers with the action name to define a controlled context. For example:
 
     public function index()
     {

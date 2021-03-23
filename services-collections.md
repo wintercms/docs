@@ -13,9 +13,9 @@
 <a name="introduction"></a>
 ## Introduction
 
-The `October\Rain\Support\Collection` class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We'll create a new collection instance from the array, run the `strtoupper` function on each element, and then remove all empty elements:
+The `Winter\Storm\Support\Collection` class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We'll create a new collection instance from the array, run the `strtoupper` function on each element, and then remove all empty elements:
 
-    $collection = new October\Rain\Support\Collection(['stewie', 'brian', null]);
+    $collection = new Winter\Storm\Support\Collection(['stewie', 'brian', null]);
 
     $collection = $collection
         ->map(function ($name) {
@@ -31,9 +31,9 @@ The `Collection` class allows you to chain its methods to perform fluent mapping
 <a name="creating-collections"></a>
 ## Creating collections
 
-As described above, passing an array to the constructor of the `October\Rain\Support\Collection` class will return a new instance for the given array. So, creating a collection is as simple as:
+As described above, passing an array to the constructor of the `Winter\Storm\Support\Collection` class will return a new instance for the given array. So, creating a collection is as simple as:
 
-    $collection = new October\Rain\Support\Collection([1, 2, 3]);
+    $collection = new Winter\Storm\Support\Collection([1, 2, 3]);
 
 By default, collections of [database models](../database/model) are always returned as `Collection` instances; however, feel free to use the `Collection` class wherever it is convenient for your application.
 
@@ -688,26 +688,26 @@ The `flatten` method flattens a multi-dimensional collection into a single dimen
 
 The `flip` method swaps the collection's keys with their corresponding values:
 
-    $collection = new Collection(['name' => 'peter', 'platform' => 'october']);
+    $collection = new Collection(['name' => 'peter', 'platform' => 'winter']);
 
     $flipped = $collection->flip();
 
     $flipped->all();
 
-    // ['peter' => 'name', 'october' => 'platform']
+    // ['peter' => 'name', 'winter' => 'platform']
 
 <a name="method-forget"></a>
 #### `forget()` {.collection-method}
 
 The `forget` method removes an item from the collection by its key:
 
-    $collection = new Collection(['name' => 'peter', 'platform' => 'october']);
+    $collection = new Collection(['name' => 'peter', 'platform' => 'winter']);
 
     $collection->forget('name');
 
     $collection->all();
 
-    // ['platform' => 'october']
+    // ['platform' => 'winter']
 
 > **Note:** Unlike most other collection methods, `forget` does not return a new modified collection; it modifies the collection it is called on.
 
@@ -729,7 +729,7 @@ The method requires the page number and the number of items to show per page, re
 
 The `get` method returns the item at a given key. If the key does not exist, `null` is returned:
 
-    $collection = new Collection(['name' => 'peter', 'platform' => 'october']);
+    $collection = new Collection(['name' => 'peter', 'platform' => 'winter']);
 
     $value = $collection->get('name');
 
@@ -737,7 +737,7 @@ The `get` method returns the item at a given key. If the key does not exist, `nu
 
 You may optionally pass a default value as the second argument:
 
-    $collection = new Collection(['name' => 'peter', 'platform' => 'october']);
+    $collection = new Collection(['name' => 'peter', 'platform' => 'winter']);
 
     $value = $collection->get('foo', 'default-value');
 
@@ -2422,11 +2422,11 @@ Likewise, we can use the `sum` higher order message to gather the total number o
 <a name="lazy-collection-introduction"></a>
 ### Introduction
 
-> **Note:** Before learning more about October's lazy collections, take some time to familiarize yourself with [PHP generators](https://www.php.net/manual/en/language.generators.overview.php).
+> **Note:** Before learning more about Winter's lazy collections, take some time to familiarize yourself with [PHP generators](https://www.php.net/manual/en/language.generators.overview.php).
 
 To supplement the already powerful `Collection` class, the `LazyCollection` class leverages PHP's [generators](https://www.php.net/manual/en/language.generators.overview.php) to allow you to work with very large datasets while keeping memory usage low.
 
-For example, imagine your application needs to process a multi-gigabyte log file while taking advantage of October's collection methods to parse the logs. Instead of reading the entire file into memory at once, lazy collections may be used to keep only a small part of the file in memory at a given time:
+For example, imagine your application needs to process a multi-gigabyte log file while taking advantage of Winter's collection methods to parse the logs. Instead of reading the entire file into memory at once, lazy collections may be used to keep only a small part of the file in memory at a given time:
 
     use App\LogEntry;
     use Illuminate\Support\LazyCollection;
@@ -2443,7 +2443,7 @@ For example, imagine your application needs to process a multi-gigabyte log file
         // Process the log entry...
     });
 
-Or, imagine you need to iterate through 10,000 Eloquent models. When using traditional October collections, all 10,000 Eloquent models must be loaded into memory at the same time:
+Or, imagine you need to iterate through 10,000 Eloquent models. When using traditional Winter collections, all 10,000 Eloquent models must be loaded into memory at the same time:
 
     $users = App\User::all()->filter(function ($user) {
         return $user->id > 500;
