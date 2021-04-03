@@ -3,7 +3,7 @@
 - [Purgeable](#purgeable)
 - [Sortable](#sortable)
 
-Model behaviors are used to implement common functionality.  
+Model behaviors are used to implement common functionality.
 Unlike [Traits](traits) these can be implemented either directly
 in a class or by extending the class. You can read more about behaviors [here](../services/behaviors).
 
@@ -11,13 +11,13 @@ in a class or by extending the class. You can read more about behaviors [here](.
 ## Purgeable
 
 Purged attributes will not be saved to the database when a model is created or updated. To purge
-attributes in your model, implement the `Winter.Rain.Database.Behaviors.Purgeable` behavior and declare
+attributes in your model, implement the `Winter.Storm.Database.Behaviors.Purgeable` behavior and declare
 a `$purgeable` property with an array containing the attributes to purge.
 
     class User extends Model
     {
         public $implement = [
-            'Winter.Rain.Database.Behaviors.Purgeable'
+            'Winter.Storm.Database.Behaviors.Purgeable'
         ];
 
         /**
@@ -25,16 +25,16 @@ a `$purgeable` property with an array containing the attributes to purge.
          */
         public $purgeable = [];
     }
-    
+
 You can also dynamically implement this behavior in a class.
 
     /**
-     * Extend the RainLab.User user model to implement the purgeable behavior.
+     * Extend the Winter.User user model to implement the purgeable behavior.
      */
-    RainLab\User\Models\User::extend(function($model) {
+    Winter\User\Models\User::extend(function($model) {
 
         // Implement the purgeable behavior dynamically
-        $model->implement[] = 'Winter.Rain.Database.Behaviors.Purgeable';
+        $model->implement[] = 'Winter.Storm.Database.Behaviors.Purgeable';
 
         // Declare the purgeable property dynamically for the purgeable behavior to use
         $model->addDynamicProperty('purgeable', []);
@@ -53,19 +53,19 @@ Sorted models will store a number value in `sort_order` which maintains the sort
     class User extends Model
     {
         public $implement = [
-            'Winter.Rain.Database.Behaviors.Sortable'
+            'Winter.Storm.Database.Behaviors.Sortable'
         ];
     }
 
 You can also dynamically implement this behavior in a class.
 
     /**
-     * Extend the RainLab.User user model to implement the sortable behavior.
+     * Extend the Winter.User user model to implement the sortable behavior.
      */
-    RainLab\User\Models\User::extend(function($model) {
+    Winter\User\Models\User::extend(function($model) {
 
         // Implement the sortable behavior dynamically
-        $model->implement[] = 'Winter.Rain.Database.Behaviors.Sortable';
+        $model->implement[] = 'Winter.Storm.Database.Behaviors.Sortable';
     });
 
 You may modify the key name used to identify the sort order by defining the `SORT_ORDER` constant:

@@ -1,11 +1,3 @@
----
-title: AJAX Extra Features
-navTitle: Extra features
-category: AJAX
-order: 6
-layout: default
----
-
 - [Loading indicator](#loader-stripe)
 - [Form validation](#ajax-validation)
     - [Throwing a validation error](#throw-validation-exception)
@@ -69,7 +61,7 @@ To add custom classes on AJAX invalidation, hook into the `ajaxInvalidField` and
     $(window).on('ajaxInvalidField', function(event, fieldElement, fieldName, errorMsg, isFirst) {
         $(fieldElement).closest('.form-group').addClass('has-error');
     });
-    
+
     $(document).on('ajaxPromise', '[data-request]', function() {
         $(this).closest('form').find('.form-group.has-error').removeClass('has-error');
     });

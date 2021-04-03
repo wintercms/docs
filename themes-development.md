@@ -150,8 +150,8 @@ When the theme is installed for the first time, the system will attempt to insta
 ## Localization
 
 Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the Winter backend and can be used for form labels just like [plugin localization](../plugin/localization)
-   
-> **Note**: Translating frontend content should be handled with the [RainLab.Translate](https://wintercms.com/plugin/rainlab-translate) plugin.
+
+> **Note**: Translating frontend content should be handled with the [Winter.Translate](https://wintercms.com/plugin/winter-translate) plugin.
 
 <a name="localization-file-structure"></a>
 ### Localization directory and file structure

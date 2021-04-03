@@ -1,11 +1,3 @@
----
-title: Backend Forms
-navTitle: Forms
-category: Backend
-order: 4
-layout: default
----
-
 - [Introduction](#introduction)
 - [Configuring the form behavior](#configuring-form)
     - [Create page](#form-create-page)
@@ -929,7 +921,7 @@ Option | Description
     user:
         label: User
         type: recordfinder
-        list: ~/plugins/rainlab/user/models/user/columns.yaml
+        list: ~/plugins/winter/user/models/user/columns.yaml
         recordsPerPage: 10
         title: Find Record
         prompt: Click the Find button to find a user
@@ -941,7 +933,7 @@ Option | Description
         searchMode: all
         searchScope: searchUsers
         useRelation: false
-        modelClass: RainLab\User\Models\User
+        modelClass: Winter\User\Models\User
 
 Option | Description
 ------------- | -------------
@@ -1204,7 +1196,7 @@ The **update.htm** view represents the Update page that allows users to update o
                 </button>
                 <button
                     type="button"
-                    class="oc-icon-trash-o btn-icon danger pull-right"
+                    class="wn-icon-trash-o btn-icon danger pull-right"
                     data-request="onDelete"
                     data-load-indicator="Deleting Category..."
                     data-request-confirm="Do you really want to delete this category?">

@@ -1,11 +1,3 @@
----
-title: Backend Lists
-navTitle: Lists
-category: Backend
-order: 3
-layout: default
----
-
 - [Introduction](#introduction)
 - [Configuring the list behavior](#configuring-list)
     - [Adding a toolbar](#adding-toolbar)
@@ -122,7 +114,7 @@ The toolbar buttons partial referred above should contain the toolbar control de
     <div data-control="toolbar">
         <a
             href="<?= Backend::url('acme/blog/posts/create') ?>"
-            class="btn btn-primary oc-icon-plus">New Post</a>
+            class="btn btn-primary wn-icon-plus">New Post</a>
     </div>
 
 <a name="adding-filters"></a>

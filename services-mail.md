@@ -211,8 +211,8 @@ If you are planning to use queued emails make sure that the path of the file is 
         Here is an image:
         {% set pathToFile = 'storage/app/media/path/to/file.jpg' | app %}
         <img src="{{ message.embed(pathToFile) }}">
-    </body>   
-    
+    </body>
+
 #### Embedding raw data in mail content
 
 If you already have a raw data string you wish to embed into an e-mail message, you may use the `embedData` method on the `message` variable:
@@ -355,8 +355,8 @@ Mail views can be registered as templates that are automatically generated in th
     public function registerMailTemplates()
     {
         return [
-            'rainlab.user::mail.activate',
-            'rainlab.user::mail.restore'
+            'winter.user::mail.activate',
+            'winter.user::mail.restore'
         ];
     }
 

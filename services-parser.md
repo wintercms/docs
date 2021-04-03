@@ -184,7 +184,7 @@ As a bonus feature, calling the `toTwig` method will output the template in a pr
 <a name="syntax-editor-mode"></a>
 ### Editor mode
 
-So far the Dynamic Syntax parser is not much different to a regular template engine, however the editor mode is where the utility of Dynamic Syntax becomes more apparent. The editor mode unlocks a new realm of possibility, for example, where [layouts inject custom form fields to pages](http://wintercms.com/plugin/rainlab-pages) that belong to them or for [dynamically built forms used in email campaigns](http://wintercms.com/plugin/responsiv-campaign).
+So far the Dynamic Syntax parser is not much different to a regular template engine, however the editor mode is where the utility of Dynamic Syntax becomes more apparent. The editor mode unlocks a new realm of possibility, for example, where [layouts inject custom form fields to pages](http://wintercms.com/plugin/winter-pages) that belong to them or for [dynamically built forms used in email campaigns](http://wintercms.com/plugin/responsiv-campaign).
 
 To continue with the examples above, calling the `toEditor` method on the `Parser` object will return a PHP array of properties that define how the variable should be populated, by a form builder for example.
 
@@ -299,7 +299,7 @@ Renders in Twig as
 File uploader input for files. This tag value will contain the full path to the file.
 
     {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
-    
+
 #### Color picker
 
 Color picker widget for color selection. This tag will contain the selected hexadecimal value. You may optionally provide an `availableColors` attribute to define the available colours for selection.
@@ -342,10 +342,10 @@ Calling `$syntax->toEditor` will return a different array for a repeater field:
 
         ]
     ]
-    
+
 The repeater field also supports group mode, to be used with the dynamic syntax parser as follows:
 
-    {variable name="sections" type="repeater" prompt="Add another section" tab="Sections" 
+    {variable name="sections" type="repeater" prompt="Add another section" tab="Sections"
         groups="$/author/plugin/repeater_fields.yaml"}{/variable}
 
 This is an example of the repeater_fields.yaml group configuration file:
@@ -367,5 +367,5 @@ This is an example of the repeater_fields.yaml group configuration file:
                 span: auto
                 label: Details
                 type: textarea
-                
-For more information about the repeater group mode see [Repeater Widget](../backend/forms#widget-repeater).                
+
+For more information about the repeater group mode see [Repeater Widget](../backend/forms#widget-repeater).

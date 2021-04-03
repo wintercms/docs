@@ -270,7 +270,7 @@ Report widgets can be used on the back-end dashboard and in other back-end repor
 The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
     plugins/
-      rainlab/                    <=== Author name
+      winter/                    <=== Author name
         googleanalytics/          <=== Plugin name
           reportwidgets/          <=== Report widgets directory
             trafficsources        <=== Widget files directory
@@ -280,7 +280,7 @@ The report widget classes should extend the `Backend\Classes\ReportWidgetBase` c
 
 Example report widget class definition:
 
-    namespace RainLab\GoogleAnalytics\ReportWidgets;
+    namespace Winter\GoogleAnalytics\ReportWidgets;
 
     use Backend\Classes\ReportWidgetBase;
 
@@ -309,7 +309,7 @@ The widget partial could contain any HTML markup you want to display in the widg
         </div>
     </div>
 
-![image](https://raw.githubusercontent.com/wintercms/docs/master/images/traffic-sources.png)
+![image](https://raw.githubusercontent.com/wintercms/docs/main/images/traffic-sources.png)
 
 Inside report widgets you can use any [charts or indicators](controls), lists or any other markup you wish. Remember that the report widgets extend the generic back-end widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
 
@@ -356,7 +356,7 @@ Inside report widgets you can use any [charts or indicators](controls), lists or
 
 Report widgets may have properties that users can manage with the Inspector:
 
-![image](https://github.com/wintercms/docs/blob/master/images/report-widget-inspector.png?raw=true)
+![image](https://github.com/wintercms/docs/blob/main/images/report-widget-inspector.png?raw=true)
 
 The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components#component-properties). Example:
 
@@ -387,18 +387,18 @@ Plugins can register report widgets by overriding the `registerReportWidgets` me
     public function registerReportWidgets()
     {
         return [
-            'RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview' => [
+            'Winter\GoogleAnalytics\ReportWidgets\TrafficOverview' => [
                 'label'   => 'Google Analytics traffic overview',
                 'context' => 'dashboard',
                 'permissions' => [
-                    'rainlab.googleanalytics.widgets.traffic_overview',
+                    'winter.googleanalytics.widgets.traffic_overview',
                 ],
             ],
-            'RainLab\GoogleAnalytics\ReportWidgets\TrafficSources' => [
+            'Winter\GoogleAnalytics\ReportWidgets\TrafficSources' => [
                 'label'   => 'Google Analytics traffic sources',
                 'context' => 'dashboard',
                 'permissions' => [
-                    'rainlab.googleanaltyics.widgets.traffic_sources',
+                    'winter.googleanaltyics.widgets.traffic_sources',
                 ],
             ]
         ];

@@ -23,11 +23,11 @@ The [Event service](../services/events) is the primary way to inject or modify t
 <a name="subscribing-to-events"></a>
 ### Subscribing to events
 
-The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a `rainlab.user.register` global event.
+The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a `winter.user.register` global event.
 
     public function boot()
     {
-        Event::listen('rainlab.user.register', function ($user) {
+        Event::listen('winter.user.register', function ($user) {
             // Code to register $user->email to mailing list
         });
     }
@@ -49,14 +49,14 @@ Local events are fired by calling `fireEvent()` on an instance of an object that
 
     $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
 
-Global events are fired by calling `Event::fire()`. As these events are global across the entire application, it is best practice to namespace them by including the vendor information in the name of the event. If your plugin Author is ACME and the plugin name is Blog, then any global events provided by the ACME.Blog plugin should be prefixed with `acme.blog`. 
+Global events are fired by calling `Event::fire()`. As these events are global across the entire application, it is best practice to namespace them by including the vendor information in the name of the event. If your plugin Author is ACME and the plugin name is Blog, then any global events provided by the ACME.Blog plugin should be prefixed with `acme.blog`.
 
     Event::fire('acme.blog.post.beforePost', [$firstParam, $secondParam]);
-    
+
 If both global & local events are provided at the same place it's best practice to fire the local event before the global event so that the local event takes priority. Additionally, the global event should provide the object instance that the local event was fired on as the first parameter.
 
     $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
-    Event::fire('rainlab.blog.beforePost', [$this, $firstParam, $secondParam]);
+    Event::fire('winter.blog.beforePost', [$this, $firstParam, $secondParam]);
 
 Once this event has been subscribed to, the parameters are available in the handler method. For example:
 
@@ -153,15 +153,15 @@ This example will listen to the [`backend.form.extendFields`](https://wintercms.
             // Extend all backend form usage
             Event::listen('backend.form.extendFields', function($widget) {
                 // Only apply this listener when the Users controller is being used
-                if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
+                if (!$widget->getController() instanceof \Winter\User\Controllers\Users) {
                     return;
                 }
 
                 // Only apply this listener when the User model is being modified
-                if (!$widget->model instanceof \RainLab\User\Models\User) {
+                if (!$widget->model instanceof \Winter\User\Models\User) {
                     return;
                 }
-                
+
                 // Only apply this listener when the Form widget in question is a root-level
                 // Form widget (not a repeater, nestedform, etc)
                 if ($widget->isNested) {
@@ -183,7 +183,7 @@ This example will listen to the [`backend.form.extendFields`](https://wintercms.
         }
     }
 
-> **Note:** In some cases (adding fields that should be made translatable by [RainLab.Translate](https://github.com/rainlab/translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://wintercms.com/docs/api/backend/form/extendfieldsbefore) event instead.
+> **Note:** In some cases (adding fields that should be made translatable by [Winter.Translate](https://github.com/wintercms/wn-translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://wintercms.com/docs/api/backend/form/extendfieldsbefore) event instead.
 
 <a name="extending-backend-list"></a>
 ### Extending a backend list
@@ -199,12 +199,12 @@ This example will modify the [`backend.list.extendColumns`](https://wintercms.co
             // Extend all backend list usage
             Event::listen('backend.list.extendColumns', function ($widget) {
                 // Only for the User controller
-                if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
+                if (!$widget->getController() instanceof \Winter\User\Controllers\Users) {
                     return;
                 }
 
                 // Only for the User model
-                if (!$widget->model instanceof \RainLab\User\Models\User) {
+                if (!$widget->model instanceof \Winter\User\Models\User) {
                     return;
                 }
 
@@ -224,7 +224,7 @@ This example will modify the [`backend.list.extendColumns`](https://wintercms.co
 <a name="extending-component"></a>
 ### Extending a component
 
-This example will declare a new global event `rainlab.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [Component class definition](components#component-class-definition).
+This example will declare a new global event `winter.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [Component class definition](components#component-class-definition).
 
     class Topic extends ComponentBase
     {
@@ -236,7 +236,7 @@ This example will declare a new global event `rainlab.forum.topic.post` and loca
              * Extensibility
              */
             $this->fireEvent('topic.post', [$post, $postUrl]);
-            Event::fire('rainlab.forum.topic.post', [$this, $post, $postUrl]);
+            Event::fire('winter.forum.topic.post', [$this, $post, $postUrl]);
         }
     }
 

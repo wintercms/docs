@@ -27,9 +27,9 @@ In order to use Composer with an Winter instance that has been installed using t
 If you plan on submitting pull requests to the Winter CMS project via GitHub, or are actively developing a project based on Winter CMS and want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place. Doing this will allow you to catch any potential issues that may be introduced (as rare as they are) right when they happen and get them fixed while you're still actively working on your project instead of only discovering them several months down the road if they eventually make it into production.
 
     "winter/storm": "dev-develop as 1.1",
-    "winter/system": "dev-develop",
-    "winter/backend": "dev-develop",
-    "winter/cms": "dev-develop",
+    "winter/wn-system-module": "dev-develop",
+    "winter/wn-backend-module": "dev-develop",
+    "winter/wn-cms-module": "dev-develop",
     "laravel/framework": "~6.0",
 
 <a name="publishing-products"></a>
@@ -38,16 +38,16 @@ If you plan on submitting pull requests to the Winter CMS project via GitHub, or
 When publishing your plugins or themes to the marketplace, you may wish to also make them available via composer. An example `composer.json` file for a plugin is included below:
 
     {
-        "name": "winter/oc-demo-plugin",
+        "name": "winter/wn-demo-plugin",
         "type": "winter-plugin",
         "description": "Demo Winter CMS plugin",
         "keywords": ["winter", "cms", "demo", "plugin"],
         "license": "MIT",
         "authors": [
             {
-                "name": "Alexey Bobkov",
+                "name": "Luke Towers",
                 "email": "hello@wintercms.com",
-                "role": "Co-founder"
+                "role": "Author"
             }
         ],
         "require": {
@@ -56,7 +56,7 @@ When publishing your plugins or themes to the marketplace, you may wish to also 
         }
     }
 
-Be sure to start your package `name` with **oc-** and end it with **-plugin** or **-theme** respectively, this will help others find your package and is in  accordance with the [quality guidelines](../help/guidelines/developer#repository-naming).
+Be sure to start your package `name` with **wn-** and end it with **-plugin** or **-theme** respectively, this will help others find your package and is in  accordance with the [quality guidelines](../help/guidelines/developer#repository-naming).
 
 The `type` field is a key definition for ensuring that your plugin or theme arrives at the correct location upon installation. Use the following types:
 
@@ -178,19 +178,19 @@ class Plugin extends PluginBase
     {
         // Instantiate the AliasLoader
         $aliasLoader = AliasLoader::getInstance();
-        
+
         // Register the aliases provided by the packages used by your plugin
         $aliasLoader->alias('Purifier', \Mews\Purifier\Facades\Purifier::class);
-    
+
         // Register the service providers provided by the packages used by your plugin
         App::register(\Mews\Purifier\PurifierServiceProvider::class);
     }
 }
-```       
+```
 
 <a name="laravel-migrations-models"></a>
 ### Migrations & Models
 
 Laravel packages that interact with the database will often include their own database migrations and Eloquent models. Ideally you should duplicate these migrations and models to your plugin's directory and then rebase the provided Model classes to extend the base `\Winter\Storm\Database\Model` class instead of the base Laravel Eloquent model class to take advantage of the extended technology features found in Winter.
 
-You should also make an effort to rename the tables to prefix them with your plugin's author code and name. For example, a table with the name `posts` should be renamed to `rainlab_blog_posts`.
+You should also make an effort to rename the tables to prefix them with your plugin's author code and name. For example, a table with the name `posts` should be renamed to `winter_blog_posts`.

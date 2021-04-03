@@ -48,7 +48,7 @@ The `create:controller` command generates a controller, configuration and view f
 The `create:formwidget` command generates a back-end form widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the form widget class name.
 
     php artisan create:formwidget Acme.Blog CategorySelector
-    
+
 <a name="scaffold-create-reportwidget"></a>
 ### Create a report widget
 
@@ -61,4 +61,4 @@ The `create:reportwidget` command generates a back-end report widget, view and b
 
 The `create:command` command generates a [new console command](../console/development). The first parameter specifies the author and plugin name. The second parameter specifies the command name.
 
-    php artisan create:command RainLab.Blog MyCommand
+    php artisan create:command Winter.Blog MyCommand

@@ -190,16 +190,16 @@ If you wish to install the theme in a custom directory, simply provide the secon
 <a name="theme-use-command"></a>
 ### Enable theme
 
-`theme:use` - switch the active theme. The following example will switch to the theme in `/themes/rainlab-vanilla`
+`theme:use` - switch the active theme. The following example will switch to the theme in `/themes/winter-vanilla`
 
-    php artisan theme:use rainlab-vanilla
+    php artisan theme:use winter-vanilla
 
 <a name="theme-remove-command"></a>
 ### Remove theme
 
-`theme:remove` - delete a theme. The following example will delete the directory `/themes/rainlab-vanilla`
+`theme:remove` - delete a theme. The following example will delete the directory `/themes/winter-vanilla`
 
-    php artisan theme:remove rainlab-vanilla
+    php artisan theme:remove winter-vanilla
 
 <a name="theme-sync-command"></a>
 ### Sync theme

@@ -36,7 +36,7 @@ Your contributions to the Winter documentation are very welcome. Please follow t
 1. Use the inline `code` tags for everything related to code - variable names, function names, syntax examples, etc.
 1. Use the **strong** tag for everything else.
 1. Don't hesitate to make cross links to other documentation articles. Adding links to the same article in the same paragraph is not necessary.
-1. See the [cms-pages.md](https://github.com/wintercms/docs/blob/master/cms-pages.md) or [cms-themes.md](https://github.com/wintercms/docs/blob/master/cms-themes.md) files for your reference.
+1. See the [cms-pages.md](https://github.com/wintercms/docs/blob/main/cms-pages.md) or [cms-themes.md](https://github.com/wintercms/docs/blob/main/cms-themes.md) files for your reference.
 
 <a name="psr-exceptions"></a>
 ## Exceptions to PSR standards
@@ -105,27 +105,27 @@ This section describes some standards that we highly recommend to follow for eve
 The vendor or author code in a namespace must begin with an uppercase character and should not contain underscores or dashes. These are examples of valid names:
 
     Acme.Blog
-    RainLab.User
+    WinterStorm.User
     Happygilmore.Golf
 
 These are examples of names that are **not** valid:
 
     acme.blog
-    rainLab.user
+    winterStorm.user
     Happy_gilmore.Golf
 
 <a name="repository-naming"></a>
 ### Repository naming
 
-When publishing work to a repository, such as Git, use the following naming as a convention. Plugins should be named with a `-plugin` suffix and optional `oc-` prefix.
+When publishing work to a repository, such as Git, use the following naming as a convention. Plugins should be named with a `-plugin` suffix and optional `wn-` prefix.
 
     blog-plugin
-    oc-blog-plugin
+    wn-blog-plugin
 
-Themes should be named with the `-theme` suffix and optional `oc-` prefix.
+Themes should be named with the `-theme` suffix and optional `wn-` prefix.
 
     happy-theme
-    oc-happy-theme
+    wn-happy-theme
 
 <a name="variable-naming"></a>
 ### PHP Variable naming
@@ -303,12 +303,12 @@ Models are commonly are placed in `models` directory. The name of a model should
 When extending other models, you should prefix the field with at least the plugin name.
 
     User::extend(function($model) {
-        $model->hasOne['forum_member'] = ['RainLab\Forum\Models\Member'];
+        $model->hasOne['forum_member'] = ['Winter\Forum\Models\Member'];
     });
 
 The fully qualified plugin name is also acceptable, for example:
 
-    $user->rainlab_forum_member
+    $user->winter_forum_member
 
 <a name="model-scopes"></a>
 ### Model scopes

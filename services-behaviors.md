@@ -31,12 +31,12 @@ A behavior is used in a similar fashion:
     class MyClass extends \Winter\Storm\Extension\Extendable
     {
         public $implement = [
-            'Winter.Rain.UtilityFunctions',
-            'Winter.Rain.DeferredBinding',
+            'Winter.Storm.UtilityFunctions',
+            'Winter.Storm.DeferredBinding',
         ];
     }
-    
-> **Note**: Implementing behaviors is case sensitive, so `RainLab.Translate.Behaviors.TranslatableModel` will work but `Rainlab.Translate.Behaviors.TranslatableModel` will not.
+
+> **Note**: Implementing behaviors is case sensitive, so `Winter.Translate.Behaviors.TranslatableModel` will work but `Winter.Translate.Behaviors.TranslatableModel` will not.
 
 Where you might define a trait like this:
 
@@ -65,13 +65,13 @@ A behavior is defined like this:
         }
     }
 
-The extended object is always passed as the first parameter to the Behavior's constructor. 
+The extended object is always passed as the first parameter to the Behavior's constructor.
 
 To summarize:
 - Extend \Winter\Storm\Extension\ExtensionBase to declare your class as a Behaviour
 - The class wanting to -implement- the Behaviour needs to extend \Winter\Storm\Extension\Extendable
 
-> **Note**: See [Using traits instead of base classes](#using-traits) 
+> **Note**: See [Using traits instead of base classes](#using-traits)
 
 <a name="constructor-extension"></a>
 ## Extending constructors
@@ -81,7 +81,7 @@ Any class that uses the `Extendable` or `ExtendableTrait` can have its construct
     MyNamespace\Controller::extend(function($controller) {
         //
     });
-    
+
 #### Dynamically declaring properties
 
 Properties can be declared on an extendable object by calling `addDynamicProperty` and passing a property name and value.
@@ -89,13 +89,13 @@ Properties can be declared on an extendable object by calling `addDynamicPropert
     Post::extend(function($model) {
         $model->addDynamicProperty('tagsCache', null);
     });
-    
+
 > **Note**: Attempting to set undeclared properties through normal means (`$this->foo = 'bar';`) on an object that implements the **Winter\Storm\Extension\ExtendableTrait** will not work. It won't throw an exception, but it will not autodeclare the property either. `addDynamicProperty` must be called in order to set previously undeclared properties on extendable objects.
 
 #### Retrieving dynamic properties
 
 Properties created dynamically can be retrieved with the getDynamicProperties function inherited from
-the ExtendableTrait.  
+the ExtendableTrait.
 
 So retrieving all dynamic properties would look like this:
 
@@ -114,7 +114,7 @@ Methods can be created to an extendable object by calling `addDynamicMethod` and
 
     Post::extend(function($model) {
         $model->addDynamicProperty('tagsCache', null);
-    
+
         $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
             if ($this->tagsCache) {
                 return $this->tagsCache;
@@ -161,19 +161,19 @@ To retrieve a list of all available methods in an `Extendable` class, you can us
      *   ...
      * ];
      */
-    
+
 #### Dynamically implementing a behavior
 
 This unique ability to extend constructors allows behaviors to be implemented dynamically, for example:
 
     /**
-     * Extend the RainLab.Users controller to include the RelationController behavior too
+     * Extend the Winter.Users controller to include the RelationController behavior too
      */
-    RainLab\Users\Controllers\Users::extend(function($controller) {
+    Winter\Users\Controllers\Users::extend(function($controller) {
 
         // Implement the list controller behavior dynamically
         $controller->implement[] = 'Backend.Behaviors.RelationController';
-        
+
         // Declare the relationConfig property dynamically for the RelationController behavior to use
         $controller->addDynamicProperty('relationConfig', '$/myvendor/myplugin/controllers/users/config_relation.yaml');
     });
@@ -282,10 +282,10 @@ If a behavior class does not exist, like a trait, a *Class not found* error will
 
     class User extends \Winter\Storm\Extension\Extendable
     {
-        public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
+        public $implement = ['@Winter.Translate.Behaviors.TranslatableModel'];
     }
 
-If the class name `RainLab\Translate\Behaviors\TranslatableModel` does not exist, no error will be thrown. This is the equivalent of the following code:
+If the class name `Winter\Translate\Behaviors\TranslatableModel` does not exist, no error will be thrown. This is the equivalent of the following code:
 
     class User extends \Winter\Storm\Extension\Extendable
     {
@@ -293,8 +293,8 @@ If the class name `RainLab\Translate\Behaviors\TranslatableModel` does not exist
 
         public function __construct()
         {
-            if (class_exists('RainLab\Translate\Behaviors\TranslatableModel')) {
-                $this->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
+            if (class_exists('Winter\Translate\Behaviors\TranslatableModel')) {
+                $this->implement[] = 'Winter.Translate.Behaviors.TranslatableModel';
             }
 
             parent::__construct();
