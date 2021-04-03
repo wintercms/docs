@@ -112,3 +112,6 @@ Extras:
     help/using-composer: "Using Composer"
     ../help/guidelines/quality: "Quality guidelines@"
     ../help/guidelines/developer: "Developer guide@"
+Events:
+  pages:
+    events/introduction: "Introduction"
