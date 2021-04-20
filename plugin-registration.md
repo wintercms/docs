@@ -12,6 +12,14 @@
 - [Navigation menus](#navigation-menus)
 - [Registering middleware](#registering-middleware)
 - [Elevated permissions](#elevated-plugin)
+- [Plugin replace](#plugin-replace)
+  - [Plugin replace registration](#plugin-replace-registration)
+    - [Version constraint](#version-constraints)
+  - [Aliases](#aliases)
+    - [Config Aliases](#aliases-config)
+    - [Lang Aliases](#aliases-lang)
+    - [Settings Aliases](#aliases-settings)
+    - [Navigation Aliases](#aliases-navigation)
 
 <a name="introduction"></a>
 ## Introduction
@@ -307,3 +315,137 @@ Define the `$elevated` property to grant elevated permissions for your plugin.
      * @var bool Plugin requires elevated permissions.
      */
     public $elevated = true;
+
+<a name="plugin-replace"></a>
+## Replacing plugins
+
+Plugin replacement is a feature that allows you to create a plugin that replaces (or overrides) another plugin.
+This can be useful when you're forking a plugin to add your own functionality but want to keep the plugin as a
+requirement of other plugins.
+
+<a name="plugin-replace-registration"></a>
+### Plugin replace registration
+
+To enable plugin replacement, specify the original plugin you are replacing in your plugin details along with your
+version constraint.
+
+    public function pluginDetails()
+    {
+        return [
+            'name'        => 'Acme Plugin',
+            'replaces'    => [
+                'Acme.Original' => '>=5.0 <=6.0.4'
+            ]
+        ];
+    }
+
+<a name="version-constraints"></a>
+#### Version constraints
+
+Version constraints allow you to restrict your plugin to only override currently installed plugins of
+specific versions. For example, this would allow you to only replace a plugin upto that plugins version `2.0.0`.
+
+This means you don't have to worry about new versions of the original plugin having changes that may conflict with
+your changes to the plugin.
+
+Version constraints are specified in the same manner as composer. For instance some valid examples would be:
+
+- `1.0`
+- `>=1.0.3`
+- `<2.0`
+- `>=1.5.0 <2.0.0`
+- `self.version`
+
+By specifying a version, your plugin will check what version the original plugin is installed at and only if
+it's version matches the constraint will it disable the original and enable the replacement. If this match fails
+then the replacement will be disabled and the original plugin will stay enabled.
+
+<a name="aliases"></a>
+### Aliases
+
+<!-- TODO: Group the into their own docs -->
+
+Aliasing is a feature of Winter that allows for backwards compatibility and support for inheriting replaced plugins:
+
+- Configs
+- Lang
+- Settings
+- Navigation
+
+<a name="aliases-config"></a>
+#### Config
+
+Config supports 2 different types of aliasing: `registerNamespaceAlias` & `registerPackageFallback`.
+
+##### registerNamespaceAlias
+
+This method allows for redirection of the alias to the namespace while accessing config values.
+
+    Config::registerNamespaceAlias(/* string $namespace */ 'winter.namespace', /* string $alias */ 'winter.alias');
+
+For example, register the following config as `plugins/winter/namespace/config/config.php`:
+
+    <?php
+    
+    return [
+        'foo' => 'bar'
+    ];
+
+The config will be accessible via the alias registered:
+
+    config('winter.alias::foo'); // returns bar
+
+##### registerPackageFallback
+
+This method allows falling back to an aliased global config (a config specified in `/config/acme/plugin/config.php`).
+
+    Config::registerPackageFallback(/* string $namespace */ 'winter.namespace', /* string $alias */ 'winter.alias');
+
+The logic to this is as follows:
+
+- If `/config/winter/namespace/config.php` exists it will be registered under the `winter.namespace` namespace.
+- If `/config/winter/namespace/config.php` does not exist, it will check `/config/winter/alias/config.php` and if found,
+  it will be registered under the `winter.namespace`.
+
+<a name="aliases-lang"></a>
+#### Lang
+
+Allows for redirection of calls to the alias and returns values from the namespace.
+
+    Lang::registerNamespaceAlias(/* string $namespace */ 'winter.namespace', /* string $alias */ 'winter.alias');
+
+For example, register the following config as `plugins/winter/namespace/lang/en/lang.php`:
+
+    <?php
+    
+    return [
+        'foo' => 'bar'
+    ];
+
+The lang will be accessible via the alias registered:
+
+    Lang::get('winter.alias::foo'); // returns bar
+
+<a name="aliases-settings"></a>
+#### Settings
+
+There are 2 methods for registering settings aliases. Firstly the aliases can be registered prior to the `PluginManager`
+init via `lazyRegisterOwnerAlias`.
+
+    SettingsManager::lazyRegisterOwnerAlias(string $namespace, string $alias);
+
+If the `PluginManager` has been loaded, then aliases can be registered via:
+
+    SettingsManager::instance()->registerOwnerAlias(string $namespace, string $alias);
+
+<a name="aliases-navigation"></a>
+#### Navigation
+
+There are 2 methods for registering settings aliases. Firstly the aliases can be registered prior to the `PluginManager`
+init via `lazyRegisterOwnerAlias`.
+
+    NavigationManager::lazyRegisterOwnerAlias(string $namespace, string $alias);
+
+If the `PluginManager` has been loaded, then aliases can be registered via:
+
+    NavigationManager::instance()->registerOwnerAlias(string $namespace, string $alias);
