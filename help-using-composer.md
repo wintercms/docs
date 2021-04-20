@@ -19,7 +19,7 @@ Using [Composer](https://getcomposer.org/) as an alternative package manager to 
 <a name="converting-from-basic-install"></a>
 ### Converting from Basic Install
 
-In order to use Composer with an Winter instance that has been installed using the Wizard or simple CLI installation process, simply copy the latest [`tests/` directory](https://github.com/wintercms/winter/tree/develop/tests) and [`composer.json`](https://github.com/wintercms/winter/tree/develop/composer.json) file from [GitHub](https://github.com/wintercms/winter/tree/develop) into your Winter instance and then run `composer install`.
+In order to use Composer with a Winter instance that has been installed using the Wizard or simple CLI installation process, simply copy the latest [`tests/` directory](https://github.com/wintercms/winter/tree/develop/tests) and [`composer.json`](https://github.com/wintercms/winter/tree/develop/composer.json) file from [GitHub](https://github.com/wintercms/winter/tree/develop) into your Winter instance and then run `composer install`.
 
 <a name="development-branch"></a>
 ### Development Branch

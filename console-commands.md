@@ -64,7 +64,7 @@ When updating Winter, use the composer update command as normal before performin
 
 Composer is configured to look inside plugin directories for composer dependencies and these will be included in updates.
 
-> **Note:** To use composer with an Winter instance that has been installed using the [Wizard installation](../setup/installation#wizard-installation), simply copy the `tests/` directory and `composer.json` file from [GitHub](https://github.com/wintercms/winter) into your Winter instance and then run `composer install`.
+> **Note:** To use composer with a Winter instance that has been installed using the [Wizard installation](../setup/installation#wizard-installation), simply copy the `tests/` directory and `composer.json` file from [GitHub](https://github.com/wintercms/winter) into your Winter instance and then run `composer install`.
 
 <a name="maintenance-commands"></a>
 ## Setup & Maintenance
