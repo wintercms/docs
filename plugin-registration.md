@@ -20,6 +20,7 @@
     - [Lang Aliases](#aliases-lang)
     - [Settings Aliases](#aliases-settings)
     - [Navigation Aliases](#aliases-navigation)
+  - [Migrations, seeders and table references](#plugin-migrations)
 
 <a name="introduction"></a>
 ## Introduction
@@ -449,3 +450,62 @@ init via `lazyRegisterOwnerAlias`.
 If the `PluginManager` has been loaded, then aliases can be registered via:
 
     NavigationManager::instance()->registerOwnerAlias(string $namespace, string $alias);
+
+<a name="plugin-migrations"></a>
+### Migrations, seeders and table references
+
+When forking a plugin and using the replace functionality, you will need to manage migrations, seeders and models. To
+do this we recommend the following:
+
+- Create a migration to rename tables
+- Update models to reference your new table
+- Check migrations for any usage of models
+
+#### Table renaming
+
+An example migration could look something like this:
+
+    const TABLES = [
+        'example',
+        'foo',
+        'bar'
+    ];
+
+    public function up()
+    {
+        foreach (self::TABLES as $table) {
+            $from = 'acme_plugin_' . $table;
+            $to = 'winter_plugin_' . $table;
+
+            if (Schema::hasTable($from) && !Schema::hasTable($to)) {
+                Schema::rename($from, $to);
+            }
+        }
+    }
+
+    public function down()
+    {
+        foreach (self::TABLES as $table) {
+            $from = 'winter_plugin_' . $table;
+            $to = 'acme_plugin_' . $table;
+
+            if (Schema::hasTable($from) && !Schema::hasTable($to)) {
+                Schema::rename($from, $to);
+            }
+        }
+    }
+
+#### Migrations using models
+
+If a migration is using a model to populate data, it will be referencing the new table and that will cause issues 
+while updating. The solution to this is dynamically renaming the table before inserting/modifying data:
+
+    ExampleModel::extend(function ($model) {
+        $model->setTable('acme_plugin_example');
+    });
+
+    // execute seeding code
+
+    ExampleModel::extend(function ($model) {
+        $model->setTable('winter_plugin_example');
+    });
