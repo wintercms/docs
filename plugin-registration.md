@@ -340,10 +340,9 @@ To enable the plugin replacement feature, specify the identifier for the plugin 
 <a name="version-constraints"></a>
 #### Version constraints
 
-Version constraints allow you to restrict your plugin to only override currently installed plugins of specific versions. For example, this would allow you to only replace a plugin upto that plugins version `2.0.0`.
+Version constraints allow you to restrict your plugin to only override currently installed plugins of specific versions. The above example showcases only replacing a plugin if the original plugin is any version between `5.0` and `6.0.4` inclusive. Most of the time the actual version constraint you'll use will be much simpler, a simple `<2.0` to indicate all versions immediately prior to the version you first release your replacement plugin as.
 
-This means you don't have to worry about new versions of the original plugin having changes that may conflict with
-your changes to the plugin.
+This means you don't have to worry about new versions of the original plugin having changes that may conflict with your changes to the plugin.
 
 Version constraints are specified in the [same format that Composer uses](https://getcomposer.org/doc/articles/versions.md#writing-version-constraints). Some valid examples would be:
 
