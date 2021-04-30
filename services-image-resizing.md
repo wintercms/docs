@@ -47,4 +47,4 @@ The available sources that images can be resized from are as follows:
 - Uploads Directory
 - Models that extend the `\Winter\Storm\Database\Attach\File` model
 
-Available sources can be extended by listening to the [`system.resizer.getAvailableSources` event](../api/system/resizer/getavailablesources)
+Available sources can be extended by listening to the [`system.resizer.getAvailableSources` event](https://wintercms.com/docs/events/event/system.resizer.getAvailableSources)

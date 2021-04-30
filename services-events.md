@@ -17,8 +17,6 @@
 <a name="basic-usage"></a>
 ## Basic usage
 
->**Note:** For a list of all events available in Winter CMS itself, see the [api documentation](https://wintercms.com/docs/api/translator/beforeresolve).
-
 The `Event` class provides a simple observer implementation, allowing you to subscribe and listen for events in your application. For example, you may listen for when a user signs in and update their last login date.
 
     Event::listen('auth.login', function($user) {

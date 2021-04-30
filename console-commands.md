@@ -36,17 +36,6 @@ Winter includes several command-line interface (CLI) commands and utilities that
 
 Console installation can be performed using the native system or with [Composer](http://getcomposer.org/) to manage dependencies. Either approach will download the Winter application files and can be used right away. If you plan on using a database, be sure to run the [install command](#console-install-command) after installation.
 
-<a name="console-install-quick"></a>
-### Quick start install
-
-Run this in your terminal to get the latest copy of Winter:
-
-    curl -s https://wintercms.com/api/installer | php
-
-Or if you don't have curl:
-
-    php -r "eval('?>'.file_get_contents('https://wintercms.com/api/installer'));"
-
 <a name="console-install-composer"></a>
 ### Composer install
 
