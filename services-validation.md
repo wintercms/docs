@@ -585,7 +585,7 @@ The easiest way to register custom validation rules is by adding the `registerVa
     }
 ```
 
-Another way to register custom validation rules is by extending the Validator instance via the `extend` method. In an Winter CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
+Another way to register custom validation rules is by extending the Validator instance via the `extend` method. In a Winter CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
 
 You can extend the Validator instance with your custom validation rule as a `Closure`, or as a `Rule` object.
 
