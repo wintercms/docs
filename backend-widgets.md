@@ -311,7 +311,7 @@ The widget partial could contain any HTML markup you want to display in the widg
 
 ![image](https://raw.githubusercontent.com/wintercms/docs/main/images/traffic-sources.png)
 
-Inside report widgets you can use any [charts or indicators](controls), lists or any other markup you wish. Remember that the report widgets extend the generic back-end widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
+Inside report widgets you can use any [charts or indicators](../ui/form), lists or any other markup you wish. Remember that the report widgets extend the generic back-end widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
 
     <div class="report-widget">
         <h3>Top pages</h3>

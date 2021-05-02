@@ -31,7 +31,7 @@ Plugins are the foundation for adding new features to the CMS by extending it. T
 1. Define [user permissions](../backend/users).
 1. Add [settings pages](settings#backend-pages), [menu items](#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
 1. Create [database table structures and seed data](updates).
-1. Alter [functionality of the core or other plugins](events).
+1. Alter [functionality of the core or other plugins](../services/events).
 1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
 
 <a name="directory-structure"></a>
@@ -110,9 +110,9 @@ Method | Description
 **registerComponents()** | registers any [front-end components](components#component-registration) used by this plugin.
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 **registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
-**registerMailLayouts()** | registers any [mail view layouts](mail#mail-template-registration) supplied by this plugin.
-**registerMailPartials()** | registers any [mail view partials](mail#mail-template-registration) supplied by this plugin.
-**registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
+**registerMailLayouts()** | registers any [mail view layouts](../services/mail#mail-template-registration) supplied by this plugin.
+**registerMailPartials()** | registers any [mail view partials](../services/mail#mail-template-registration) supplied by this plugin.
+**registerMailTemplates()** | registers any [mail view templates](../services/mail#mail-template-registration) supplied by this plugin.
 **registerMarkupTags()** | registers [additional markup tags](#extending-twig) that can be used in the CMS.
 **registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
 **registerPermissions()** | registers any [back-end permissions](../backend/users#permission-registration) used by this plugin.

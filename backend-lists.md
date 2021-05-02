@@ -37,7 +37,7 @@ List behavior depends on list [column definitions](#list-columns) and a [model c
         public $listConfig = 'list_config.yaml';
     }
 
-> **Note:** Very often the list and [form behavior](form) are used together in a same controller.
+> **Note:** Very often the list and [form behavior](../ui/form) are used together in a same controller.
 
 <a name="configuring-list"></a>
 ## Configuring the list behavior

@@ -442,7 +442,7 @@ Another example could be overriding the entire page view response by returning a
 <a name="component-assets"></a>
 ## Injecting page assets with components
 
-Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/page#injecting-assets). Example:
+Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/pages#injecting-assets). Example:
 
     public function onRun()
     {

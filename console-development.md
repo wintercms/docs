@@ -227,7 +227,7 @@ If your command is registered in the [application container](../services/applica
 
 #### Registering commands in a service provider
 
-If you need to register commands from within a [service provider](application#service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](application#app-container) binding for the command:
+If you need to register commands from within a [service provider](../services/application#service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](../services/application#app-container) binding for the command:
 
     public function boot()
     {

@@ -24,7 +24,7 @@ All websites have pages. In Winter, pages are represented with page templates. P
 <a name="configuration"></a>
 ## Page configuration
 
-Page configuration is defined in the [Configuration Section](themes#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and its [Components](components), which are explained in another article. The following configuration parameters are supported for pages:
+Page configuration is defined in the [Configuration Section](themes#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and its [Components](../cms/components), which are explained in another article. The following configuration parameters are supported for pages:
 
 Parameter | Description
 ------------- | -------------
@@ -97,12 +97,12 @@ For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brow
 <a name="dynamic-pages"></a>
 ## Dynamic pages
 
-Inside the [Twig section](themes#twig-section) of a page template, you can use any [functions, filters, and tags provided by Winter](../markup). Any dynamic page requires **variables**. In Winter, variables may be prepared by the page, layout [PHP section](themes#php-section), or by [Components](components). In this article, we describe how to prepare variables in the PHP section.
+Inside the [Twig section](themes#twig-section) of a page template, you can use any [functions, filters, and tags provided by Winter](../markup). Any dynamic page requires **variables**. In Winter, variables may be prepared by the page, layout [PHP section](themes#php-section), or by [Components](../cms/components). In this article, we describe how to prepare variables in the PHP section.
 
 <a name="page-life-cycle"></a>
 ### Page execution life cycle
 
-There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](components) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use `array notation` to pass variables to the page:
+There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](../cms/components) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use `array notation` to pass variables to the page:
 
     url = "/"
     ==
@@ -171,9 +171,9 @@ The `onHandleForm` function can be defined in the page or layout [PHP section](t
 
 The handler loads the value with the `post` function and initializes the page's `lastValue` attribute variable which is displayed below the form in the first example.
 
-> **Note:** If a handler with the same name is defined in the page layout, the page, and a page [component](components), Winter will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
+> **Note:** If a handler with the same name is defined in the page layout, the page, and a page [component](../cms/components), Winter will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
 
-If you want to refer to a handler defined in a specific [component](components), use the component's name or alias in the handler reference:
+If you want to refer to a handler defined in a specific [component](../cms/components), use the component's name or alias in the handler reference:
 
     {{ form_open({ request: 'myComponent::onHandleForm' }) }}
 
@@ -206,7 +206,7 @@ More information can be found at [`this.page` in the Markup guide](../markup/thi
 <a name="injecting-assets"></a>
 ## Injecting page assets programmatically
 
-If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes#php-section) of a page or [layout](layout) template. Example:
+If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes#php-section) of a page or [layout](layouts) template. Example:
 
     function onStart()
     {
@@ -238,7 +238,7 @@ The second argument of `addCss` and `addJs` allows you to provide additional att
         $this->addJs(['assets/js/app.js', 'assets/js/nav.js'], ['defer' => true]);
     }
 
-In order to output the injected assets on pages or [layouts](layout), use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
+In order to output the injected assets on pages or [layouts](layouts), use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
 
     <head>
         ...

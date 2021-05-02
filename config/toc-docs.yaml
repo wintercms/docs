@@ -110,8 +110,8 @@ Extras:
   pages:
     help/unit-testing: "Unit Testing"
     help/using-composer: "Using Composer"
-    ../help/guidelines/quality: "Quality guidelines@"
-    ../help/guidelines/developer: "Developer guide@"
+    help/guidelines/quality: "Quality guidelines@"
+    help/developer/guide: "Developer guide"
 Events:
   pages:
     events/introduction: "Introduction"

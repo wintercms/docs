@@ -56,7 +56,7 @@ When publishing your plugins or themes to the marketplace, you may wish to also 
         }
     }
 
-Be sure to start your package `name` with **wn-** and end it with **-plugin** or **-theme** respectively, this will help others find your package and is in  accordance with the [quality guidelines](../help/guidelines/developer#repository-naming).
+Be sure to start your package `name` with **wn-** and end it with **-plugin** or **-theme** respectively, this will help others find your package and is in  accordance with the [quality guidelines](../help/developer/guide#repository-naming).
 
 The `type` field is a key definition for ensuring that your plugin or theme arrives at the correct location upon installation. Use the following types:
 
@@ -156,7 +156,7 @@ Now you are free to provide the packages configuration values the same way you w
         ],
     ];
 
-Now the package configuration has been included natively in Winter CMS and the values can be changed normally using the [standard configuration approach](settings#file-configuration).
+Now the package configuration has been included natively in Winter CMS and the values can be changed normally using the [standard configuration approach](../plugin/settings#file-configuration).
 
 <a name="laravel-aliases-service-providers"></a>
 ### Aliases & Service Providers
