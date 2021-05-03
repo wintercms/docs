@@ -42,6 +42,7 @@ Plugins reside in the **/plugins** subdirectory of the application directory. An
     plugins/
       acme/              <=== Author name
         blog/            <=== Plugin name
+          assets/
           classes/
           components/
           controllers/
@@ -58,7 +59,18 @@ Not all plugin directories are required. The only required file is the **Plugin.
           components/
           Plugin.php     <=== Plugin registration file
 
-> **Note:** if you are developing a plugin for the [Marketplace](http://wintercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
+Plugin assets like css and js files must reside under the assets directory:
+
+    plugins/
+      acme/
+        blog/
+          assets/        <=== Assets directory
+            css/
+              styles.css
+            js/
+              custom.js
+
+> **Note:** if you are developing a plugin for the [Marketplace](/marketplace), the [updates/version.yaml](updates) file is required.
 
 <a name="namespaces"></a>
 ### Plugin namespaces
