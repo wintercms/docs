@@ -38,14 +38,14 @@ sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json
 When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
 
 <a name="wizard-installation"></a>
-## Wizard installation
+## Wizard installation (available soon)
 
 The wizard installation is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
 
 > **Note:** If you are a developer, we recommend that you [install via Composer instead](../console/commands#console-install-composer)
 
 1. Prepare a directory on your server that is empty. It can be a sub-directory, domain root or a sub-domain.
-1. [Download the installer archive file](http://wintercms.com/download).
+1. [Download the installer archive file](http://wintercms.com/download) (available soon).
 1. Unpack the installer archive to the prepared directory.
 1. Grant writing permissions on the installation directory and all its subdirectories and files.
 1. Navigate to the install.php script in your web browser.
