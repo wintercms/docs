@@ -503,6 +503,13 @@ By default the dropdown has a searching feature, allowing quick selection of a v
         type: dropdown
         showSearch: false
 
+Dropdown can accept a new value to be dynamically set by the user. This can be activated by setting the `acceptNewOptions` option to `true`.
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        acceptNewOptions: true
+
 <a name="field-radio"></a>
 ### Radio List
 
