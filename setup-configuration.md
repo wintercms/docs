@@ -136,30 +136,32 @@ Paste the following code in the editor and change the **host address** and  **se
 
 If your webserver is running Internet Information Services (IIS) you can use the following in your **web.config** configuration file to run Winter CMS.
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <configuration>
-        <system.webServer>
-            <rewrite>
-                <rules>
-                    <clear />
-                    <rule name="Winter CMS to handle all non-whitelisted URLs" stopProcessing="true">
-                       <match url="^(.*)$" ignoreCase="false" />
-                       <conditions logicalGrouping="MatchAll">
-                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/.well-known/*" negate="true" />
-                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/uploads/public/.*" negate="true" />
-                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/media/.*" negate="true" />
-                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/resized/.*" negate="true" />
-                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/temp/public/.*" negate="true" />
-                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/themes/.*/(assets|resources)/.*" negate="true" />
-                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/plugins/.*/(assets|resources)/.*" negate="true" />
-                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/modules/.*/(assets|resources)/.*" negate="true" />
-                       </conditions>
-                       <action type="Rewrite" url="index.php" appendQueryString="true" />
-                   </rule>
-                </rules>
-            </rewrite>
-        </system.webServer>
-    </configuration>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <rewrite>
+            <rules>
+                <rule name="Winter CMS to handle all non-whitelisted URLs" stopProcessing="true">
+                    <match url="^index.php" negate="true" />
+                    <conditions logicalGrouping="MatchAll">
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" pattern="/.well-known/*" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" pattern="/storage/app/uploads/public/.*" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" pattern="/storage/app/media/.*" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" pattern="/storage/app/resized/.*" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" pattern="/storage/temp/public/.*" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" pattern="/themes/.*/(assets|resources)/.*" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" pattern="/plugins/.*/(assets|resources)/.*" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" pattern="/modules/.*/(assets|resources)/.*" ignoreCase="false" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="index.php" />
+                </rule>
+            </rules>
+        </rewrite>
+    </system.webServer>
+</configuration>
+```
 
 <a name="app-configuration"></a>
 ## Application configuration
