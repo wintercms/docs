@@ -17,7 +17,7 @@
     - [Domain driven environment](#domain-environment)
     - [Converting to DotEnv configuration](#dotenv-configuration)
 
-All of the configuration files for Winter are stored in the `config/` directory. The available options are documented inline so it is recommended to look through the files to become familiar with the available options.
+All of the configuration files for Winter are stored in the `config/` directory. Options are usually documented in the configuration files directly, so it is recommended to look through the files to become familiar with the available options.
 
 <a name="webserver-configuration"></a>
 ## Web server configuration
