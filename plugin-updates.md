@@ -51,7 +51,7 @@ In the example above the **Acme.Blog** plugin will not be updated until the **Ac
 <a name="version-file"></a>
 ## Plugin version file
 
-The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://wintercms.com/help/site/marketplace). Here is an example of a plugin version file:
+The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](/marketplace). Here is an example of a plugin version file:
 
     1.0.1: "First version"
     1.0.2: "Second version"
