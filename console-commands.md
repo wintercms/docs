@@ -161,7 +161,7 @@ Winter includes a number of commands for managing themes.
 <a name="theme-install-command"></a>
 ### Install theme
 
-`theme:install` - download and install a theme from the [Marketplace](https://wintercms.com/themes/). The following example will install the theme in `/themes/authorname-themename`
+`theme:install` - download and install a theme from the [Marketplace](https://wintercms.com/marketplace). The following example will install the theme in `/themes/authorname-themename`
 
     php artisan theme:install AuthorName.ThemeName
 
