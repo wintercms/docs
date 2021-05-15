@@ -244,14 +244,6 @@ Color picker widget for color selection. This tag will contain the selected hexa
 
 <hr>
 
-#### File upload
-
-File uploader input for files. This tag value will contain the full path to the file.
-
-    {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
-
-<hr>
-
 #### Dropdown
 
 Renders a dropdown form field.
@@ -265,6 +257,14 @@ Renders a dropdown form field with independent values and labels.
 Renders a dropdown form field with an array returned by a static class method (the class must be a fully namespaced class).
 
     {dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
+
+<hr>
+
+#### File upload
+
+File uploader input for files. This tag value will contain the full path to the file.
+
+    {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
 
 <hr>
 
