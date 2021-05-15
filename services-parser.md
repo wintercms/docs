@@ -184,7 +184,7 @@ As a bonus feature, calling the `toTwig` method will output the template in a pr
 <a name="syntax-editor-mode"></a>
 ### Editor mode
 
-So far the Dynamic Syntax parser is not much different to a regular template engine, however the editor mode is where the utility of Dynamic Syntax becomes more apparent. The editor mode unlocks a new realm of possibility, for example, where [layouts inject custom form fields to pages](http://wintercms.com/plugin/winter-pages) that belong to them or for [dynamically built forms used in email campaigns](http://wintercms.com/plugin/responsiv-campaign).
+So far the Dynamic Syntax parser is not much different to a regular template engine, however the editor mode is where the utility of Dynamic Syntax becomes more apparent. The editor mode unlocks a new realm of possibility, for example, where [layouts inject custom form fields to pages](https://github.com/wintercms/wn-pages-plugin) that belong to them or for [dynamically built forms used in email campaigns](https://octobercms.com/plugin/responsiv-campaign).
 
 To continue with the examples above, calling the `toEditor` method on the `Parser` object will return a PHP array of properties that define how the variable should be populated, by a form builder for example.
 
