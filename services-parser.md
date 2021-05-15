@@ -208,39 +208,9 @@ You may notice the properties closely resemble the options found in [form field 
 
 There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms#field-types).
 
-#### Text
+> **NOTE**: Every tag except for the `{variable}` tag will render its value when in view mode. If you just want to store the value to be used elsewhere on your page in view mode, then it's recommended to use the `{variable}` tag instead.
 
-Single line input for smaller blocks of text.
-
-    {text name="websiteName" label="Website Name"}Our wonderful website{/text}
-
-#### Textarea
-
-Multiple line input for larger blocks of text.
-
-    {textarea name="websiteDescription" label="Website Description"}
-        This is our vision for things to come
-    {/textarea}
-
-### Dropdown
-
-Renders a dropdown form field.
-
-    {dropdown name="dropdown" label="Pick one" options="One|Two"}{/dropdown}
-
-Renders a dropdown form field with independent values and labels.
-
-    {dropdown name="dropdown" label="Pick one" options="one:One|two:Two"}{/dropdown}
-
-Renders a dropdown form field with an array returned by a static class method (the class must be a fully namespaced class).
-
-    {dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
-
-### Radio
-
-Renders a radio form field.
-
-    {radio name="radio" label="Thoughts?" options="y:Yes|n:No|m:Maybe"}{/radio}
+<hr>
 
 #### Variable
 
@@ -248,25 +218,7 @@ Renders the form field type exactly as defined in the `type` attribute. This tag
 
     {variable type="text" name="name" label="Name"}John{/variable}
 
-#### Rich editor
-
-Text input for rich content (WYSIWYG).
-
-    {richeditor name="content" label="Main content"}Default text{/richeditor}
-
-Renders in Twig as
-
-    {{ content|raw }}
-
-#### Markdown
-
-Text input for Markdown content.
-
-    {markdown name="content" label="Markdown content"}Default text{/markdown}
-
-Renders in Twig as
-
-    {{ content|md }}
+<hr>
 
 <!--
 #### Checkbox
@@ -284,6 +236,50 @@ Renders in Twig as
     {% endif %}
 -->
 
+#### Color picker
+
+Color picker widget for color selection. This tag will contain the selected hexadecimal value. You may optionally provide an `availableColors` attribute to define the available colours for selection.
+
+    {colorpicker name="bg_color" label="Background colour" allowEmpty="true" availableColors="#ffffff|#000000"}{/colorpicker}
+
+<hr>
+
+#### File upload
+
+File uploader input for files. This tag value will contain the full path to the file.
+
+    {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
+
+<hr>
+
+#### Dropdown
+
+Renders a dropdown form field.
+
+    {dropdown name="dropdown" label="Pick one" options="One|Two"}{/dropdown}
+
+Renders a dropdown form field with independent values and labels.
+
+    {dropdown name="dropdown" label="Pick one" options="one:One|two:Two"}{/dropdown}
+
+Renders a dropdown form field with an array returned by a static class method (the class must be a fully namespaced class).
+
+    {dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
+
+<hr>
+
+#### Markdown
+
+Text input for Markdown content.
+
+    {markdown name="content" label="Markdown content"}Default text{/markdown}
+
+Renders in Twig as
+
+    {{ content|md }}
+
+<hr>
+
 #### Media finder
 
 File selector for media library items. This tag value will contain the relative path to the file.
@@ -294,18 +290,16 @@ Renders in Twig as
 
     {{ logo|media }}
 
-#### File upload
+<hr>
+    
+#### Radio
 
-File uploader input for files. This tag value will contain the full path to the file.
+Renders a radio form field.
 
-    {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
+    {radio name="radio" label="Thoughts?" options="y:Yes|n:No|m:Maybe"}{/radio}
 
-#### Color picker
-
-Color picker widget for color selection. This tag will contain the selected hexadecimal value. You may optionally provide an `availableColors` attribute to define the available colours for selection.
-
-    {colorpicker name="bg_color" label="Background colour" allowEmpty="true" availableColors="#ffffff|#000000"}{/colorpicker}
-
+<hr>
+   
 #### Repeater
 
 Renders a repeating section with other fields inside.
@@ -369,3 +363,33 @@ This is an example of the repeater_fields.yaml group configuration file:
                 type: textarea
 
 For more information about the repeater group mode see [Repeater Widget](../backend/forms#widget-repeater).
+
+<hr>
+
+#### Rich editor
+
+Text input for rich content (WYSIWYG).
+
+    {richeditor name="content" label="Main content"}Default text{/richeditor}
+
+Renders in Twig as
+
+    {{ content|raw }}
+
+<hr>
+
+#### Text
+
+Single line input for smaller blocks of text.
+
+    {text name="websiteName" label="Website Name"}Our wonderful website{/text}
+
+<hr>
+
+#### Textarea
+
+Multiple line input for larger blocks of text.
+
+    {textarea name="websiteDescription" label="Website Description"}
+        This is our vision for things to come
+    {/textarea}
