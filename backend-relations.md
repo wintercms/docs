@@ -31,7 +31,7 @@ Relation behavior depends on [relation definitions](#relation-definitions). In o
         public $relationConfig = 'config_relation.yaml';
     }
 
-> **Note:** Very often the relation behavior is used together with the [form behavior](form).
+> **Note:** Very often the relation behavior is used together with the [form behavior](forms).
 
 <a name="configuring-relation"></a>
 ## Configuring the relation behavior
