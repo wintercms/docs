@@ -236,6 +236,10 @@ Renders a dropdown form field with an array returned by a static class method (t
 
     {dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
 
+> Please note that using dropdown will print the selected option when the page is rendered. If you wish to use a 
+> dropdown without the value being printed then you can use a variable tag:
+> `{variable type="dropdown" name="name" label="Name" options="a:A|b:B"}default{/variable}`
+
 ### Radio
 
 Renders a radio form field.
