@@ -106,6 +106,6 @@ Unit tests can be performed by running `vendor/bin/phpunit` in the root director
 
 ### Functional tests
 
-Functional tests can be performed by installing the [Winter.Dusk](https://wintercms.com/plugin/winter-dusk) in your Winter CMS installation. The Winter.Dusk plugin is powered by Laravel Dusk, a comprehensive testing suite for the Laravel framework that is designed to test interactions with a fully operational Winter CMS instance through a virtual browser.
+Functional tests can be performed by installing the [Winter.Dusk](https://github.com/wintercms/wn-dusk-plugin) in your Winter CMS installation. The Winter.Dusk plugin is powered by Laravel Dusk, a comprehensive testing suite for the Laravel framework that is designed to test interactions with a fully operational Winter CMS instance through a virtual browser.
 
 For information on installing and setting up your Winter CMS install to run functional tests, please review the [README](https://github.com/wintercms/wn-dusk-plugin/blob/main/README.md) for the plugin.
