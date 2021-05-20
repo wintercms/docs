@@ -23,6 +23,8 @@ When you first start using Winter CMS, error and exception handling is already c
 
 Log entries are always created when an error page is shown and for certain [exception types](#exception-types).
 
+>**NOTE**: Some server errors are too low level to be handled by Winter, and thus are only visible in the relevant logs for where the error occurred. These are typically issues with the server's configuration, and you should look for those logs wherever the server software that you are using keeps its logs.
+
 <a name="configuration"></a>
 ## Configuration
 
