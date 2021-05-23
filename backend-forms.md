@@ -671,8 +671,12 @@ Option | Description
 
 Option | Description
 ------------- | -------------
+**format** | set color format string, available values are hex,rgb,prgb (percentage rgb),hsv,hsl. Default: hex
+**showAlpha** | display slider for alpha channel. Default: false
 **availableColors** |  list of available colors.
 **allowEmpty** | allows empty input value. Default: false
+
+Setting `showAlpha` to true force format to rgb if defined format is `hex`.
 
 There are two ways to provide the available colors for the colorpicker. The first method defines the `availableColors` directly as a list of hex color codes in the YAML file:
 
