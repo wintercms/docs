@@ -112,13 +112,14 @@ You may also access the job identifier:
 <a name="queueing-closures"></a>
 ## Queueing closures
 
-You may also push a Closure onto the queue. This is very convenient for quick, simple tasks that need to be queued:
+Instead of pushing a job class into the queue, you may also push a closure for simple tasks that need to be executed out of the current request cycle.
 
 #### Pushing a closure onto the queue
 
-    Queue::push(function($job) use ($id) {
+    Queue::push(function () use ($id, $jobId) {
         Account::delete($id);
-
+        
+        $job = Job::get($jobId);
         $job->delete();
     });
 
