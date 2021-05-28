@@ -116,10 +116,10 @@ Methods can be created to an extendable object by calling `addDynamicMethod` and
         $model->addDynamicProperty('tagsCache', null);
 
         $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
-            if ($this->tagsCache) {
-                return $this->tagsCache;
+            if ($model->tagsCache) {
+                return $model->tagsCache;
             } else {
-                return $this->tagsCache = $model->tags()->lists('name');
+                return $model->tagsCache = $model->tags()->lists('name');
             }
         });
     });
@@ -130,7 +130,7 @@ You can check for the existence of a method in an `Extendable` class by using th
 
     Post::extend(function($model) {
         $model->addDynamicMethod('getTagsAttribute', function () use ($model) {
-            return $this->tagsCache;
+            return $model->tagsCache;
         });
     });
 
@@ -145,7 +145,7 @@ To retrieve a list of all available methods in an `Extendable` class, you can us
 
     Post::extend(function($model) {
         $model->addDynamicMethod('getTagsAttribute', function () use ($model) {
-            return $this->tagsCache;
+            return $model->tagsCache;
         });
     });
 
