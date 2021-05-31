@@ -1012,7 +1012,7 @@ Now, when you update a `Comment`, the owning `Post` will have its `updated_at` c
 
 Deferred bindings allows you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
 
-You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/form) automatically, but you may want to use this feature in other places.
+You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/forms) automatically, but you may want to use this feature in other places.
 
 <a name="deferred-session-key"></a>
 ### Generating a session key

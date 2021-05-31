@@ -77,7 +77,7 @@ You can also use regular expressions to validate parameters. To add a validation
     ...
     url = "/blog/:post_name?|^[a-z0-9\-]+$" - this will match /blog/my-blog-post
 
-It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match one or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter. 
+It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match one or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter.
 
     url = "/blog/:category*/:slug"
 
@@ -154,7 +154,7 @@ A more useful example might be triggering a redirect using the `Redirect` facade
 <a name="handling-forms"></a>
 ### Handling forms
 
-You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction) article). Use the [`form_open()`](markup#standard-form) function to define a form that refers to an event handler. Example:
+You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction) article). Use the [`form_open()`](../markup#standard-form) function to define a form that refers to an event handler. Example:
 
     {{ form_open({ request: 'onHandleForm' }) }}
         Please enter a string: <input type="text" name="value"/>
@@ -230,7 +230,7 @@ LESS and SCSS assets can be injected and compiled using the combiner:
     {
         $this->addCss(['assets/less/base.less']);
     }
-    
+
 The second argument of `addCss` and `addJs` allows you to provide additional attributes to your injected assets:
 
     function onStart()
