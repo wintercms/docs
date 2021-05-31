@@ -47,6 +47,7 @@ Backend:
   pages:
     backend/controllers-ajax: "Controllers & AJAX"
     backend/views-partials: "Views & Partials"
+    backend/navigation: "Navigation"
     backend/widgets: "Widgets"
     backend/forms: "Forms"
     backend/lists: "Lists"
