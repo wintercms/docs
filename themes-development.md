@@ -91,7 +91,7 @@ The following is an example of how to define a website name configuration field 
         $model->addJsonable('contact');
     });
 
-The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup#default-variables) called `this.theme`.
+The value can then be accessed inside any of the Theme templates using the [default page variable](../markup#default-variables) called `this.theme`.
 
     <h1>Welcome to {{ this.theme.site_name }}!</h1>
 
