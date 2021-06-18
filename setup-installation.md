@@ -10,7 +10,7 @@
     - [Setting up the scheduler](#crontab-setup)
     - [Setting up queue workers](#queue-setup)
 
-There are two ways you can install Winter, either using the [Wizard installer](#wizard-installation) or [Command-line installation](../console/commands#console-install) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
+There are two ways you can install Winter, either using the [Web-based installer](#web-based-installation) or [Command-line installation](../console/commands#console-install) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
 
 <a name="system-requirements"></a>
 ## Minimum system requirements
@@ -37,34 +37,30 @@ sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
 
-<a name="wizard-installation"></a>
-## Wizard installation (available soon)
+<a name="web-based-installation"></a>
+## Web-based installation
 
-The wizard installation is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
+The [Web Installer](https://github.com/wintercms/web-installer) is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
 
 > **Note:** If you are a developer, we recommend that you [install via Composer instead](../console/commands#console-install-composer)
 
-1. Prepare a directory on your server that is empty. It can be a sub-directory, domain root or a sub-domain.
-1. [Download the installer archive file](http://wintercms.com/download) (available soon).
-1. Unpack the installer archive to the prepared directory.
-1. Grant writing permissions on the installation directory and all its subdirectories and files.
-1. Navigate to the install.php script in your web browser.
-1. Follow the installation instructions.
+1. Prepare an empty directory on the web server that will host your Winter CMS installation. It can be a main domain, sub-domain or subfolder.
+2. [Download the "install.zip" file](https://github.com/wintercms/web-installer/releases/latest) from the latest release of the Winter CMS Web Installer into this folder.
+3. Unzip the downloaded ZIP file.
+4. Grant write permissions to all files and folders that were extracted.
+5. In your web browser, navigate to the URL pointing to that folder, and include `/install.html` at the end of the URL.
+6. Follow the instructions given in the installer.
 
-![image](https://github.com/wintercms/docs/blob/main/images/wizard-installer.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/wintercms/docs/blob/main/images/web-installer.jpg?raw=true) {.img-responsive .frame}
 
 <a name="troubleshoot-installation"></a>
 ### Troubleshooting installation
 
-1. **An error 500 is displayed when downloading the application files**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
+1. **Unable to connect to the Winter Marketplace API**: If your server has a firewall blocking requests to port 443, you will need to allow requests and responses for this port. Contact your system administrator to allow access to this port.
 
-1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the `/storage` files and folders, they should be writable for the web server.
+2. **Installer fails on the "Determining dependencies" or "Installing dependencies" step**: Under the hood, the web installer uses Composer to process and install the dependencies necessary to run Winter CMS - note, you *do not* need Composer installed as a CLI tool for this to work. This process may require a larger amount of memory to complete - if your environment restricts memory usage for your applications, consider allowing up to 1.5GB of memory temporarily for the installer, then reduce it after the installation is complete. The installer will try to do this automatically.
 
-1. **An error code "liveConnection" is displayed**: The installer will test a connection to the installation server using port 80. Check that your webserver can create outgoing connections on port 80 via PHP. Contact your hosting provider or this is often found in the server firewall settings.
-
-1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration#debug-mode) to see the underlying error message.
-
-> **Note:** A detailed installation log can be found in the `install_files/install.log` file.
+3. **Installer does not display or function correctly**: The web installer has been built on modern front-end frameworks, and may require the use of a more recent browser version. Consider installing Mozilla Firefox, Microsoft Edge or Google Chrome and keeping it up-to-date.
 
 <a name="command-line-installation"></a>
 ## Command-line installation
