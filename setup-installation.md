@@ -1,7 +1,7 @@
 # Installation
 
 - [Minimum system requirements](#system-requirements)
-- [Wizard installation](#wizard-installation)
+- [Web-based installation](#web-based-installation)
     - [Troubleshooting installation](#troubleshoot-installation)
 - [Command-line installation](#command-line-installation)
 - [Post-installation steps](#post-install-steps)
