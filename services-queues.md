@@ -130,7 +130,7 @@ if ($job->attempts() > 3) {
 }
 ```
 
-#### Marking a job as failed
+### Marking a job as failed
 
 While a job is generally marked as failed if an exception is thrown while running the job and the retries are exhausted, you may wish to fail the job manually under certain circumstances.
 
@@ -215,7 +215,7 @@ You may also set the length of time (in seconds) each job should be allowed to r
 php artisan queue:work --once --timeout=60
 ```
 
-#### Specifying queue sleep duration
+### Specifying queue sleep duration
 
 In addition, you may specify the number of seconds to wait before polling for new jobs:
 
