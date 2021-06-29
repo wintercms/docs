@@ -29,7 +29,7 @@ When using the `local` driver, note that all file operations are relative to the
 
 #### Other driver prerequisites
 
-Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](http://wintercms.com/plugin/winter-drivers).
+Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](https://github.com/wintercms/wn-drivers-plugin).
 
 <a name="basic-usage"></a>
 ## Basic usage
