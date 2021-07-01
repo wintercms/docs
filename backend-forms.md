@@ -510,6 +510,30 @@ Dropdown can accept a new value to be dynamically set by the user. This can be a
         type: dropdown
         allowCustom: true
 
+`allowCustom` option can be useful to provide to the user a list of already used options without limitting him to them. Using `get*Options` viewed above, we could provide a list of already known blog posts' statuses but easily add one new :
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        allowCustom: true
+
+    public function getStatusOptions($value, $formData)
+    {
+        // Prefill the dropdown with the already used statuses: [['status' => 'draft'], ['status' => 'published']]
+        $statuses = self::distinct('status')->get();
+
+        // Insert the actual form's model value to avoid it to vanish
+        // on eventual AJAX call that would refresh the field partial like dependsOn
+        if ($this->status) {
+        
+            // The actual form's status could be a custom like ['status' => 'need review']
+            $statuses->add(['status' => $this->status]);
+        }
+
+        // Return a list of statuses: [['status' => 'draft'], ['status' => 'published'], ['status' => 'need review']]
+        return $statuses->pluck('status', 'status');
+    }
+
 <a name="field-radio"></a>
 ### Radio List
 
