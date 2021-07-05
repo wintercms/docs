@@ -336,11 +336,11 @@ public function boot()
 {
     // Add a new middleware to beginning of the stack.
     $this->app['Illuminate\Contracts\Http\Kernel']
-            ->prependMiddleware('Path\To\Custom\Middleware');
+        ->prependMiddleware('Path\To\Custom\Middleware');
 
     // Add a new middleware to end of the stack.
     $this->app['Illuminate\Contracts\Http\Kernel']
-            ->pushMiddleware('Path\To\Custom\Middleware');
+        ->pushMiddleware('Path\To\Custom\Middleware');
 }
 ```
 
@@ -364,8 +364,8 @@ Define the `$elevated` property to grant elevated permissions for your plugin.
 
 ```php
 /**
-    * @var bool Plugin requires elevated permissions.
-    */
+ * @var bool Plugin requires elevated permissions.
+ */
 public $elevated = true;
 ```
 
@@ -383,10 +383,10 @@ To enable the plugin replacement feature, specify the identifier for the plugin 
 public function pluginDetails()
 {
     return [
-        'name'        => 'Acme Plugin',
-        'replaces'    => [
+        'name'     => 'Acme Plugin',
+        'replaces' => [
             'Acme.Original' => '>=5.0 <=6.0.4'
-        ]
+        ],
     ];
 }
 ```
