@@ -176,17 +176,19 @@ Plugins can also supply a file named **routes.php** that contain custom routing 
 
 A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
 
-    namespace Acme\Blog;
+```php
+namespace Acme\Blog;
 
-    class Plugin extends \System\Classes\PluginBase
-    {
-        /**
-         * @var array Plugin dependencies
-         */
-        public $require = ['Acme.User'];
+class Plugin extends \System\Classes\PluginBase
+{
+    /**
+     * @var array Plugin dependencies
+     */
+    public $require = ['Acme.User'];
 
-        [...]
-    }
+    // [...]
+}
+```
 
 Dependency definitions will affect how the plugin operates and [how the update process applies updates](../plugin/updates#update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
 
@@ -195,73 +197,105 @@ Dependency definitions can be complex but care should be taken to prevent circul
 <a name="extending-twig"></a>
 ## Extending Twig
 
-Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags` method of the plugin registration class. The next example registers two Twig filters and two functions.
+Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags` method of the plugin registration class.
 
-    public function registerMarkupTags()
-    {
-        return [
-            'filters' => [
-                // A global function, i.e str_plural()
-                'plural' => 'str_plural',
+[Twig options](https://twig.symfony.com/doc/2.x/advanced.html#filters) are also able to be passed to change the behavior of the registered filters & functions by providing an array with an `'options'` element containing the options to be passed at time of registration where the callable value would be provided normally. If options are provided, then the callable handler for the filter / function being registered must either be present in a `'callable'` element or as the first element of the array.
 
-                // A local method, i.e $this->makeTextAllCaps()
-                'uppercase' => [$this, 'makeTextAllCaps']
+>**IMPORTANT:** All custom Twig filters & functions registered via the `MarkupManager` (i.e. `registerMarkupTags()` will have the `is_safe` option set to `['html']` by default, which means that Twig's automatic escaping is disabled by default (effectively its as if the `| raw` filter was always located after your filter or function's output) unless you provide the `is_safe` option during registration (`'options' => ['is_safe' => []]`).
+
+The next example registers three Twig filters and three functions.
+
+```php
+public function registerMarkupTags()
+{
+    return [
+        'filters' => [
+            // A global function, i.e str_plural()
+            'plural' => 'str_plural',
+
+            // A local method, i.e $this->makeTextAllCaps()
+            'uppercase' => [$this, 'makeTextAllCaps']
+
+            // Any callable with custom options defined - first element method
+            'userInputToEmojis' => ['input_to_emojis', 'options' => ['is_safe' => []]],
+        ],
+        'functions' => [
+            // A static method call, i.e Form::open()
+            'form_open' => ['Winter\Storm\Html\Form', 'open'],
+
+            // Using an inline closure
+            'helloWorld' => function() { return 'Hello World!'; }
+
+            // Any callable with custom options defined - named 'callable' method
+            'goodbyeWorld' => [
+                'callable' => ['Acme\Plugin\Nuke', 'boom'],
+                'options'  => ['needs_environment' => true],
             ],
-            'functions' => [
-                // A static method call, i.e Form::open()
-                'form_open' => ['Winter\Storm\Html\Form', 'open'],
+        ],
+    ];
+}
 
-                // Using an inline closure
-                'helloWorld' => function() { return 'Hello World!'; }
-            ]
-        ];
-    }
+public function makeTextAllCaps($text)
+{
+    return strtoupper($text);
+}
+```
 
-    public function makeTextAllCaps($text)
-    {
-        return strtoupper($text);
-    }
+The following Twig custom options are available:
+| Option | Type | Default | Description |
+-------- | ---- | ------- | -----------
+| `needs_environment` | boolean | `false` | if true provides the current `TwigEnvironment` as the first argument to the filter call |
+| `needs_context` | boolean | `false` | if true provides the current `TwigContext` as the first argument (second if `needs_environment also set`) to the filter call |
+| `is_safe` | array | `[]` | array of languages (usually `html` or `all` are valid values) that the output of the filter / function is safe to be used on without escaping |
+| `pre_escape` | string | `''` | (only filters) will pre-escape the value before it is passed to your filter for the language that you set (usually `'html'`) |
+| `preserve_safety` | array | `[]` | (only filters) array of languages (usually `html`) that the filter will preserve the safety setting of for previous filters in the chain. i.e. if the previous filter in the chain says that its safe and doesn't require escaping then neither will this one, but if it says that it's unsafe and requires escaping then so will this one. |
+| `is_variadic` | boolean | `false` | if true will pass any extra arguments provided to the filter as a single array as the last argument to the filter call |
+| `deprecated` | boolean | `false` | if true marks the current filter as being deprecated (usually used with `alternative` to provide an alternative option |
+| `alternative` | string | `''` | if `deprecated` is true, provides a recommended alternative filter to use instead. |
+
 
 <a name="navigation-menus"></a>
 ## Navigation menus
 
 Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
 
-    public function registerNavigation()
-    {
-        return [
-            'blog' => [
-                'label'       => 'Blog',
-                'url'         => Backend::url('acme/blog/posts'),
-                'icon'        => 'icon-pencil',
-                'permissions' => ['acme.blog.*'],
-                'order'       => 500,
-                // Set counter to false to prevent the default behaviour of the main menu counter being a sum of
-                // its side menu counters
-                'counter'     => ['\Author\Plugin\Classes\MyMenuCounterService', 'getBlogMenuCount'],
-                'counterLabel'=> 'Label describing a dynamic menu counter',
-                // Optionally you can set a badge value instead of a counter to display a string instead of a numerical counter
-                'badge'       => 'New'
+```php
+public function registerNavigation()
+{
+    return [
+        'blog' => [
+            'label'       => 'Blog',
+            'url'         => Backend::url('acme/blog/posts'),
+            'icon'        => 'icon-pencil',
+            'permissions' => ['acme.blog.*'],
+            'order'       => 500,
+            // Set counter to false to prevent the default behaviour of the main menu counter being a sum of
+            // its side menu counters
+            'counter'     => ['\Author\Plugin\Classes\MyMenuCounterService', 'getBlogMenuCount'],
+            'counterLabel'=> 'Label describing a dynamic menu counter',
+            // Optionally you can set a badge value instead of a counter to display a string instead of a numerical counter
+            'badge'       => 'New'
 
-                'sideMenu' => [
-                    'posts' => [
-                        'label'       => 'Posts',
-                        'icon'        => 'icon-copy',
-                        'url'         => Backend::url('acme/blog/posts'),
-                        'permissions' => ['acme.blog.access_posts'],
-                        'counter'     => 2,
-                        'counterLabel'=> 'Label describing a static menu counter',
-                    ],
-                    'categories' => [
-                        'label'       => 'Categories',
-                        'icon'        => 'icon-copy',
-                        'url'         => Backend::url('acme/blog/categories'),
-                        'permissions' => ['acme.blog.access_categories'],
-                    ]
+            'sideMenu' => [
+                'posts' => [
+                    'label'       => 'Posts',
+                    'icon'        => 'icon-copy',
+                    'url'         => Backend::url('acme/blog/posts'),
+                    'permissions' => ['acme.blog.access_posts'],
+                    'counter'     => 2,
+                    'counterLabel'=> 'Label describing a static menu counter',
+                ],
+                'categories' => [
+                    'label'       => 'Categories',
+                    'icon'        => 'icon-copy',
+                    'url'         => Backend::url('acme/blog/categories'),
+                    'permissions' => ['acme.blog.access_categories'],
                 ]
             ]
-        ];
-    }
+        ]
+    ];
+}
+```
 
 When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users). The order in which the back-end navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
 
@@ -286,25 +320,29 @@ Key | Description
 
 To register a custom middleware, you can apply it directly to a Backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
 
-    public function boot()
-    {
-        \Cms\Classes\CmsController::extend(function($controller) {
-            $controller->middleware('Path\To\Custom\Middleware');
-        });
-    }
+```php
+public function boot()
+{
+    \Cms\Classes\CmsController::extend(function($controller) {
+        $controller->middleware('Path\To\Custom\Middleware');
+    });
+}
+```
 
 Alternatively, you can push it directly into the Kernel via the following.
 
-    public function boot()
-    {
-        // Add a new middleware to beginning of the stack.
-        $this->app['Illuminate\Contracts\Http\Kernel']
-             ->prependMiddleware('Path\To\Custom\Middleware');
+```
+public function boot()
+{
+    // Add a new middleware to beginning of the stack.
+    $this->app['Illuminate\Contracts\Http\Kernel']
+            ->prependMiddleware('Path\To\Custom\Middleware');
 
-        // Add a new middleware to end of the stack.
-        $this->app['Illuminate\Contracts\Http\Kernel']
-             ->pushMiddleware('Path\To\Custom\Middleware');
-    }
+    // Add a new middleware to end of the stack.
+    $this->app['Illuminate\Contracts\Http\Kernel']
+            ->pushMiddleware('Path\To\Custom\Middleware');
+}
+```
 
 <a name="elevated-plugin"></a>
 ## Elevated permissions
@@ -324,10 +362,12 @@ Request | Description
 
 Define the `$elevated` property to grant elevated permissions for your plugin.
 
-    /**
-     * @var bool Plugin requires elevated permissions.
-     */
-    public $elevated = true;
+```php
+/**
+    * @var bool Plugin requires elevated permissions.
+    */
+public $elevated = true;
+```
 
 <a name="plugin-replace"></a>
 ## Plugin replacemnet & forking
@@ -339,15 +379,17 @@ Plugin replacement is a feature that allows you to create a plugin that replaces
 
 To enable the plugin replacement feature, specify the identifier for the plugin your plugin is replacing in your plugin details along with the version constraints that define what versions of the plugin are able to be replaced by your plugin.
 
-    public function pluginDetails()
-    {
-        return [
-            'name'        => 'Acme Plugin',
-            'replaces'    => [
-                'Acme.Original' => '>=5.0 <=6.0.4'
-            ]
-        ];
-    }
+```php
+public function pluginDetails()
+{
+    return [
+        'name'        => 'Acme Plugin',
+        'replaces'    => [
+            'Acme.Original' => '>=5.0 <=6.0.4'
+        ]
+    ];
+}
+```
 
 <a name="version-constraints"></a>
 #### Version constraints
