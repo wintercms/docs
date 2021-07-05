@@ -201,7 +201,7 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
 
 [Twig options](https://twig.symfony.com/doc/2.x/advanced.html#filters) are also able to be passed to change the behavior of the registered filters & functions by providing an array with an `'options'` element containing the options to be passed at time of registration where the callable value would be provided normally. If options are provided, then the callable handler for the filter / function being registered must either be present in a `'callable'` element or as the first element of the array.
 
->**IMPORTANT:** All custom Twig filters & functions registered via the `MarkupManager` (i.e. `registerMarkupTags()` will have the `is_safe` option set to `['html']` by default, which means that Twig's automatic escaping is disabled by default (effectively its as if the `| raw` filter was always located after your filter or function's output) unless you provide the `is_safe` option during registration (`'options' => ['is_safe' => []]`).
+>**IMPORTANT:** All custom Twig filters & functions registered via the `MarkupManager` (i.e. `registerMarkupTags()` will have the `is_safe` option set to `['html']` by default, which means that Twig's automatic escaping is disabled by default (effectively it's as if the `| raw` filter was always located after your filter or function's output) unless you provide the `is_safe` option during registration (`'options' => ['is_safe' => []]`).
 
 The next example registers three Twig filters and three functions.
 
