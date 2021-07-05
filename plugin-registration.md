@@ -370,7 +370,7 @@ public $elevated = true;
 ```
 
 <a name="plugin-replace"></a>
-## Plugin replacemnet & forking
+## Plugin replacement & forking
 
 Plugin replacement is a feature that allows you to create a plugin that replaces (or overrides) another plugin. This is useful when you're forking a plugin to add your own functionality but want to be able to seamlessly migrate from and act as a drop in replacement for the original plugin (i.e. retaining original data, fulfilling other plugin's dependencies on the original plugin, etc).
 
