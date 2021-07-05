@@ -248,7 +248,7 @@ The following Twig custom options are available:
 | `needs_context` | boolean | `false` | if true provides the current `TwigContext` as the first argument (second if `needs_environment also set`) to the filter call |
 | `is_safe` | array | `[]` | array of languages (usually `html` or `all` are valid values) that the output of the filter / function is safe to be used on without escaping |
 | `pre_escape` | string | `''` | (only filters) will pre-escape the value before it is passed to your filter for the language that you set (usually `'html'`) |
-| `preserve_safety` | array | `[]` | (only filters) array of languages (usually `html`) that the filter will preserve the safety setting of for previous filters in the chain. i.e. if the previous filter in the chain says that its safe and doesn't require escaping then neither will this one, but if it says that it's unsafe and requires escaping then so will this one. |
+| `preserves_safety` | array | `[]` | (only filters) array of languages (usually `html`) that the filter will preserve the safety setting of for previous filters in the chain. i.e. if the previous filter in the chain says that its safe and doesn't require escaping then neither will this one, but if it says that it's unsafe and requires escaping then so will this one. |
 | `is_variadic` | boolean | `false` | if true will pass any extra arguments provided to the filter as a single array as the last argument to the filter call |
 | `deprecated` | boolean | `false` | if true marks the current filter as being deprecated (usually used with `alternative` to provide an alternative option |
 | `alternative` | string | `''` | if `deprecated` is true, provides a recommended alternative filter to use instead. |
