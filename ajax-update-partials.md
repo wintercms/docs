@@ -11,7 +11,9 @@ When a handler executes it may prepare partials that are updated on the page, ei
 
 The client browser may request partials to be updated from the server when it performs an AJAX request, which is considered *pulling a content update*. The following code renders the **mytime** partial inside the `#myDiv` element on the page after calling the `onRefreshTime` [event handler](../ajax/handlers).
 
-    <div id="myDiv">{% raw %}{% partial 'mytime' %}{% endraw %}</div>
+```twig
+<div id="myDiv">{% partial 'mytime' %}</div>
+```
 
 The [data attributes API](../ajax/attributes-api) uses the `data-request-update` attribute.
 

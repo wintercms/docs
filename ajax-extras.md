@@ -9,9 +9,9 @@
 
 When using the AJAX framework, you have the option to specify the **extras** suffix which includes additional StyleSheet and JavaScript files. These features are useful when working with AJAX requests in front-end CMS pages.
 
-{% raw %}
-    {% framework extras %}
-{% endraw %}
+```twig
+{% framework extras %}
+```
 
 <a name="loader-stripe"></a>
 ## Loading indicator
@@ -121,16 +121,16 @@ Combined with use of the `Flash` facade in the event handler, a flash message wi
 
 To remain consistent with AJAX based flash messages, you can render a [standard flash message](../markup/tag-flash) when the page loads by placing this code in your page or layout.
 
-{% raw %}
-    {% flash %}
-        <p
-            data-control="flash-message"
-            class="flash-message fade {{ type }}"
-            data-interval="5">
-            {{ message }}
-        </p>
-    {% endflash %}
-{% endraw %}
+```twig
+{% flash %}
+    <p
+        data-control="flash-message"
+        class="flash-message fade {{ type }}"
+        data-interval="5">
+        {{ message }}
+    </p>
+{% endflash %}
+```
 
 <a name="usage-example"></a>
 ## Usage example
