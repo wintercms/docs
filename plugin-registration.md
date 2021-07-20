@@ -242,8 +242,9 @@ public function makeTextAllCaps($text)
 ```
 
 The following Twig custom options are available:
+
 | Option | Type | Default | Description |
--------- | ---- | ------- | -----------
+| ------ | ---- | ------- | ----------- |
 | `needs_environment` | boolean | `false` | if true provides the current `TwigEnvironment` as the first argument to the filter call |
 | `needs_context` | boolean | `false` | if true provides the current `TwigContext` as the first argument (second if `needs_environment also set`) to the filter call |
 | `is_safe` | array | `[]` | array of languages (usually `html` or `all` are valid values) that the output of the filter / function is safe to be used on without escaping |
