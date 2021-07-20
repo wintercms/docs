@@ -11,7 +11,8 @@
     - [CSRF protection](#csrf-protection)
     - [Bleeding edge updates](#edge-updates)
     - [Using a public folder](#public-folder)
-    - [Using a shared hosting](#shared-hosting)
+    - [Using a shared hosting provider](#shared-hosting)
+    - [Backend-only Mode](#backend-only-mode)
 - [Environment configuration](#environment-config)
     - [Defining a base environment](#base-environment)
     - [Domain driven environment](#domain-environment)
@@ -238,7 +239,7 @@ This will create a new directory called **public/** in the project's base direct
 > **Note**: The above command may need to be performed with System Administrator or *sudo* privileges. It should also be performed after each system update or when a new plugin is installed.
 
 <a name="shared-hosting"></a>
-### Using a shared hosting
+### Using a shared hosting provider
 
 If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
 
@@ -256,6 +257,27 @@ You can setup this protection in the file location `config/cms.php` in the secti
     'defaultMask' => ['file' => '644', 'folder' => '755'],
 
 > **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your cPanel and set them.
+
+<a name="backend-only"></a>
+### Backend-only Mode
+
+Winter CMS can be configured to run with only the Backend module installed, therefore allowing Winter CMS to be used for self-contained applications. This may be useful for managing API data or administrating a headless CMS.
+
+You can disable the CMS module from running by making the following changes to your `config/cms.php` file in your Winter CMS installation.
+
+```php
+'backendUri' => '', // Set to an empty string to use the root domain or subdomain.
+
+'loadModules' => ['System', 'Backend'], // Remove 'Cms' to not use the CMS module.
+```
+
+This allows the root domain or subdomain that hosts your Winter CMS install to load up the Backend immediately when accessing the URL in your browser.
+
+After making these changes, you may delete the `modules/cms` folder from your project, as they will no longer be required.
+
+If you have installed Winter CMS [via Composer](https://wintercms.com/docs/help/using-composer), you can remove the `winter/wn-cms-module` line in the `require` block within the `composer.json` file in the root folder of your Winter CMS install, and this will prevent Composer from installing or updating the CMS module.
+
+> **Note:** Some plugins may make references to classes within the CMS module. If this is the case, you will need to keep the CMS module files available in your install.
 
 <a name="environment-config"></a>
 ## Environment configuration
