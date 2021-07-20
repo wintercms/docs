@@ -258,7 +258,7 @@ You can setup this protection in the file location `config/cms.php` in the secti
 
 > **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your cPanel and set them.
 
-<a name="backend-only"></a>
+<a name="backend-only-mode"></a>
 ### Backend-only Mode
 
 Winter CMS can be configured to run with only the Backend module installed, therefore allowing Winter CMS to be used for self-contained applications. This may be useful for managing API data or administrating a headless CMS.
