@@ -213,7 +213,7 @@ In order to load the state list you should know what country is currently select
 <a name="page-list-properties"></a>
 ### Page list properties
 
-Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup#page-filter)). Winter includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
+Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../markup/filter-page)). Winter includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
 
     public function defineProperties()
     {
