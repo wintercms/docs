@@ -62,6 +62,8 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 
 3. **Installer does not display or function correctly**: The web installer has been built on modern front-end frameworks, and may require the use of a more recent browser version. Consider installing Mozilla Firefox, Microsoft Edge or Google Chrome and keeping it up-to-date.
 
+4. **Unable to parse JSON response**: Depending on your internet connection, downloading all the source files may take more time than your [PHP installation `max_execution_time` variable](https://www.php.net/manual/en/info.configuration.php#ini.max-execution-time) allows. Causing download to ends with an incomplete files base. Modify your PHP configuration to increase this variable.
+
 <a name="command-line-installation"></a>
 ## Command-line installation
 
