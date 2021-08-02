@@ -230,6 +230,7 @@ You can also specify a custom text format, for example **Admin:Full Name (active
         sortable: false
         width: 150
         height: 150
+        default: '/modules/backend/assets/images/logo.svg'
         options:
             quality: 80
 
