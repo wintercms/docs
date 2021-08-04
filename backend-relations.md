@@ -10,6 +10,7 @@
     - [Has one](#has-one)
 - [Displaying a relation manager](#relation-display)
 - [Extending relation behavior](#extend-relation-behavior)
+- [Overriding relation partials](#override-relation-partials)
 
 <a name="introduction"></a>
 ## Introduction
@@ -410,3 +411,10 @@ The view widget is often refreshed when the manage widget makes a change, you ca
 
         return ['#myCounter' => 'Total records: 6'];
     }
+    
+<a name="override-relation-partials"></a>
+## Overriding relation partials
+
+Sometimes you may wish to override the [default relation partials](https://github.com/wintercms/winter/tree/develop/modules/backend/behaviors/relationcontroller/partials). To do so, create a file with the same name as the default partial, but prepend it with *_relation* and store it within your controllers directory. Your partial will be autodetected and used instead of the default one.
+
+Let's say you want to override the *_manage_form.htm* partial. Create a file within your controllers directory, and name it *_relation_manage_form.htm*.
