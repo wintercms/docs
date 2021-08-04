@@ -13,6 +13,8 @@
     - [Using a public folder](#public-folder)
     - [Using a shared hosting provider](#shared-hosting)
     - [Backend-only Mode](#backend-only-mode)
+    - [Trusted Hosts](#trusted-hosts)
+    - [Trusted Proxies](#trusted-proxies)
 - [Environment configuration](#environment-config)
     - [Defining a base environment](#base-environment)
     - [Domain driven environment](#domain-environment)
@@ -278,6 +280,64 @@ After making these changes, you may delete the `modules/cms` folder from your pr
 If you have installed Winter CMS [via Composer](https://wintercms.com/docs/help/using-composer), you can remove the `winter/wn-cms-module` line in the `require` block within the `composer.json` file in the root folder of your Winter CMS install, and this will prevent Composer from installing or updating the CMS module.
 
 > **Note:** Some plugins may make references to classes within the CMS module. If this is the case, you will need to keep the CMS module files available in your install.
+
+<a name="trusted-hosts"></a>
+### Trusted Hosts
+
+Winter CMS provides support for trusted hosts, a security feature that specifies the domains that your site will accept and respond to when receiving requests. Using this feature will prevent malicious users from phishing data from users or hijacking requests to your site.
+
+By default, this feature is disabled as this sort of protection should generally be applied at the server configuration level, but can be enabled through the `trustedHosts` configuration value within `config/app.php`. By setting this value to `true`, your site will be set to only accept requests to the URL provided in `url` configuration value in the same file. You can, alternatively, specify an array of domains in which you will accept requests from if your site is available on multiple domains.
+
+```php
+'trustedHosts' => true,
+
+'trustedHosts' => [
+    'example.com',           // Matches just example.com
+    'www.example.com',       // Matches just www.example.com
+    '^(.+\.)?example\.com$', // Matches example.com and all subdomains
+    'https://example.com',   // Matches just example.com
+],
+```
+
+<a name="trusted-proxies"></a>
+### Trusted Proxies
+
+For sites that run through proxy hosts, such as CloudFlare or Amazon Elastic Load Balancing, Winter CMS can be configured to trust requests from proxies. This may be required in the case of secure HTTPS connections, as some proxies will terminate the SSL connection on their end before sending the (insecure) request to your host server.
+
+If your site has SSL connections being forced (ie. you have enabled the `cms.backendForceSecure` configuration) without trusted proxies, the user's request may be declined or even forced into a redirect loop.
+
+To enable trusted proxies, you can set the `trustedProxies` and `trustedProxyHeaders` configuration values in `config/app.php`.
+
+The `trustedProxies` value specifies the IP address(es) that proxy connections will be accepted from, either as a comma-separated string or an array. You may also use `'*'` to allow all proxy requests.
+
+```php
+// To trust all proxies:
+'trustedProxies' => '*',
+
+// To trust two IP addresses as proxies
+'trustedProxies' => '192.168.1.1, 192.168.1.2',
+'trustedProxies' => ['192.168.1.1', '192.168.1.2'],
+```
+
+The `trustedProxyHeaders` value specifies which headers will be allowed to define the request when forwarded from the proxy. By default, you would generally allow all headers, but you may fine-tune this to your specific needs.
+
+```php
+// To trust all headers
+'trustedProxyHeaders' => Illuminate\Http\Request::HEADER_X_FORWARDED_ALL,
+
+// To trust only the hostname
+'trustedProxyHeaders' => Illuminate\Http\Request::HEADER_X_FORWARDED_HOST,
+
+// To trust the hostname, IP and port
+'trustedProxyHeaders' => Illuminate\Http\Request::HEADER_X_FORWARDED_FOR
+    | Illuminate\Http\Request::HEADER_X_FORWARDED_HOST
+    | Illuminate\Http\Request::HEADER_X_FORWARDED_PORT
+```
+
+> **Note:** Amazon Elastic Load Balancing users must use the `HEADER_X_FORWARDED_AWS_ELB` option to accept the correct headers.
+> ```php
+> 'trustedProxyHeaders' => Illuminate\Http\Request::HEADER_X_FORWARDED_AWS_ELB
+> ```
 
 <a name="environment-config"></a>
 ## Environment configuration
