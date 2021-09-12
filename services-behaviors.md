@@ -36,8 +36,6 @@ A behavior is used in a similar fashion:
         ];
     }
 
-> **Note**: Implementing behaviors is case sensitive, so `Winter.Translate.Behaviors.TranslatableModel` will work but `Winter.Translate.Behaviors.TranslatableModel` will not.
-
 Where you might define a trait like this:
 
     trait UtilityFunctions
