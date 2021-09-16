@@ -13,6 +13,8 @@
     - [Mass assignment](#mass-assignment)
 - [Deleting models](#deleting-models)
 - [Query scopes](#query-scopes)
+    - [Local scopes](#local-scopes)
+    - [Global scopes](#global-scopes)
 - [Events](#events)
 - [Extending models](#extending-models)
 
@@ -383,6 +385,9 @@ You may also run a delete query on a set of models. In this example, we will del
 <a name="query-scopes"></a>
 ## Query scopes
 
+<a name="local-scopes"></a>
+#### Local scopes
+
 Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`:
 
     class User extends Model
@@ -428,6 +433,131 @@ Sometimes you may wish to define a scope that accepts parameters. To get started
 Now you may pass the parameters when calling the scope:
 
     $users = User::applyType('admin')->get();
+    
+
+<a name="global-scopes"></a>
+#### Global scopes
+
+Global scopes allow you to add constraints to all queries for a given model. Winters own soft delete functionality utilizes global scopes to only retrieve "non-deleted" models from the database. Writing your own global scopes can provide a convenient, easy way to make sure every query for a given model receives certain constraints.
+
+
+#### Writing Global Scopes
+
+Writing a global scope is simple. First, define a class that implements the `Illuminate\Database\Eloquent\Scope` interface. Winter does not have a conventional location that you should place scope classes, so you are free to place this class in any directory that you wish.
+
+The `Scope` interface requires you to implement one method: `apply`. The `apply` method may add `where` constraints or other types of clauses to the query as needed:
+```php
+<?php
+
+namespace MyAuthor\MyPlugin\Scopes;
+
+use Winter\Storm\Database\Builder;
+use Winter\Storm\Database\Model;
+use Illuminate\Database\Eloquent\Scope;
+
+class AncientScope implements Scope
+{
+    /**
+     * Apply the scope to a given Eloquent query builder.
+     *
+     * @param  Winter\Storm\Database\Builder  $builder
+     * @param  Winter\Storm\Database\Model  $model
+     * @return void
+     */
+    public function apply(Builder $builder, Model $model)
+    {
+        $builder->where('created_at', '<', now()->subYears(2000));
+    }
+}
+```
+
+> **Note:** If your global scope is adding columns to the select clause of the query, you should use the addSelect method instead of select. This will prevent the unintentional replacement of the query's existing select clause.
+
+#### Applying Global Scopes
+
+To assign a global scope to a model, you should override the model's `booted` method and invoke the model's `addGlobalScope` method. The `addGlobalScope` method accepts an instance of your scope as its only argument:
+
+```php
+<?php
+
+namespace MyAuthor\MyPlugin\Models;
+
+use MyAuthor\MyPlugin\Scopes\AncientScope;
+use Winter\Storm\Database\Model;
+
+class User extends Model
+{
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new AncientScope);
+    }
+}
+```
+
+After adding the scope in the example above to the `MyAuthor\MyPlugin\Models\User` model, a call to the `User::all()` method will execute the following SQL query:
+
+```sql
+select * from `users` where `created_at` < 0021-02-18 00:00:00
+```
+
+#### Anonymous Global Scopes
+
+Winter also allows you to define global scopes using closures, which is particularly useful for simple scopes that do not warrant a separate class of their own. When defining a global scope using a closure, you should provide a scope name of your own choosing as the first argument to the addGlobalScope method:
+
+```php
+<?php
+
+namespace MyAuthor\MyPlugin\Models;
+
+use Winter\Storm\Database\Builder;
+use Winter\Storm\Database\Model;
+
+class User extends Model
+{
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope('ancient', function (Builder $builder) {
+            $builder->where('created_at', '<', now()->subYears(2000));
+        });
+    }
+}
+```
+
+#### Removing Global Scopes
+
+If you would like to remove a global scope for a given query, you may use the `withoutGlobalScope` method. This method accepts the class name of the global scope as its only argument:
+
+```php
+User::withoutGlobalScope(AncientScope::class)->get();
+```
+
+Or, if you defined the global scope using a closure, you should pass the string name that you assigned to the global scope:
+
+```php
+User::withoutGlobalScope('ancient')->get();
+```
+
+If you would like to remove several or even all of the query's global scopes, you may use the `withoutGlobalScopes` method:
+
+```php
+// Remove all of the global scopes...
+User::withoutGlobalScopes()->get();
+
+// Remove some of the global scopes...
+User::withoutGlobalScopes([
+    FirstScope::class, SecondScope::class
+])->get();
+```
 
 <a name="events"></a>
 ## Events
