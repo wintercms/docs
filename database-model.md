@@ -480,9 +480,9 @@ To assign a global scope to a model, you should override the model's `booted` me
 ```php
 <?php
 
-namespace MyAuthor\MyPlugin\Scopes;
+namespace MyAuthor\MyPlugin\Models;
 
-use App\Scopes\AncientScope;
+use MyAuthor\MyPlugin\Scopes\AncientScope;
 use Winter\Storm\Database\Model;
 
 class User extends Model
