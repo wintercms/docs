@@ -13,6 +13,8 @@
     - [Mass assignment](#mass-assignment)
 - [Deleting models](#deleting-models)
 - [Query scopes](#query-scopes)
+    - [Local scopes](#local-scopes)
+    - [Global scopes](#global-scopes)
 - [Events](#events)
 - [Extending models](#extending-models)
 
@@ -383,6 +385,9 @@ You may also run a delete query on a set of models. In this example, we will del
 <a name="query-scopes"></a>
 ## Query scopes
 
+<a name="local-scopes"></a>
+#### Local scopes
+
 Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`:
 
     class User extends Model
@@ -431,7 +436,7 @@ Now you may pass the parameters when calling the scope:
     
 
 <a name="global-scopes"></a>
-### Global scopes
+#### Global scopes
 
 Global scopes allow you to add constraints to all queries for a given model. Winters own soft delete functionality utilizes global scopes to only retrieve "non-deleted" models from the database. Writing your own global scopes can provide a convenient, easy way to make sure every query for a given model receives certain constraints.
 
@@ -500,7 +505,7 @@ After adding the scope in the example above to the `App\Models\User` model, a ca
 select * from `users` where `created_at` < 0021-02-18 00:00:00
 ```
 
-### Anonymous Global Scopes
+#### Anonymous Global Scopes
 
 Winter also allows you to define global scopes using closures, which is particularly useful for simple scopes that do not warrant a separate class of their own. When defining a global scope using a closure, you should provide a scope name of your own choosing as the first argument to the addGlobalScope method:
 
