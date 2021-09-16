@@ -460,8 +460,8 @@ class AncientScope implements Scope
     /**
      * Apply the scope to a given Eloquent query builder.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $builder
-     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  Winter\Storm\Database\Builder  $builder
+     * @param  Winter\Storm\Database\Model  $model
      * @return void
      */
     public function apply(Builder $builder, Model $model)
@@ -499,7 +499,7 @@ class User extends Model
 }
 ```
 
-After adding the scope in the example above to the `App\Models\User` model, a call to the `User::all()` method will execute the following SQL query:
+After adding the scope in the example above to the `MyAuthor\MyPlugin\Models\User` model, a call to the `User::all()` method will execute the following SQL query:
 
 ```sql
 select * from `users` where `created_at` < 0021-02-18 00:00:00
