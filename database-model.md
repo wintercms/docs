@@ -449,10 +449,10 @@ The `Scope` interface requires you to implement one method: `apply`. The `apply`
 ```php
 <?php
 
-namespace Author\Plugin\Scopes;
+namespace MyAuthor\MyPlugin\Scopes;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Winter\Storm\Database\Builder;
+use Winter\Storm\Database\Model;
 use Illuminate\Database\Eloquent\Scope;
 
 class AncientScope implements Scope
@@ -480,10 +480,10 @@ To assign a global scope to a model, you should override the model's `booted` me
 ```php
 <?php
 
-namespace Author\Plugin\Scopes;
+namespace MyAuthor\MyPlugin\Scopes;
 
 use App\Scopes\AncientScope;
-use Illuminate\Database\Eloquent\Model;
+use Winter\Storm\Database\Model;
 
 class User extends Model
 {
@@ -512,10 +512,10 @@ Winter also allows you to define global scopes using closures, which is particul
 ```php
 <?php
 
-namespace Author\Plugin\Models;
+namespace MyAuthor\MyPlugin\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Winter\Storm\Database\Builder;
+use Winter\Storm\Database\Model;
 
 class User extends Model
 {
