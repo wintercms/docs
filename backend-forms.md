@@ -18,6 +18,7 @@
     - [Field dependencies](#field-dependencies)
     - [Preventing a field from being submitted](#prevent-field-submission)
 - [Extending form behavior](#extend-form-behavior)
+    - [Form Model Events](#form-model-events)
     - [Overriding controller action](#overriding-action)
     - [Overriding controller redirect](#overriding-redirect)
     - [Extending form model query](#extend-model-query)
@@ -1379,6 +1380,13 @@ Sometimes you may need to prevent a field from being submitted. In order to do t
 ## Extending form behavior
 
 Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
+
+<a name="form-model-events"></a>
+### Form Model Events
+
+Several controller methods can called at various points during the lifecycle of the `FormController` to provide injection points for custom logic. See the [API docs](/docs/api/develop/Backend/Behaviors/FormController.html#method_formBeforeSave) for a full reference of what they are. Generally speaking any method in the API docs prefixed with `form` can be overridden in your controller to change the default behaviour or act as an injection point for custom logic.
+
+>**NOTE:** It may be more desirable to use [model events](/docs/events/event/model.beforeSave) to implement your logic instead as those are always run when applicable if the model is being affected, no matter where the interaction with the model is occuring. 
 
 <a name="overriding-action"></a>
 ### Overriding controller action
