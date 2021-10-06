@@ -58,6 +58,12 @@ The `create:controller` command generates a controller, configuration and view f
 
     php artisan create:controller Acme.Blog Posts
 
+> Note: to keep it simple for newcomers, the controller generated view files are using static words that you may want to translate in your plugin.
+> You can use the option `--with-translations` to generate those files using the core's translation keys.
+> ```
+> php artisan create:controller Acme.Blog Posts --with-translations
+> ```
+
 <a name="scaffold-create-formwidget"></a>
 ### Create a FormWidget
 
