@@ -30,6 +30,10 @@ The `create:plugin` command generates a plugin folder and basic files for the pl
 
     php artisan create:plugin Acme.Blog
 
+> Note: If you plan to translate your plugin in multiple languages, you can add the `--with-translations` option to the command to generate the plugin's files with basic internationalization keys and the current app locale lang file as the starting point for your plugin development.
+> ```
+> php artisan create:plugin Acme.Blog --with-translations
+> ```
 <a name="scaffold-create-component"></a>
 ### Create a Component
 
