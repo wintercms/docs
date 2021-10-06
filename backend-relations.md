@@ -62,6 +62,20 @@ An *Invoice* model with a relationship called `items` should define the first le
             form: $/acme/pay/models/invoiceitem/fields.yaml
             recordsPerPage: 10
 
+You can also customize the labels of the toolbar buttons:
+
+    items: 
+        label: Invoice Line Item
+     view:
+            list: $/acme/pay/models/invoiceitem/columns.yaml
+            toolbarButtons: 
+                create: New MyLineItem
+                delete: Delete MyLineItem
+        manage:
+            form: $/acme/pay/models/invoiceitem/fields.yaml
+            recordsPerPage: 10
+
+
 The following options are then used for each relationship name definition:
 
 Option | Description
