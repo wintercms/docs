@@ -66,11 +66,11 @@ You can also customize the labels of the toolbar buttons:
 
     items: 
         label: Invoice Line Item
-     view:
+        view:
             list: $/acme/pay/models/invoiceitem/columns.yaml
             toolbarButtons: 
-                create: New MyLineItem
-                delete: Delete MyLineItem
+                create: Add a line item
+                delete: Remove line item
         manage:
             form: $/acme/pay/models/invoiceitem/fields.yaml
             recordsPerPage: 10
