@@ -3,7 +3,8 @@
 - [Writing documentation](#writing-docs)
 - [Exceptions to PSR standards](#psr-exceptions)
     - [Controller methods can have a single underscore](#psr-exception-methods)
-    - [Subsequent expressions are on a new line](#psr-exception-newline-expressions)
+    - [Subsequent expressions on same line as closing curly brace](#psr-exception-newline-expressions)
+    - [Use of trailing commas](#psr-exception-trailing-commas)
 - [Developer standards and patterns](#developer-standards)
     - [Vendor naming](#vendor-naming)
     - [Repository naming](#repository-naming)
@@ -18,13 +19,11 @@
     - [Model naming](#model-naming)
     - [Model scopes](#model-scopes)
     - [Class guidance](#class-guide)
-- [Environment configuration](#environment-config)
-    - [Use strict mode with MySQL](#strict-trans-tables)
 
 <a name="writing-docs"></a>
 ## Writing documentation
 
-Your contributions to the Winter documentation are very welcome. Please follow the next rules if you want to contribute. How to style perfect Winter documentation pages:
+Your contributions to the Winter documentation are very welcome. Please follow the Winter CMS documentation guidelines if you would like  to contribute:
 
 1. Each page that has at least one H2 header should have a TOC list. The TOC list should be the first element after the H1 header. The TOC should have links to all H2 headers on the page.
 1. There should be an introductory text below the TOC, even if there is the Introduction section. You may want to get rid of the Introduction section if it's not really needed. Don't leave the TOC alone.
@@ -34,8 +33,9 @@ Your contributions to the Winter documentation are very welcome. Please follow t
 1. Avoid short, 1 sentence, paragraphs. Merge short paragraphs and try to be a bit more verbose.
 1. Avoid short hanging paragraphs below code sections. Merge such paragraphs with the text above the code blocks.
 1. Use the inline `code` tags for everything related to code - variable names, function names, syntax examples, etc.
+1. Use code blocks (three backticks followed by the language of the block at the start of the codeblock and three backticks at the end) for code examples that are longer than a single line.
 1. Use the **strong** tag for everything else.
-1. Don't hesitate to make cross links to other documentation articles. Adding links to the same article in the same paragraph is not necessary.
+1. Cross links to other documentation articles is highly encouraged. Adding links to the same article in the same paragraph is not necessary.
 1. See the [cms-pages.md](https://github.com/wintercms/docs/blob/main/cms-pages.md) or [cms-themes.md](https://github.com/wintercms/docs/blob/main/cms-themes.md) files for your reference.
 
 <a name="psr-exceptions"></a>
@@ -48,51 +48,115 @@ There are some exceptions to the PSR standard used by Winter.
 
 PSR-2 states that methods must be in **camelCase**. However, in Backend controllers Winter will prefix AJAX handlers with the action name to define a controlled context. For example:
 
-    public function index()
-    {
-        // This is the index page (index action)
-    }
+```php
+public function index()
+{
+    // This is the index page (index action)
+}
 
-    public function index_onDoSomething()
-    {
-        // AJAX handler only works on the index action
-    }
+public function index_onDoSomething()
+{
+    // AJAX handler only works on the index action
+}
 
-    public function onDoSomethingElse()
-    {
-        // AJAX handler works globally for all actions
-    }
+public function onDoSomethingElse()
+{
+    // AJAX handler works globally for all actions
+}
+```
 
 An exception must be granted for these scenarios.
 
 <a name="psr-exception-newline-expressions"></a>
 ### Subsequent expressions are on a new line
 
-PSR-2 does not explicitly state that subsequent expressions should be on the same line as the closing parenthesis.
+PSR-2 does not explicitly state that subsequent expressions should be on the same line as the closing curly brace.
 
-The following code is considered valid and is recommended for better spacing between logic:
+```php
+if ($expr1) {
+    // if body
+}
+elseif ($expr2) {
+    // elseif body
+}
+else {
+    // else body;
+}
+```
 
+While some sections of the Winter CMS codebase may be using the above style, it is not recommended and should be changed to the below when encountered.
+
+```php
     if ($expr1) {
         // if body
-    }
-    elseif ($expr2) {
+    } elseif ($expr2) {
         // elseif body
-    }
-    else {
+    } else {
         // else body;
     }
+```
 
-    try {
-        // try body
-    }
-    catch (FirstExceptionType $e) {
-        // catch body
-    }
-    catch (OtherExceptionType $e) {
-        // catch body
-    }
+It is entirely acceptable to place multiple conditions on new lines for readability however:
 
-This is an acceptable preference based on a technicality, PSR-1 and PSR-2 are not explicit when using SHOULD, MUST, etc. in this case. However, at the time of writing, the PSR-2 codesniffer rules say it's not valid, so an exception may be required.
+```php
+if (
+    $expr1 &&
+    $longExpression &&
+    $superLongExpressionTooMuchToHandleOhNoWontSomeoneThinkOfTheColumnCount
+) {
+    // if body
+} elseif (
+    $seriously ||
+    $thisIsSuperLongAndContrived ||
+    $butThisIsBetterThanSuperLongOneLiners
+) {
+    // elseif body
+} else {
+    // else body;
+}
+```
+
+This is an acceptable preference based on a technicality, PSR-1 and PSR-2 are not explicit when using SHOULD, MUST, etc. in this case.
+
+Additionally, `if` statements with no curly braces due to only being one line of code are highly discouraged:
+
+```php
+if ($condition)
+    doSomething();
+```
+
+You should always use full curly braces on your expressions:
+
+```php
+if ($condition) {
+    doSomething();
+}
+```
+
+<a name="psr-exception-trailing-commas"></a>
+### Use of trailing commas
+
+Although not specified one way or another in [PSR-2](https://www.php-fig.org/psr/psr-2/), Winter CMS highly recommends the use of trailing commas in multi-line arrays, especially for localization files. Trailing commas make it easier to perform maintenance on multiline array items without causing unnecessary visual clutter in diffs or version control history.
+
+**Recommended:**
+
+```php
+$items = [
+    'apple',
+    'banana',
+    'orange',
+];
+```
+
+**NOT** recommended:
+
+```php
+$items = [
+    'apple',
+    'banana',
+    'orange'
+];
+```
 
 <a name="developer-standards"></a>
 ## Developer standards and patterns
@@ -127,6 +191,11 @@ Themes should be named with the `-theme` suffix and optional `wn-` prefix.
     happy-theme
     wn-happy-theme
 
+Projects can be named with a `wn-` prefix and suffix indicating the project type (i.e. `-site`, `-app`, etc), although this is just a suggested convention and isn't enforced anywhere.
+
+    wn-wintercms.com-site
+    wn-api.wintercms.com-app
+
 <a name="variable-naming"></a>
 ### PHP Variable naming
 
@@ -141,28 +210,36 @@ Use **camelCase** everywhere except for the following:
 
 Form element names should use snake_case (underscores)
 
-    <input name="first_name">
+```html
+<input name="first_name">
+```
 
 Where the name is an array, the array keys can be either StudlyCase or snake_case.
 
-    <input name="ForumMember[first_name]">
-    <input name="forum_member[first_name]">
+```html
+<input name="ForumMember[first_name]">
+<input name="forum_member[first_name]">
+```
 
 Element IDs should be camel case or hyphen-case (dashes)
 
-    <div id="firstNameGroup">
-        <input id="firstName">
-    </div>
+```html
+<div id="firstNameGroup">
+    <input id="firstName">
+</div>
 
-    <div id="first-name-group">
-        <input id="first-name">
-    </div>
+<div id="first-name-group">
+    <input id="first-name">
+</div>
+```
 
 Element classes names should use hyphen-case (dashes)
 
-    <div class="form-group">
-        <input class="form-control">
-    </div>
+```html
+<div class="form-group">
+    <input class="form-control">
+</div>
+```
 
 <a name="view-naming"></a>
 ### View file naming
@@ -207,33 +284,43 @@ When specifying [event names](/docs/services/events). The term *after* is not us
 1. **beforeSetAttribute** - this event comes *before* any default logic.
 1. **setAttribute** - this event comes *after* any default logic.
 
+>**NOTE:** This is true for the vast majority of cases, however the events present for default model events like `boot`, `create`, `delete`, `fetch`, `restore`, `save`, `update`, & `validate` all have before & after variants to match the model method events.
+
 Where possible events should cover global and local versions. Global events should be prefixed with the module or plugin name. For example:
 
-    // For global events, it is prefixed with the module or plugin code
-    Event::fire('cms.page.end');
+```php
+// For global events, it is prefixed with the module or plugin code
+Event::fire('cms.page.end');
 
-    // For local events, the prefix is not required
-    $this->fireEvent('page.end');
+// For local events, the prefix is not required
+$this->fireEvent('page.end');
+```
 
 Avoid using terms such as *onSomething* in event names since the word *bind*/*fire* represent this action word.
 
 It is good practise to always pass the calling object as the first parameter to the global event, the local event should not need this. Local events take priority over global events when halting, or come first when processing.
 
-    // Local event
-    if ($this->fireEvent('beforeAddContent', [$message, $view], true) === false)
-        return;
+```php
+// Local event
+if ($this->fireEvent('beforeAddContent', [$message, $view], true) === false) {
+    return;
+}
 
-    // Global event
-    if (Event::fire('mailer.beforeAddContent', [$this, $message, $view], true) === false)
-        return;
+// Global event
+if (Event::fire('mailer.beforeAddContent', [$this, $message, $view], true) === false) {
+    return;
+}
+```
 
 When expecting multiple results, it is easy to combine the arrays like so:
 
-    // Combine local and global event results
-    $eventResults = array_merge(
-        $this->fireEvent('form.beforeRefresh', [$saveData]),
-        Event::fire('backend.form.beforeRefresh', [$this, $saveData])
-    );
+```php
+// Combine local and global event results
+$eventResults = array_merge(
+    $this->fireEvent('form.beforeRefresh', [$saveData]),
+    Event::fire('backend.form.beforeRefresh', [$this, $saveData])
+);
+```
 
 <a name="db-table-naming"></a>
 ### Database table naming
@@ -253,7 +340,7 @@ If your plugin extends tables belonging to other plugins, the added column names
 
     acme_blog_category_id
 
-The author and plugin name acronym is acceptable too:
+The author and plugin name acronym is also acceptable as a prefix:
 
     ab_category_id
 
@@ -283,7 +370,7 @@ Using the suffix helps avoid conflicts with controller and model names. Alternat
 <a name="controller-naming"></a>
 ### Controller naming
 
-Controllers are commonly are placed in `controllers` directory, for back-end controllers. The name of a controller should be a plural, for example:
+Controllers are commonly are placed in `controllers` directory, for back-end controllers. The name of a controller should be in plural form, for example:
 
     People
     Products
@@ -293,38 +380,68 @@ Controllers are commonly are placed in `controllers` directory, for back-end con
 <a name="model-naming"></a>
 ### Model naming
 
-Models are commonly are placed in `models` directory. The name of a model should be a singular, for example:
+Models are commonly are placed in `models` directory. The name of a model should be in singular form, for example:
 
     Person
     Product
     Category
     ProductCategory
 
-When extending other models, you should prefix the field with at least the plugin name.
+When dynamically extending other plugin's models, you should prefix the field with at least the plugin name. This helps to avoid potential future conflicts if that plugin is updated to add new relationships that could conflict with your dynamic relationships.
 
-    User::extend(function($model) {
-        $model->hasOne['forum_member'] = ['Winter\Forum\Models\Member'];
-    });
+```php
+User::extend(function($model) {
+    $model->hasOne['forum_member'] = ['Winter\Forum\Models\Member'];
+});
+```
 
 The fully qualified plugin name is also acceptable, for example:
 
-    $user->winter_forum_member
+```php
+$user->winter_forum_member
+```
 
 <a name="model-scopes"></a>
 ### Model scopes
 
-If a model scope returns a query object, used for chaining, they should be prefixed with `apply` to indicate they are being applied to the query. Defined as:
+[Model scopes](database/model#query-scopes) should always return the scoped `QueryBuilder` instance to support scope chaining. If a scope is not returning a `QueryBuilder` instance then it is not a scope and should be a regular / static method instead.
 
-    public function scopeApplyUser($query, $user)
-    {
-        return $query->where('user_id', $user->id);
-    }
+```php
+// Valid scope method
+public function scopeWithValidUser(Builder $query, User $user)
+{
+    return $query->where('user_id', $user->id);
+}
+
+// Invalid scope method
+public function scopeWithValidUser(Builder $query, User $user)
+{
+    return $query->where('user_id', $user->id)->get();
+}
+
+// Valid standalone method returning a collection
+public function getValidUser(User $user)
+{
+    return $this->withValidUser($user)->get();
+}
+```
+
+Scope naming can be tricky as it's important to avoid conflicts with other aspects of the model's API, such as relationships & attributes. Generally speaking, scopes that receive additional parameters should be prefixed with `apply` to indicate they are being applied to the query. Defined as:
+
+```php
+public function scopeApplyUser(Builder $query, User $user)
+{
+    return $query->where('user_id', $user->id);
+}
+```
 
 Then applied to the model as:
 
-    $model->applyUser($user);
+```php
+$model->applyUser($user);
+```
 
-Whilst `apply` is the ideal prefix name, here are some other prefixes we recommended for chained scopes:
+Whilst `apply` is the ideal prefix name for those situations, here are some other prefixes we recommended for chained scopes:
 
     - is
     - for
@@ -332,28 +449,11 @@ Whilst `apply` is the ideal prefix name, here are some other prefixes we recomme
     - without
     - filter
 
-If a scope returns anything other than a query then any name can be used. Some acceptable names for non-chained scopes:
-
-    - find
-    - get
-    - list
-    - lists
-
 <a name="class-guide"></a>
 ### Class guidance
 
 These points are to be considered in a relaxed fashion:
 
-1. In classes, properties and methods should be declared as `protected` in favor of `private`. So all classes can be used as base classes.
+1. In classes, properties and methods should be declared as `protected` in favor of `private` so that all classes can be used as base classes. Similarily, `static::someMethodOrConstantOrProperty` is preferred to `self::someMethodOrConstantOrProperty`, again to make it easier to extend classes.
 1. If a property contains a single value (not an array), make the property `public` instead of a get/set approach.
 1. If a property contains a collection (is an array), make the property `protected` with get `getProperties`, `getProperty` and `setProperty`.
-
-<a name="environment-config"></a>
-## Environment configuration
-
-<a name="strict-trans-tables"></a>
-### Use strict mode with MySQL
-
-When MySQL [STRICT_TRANS_TABLES mode](http://dev.mysql.com/doc/refman/5.0/en/sql-mode.html) is enabled the server performs strict data type validation. It is highly recommended to keep this mode enabled in MySQL during the development. This allows you to find errors before your code gets to a client's server with the enabled strict mode. The mode can be enabled in my.cnf (Unix) or my.ini (Windows) file:
-
-    sql_mode=STRICT_TRANS_TABLES
