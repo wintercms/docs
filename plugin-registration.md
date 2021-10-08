@@ -524,7 +524,7 @@ NavigationManager::instance()->registerOwnerAlias('Winter.Replacement', 'Winter.
 <a name="plugin-replace-data"></a>
 ### Migrations, seeders and table references
 
-When forking a plugin and using the replace functionality, you will need to handle migratign the data from the original plugin to your replacing plugin via  migrations, seeders and the model classes. To do this we recommend the following:
+When forking a plugin and using the replace functionality, you will need to handle migrating the data from the original plugin to your replacing plugin via migrations, seeders and the model classes. To do this we recommend the following:
 
 - Create a migration to rename tables
 - Update models to reference your new table
