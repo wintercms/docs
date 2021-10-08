@@ -87,13 +87,13 @@ else {
 While some sections of the Winter CMS codebase may be using the above style, it is not recommended and should be changed to the below when encountered.
 
 ```php
-    if ($expr1) {
-        // if body
-    } elseif ($expr2) {
-        // elseif body
-    } else {
-        // else body;
-    }
+if ($expr1) {
+    // if body
+} elseif ($expr2) {
+    // elseif body
+} else {
+    // else body;
+}
 ```
 
 It is entirely acceptable to place multiple conditions on new lines for readability however:
