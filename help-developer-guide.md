@@ -68,7 +68,7 @@ public function onDoSomethingElse()
 An exception must be granted for these scenarios.
 
 <a name="psr-exception-newline-expressions"></a>
-### Subsequent expressions are on a new line
+### Subsequent expressions on same line as closing curly brace
 
 PSR-2 does not explicitly state that subsequent expressions should be on the same line as the closing curly brace.
 
