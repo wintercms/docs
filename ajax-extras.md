@@ -1,3 +1,5 @@
+# Extra Features
+
 - [Loading indicator](#loader-stripe)
 - [Form validation](#ajax-validation)
     - [Throwing a validation error](#throw-validation-exception)

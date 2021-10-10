@@ -8,7 +8,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-Layouts define the page scaffold, that is everything that repeats on a page, such as a header and footer. Layouts often contain the HTML tag as well as the HEAD, TITLE and BODY tags.
+Layouts define the page scaffold, usually including everything that is present on multiple pages such as headers and footers. Layouts often contain the HTML tag as well as the HEAD, TITLE and BODY tags.
 
 Layout templates reside in the **/layouts** subdirectory of a theme directory. Layout template files should have the **htm** extension. Inside the layout file you should use the `{% page %}` tag to output the page content. Simplest layout example:
 

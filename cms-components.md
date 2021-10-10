@@ -1,4 +1,4 @@
-# Using Components
+# Components
 
 - [Introduction](#introduction)
 - [Component aliases](#aliases)
@@ -10,7 +10,9 @@
 - [The "View Bag" component](#viewbag-component)
 - [Soft components](#soft-components)
 
-Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of Winter. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
+## Introduction
+
+Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of Winter. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction), form postbacks, and the page execution cycle (used to inject variables to pages or return custom responses).
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers) or [developing components](../plugin/components) as part of plugins.
 
@@ -76,7 +78,7 @@ However there is a way to initialize properties with values loaded from external
 Assuming that in the example above the component **demoTodo** is defined in a partial, it will be initialized with a value loaded from the **maxItems** partial variable:
 
     {% partial 'my-todo-partial' maxItems='10' %}
-    
+
 You may use dot notation to retrieve a deeply nested value from an external parameter:
 
     [demoTodo]

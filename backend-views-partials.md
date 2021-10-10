@@ -1,3 +1,5 @@
+# Backend Views & Partials
+
 - [Partials and hints](#partials)
     - [Hint partials](#hints)
     - [Checking if hints are hidden](#checking-hints)

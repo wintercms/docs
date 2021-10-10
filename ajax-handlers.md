@@ -1,3 +1,5 @@
+# Event Handlers
+
 - [AJAX handlers](#ajax-handlers)
     - [Calling a handler](#calling-handlers)
 - [Redirects in AJAX handlers](#redirects-in-handlers)

@@ -1,14 +1,14 @@
-# CMS Content blocks
+# Content Blocks
 
 - [Introduction](#introduction)
 - [Rendering content blocks](#rendering-content-blocks)
 - [Passing variables to content blocks](#content-variables)
     - [Global variables](#content-global-variables)
 
-Content blocks are text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout. They are designed to hold static content only and support basic templating variables. [Partials](partials) are more flexible and should be used for generating dynamic content.
-
 <a name="introduction"></a>
 ## Introduction
+
+Content blocks are text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout. They are designed to hold static content only and support basic templating variables. [Partials](partials) are more flexible and should be used for generating dynamic content.
 
 Content blocks files reside in the **/content** subdirectory of a theme directory. The following extensions are supported for content files:
 

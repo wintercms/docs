@@ -1,4 +1,4 @@
-# Active Record Model
+# Database: Models (Active Record ORM)
 
 - [Introduction](#introduction)
 - [Defining models](#defining-models)
@@ -433,7 +433,7 @@ Sometimes you may wish to define a scope that accepts parameters. To get started
 Now you may pass the parameters when calling the scope:
 
     $users = User::applyType('admin')->get();
-    
+
 
 <a name="global-scopes"></a>
 #### Global scopes

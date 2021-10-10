@@ -1,3 +1,5 @@
+# Backend Forms
+
 - [Introduction](#introduction)
 - [Configuring the form behavior](#configuring-form)
     - [Create page](#form-create-page)
@@ -29,9 +31,9 @@
 <a name="introduction"></a>
 ## Introduction
 
-**Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
+The **Form behavior** is a controller [behavior](../services/behaviors) used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
-Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+The Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
     namespace Acme\Blog\Controllers;
 
@@ -1386,7 +1388,7 @@ Sometimes you may wish to modify the default form behavior and there are several
 
 Several controller methods can called at various points during the lifecycle of the `FormController` to provide injection points for custom logic. See the [API docs](/docs/api/develop/Backend/Behaviors/FormController.html#method_formBeforeSave) for a full reference of what they are. Generally speaking any method in the API docs prefixed with `form` can be overridden in your controller to change the default behaviour or act as an injection point for custom logic.
 
->**NOTE:** It may be more desirable to use [model events](/docs/events/event/model.beforeSave) to implement your logic instead as those are always run when applicable if the model is being affected, no matter where the interaction with the model is occuring. 
+>**NOTE:** It may be more desirable to use [model events](/docs/events/event/model.beforeSave) to implement your logic instead as those are always run when applicable if the model is being affected, no matter where the interaction with the model is occuring.
 
 <a name="overriding-action"></a>
 ### Overriding controller action

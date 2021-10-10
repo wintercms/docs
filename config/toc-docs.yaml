@@ -1,48 +1,17 @@
-Setup:
+Getting Started:
   icon: "icon-wrench"
   pages:
     setup/installation: "Installation"
     setup/configuration: "Configuration"
 
-CMS:
-  icon: "icon-magic"
-  pages:
-    cms/themes: "Themes"
-    cms/pages: "Pages"
-    cms/partials: "Partials"
-    cms/layouts: "Layouts"
-    cms/content: "Content blocks"
-    cms/components: "Components"
-    cms/mediamanager: "Media manager"
-    markup: "Markup guide@"
+# "Architecture Concepts":
+#   icon: "icon-lightbulb"
+#   pages:
+#     architecture/overview: "Overview"
+#     architecture/why-winter: "Why Winter CMS?"
+#     architecture/request-lifecycle: "Request Lifecycle"
 
-AJAX:
-  icon: "icon-bolt"
-  pages:
-    ajax/introduction: "Introduction"
-    ajax/handlers: "Event handlers"
-    ajax/update-partials: "Updating partials"
-    ajax/attributes-api: "Data attributes API"
-    ajax/javascript-api: "JavaScript API"
-    ajax/extras: "Extra features"
-
-Themes:
-  icon: "icon-picture"
-  pages:
-    themes/development: "Developing themes"
-
-Plugins:
-  icon: "icon-puzzle-piece"
-  pages:
-    plugin/registration: "Registration"
-    plugin/updates: "Version history"
-    plugin/components: "Building components"
-    plugin/settings: "Settings & Config"
-    plugin/localization: "Localization"
-    plugin/scheduling: "Task scheduling"
-    plugin/extending: "Extending plugins"
-
-Backend:
+Backend (Admin):
   icon: "icon-desktop"
   pages:
     backend/controllers-ajax: "Controllers & AJAX"
@@ -54,17 +23,53 @@ Backend:
     backend/reorder: "Sorting records"
     backend/import-export: "Importing & Exporting"
     backend/users: "Users & Permissions"
-    ui: "User interface guide@"
+    backend/controls: "UI Elements"
+    ui: "User Interface Guide@"
+
+Frontend (CMS):
+  icon: "icon-magic"
+  pages:
+    cms/themes: "Themes"
+    themes/development: "Developing Themes"
+    cms/pages: "Pages"
+    cms/partials: "Partials"
+    cms/layouts: "Layouts"
+    cms/content: "Content Blocks"
+    cms/components: "Components"
+    cms/mediamanager: "Media Manager"
+    markup: "Markup Guide@"
+    "https://twig.symfony.com/doc/2.x/": "Twig Docs@"
+
+Plugins:
+  icon: "icon-puzzle-piece"
+  pages:
+    plugin/registration: "Registration"
+    plugin/updates: "Version History"
+    plugin/components: "Building Components"
+    plugin/settings: "Settings & Config"
+    plugin/localization: "Localization"
+    plugin/scheduling: "Task Scheduling"
+    plugin/extending: "Extending Plugins"
+
+"AJAX Framework":
+  icon: "icon-bolt"
+  pages:
+    ajax/introduction: "Introduction"
+    ajax/handlers: "Event Handlers"
+    ajax/update-partials: "Updating Partials"
+    ajax/attributes-api: "Data Attributes API"
+    ajax/javascript-api: "JavaScript API"
+    ajax/extras: "Extra Features"
 
 Database:
   icon: "icon-hdd"
   pages:
-    database/basics: "Basic usage"
+    database/basics: "Getting Started"
     database/structure: "Structure"
     database/query: "Queries"
     database/model: "Models"
     database/relations: "Relationships"
-    database/attachments: "File attachments"
+    database/attachments: "File Attachments"
     database/collection: "Collections"
     database/mutators: "Mutators"
     database/serialization: "Serialization"
@@ -98,19 +103,23 @@ Services:
 Console:
   icon: "icon-terminal"
   pages:
-    console/commands: "Command list"
+    console/commands: "Command List"
     console/scaffolding: "Scaffolding"
     console/development: "Development"
-
-"API Docs@":
-    page: api
 
 Extras:
   icon: "icon-question-sign"
   pages:
     help/unit-testing: "Unit Testing"
     help/using-composer: "Using Composer"
-    help/developer/guide: "Developer guide"
+    help/developer/guide: "Developer Guide"
+
 Events:
   pages:
     events/introduction: "Introduction"
+
+"Further Reading":
+  pages:
+    api: "API Docs@"
+    "https://laravel.com/docs/6.x": "Laravel Docs@"
+    "https://www.php.net/manual/en/intro-whatis.php": "PHP Docs@"

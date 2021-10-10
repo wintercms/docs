@@ -1,4 +1,4 @@
-# Composer
+# Using Composer
 
 - [Introduction](#introduction)
     - [Converting from a basic installation](#converting-from-basic-install)
@@ -51,7 +51,7 @@ Using the following best practices with Composer and Winter CMS will make deploy
 - Add a `.gitignore` file inside the `modules` folder to ignore all changes within this folder, as the modules will be installed and updated by Composer.
 - Add a `.gitignore` file inside the `plugins` folder to ignore all changes within this folder if you install your plugins via Composer. You can optionally allow custom plugins that are only being used for that specific project.
 - Use `composer install --no-dev` on your production instance to specifically exclude any "development" packages and libraries that won't be used in production.
-    
+
 <a name="installing-plugin-theme"></a>
 ## Installing a plugin or theme using Composer
 

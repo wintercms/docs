@@ -1,11 +1,10 @@
-# Database attachments
+# Database: File Attachments
 
 - [File attachments](#file-attachments)
     - [Creating new attachments](#creating-attachments)
     - [Viewing attachments](#viewing-attachments)
     - [Usage example](#attachments-usage-example)
     - [Validation example](#attachments-validation-example)
-
 
 <a name="file-attachments"></a>
 ## File attachments
@@ -26,7 +25,7 @@ Multiple file attachments:
         'photos' => 'System\Models\File'
     ];
 
-> **NOTE:** If you have a column in your model's table with the same name as the attachment relationship it will not work. Attachments and the FileUpload FormWidget work using relationships, so if there is a column with the same name present in the table itself it will cause issues. 
+> **NOTE:** If you have a column in your model's table with the same name as the attachment relationship it will not work. Attachments and the FileUpload FormWidget work using relationships, so if there is a column with the same name present in the table itself it will cause issues.
 
 Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the *public* argument to `false`:
 

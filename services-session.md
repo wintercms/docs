@@ -1,4 +1,4 @@
-# Session services
+# Session Services
 
 - [Configuration](#configuration)
 - [Session usage](#session-usage)

@@ -1,3 +1,5 @@
+# Updating Partials
+
 - [Pulling partial updates](#pulling-updates)
     - [Update definition](#update-definition)
     - [Appending and prepending content](#appending-prepending)
