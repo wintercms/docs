@@ -1,3 +1,5 @@
+# Backend Lists
+
 - [Introduction](#introduction)
 - [Configuring the list behavior](#configuring-list)
     - [Adding a toolbar](#adding-toolbar)
@@ -24,9 +26,9 @@
 <a name="introduction"></a>
 ## Introduction
 
-**List behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
+The **List behavior** is a controller [behavior](../services/behaviors) used for managing lists of records on a page. The behavior provides the sortable and searchable list with optional links for each of its records. The behavior provides the controller action `index`; however the list can be rendered anywhere and multiple list definitions can be used.
 
-List behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+The list behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
     namespace Acme\Blog\Controllers;
 

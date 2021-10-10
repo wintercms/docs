@@ -1,4 +1,4 @@
-# Relations
+# Backend Relations
 
 - [Introduction](#introduction)
 - [Configuring the relation behavior](#configuring-relation)
@@ -15,9 +15,9 @@
 <a name="introduction"></a>
 ## Introduction
 
-**Relation behavior** is a controller modifier used for easily managing complex [model](../database/model) relationships on a page. Not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
+The **Relation behavior** is a controller [behavior](../services/behaviors) used for easily managing complex [model](../database/model) relationships on a page. It is not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
 
-Relation behavior depends on [relation definitions](#relation-definitions). In order to use the relation behavior you should add the `Backend.Behaviors.RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#configuring-relation).
+The Relation behavior depends on [relation definitions](#relation-definitions). In order to use the relation behavior you should add the `Backend.Behaviors.RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#configuring-relation).
 
     namespace Acme\Projects\Controllers;
 
@@ -64,11 +64,11 @@ An *Invoice* model with a relationship called `items` should define the first le
 
 You can also customize the labels of the toolbar buttons:
 
-    items: 
+    items:
         label: Invoice Line Item
         view:
             list: $/acme/pay/models/invoiceitem/columns.yaml
-            toolbarButtons: 
+            toolbarButtons:
                 create: Add a line item
                 delete: Remove line item
         manage:
@@ -425,7 +425,7 @@ The view widget is often refreshed when the manage widget makes a change, you ca
 
         return ['#myCounter' => 'Total records: 6'];
     }
-    
+
 <a name="override-relation-partials"></a>
 ## Overriding relation partials
 

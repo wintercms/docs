@@ -1,4 +1,4 @@
-# Scaffolding commands
+# Scaffolding Commands
 
 - [Scaffolding commands](#scaffolding-commands)
     - [Create a theme](#scaffold-create-theme)
@@ -43,7 +43,7 @@ The `create:component` command creates a new component class and the default com
 The `create:model` command generates the files needed for a new model. The first parameter specifies the author and plugin name. The second parameter specifies the model class name.
 
     php artisan create:model Acme.Blog Post
-    
+
 <a name="scaffold-create-settings-model"></a>
 ### Create a Settings Model
 

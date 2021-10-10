@@ -1,11 +1,9 @@
-# Database Behaviors
+# Database: Behaviors
 
 - [Purgeable](#purgeable)
 - [Sortable](#sortable)
 
-Model behaviors are used to implement common functionality.
-Unlike [Traits](traits) these can be implemented either directly
-in a class or by extending the class. You can read more about behaviors [here](../services/behaviors).
+Model behaviors are used to implement common functionality. Unlike [Traits](traits) these can be implemented either directly in a class or by extending the class. You can read more about behaviors [here](../services/behaviors).
 
 <a name="purgeable"></a>
 ## Purgeable

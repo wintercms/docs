@@ -1,10 +1,12 @@
-- [JavaScript API](#javascript-api)
+# JavaScript API
+
+- [Introduction](#javascript-api)
 - [Usage examples](#javascript-examples)
 - [Global AJAX events](#global-events)
 - [Usage examples](#global-events-examples)
 
 <a name="javascript-api"></a>
-## JavaScript API
+## Introduction
 
 The JavaScript API is more powerful than the data attributes API. The `request` method can be used with any element that is inside a form, or on a form element. When the method is used with an element inside a form, it is forwarded to the form.
 

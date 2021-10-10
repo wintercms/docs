@@ -1,4 +1,4 @@
-# Model Mutators
+# Database: Model Mutators
 
 - [Introduction](#introduction)
 - [Accessors & mutators](#accessors-and-mutators)

@@ -1,3 +1,5 @@
+# AJAX Framework
+
 - [Introduction](#introduction)
 - [Including the framework](#framework-script)
 - [How AJAX requests work](#how-ajax-works)

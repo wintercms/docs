@@ -1,4 +1,4 @@
-# Queue service
+# Queue Service
 
 - [Configuration](#configuration)
 - [Basic usage](#basic-usage)
@@ -158,7 +158,7 @@ Instead of pushing a job class into the queue, you may also push a closure for s
 ```php
 Queue::push(function () use ($id, $jobId) {
     Account::delete($id);
-    
+
     $job = Job::get($jobId);
     $job->delete();
 });
@@ -419,8 +419,8 @@ public function failed($data)
     // Called when the job is failing...
 }
 ```
-    
-The original array of `data` will also be automatically passed onto the failed method.    
+
+The original array of `data` will also be automatically passed onto the failed method.
 
 ### Retrying failed jobs
 

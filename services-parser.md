@@ -1,4 +1,4 @@
-# Parser service
+# Parser Service
 
 - [Introduction](#introduction)
 - [Markdown parser](#markdown-parser)
@@ -291,7 +291,7 @@ Renders in Twig as
     {{ logo|media }}
 
 <hr>
-    
+
 #### Radio
 
 Renders a radio form field.
@@ -299,7 +299,7 @@ Renders a radio form field.
     {radio name="radio" label="Thoughts?" options="y:Yes|n:No|m:Maybe"}{/radio}
 
 <hr>
-   
+
 #### Repeater
 
 Renders a repeating section with other fields inside.
