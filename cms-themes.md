@@ -30,23 +30,42 @@ Object | Description
 <a name="directory-structure"></a>
 ## Directory structure
 
-Below, you can see an example theme directory structure. Each Winter theme is represented with a separate directory and generally, one active theme is used for displaying the website. This example displays the "website" theme directory.
+Below, you can see an example theme directory structure. Each Winter theme is represented with a separate directory and generally, one active theme is used for displaying the website. This example displays the "example-theme" theme directory.
 
-    themes/
-      website/           <=== Theme starts here
-        pages/           <=== Pages directory
-          home.htm
-        layouts/         <=== Layouts directory
-          default.htm
-        partials/        <=== Partials directory
-          sidebar.htm
-        content/         <=== Content directory
-          intro.htm
-        assets/          <=== Assets directory
-          css/
-            my-styles.css
-          js/
-          images/
+```
+📂 themes
+ ┣ 📂 example-theme
+ ┃ ┣ 📂 assets                <-- Theme assets
+ ┃ ┃ ┣ 📂 css
+ ┃ ┃ ┣ 📂 fonts
+ ┃ ┃ ┣ 📂 images
+ ┃ ┃ ┣ 📂 javascript
+ ┃ ┃ ┣ 📂 scss
+ ┃ ┃ ┗ 📂 vendor
+ ┃ ┣ 📂 content               <-- Static content files
+ ┃ ┃ ┗ 📂 static-pages        <-- Content files from the Winter.Pages plugin
+ ┃ ┃ ┃ ┗ 📜 index.htm
+ ┃ ┃ ┗ 📜 welcome.htm
+ ┃ ┣ 📂 layouts               <-- Theme Layouts
+ ┃ ┃ ┣ 📜 default.htm
+ ┃ ┃ ┗ 📜 sidebar.htm
+ ┃ ┣ 📂 meta                  <-- Menu definitions and other plugin specific files
+ ┃ ┃ ┣ 📂 menus
+ ┃ ┃ ┃ ┣ 📜 main-menu.yaml
+ ┃ ┃ ┃ ┗ 📜 sitemap.yaml
+ ┃ ┃ ┗ 📜 static-pages.yaml
+ ┃ ┣ 📂 pages                 <-- Theme Pages
+ ┃ ┃ ┣ 📜 404.htm
+ ┃ ┃ ┣ 📜 home.htm
+ ┃ ┃ ┣ 📜 error.htm
+ ┃ ┃ ┗ 📜 sitemap.htm
+ ┃ ┣ 📂 partials              <-- Theme Partials
+ ┃ ┃ ┣ 📜 html-footer.htm
+ ┃ ┃ ┣ 📜 html-header.htm
+ ┃ ┃ ┗ 📜 navbar.htm
+ ┃ ┣ 📜 theme.yaml            <-- Theme information file
+ ┃ ┗ 📜 version.yaml          <-- Theme updates file
+```
 
 > The active theme is set with the `activeTheme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
 

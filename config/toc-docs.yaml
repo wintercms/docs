@@ -4,12 +4,15 @@ Getting Started:
     setup/installation: "Installation"
     setup/configuration: "Configuration"
 
-# "Architecture Concepts":
-#   icon: "icon-lightbulb"
-#   pages:
-#     architecture/overview: "Overview"
-#     architecture/why-winter: "Why Winter CMS?"
-#     architecture/request-lifecycle: "Request Lifecycle"
+"Architecture Concepts":
+  icon: "icon-lightbulb"
+  pages:
+    architecture/introduction: "Introduction"
+    # architecture/why-winter: "Why Winter CMS?"
+    # architecture/request-lifecycle: "Request Lifecycle"
+    help/unit-testing: "Unit Testing"
+    help/using-composer: "Using Composer"
+    help/developer/guide: "Developer Guide"
 
 Backend (Admin):
   icon: "icon-desktop"
@@ -80,23 +83,24 @@ Services:
   icon: "icon-gears"
   pages:
     services/application: "Application"
+    services/asset-compilation: "Asset Compilation"
     services/behaviors: "Behaviors"
     services/cache: "Cache"
     services/collections: "Collections"
     services/error-log: "Errors & Logging"
     services/events: "Events"
-    services/html: "Forms & Html"
-    services/image-resizing: "Image Resizing"
     services/filesystem-cdn: "Filesystem / CDN"
+    services/html: "Forms & Html"
     services/hashing-encryption: "Hashing & Encryption"
     services/helpers: "Helpers"
+    services/image-resizing: "Image Resizing"
     services/mail: "Mail"
     services/pagination: "Pagination"
     services/parser: "Parser"
     services/queues: "Queues"
+    services/router: "Router"
     services/request-input: "Request & Input"
     services/response-view: "Response & View"
-    services/router: "Router"
     services/session: "Session"
     services/validation: "Validation"
 
@@ -106,13 +110,6 @@ Console:
     console/commands: "Command List"
     console/scaffolding: "Scaffolding"
     console/development: "Development"
-
-Extras:
-  icon: "icon-question-sign"
-  pages:
-    help/unit-testing: "Unit Testing"
-    help/using-composer: "Using Composer"
-    help/developer/guide: "Developer Guide"
 
 Events:
   pages:
