@@ -7,7 +7,7 @@
     - [Install command](#console-install-command)
     - [System update](#console-update-command)
     - [Database migration](#console-up-command)
-    - [Change Backend user password](#change-backend-user-password-command)
+    - [Change backend user password](#change-backend-user-password-command)
 - [Plugin management](#plugin-commands)
     - [Install plugin](#plugin-install-command)
     - [Refresh plugin](#plugin-refresh-command)
@@ -53,7 +53,7 @@ When updating Winter, use the composer update command as normal before performin
 
 Composer is configured to look inside plugin directories for composer dependencies and these will be included in updates.
 
-> **Note:** To use composer with a Winter instance that has been installed using the [Wizard installation](../setup/installation#wizard-installation), simply copy the `tests/` directory and `composer.json` file from [GitHub](https://github.com/wintercms/winter) into your Winter instance and then run `composer install`.
+> **NOTE:** To use composer with a Winter instance that has been installed using the [Wizard installation](../setup/installation#wizard-installation), simply copy the `tests/` directory and `composer.json` file from [GitHub](https://github.com/wintercms/winter) into your Winter instance and then run `composer install`.
 
 <a name="maintenance-commands"></a>
 ## Setup & Maintenance
@@ -67,7 +67,7 @@ The `winter:install` command will guide you through the process of setting up Wi
 
 You also may wish to inspect **config/app.php** and **config/cms.php** to change any additional configuration.
 
-> **Note:** You cannot run `winter:install` after running `winter:env`. `winter:env` takes the existing configuration values and puts them in the `.env` file while replacing the original values with calls to `env()` within the configuration files. `winter:install` cannot now replace those calls to `env()` within the configuration files as that would be overly complex to manage.
+> **NOTE:** You cannot run `winter:install` after running `winter:env`. `winter:env` takes the existing configuration values and puts them in the `.env` file while replacing the original values with calls to `env()` within the configuration files. `winter:install` cannot now replace those calls to `env()` within the configuration files as that would be overly complex to manage.
 
 <a name="console-update-command"></a>
 ### System update
@@ -90,9 +90,9 @@ The inverse command `winter:down` will reverse all migrations, dropping database
     php artisan winter:down
 
 <a name="change-backend-user-password-command"></a>
-### Change Backend user password
+### Change backend user password
 
-The `winter:passwd` command will allow the password of a Backend user or administrator to be changed via the command-line. This is useful if someone gets locked out of their Winter CMS install, or for changing the password for the default administrator account.
+The `winter:passwd` command will allow the password of a backend user or administrator to be changed via the command-line. This is useful if someone gets locked out of their Winter CMS install, or for changing the password for the default administrator account.
 
     php artisan winter:passwd username password
 
@@ -251,7 +251,7 @@ Winter includes a number of utility commands.
 php artisan winter:mirror public
 ```
 
->**Note:** By default the symlinks created will be absolute symlinks, to create them as relative symlinks instead include the `--relative` option:
+> **NOTE:** By default the symlinks created will be absolute symlinks, to create them as relative symlinks instead include the `--relative` option:
 
 ```bash
 php artisan winter:mirror public --relative

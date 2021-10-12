@@ -3,10 +3,10 @@
 - [Users and Permissions](#users-and-permissions)
 - [Backend user helper](#backend-auth-facade)
 - [Registering permissions](#permission-registration)
-- [Restricting access to back-end pages](#page-access)
+- [Restricting access to backend pages](#page-access)
 - [Restricting access to features](#features)
 
-The user management for the back-end includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also register permissions that control access to the features in the back-end.
+The user management for the backend includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also register permissions that control access to the features in the backend.
 
 <a name="users-and-permissions"></a>
 ## Users and Permissions
@@ -21,9 +21,9 @@ When checking if a user has a specific permission, the permission settings for t
 
 Roles (`\Backend\Models\UserRole`) are groupings of permissions with a name and description used to identify the role. An Administrator can only have one role assigned to them at once. A Role could be assigned to multiple administrators. Winter ships with two system roles by default, `developer` and `publisher`. Any number of custom roles with their own combinations of permissions can be created and applied to users.
 
-> **Note:** Any user with the `manage_users` permissions can manage the assignment of roles, but only to other users (not to themselves), and roles can only be created or modified by a superuser.
+> **NOTE:** Any user with the `manage_users` permissions can manage the assignment of roles, but only to other users (not to themselves), and roles can only be created or modified by a superuser.
 
-> **Note:** System roles (`developer`, `publisher`, and any role with `is_system` set to `true`) cannot have their permissions changed through the Backend. They are assumed to have access to all permissions, unless a given permission specifies a specific role or roles that it applies to using the `roles` array key in the definition of the permission (in which case only that specified system role has access to it).
+> **NOTE:** System roles (`developer`, `publisher`, and any role with `is_system` set to `true`) cannot have their permissions changed through the backend. They are assumed to have access to all permissions, unless a given permission specifies a specific role or roles that it applies to using the `roles` array key in the definition of the permission (in which case only that specified system role has access to it).
 
 Groups (`\Backend\Models\UserGroup`) are an organizational tool for grouping administrators, they can be thought of as "user categories". They have nothing to do with permissions and are strictly for organizational purposes. For instance, if you wanted to send an email to all users that are in the group `Head Office Staff`, you would simply do `Mail::sendTo(UserGroup::where('code', 'head-office-staff')->get()->users, 'author.plugin::mail.important_notification', $data);`
 
@@ -70,11 +70,11 @@ You may authenticate a user by providing their login and password with `BackendA
 <a name="permission-registration"></a>
 ## Registering permissions
 
-Plugins can register back-end user permissions by overriding the `registerPermissions` method inside the [Plugin registration class](../plugin/registration#registration-file). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
+Plugins can register backend user permissions by overriding the `registerPermissions` method inside the [Plugin registration class](../plugin/registration#registration-file). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
 
     acme.blog.access_categories
 
-The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Back-end controllers can use permissions defined by plugins for restricting the user access to [pages](#page-access) or [features](#features).
+The next example shows how to register backend permission items. Permissions are defined with a permission key and description. In the backend permission management user interface permissions are displayed as a checkbox list. Backend controllers can use permissions defined by plugins for restricting the user access to [pages](#page-access) or [features](#features).
 
     public function registerPermissions()
     {
@@ -104,9 +104,9 @@ You may also specify a `roles` option as an array with each value as a role API 
     }
 
 <a name="page-access"></a>
-## Restricting access to back-end pages
+## Restricting access to backend pages
 
-In a back-end controller class you can specify which permissions are required for access the pages provided by the controller. It's done with the `$requiredPermissions` controller's property. This property should contain an array of permission keys. If the user permissions match any permission from the list, the framework will let the user to see the controller pages.
+In a backend controller class you can specify which permissions are required for access the pages provided by the controller. It's done with the `$requiredPermissions` controller's property. This property should contain an array of permission keys. If the user permissions match any permission from the list, the framework will let the user to see the controller pages.
 
     <?php namespace Acme\Blog\Controllers;
 
@@ -124,7 +124,7 @@ You can also use the **asterisk** symbol to indicate the "all permissions" condi
 <a name="features"></a>
 ## Restricting access to features
 
-The back-end user model has methods that allow to determine whether the user has specific permissions. You can use this feature in order to limit the functionality of the back-end user interface. The permission methods supported by the back-end user are `hasAccess` and `hasPermission`. Both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.
+The backend user model has methods that allow to determine whether the user has specific permissions. You can use this feature in order to limit the functionality of the backend user interface. The permission methods supported by the backend user are `hasAccess` and `hasPermission`. Both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.
 
 The `hasAccess` method returns **true** for any permission if the user is a superuser (`is_superuser` set to `true`). The `hasPermission` method is more strict, only returning true if the user actually has the specified permissions either in their account or through their role. Generally, `hasAccess` is the preferred method to use as it respects the absolute power of the superuser. The following example shows how to use the methods in the controller code:
 
@@ -139,7 +139,7 @@ The `hasAccess` method returns **true** for any permission if the user is a supe
         // ...
     }
 
-You can also use the methods in the back-end views for hiding user interface elements. The next examples demonstrates how you can hide a button on the Edit Category [back-end form](forms):
+You can also use the methods in the backend views for hiding user interface elements. The next examples demonstrates how you can hide a button on the Edit Category [backend form](forms):
 
     <?php if ($this->user->hasAccess('acme.blog.delete_categories')): ?>
         <button

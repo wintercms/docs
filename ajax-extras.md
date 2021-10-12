@@ -9,7 +9,7 @@
 - [Flash messages](#ajax-flash)
 - [Usage example](#usage-example)
 
-When using the AJAX framework, you have the option to specify the **extras** suffix which includes additional StyleSheet and JavaScript files. These features are useful when working with AJAX requests in front-end CMS pages.
+When using the AJAX framework, you have the option to specify the **extras** suffix which includes additional StyleSheet and JavaScript files. These features are useful when working with AJAX requests in frontend CMS pages.
 
 ```twig
 {% framework extras %}
@@ -43,7 +43,7 @@ In the server side AJAX handler you may throw a [validation exception](../servic
         throw new ValidationException(['name' => 'You must give a name!']);
     }
 
-> **Note**: You can also pass an instance of the [validation service](../services/validation) as the first argument of the exception.
+> **NOTE**: You can also pass an instance of the [validation service](../services/validation) as the first argument of the exception.
 
 <a name="error-messages"></a>
 ### Displaying error messages

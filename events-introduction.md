@@ -45,7 +45,7 @@ You may also pass a reference to any callable object or a [dedicated event class
 
     Event::listen('auth.login', [$this, 'LoginHandler']);
 
-> **Note**: The callable method can choose to specify all, some or none of the arguments. Either way the event will not throw any errors unless it specifies too many.
+> **NOTE**: The callable method can choose to specify all, some or none of the arguments. Either way the event will not throw any errors unless it specifies too many.
 
 <a name="event-registration"></a>
 ### Where to register listeners

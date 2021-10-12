@@ -33,14 +33,14 @@ Use the `Markdown::parse` method to render Markdown to HTML:
 
     $html = Markdown::parse($markdown);
 
-You may also use the `|md` filter for [parsing Markdown in your front-end markup](../markup/filter-md).
+You may also use the `|md` filter for [parsing Markdown in your frontend markup](../markup/filter-md).
 
     {{ '**Text** is bold.'|md }}
 
 <a name="twig-parser"></a>
 ## Twig template parser
 
-Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup), [view content](../services/response-view#views) and [mail message content](../services/mail#message-content).
+Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the frontend markup](../markup), [view content](../services/response-view#views) and [mail message content](../services/mail#message-content).
 
 The `Twig` facade is used for parsing Twig syntax, you may use the `Twig::parse` method to render Twig to HTML.
 
@@ -84,7 +84,7 @@ The array can be iterated using the following syntax:
 <a name="yaml-parser"></a>
 ## YAML configuration parser
 
-YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of Winter, such as [form field](../backend/forms#form-fields) and [list column](../backend/lists##list-columns) definitions. An example of some YAML:
+YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the backend development of Winter, such as [form field](../backend/forms#form-fields) and [list column](../backend/lists##list-columns) definitions. An example of some YAML:
 
     receipt:     Acme Purchase Invoice
     date:        2015-10-02

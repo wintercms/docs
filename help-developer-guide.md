@@ -46,7 +46,7 @@ There are some exceptions to the PSR standard used by Winter.
 <a name="psr-exception-methods"></a>
 ### Controller methods can have a single underscore
 
-PSR-2 states that methods must be in **camelCase**. However, in Backend controllers Winter will prefix AJAX handlers with the action name to define a controlled context. For example:
+PSR-2 states that methods must be in **camelCase**. However, in backend controllers Winter will prefix AJAX handlers with the action name to define a controlled context. For example:
 
 ```php
 public function index()
@@ -284,7 +284,7 @@ When specifying [event names](/docs/services/events). The term *after* is not us
 1. **beforeSetAttribute** - this event comes *before* any default logic.
 1. **setAttribute** - this event comes *after* any default logic.
 
->**NOTE:** This is true for the vast majority of cases, however the events present for default model events like `boot`, `create`, `delete`, `fetch`, `restore`, `save`, `update`, & `validate` all have before & after variants to match the model method events.
+> **NOTE:** This is true for the vast majority of cases, however the events present for default model events like `boot`, `create`, `delete`, `fetch`, `restore`, `save`, `update`, & `validate` all have before & after variants to match the model method events.
 
 Where possible events should cover global and local versions. Global events should be prefixed with the module or plugin name. For example:
 
@@ -370,7 +370,7 @@ Using the suffix helps avoid conflicts with controller and model names. Alternat
 <a name="controller-naming"></a>
 ### Controller naming
 
-Controllers are commonly are placed in `controllers` directory, for back-end controllers. The name of a controller should be in plural form, for example:
+Controllers are commonly are placed in `controllers` directory, for backend controllers. The name of a controller should be in plural form, for example:
 
     People
     Products
@@ -404,7 +404,7 @@ $user->winter_forum_member
 <a name="model-scopes"></a>
 ### Model scopes
 
-[Model scopes](database/model#query-scopes) should always return the scoped `QueryBuilder` instance to support scope chaining. If a scope is not returning a `QueryBuilder` instance then it is not a scope and should be a regular / static method instead.
+[Model scopes](../database/model#query-scopes) should always return the scoped `QueryBuilder` instance to support scope chaining. If a scope is not returning a `QueryBuilder` instance then it is not a scope and should be a regular / static method instead.
 
 ```php
 // Valid scope method

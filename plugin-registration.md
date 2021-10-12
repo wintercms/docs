@@ -2,6 +2,9 @@
 
 - [Introduction](#introduction)
     - [Directory structure](#directory-structure)
+        - [Simple](#simple-structure)
+        - [Typical](#typical-structure)
+        - [Complex](#complex-structure)
     - [Plugin namespaces](#namespaces)
 - [Registration file](#registration-file)
     - [Supported methods](#registration-methods)
@@ -25,52 +28,121 @@
 <a name="introduction"></a>
 ## Introduction
 
-Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
+Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or backend menus and pages. Some examples of what a plugin can do:
 
-1. Define [components](components).
+1. Define [components](../plugin/components).
 1. Define [user permissions](../backend/users).
-1. Add [settings pages](settings#backend-pages), [menu items](#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
-1. Create [database table structures and seed data](updates).
+1. Add [settings pages](../plugin/settings#backend-pages), [menu items](../plugin/registration#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
+1. Create [database table structures and seed data](../plugin/updates).
 1. Alter [functionality of the core or other plugins](../services/events).
-1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
+1. Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
 
 <a name="directory-structure"></a>
 ### Directory structure
 
-Plugins reside in the **/plugins** subdirectory of the application directory. An example of a plugin directory structure:
+Plugins reside in the **/plugins** subdirectory of the application directory. Plugins can range from extremely simple to very complex depending on the requirements. The most simple plugin only requires a `Plugin.php` file, but they can accomodate all the way up to entire application structures as required.
 
-    plugins/
-      acme/              <=== Author name
-        blog/            <=== Plugin name
-          assets/
-          classes/
-          components/
-          controllers/
-          models/
-          updates/
-          ...
-          Plugin.php     <=== Plugin registration file
+<a name="simple-structure"></a>
+#### Simple Plugin Structure:
 
-Not all plugin directories are required. The only required file is the **Plugin.php** described below. If your plugin provides only a single [component](components), your plugin directory could be much simpler, like this:
+The simplest plugins only require the **Plugin.php** file described below.
 
-    plugins/
-      acme/              <=== Author name
-        blog/            <=== Plugin name
-          components/
-          Plugin.php     <=== Plugin registration file
+```css
+📂 plugins
+ ┣ 📂 myauthor          <-- Author name
+ ┃ ┣ 📂 myplugin        <-- Plugin name
+ ┃ ┃ ┗ 📜 Plugin.php    <-- Plugin registration file, required
+```
 
-Plugin assets like css and js files must reside under the assets directory:
+<a name="typical-structure"></a>
+#### Typical Plugin Structure:
 
-    plugins/
-      acme/
-        blog/
-          assets/        <=== Assets directory
-            css/
-              styles.css
-            js/
-              custom.js
+The following is an example of what most plugins would end up looking like when interacting with the most commonly used Winter CMS functionality.
 
-> **Note:** if you are developing a plugin for the [Marketplace](/marketplace), the [updates/version.yaml](updates) file is required.
+> **NOTE:** if you are developing a plugin for the [Marketplace](/marketplace), the [updates/version.yaml](updates) file is required.
+
+```css
+📂 plugins
+ ┣ 📂 myauthor              <-- Author name
+ ┃ ┣ 📂 myplugin            <-- Plugin name
+ ┃ ┃ ┣ 📂 assets            <-- Assets used for either frontend functionality (components) or backend (controllers, widgets, etc)
+ ┃ ┃ ┣ 📂 controllers       <-- Backend controllers
+ ┃ ┃ ┣ 📂 lang              <-- Localization files
+ ┃ ┃ ┃ ┗ 📂 en              <-- Specific locale folder
+ ┃ ┃ ┃ ┃ ┗ 📜 lang.php      <-- Translations
+ ┃ ┃ ┣ 📂 models            <-- Models
+ ┃ ┃ ┣ 📂 updates           <-- Database migrations
+ ┃ ┃ ┃ ┗ 📜 version.yaml    <-- Changelog
+ ┃ ┃ ┣ 📂 views             <-- Custom view files
+ ┃ ┃ ┃ ┗ 📂 mail            <-- Custom mail templates
+ ┃ ┃ ┣ 📜 README.md         <-- Documentation describing the purpose of the plugin
+ ┃ ┃ ┗ 📜 Plugin.php        <-- Plugin registration class
+```
+
+<a name="complex-structure"></a>
+#### Complex Plugin Structure:
+
+The following is an example of what a complex plugin could look like when using a significant number of the features provided by Winter CMS as well as providing some of its own.
+
+```css
+📂 plugins
+ ┣ 📂 myauthor                              <-- Author name
+ ┃ ┣ 📂 myplugin                            <-- Plugin name
+ ┃ ┃ ┣ 📂 assets                            <-- Assets used for either frontend functionality (components) or backend (controllers, widgets, etc)
+ ┃ ┃ ┃ ┣ 📂 css
+ ┃ ┃ ┃ ┣ 📂 favicons
+ ┃ ┃ ┃ ┣ 📂 images
+ ┃ ┃ ┃ ┣ 📂 js
+ ┃ ┃ ┃ ┗ 📂 scss
+ ┃ ┃ ┣ 📂 behaviors                         <-- Any custom behaviors provided by the plugin
+ ┃ ┃ ┣ 📂 classes                           <-- Any custom classes provided by the plugin
+ ┃ ┃ ┣ 📂 config                            <-- Configuration files
+ ┃ ┃ ┃ ┗ 📜 config.php
+ ┃ ┃ ┣ 📂 console                           <-- Any custom CLI commands provided by the plugin
+ ┃ ┃ ┣ 📂 controllers                       <-- Backend controllers
+ ┃ ┃ ┃ ┣ 📂 records                         <-- Directory for the view and configuration files for the given controller
+ ┃ ┃ ┃ ┃ ┣ 📜 _list_toolbar.htm             <-- List toolbar partial file
+ ┃ ┃ ┃ ┃ ┣ 📜 config_filter.yaml            <-- Configuration for the Filter widget present on the controller lists
+ ┃ ┃ ┃ ┃ ┣ 📜 config_form.yaml              <-- Configuration for the Form widget present on the controller
+ ┃ ┃ ┃ ┃ ┣ 📜 config_importexport.yaml      <-- Configuration for the Import/Export behavior
+ ┃ ┃ ┃ ┃ ┣ 📜 config_list.yaml              <-- Configuration for the Lists widget present on the controller
+ ┃ ┃ ┃ ┃ ┣ 📜 config_relation.yaml          <-- Configuration for the RelationController behavior
+ ┃ ┃ ┃ ┃ ┣ 📜 create.htm                    <-- View file for the create action
+ ┃ ┃ ┃ ┃ ┣ 📜 index.htm                     <-- View file for the index action
+ ┃ ┃ ┃ ┃ ┣ 📜 preview.htm                   <-- View file for the preview action
+ ┃ ┃ ┃ ┃ ┗ 📜 update.htm                    <-- View file for the update action
+ ┃ ┃ ┃ ┣ 📜 Records.php                     <-- Backend controller for the Record model
+ ┃ ┃ ┣ 📂 docs                              <-- Any plugin-specific documentation should live here
+ ┃ ┃ ┣ 📂 formwidgets                       <-- Any custom FormWidgets provided by the plugin
+ ┃ ┃ ┣ 📂 lang                              <-- Localization files
+ ┃ ┃ ┃ ┗ 📂 en                              <-- Specific locale folder
+ ┃ ┃ ┃ ┃ ┗ 📜 lang.php                      <-- Translations for that locale
+ ┃ ┃ ┣ 📂 layouts                           <-- Any custom backend layouts used by the plugin
+ ┃ ┃ ┣ 📂 models                            <-- Models provided by the plugin
+ ┃ ┃ ┃ ┣ 📂 record                          <-- Directory containing configuration files specific to that model
+ ┃ ┃ ┃ ┃ ┣ 📜 columns.yaml                  <-- Configuration file used for the Lists widget
+ ┃ ┃ ┃ ┃ ┗ 📜 fields.yaml                   <-- Configuration file used for the Form widget
+ ┃ ┃ ┃ ┣ 📜 Record.php                      <-- Model class for the Record model
+ ┃ ┃ ┣ 📂 partials                          <-- Any custom partials used by the plugin
+ ┃ ┃ ┣ 📂 reportwidgets                     <-- Any custom ReportWidgets provided by the plugin
+ ┃ ┃ ┣ 📂 tests                             <-- Test suite for the plugin
+ ┃ ┃ ┣ 📂 traits                            <-- Any custom Traits provided by the plugin
+ ┃ ┃ ┣ 📂 updates                           <-- Database migrations
+ ┃ ┃ ┃ ┃ ┣ 📂 v1.0.0                        <-- Migrations for a specific version of the plugin
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜 create_records_table.php    <-- Database migration file, referenced in version.yaml
+ ┃ ┃ ┃ ┗ 📜 version.yaml                    <-- Changelog
+ ┃ ┃ ┣ 📂 views                             <-- Custom view files
+ ┃ ┃ ┃ ┗ 📂 mail                            <-- Custom mail templates provided by the plugin
+ ┃ ┃ ┣ 📂 widgets                           <-- Any custom Widgets provided by the plugin
+ ┃ ┃ ┣ 📜 LICENSE                           <-- License file
+ ┃ ┃ ┣ 📜 README.md                         <-- Documentation describing the purpose of the plugin
+ ┃ ┃ ┣ 📜 Plugin.php                        <-- Plugin registration file
+ ┃ ┃ ┣ 📜 composer.json                     <-- Composer file to manage dependencies for the plugin
+ ┃ ┃ ┣ 📜 helpers.php                       <-- Global helpers provided by the plugin loaded via composer.json
+ ┃ ┃ ┣ 📜 phpunit.xml                       <-- Unit testing configuration
+ ┃ ┃ ┣ 📜 plugin.yaml                       <-- Simplified plugin registration configuration YAML file, used by Winter.Builder
+ ┃ ┃ ┗ 📜 routes.php                        <-- Any custom routes provided by the plugin
+ ```
 
 <a name="namespaces"></a>
 ### Plugin namespaces
@@ -119,18 +191,18 @@ Method | Description
 **pluginDetails()** | returns information about the plugin.
 **register()** | register method, called when the plugin is first registered.
 **boot()** | boot method, called right before the request route.
-**registerComponents()** | registers any [front-end components](components#component-registration) used by this plugin.
-**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
+**registerComponents()** | registers any [frontend components](components#component-registration) used by this plugin.
+**registerFormWidgets()** | registers any [backend form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 **registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
 **registerMailLayouts()** | registers any [mail view layouts](../services/mail#mail-template-registration) supplied by this plugin.
 **registerMailPartials()** | registers any [mail view partials](../services/mail#mail-template-registration) supplied by this plugin.
 **registerMailTemplates()** | registers any [mail view templates](../services/mail#mail-template-registration) supplied by this plugin.
 **registerMarkupTags()** | registers [additional markup tags](#extending-twig) that can be used in the CMS.
-**registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
-**registerPermissions()** | registers any [back-end permissions](../backend/users#permission-registration) used by this plugin.
-**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
+**registerNavigation()** | registers [backend navigation menu items](#navigation-menus) for this plugin.
+**registerPermissions()** | registers any [backend permissions](../backend/users#permission-registration) used by this plugin.
+**registerReportWidgets()** | registers any [backend report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
 **registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
-**registerSettings()** | registers any [back-end configuration links](settings#link-registration) used by this plugin.
+**registerSettings()** | registers any [backend configuration links](settings#link-registration) used by this plugin.
 **registerValidationRules()** | registers any [custom validators](../services/validation#custom-validation-rules) supplied by this plugin.
 
 <a name="basic-plugin-information"></a>
@@ -161,7 +233,7 @@ The `register` method is called immediately when the plugin is registered. The `
         });
     }
 
-> **Note:** The `boot` and `register` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
+> **NOTE:** The `boot` and `register` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
 
 Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router). For example:
 
@@ -258,7 +330,7 @@ The following Twig custom options are available:
 <a name="navigation-menus"></a>
 ## Navigation menus
 
-Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
+Plugins can extend the backend navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the backend navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
 
 ```php
 public function registerNavigation()
@@ -298,9 +370,9 @@ public function registerNavigation()
 }
 ```
 
-When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users). The order in which the back-end navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
+When you register the backend navigation you can use [localization strings](localization) for the `label` values. Backend navigation can also be controlled by the `permissions` values and correspond to defined [backend user permissions](../backend/users). The order in which the backend navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
 
-To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
+To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the backend controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
 Key | Description
 ------------- | -------------
@@ -319,7 +391,7 @@ Key | Description
 <a name="registering-middleware"></a>
 ## Registering middleware
 
-To register a custom middleware, you can apply it directly to a Backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
+To register a custom middleware, you can apply it directly to a backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
 
 ```php
 public function boot()
@@ -348,7 +420,7 @@ public function boot()
 <a name="elevated-plugin"></a>
 ## Elevated permissions
 
-By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the back-end. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
+By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the backend. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
 
 Request | Description
 ------------- | -------------
@@ -412,7 +484,7 @@ By specifying a version, your plugin will check what version the original plugin
 <a name="aliases"></a>
 ### Aliases
 
->**NOTE:** This is for reference only. By registering as a plugin replacement using the above feature Winter already handles registering these aliases throughout the system for you.
+> **NOTE:** This is for reference only. By registering as a plugin replacement using the above feature Winter already handles registering these aliases throughout the system for you.
 
 <!-- TODO: Group the into their own docs -->
 

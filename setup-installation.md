@@ -42,7 +42,7 @@ When using the SQL Server database engine, you will need to install the [group c
 
 The [Web Installer](https://github.com/wintercms/web-installer) is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
 
-> **Note:** If you are a developer, we recommend that you [install via Composer instead](../console/commands#console-install-composer)
+> **NOTE:** If you are a developer, we recommend that you [install via Composer instead](../console/commands#console-install-composer)
 
 1. Prepare an empty directory on the web server that will host your Winter CMS installation. It can be a main domain, sub-domain or subfolder.
 2. [Download the "install.zip" file](https://github.com/wintercms/web-installer/releases/latest) from the latest release of the Winter CMS Web Installer into this folder.
@@ -60,7 +60,7 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 
 2. **Installer fails on the "Determining dependencies" or "Installing dependencies" step**: Under the hood, the web installer uses Composer to process and install the dependencies necessary to run Winter CMS - note, you *do not* need Composer installed as a CLI tool for this to work. This process may require a larger amount of memory to complete - if your environment restricts memory usage for your applications, consider allowing up to 1.5GB of memory temporarily for the installer, then reduce it after the installation is complete. The installer will try to do this automatically.
 
-3. **Installer does not display or function correctly**: The web installer has been built on modern front-end frameworks, and may require the use of a more recent browser version. Consider installing Mozilla Firefox, Microsoft Edge or Google Chrome and keeping it up-to-date.
+3. **Installer does not display or function correctly**: The web installer has been built on modern frontend frameworks, and may require the use of a more recent browser version. Consider installing Mozilla Firefox, Microsoft Edge or Google Chrome and keeping it up-to-date.
 
 4. **Unable to parse JSON response**: Depending on your internet connection, downloading all the source files may take more time than the [`max_execution_time` PHP configuration value](https://www.php.net/manual/en/info.configuration.php#ini.max-execution-time) allows; causing the download to end with an incomplete file base. Modify the PHP configuration to increase this value and try again.
 
@@ -102,7 +102,7 @@ For *scheduled tasks* to operate correctly, you should add the following Cron en
 
 Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of Winter. This Cron will call the command scheduler every minute. Then Winter evaluates any scheduled tasks and runs the tasks that are due.
 
-> **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
+> **NOTE**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 
 <a name="queue-setup"></a>
 ### Setting up queue workers

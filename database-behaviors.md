@@ -78,4 +78,4 @@ Use the `setSortableOrder` method to set the orders on a single record or multip
     // Sets the order of records 1, 2, 3 to 3, 2, 1 respectively...
     $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 
-> **Note:** If implementing this behavior in a model where data (rows) already existed previously, the data set may need to be initialized before this behavior will work correctly. To do so, either manually update each row's `sort_order` column or run a query against the data to copy the record's `id` column to the `sort_order` column (ex. `UPDATE myvendor_myplugin_mymodelrecords SET sort_order = id`).
+> **NOTE:** If implementing this behavior in a model where data (rows) already existed previously, the data set may need to be initialized before this behavior will work correctly. To do so, either manually update each row's `sort_order` column or run a query against the data to copy the record's `id` column to the `sort_order` column (ex. `UPDATE myvendor_myplugin_mymodelrecords SET sort_order = id`).

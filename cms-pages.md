@@ -31,8 +31,8 @@ Parameter | Description
 **url** | the page URL, required. The URL syntax is described below.
 **title** | the page title, required.
 **layout** | the page [layout](layouts), optional. If specified, should contain the name of the layout file, without extension, for example: `default`.
-**description** | the page description for the back-end interface, optional.
-**hidden** | hidden pages are accessible only by logged-in back-end users, optional.
+**description** | the page description for the backend interface, optional.
+**hidden** | hidden pages are accessible only by logged-in backend users, optional.
 
 <a name="url-syntax"></a>
 ### URL syntax
@@ -41,7 +41,7 @@ The page URL is defined with the **url** configuration parameter. URLs should st
 
     url = "/blog"
 
-> **Note:** The page URL is case-insensitive by default.
+> **NOTE:** The page URL is case-insensitive by default.
 
 URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by Winter components or from the page [PHP code](themes#php-section) section.
 
@@ -92,7 +92,7 @@ For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brow
 - make: `volkswagen/beetle/retro`
 </div>
 
-> **Note:** Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
+> **NOTE:** Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
 
 <a name="dynamic-pages"></a>
 ## Dynamic pages
@@ -171,7 +171,7 @@ The `onHandleForm` function can be defined in the page or layout [PHP section](t
 
 The handler loads the value with the `post` function and initializes the page's `lastValue` attribute variable which is displayed below the form in the first example.
 
-> **Note:** If a handler with the same name is defined in the page layout, the page, and a page [component](../cms/components), Winter will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
+> **NOTE:** If a handler with the same name is defined in the page layout, the page, and a page [component](../cms/components), Winter will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
 
 If you want to refer to a handler defined in a specific [component](../cms/components), use the component's name or alias in the handler reference:
 
@@ -208,43 +208,12 @@ More information can be found at [`this.page` in the Markup guide](../markup/thi
 
 If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes#php-section) of a page or [layout](layouts) template. Example:
 
-    function onStart()
-    {
-        $this->addCss('assets/css/hello.css');
-        $this->addJs('assets/js/app.js');
-    }
+```php
+function onStart()
+{
+    $this->addCss('assets/css/hello.css');
+    $this->addJs('assets/js/app.js');
+}
+```
 
-If the path specified in the `addCss` and `addJs` method argument begins with a slash (/), it will be relative to the website root. If the asset path does not begin with a slash, it is relative to the theme.
-
-Injected assets can be combined by passing them as an array:
-
-    function onStart()
-    {
-        $this->addCss(['assets/css/hello.css', 'assets/css/goodbye.css']);
-        $this->addJs(['assets/js/app.js', 'assets/js/nav.js']);
-    }
-
-LESS and SCSS assets can be injected and compiled using the combiner:
-
-    function onStart()
-    {
-        $this->addCss(['assets/less/base.less']);
-    }
-
-The second argument of `addCss` and `addJs` allows you to provide additional attributes to your injected assets:
-
-    function onStart()
-    {
-        $this->addJs(['assets/js/app.js', 'assets/js/nav.js'], ['defer' => true]);
-    }
-
-In order to output the injected assets on pages or [layouts](layouts), use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
-
-    <head>
-        ...
-        {% styles %}
-    </head>
-    <body>
-        ...
-        {% scripts %}
-    </body>
+See the [Asset Compiler](../services/asset-compilation#injecting-page-assets) docs for more information.

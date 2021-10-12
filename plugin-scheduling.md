@@ -12,7 +12,7 @@
 
 In the past, developers have generated a Cron entry for each task they need to schedule. However, this can sometimes be a headache. Your task schedule is no longer in source control, and you must SSH into your server to add the Cron entries. The command scheduler allows you to fluently and expressively define your command schedule within the application itself, and only a single Cron entry is needed on your server.
 
-> **Note**: See the [installation guide](../setup/installation#crontab-setup) for instructions on how to set up the scheduler task.
+> **NOTE**: See the [installation guide](../setup/installation#crontab-setup) for instructions on how to set up the scheduler task.
 
 <a name="defining-schedules"></a>
 ## Defining schedules
@@ -113,7 +113,7 @@ Using the `emailOutputTo` method, you may e-mail the output to an e-mail address
              ->sendOutputTo($filePath)
              ->emailOutputTo('foo@example.com');
 
-> **Note:** The `emailOutputTo` and `sendOutputTo` methods are exclusive to the `command` method and are not supported for `call`.
+> **NOTE:** The `emailOutputTo` and `sendOutputTo` methods are exclusive to the `command` method and are not supported for `call`.
 
 <a name="task-hooks"></a>
 ## Task hooks
@@ -138,4 +138,4 @@ Using the `pingBefore` and `thenPing` methods, the scheduler can automatically p
              ->pingBefore($url)
              ->thenPing($url);
 
-> You need to install [Drivers plugin](http://wintercms.com/plugin/winter-drivers) before you can use either the `pingBefore($url)` or `thenPing($url)` features.
+> You need to install [Drivers plugin](https://wintercms.com/plugin/winter-drivers) before you can use either the `pingBefore($url)` or `thenPing($url)` features.

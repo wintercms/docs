@@ -32,7 +32,7 @@ The Relation behavior depends on [relation definitions](#relation-definitions). 
         public $relationConfig = 'config_relation.yaml';
     }
 
-> **Note:** Very often the relation behavior is used together with the [form behavior](forms).
+> **NOTE:** Very often the relation behavior is used together with the [form behavior](forms).
 
 <a name="configuring-relation"></a>
 ## Configuring the relation behavior
@@ -288,7 +288,7 @@ Before relations can be managed on any page, the target model must first be init
     $post = Post::where('id', 7)->first();
     $this->initRelation($post);
 
-> **Note:** The [form behavior](forms) will automatically initialize the model on its create, update and preview actions.
+> **NOTE:** The [form behavior](forms) will automatically initialize the model on its create, update and preview actions.
 
 The relation manager can then be displayed for a specified relation definition by calling the `relationRender` method. For example, if you want to display the relation manager on the [Preview](forms#form-preview-view) page, the **preview.htm** view contents could look like this:
 
@@ -333,7 +333,7 @@ Provides an opportunity to manipulate the relation configuration. The following 
 ### Extending the view widget
 
 Provides an opportunity to manipulate the view widget.
-> **Note**: The view widget has not yet fully initialized, so not all public methods will work as expected! For more information read [How to remove a column](#remove-column).
+> **NOTE**: The view widget has not yet fully initialized, so not all public methods will work as expected! For more information read [How to remove a column](#remove-column).
 
 For example you might want to toggle showCheckboxes based on a property of your model.
 
@@ -410,7 +410,7 @@ There are two filter widgets that may be extended using the following methods, o
         // Extends the manage filter widget
     }
 
-Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](/docs/backend/lists#extend-filter-scopes).
+Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [backend list documentation](/docs/backend/lists#extend-filter-scopes).
 
 <a name="extend-refresh-results"></a>
 ### Extending the refresh results

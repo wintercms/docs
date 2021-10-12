@@ -114,7 +114,7 @@ The `download` method may be used to generate a response that forces the user's 
 
     return Response::download($pathToFile)->deleteFileAfterSend(true);
 
-> **Note:** Symfony HttpFoundation, which manages file downloads, requires the file being downloaded to have an ASCII file name.
+> **NOTE:** Symfony HttpFoundation, which manages file downloads, requires the file being downloaded to have an ASCII file name.
 
 <a name="redirects"></a>
 ## Redirects
@@ -130,7 +130,7 @@ Redirecting to a new URL and [flashing data to the session](../services/session)
 
     return Redirect::to('user/login')->with('message', 'Login Failed');
 
-> **Note:** Since the `with` method flashes data to the session, you may retrieve the data using the typical `Session::get` method.
+> **NOTE:** Since the `with` method flashes data to the session, you may retrieve the data using the typical `Session::get` method.
 
 <a name="redirecting-previous-url"></a>
 #### Redirecting to the previous URL
@@ -166,7 +166,7 @@ You may define your macros in the `boot` method of a [Plugin registration file](
 <a name="views"></a>
 ## Views
 
-Views are a great way to store system based presentation logic, such as markup used by an API or end point, or markup that is shared with the CMS and back-end areas. Views are also used by the [Mail service](../services/mail) for providing default template content. Views are typically stored in the `views` directory of a plugin.
+Views are a great way to store system based presentation logic, such as markup used by an API or end point, or markup that is shared with the CMS and backend areas. Views are also used by the [Mail service](../services/mail) for providing default template content. Views are typically stored in the `views` directory of a plugin.
 
 A simple view could look something like this:
 
@@ -194,7 +194,7 @@ This view may be returned to the browser using the `View::make` method:
 
 The first argument is a "path hint" that contains the plugin name, separated by two colons `::`, followed by the view file name. The second argument passed to `View::make` is an array of data that should be made available to the view.
 
-> **Note**: The path hint is case sensitive and the plugin name should always be in lowercase.
+> **NOTE**: The path hint is case sensitive and the plugin name should always be in lowercase.
 
 #### Passing data to views
 

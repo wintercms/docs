@@ -8,7 +8,7 @@ is the PHP equivalent of the following:
 
     <?= Html::strip() ?>
 
-> **Note**: Methods in *camelCase* should be converted to *snake_case*.
+> **NOTE**: Methods in *camelCase* should be converted to *snake_case*.
 
 ## html_strip()
 

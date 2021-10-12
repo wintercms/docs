@@ -16,7 +16,7 @@ You can also test if an array is not empty:
         </ul>
     {% endif %}
 
-> **Note**: If you want to test if the variable is defined, use `{% if users is defined %}` instead.
+> **NOTE**: If you want to test if the variable is defined, use `{% if users is defined %}` instead.
 
 You can also use `not` to check for values that evaluate to `false`:
 

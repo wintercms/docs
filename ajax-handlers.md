@@ -34,7 +34,7 @@ If two components register the same handler name, it is advised to prefix the ha
 
     <button data-request="mycomponent::onSubmitContactForm">Go</button>
 
-You may want to use the [`__SELF__`](https://wintercms.com/docs/plugin/components#referencing-self) reference variable instead of the hard coded alias in case the user changes the component alias used on the page.
+You may want to use the [`__SELF__`](../plugin/components#referencing-self) reference variable instead of the hard coded alias in case the user changes the component alias used on the page.
 
     <form data-request="{{ __SELF__ }}::onCalculate" data-request-update="'{{ __SELF__ }}::calcresult': '#result'">
 
@@ -92,7 +92,7 @@ You may throw an [AJAX exception](../services/error-log#ajax-exception) using th
         'questionsNeeded' => 2
     ]);
 
-> **Note**: When throwing this exception type [partials will be updated](../ajax/update-partials) as normal.
+> **NOTE**: When throwing this exception type [partials will be updated](../ajax/update-partials) as normal.
 
 <a name="before-handler"></a>
 ## Running code before handlers

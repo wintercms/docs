@@ -102,7 +102,7 @@ After calling the `messages` method on a `Validator` instance, you will receive 
 
     echo $messages->first('email', '<p>:message</p>');
 
-> **Note:** By default, messages are formatted using Bootstrap compatible syntax.
+> **NOTE:** By default, messages are formatted using Bootstrap compatible syntax.
 
 #### Retrieving all error messages with a format
 
@@ -451,7 +451,7 @@ In the rule above, only rows with an `account_id` of `1` would be included in th
 
 The field under validation must be formatted as an URL.
 
-> **Note:** This function uses PHP's `filter_var` method.
+> **NOTE:** This function uses PHP's `filter_var` method.
 
 <a name="conditionally-adding-rules"></a>
 ## Conditionally adding rules
@@ -485,7 +485,7 @@ The first argument passed to the `sometimes` method is the name of the field we 
         return $input->games >= 100;
     });
 
-> **Note:** The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used as an object to access your input and files.
+> **NOTE:** The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used as an object to access your input and files.
 
 <a name="validating-arrays"></a>
 ## Validating Arrays

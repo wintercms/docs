@@ -3,7 +3,7 @@
 - [Extending with events](#extending-with-events)
     - [Subscribing to events](#subscribing-to-events)
     - [Declaring events](#declaring-events)
-- [Extending back-end views](#backend-view-events)
+- [Extending backend views](#backend-view-events)
 - [Usage examples](#usage-examples)
     - [Extending a User model](#extending-user-model)
     - [Extending a backend form](#extending-backend-form)
@@ -87,7 +87,7 @@ This will allow other plugins to inject HTML to this area by hooking the event a
         return '<a href="#">Sign in with Google!</a>';
     });
 
-> **Note**: The first parameter in the event handler will always be the calling object (the controller).
+> **NOTE**: The first parameter in the event handler will always be the calling object (the controller).
 
 The above example would output the following markup:
 
@@ -103,7 +103,7 @@ These are some practical examples of how events can be used.
 <a name="extending-user-model"></a>
 ### Extending a User model
 
-This example will modify the [`model.getAttribute`](https://wintercms.com/docs/events/event/model.beforeGetAttribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
+This example will modify the [`model.getAttribute`](../events/event/model.beforeGetAttribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
 
     class Plugin extends PluginBase
     {
@@ -140,9 +140,9 @@ This example will modify the [`model.getAttribute`](https://wintercms.com/docs/e
 <a name="extending-backend-form"></a>
 ### Extending backend forms
 
-There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms#extend-form-behavior).
+There are a number of ways to [extend backend forms](../backend/forms#extend-form-behavior).
 
-This example will listen to the [`backend.form.extendFields`](https://wintercms.com/docs/events/event/backend.form.extendFields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
+This example will listen to the [`backend.form.extendFields`](../events/event/backend.form.extendFields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
     class Plugin extends PluginBase
     {
@@ -183,12 +183,12 @@ This example will listen to the [`backend.form.extendFields`](https://wintercms.
         }
     }
 
-> **Note:** In some cases (adding fields that should be made translatable by [Winter.Translate](https://github.com/wintercms/wn-translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://wintercms.com/docs/events/event/backend.form.extendFieldsBefore) event instead.
+> **NOTE:** In some cases (adding fields that should be made translatable by [Winter.Translate](https://github.com/wintercms/wn-translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](../events/event/backend.form.extendFieldsBefore) event instead.
 
 <a name="extending-backend-list"></a>
 ### Extending a backend list
 
-This example will modify the [`backend.list.extendColumns`](https://wintercms.com/docs/events/event/backend.list.extendColumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
+This example will modify the [`backend.list.extendColumns`](../events/event/backend.list.extendColumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
     class Plugin extends PluginBase
     {

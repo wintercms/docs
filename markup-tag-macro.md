@@ -22,7 +22,7 @@ The following example defines a function called `input()` that takes 4 arguments
             size="{{ size|default(20) }}" />
     {% endmacro %}
 
-> **Note**: Macro arguments don't specify default values and are always considered optional.
+> **NOTE**: Macro arguments don't specify default values and are always considered optional.
 
 <a name="calling-macros"></a>
 ## Calling macros
@@ -71,7 +71,7 @@ When you want to use a macro inside another macro from the same template, you ne
 Macros don't have access to the current page variables.
 
     <!-- Winter CMS -->
-    {{ site_name }} 
+    {{ site_name }}
 
     {% macro myFunction() %}
         <!-- NULL -->

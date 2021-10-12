@@ -167,7 +167,7 @@ When attributes names are passed to the `$jsonable` property, the values will be
 
 When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [Winter\Storm\Database\Builder](https://wintercms.com/docs/api/develop/Winter/Storm/Database/Builder.html).
 
-> **Note**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. While the cache should automatically invalidate itself most of the time, sometimes you will need to use the `$model->reload()` method to flush the cache for more complex use cases.
+> **NOTE**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. While the cache should automatically invalidate itself most of the time, sometimes you will need to use the `$model->reload()` method to flush the cache for more complex use cases.
 
 <a name="retrieving-multiple-models"></a>
 ### Retrieving multiple models
@@ -195,7 +195,7 @@ The `all` method will return all of the results in the model's table. Since each
         ->take(10)
         ->get();
 
-> **Note:** Since models are query builders, you should familiarize yourself with all of the methods available on the [query builder](../database/query). You may use any of these methods in your model queries.
+> **NOTE:** Since models are query builders, you should familiarize yourself with all of the methods available on the [query builder](../database/query). You may use any of these methods in your model queries.
 
 <a name="returning-collections"></a>
 #### Collections
@@ -296,7 +296,7 @@ If you would like to perform multiple "upserts" in a single query, then you shou
         ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
     ], ['departure', 'destination'], ['price']);
 
-> **Note::** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
+> **NOTE::** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
 
 <a name="mass-assignment"></a>
 ### Mass assignment
@@ -380,7 +380,7 @@ You may also run a delete query on a set of models. In this example, we will del
 
     $deletedRows = Flight::where('active', 0)->delete();
 
-> **Note**: It is important to mention that [model events](#model-events) will not fire when deleting records directly from a query.
+> **NOTE**: It is important to mention that [model events](#model-events) will not fire when deleting records directly from a query.
 
 <a name="query-scopes"></a>
 ## Query scopes
@@ -471,7 +471,7 @@ class AncientScope implements Scope
 }
 ```
 
-> **Note:** If your global scope is adding columns to the select clause of the query, you should use the addSelect method instead of select. This will prevent the unintentional replacement of the query's existing select clause.
+> **NOTE:** If your global scope is adding columns to the select clause of the query, you should use the addSelect method instead of select. This will prevent the unintentional replacement of the query's existing select clause.
 
 #### Applying Global Scopes
 
@@ -591,7 +591,7 @@ An example of using an event:
         $this->slug = Str::slug($this->name);
     }
 
-> **Note:** Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
+> **NOTE:** Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
 
 <a name="basic-usage"></a>
 ### Basic usage
@@ -652,7 +652,7 @@ This approach can also be used to bind to [local events](#events), the following
         });
     });
 
-> **Note:** Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.
+> **NOTE:** Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.
 
 Additionally, a few methods exist to extend protected model properties.
 

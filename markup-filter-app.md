@@ -4,9 +4,9 @@ The `| app` filter returns an address relative to the public path of the website
 
     <link rel="icon" href="{{ '/favicon.ico' | app }}" />
 
-If the website address is __http://wintercms.com__ the above example would output the following:
+If the website address is __https://example.com__ the above example would output the following:
 
-    <link rel="icon" href="http://wintercms.com/favicon.ico" />
+    <link rel="icon" href="https://example.com/favicon.ico" />
 
 It can also be used for static URLs:
 
@@ -16,8 +16,8 @@ It can also be used for static URLs:
 
 The above would output:
 
-    <a href="http://wintercms.com/about-us">
+    <a href="https://example.com/about-us">
         About us
     </a>
 
-> **Note**: The `| page` filter is recommended for linking to other pages.
+> **NOTE**: The `| page` filter is recommended for linking to other pages.

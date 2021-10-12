@@ -39,7 +39,7 @@ The list behavior depends on list [column definitions](#list-columns) and a [mod
         public $listConfig = 'list_config.yaml';
     }
 
-> **Note:** Very often the list and [form behavior](../ui/form) are used together in a same controller.
+> **NOTE:** Very often the list and [form behavior](../ui/form) are used together in a same controller.
 
 <a name="configuring-list"></a>
 ## Configuring the list behavior
@@ -254,7 +254,7 @@ You can also specify a custom number format, for example currency **$ 99.00**
         type: number
         format: $ %.2f
 
-> **Note:** Both `text` and `number` columns support the `format` property, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php). Value must be a string.
+> **NOTE:** Both `text` and `number` columns support the `format` property, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php). Value must be a string.
 
 <a name="column-switch"></a>
 ### Switch
@@ -288,7 +288,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         type: datetime
         ignoreTimezone: true
 
-> **Note:** the `ignoreTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
+> **NOTE:** the `ignoreTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
 
 <a name="column-date"></a>
 ### Date
@@ -352,7 +352,7 @@ To display a column that shows the number of related records, use the `useRelati
         relation: users
         useRelationCount: true
 
-> **Note:** Using the `relation` option on a column will load the value from the `select`ed column into the attribute specified by this column. It is recommended that you name the column displaying the relation data without conflicting with existing model attributes as demonstrated in the examples below:
+> **NOTE:** Using the `relation` option on a column will load the value from the `select`ed column into the attribute specified by this column. It is recommended that you name the column displaying the relation data without conflicting with existing model attributes as demonstrated in the examples below:
 
 **Best Practice:**
 
@@ -512,7 +512,7 @@ In the above example, the `city` scope will refresh when the `country` scope has
         }
     }
 
-> **Note:** Scope dependencies with `type: group` are only supported at this stage.
+> **NOTE:** Scope dependencies with `type: group` are only supported at this stage.
 
 <a name="scope-types"></a>
 ### Available scope types
@@ -652,7 +652,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         conditions: created_at >= ':after' AND created_at <= ':before'
         ignoreTimezone: true
 
-> **Note:** the `ignoreTimezone` option also applies to the `date` filter type as well.
+> **NOTE:** the `ignoreTimezone` option also applies to the `date` filter type as well.
 
 <a name="filter-number"></a>
 ### Number
@@ -670,7 +670,7 @@ The `min` and `max` options specify the minimum and maximum values that can be e
         max: 1000
         conditions: age >= ':filtered'
 
-> **Note:** the `step`, `min`, and `max` options also apply to the `numberrange` filter type as well.
+> **NOTE:** the `step`, `min`, and `max` options also apply to the `numberrange` filter type as well.
 
 <a name="filter-numberrange"></a>
 ### Number Range
@@ -756,7 +756,7 @@ The behavior will invoke a `Lists` widget that also contains numerous views that
     # Custom view path
     customViewPath: $/acme/blog/controllers/reviews/list
 
-> **Note**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
+> **NOTE**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
 
 For example, to modify the list body row markup, create a file called `list/_list_body_row.htm` in your controller directory.
 
@@ -927,7 +927,7 @@ The collection of records used by the list can be extended by overriding the `li
 <a name="custom-column-types"></a>
 ### Custom column types
 
-Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
+Custom list column types can be registered in the backend with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
 
     public function registerListColumnTypes()
     {

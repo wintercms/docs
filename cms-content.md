@@ -18,7 +18,7 @@ Extension | Description
 **txt** | Used for plain text.
 **md** | Used for Markdown syntax.
 
-The extension affects the way content blocks are displayed in the back-end user interface (with a WYSIWYG editor or with a plain text editor) and how the blocks are rendered on the website. Markdown blocks are converted to HTML before they are displayed.
+The extension affects the way content blocks are displayed in the backend user interface (with a WYSIWYG editor or with a plain text editor) and how the blocks are rendered on the website. Markdown blocks are converted to HTML before they are displayed.
 
 <a name="rendering-content-blocks"></a>
 ## Rendering content blocks

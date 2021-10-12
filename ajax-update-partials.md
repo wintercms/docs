@@ -87,7 +87,7 @@ The following example will update an element on the page with the id **myDiv** u
         ];
     }
 
-> **Note:** The key name must start with an identifier `#` or class `.` character to trigger a content update.
+> **NOTE:** The key name must start with an identifier `#` or class `.` character to trigger a content update.
 
 <a name="passing-variables"></a>
 ## Passing variables to partials
@@ -96,7 +96,7 @@ Depending on the execution context, an [AJAX event handler](../ajax/handlers) ma
 
 - Use `$this[]` inside a page or layout [PHP section](../cms/themes#php-section).
 - Use `$this->page[]` inside a [component class](../plugin/components#ajax-handlers).
-- Use `$this->vars[]` in the [back-end area](../backend/controllers-ajax#ajax).
+- Use `$this->vars[]` in the [backend area](../backend/controllers-ajax#ajax).
 
 These examples will provide the **result** variable to a partial for each context:
 

@@ -8,7 +8,7 @@ If the filter can successfully resize the provided image, then a URL to the Wint
 
 This means that the actual work of resizing the image is delayed until the browser requests a specific image which prevents the resizing of the images from blocking the rendering of a page. It also means that several resize requests can be handled at once in parallel as the browser will make multiple requests at the same time for resized images with each request able to handle just resizing its own image.
 
->**NOTE:** If the filter is unable to process the provided image, then it will instead return the original URL unmodified.
+> **NOTE:** If the filter is unable to process the provided image, then it will instead return the original URL unmodified.
 
 The filter accepts three parameters: `| resize(int $width [, int $height , array $options])`.
 
@@ -16,4 +16,4 @@ See the [image resizing docs](../services/image-resizing#resize-parameters) for 
 
 - [List of locations images can be resized from](../services/image-resizing#resize-sources)
 
->**Note:** The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.
+> **NOTE:** The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.

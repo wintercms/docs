@@ -33,7 +33,7 @@
 
 Database tables are often related to one another. For example, a blog post may have many comments, or an order could be related to the user who placed it. Winter makes managing and working with these relationships easy and supports several different types of relationships.
 
-> **Note:** If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, Winter cannot connect the relations.
+> **NOTE:** If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, Winter cannot connect the relations.
 
 <a name="defining-relationships"></a>
 ## Defining relationships
@@ -55,7 +55,7 @@ Accessing a relationship as a property is also possible:
 
     $user->posts;
 
-> **Note**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. The `load($relation)` method won't force cache to flush. To reload the memory cache use the `reloadRelations()` or the `reload()` methods on the model object.
+> **NOTE**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. The `load($relation)` method won't force cache to flush. To reload the memory cache use the `reloadRelations()` or the `reload()` methods on the model object.
 
 <a name="detailed-relationships"></a>
 ### Detailed definitions
@@ -1012,7 +1012,7 @@ Now, when you update a `Comment`, the owning `Post` will have its `updated_at` c
 
 Deferred bindings allows you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
 
-You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/forms) automatically, but you may want to use this feature in other places.
+You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the backend [Form behavior](../backend/forms) automatically, but you may want to use this feature in other places.
 
 <a name="deferred-session-key"></a>
 ### Generating a session key
@@ -1033,7 +1033,7 @@ The comment in the next example will not be added to the post unless the post is
     $post = new Post;
     $post->comments()->add($comment, $sessionKey);
 
-> **Note**: the `$post` object has not been saved but the relationship will be created if the saving happens.
+> **NOTE**: the `$post` object has not been saved but the relationship will be created if the saving happens.
 
 <a name="defer-unbinding"></a>
 ### Defer a relation unbinding
@@ -1085,7 +1085,7 @@ Destroys all bindings that have not been committed and are older than 1 day:
 
     Winter\Storm\Database\Models\DeferredBinding::cleanUp(1);
 
-> **Note:** Winter automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
+> **NOTE:** Winter automatically destroys deferred bindings that are older than 5 days. It happens when a backend user logs into the system.
 
 <a name="disable-deferred-binding"></a>
 ### Disable Deferred Binding
@@ -1101,4 +1101,4 @@ Sometimes you might need to disable deferred binding entirely for a given model,
         return $result;
     }
 
-> **Note:** This will disable deferred binding entirely for any model's you apply this override to.
+> **NOTE:** This will disable deferred binding entirely for any model's you apply this override to.

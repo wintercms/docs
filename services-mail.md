@@ -16,11 +16,11 @@
 <a name="introduction"></a>
 ## Introduction
 
-Winter provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the back-end interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
+Winter provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the backend interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
 
 ### Driver prerequisites
 
-Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](http://wintercms.com/plugin/winter-drivers).
+Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](https://wintercms.com/plugin/winter-drivers).
 
 #### Mailgun driver
 
@@ -69,7 +69,7 @@ Since we are passing an array containing the `name` key in the example above, we
 
     {{ name }}
 
-> **Note:** You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#attachments).
+> **NOTE:** You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#attachments).
 
 #### Quick sending
 
@@ -140,7 +140,7 @@ Here is a list of the available methods on the `$message` message builder instan
     // Get the underlying SwiftMailer message instance...
     $message->getSwiftMessage();
 
-> **Note:** The message instance passed to a `Mail::send` Closure extends the [SwiftMailer](http://swiftmailer.org) message class, allowing you to call any method on that class to build your e-mail messages.
+> **NOTE:** The message instance passed to a `Mail::send` Closure extends the [SwiftMailer](http://swiftmailer.org) message class, allowing you to call any method on that class to build your e-mail messages.
 
 #### Mailing plain text
 
@@ -259,9 +259,9 @@ If you wish to specify a specific queue on which to push the message, you may do
 <a name="message-content"></a>
 ## Message content
 
-Mail messages can be sent in Winter using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
+Mail messages can be sent in Winter using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the backend interface via *System > Mail templates*. All mail messages support using Twig for markup.
 
-Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
+Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the backend interface.
 
 <a name="mail-views"></a>
 ### Mail views
@@ -293,7 +293,7 @@ The content inside a mail view file can include up to 3 sections: **configuratio
 
     <p>This email was sent using formatting (HTML)</p>
 
-> **Note:** Basic Twig tags and expressions are supported in mail views.
+> **NOTE:** Basic Twig tags and expressions are supported in mail views.
 
 The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
 
@@ -318,7 +318,7 @@ Parameter | Description
 <a name="mail-templates"></a>
 ### Using mail templates
 
-Mail templates reside in the database and can be created in the back-end area via *Settings > Mail > Mail templates*. The **code** specified in the template is a unique identifier and cannot be changed once created.
+Mail templates reside in the database and can be created in the backend area via *Settings > Mail > Mail templates*. The **code** specified in the template is a unique identifier and cannot be changed once created.
 
 The process for sending these emails is the same. For example, if you create a template with code *this.is.my.email* you can send it using this PHP code:
 
@@ -327,7 +327,7 @@ The process for sending these emails is the same. For example, if you create a t
         [...]
     });
 
-> **Note:** If the mail template does not exist in the system, this code will attempt to find a mail view with the same code.
+> **NOTE:** If the mail template does not exist in the system, this code will attempt to find a mail view with the same code.
 
 #### Automatically generated templates
 
@@ -344,13 +344,13 @@ By default, Winter comes with two primary mail layouts:
 
 Layout | Code | Description
 ------------- | ------------- | -------------
-Default | default | Used for public facing, front-end mail
-System | system | Used for internal, back-end mail
+Default | default | Used for public facing, frontend mail
+System | system | Used for internal, backend mail
 
 <a name="mail-template-registration"></a>
 ### Registering mail layouts, templates & partials
 
-Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration#registration-file).
+Mail views can be registered as templates that are automatically generated in the backend ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration#registration-file).
 
     public function registerMailTemplates()
     {

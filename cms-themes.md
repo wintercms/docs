@@ -15,7 +15,7 @@
 
 Themes define the appearance of your website or web application built with Winter. Winter themes are completely file-backed and can be managed with any version control system, for example, Git. This page gives you the high-level description of Winter themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
 
->**NOTE:** Themes can store templates in the database if `cms.databaseTemplates` is enabled, see the [database driven themes](#database-driven-themes) section for more information.
+> **NOTE:** Themes can store templates in the database if `cms.databaseTemplates` is enabled, see the [database driven themes](#database-driven-themes) section for more information.
 
 Themes are directories that reside in the **/themes** directory by default. Themes can contain the following objects:
 
@@ -30,25 +30,44 @@ Object | Description
 <a name="directory-structure"></a>
 ## Directory structure
 
-Below, you can see an example theme directory structure. Each Winter theme is represented with a separate directory and generally, one active theme is used for displaying the website. This example displays the "website" theme directory.
+Below, you can see an example theme directory structure. Each Winter theme is represented with a separate directory and generally, one active theme is used for displaying the website. This example displays the "example-theme" theme directory.
 
-    themes/
-      website/           <=== Theme starts here
-        pages/           <=== Pages directory
-          home.htm
-        layouts/         <=== Layouts directory
-          default.htm
-        partials/        <=== Partials directory
-          sidebar.htm
-        content/         <=== Content directory
-          intro.htm
-        assets/          <=== Assets directory
-          css/
-            my-styles.css
-          js/
-          images/
+```
+📂 themes
+ ┣ 📂 example-theme
+ ┃ ┣ 📂 assets                <-- Theme assets
+ ┃ ┃ ┣ 📂 css
+ ┃ ┃ ┣ 📂 fonts
+ ┃ ┃ ┣ 📂 images
+ ┃ ┃ ┣ 📂 javascript
+ ┃ ┃ ┣ 📂 scss
+ ┃ ┃ ┗ 📂 vendor
+ ┃ ┣ 📂 content               <-- Static content files
+ ┃ ┃ ┗ 📂 static-pages        <-- Content files from the Winter.Pages plugin
+ ┃ ┃ ┃ ┗ 📜 index.htm
+ ┃ ┃ ┗ 📜 welcome.htm
+ ┃ ┣ 📂 layouts               <-- Theme Layouts (Page scaffolds / templates)
+ ┃ ┃ ┣ 📜 default.htm
+ ┃ ┃ ┗ 📜 sidebar.htm
+ ┃ ┣ 📂 meta                  <-- Menu definitions and other plugin specific YAML files
+ ┃ ┃ ┣ 📂 menus
+ ┃ ┃ ┃ ┣ 📜 main-menu.yaml
+ ┃ ┃ ┃ ┗ 📜 sitemap.yaml      <-- Meta file describing the sitemap
+ ┃ ┃ ┗ 📜 static-pages.yaml   <-- Meta file describing the structure of the Winter.Pages static pages
+ ┃ ┣ 📂 pages                 <-- Theme Pages (Contain the routing for the frontend)
+ ┃ ┃ ┣ 📜 404.htm             <-- Page for 404 responses
+ ┃ ┃ ┣ 📜 home.htm
+ ┃ ┃ ┣ 📜 error.htm           <-- Page for 500 responses
+ ┃ ┃ ┗ 📜 sitemap.htm         <-- Page for rendering the sitemap response
+ ┃ ┣ 📂 partials              <-- Theme Partials (Reusable pieces of HTML markup)
+ ┃ ┃ ┣ 📜 html-footer.htm
+ ┃ ┃ ┣ 📜 html-header.htm
+ ┃ ┃ ┗ 📜 navbar.htm
+ ┃ ┣ 📜 theme.yaml            <-- Theme information file
+ ┃ ┗ 📜 version.yaml          <-- Theme updates file
+```
 
-> The active theme is set with the `activeTheme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
+> The active theme is set with the `activeTheme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Frontend Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
 
 <a name="subdirectories"></a>
 ### Subdirectories
@@ -76,7 +95,7 @@ To refer to a partial or a content file from a subdirectory, specify the subdire
 
     {% partial "blog/category-list" %}
 
-> **Note:** The template paths are always absolute. If, in a partial, you render another partial from the same subdirectory, you still need to specify the subdirectory's name.
+> **NOTE:** The template paths are always absolute. If, in a partial, you render another partial from the same subdirectory, you still need to specify the subdirectory's name.
 
 <a name="template-structure"></a>
 ## Template structure
@@ -182,4 +201,4 @@ Winter CMS comes with another very useful feature, disabled by default, called D
 
 Files modified in the database are cached to indicate that they should be loaded from the database.
 
->**NOTE:** All CMS template objects (ex. `Layout`, `Page`, `Content`, `Partial`, `Meta`, etc) are stored in the database when this feature is enabled and a change is made to the template in question; however theme asset files will **not** be.
+> **NOTE:** All CMS template objects (ex. `Layout`, `Page`, `Content`, `Partial`, `Meta`, etc) are stored in the database when this feature is enabled and a change is made to the template in question; however theme asset files will **not** be.

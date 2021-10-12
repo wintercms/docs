@@ -8,7 +8,7 @@ Remember that if you refer a page from a subdirectory you should specify the sub
 
     <a href="{{ 'contacts/about' | page }}">About Us</a>
 
-> **Note**: The [Themes documentation](../cms/themes#subdirectories) has more details on subdirectory usage.
+> **NOTE**: The [Themes documentation](../cms/themes#subdirectories) has more details on subdirectory usage.
 
 To access the link to a certain page from the PHP section, you can use `$this->pageUrl('page-name-without-extension')`:
 
@@ -51,9 +51,9 @@ Given the above content is found in a CMS page file **post.htm** you can link to
         Blog post #10
     </a>
 
-If the website address is __http://wintercms.com__ the above example would output the following:
+If the website address is __https://example.com__ the above example would output the following:
 
-    <a href="http://wintercms.com/blog/post/10">
+    <a href="https://example.com/blog/post/10">
         Blog post #10
     </a>
 
@@ -74,7 +74,7 @@ If there are two pages, **post.htm** and **post-edit.htm**, with the above URLs 
 
 When the above markup appears on the **post.htm** page, it will output the following:
 
-    <a href="http://wintercms.com/blog/post/edit/10">
+    <a href="https://example.com/blog/post/edit/10">
         Edit this post
     </a>
 

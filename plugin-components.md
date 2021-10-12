@@ -59,7 +59,7 @@ The **component class file** defines the component functionality and [component 
         }
     }
 
-The `componentDetails` method is required. The method should return an array with two keys: `name` and `description`. The name and description are display in the CMS back-end user interface.
+The `componentDetails` method is required. The method should return an array with two keys: `name` and `description`. The name and description are display in the CMS backend user interface.
 
 When this [component is attached to a page or layout](../cms/components), the class properties and methods become available on the page through the component variable, which name matches the component short name or the alias. For example, if the BlogPost component from the previous example was defined on a page with its short name:
 
@@ -111,9 +111,9 @@ The method should return an array with the property keys as indexes and property
 
 Key | Description
 ------------- | -------------
-**title** | required, the property title, it is used by the component Inspector in the CMS back-end.
-**description** | required, the property description, it is used by the component Inspector in the CMS back-end.
-**default** | optional, the default property value to use when the component is added to a page or layout in the CMS back-end.
+**title** | required, the property title, it is used by the component Inspector in the CMS backend.
+**description** | required, the property description, it is used by the component Inspector in the CMS backend.
+**default** | optional, the default property value to use when the component is added to a page or layout in the CMS backend.
 **type** | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox**, **dropdown** and **set**. Default value: **string**.
 **validationPattern** | optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with **string** properties.
 **validationMessage** | optional error message to display if the validation fails.
@@ -135,7 +135,7 @@ If the property value is not defined, you can supply the default value as a seco
 You can also load all the properties as array:
 
     $properties = $this->getProperties();
-    
+
 To access the property from the Twig partials for the component, utilize the `__SELF__` variable which refers to the Component object:
 
    `{{ __SELF__.property('maxItems') }}`
@@ -312,7 +312,7 @@ Like all methods in the [page execution life cycle](../cms/layouts#layout-life-c
             return Response::make('Access denied!', 403);
         }
     }
-    
+
 You can also return a 404 response from the `onRun` method:
 
     public function onRun()
@@ -367,7 +367,7 @@ These properties will not be available in the `onRun` method since they are esta
 <a name="component-partials"></a>
 ## Component partials
 
-In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/winter/demo/components/todo/pagination.htm** and displayed on the page using:
+In addition to the default markup, components can also offer additional partials that can be used on the frontend or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/winter/demo/components/todo/pagination.htm** and displayed on the page using:
 
     {% partial 'demoTodo::pagination' %}
 
@@ -442,28 +442,11 @@ Another example could be overriding the entire page view response by returning a
 <a name="component-assets"></a>
 ## Injecting page assets with components
 
-Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/pages#injecting-assets). Example:
+Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to by using the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. This should be done in the component's `onRun` method. See the [Asset Compiler](../services/asset-compilation) docs for more information
 
-    public function onRun()
-    {
-        $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
-    }
-
-If the path specified in the `addCss` and `addJs` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.
-
-The `addCss` and `addJs` methods provide a second argument that defines the attributes of your injected asset as an array. A special attribute - `build` - is available, that will suffix your injected assets with the current version of the plugin specified. This can be used to refresh cached assets when a plugin is upgraded.
-
-    public function onRun()
-    {
-        $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js', [
-            'build' => 'Acme.Test',
-            'defer' => true
-        ]);
-    }
-    
-You may also use a string as the second argument, which then defaults to using the string value as the `build`:
-
-    public function onRun()
-    {
-        $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js', 'Acme.Test');
-    }
+```php
+public function onRun()
+{
+    $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
+}
+```

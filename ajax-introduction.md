@@ -8,14 +8,14 @@
 <a name="introduction"></a>
 ## Introduction
 
-Winter includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in [CMS themes](../cms/themes) and anywhere in the [back-end administration area](../backend/controllers-ajax#ajax).
+Winter includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in [CMS themes](../cms/themes) and anywhere in the [backend administration area](../backend/controllers-ajax#ajax).
 
 The AJAX framework comes in two flavors, you may either use [the JavaScript API](../ajax/javascript-api) or [the data attributes API](../ajax/attributes-api). The data attributes API doesn't require any JavaScript knowledge to use AJAX with Winter.
 
 <a name="framework-script"></a>
 ## Including the framework
 
-The AJAX framework is optional in your [CMS theme](../cms/themes), to use the library you should include it by placing the `{% framework %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts). This adds a reference to the Winter front-end JavaScript library. The library requires jQuery so it should be loaded first, for example:
+The AJAX framework is optional in your [CMS theme](../cms/themes), to use the library you should include it by placing the `{% framework %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts). This adds a reference to the Winter frontend JavaScript library. The library requires jQuery so it should be loaded first, for example:
 
 ```
 <script src="{{ 'assets/javascript/jquery.js' | theme }}"></script>
@@ -41,7 +41,7 @@ A page can issue an AJAX request either prompted by data attributes or by using 
 5. The server sends the response, containing the rendered partials markup.
 6. The client-side framework updates page elements with the partials data received from the server.
 
-> **Note**: Depending on the page context a [CMS partial](../cms/partials) or [backend partial](../backend/views-partials) view will be rendered.
+> **NOTE**: Depending on the page context a [CMS partial](../cms/partials) or [backend partial](../backend/views-partials) view will be rendered.
 
 <a name="usage-example"></a>
 ## Usage example
@@ -62,7 +62,7 @@ Below is a simple example that uses the data attributes API to define an AJAX en
     <!-- Result container -->
     <div id="myDiv"></div>
 
-> **Note**: The form data for `value1` and `value2` are automatically sent with the AJAX request.
+> **NOTE**: The form data for `value1` and `value2` are automatically sent with the AJAX request.
 
 The **mypartial** partial contains markup that reads the `result` variable.
 
