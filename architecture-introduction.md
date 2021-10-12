@@ -106,9 +106,13 @@ Winter CMS includes a server-side [Asset Compiler](../services/asset-compilation
 Additionally, you can [define variables in the theme.yaml file](../themes/development#combiner-vars) that can be modified in the Theme Settings area of the Backend which are then injected into the compiled files, creating flexibility for theming and branding.
 
 <a name="image-resizer"></a>
-### Image Resizer
+### Image Resizing
 
+The [Image Resizing](../services/image-resizing) service can be used for resizing any image resources accessible to the application.
 
+It works by accepting a variety of image sources and normalizing the pipeline for storing the desired resizing configuration and then deferring the actual resizing of the images until requested by the browser. When the resizer route is hit, the configuration is retrieved from the cache and used to generate the desired image and then redirect to the generated images static path to minimize the load on the server.
+
+Future loads of the image are automatically pointed to the static URL of the resized image without even hitting the resizer route.
 
 <a name="dynamic-class-extension-behaviors"></a>
 ### Dynamic Class Extension & Behaviors

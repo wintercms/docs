@@ -1,10 +1,30 @@
 # Image Resizing
 
+- [Introduction](#introduction)
+- [Configuration](#configuration)
 - [Resize parameters](#resize-parameters)
 - [Available modes](#available-modes)
 - [Resize sources](#resize-sources)
 
-> **NOTE:** The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.
+<a name="introduction"></a>
+## Introduction
+
+The Image Resizing service can be used for resizing any image resources accessible to the application.
+
+It works by accepting a variety of image sources and normalizing the pipeline for storing the desired resizing configuration and then deferring the actual resizing of the images until requested by the browser. When the resizer route is hit, the configuration is retrieved from the cache and used to generate the desired image and then redirect to the generated images static path to minimize the load on the server.
+
+Future loads of the image are automatically pointed to the static URL of the resized image without even hitting the resizer route.
+
+<a name="configuration"></a>
+## Configuration
+
+The functionality of this class is controlled by these config items:
+
+- **cms.storage.resized.disk**: The disk to store resized images on
+- **cms.storage.resized.folder**: The folder on the disk to store resized images in
+- **cms.storage.resized.path**: The public path to the resized images as returned by the storage disk's URL method, used to identify already resized images
+
+> **NOTE:** The image resizing service requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this service.
 
 <a name="resize-parameters"></a>
 ## Resize Parameters
@@ -47,4 +67,4 @@ The available sources that images can be resized from are as follows:
 - Uploads Directory
 - Models that extend the `\Winter\Storm\Database\Attach\File` model
 
-Available sources can be extended by listening to the [`system.resizer.getAvailableSources` event](https://wintercms.com/docs/events/event/system.resizer.getAvailableSources)
+Available sources can be extended by listening to the [`system.resizer.getAvailableSources` event](../events/event/system.resizer.getAvailableSources)
