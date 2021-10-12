@@ -2,9 +2,10 @@
 
 - [Introduction](#introduction)
 - [Configuration](#configuration)
-- [Resize parameters](#resize-parameters)
-- [Available modes](#available-modes)
-- [Resize sources](#resize-sources)
+- [Usage](#usage)
+- [Available Parameters](#resize-parameters)
+- [Available Modes](#available-modes)
+- [Available Sources](#resize-sources)
 
 <a name="introduction"></a>
 ## Introduction
@@ -26,8 +27,19 @@ The functionality of this class is controlled by these config items:
 
 > **NOTE:** The image resizing service requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this service.
 
+<a name="usage"></a>
+## Usage
+
+The Image Resizer can be access through a number of different methods:
+
+- [`image` backend list columns](../backend/lists#column-image)
+- [`getThumb()` on `Winter\Storm\Database\Attach\File` models](../database/attachments#viewing-attachments)
+- the [`| resize` filter](../markup/filter-resize)
+- Passing a supported `$image` source to [`System\Classes\ImageResizer::filterGetUrl()`](https://wintercms.com/docs/api/develop/System/Classes/ImageResizer.html#method_filterGetUrl)
+- Instantiating an instance of the [`System\Classes\ImageResizer` class](https://wintercms.com/docs/api/develop/System/Classes/ImageResizer.html#method___construct) and using that as desired
+
 <a name="resize-parameters"></a>
-## Resize Parameters
+## Available Parameters
 
 The basic parameters provided to the ImageResizer are `(int) $width`, `(int) $height`, and `(array) $options`.
 
@@ -43,7 +55,7 @@ Key | Description | Default | Options
 `sharpen` | Amount to sharpen the image | `0` | `0-100`
 
 <a name="available-modes"></a>
-### Available Modes
+## Available Modes
 
 The `mode` option allows you to specify how the image should be resized. The available modes are as follows:
 
@@ -57,7 +69,7 @@ Mode | Description
 `fit` | Fit the image inside the given maximal dimensions, keeping the aspect ratio
 
 <a name="resize-sources"></a>
-## Resize sources
+## Available Sources
 
 The available sources that images can be resized from are as follows:
 
