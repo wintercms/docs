@@ -1,14 +1,16 @@
 # Introduction to Winter CMS
 
 - [Meet Winter CMS](#meet-winter-cms)
-- [Code Structure](#code-structure)
+- [Project Structure](#project-structure)
+    - [Directory Structure](#project-directory-structure)
     - [Themes](#code-structure-themes)
     - [Plugins](#code-structure-plugins)
     - [Modules](#code-structure-modules)
 - [Development Features](#development-features)
     - [AJAX Framework](#ajax-framework)
     - [Dynamic Content Parser](#dynamic-content-parser)
-    - [Components](#components)
+    - [Frontend Components](#components)
+    - [Backend Widgets](#widgets)
     - [Asset Compiler](#asset-compiler)
     - [Image Resizer](#image-resizer)
     - [Behaviors & Dynamic Class Extension](#behaviors-dynamic-class-extension)
@@ -27,12 +29,13 @@ Winter is a Content Management System (CMS) whose sole purpose is to make your d
 
 > Everything should be made as simple as possible, but not simpler <br>[(Albert Einstein, paraphrased)](https://quoteinvestigator.com/2011/05/13/einstein-simple/)
 
-Projects in Winter CMS generally have a frontend and a backend.
+<a name="project-structure"></a>
+## Project Structure
 
-<a name="code-structure"></a>
-## Code Structure
+The code for your Winter CMS projects can generally exist as one of three different types of extension; as a [Theme](#code-structure-themes), [Plugin](#code-structure-plugins), or [Module](#code-structure-modules). Code can also be included in the form of external dependencies managed by [Composer](../help/using-composer).
 
-The code for your Winter CMS projects can generally exist in one of three locations, as a Theme, Plugin, or Module.
+<a name="project-directory-structure"></a>
+### Directory Structure
 
 ```
 📂 MyWinterProject
@@ -55,13 +58,16 @@ The code for your Winter CMS projects can generally exist in one of three locati
 <a name="code-structure-themes"></a>
 ### Themes
 
-[Themes](../cms/themes) contain the frontend code, assets, and functionality as well as static site content. Check out the [Themes page](../cms/themes#directory-structure) to see an example of the directory structure.
+[Themes](../cms/themes) contain the frontend code, assets, and functionality as well as static site content. Check out the [Themes page](../cms/themes#directory-structure) to see an example of the directory structure. Themes are flat file based, but can also exist in the database through the [database templates feature](../cms/themes#database-driven-themes) as well as the [theme logging](../cms/themes#theme-logging) feature.
 
-#### Languages Used:
+Themes are managed by the CMS module, the default frontend experience in Winter CMS. It is not a required module however, so it is entirely possible to not include the CMS module in your projects if desired and instead use custom plugins to have Winter act as a headless CMS, or not provide a frontend at all and use Winter solely for its backend functionality (for more complex, data focused applications like internal tools or SaaS offerings).
+
+**Languages Used:**
 
 - [INI](https://en.wikipedia.org/wiki/INI_file) is used for [template configuration](../cms/themes#configuration-section)
 - PHP is used to add more complex logic through the [PHP code sections](../cms/themes#php-section)
 - [Twig](https://twig.symfony.com/) is used for [templating functionality and conditionals](../cms/themes#twig-section).
+- HTML, CSS, JS, SCSS/SASS, LESS, etc; any other frontend language can be used in frontend themes as desired.
 
 <a name="code-structure-plugins"></a>
 ### Plugins
@@ -69,13 +75,20 @@ The code for your Winter CMS projects can generally exist in one of three locati
 <a name="code-structure-modules"></a>
 ### Modules
 
+Modules in Winter CMS can be thought of as "core plugins". Winter CMS itself consists of the following three modules:
 
+- **System**, used to bootstrap Winter and provide common services used by all other modules and plugins, required for Winter to function.
+- **Backend**, provides the backend for Winter and all of its associated services, controllers, and other features used by plugins.
+- **CMS**, provides the default frontend for Winter and all of its associated services used by Themes.
+
+Modules have a ServiceProvider class that handles booting and registration and then can contain any number of other features that would be present in a plugin. While it is possible to develop and use your own custom modules, there really isn't a need to most of the time since plugins are capable of doing anything that a custom module would be able to do while providing a better experience with a version file and plugin management features builtin to the System and Backend modules.
+
+Of the three modules present in Winter CMS, only the System module is required for Winter to function at a basic level. It is entirely possible (and actively done in many Winter projects) to [operate with only the Backend module](../setup/configuration#backend-only-mode); usually for complex, data-heavy use cases, "intranet" type internal tools, and SaaS type offerings. While it is also possible to operate Winter with only the CMS module, that is less useful as the Backend module is where Winter really provides a lot of value.
 
 <a name="development-features"></a>
 ## Development Features
 
 Winter CMS provides a number of features out of the box to make development easier. A few of them are listed below for easier discoverability.
-
 
 <a name="ajax-framework"></a>
 ### AJAX Framework
@@ -92,11 +105,17 @@ The [Dynamic Content Parser](../services/parser#dynamic-syntax-parser) is a temp
 This template engine can be used on top of other templating engines but is mainly used with Twig. It can be used to generate any type of field that the backend currently supports. The dynamic content parser provides the capability of making fully customisable and intricate content pages that can be client-controlled.
 
 <a name="components"></a>
-### Components
+### Frontend Components
 
 [Components](../cms/components) are the main conduit between backend functionality and Frontend content, being used in layouts, pages, and partials. They handle interactions and dynamic content generation as structured “objects”, including a [PHP file handling all functionality](../plugin/components), default partials for the frontend content, and any additional JS or CSS assets. They can provide configurable properties to set up aspects of the component, controlled through the backend.
 
 Themes can [override a component’s partial](../cms/components#customizing-default-markup) to tailor the component output to their own specifications.
+
+<a name="widgets"></a>
+### Backend Widgets
+
+
+
 
 <a name="asset-compiler"></a>
 ### Asset Compiler
@@ -163,7 +182,7 @@ Post::extend(function($model) {
 1. Provide a safe mechanism for shared functionality across controllers whilst still maintaining their own state.
 1. Classes can be extended with behaviors dynamically.
 
-The best of example of the power of behaviors would be the backend [form](../backend/forms), [list](../backend/lists), and [relation](../backend/relations) ControllerBehaviors that implement the majority of CRUD requirements in Winter CMS for any controllers that implement them.
+The best of example of the power of behaviors would be the backend [form](../backend/forms), [list](../backend/lists), and [relation](../backend/relations) ControllerBehaviors that provide the majority of CRUD requirements in Winter CMS for any controllers that implement them.
 
 <a name="events"></a>
 ### Events
@@ -186,7 +205,7 @@ The best of example of the power of behaviors would be the backend [form](../bac
 <a name="common-questions"></a>
 ## Common Questions
 
-As Winter is a project designed to serve the needs of developers all over the world working on all sorts of different projects we sometimes make decisions that are not obvious from the point of view of individual projects looking to build on Winter.
+As Winter is a project designed to serve the needs of developers all over the world working on all sorts of different projects we sometimes make decisions that are not obvious from the point of view of individual projects looking to build on Winter. This section should provide some background information on some of the most common questions that are asked about decisions made over the life of the project.
 
 <a name="why-laravel"></a>
 ### Why Laravel?
@@ -209,6 +228,6 @@ At a basic level, all templating engines are the same. However, Winter made the 
 
 Additionally, Blade is subject to the same breaking changes that Laravel itself introduces between major versions, and while breaking changes in a template engine may be fine for a web application framework designed for single use projects that can easily update their view files as well as their logic files during upgrades of the base framework version; it does not align at all with Winter's requirement to provide a stable base to build long term projects on. Having an update to your CMS require that you make changes to your frontend is simply not the developer experience that we wish to provide.
 
-While it is theoretically possible to have your Winter CMS projects use Blade to render templates, it isn't a recommended approach as it is important to have a single templating engine used for the frontend to ensure maximum compatibility between all Themes & Plugins.
+While it is theoretically possible to have your Winter CMS projects use Blade to render templates, it isn't a recommended approach as it is important to have a single templating engine used for the frontend to ensure maximum compatibility between all themes & plugins.
 
 For historical context as well, when the decision was made Blade did not have many of the more advanced features it does today, and those features (such as Components) have existed in Winter CMS since it was created in 2014.

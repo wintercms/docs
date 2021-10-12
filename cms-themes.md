@@ -46,20 +46,20 @@ Below, you can see an example theme directory structure. Each Winter theme is re
  ┃ ┃ ┗ 📂 static-pages        <-- Content files from the Winter.Pages plugin
  ┃ ┃ ┃ ┗ 📜 index.htm
  ┃ ┃ ┗ 📜 welcome.htm
- ┃ ┣ 📂 layouts               <-- Theme Layouts
+ ┃ ┣ 📂 layouts               <-- Theme Layouts (Page scaffolds / templates)
  ┃ ┃ ┣ 📜 default.htm
  ┃ ┃ ┗ 📜 sidebar.htm
- ┃ ┣ 📂 meta                  <-- Menu definitions and other plugin specific files
+ ┃ ┣ 📂 meta                  <-- Menu definitions and other plugin specific YAML files
  ┃ ┃ ┣ 📂 menus
  ┃ ┃ ┃ ┣ 📜 main-menu.yaml
- ┃ ┃ ┃ ┗ 📜 sitemap.yaml
- ┃ ┃ ┗ 📜 static-pages.yaml
- ┃ ┣ 📂 pages                 <-- Theme Pages
- ┃ ┃ ┣ 📜 404.htm
+ ┃ ┃ ┃ ┗ 📜 sitemap.yaml      <-- Meta file describing the sitemap
+ ┃ ┃ ┗ 📜 static-pages.yaml   <-- Meta file describing the structure of the Winter.Pages static pages
+ ┃ ┣ 📂 pages                 <-- Theme Pages (Contain the routing for the frontend)
+ ┃ ┃ ┣ 📜 404.htm             <-- Page for 404 responses
  ┃ ┃ ┣ 📜 home.htm
- ┃ ┃ ┣ 📜 error.htm
- ┃ ┃ ┗ 📜 sitemap.htm
- ┃ ┣ 📂 partials              <-- Theme Partials
+ ┃ ┃ ┣ 📜 error.htm           <-- Page for 500 responses
+ ┃ ┃ ┗ 📜 sitemap.htm         <-- Page for rendering the sitemap response
+ ┃ ┣ 📂 partials              <-- Theme Partials (Reusable pieces of HTML markup)
  ┃ ┃ ┣ 📜 html-footer.htm
  ┃ ┃ ┣ 📜 html-header.htm
  ┃ ┃ ┗ 📜 navbar.htm
