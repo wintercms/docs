@@ -10,13 +10,16 @@
     - [AJAX Framework](#ajax-framework)
     - [Dynamic Content Parser](#dynamic-content-parser)
     - [Frontend Components](#components)
-    - [Backend Widgets](#widgets)
     - [Asset Compiler](#asset-compiler)
     - [Image Resizer](#image-resizer)
     - [Behaviors & Dynamic Class Extension](#behaviors-dynamic-class-extension)
-    - [Events](#events)
-    - [Backend Skins](#backend-skins)
-    - [CRUD Management](#crud-management)
+    <!--
+        @TODO
+        - [Backend Widgets](#widgets)
+        - [Events](#events)
+        - [Backend Skins](#backend-skins)
+        - [CRUD Management](#crud-management)
+    -->
 - [Common Questions](#common-questions)
     - [Why Laravel?](#why-laravel)
     - [Why Laravel LTS?](#why-laravel-lts)
@@ -58,7 +61,11 @@ The code for your Winter CMS projects can generally exist as one of three differ
 <a name="code-structure-themes"></a>
 ### Themes
 
-[Themes](../cms/themes) contain the frontend code, assets, and functionality as well as static site content. Check out the [Themes page](../cms/themes#directory-structure) to see an example of the directory structure. Themes are flat file based, but can also exist in the database through the [database templates feature](../cms/themes#database-driven-themes) as well as the [theme logging](../cms/themes#theme-logging) feature.
+[Themes](../cms/themes) contain the frontend code, assets, and functionality as well as static site content.
+
+Check out the [Themes page](../cms/themes#directory-structure) to see an example of the directory structure.
+
+Themes are flat file based, but can also exist in the database through the [database templates feature](../cms/themes#database-driven-themes) as well as the [theme logging](../cms/themes#theme-logging) feature.
 
 Themes are managed by the CMS module, the default frontend experience in Winter CMS. It is not a required module however, so it is entirely possible to not include the CMS module in your projects if desired and instead use custom plugins to have Winter act as a headless CMS, or not provide a frontend at all and use Winter solely for its backend functionality (for more complex, data focused applications like internal tools or SaaS offerings).
 
@@ -71,6 +78,17 @@ Themes are managed by the CMS module, the default frontend experience in Winter 
 
 <a name="code-structure-plugins"></a>
 ### Plugins
+
+Plugins are the foundation for adding new features to Winter CMS by extending it. The registration process allows plugins to declare their features such as [components](../plugin/components) or backend menus and pages. Some examples of what a plugin can do:
+
+1. Define [components](../plugin/components).
+1. Define [user permissions](../backend/users).
+1. Add [settings pages](../plugin/settings#backend-pages), [menu items](../plugin/registration#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
+1. Create [database table structures and seed data](../plugin/updates).
+1. Alter [functionality of the core or other plugins](../services/events).
+1. Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
+
+Check out the [Plugins page](../plugin/registration#directory-structure) to see an example of the directory structure.
 
 <a name="code-structure-modules"></a>
 ### Modules
@@ -110,12 +128,6 @@ This template engine can be used on top of other templating engines but is mainl
 [Components](../cms/components) are the main conduit between backend functionality and Frontend content, being used in layouts, pages, and partials. They handle interactions and dynamic content generation as structured “objects”, including a [PHP file handling all functionality](../plugin/components), default partials for the frontend content, and any additional JS or CSS assets. They can provide configurable properties to set up aspects of the component, controlled through the backend.
 
 Themes can [override a component’s partial](../cms/components#customizing-default-markup) to tailor the component output to their own specifications.
-
-<a name="widgets"></a>
-### Backend Widgets
-
-
-
 
 <a name="asset-compiler"></a>
 ### Asset Compiler
@@ -184,23 +196,20 @@ Post::extend(function($model) {
 
 The best of example of the power of behaviors would be the backend [form](../backend/forms), [list](../backend/lists), and [relation](../backend/relations) ControllerBehaviors that provide the majority of CRUD requirements in Winter CMS for any controllers that implement them.
 
-<a name="events"></a>
-### Events
+<!--
+    @TODO:
+    <a name="widgets"></a>
+    ### Backend Widgets
 
+    <a name="events"></a>
+    ### Events
 
+    <a name="backend-skins"></a>
+    ### Backend Skins
 
-<a name="backend-skins"></a>
-### Backend Skins
-
-
-
-<a name="crud-management"></a>
-### CRUD Management
-
-
-
-
-
+    <a name="crud-management"></a>
+    ### CRUD Management
+-->
 
 <a name="common-questions"></a>
 ## Common Questions
