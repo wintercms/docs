@@ -1,4 +1,4 @@
-# Behaviors
+# Behaviors & Dynamic Class Extension
 
 - [Introduction](#introduction)
 - [Comparison to Traits](#compare-traits)
@@ -20,14 +20,51 @@
 <a name="introduction"></a>
 ## Introduction
 
-Behaviors add the ability for classes to have *private traits*, also known as Behaviors. These are similar to [native PHP Traits](https://php.net/manual/en/language.oop5.traits.php) except they have some distinct benefits:
+Dynamic class extension provides the following benefits:
+
+1. Add new properties and methods dynamically.
+1. Bind to local events fired in models, widgets, and other locations, even those in the core modules or other plugins.
+1. Add additional behaviours (private traits, see below) to classes.
+1. Must extend the `Winter\Storm\Extension\Extendable` class or implement the `Winter\Storm\Extension\ExtendableTrait`.
+1. Already-defined methods and properties cannot be overridden.
+1. Extendable classes are protected against having undefined properties set on first use and must use `$object->addDynamicProperty();` instead.
+1. Dynamically added methods cannot override methods defined in code.
+
+See below for a sample of what is possible with dynamic class extension:
+
+```php
+// Dynamically extend a model that belongs to a third party plugin
+Post::extend(function($model) {
+    // Bind to an event that's only fired locally
+    $model->bindEvent('model.afterSave', function () use ($model) {
+        if (!$model->isValid()) {
+            throw new \Exception("Invalid Model!");
+        }
+    });
+
+    // Add a new property to the class
+    $model->addDynamicProperty('tagsCache', null);
+
+    // Add a new method to the class
+    $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
+        if ($model->tagsCache) {
+            return $model->tagsCache;
+        } else {
+            return $model->tagsCache = $model->tags()->lists('name');
+        }
+    });
+});
+```
+
+Dynamic Class Extension also adds the ability for classes to have *private traits*, also known as Behaviors. These are similar to [native PHP Traits](https://php.net/manual/en/language.oop5.traits.php) except they have some distinct benefits:
 
 1. Behaviors have their own constructor.
 1. Behaviors can have private or protected methods.
 1. Methods and property names can conflict safely.
+1. Provide a safe mechanism for shared functionality across controllers whilst still maintaining their own state.
 1. Classes can be extended with behaviors dynamically.
-1. Extendable classes are protected against having undefined properties set on first use and must use `$object->addDynamicProperty();` instead.
-1. Dynamically added methods cannot override methods defined in code.
+
+The best of example of the power of behaviors would be the backend [form](../backend/forms), [list](../backend/lists), and [relation](../backend/relations) ControllerBehaviors that implement the majority of CRUD requirements in Winter CMS for any controllers that implement them.
 
 <a name="compare-traits"></a>
 ## Comparison to Traits
