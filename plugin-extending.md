@@ -3,7 +3,7 @@
 - [Extending with events](#extending-with-events)
     - [Subscribing to events](#subscribing-to-events)
     - [Declaring events](#declaring-events)
-- [Extending back-end views](#backend-view-events)
+- [Extending backend views](#backend-view-events)
 - [Usage examples](#usage-examples)
     - [Extending a User model](#extending-user-model)
     - [Extending a backend form](#extending-backend-form)

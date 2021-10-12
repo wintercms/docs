@@ -166,7 +166,7 @@ You may define your macros in the `boot` method of a [Plugin registration file](
 <a name="views"></a>
 ## Views
 
-Views are a great way to store system based presentation logic, such as markup used by an API or end point, or markup that is shared with the CMS and back-end areas. Views are also used by the [Mail service](../services/mail) for providing default template content. Views are typically stored in the `views` directory of a plugin.
+Views are a great way to store system based presentation logic, such as markup used by an API or end point, or markup that is shared with the CMS and backend areas. Views are also used by the [Mail service](../services/mail) for providing default template content. Views are typically stored in the `views` directory of a plugin.
 
 A simple view could look something like this:
 

@@ -31,7 +31,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-The **Form behavior** is a controller [behavior](../services/behaviors) used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
+The **Form behavior** is a controller [behavior](../services/behaviors) used for easily adding form functionality to a backend page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
 The Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
@@ -650,7 +650,7 @@ There are various form widgets included as standard, although it is common for p
 <a name="widget-codeeditor"></a>
 ### Code editor
 
-`codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.
+`codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the backend.
 
     css_content:
         type: codeeditor

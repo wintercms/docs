@@ -96,7 +96,7 @@ Depending on the execution context, an [AJAX event handler](../ajax/handlers) ma
 
 - Use `$this[]` inside a page or layout [PHP section](../cms/themes#php-section).
 - Use `$this->page[]` inside a [component class](../plugin/components#ajax-handlers).
-- Use `$this->vars[]` in the [back-end area](../backend/controllers-ajax#ajax).
+- Use `$this->vars[]` in the [backend area](../backend/controllers-ajax#ajax).
 
 These examples will provide the **result** variable to a partial for each context:
 

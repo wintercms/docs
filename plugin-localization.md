@@ -4,7 +4,7 @@
 - [Accessing localization strings](#accessing-strings)
 - [Overriding localization strings](#overriding)
 
-Plugins can have localization files in the **lang** subdirectory of the plugin directory. Plugins' localization files are registered automatically. The localization strings are supported automatically in the back-end user interface menus, form labels, etc. - if you provide the localization key instead of a real string, the system will try to load it from the localization file. In other cases you need to load the localization string [with the API](#accessing-strings).
+Plugins can have localization files in the **lang** subdirectory of the plugin directory. Plugins' localization files are registered automatically. The localization strings are supported automatically in the backend user interface menus, form labels, etc. - if you provide the localization key instead of a real string, the system will try to load it from the localization file. In other cases you need to load the localization string [with the API](#accessing-strings).
 
 > **NOTE**: For translating frontend content, [there are plugins that can be used](https://wintercms.com/plugin/winter-translate) for this purpose.
 

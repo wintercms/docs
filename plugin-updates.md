@@ -28,8 +28,8 @@ The change log is stored in a YAML file called `version.yaml` inside the **/upda
 
 During an update the system will notify the user about recent changes to plugins, it can also prompt them about [important or breaking changes](#important-updates). Any given migration or seed file will only be excuted once after a successful update. Winter executes the update process automatically when any of the following occurs:
 
-1. When an administrator signs in to the back-end.
-1. When the system is updated using the update feature in the back-end area.
+1. When an administrator signs in to the backend.
+1. When the system is updated using the update feature in the backend area.
 1. When the [console command](../console/commands#console-up-command) `php artisan winter:up` is called in the command line from the application directory.
 
 > **NOTE:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.

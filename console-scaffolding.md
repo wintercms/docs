@@ -6,7 +6,7 @@
     - [Create a component](#scaffold-create-component)
     - [Create a model](#scaffold-create-model)
     - [Create a settings model](#scaffold-create-settings-model)
-    - [Create a back-end controller](#scaffold-create-controller)
+    - [Create a backend controller](#scaffold-create-controller)
     - [Create a form widget](#scaffold-create-formwidget)
     - [Create a report widget](#scaffold-create-reportwidget)
     - [Create a console command](#scaffold-create-command)
@@ -52,7 +52,7 @@ The `create:settings` command generates the files needed for a new [Settings mod
     php artisan create:settings Acme.Blog CustomSettings
 
 <a name="scaffold-create-controller"></a>
-### Create a back-end Controller
+### Create a backend Controller
 
 The `create:controller` command generates a controller, configuration and view files. The first parameter specifies the author and plugin name. The second parameter specifies the controller class name.
 
@@ -61,14 +61,14 @@ The `create:controller` command generates a controller, configuration and view f
 <a name="scaffold-create-formwidget"></a>
 ### Create a FormWidget
 
-The `create:formwidget` command generates a back-end form widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the form widget class name.
+The `create:formwidget` command generates a backend form widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the form widget class name.
 
     php artisan create:formwidget Acme.Blog CategorySelector
 
 <a name="scaffold-create-reportwidget"></a>
 ### Create a ReportWidget
 
-The `create:reportwidget` command generates a back-end report widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the report widget class name.
+The `create:reportwidget` command generates a backend report widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the report widget class name.
 
     php artisan create:reportwidget Acme.Blog TopPosts
 

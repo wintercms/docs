@@ -35,7 +35,7 @@ When this page is requested its content is merged with the layout, or more preci
 
 Note that you can render [partials](partials) in layouts. This lets you to share the common markup elements between different layouts. For example, you can have a partial that outputs the website CSS and JavaScript links. This approach simplifies the resource management - if you want to add a JavaScript reference you should modify a single partial instead of editing all the layouts.
 
-The [Configuration](themes#configuration-section) section is optional for layouts. The supported configuration parameters are **name** and **description**. The parameters are optional and used in the back-end user interface. Example layout template with a description:
+The [Configuration](themes#configuration-section) section is optional for layouts. The supported configuration parameters are **name** and **description**. The parameters are optional and used in the backend user interface. Example layout template with a description:
 
     description = "Basic layout example"
     ==

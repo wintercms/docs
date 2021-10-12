@@ -59,7 +59,7 @@ The **component class file** defines the component functionality and [component 
         }
     }
 
-The `componentDetails` method is required. The method should return an array with two keys: `name` and `description`. The name and description are display in the CMS back-end user interface.
+The `componentDetails` method is required. The method should return an array with two keys: `name` and `description`. The name and description are display in the CMS backend user interface.
 
 When this [component is attached to a page or layout](../cms/components), the class properties and methods become available on the page through the component variable, which name matches the component short name or the alias. For example, if the BlogPost component from the previous example was defined on a page with its short name:
 
@@ -111,9 +111,9 @@ The method should return an array with the property keys as indexes and property
 
 Key | Description
 ------------- | -------------
-**title** | required, the property title, it is used by the component Inspector in the CMS back-end.
-**description** | required, the property description, it is used by the component Inspector in the CMS back-end.
-**default** | optional, the default property value to use when the component is added to a page or layout in the CMS back-end.
+**title** | required, the property title, it is used by the component Inspector in the CMS backend.
+**description** | required, the property description, it is used by the component Inspector in the CMS backend.
+**default** | optional, the default property value to use when the component is added to a page or layout in the CMS backend.
 **type** | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox**, **dropdown** and **set**. Default value: **string**.
 **validationPattern** | optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with **string** properties.
 **validationMessage** | optional error message to display if the validation fails.

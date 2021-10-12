@@ -25,14 +25,14 @@
 <a name="introduction"></a>
 ## Introduction
 
-Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
+Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or backend menus and pages. Some examples of what a plugin can do:
 
 1. Define [components](components).
 1. Define [user permissions](../backend/users).
 1. Add [settings pages](settings#backend-pages), [menu items](#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
 1. Create [database table structures and seed data](updates).
 1. Alter [functionality of the core or other plugins](../services/events).
-1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
+1. Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
 
 <a name="directory-structure"></a>
 ### Directory structure
@@ -120,17 +120,17 @@ Method | Description
 **register()** | register method, called when the plugin is first registered.
 **boot()** | boot method, called right before the request route.
 **registerComponents()** | registers any [frontend components](components#component-registration) used by this plugin.
-**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
+**registerFormWidgets()** | registers any [backend form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 **registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
 **registerMailLayouts()** | registers any [mail view layouts](../services/mail#mail-template-registration) supplied by this plugin.
 **registerMailPartials()** | registers any [mail view partials](../services/mail#mail-template-registration) supplied by this plugin.
 **registerMailTemplates()** | registers any [mail view templates](../services/mail#mail-template-registration) supplied by this plugin.
 **registerMarkupTags()** | registers [additional markup tags](#extending-twig) that can be used in the CMS.
-**registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
-**registerPermissions()** | registers any [back-end permissions](../backend/users#permission-registration) used by this plugin.
-**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
+**registerNavigation()** | registers [backend navigation menu items](#navigation-menus) for this plugin.
+**registerPermissions()** | registers any [backend permissions](../backend/users#permission-registration) used by this plugin.
+**registerReportWidgets()** | registers any [backend report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
 **registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
-**registerSettings()** | registers any [back-end configuration links](settings#link-registration) used by this plugin.
+**registerSettings()** | registers any [backend configuration links](settings#link-registration) used by this plugin.
 **registerValidationRules()** | registers any [custom validators](../services/validation#custom-validation-rules) supplied by this plugin.
 
 <a name="basic-plugin-information"></a>
@@ -258,7 +258,7 @@ The following Twig custom options are available:
 <a name="navigation-menus"></a>
 ## Navigation menus
 
-Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
+Plugins can extend the backend navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the backend navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
 
 ```php
 public function registerNavigation()
@@ -298,9 +298,9 @@ public function registerNavigation()
 }
 ```
 
-When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Backend navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users). The order in which the back-end navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
+When you register the backend navigation you can use [localization strings](localization) for the `label` values. Backend navigation can also be controlled by the `permissions` values and correspond to defined [backend user permissions](../backend/users). The order in which the backend navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
 
-To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
+To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the backend controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
 Key | Description
 ------------- | -------------
@@ -348,7 +348,7 @@ public function boot()
 <a name="elevated-plugin"></a>
 ## Elevated permissions
 
-By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the back-end. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
+By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the backend. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
 
 Request | Description
 ------------- | -------------

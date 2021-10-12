@@ -135,7 +135,7 @@ You may use the `environment` method to discover the application environment as 
 
 #### Determine the execution context
 
-It is possible to know if the current request is being performed in the administrative back-end area using the `runningInBackend` method.
+It is possible to know if the current request is being performed in the administrative backend area using the `runningInBackend` method.
 
     App::runningInBackend();
 

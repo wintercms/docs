@@ -16,7 +16,7 @@ Partial templates files reside in the **/partials** subdirectory of a theme dire
 
     <p>This is a partial</p>
 
-The [Configuration](themes#configuration-section) section is optional for partials and can contain the optional **description** parameter which is displayed in the back-end user interface. The next example shows a partial with description:
+The [Configuration](themes#configuration-section) section is optional for partials and can contain the optional **description** parameter which is displayed in the backend user interface. The next example shows a partial with description:
 
     description = "Demo partial"
     ==

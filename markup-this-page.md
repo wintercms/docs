@@ -46,7 +46,7 @@ An alternative `description` field, usually more descriptive for SEO purposes.
 
 ### hidden
 
-Hidden pages are accessible only by logged-in back-end users.
+Hidden pages are accessible only by logged-in backend users.
 
     {% if this.page.hidden %}
         <p>Note to other admins: We are currently working on this page.</p>

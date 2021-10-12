@@ -12,12 +12,12 @@
 <a name="introduction"></a>
 ## Introduction
 
-There are two ways to configure plugins - with back-end settings forms and with configuration files. Using database settings with back-end pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
+There are two ways to configure plugins - with backend settings forms and with configuration files. Using database settings with backend pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
 
 <a name="database-settings"></a>
 ## Database settings
 
-You can create models for storing settings in the database by implementing the `SettingsModel` behavior in a model class. This model can be used directly for creating the back-end settings form. You don't need to create a database table and a controller for creating the back-end settings forms based on the settings model.
+You can create models for storing settings in the database by implementing the `SettingsModel` behavior in a model class. This model can be used directly for creating the backend settings form. You don't need to create a database table and a controller for creating the backend settings forms based on the settings model.
 
 The settings model classes should extend the Model class and implement the `System.Behaviors.SettingsModel` behavior. The settings models, like any other models, should be defined in the **models** subdirectory of the plugin directory. The model from the next example should be defined in the `plugins/acme/demo/models/Settings.php` script.
 
@@ -38,7 +38,7 @@ The settings model classes should extend the Model class and implement the `Syst
 
 The `$settingsCode` property is required for settings models. It defines the unique settings key which is used for saving the settings to the database.
 
-The `$settingsFields` property is required if are going to build a back-end settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [backend forms](../backend/forms) article. The YAML file should be placed to the directory with the name matching the model class name in lowercase. For the model from the previous example the directory structure would look like this:
+The `$settingsFields` property is required if are going to build a backend settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [backend forms](../backend/forms) article. The YAML file should be placed to the directory with the name matching the model class name in lowercase. For the model from the previous example the directory structure would look like this:
 
     plugins/
       acme/
@@ -48,7 +48,7 @@ The `$settingsFields` property is required if are going to build a back-end sett
               fields.yaml    <=== Model form fields
             Settings.php     <=== Model script
 
-Settings models [can be registered](#backend-pages) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
+Settings models [can be registered](#backend-pages) to appear on the **backend Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 
 <a name="writing-settings"></a>
 ### Writing to a settings model
@@ -88,12 +88,12 @@ The settings model has the static `get` method that enables you to load individu
 <a name="backend-pages"></a>
 ## Backend settings pages
 
-The back-end contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
+The backend contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
 
 <a name="link-registration"></a>
 ### Settings link registration
 
-The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
+The backend settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific backend page, or create a link to a settings model. The next example shows how to create a link to a backend page.
 
     public function registerSettings()
     {
@@ -147,7 +147,7 @@ Just like [setting navigation context in the controller](../backend/controllers-
         SettingsManager::setContext('You.Plugin', 'settings');
     }
 
-The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#link-registration).
+The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the backend settings page](#link-registration).
 
 <a name="file-configuration"></a>
 ## File-based configuration

@@ -14,7 +14,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-The Winter CMS back-end implements the MVC pattern. Controllers manage back-end pages and implement various features like forms and lists. This article describes how to develop back-end controllers and how to configure controller behaviors.
+The Winter CMS backend implements the MVC pattern. Controllers manage backend pages and implement various features like forms and lists. This article describes how to develop backend controllers and how to configure controller behaviors.
 
 Each controller consists of a PHP file which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are `.htm` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
 
@@ -44,21 +44,21 @@ Controller classes must extend the `\Backend\Classes\Controller` class. As any o
         }
     }
 
-Usually each controller implements functionality for working with a single type of data - like blog posts or categories. All back-end behaviors described below assume this convention.
+Usually each controller implements functionality for working with a single type of data - like blog posts or categories. All backend behaviors described below assume this convention.
 
 <a name="controller-properties"></a>
 ### Controller properties
 
-The back-end controller base class defines a number of properties that allow to configure the page appearance and manage the page security:
+The backend controller base class defines a number of properties that allow to configure the page appearance and manage the page security:
 
 Property | Description
 ------------- | -------------
 **$fatalError** | allows to store a fatal exception generated in an action method in order to display it in the view.
-**$user** | contains a reference to the the back-end user object.
+**$user** | contains a reference to the the backend user object.
 **$suppressView** | allows to prevent the view display. Can be updated in the action method or in the controller constructor.
 **$params** | an array of the routed parameters.
 **$action** | a name of the action method being executed in the current request.
-**$publicActions** | defines an array of actions available without the back-end user authentication. Can be overridden in the class definition.
+**$publicActions** | defines an array of actions available without the backend user authentication. Can be overridden in the class definition.
 **$requiredPermissions** | permissions required to view this page. Can be set in the class definition or in the controller constructor. See [users & permissions](users) for details.
 **$pageTitle** | sets the page title. Can be set in the action method.
 **$bodyClass** | body class property used for customizing the layout. Can be set in the controller constructor or action method.
@@ -94,7 +94,7 @@ The variables passed with the `$vars` property can now be accessed directly in y
 <a name="navigation-context"></a>
 ## Setting the navigation context
 
-Plugins can register the back-end navigation menus and submenus in the [plugin registration file](../plugin/registration#navigation-menus). The navigation context determines what back-end menu and submenu are active for the current back-end page. You can set the navigation context with the `BackendMenu` class:
+Plugins can register the backend navigation menus and submenus in the [plugin registration file](../plugin/registration#navigation-menus). The navigation context determines what backend menu and submenu are active for the current backend page. You can set the navigation context with the `BackendMenu` class:
 
     BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
 
@@ -111,19 +111,19 @@ The first parameter specifies the author and plugin names. The second parameter 
         BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
     }
 
-You can set the title of the back-end page with the `$pageTitle` property of the controller class (note that the form and list behaviors can do it for you):
+You can set the title of the backend page with the `$pageTitle` property of the controller class (note that the form and list behaviors can do it for you):
 
     $this->pageTitle = 'Blog categories';
 
 <a name="ajax"></a>
 ## Using AJAX handlers
 
-The back-end AJAX framework uses the same [AJAX library](../ajax/introduction) as the frontend pages. The library is loaded automatically on the back-end pages.
+The backend AJAX framework uses the same [AJAX library](../ajax/introduction) as the frontend pages. The library is loaded automatically on the backend pages.
 
 <a name="ajax-handlers"></a>
 ### Backend AJAX handlers
 
-The back-end AJAX handlers can be defined in the controller class or [widgets](widgets). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
+The backend AJAX handlers can be defined in the controller class or [widgets](widgets). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
 
 Backend AJAX handlers can return an array of data, throw an exception or redirect to another page (see [AJAX event handlers](../ajax/handlers)). You can use `$this->vars` to set variables and the controller's `makePartial` method to render a partial and return its contents as a part of the response data.
 
@@ -143,7 +143,7 @@ Backend AJAX handlers can return an array of data, throw an exception or redire
 <a name="triggering-ajax-requests"></a>
 ### Triggering AJAX requests
 
-The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [frontend AJAX library](../ajax/introduction) for details. The following example shows how to trigger a request with a back-end button.
+The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [frontend AJAX library](../ajax/introduction) for details. The following example shows how to trigger a request with a backend button.
 
     <button
         type="button"

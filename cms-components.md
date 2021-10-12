@@ -21,7 +21,7 @@ This article describes the components basics and doesn't explain how to use [com
 <a name="introduction"></a>
 ## Introduction
 
-If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes#configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
+If you use the backend user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes#configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
 
     title = "Components demonstration"
     url = "/components"
@@ -31,7 +31,7 @@ If you use the back-end user interface you can add components to your pages, par
     ==
     ...
 
-This initializes the component with the properties that are defined in the component section. Many components have properties, but it is not a requirement. Some properties are required, and some properties have default values. If you are not sure what properties are supported by a component, refer to the documentation provided by the developer, or use the Inspector in the Winter back-end. The Inspector opens when you click a component in the page or layout component panel.
+This initializes the component with the properties that are defined in the component section. Many components have properties, but it is not a requirement. Some properties are required, and some properties have default values. If you are not sure what properties are supported by a component, refer to the documentation provided by the developer, or use the Inspector in the Winter backend. The Inspector opens when you click a component in the page or layout component panel.
 
 When you refer a component, it automatically creates a page variable that matches the component name (`demoTodo` in the previous example). Components that provide HTML markup can be rendered on a page with the `{% component %}` tag, like this:
 
@@ -97,7 +97,7 @@ The page, the component belongs to, should have a corresponding [URL parameter](
 
     url = "/todo/:maxItems"
 
-In the Winter back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
+In the Winter backend you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
 
 <a name="component-variables"></a>
 ## Passing variables to components
@@ -198,7 +198,7 @@ Any property defined for the component is then made available inside the page, l
         [...]
     </ul>
 
-> **NOTE**: The viewBag component is hidden on the back-end and is only available for file-based editing. It can also be used by other plugins to store data.
+> **NOTE**: The viewBag component is hidden on the backend and is only available for file-based editing. It can also be used by other plugins to store data.
 
 <a name="soft-components"></a>
 ## Soft components

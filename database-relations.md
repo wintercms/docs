@@ -1012,7 +1012,7 @@ Now, when you update a `Comment`, the owning `Post` will have its `updated_at` c
 
 Deferred bindings allows you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
 
-You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/forms) automatically, but you may want to use this feature in other places.
+You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the backend [Form behavior](../backend/forms) automatically, but you may want to use this feature in other places.
 
 <a name="deferred-session-key"></a>
 ### Generating a session key
@@ -1085,7 +1085,7 @@ Destroys all bindings that have not been committed and are older than 1 day:
 
     Winter\Storm\Database\Models\DeferredBinding::cleanUp(1);
 
-> **NOTE:** Winter automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
+> **NOTE:** Winter automatically destroys deferred bindings that are older than 5 days. It happens when a backend user logs into the system.
 
 <a name="disable-deferred-binding"></a>
 ### Disable Deferred Binding

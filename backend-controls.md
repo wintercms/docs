@@ -5,12 +5,12 @@
 - [Pie chart](#pie-chart)
 - [Bar chart](#bar-chart)
 
-The back-end user interface includes a number of HTML controls that you can use on your pages. These controls are not exposed as widgets of any kind but can simpify some of the custom UI needs your project may have.
+The backend user interface includes a number of HTML controls that you can use on your pages. These controls are not exposed as widgets of any kind but can simpify some of the custom UI needs your project may have.
 
 <a name="scoreboards"></a>
 ## Scoreboards
 
-The scoreboard control is usually displayed above back-end lists and displays some summary or the most important data. The control could contain any charts and indicators (see below). Example of a scoreboard control markup displayed above a list widget:
+The scoreboard control is usually displayed above backend lists and displays some summary or the most important data. The control could contain any charts and indicators (see below). Example of a scoreboard control markup displayed above a list widget:
 
 ```php
 <div class="scoreboard">

@@ -244,7 +244,7 @@ You may use the `php artisan help queue:work` command to view all of the availab
 
 ### Deploying with daemon queue workers
 
-The simplest way to deploy an application using daemon queue workers is to put the application in maintenance mode at the beginning of your deployment. This can be done using the back-end settings area. Once the application is in maintenance mode, Winter will not accept any new jobs off of the queue, but will continue to process existing jobs.
+The simplest way to deploy an application using daemon queue workers is to put the application in maintenance mode at the beginning of your deployment. This can be done using the backend settings area. Once the application is in maintenance mode, Winter will not accept any new jobs off of the queue, but will continue to process existing jobs.
 
 The easiest way to restart your workers is to include the following command in your deployment script:
 

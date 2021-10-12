@@ -927,7 +927,7 @@ The collection of records used by the list can be extended by overriding the `li
 <a name="custom-column-types"></a>
 ### Custom column types
 
-Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
+Custom list column types can be registered in the backend with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
 
     public function registerListColumnTypes()
     {

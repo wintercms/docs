@@ -370,7 +370,7 @@ Using the suffix helps avoid conflicts with controller and model names. Alternat
 <a name="controller-naming"></a>
 ### Controller naming
 
-Controllers are commonly are placed in `controllers` directory, for back-end controllers. The name of a controller should be in plural form, for example:
+Controllers are commonly are placed in `controllers` directory, for backend controllers. The name of a controller should be in plural form, for example:
 
     People
     Products

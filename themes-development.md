@@ -67,7 +67,7 @@ The file format is following:
 <a name="preview-image"></a>
 ## Theme preview image
 
-The theme preview image is used in the back-end theme selector. The image file **theme-preview.png** should be placed to the theme's **assets/images** directory:
+The theme preview image is used in the backend theme selector. The image file **theme-preview.png** should be placed to the theme's **assets/images** directory:
 
 ```
 📂 themes

@@ -9,7 +9,7 @@
 <a name="partials"></a>
 ## Partials
 
-Backend partials are files with the extension **htm** that reside in the [controller's views](#introduction) directory. The partial file names should start with the underscore: *_partial.htm*. Partials can be rendered from a back-end page or another partial. Use the controller's `makePartial` method to render a partial. The method takes two parameters - the partial name and the optional array of variables to pass to the partial. Example:
+Backend partials are files with the extension **htm** that reside in the [controller's views](#introduction) directory. The partial file names should start with the underscore: *_partial.htm*. Partials can be rendered from a backend page or another partial. Use the controller's `makePartial` method to render a partial. The method takes two parameters - the partial name and the optional array of variables to pass to the partial. Example:
 
     <?= $this->makePartial('sidebar', ['showHeader' => true]) ?>
 
@@ -93,4 +93,4 @@ This layout uses two placeholders, a primary content area called **form-contents
         <?= Form::close() ?>
     <?php Block::endPut() ?>
 
-The layout is executed in the final section by overriding the **body** placeholder used by every back-end layout. It wraps everything with a `<form />` HTML tag and renders the child layout called **form-with-sidebar**. This file is located in `modules\backend\layouts\form-with-sidebar.htm`.
+The layout is executed in the final section by overriding the **body** placeholder used by every backend layout. It wraps everything with a `<form />` HTML tag and renders the child layout called **form-with-sidebar**. This file is located in `modules\backend\layouts\form-with-sidebar.htm`.

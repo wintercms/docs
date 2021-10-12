@@ -114,7 +114,7 @@ The following aliases are supported:
 
 Alias | Description
 ------------- | -------------
-`@jquery` | Reference to the jQuery library (v3.4.0) used in the back-end. (JavaScript)
+`@jquery` | Reference to the jQuery library (v3.4.0) used in the backend. (JavaScript)
 `@framework` | AJAX framework extras, subsitute for `{% framework %}` tag. (JavaScript)
 `@framework.extras` | AJAX framework extras, subsitute for `{% framework extras %}` tag. (JavaScript, CSS)
 `@framework.extras.js` | AJAX framework extras, (JavaScript)
@@ -142,7 +142,7 @@ Example:
 
 If you are wanting to render the injected assets in any other context, you can call `$this->makeAssets()` on the object that implements the `System\Traits\AssetMaker` trait to rener the injected assets for that object instance.
 
-> **NOTE:** Injected assets are rendered by default in the back-end through the `<?= $this->makeAssets() ?>` call in `modules/backend/layouts/_head.htm`, so if you are using a custom layout for your back-end controllers you will need to ensure that it includes that call.
+> **NOTE:** Injected assets are rendered by default in the backend through the `<?= $this->makeAssets() ?>` call in `modules/backend/layouts/_head.htm`, so if you are using a custom layout for your backend controllers you will need to ensure that it includes that call.
 
 <a name="compiler-bundles"></a>
 ## Compiler Bundles
