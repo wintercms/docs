@@ -11,7 +11,7 @@
     - [Components](#components)
     - [Asset Compiler](#asset-compiler)
     - [Image Resizer](#image-resizer)
-    - [Dynamic Class Extension & Behaviors](#dynamic-class-extension-behaviors)
+    - [Behaviors & Dynamic Class Extension](#behaviors-dynamic-class-extension)
     - [Events](#events)
     - [Backend Skins](#backend-skins)
     - [CRUD Management](#crud-management)
@@ -114,10 +114,35 @@ It works by accepting a variety of image sources and normalizing the pipeline fo
 
 Future loads of the image are automatically pointed to the static URL of the resized image without even hitting the resizer route.
 
-<a name="dynamic-class-extension-behaviors"></a>
-### Dynamic Class Extension & Behaviors
+<a name="behaviors"></a>
+### Behaviors & Dynamic Class Extension
 
+In Winter CMS, it is possible to dynamically extend the constructor of most classes to add new properties and methods. This also allows [binding to local events](../events/introduction#event-emitter-trait) only present on specific object instances instead of globaly.
 
+[Dynamic Class Extension](../services/behaviors) also adds the ability for classes to have *private traits*, also known as [Behaviors](../services/behaviors). These are similar to [native PHP Traits](https://php.net/manual/en/language.oop5.traits.php) except they have some distinct benefits:
+
+1. Behaviors have their own constructor.
+1. Behaviors can have private or protected methods.
+1. Methods and property names can conflict safely.
+1. Classes can be extended with behaviors dynamically.
+1. Extendable classes are protected against having undefined properties set on first use and must use `$object->addDynamicProperty();` instead.
+1. Dynamically added methods cannot override methods defined in code.
+
+See below for a sample of what is possible with dynamic class extension:
+
+```php
+Post::extend(function($model) {
+    $model->addDynamicProperty('tagsCache', null);
+
+    $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
+        if ($model->tagsCache) {
+            return $model->tagsCache;
+        } else {
+            return $model->tagsCache = $model->tags()->lists('name');
+        }
+    });
+});
+```
 
 <a name="events"></a>
 ### Events
