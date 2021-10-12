@@ -344,7 +344,7 @@ By default, Winter comes with two primary mail layouts:
 
 Layout | Code | Description
 ------------- | ------------- | -------------
-Default | default | Used for public facing, front-end mail
+Default | default | Used for public facing, frontend mail
 System | system | Used for internal, back-end mail
 
 <a name="mail-template-registration"></a>

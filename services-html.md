@@ -24,7 +24,7 @@ Winter provides various helpful functions with the `Html` facade, useful for dea
     // Twig
     {{ form_open(...) }}
 
-As you can see above, in Twig all functions prefixed with `form_` will bind directly to the `Form` facade and provide access to the methods using *snake_case*. See the [markup guide for more information](../markup/function-form) on using the form helper in the front-end.
+As you can see above, in Twig all functions prefixed with `form_` will bind directly to the `Form` facade and provide access to the methods using *snake_case*. See the [markup guide for more information](../markup/function-form) on using the form helper in the frontend.
 
 <a name="opening-a-form"></a>
 ## Opening a form
@@ -205,7 +205,7 @@ You may pass a default value as the second argument:
 #### Generating a drop-down list with a range, selected value and blank option
 
     <?= Form::selectRange('number', 10, 20, 2, ['emptyOption' => 'Choose...']) ?>
-    
+
 #### Generating a list with month names
 
     <?= Form::selectMonth('month') ?>
@@ -213,7 +213,7 @@ You may pass a default value as the second argument:
 #### Generating a list with month names, selected value and blank option
 
     <?= Form::selectMonth('month', 2, ['emptyOption' => 'Choose month...']) ?>
-    
+
 <a name="buttons"></a>
 ## Buttons
 

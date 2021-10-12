@@ -367,7 +367,7 @@ These properties will not be available in the `onRun` method since they are esta
 <a name="component-partials"></a>
 ## Component partials
 
-In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/winter/demo/components/todo/pagination.htm** and displayed on the page using:
+In addition to the default markup, components can also offer additional partials that can be used on the frontend or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/winter/demo/components/todo/pagination.htm** and displayed on the page using:
 
     {% partial 'demoTodo::pagination' %}
 

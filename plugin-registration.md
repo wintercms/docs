@@ -119,7 +119,7 @@ Method | Description
 **pluginDetails()** | returns information about the plugin.
 **register()** | register method, called when the plugin is first registered.
 **boot()** | boot method, called right before the request route.
-**registerComponents()** | registers any [front-end components](components#component-registration) used by this plugin.
+**registerComponents()** | registers any [frontend components](components#component-registration) used by this plugin.
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 **registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
 **registerMailLayouts()** | registers any [mail view layouts](../services/mail#mail-template-registration) supplied by this plugin.
@@ -298,7 +298,7 @@ public function registerNavigation()
 }
 ```
 
-When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users). The order in which the back-end navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
+When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Backend navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users). The order in which the back-end navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
 
 To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 

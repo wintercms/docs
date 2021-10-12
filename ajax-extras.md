@@ -9,7 +9,7 @@
 - [Flash messages](#ajax-flash)
 - [Usage example](#usage-example)
 
-When using the AJAX framework, you have the option to specify the **extras** suffix which includes additional StyleSheet and JavaScript files. These features are useful when working with AJAX requests in front-end CMS pages.
+When using the AJAX framework, you have the option to specify the **extras** suffix which includes additional StyleSheet and JavaScript files. These features are useful when working with AJAX requests in frontend CMS pages.
 
 ```twig
 {% framework extras %}

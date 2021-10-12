@@ -27,7 +27,7 @@ Winter is a Content Management System (CMS) whose sole purpose is to make your d
 
 > Everything should be made as simple as possible, but not simpler <br>[(Albert Einstein, paraphrased)](https://quoteinvestigator.com/2011/05/13/einstein-simple/)
 
-Projects in Winter CMS generally have a Front-end and a Back-end.
+Projects in Winter CMS generally have a Frontend and a Backend.
 
 <a name="code-structure"></a>
 ## Code Structure
@@ -55,7 +55,7 @@ The code for your Winter CMS projects can generally exist in one of three locati
 <a name="code-structure-themes"></a>
 ### Themes
 
-[Themes](../cms/themes) contain the front-end code, assets, and functionality as well as static site content. Check out the [Themes page](../cms/themes#directory-structure) to see an example of the directory structure.
+[Themes](../cms/themes) contain the frontend code, assets, and functionality as well as static site content. Check out the [Themes page](../cms/themes#directory-structure) to see an example of the directory structure.
 
 #### Languages Used:
 
@@ -94,7 +94,7 @@ This template engine can be used on top of other templating engines but is mainl
 <a name="components"></a>
 ### Components
 
-[Components](../cms/components) are the main conduit between Back-end functionality and Front-end content, being used in layouts, pages, and partials. They handle interactions and dynamic content generation as structured “objects”, including a [PHP file handling all functionality](../plugin/components), default partials for the front-end content, and any additional JS or CSS assets. They can provide configurable properties to set up aspects of the component, controlled through the Backend.
+[Components](../cms/components) are the main conduit between Backend functionality and Frontend content, being used in layouts, pages, and partials. They handle interactions and dynamic content generation as structured “objects”, including a [PHP file handling all functionality](../plugin/components), default partials for the frontend content, and any additional JS or CSS assets. They can provide configurable properties to set up aspects of the component, controlled through the Backend.
 
 Themes can [override a component’s partial](../cms/components#customizing-default-markup) to tailor the component output to their own specifications.
 
@@ -103,7 +103,7 @@ Themes can [override a component’s partial](../cms/components#customizing-defa
 
 Winter CMS includes a server-side [Asset Compiler](../services/asset-compilation) that makes use of the [Assetic Framework](https://github.com/assetic-php/assetic) to compile and combine assets like CSS and JavaScript serverside, through PHP, negating the need for complex build workflows. The Asset Compiler provides on-the-fly server-side compilation of SASS and LESS stylesheets as well as [run-once manual compilation of assets](../services/asset-compilation#compiler-bundles) without requiring additional workflow tools like Node or NPM. It is also able to combine and minify CSS and JS files.
 
-Additionally, you can [define variables in the theme.yaml file](../themes/development#combiner-vars) that can be modified in the Theme Settings area of the Back-end which are then injected into the compiled files, creating flexibility for theming and branding.
+Additionally, you can [define variables in the theme.yaml file](../themes/development#combiner-vars) that can be modified in the Theme Settings area of the Backend which are then injected into the compiled files, creating flexibility for theming and branding.
 
 <a name="image-resizer"></a>
 ### Image Resizer
@@ -157,8 +157,8 @@ Winter CMS uses [Twig](https://twig.symfony.com/) as the default templating engi
 
 At a basic level, all templating engines are the same. However, Winter made the decision to go with Twig as it is a robust and mature templating language that is easy to learn, widely used in other project, and very similar to [Liquid](https://shopify.github.io/liquid/), the templating engine used by [Shopify](https://www.shopify.com/). These factors combined mean that Twig is easier to pick up and start using for most developers without requiring any existing knowledge of PHP or Blade specifically which means that a wider developer base can have an easier time working with Winter CMS.
 
-Additionally, Blade is subject to the same breaking changes that Laravel itself introduces between major versions, and while breaking changes in a template engine may be fine for a web application framework designed for single use projects that can easily update their view files as well as their logic files during upgrades of the base framework version; it does not align at all with Winter's requirement to provide a stable base to build long term projects on. Having an update to your CMS require that you make changes to your front-end is simply not the developer experience that we wish to provide.
+Additionally, Blade is subject to the same breaking changes that Laravel itself introduces between major versions, and while breaking changes in a template engine may be fine for a web application framework designed for single use projects that can easily update their view files as well as their logic files during upgrades of the base framework version; it does not align at all with Winter's requirement to provide a stable base to build long term projects on. Having an update to your CMS require that you make changes to your frontend is simply not the developer experience that we wish to provide.
 
-While it is theoretically possible to have your Winter CMS projects use Blade to render templates, it isn't a recommended approach as it is important to have a single templating engine used for the front-end to ensure maximum compatibility between all Themes & Plugins.
+While it is theoretically possible to have your Winter CMS projects use Blade to render templates, it isn't a recommended approach as it is important to have a single templating engine used for the frontend to ensure maximum compatibility between all Themes & Plugins.
 
 For historical context as well, when the decision was made Blade did not have many of the more advanced features it does today, and those features (such as Components) have existed in Winter CMS since it was created in 2014.

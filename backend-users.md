@@ -74,7 +74,7 @@ Plugins can register back-end user permissions by overriding the `registerPermis
 
     acme.blog.access_categories
 
-The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Back-end controllers can use permissions defined by plugins for restricting the user access to [pages](#page-access) or [features](#features).
+The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Backend controllers can use permissions defined by plugins for restricting the user access to [pages](#page-access) or [features](#features).
 
     public function registerPermissions()
     {

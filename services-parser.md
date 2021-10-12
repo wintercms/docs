@@ -33,14 +33,14 @@ Use the `Markdown::parse` method to render Markdown to HTML:
 
     $html = Markdown::parse($markdown);
 
-You may also use the `|md` filter for [parsing Markdown in your front-end markup](../markup/filter-md).
+You may also use the `|md` filter for [parsing Markdown in your frontend markup](../markup/filter-md).
 
     {{ '**Text** is bold.'|md }}
 
 <a name="twig-parser"></a>
 ## Twig template parser
 
-Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup), [view content](../services/response-view#views) and [mail message content](../services/mail#message-content).
+Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the frontend markup](../markup), [view content](../services/response-view#views) and [mail message content](../services/mail#message-content).
 
 The `Twig` facade is used for parsing Twig syntax, you may use the `Twig::parse` method to render Twig to HTML.
 

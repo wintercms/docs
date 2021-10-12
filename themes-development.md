@@ -39,7 +39,7 @@ Example of the theme information file:
 
 ```yaml
 name: "Winter CMS Demo"
-description: "Demonstrates the basic concepts of the front-end theming."
+description: "Demonstrates the basic concepts of the frontend theming."
 author: "Winter CMS"
 homepage: "http://wintercms.com"
 code: "demo"
@@ -94,7 +94,7 @@ form:
     fields:
         site_name:
             label: Site name
-            comment: The website name as it should appear on the front-end
+            comment: The website name as it should appear on the frontend
             default: My Amazing Site!
 ```
 
@@ -127,7 +127,7 @@ form: config/fields.yaml
 fields:
     site_name:
         label: Site name
-        comment: The website name as it should appear on the front-end
+        comment: The website name as it should appear on the frontend
         default: My Amazing Site!
 ```
 

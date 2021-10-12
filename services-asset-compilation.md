@@ -1,5 +1,6 @@
 # Asset Compilation
 
+- [Introduction](#introduction)
 - [Injecting Page Assets](#injecting-page-assets)
     - [Asset Compilation](#asset-compilation)
     - [Combining CSS or JavaScript Files](#combine-css-javascript)
@@ -10,6 +11,13 @@
 - [Extending the Asset Compiler](#extending-compiler)
     - [Register Custom Aliases](#extend-register-alias)
     - [Register Custom Asset Bundles](#extend-register-bundle)
+
+<a name="introduction"></a>
+## Introduction
+
+Winter CMS includes a server-side Asset Compiler that makes use of the [Assetic Framework](https://github.com/assetic-php/assetic) to compile and combine assets like CSS and JavaScript serverside, through PHP, negating the need for complex build workflows. The Asset Compiler provides on-the-fly server-side compilation of SASS and LESS stylesheets as well as [run-once manual compilation of assets](#compiler-bundles) without requiring additional workflow tools like Node or NPM. It is also able to combine and minify CSS and JS files.
+
+Additionally, you can [define variables in the theme.yaml file](../themes/development#combiner-vars) that can be modified in the Theme Settings area of the Backend which are then injected into the compiled files, creating flexibility for theming and branding.
 
 <a name="injecting-page-assets"></a>
 ## Injecting Page Assets
@@ -117,7 +125,7 @@ The same alias can be used for JavaScript or CSS, for example `@framework.extras
 <a name="rendering-injected-assets"></a>
 ### Rendering Injected Assets
 
-In order to output the injected assets on the front-end you need to use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags.
+In order to output the injected assets on the frontend you need to use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags.
 
 Example:
 
@@ -146,7 +154,7 @@ The Winter CMS core registers several such bundles for internal usage that are c
 <a name="extending-compiler"></a>
 ## Extending the Asset Compiler
 
-The `System\Classes\AssetCombiner` class provides the `registerCallback(callable $callback)` static method to extend it's default behaviour.
+The `System\Classes\AssetCombiner` class provides the `registerCallback(callable $callback)` static method to extend it's default behaviour. Additionally, the [`system.assets.beforeAddAsset` event](../events/event/system.assets.beforeAddAsset) is available for extending any calls to `addJs()` or `addCss()`
 
 <a name="extend-register-alias"></a>
 ### Register Custom Aliases

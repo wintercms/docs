@@ -20,7 +20,7 @@ Widgets are self-contained blocks of functionality that solve different tasks. W
 <a name="generic-widgets"></a>
 ## Generic Widgets
 
-Widgets are the back-end equivalent of front-end [Components](../cms/components). They are similar because they are modular bundles of functionality, supply partials and are named using aliases. The key difference is that back-end widgets use YAML markup for their configuration and bind themselves to Backend pages.
+Widgets are the back-end equivalent of frontend [Components](../cms/components). They are similar because they are modular bundles of functionality, supply partials and are named using aliases. The key difference is that back-end widgets use YAML markup for their configuration and bind themselves to Backend pages.
 
 Widget classes reside inside the **widgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example widget directory structure looks like this:
 

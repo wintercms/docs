@@ -7,7 +7,7 @@
 - [Passing data to views](#passing-data-to-views)
 - [Setting the navigation context](#navigation-context)
 - [Using AJAX handlers](#ajax)
-    - [Back-end AJAX handlers](#ajax-handlers)
+    - [Backend AJAX handlers](#ajax-handlers)
     - [Triggering AJAX requests](#triggering-ajax-requests)
 - [Controller middleware](#controller-middleware)
 
@@ -68,7 +68,7 @@ Property | Description
 <a name="actions-views-routing"></a>
 ## Actions, views and routing
 
-Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Back-end view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
+Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
 
     <h1>Hello World</h1>
 
@@ -118,14 +118,14 @@ You can set the title of the back-end page with the `$pageTitle` property of the
 <a name="ajax"></a>
 ## Using AJAX handlers
 
-The back-end AJAX framework uses the same [AJAX library](../ajax/introduction) as the front-end pages. The library is loaded automatically on the back-end pages.
+The back-end AJAX framework uses the same [AJAX library](../ajax/introduction) as the frontend pages. The library is loaded automatically on the back-end pages.
 
 <a name="ajax-handlers"></a>
-### Back-end AJAX handlers
+### Backend AJAX handlers
 
 The back-end AJAX handlers can be defined in the controller class or [widgets](widgets). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
 
-Back-end AJAX handlers can return an array of data, throw an exception or redirect to another page (see [AJAX event handlers](../ajax/handlers)). You can use `$this->vars` to set variables and the controller's `makePartial` method to render a partial and return its contents as a part of the response data.
+Backend AJAX handlers can return an array of data, throw an exception or redirect to another page (see [AJAX event handlers](../ajax/handlers)). You can use `$this->vars` to set variables and the controller's `makePartial` method to render a partial and return its contents as a part of the response data.
 
     public function onOpenTemplate()
     {
@@ -143,7 +143,7 @@ Back-end AJAX handlers can return an array of data, throw an exception or redir
 <a name="triggering-ajax-requests"></a>
 ### Triggering AJAX requests
 
-The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [front-end AJAX library](../ajax/introduction) for details. The following example shows how to trigger a request with a back-end button.
+The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [frontend AJAX library](../ajax/introduction) for details. The following example shows how to trigger a request with a back-end button.
 
     <button
         type="button"

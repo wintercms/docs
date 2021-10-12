@@ -4,7 +4,7 @@
 - [Database settings](#database-settings)
     - [Writing to a settings model](#writing-settings)
     - [Reading from a settings model](#reading-settings)
-- [Back-end settings pages](#backend-pages)
+- [Backend settings pages](#backend-pages)
     - [Settings link registration](#link-registration)
     - [Setting the page navigation context](#settings-page-context)
 - [File-based configuration](#file-configuration)
@@ -86,7 +86,7 @@ The settings model has the static `get` method that enables you to load individu
 
 
 <a name="backend-pages"></a>
-## Back-end settings pages
+## Backend settings pages
 
 The back-end contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
 
@@ -110,7 +110,7 @@ The back-end settings navigation links can be extended by overriding the `regist
         ];
     }
 
-> **Note:** Back-end settings pages should [set the settings context](#settings-page-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
+> **Note:** Backend settings pages should [set the settings context](#settings-page-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
 
 The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#database-settings) section.
 
@@ -135,7 +135,7 @@ The optional `keywords` parameter is used by the settings search feature. If key
 <a name="settings-page-context"></a>
 ### Setting the page navigation context
 
-Just like [setting navigation context in the controller](../backend/controllers-ajax#navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
+Just like [setting navigation context in the controller](../backend/controllers-ajax#navigation-context), Backend settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
 
     public function __construct()
     {
