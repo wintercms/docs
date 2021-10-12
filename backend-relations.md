@@ -410,7 +410,7 @@ There are two filter widgets that may be extended using the following methods, o
         // Extends the manage filter widget
     }
 
-Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](/docs/backend/lists#extend-filter-scopes).
+Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [backend list documentation](/docs/backend/lists#extend-filter-scopes).
 
 <a name="extend-refresh-results"></a>
 ### Extending the refresh results

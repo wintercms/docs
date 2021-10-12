@@ -319,7 +319,7 @@ Key | Description
 <a name="registering-middleware"></a>
 ## Registering middleware
 
-To register a custom middleware, you can apply it directly to a Backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
+To register a custom middleware, you can apply it directly to a backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
 
 ```php
 public function boot()

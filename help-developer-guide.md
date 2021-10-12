@@ -46,7 +46,7 @@ There are some exceptions to the PSR standard used by Winter.
 <a name="psr-exception-methods"></a>
 ### Controller methods can have a single underscore
 
-PSR-2 states that methods must be in **camelCase**. However, in Backend controllers Winter will prefix AJAX handlers with the action name to define a controlled context. For example:
+PSR-2 states that methods must be in **camelCase**. However, in backend controllers Winter will prefix AJAX handlers with the action name to define a controlled context. For example:
 
 ```php
 public function index()

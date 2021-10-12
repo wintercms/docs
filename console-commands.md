@@ -7,7 +7,7 @@
     - [Install command](#console-install-command)
     - [System update](#console-update-command)
     - [Database migration](#console-up-command)
-    - [Change Backend user password](#change-backend-user-password-command)
+    - [Change backend user password](#change-backend-user-password-command)
 - [Plugin management](#plugin-commands)
     - [Install plugin](#plugin-install-command)
     - [Refresh plugin](#plugin-refresh-command)
@@ -90,9 +90,9 @@ The inverse command `winter:down` will reverse all migrations, dropping database
     php artisan winter:down
 
 <a name="change-backend-user-password-command"></a>
-### Change Backend user password
+### Change backend user password
 
-The `winter:passwd` command will allow the password of a Backend user or administrator to be changed via the command-line. This is useful if someone gets locked out of their Winter CMS install, or for changing the password for the default administrator account.
+The `winter:passwd` command will allow the password of a backend user or administrator to be changed via the command-line. This is useful if someone gets locked out of their Winter CMS install, or for changing the password for the default administrator account.
 
     php artisan winter:passwd username password
 

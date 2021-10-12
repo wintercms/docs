@@ -29,7 +29,7 @@ Backend (Admin):
     backend/controls: "UI Elements"
     ui: "User Interface Guide@"
 
-Frontend (CMS):
+Frontend:
   icon: "icon-magic"
   pages:
     cms/themes: "Themes"

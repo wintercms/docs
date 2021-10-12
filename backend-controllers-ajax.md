@@ -157,11 +157,11 @@ The AJAX request can be triggered with the data attributes API or the JavaScript
 <a name="controller-middleware"></a>
 ## Controller middleware
 
-You can define middleware in your Backend controllers, providing you with a convenient mechanism for making changes to the response of a HTTP request. For example, you may wish to specify a HTTP header for certain actions in your controller, or redirect users if they don't meet certain criteria.
+You can define middleware in your backend controllers, providing you with a convenient mechanism for making changes to the response of a HTTP request. For example, you may wish to specify a HTTP header for certain actions in your controller, or redirect users if they don't meet certain criteria.
 
 Controller middleware is executed after the request is processed by Winter CMS, but before the response is sent to the browser.
 
-To define middleware for your controller, you may specify it in the `__construct()` method of your Backend controller by calling the `middleware()` method.
+To define middleware for your controller, you may specify it in the `__construct()` method of your backend controller by calling the `middleware()` method.
 
 ```php
 public function __construct()

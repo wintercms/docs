@@ -263,7 +263,7 @@ You can setup this protection in the file location `config/cms.php` in the secti
 <a name="backend-only-mode"></a>
 ### Backend-only Mode
 
-Winter CMS can be configured to run with only the Backend module installed, therefore allowing Winter CMS to be used for self-contained applications. This may be useful for managing API data or administrating a headless CMS.
+Winter CMS can be configured to run with only the backend module installed, therefore allowing Winter CMS to be used for self-contained applications. This may be useful for managing API data or administrating a headless CMS.
 
 You can disable the CMS module from running by making the following changes to your `config/cms.php` file in your Winter CMS installation.
 
@@ -273,7 +273,7 @@ You can disable the CMS module from running by making the following changes to y
 'loadModules' => ['System', 'Backend'], // Remove 'Cms' to not use the CMS module.
 ```
 
-This allows the root domain or subdomain that hosts your Winter CMS install to load up the Backend immediately when accessing the URL in your browser.
+This allows the root domain or subdomain that hosts your Winter CMS install to load up the backend immediately when accessing the URL in your browser.
 
 After making these changes, you may delete the `modules/cms` folder from your project, as they will no longer be required.
 

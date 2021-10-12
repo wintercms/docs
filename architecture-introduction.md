@@ -27,7 +27,7 @@ Winter is a Content Management System (CMS) whose sole purpose is to make your d
 
 > Everything should be made as simple as possible, but not simpler <br>[(Albert Einstein, paraphrased)](https://quoteinvestigator.com/2011/05/13/einstein-simple/)
 
-Projects in Winter CMS generally have a Frontend and a Backend.
+Projects in Winter CMS generally have a frontend and a backend.
 
 <a name="code-structure"></a>
 ## Code Structure
@@ -94,7 +94,7 @@ This template engine can be used on top of other templating engines but is mainl
 <a name="components"></a>
 ### Components
 
-[Components](../cms/components) are the main conduit between Backend functionality and Frontend content, being used in layouts, pages, and partials. They handle interactions and dynamic content generation as structured “objects”, including a [PHP file handling all functionality](../plugin/components), default partials for the frontend content, and any additional JS or CSS assets. They can provide configurable properties to set up aspects of the component, controlled through the Backend.
+[Components](../cms/components) are the main conduit between backend functionality and Frontend content, being used in layouts, pages, and partials. They handle interactions and dynamic content generation as structured “objects”, including a [PHP file handling all functionality](../plugin/components), default partials for the frontend content, and any additional JS or CSS assets. They can provide configurable properties to set up aspects of the component, controlled through the backend.
 
 Themes can [override a component’s partial](../cms/components#customizing-default-markup) to tailor the component output to their own specifications.
 
@@ -103,7 +103,7 @@ Themes can [override a component’s partial](../cms/components#customizing-defa
 
 Winter CMS includes a server-side [Asset Compiler](../services/asset-compilation) that makes use of the [Assetic Framework](https://github.com/assetic-php/assetic) to compile and combine assets like CSS and JavaScript serverside, through PHP, negating the need for complex build workflows. The Asset Compiler provides on-the-fly server-side compilation of SASS and LESS stylesheets as well as [run-once manual compilation of assets](../services/asset-compilation#compiler-bundles) without requiring additional workflow tools like Node or NPM. It is also able to combine and minify CSS and JS files.
 
-Additionally, you can [define variables in the theme.yaml file](../themes/development#combiner-vars) that can be modified in the Theme Settings area of the Backend which are then injected into the compiled files, creating flexibility for theming and branding.
+Additionally, you can [define variables in the theme.yaml file](../themes/development#combiner-vars) that can be modified in the Theme Settings area of the backend which are then injected into the compiled files, creating flexibility for theming and branding.
 
 <a name="image-resizer"></a>
 ### Image Resizing
