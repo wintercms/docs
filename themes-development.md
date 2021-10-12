@@ -98,7 +98,7 @@ form:
             default: My Amazing Site!
 ```
 
-> **Note:** If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following:
+> **NOTE:** If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following:
 
 ```php
 \Cms\Models\ThemeData::extend(function ($model) {
@@ -180,7 +180,7 @@ When the theme is installed for the first time, the system will attempt to insta
 
 Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the Winter backend and can be used for form labels just like [plugin localization](../plugin/localization)
 
-> **Note**: Translating frontend content should be handled with the [Winter.Translate](https://wintercms.com/plugin/winter-translate) plugin.
+> **NOTE**: Translating frontend content should be handled with the [Winter.Translate](https://wintercms.com/plugin/winter-translate) plugin.
 
 <a name="localization-file-structure"></a>
 ### Localization directory and file structure

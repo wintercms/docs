@@ -69,7 +69,7 @@ To summarize:
 - Extend \Winter\Storm\Extension\ExtensionBase to declare your class as a Behaviour
 - The class wanting to -implement- the Behaviour needs to extend \Winter\Storm\Extension\Extendable
 
-> **Note**: See [Using traits instead of base classes](#using-traits)
+> **NOTE**: See [Using traits instead of base classes](#using-traits)
 
 <a name="constructor-extension"></a>
 ## Extending constructors
@@ -88,7 +88,7 @@ Properties can be declared on an extendable object by calling `addDynamicPropert
         $model->addDynamicProperty('tagsCache', null);
     });
 
-> **Note**: Attempting to set undeclared properties through normal means (`$this->foo = 'bar';`) on an object that implements the **Winter\Storm\Extension\ExtendableTrait** will not work. It won't throw an exception, but it will not autodeclare the property either. `addDynamicProperty` must be called in order to set previously undeclared properties on extendable objects.
+> **NOTE**: Attempting to set undeclared properties through normal means (`$this->foo = 'bar';`) on an object that implements the **Winter\Storm\Extension\ExtendableTrait** will not work. It won't throw an exception, but it will not autodeclare the property either. `addDynamicProperty` must be called in order to set previously undeclared properties on extendable objects.
 
 #### Retrieving dynamic properties
 

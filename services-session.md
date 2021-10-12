@@ -19,7 +19,7 @@ The session configuration is stored in `config/session.php`. Be sure to review t
 - `array` - sessions are stored in a simple PHP array and will not be persisted across requests.
 </div>
 
-> **Note:** The array driver is typically used for running unit tests to prevent session data from persisting.
+> **NOTE:** The array driver is typically used for running unit tests to prevent session data from persisting.
 
 #### Reserved keys
 

@@ -4,7 +4,7 @@
 - [Available modes](#available-modes)
 - [Resize sources](#resize-sources)
 
->**Note:** The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.
+> **NOTE:** The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.
 
 <a name="resize-parameters"></a>
 ## Resize Parameters

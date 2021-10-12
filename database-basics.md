@@ -134,7 +134,7 @@ Lastly, you can commit a transaction via the `commit` method:
 
     Db::commit();
 
-> **Note:** Using the `Db` facade's transaction methods also controls transactions for the [query builder](../database/query) and [model queries](../database/model).
+> **NOTE:** Using the `Db` facade's transaction methods also controls transactions for the [query builder](../database/query) and [model queries](../database/model).
 
 <a name="database-events"></a>
 ## Database events
@@ -162,4 +162,4 @@ However, in some cases, such as when inserting a large number of rows, this can 
 
     Db::connection()->disableQueryLog();
 
-> **Note**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log#helpers) instead.
+> **NOTE**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log#helpers) instead.

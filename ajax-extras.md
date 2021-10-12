@@ -43,7 +43,7 @@ In the server side AJAX handler you may throw a [validation exception](../servic
         throw new ValidationException(['name' => 'You must give a name!']);
     }
 
-> **Note**: You can also pass an instance of the [validation service](../services/validation) as the first argument of the exception.
+> **NOTE**: You can also pass an instance of the [validation service](../services/validation) as the first argument of the exception.
 
 <a name="error-messages"></a>
 ### Displaying error messages

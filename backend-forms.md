@@ -44,7 +44,7 @@ The Form behavior depends on form [field definitions](#form-fields) and a [model
         public $formConfig = 'config_form.yaml';
     }
 
-> **Note:** Very often the form and [list behavior](lists) are used together in a same controller.
+> **NOTE:** Very often the form and [list behavior](lists) are used together in a same controller.
 
 <a name="configuring-form"></a>
 ## Configuring the form behavior
@@ -211,7 +211,7 @@ Option | Description
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
-> **Note:** It is not recommended to use lazy loading on tabs with fields that are affected by triggers.
+> **NOTE:** It is not recommended to use lazy loading on tabs with fields that are affected by triggers.
 
     tabs:
         stretch: true
@@ -837,7 +837,7 @@ Option | Description
 **thumbOptions** | options to pass to the thumbnail generating method for the file
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
 
-> **Note:** Unlike the [Media Finder FormWidget](#widget-mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
+> **NOTE:** Unlike the [Media Finder FormWidget](#widget-mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown editor
@@ -870,7 +870,7 @@ Option | Description
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 
-> **Note:** Unlike the [File Upload FormWidget](#widget-fileupload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
+> **NOTE:** Unlike the [File Upload FormWidget](#widget-fileupload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
 
 <a name="widget-nestedform"></a>
 ### Nested Form
@@ -1057,7 +1057,7 @@ Option | Description
 **icon** | defines an icon for the group, optional.
 **fields** | form fields belonging to the group, see [backend form fields](#form-fields).
 
-> **Note**: The group key is stored along with the saved data as the `_group` attribute.
+> **NOTE**: The group key is stored along with the saved data as the `_group` attribute.
 
 #### Repeater style
 
@@ -1085,7 +1085,7 @@ The available toolbar buttons are:
 
     fullscreen, bold, italic, underline, strikeThrough, subscript, superscript, fontFamily, fontSize, |, color, emoticons, inlineStyle, paragraphStyle, |, paragraphFormat, align, formatOL, formatUL, outdent, indent, quote, insertHR, -, insertLink, insertImage, insertVideo, insertAudio, insertFile, insertTable, undo, redo, clearFormatting, selectAll, html
 
-> **Note**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
+> **NOTE**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
 
 <a name="widget-sensitive"></a>
 ### Sensitive
@@ -1388,7 +1388,7 @@ Sometimes you may wish to modify the default form behavior and there are several
 
 Several controller methods can called at various points during the lifecycle of the `FormController` to provide injection points for custom logic. See the [API docs](/docs/api/develop/Backend/Behaviors/FormController.html#method_formBeforeSave) for a full reference of what they are. Generally speaking any method in the API docs prefixed with `form` can be overridden in your controller to change the default behaviour or act as an injection point for custom logic.
 
->**NOTE:** It may be more desirable to use [model events](/docs/events/event/model.beforeSave) to implement your logic instead as those are always run when applicable if the model is being affected, no matter where the interaction with the model is occuring.
+> **NOTE:** It may be more desirable to use [model events](/docs/events/event/model.beforeSave) to implement your logic instead as those are always run when applicable if the model is being affected, no matter where the interaction with the model is occuring.
 
 <a name="overriding-action"></a>
 ### Overriding controller action

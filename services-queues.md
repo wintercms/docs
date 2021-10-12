@@ -80,7 +80,7 @@ Queue::later($date, 'SendEmail', ['message' => $message]);
 
 In this example, we're using the [Carbon](https://github.com/briannesbitt/Carbon) date library to specify the delay we wish to assign to the job. Alternatively, you may pass the number of seconds you wish to delay as an integer.
 
-> **Note:** The Amazon SQS service has a delay limit of 900 seconds (15 minutes).
+> **NOTE:** The Amazon SQS service has a delay limit of 900 seconds (15 minutes).
 
 ### Queues and models
 
@@ -164,7 +164,7 @@ Queue::push(function () use ($id, $jobId) {
 });
 ```
 
-> **Note:** Instead of making objects available to queued Closures via the `use` directive, consider passing primary keys and re-pulling the associated models from within your queue job. This often avoids unexpected serialization behavior.
+> **NOTE:** Instead of making objects available to queued Closures via the `use` directive, consider passing primary keys and re-pulling the associated models from within your queue job. This often avoids unexpected serialization behavior.
 
 When using Iron.io [push queues](#push-queues), you should take extra precaution queueing Closures. The end-point that receives your queue messages should check for a token to verify that the request is actually from Iron.io. For example, your push queue end-point should be something like: `https://example.com/queue/receive?token=SecretToken`. You may then check the value of the secret token in your application before marshalling the queue request.
 
@@ -254,7 +254,7 @@ php artisan queue:restart
 
 This command will instruct all queue workers to restart after they finish processing their current job.
 
-> **Note:** This command relies on the cache system to schedule the restart. By default, APCu does not work for CLI commands. If you are using APCu, add `apc.enable_cli=1` to your APCu configuration.
+> **NOTE:** This command relies on the cache system to schedule the restart. By default, APCu does not work for CLI commands. If you are using APCu, add `apc.enable_cli=1` to your APCu configuration.
 
 ### Coding for daemon queue workers
 
@@ -333,7 +333,7 @@ Finally, to restart it:
 systemctl --user restart queue-worker.service
 ```
 
-> **Note:** If you run the following commands when logged in via an SSH session, your daemon may stop as soon as you logout. You can tell your OS to keep alive any of your processes by running the following command, substituting the `<user>` placeholder with the user running the service: `loginctl enable-linger <user>`
+> **NOTE:** If you run the following commands when logged in via an SSH session, your daemon may stop as soon as you logout. You can tell your OS to keep alive any of your processes by running the following command, substituting the `<user>` placeholder with the user running the service: `loginctl enable-linger <user>`
 
 #### Checking the status of the daemon
 

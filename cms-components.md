@@ -16,7 +16,7 @@ Components are configurable building elements that can be attached to any page, 
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers) or [developing components](../plugin/components) as part of plugins.
 
-> **Note:** Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials#dynamic-partials) article.
+> **NOTE:** Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials#dynamic-partials) article.
 
 <a name="introduction"></a>
 ## Introduction
@@ -37,7 +37,7 @@ When you refer a component, it automatically creates a page variable that matche
 
     {% component 'demoTodo' %}
 
-> **Note:** If two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
+> **NOTE:** If two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
 
 <a name="aliases"></a>
 ## Components aliases
@@ -108,7 +108,7 @@ In this example, the **maxItems** property of the component will be set to *7* a
 
     {% component 'demoTodoAlias' maxItems='7' %}
 
-> **Note**: Not all components support passing variables when rendering.
+> **NOTE**: Not all components support passing variables when rendering.
 
 <a name="customizing-default-markup"></a>
 ## Customizing default markup
@@ -198,7 +198,7 @@ Any property defined for the component is then made available inside the page, l
         [...]
     </ul>
 
-> **Note**: The viewBag component is hidden on the back-end and is only available for file-based editing. It can also be used by other plugins to store data.
+> **NOTE**: The viewBag component is hidden on the back-end and is only available for file-based editing. It can also be used by other plugins to store data.
 
 <a name="soft-components"></a>
 ## Soft components

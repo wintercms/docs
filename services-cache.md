@@ -107,7 +107,7 @@ The Redis configuration for your application is located in the `config/database.
 ],
 ```
 
-By default, the Redis cache functionality will use the `predis` client package to provide caching abilities through Redis. You may also use `phpredis` as the client, which uses the PHP `redis` extension. This can be [installed through PECL](http://pecl.php.net/package/redis). 
+By default, the Redis cache functionality will use the `predis` client package to provide caching abilities through Redis. You may also use `phpredis` as the client, which uses the PHP `redis` extension. This can be [installed through PECL](http://pecl.php.net/package/redis).
 
 When using `predis`, you may define an `options` array value in your Redis connection definition, allowing you to specify a set of Predis [client options](https://github.com/nrk/predis/wiki/Client-Options).
 
@@ -247,7 +247,7 @@ $expiresAt = Carbon::now()->addMinutes(10);
 Cache::put('key', 'value', $expiresAt);
 ```
 
-> **Note:** We recommend using `DateTime` instances for defining all expiry lengths, in order to ensure compatibility with future versions of Winter CMS.
+> **NOTE:** We recommend using `DateTime` instances for defining all expiry lengths, in order to ensure compatibility with future versions of Winter CMS.
 
 The `add` method will only add the item to the cache if it does not already exist in the cache store. The method will return `true` if the item is actually added to the cache. Otherwise, the method will return `false`:
 

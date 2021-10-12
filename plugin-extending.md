@@ -87,7 +87,7 @@ This will allow other plugins to inject HTML to this area by hooking the event a
         return '<a href="#">Sign in with Google!</a>';
     });
 
-> **Note**: The first parameter in the event handler will always be the calling object (the controller).
+> **NOTE**: The first parameter in the event handler will always be the calling object (the controller).
 
 The above example would output the following markup:
 
@@ -183,7 +183,7 @@ This example will listen to the [`backend.form.extendFields`](https://wintercms.
         }
     }
 
-> **Note:** In some cases (adding fields that should be made translatable by [Winter.Translate](https://github.com/wintercms/wn-translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://wintercms.com/docs/events/event/backend.form.extendFieldsBefore) event instead.
+> **NOTE:** In some cases (adding fields that should be made translatable by [Winter.Translate](https://github.com/wintercms/wn-translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://wintercms.com/docs/events/event/backend.form.extendFieldsBefore) event instead.
 
 <a name="extending-backend-list"></a>
 ### Extending a backend list

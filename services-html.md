@@ -39,7 +39,7 @@ By default, a `POST` method will be assumed, however, you are free to specify an
 
     Form::open(['url' => 'foo/bar', 'method' => 'put'])
 
-> **Note:** Since HTML forms only support `POST` and `GET`, `PUT` and `DELETE` methods will be spoofed by automatically adding a `_method` hidden field to your form.
+> **NOTE:** Since HTML forms only support `POST` and `GET`, `PUT` and `DELETE` methods will be spoofed by automatically adding a `_method` hidden field to your form.
 
 You may pass in regular HTML attributes as well:
 
@@ -71,7 +71,7 @@ You can also pass partials to update as another array:
         ]
     ])
 
-> **Note**: Most [data attributes from the AJAX framework](../ajax/attributes-api) are available here by dropping the `data-request-` prefix.
+> **NOTE**: Most [data attributes from the AJAX framework](../ajax/attributes-api) are available here by dropping the `data-request-` prefix.
 
 <a name="form-tokens"></a>
 ## Form tokens
@@ -112,7 +112,7 @@ You may pass a default value as the second argument:
 
     <?= Form::value('name', 'John Travolta') ?>
 
-> **Note:** When using `Form::model`, be sure to close your form with `Form::close`!
+> **NOTE:** When using `Form::model`, be sure to close your form with `Form::close`!
 
 <a name="labels"></a>
 ## Labels
@@ -125,7 +125,7 @@ You may pass a default value as the second argument:
 
     <?= Form::label('email', 'E-Mail Address', ['class' => 'awesome']) ?>
 
-> **Note:** After creating a label, any form element you create with a name matching the label name will automatically receive an ID matching the label name as well.
+> **NOTE:** After creating a label, any form element you create with a name matching the label name will automatically receive an ID matching the label name as well.
 
 <a name="text"></a>
 ## Text fields
@@ -138,7 +138,7 @@ You may pass a default value as the second argument:
 
     <?= Form::text('email', 'emailaddress@example.com') ?>
 
-> **Note:** The *hidden* and *textarea* methods have the same signature as the *text* method.
+> **NOTE:** The *hidden* and *textarea* methods have the same signature as the *text* method.
 
 #### Generating a password input
 
@@ -178,7 +178,7 @@ You may pass a default value as the second argument:
 
     <?= Form::file('image') ?>
 
-> **Note:** The form must have been opened with the `files` option set to `true`.
+> **NOTE:** The form must have been opened with the `files` option set to `true`.
 
 <a name="drop-down-lists"></a>
 ## Drop-down lists
@@ -221,7 +221,7 @@ You may pass a default value as the second argument:
 
     <?= Form::submit('Click Me!') ?>
 
-> **Note:** Need to create a button element? Try the *button* method. It has the same signature as *submit*.
+> **NOTE:** Need to create a button element? Try the *button* method. It has the same signature as *submit*.
 
 <a name="custom-macros"></a>
 ## Custom macros

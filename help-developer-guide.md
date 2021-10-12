@@ -284,7 +284,7 @@ When specifying [event names](/docs/services/events). The term *after* is not us
 1. **beforeSetAttribute** - this event comes *before* any default logic.
 1. **setAttribute** - this event comes *after* any default logic.
 
->**NOTE:** This is true for the vast majority of cases, however the events present for default model events like `boot`, `create`, `delete`, `fetch`, `restore`, `save`, `update`, & `validate` all have before & after variants to match the model method events.
+> **NOTE:** This is true for the vast majority of cases, however the events present for default model events like `boot`, `create`, `delete`, `fetch`, `restore`, `save`, `update`, & `validate` all have before & after variants to match the model method events.
 
 Where possible events should cover global and local versions. Global events should be prefixed with the module or plugin name. For example:
 

@@ -8,7 +8,7 @@ A content block inside a subdirectory can be rendered in the same way.
 
     {% content "sidebar/content.htm" %}
 
-> **Note**: The [Themes documentation](../cms/themes#subdirectories) has more details on subdirectory usage.
+> **NOTE**: The [Themes documentation](../cms/themes#subdirectories) has more details on subdirectory usage.
 
 Content blocks can be rendered as plain text:
 
@@ -55,4 +55,4 @@ The collection of variables is accessed by using an opening and closing set of b
         {/likes}
     </ul>
 
-> **Note**: Twig syntax is not supported in Content blocks, consider using a [CMS partial](../cms/partials) instead.
+> **NOTE**: Twig syntax is not supported in Content blocks, consider using a [CMS partial](../cms/partials) instead.

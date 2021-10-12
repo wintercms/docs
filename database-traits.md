@@ -63,7 +63,7 @@ Similar to the [hashable trait](#hashable), encrypted attributes are encrypted w
         protected $encryptable = ['api_key', 'api_secret'];
     }
 
-> **Note:** Encrypted attributes will be serialized and unserialized as a part of the encryption / decryption process. Do not make an attribute that is `encryptable` also [`jsonable`](model#standard-properties) at the same time as the `jsonable` process will attempt to decode a value that has already been unserialized by the encryptor.
+> **NOTE:** Encrypted attributes will be serialized and unserialized as a part of the encryption / decryption process. Do not make an attribute that is `encryptable` also [`jsonable`](model#standard-properties) at the same time as the `jsonable` process will attempt to decode a value that has already been unserialized by the encryptor.
 
 <a name="sluggable"></a>
 ## Sluggable
@@ -181,7 +181,7 @@ Use the `setSortableOrder` method to set the orders on a single record or multip
     // Sets the order of records 1, 2, 3 to 3, 2, 1 respectively...
     $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 
-> **Note:** If adding this trait to a model where data (rows) already existed previously, the data set may need to be initialized before this trait will work correctly. To do so, either manually update each row's `sort_order` column or run a query against the data to copy the record's `id` column to the `sort_order` column (ex. `UPDATE myvendor_myplugin_mymodelrecords SET sort_order = id`).
+> **NOTE:** If adding this trait to a model where data (rows) already existed previously, the data set may need to be initialized before this trait will work correctly. To do so, either manually update each row's `sort_order` column or run a query against the data to copy the record's `id` column to the `sort_order` column (ex. `UPDATE myvendor_myplugin_mymodelrecords SET sort_order = id`).
 
 <a name="simple-tree"></a>
 ## Simple Tree
@@ -306,7 +306,7 @@ Winter models uses the built-in [Validator class](../services/validation). The v
         ];
     }
 
-> **Note**: You're free to use the [array syntax](../services/validation#validating-arrays) for validation rules as well.
+> **NOTE**: You're free to use the [array syntax](../services/validation#validating-arrays) for validation rules as well.
 
     class User extends Model
     {
@@ -328,14 +328,14 @@ Models validate themselves automatically when the `save` method is called.
     // Returns false if model is invalid
     $success = $user->save();
 
-> **Note:** You can also validate a model at any time using the `validate` method.
+> **NOTE:** You can also validate a model at any time using the `validate` method.
 
 <a name="retrieving-validation-errors"></a>
 ### Retrieving validation errors
 
 When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
 
-> **Note:** The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation#working-with-error-messages) of formatting errors.
+> **NOTE:** The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation#working-with-error-messages) of formatting errors.
 
 <a name="overriding-validation"></a>
 ### Overriding validation
@@ -494,7 +494,7 @@ When two related models have soft deletes enabled, you can cascade the delete ev
         ];
     }
 
-> **Note:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
+> **NOTE:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
 
 Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.
 

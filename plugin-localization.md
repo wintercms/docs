@@ -6,7 +6,7 @@
 
 Plugins can have localization files in the **lang** subdirectory of the plugin directory. Plugins' localization files are registered automatically. The localization strings are supported automatically in the back-end user interface menus, form labels, etc. - if you provide the localization key instead of a real string, the system will try to load it from the localization file. In other cases you need to load the localization string [with the API](#accessing-strings).
 
-> **Note**: For translating frontend content, [there are plugins that can be used](http://wintercms.com/plugin/winter-translate) for this purpose.
+> **NOTE**: For translating frontend content, [there are plugins that can be used](http://wintercms.com/plugin/winter-translate) for this purpose.
 
 <a name="file-structure"></a>
 ## Localization directory and file structure

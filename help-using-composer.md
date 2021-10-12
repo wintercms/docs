@@ -25,7 +25,7 @@ Composer is the de-facto standard for package management in the PHP ecosystem, a
 
 In order to use Composer with a Winter CMS instance that has been installed using the Wizard or simple CLI installation process, simply copy the latest [`tests/` directory](https://github.com/wintercms/winter/tree/develop/tests) and [`composer.json`](https://github.com/wintercms/winter/tree/develop/composer.json) file from [GitHub](https://github.com/wintercms/winter/tree/develop) into your Winter instance and then run `composer install` within the root directory of the project.
 
-> **Note:** If you have made modifications to the files within the `modules` directory, these will be overwritten by Composer if an update to those modules is installed. It is recommended that you *do not* make modifications to the modules directly.
+> **NOTE:** If you have made modifications to the files within the `modules` directory, these will be overwritten by Composer if an update to those modules is installed. It is recommended that you *do not* make modifications to the modules directly.
 
 <a name="development-branch"></a>
 ### Development branch
@@ -40,7 +40,7 @@ If you plan on submitting pull requests to the Winter CMS project via GitHub, or
 "laravel/framework": "~6.0",
 ```
 
-> **Note:** Do not commit the changes to `composer.json`, as this file is handled by the Winter CMS maintainers.
+> **NOTE:** Do not commit the changes to `composer.json`, as this file is handled by the Winter CMS maintainers.
 
 <a name="deployment-best-practices"></a>
 ### Deployment best practices

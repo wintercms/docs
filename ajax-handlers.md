@@ -92,7 +92,7 @@ You may throw an [AJAX exception](../services/error-log#ajax-exception) using th
         'questionsNeeded' => 2
     ]);
 
-> **Note**: When throwing this exception type [partials will be updated](../ajax/update-partials) as normal.
+> **NOTE**: When throwing this exception type [partials will be updated](../ajax/update-partials) as normal.
 
 <a name="before-handler"></a>
 ## Running code before handlers

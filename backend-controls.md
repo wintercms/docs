@@ -83,7 +83,7 @@ Indicators are simple reporting element that have a title, a value and a descrip
 
 ![image](https://github.com/wintercms/docs/blob/main/images/name-title-indicators.png?raw=true) {.img-responsive .frame}
 
-> **Note:** The example is given in the context of a scoreboard area. If you use the indicators in a [report widget](widgets#report-widgets) partial, the class **scoreboard-item** shouldn't be used.
+> **NOTE:** The example is given in the context of a scoreboard area. If you use the indicators in a [report widget](widgets#report-widgets) partial, the class **scoreboard-item** shouldn't be used.
 
 <a name="pie-chart"></a>
 ## Pie chart

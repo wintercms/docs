@@ -70,7 +70,7 @@ Plugin assets like css and js files must reside under the assets directory:
             js/
               custom.js
 
-> **Note:** if you are developing a plugin for the [Marketplace](/marketplace), the [updates/version.yaml](updates) file is required.
+> **NOTE:** if you are developing a plugin for the [Marketplace](/marketplace), the [updates/version.yaml](updates) file is required.
 
 <a name="namespaces"></a>
 ### Plugin namespaces
@@ -161,7 +161,7 @@ The `register` method is called immediately when the plugin is registered. The `
         });
     }
 
-> **Note:** The `boot` and `register` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
+> **NOTE:** The `boot` and `register` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
 
 Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router). For example:
 
@@ -412,7 +412,7 @@ By specifying a version, your plugin will check what version the original plugin
 <a name="aliases"></a>
 ### Aliases
 
->**NOTE:** This is for reference only. By registering as a plugin replacement using the above feature Winter already handles registering these aliases throughout the system for you.
+> **NOTE:** This is for reference only. By registering as a plugin replacement using the above feature Winter already handles registering these aliases throughout the system for you.
 
 <!-- TODO: Group the into their own docs -->
 

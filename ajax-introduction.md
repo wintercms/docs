@@ -41,7 +41,7 @@ A page can issue an AJAX request either prompted by data attributes or by using 
 5. The server sends the response, containing the rendered partials markup.
 6. The client-side framework updates page elements with the partials data received from the server.
 
-> **Note**: Depending on the page context a [CMS partial](../cms/partials) or [backend partial](../backend/views-partials) view will be rendered.
+> **NOTE**: Depending on the page context a [CMS partial](../cms/partials) or [backend partial](../backend/views-partials) view will be rendered.
 
 <a name="usage-example"></a>
 ## Usage example
@@ -62,7 +62,7 @@ Below is a simple example that uses the data attributes API to define an AJAX en
     <!-- Result container -->
     <div id="myDiv"></div>
 
-> **Note**: The form data for `value1` and `value2` are automatically sent with the AJAX request.
+> **NOTE**: The form data for `value1` and `value2` are automatically sent with the AJAX request.
 
 The **mypartial** partial contains markup that reads the `result` variable.
 

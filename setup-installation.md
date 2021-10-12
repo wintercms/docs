@@ -42,7 +42,7 @@ When using the SQL Server database engine, you will need to install the [group c
 
 The [Web Installer](https://github.com/wintercms/web-installer) is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
 
-> **Note:** If you are a developer, we recommend that you [install via Composer instead](../console/commands#console-install-composer)
+> **NOTE:** If you are a developer, we recommend that you [install via Composer instead](../console/commands#console-install-composer)
 
 1. Prepare an empty directory on the web server that will host your Winter CMS installation. It can be a main domain, sub-domain or subfolder.
 2. [Download the "install.zip" file](https://github.com/wintercms/web-installer/releases/latest) from the latest release of the Winter CMS Web Installer into this folder.
@@ -102,7 +102,7 @@ For *scheduled tasks* to operate correctly, you should add the following Cron en
 
 Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of Winter. This Cron will call the command scheduler every minute. Then Winter evaluates any scheduled tasks and runs the tasks that are due.
 
-> **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
+> **NOTE**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 
 <a name="queue-setup"></a>
 ### Setting up queue workers

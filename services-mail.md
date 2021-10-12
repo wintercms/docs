@@ -69,7 +69,7 @@ Since we are passing an array containing the `name` key in the example above, we
 
     {{ name }}
 
-> **Note:** You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#attachments).
+> **NOTE:** You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#attachments).
 
 #### Quick sending
 
@@ -140,7 +140,7 @@ Here is a list of the available methods on the `$message` message builder instan
     // Get the underlying SwiftMailer message instance...
     $message->getSwiftMessage();
 
-> **Note:** The message instance passed to a `Mail::send` Closure extends the [SwiftMailer](http://swiftmailer.org) message class, allowing you to call any method on that class to build your e-mail messages.
+> **NOTE:** The message instance passed to a `Mail::send` Closure extends the [SwiftMailer](http://swiftmailer.org) message class, allowing you to call any method on that class to build your e-mail messages.
 
 #### Mailing plain text
 
@@ -293,7 +293,7 @@ The content inside a mail view file can include up to 3 sections: **configuratio
 
     <p>This email was sent using formatting (HTML)</p>
 
-> **Note:** Basic Twig tags and expressions are supported in mail views.
+> **NOTE:** Basic Twig tags and expressions are supported in mail views.
 
 The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
 
@@ -327,7 +327,7 @@ The process for sending these emails is the same. For example, if you create a t
         [...]
     });
 
-> **Note:** If the mail template does not exist in the system, this code will attempt to find a mail view with the same code.
+> **NOTE:** If the mail template does not exist in the system, this code will attempt to find a mail view with the same code.
 
 #### Automatically generated templates
 
