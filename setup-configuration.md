@@ -277,7 +277,7 @@ This allows the root domain or subdomain that hosts your Winter CMS install to l
 
 After making these changes, you may delete the `modules/cms` folder from your project, as they will no longer be required.
 
-If you have installed Winter CMS [via Composer](https://wintercms.com/docs/help/using-composer), you can remove the `winter/wn-cms-module` line in the `require` block within the `composer.json` file in the root folder of your Winter CMS install, and this will prevent Composer from installing or updating the CMS module.
+If you have installed Winter CMS [via Composer](../help/using-composer), you can remove the `winter/wn-cms-module` line in the `require` block within the `composer.json` file in the root folder of your Winter CMS install, and this will prevent Composer from installing or updating the CMS module.
 
 > **NOTE:** Some plugins may make references to classes within the CMS module. If this is the case, you will need to keep the CMS module files available in your install.
 

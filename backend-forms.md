@@ -333,7 +333,7 @@ If you would like to validate this field server-side on save to ensure that it i
         'your_age' => 'numeric',
     ];
 
-For more information on model validation, please visit [the documentation page](https://wintercms.com/docs/services/validation#rule-numeric).
+For more information on model validation, please visit [the documentation page](../services/validation#rule-numeric).
 
 <a name="field-password"></a>
 ### Password
@@ -362,7 +362,7 @@ If you would like to validate this field on save to ensure that it is a properly
         'user_email' => 'email',
     ];
 
-For more information on model validation, please visit [the documentation page](https://wintercms.com/docs/services/validation#rule-email).
+For more information on model validation, please visit [the documentation page](../services/validation#rule-email).
 
 <a name="field-textarea"></a>
 ### Textarea
@@ -1412,7 +1412,7 @@ You can specify the URL to redirect to after the model is saved by overriding th
 
     public function formGetRedirectUrl($context = null, $model = null)
     {
-        return 'https://wintercms.com';
+        return 'https://example.com';
     }
 
 <a name="extend-model-query"></a>

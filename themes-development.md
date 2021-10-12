@@ -41,7 +41,7 @@ Example of the theme information file:
 name: "Winter CMS Demo"
 description: "Demonstrates the basic concepts of the frontend theming."
 author: "Winter CMS"
-homepage: "http://wintercms.com"
+homepage: "https://wintercms.com"
 code: "demo"
 ```
 

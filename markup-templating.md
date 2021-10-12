@@ -83,5 +83,5 @@ There are some features offered by Twig that are not supported by Winter. They a
 
 Tag | Equivalent
 ------------- | -------------
-`{% extend %}` | Use [Layouts](http://wintercms.com/docs/cms/layouts) or `{% placeholder %}`
+`{% extend %}` | Use [Layouts](../cms/layouts) or `{% placeholder %}`
 `{% include %}` | Use `{% partial %}` or `{% content %}`

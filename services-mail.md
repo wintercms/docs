@@ -20,7 +20,7 @@ Winter provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` f
 
 ### Driver prerequisites
 
-Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](http://wintercms.com/plugin/winter-drivers).
+Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](https://wintercms.com/plugin/winter-drivers).
 
 #### Mailgun driver
 

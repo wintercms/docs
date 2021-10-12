@@ -138,4 +138,4 @@ Using the `pingBefore` and `thenPing` methods, the scheduler can automatically p
              ->pingBefore($url)
              ->thenPing($url);
 
-> You need to install [Drivers plugin](http://wintercms.com/plugin/winter-drivers) before you can use either the `pingBefore($url)` or `thenPing($url)` features.
+> You need to install [Drivers plugin](https://wintercms.com/plugin/winter-drivers) before you can use either the `pingBefore($url)` or `thenPing($url)` features.

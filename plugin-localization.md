@@ -6,7 +6,7 @@
 
 Plugins can have localization files in the **lang** subdirectory of the plugin directory. Plugins' localization files are registered automatically. The localization strings are supported automatically in the back-end user interface menus, form labels, etc. - if you provide the localization key instead of a real string, the system will try to load it from the localization file. In other cases you need to load the localization string [with the API](#accessing-strings).
 
-> **NOTE**: For translating frontend content, [there are plugins that can be used](http://wintercms.com/plugin/winter-translate) for this purpose.
+> **NOTE**: For translating frontend content, [there are plugins that can be used](https://wintercms.com/plugin/winter-translate) for this purpose.
 
 <a name="file-structure"></a>
 ## Localization directory and file structure
@@ -34,7 +34,7 @@ The **lang.php** file should define and return an array of any depth, for exampl
         ]
     ];
 
-The **validation.php** file has a similar structure to the **lang.php** and is used to specify your [custom validation](https://wintercms.com/docs/services/validation#localization) messages in a language file, for example:
+The **validation.php** file has a similar structure to the **lang.php** and is used to specify your [custom validation](../services/validation#localization) messages in a language file, for example:
 
     <?php
 
