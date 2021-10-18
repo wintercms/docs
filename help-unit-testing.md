@@ -6,7 +6,7 @@
 <a name="testing-plugins"></a>
 ## Testing plugins
 
-Individual plugin test cases can be run by running `../../../vendor/bin/phpunit` in the plugin's base directory (ex. `plugins/acme/demo`.
+Individual plugin test cases can be run by running [the `winter:test`](./console/commands/#winter-test) command with the `--p|plugin=` option.
 
 ### Creating plugin tests
 
@@ -102,7 +102,7 @@ To perform unit testing on the core Winter files, you should download a developm
 
 ### Unit tests
 
-Unit tests can be performed by running `vendor/bin/phpunit` in the root directory of your Winter CMS installation.
+Unit tests can be performed by running  [the `winter:test`](./console/commands/#winter-test) command with the `--o|-core` option.
 
 ### Functional tests
 
