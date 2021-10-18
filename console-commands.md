@@ -322,16 +322,16 @@ All the project's tests:
 
 Only the core's tests with the `--o|-core` option:
 
-    php artisan winter:test --o
+    php artisan winter:test -o
 
 Only the specified plugin's tests with the `--p|-plugin=` option:
 
-    php artisan winter:test --p Acme.Demo
+    php artisan winter:test -p Acme.Demo
 
 Only a specified custom Test Suite with the `--c|-configuration=` option:
 
-    php artisan winter:test --c ./custom-path/phpunit.xml
+    php artisan winter:test -c ./custom-path/phpunit.xml
 
 You can pass any of the PHP Unit options as long as you type them **after** the `winter:test` command's options:
 
-    php artisan winter:test --p Acme.Demo --filter=FilteredTest --stop-on-failure
+    php artisan winter:test -p Acme.Demo --filter=FilteredTest --stop-on-failure
