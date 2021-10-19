@@ -314,24 +314,24 @@ To also delete records that have no associated file in the local storage, pass t
 <a name="winter-test"></a>
 #### Run unit tests
 
-Runs the core's, a specified plugin's or all the project's unit tests.
+Runs the unit tests for the core, a specified plugin or across the entire project.
 
-All the project's tests:
+To run the entire project's unit tests:
 
     php artisan winter:test
 
-Only the core's tests with the `--o|-core` option:
+Or, to run only the core unit tests, use the `-o|--core` option:
 
     php artisan winter:test -o
 
-Only the specified plugin's tests with the `--p|-plugin=` option:
+To run a specified plugin's tests, use the `-p|--plugin=` option:
 
     php artisan winter:test -p Acme.Demo
 
-Only a specified custom Test Suite with the `--c|-configuration=` option:
+To run a custom test suite, use the `-c|--configuration=` option:
 
     php artisan winter:test -c ./custom-path/phpunit.xml
 
-You can pass any of the PHP Unit options as long as you type them **after** the `winter:test` command's options:
+You can pass any additional parameters to PHPUnit, as long as you include them **after** the `winter:test` command's options:
 
     php artisan winter:test -p Acme.Demo --filter=FilteredTest --stop-on-failure
