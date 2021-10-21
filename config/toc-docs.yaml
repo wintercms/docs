@@ -13,6 +13,7 @@ Getting Started:
     help/unit-testing: "Unit Testing"
     help/using-composer: "Using Composer"
     help/developer/guide: "Developer Guide"
+    architecture/maintainer-guide: "Maintainer Guide"
 
 Backend (Admin):
   icon: "icon-desktop"
