@@ -10,6 +10,10 @@
     - [Setting up the scheduler](#crontab-setup)
     - [Setting up queue workers](#queue-setup)
 
+<div class="og-description">
+    Documentation on the different ways to install Winter CMS for your next project.
+</div>
+
 There are two ways you can install Winter, either using the [Web-based installer](#web-based-installation) or [Command-line installation](../console/commands#console-install) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
 
 <a name="system-requirements"></a>
