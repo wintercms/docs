@@ -1,11 +1,11 @@
 # Plugin Registration
 
 - [Introduction](#introduction)
-    - [Directory structure](#directory-structure)
-        - [Simple](#simple-structure)
-        - [Typical](#typical-structure)
-        - [Complex](#complex-structure)
-    - [Plugin namespaces](#namespaces)
+- [Directory structure](#directory-structure)
+    - [Simple](#simple-structure)
+    - [Typical](#typical-structure)
+    - [Complex](#complex-structure)
+- [Plugin namespaces](#namespaces)
 - [Registration file](#registration-file)
     - [Supported methods](#registration-methods)
     - [Basic plugin information](#basic-plugin-information)
@@ -16,46 +16,42 @@
 - [Registering middleware](#registering-middleware)
 - [Elevated permissions](#elevated-plugin)
 - [Plugin replacement & forking](#plugin-replace)
-  - [Registering as a replacement](#plugin-replace-registration)
-    - [Version constraints](#version-constraints)
-  - [Aliases](#aliases)
-    - [Config Aliases](#aliases-config)
-    - [Lang Aliases](#aliases-lang)
-    - [Settings Aliases](#aliases-settings)
-    - [Navigation Aliases](#aliases-navigation)
-  - [Handling migrations, seeders and table references](#plugin-replace-data)
 
-<a name="introduction"></a>
+<div class="og-description">
+    Learn how to create and register plugins for Winter CMS.
+</div>
+
+<a name="Introduction"></a>
 ## Introduction
 
-Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or backend menus and pages. Some examples of what a plugin can do:
+Plugins are the foundation for adding new features or extending the base functionality of Winter CMS. The plugin registration process allows plugins to declare their features such as [components](components), navigation items and Backend pages. Some examples of what a plugin can do:
 
-1. Define [components](../plugin/components).
-1. Define [user permissions](../backend/users).
-1. Add [settings pages](../plugin/settings#backend-pages), [menu items](../plugin/registration#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
-1. Create [database table structures and seed data](../plugin/updates).
-1. Alter [functionality of the core or other plugins](../services/events).
-1. Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
+- Define [components](../plugin/components).
+- Define [user permissions](../backend/users).
+- Add [settings pages](../plugin/settings#backend-pages), [menu items](../plugin/registration#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
+- Create [database table structures and seed data](../plugin/updates).
+- Alter [functionality of the core or other plugins](../services/events).
+- Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
 
 <a name="directory-structure"></a>
-### Directory structure
+## Directory structure
 
 Plugins reside in the **/plugins** subdirectory of the application directory. Plugins can range from extremely simple to very complex depending on the requirements. The most simple plugin only requires a `Plugin.php` file, but they can accomodate all the way up to entire application structures as required.
 
 <a name="simple-structure"></a>
-#### Simple Plugin Structure:
+### Simple plugin structure
 
 The simplest plugins only require the **Plugin.php** file described below.
 
 ```css
 📂 plugins
- ┣ 📂 myauthor          <-- Author name
- ┃ ┣ 📂 myplugin        <-- Plugin name
- ┃ ┃ ┗ 📜 Plugin.php    <-- Plugin registration file, required
+ ┣ 📂 myauthor          /* Author name */
+ ┃ ┣ 📂 myplugin        /* Plugin name */
+ ┃ ┃ ┗ 📜 Plugin.php    /* Plugin registration file, required */
 ```
 
 <a name="typical-structure"></a>
-#### Typical Plugin Structure:
+### Typical plugin structure
 
 The following is an example of what most plugins would end up looking like when interacting with the most commonly used Winter CMS functionality.
 
@@ -63,123 +59,131 @@ The following is an example of what most plugins would end up looking like when 
 
 ```css
 📂 plugins
- ┣ 📂 myauthor              <-- Author name
- ┃ ┣ 📂 myplugin            <-- Plugin name
- ┃ ┃ ┣ 📂 assets            <-- Assets used for either frontend functionality (components) or backend (controllers, widgets, etc)
- ┃ ┃ ┣ 📂 controllers       <-- Backend controllers
- ┃ ┃ ┣ 📂 lang              <-- Localization files
- ┃ ┃ ┃ ┗ 📂 en              <-- Specific locale folder
- ┃ ┃ ┃ ┃ ┗ 📜 lang.php      <-- Translations
- ┃ ┃ ┣ 📂 models            <-- Models
- ┃ ┃ ┣ 📂 updates           <-- Database migrations
- ┃ ┃ ┃ ┗ 📜 version.yaml    <-- Changelog
- ┃ ┃ ┣ 📂 views             <-- Custom view files
- ┃ ┃ ┃ ┗ 📂 mail            <-- Custom mail templates
- ┃ ┃ ┣ 📜 README.md         <-- Documentation describing the purpose of the plugin
- ┃ ┃ ┗ 📜 Plugin.php        <-- Plugin registration class
+ ┣ 📂 myauthor              /* Author name */
+ ┃ ┣ 📂 myplugin            /* Plugin name */
+ ┃ ┃ ┣ 📂 assets            /* CSS, JavaScript and image assets for pages and components */
+ ┃ ┃ ┣ 📂 controllers       /* Backend controllers */
+ ┃ ┃ ┣ 📂 lang              /* Localization files */
+ ┃ ┃ ┃ ┗ 📂 en              /* Specific locale folder */
+ ┃ ┃ ┃ ┃ ┗ 📜 lang.php      /* Translations */
+ ┃ ┃ ┣ 📂 models            /* Models */
+ ┃ ┃ ┣ 📂 updates           /* Database migrations */
+ ┃ ┃ ┃ ┗ 📜 version.yaml    /* Changelog */
+ ┃ ┃ ┣ 📂 views             /* Custom view files */
+ ┃ ┃ ┃ ┗ 📂 mail            /* Custom mail templates */
+ ┃ ┃ ┣ 📜 README.md         /* Documentation describing the purpose of the plugin */
+ ┃ ┃ ┗ 📜 Plugin.php        /* Plugin registration class */
 ```
 
 <a name="complex-structure"></a>
-#### Complex Plugin Structure:
+### Complex plugin structure
 
 The following is an example of what a complex plugin could look like when using a significant number of the features provided by Winter CMS as well as providing some of its own.
 
 ```css
 📂 plugins
- ┣ 📂 myauthor                              <-- Author name
- ┃ ┣ 📂 myplugin                            <-- Plugin name
- ┃ ┃ ┣ 📂 assets                            <-- Assets used for either frontend functionality (components) or backend (controllers, widgets, etc)
+ ┣ 📂 myauthor                              /* Author name */
+ ┃ ┣ 📂 myplugin                            /* Plugin name */
+ ┃ ┃ ┣ 📂 assets                            /* CSS, JavaScript and image assets for pages and components */
  ┃ ┃ ┃ ┣ 📂 css
  ┃ ┃ ┃ ┣ 📂 favicons
  ┃ ┃ ┃ ┣ 📂 images
  ┃ ┃ ┃ ┣ 📂 js
  ┃ ┃ ┃ ┗ 📂 scss
- ┃ ┃ ┣ 📂 behaviors                         <-- Any custom behaviors provided by the plugin
- ┃ ┃ ┣ 📂 classes                           <-- Any custom classes provided by the plugin
- ┃ ┃ ┣ 📂 config                            <-- Configuration files
+ ┃ ┃ ┣ 📂 behaviors                         /* Any custom behaviors provided by the plugin */
+ ┃ ┃ ┣ 📂 classes                           /* Any custom classes provided by the plugin */
+ ┃ ┃ ┣ 📂 config                            /* Configuration files */
  ┃ ┃ ┃ ┗ 📜 config.php
- ┃ ┃ ┣ 📂 console                           <-- Any custom CLI commands provided by the plugin
- ┃ ┃ ┣ 📂 controllers                       <-- Backend controllers
- ┃ ┃ ┃ ┣ 📂 records                         <-- Directory for the view and configuration files for the given controller
- ┃ ┃ ┃ ┃ ┣ 📜 _list_toolbar.htm             <-- List toolbar partial file
- ┃ ┃ ┃ ┃ ┣ 📜 config_filter.yaml            <-- Configuration for the Filter widget present on the controller lists
- ┃ ┃ ┃ ┃ ┣ 📜 config_form.yaml              <-- Configuration for the Form widget present on the controller
- ┃ ┃ ┃ ┃ ┣ 📜 config_importexport.yaml      <-- Configuration for the Import/Export behavior
- ┃ ┃ ┃ ┃ ┣ 📜 config_list.yaml              <-- Configuration for the Lists widget present on the controller
- ┃ ┃ ┃ ┃ ┣ 📜 config_relation.yaml          <-- Configuration for the RelationController behavior
- ┃ ┃ ┃ ┃ ┣ 📜 create.htm                    <-- View file for the create action
- ┃ ┃ ┃ ┃ ┣ 📜 index.htm                     <-- View file for the index action
- ┃ ┃ ┃ ┃ ┣ 📜 preview.htm                   <-- View file for the preview action
- ┃ ┃ ┃ ┃ ┗ 📜 update.htm                    <-- View file for the update action
- ┃ ┃ ┃ ┣ 📜 Records.php                     <-- Backend controller for the Record model
- ┃ ┃ ┣ 📂 docs                              <-- Any plugin-specific documentation should live here
- ┃ ┃ ┣ 📂 formwidgets                       <-- Any custom FormWidgets provided by the plugin
- ┃ ┃ ┣ 📂 lang                              <-- Localization files
- ┃ ┃ ┃ ┗ 📂 en                              <-- Specific locale folder
- ┃ ┃ ┃ ┃ ┗ 📜 lang.php                      <-- Translations for that locale
- ┃ ┃ ┣ 📂 layouts                           <-- Any custom backend layouts used by the plugin
- ┃ ┃ ┣ 📂 models                            <-- Models provided by the plugin
- ┃ ┃ ┃ ┣ 📂 record                          <-- Directory containing configuration files specific to that model
- ┃ ┃ ┃ ┃ ┣ 📜 columns.yaml                  <-- Configuration file used for the Lists widget
- ┃ ┃ ┃ ┃ ┗ 📜 fields.yaml                   <-- Configuration file used for the Form widget
- ┃ ┃ ┃ ┣ 📜 Record.php                      <-- Model class for the Record model
- ┃ ┃ ┣ 📂 partials                          <-- Any custom partials used by the plugin
- ┃ ┃ ┣ 📂 reportwidgets                     <-- Any custom ReportWidgets provided by the plugin
- ┃ ┃ ┣ 📂 tests                             <-- Test suite for the plugin
- ┃ ┃ ┣ 📂 traits                            <-- Any custom Traits provided by the plugin
- ┃ ┃ ┣ 📂 updates                           <-- Database migrations
- ┃ ┃ ┃ ┃ ┣ 📂 v1.0.0                        <-- Migrations for a specific version of the plugin
- ┃ ┃ ┃ ┃ ┃ ┗ 📜 create_records_table.php    <-- Database migration file, referenced in version.yaml
- ┃ ┃ ┃ ┗ 📜 version.yaml                    <-- Changelog
- ┃ ┃ ┣ 📂 views                             <-- Custom view files
- ┃ ┃ ┃ ┗ 📂 mail                            <-- Custom mail templates provided by the plugin
- ┃ ┃ ┣ 📂 widgets                           <-- Any custom Widgets provided by the plugin
- ┃ ┃ ┣ 📜 LICENSE                           <-- License file
- ┃ ┃ ┣ 📜 README.md                         <-- Documentation describing the purpose of the plugin
- ┃ ┃ ┣ 📜 Plugin.php                        <-- Plugin registration file
- ┃ ┃ ┣ 📜 composer.json                     <-- Composer file to manage dependencies for the plugin
- ┃ ┃ ┣ 📜 helpers.php                       <-- Global helpers provided by the plugin loaded via composer.json
- ┃ ┃ ┣ 📜 phpunit.xml                       <-- Unit testing configuration
- ┃ ┃ ┣ 📜 plugin.yaml                       <-- Simplified plugin registration configuration YAML file, used by Winter.Builder
- ┃ ┃ ┗ 📜 routes.php                        <-- Any custom routes provided by the plugin
+ ┃ ┃ ┣ 📂 console                           /* Any custom CLI commands provided by the plugin */
+ ┃ ┃ ┣ 📂 controllers                       /* Backend controllers */
+ ┃ ┃ ┃ ┣ 📂 records                         /* Directory for the view and configuration files for the given controller */
+ ┃ ┃ ┃ ┃ ┣ 📜 _list_toolbar.htm             /* List toolbar partial file */
+ ┃ ┃ ┃ ┃ ┣ 📜 config_filter.yaml            /* Configuration for the Filter widget present on the controller lists */
+ ┃ ┃ ┃ ┃ ┣ 📜 config_form.yaml              /* Configuration for the Form widget present on the controller */
+ ┃ ┃ ┃ ┃ ┣ 📜 config_importexport.yaml      /* Configuration for the Import/Export behavior */
+ ┃ ┃ ┃ ┃ ┣ 📜 config_list.yaml              /* Configuration for the Lists widget present on the controller */
+ ┃ ┃ ┃ ┃ ┣ 📜 config_relation.yaml          /* Configuration for the RelationController behavior */
+ ┃ ┃ ┃ ┃ ┣ 📜 create.htm                    /* View file for the create action */
+ ┃ ┃ ┃ ┃ ┣ 📜 index.htm                     /* View file for the index action */
+ ┃ ┃ ┃ ┃ ┣ 📜 preview.htm                   /* View file for the preview action */
+ ┃ ┃ ┃ ┃ ┗ 📜 update.htm                    /* View file for the update action */
+ ┃ ┃ ┃ ┣ 📜 Records.php                     /* Backend controller for the Record model */
+ ┃ ┃ ┣ 📂 docs                              /* Any plugin-specific documentation should live here */
+ ┃ ┃ ┣ 📂 formwidgets                       /* Any custom FormWidgets provided by the plugin */
+ ┃ ┃ ┣ 📂 lang                              /* Localization files */
+ ┃ ┃ ┃ ┗ 📂 en                              /* Specific locale folder */
+ ┃ ┃ ┃ ┃ ┗ 📜 lang.php                      /* Translations for that locale */
+ ┃ ┃ ┣ 📂 layouts                           /* Any custom backend layouts used by the plugin */
+ ┃ ┃ ┣ 📂 models                            /* Models provided by the plugin */
+ ┃ ┃ ┃ ┣ 📂 record                          /* Directory containing configuration files specific to that model */
+ ┃ ┃ ┃ ┃ ┣ 📜 columns.yaml                  /* Configuration file used for the Lists widget */
+ ┃ ┃ ┃ ┃ ┗ 📜 fields.yaml                   /* Configuration file used for the Form widget */
+ ┃ ┃ ┃ ┣ 📜 Record.php                      /* Model class for the Record model */
+ ┃ ┃ ┣ 📂 partials                          /* Any custom partials used by the plugin */
+ ┃ ┃ ┣ 📂 reportwidgets                     /* Any custom ReportWidgets provided by the plugin */
+ ┃ ┃ ┣ 📂 tests                             /* Test suite for the plugin */
+ ┃ ┃ ┣ 📂 traits                            /* Any custom Traits provided by the plugin */
+ ┃ ┃ ┣ 📂 updates                           /* Database migrations */
+ ┃ ┃ ┃ ┃ ┣ 📂 v1.0.0                        /* Migrations for a specific version of the plugin */
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜 create_records_table.php    /* Database migration file, referenced in version.yaml */
+ ┃ ┃ ┃ ┗ 📜 version.yaml                    /* Changelog */
+ ┃ ┃ ┣ 📂 views                             /* Custom view files */
+ ┃ ┃ ┃ ┗ 📂 mail                            /* Custom mail templates provided by the plugin */
+ ┃ ┃ ┣ 📂 widgets                           /* Any custom Widgets provided by the plugin */
+ ┃ ┃ ┣ 📜 LICENSE                           /* License file */
+ ┃ ┃ ┣ 📜 README.md                         /* Documentation describing the purpose of the plugin */
+ ┃ ┃ ┣ 📜 Plugin.php                        /* Plugin registration file */
+ ┃ ┃ ┣ 📜 composer.json                     /* Composer file to manage dependencies for the plugin */
+ ┃ ┃ ┣ 📜 helpers.php                       /* Global helpers provided by the plugin loaded via composer.json */
+ ┃ ┃ ┣ 📜 phpunit.xml                       /* Unit testing configuration */
+ ┃ ┃ ┣ 📜 plugin.yaml                       /* Simplified plugin registration configuration YAML file, used by Builder plugin */
+ ┃ ┃ ┗ 📜 routes.php                        /* Any custom routes provided by the plugin */
  ```
 
 <a name="namespaces"></a>
-### Plugin namespaces
+## Plugin namespaces
 
-Plugin namespaces are very important, especially if you are going to publish your plugins on the [Winter Marketplace](https://wintercms.com/marketplace). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
+Plugin namespaces are very important, especially if you are going to publish your plugins on the [Winter Marketplace](https://wintercms.com/marketplace). By using a unique plugin namespace, you remove the chance that your plugin conflicts with another author.
+
+When you register as an author on the Marketplace, you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register.
+
+The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
 <a name="registration-file"></a>
 ## Registration file
 
-The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
+The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. This file is read in the boot process of Winter CMS when determining available plugins. Registration files can provide the following:
 
 1. Information about the plugin, its name, and author.
-1. Registration methods for extending the CMS.
+1. Registration methods for extending the CMS and stating the intentions of the plugin.
 
-Registration scripts should use the plugin namespace. The registration script should define a class with the name `Plugin` that extends the `\System\Classes\PluginBase` class. The only required method of the plugin registration class is `pluginDetails`. An example Plugin registration file:
+Registration scripts should use the plugin namespace. The registration script should define a class with the name `Plugin` that extends the `\System\Classes\PluginBase` class. The only required method of the plugin registration class is the `pluginDetails` method. An example Plugin registration file:
 
-    namespace Acme\Blog;
+```php
+<?php
 
-    class Plugin extends \System\Classes\PluginBase
+namespace Acme\Blog;
+
+class Plugin extends \System\Classes\PluginBase
+{
+    public function pluginDetails()
     {
-        public function pluginDetails()
-        {
-            return [
-                'name' => 'Blog Plugin',
-                'description' => 'Provides some really cool blog features.',
-                'author' => 'ACME Corporation',
-                'icon' => 'icon-leaf'
-            ];
-        }
-
-        public function registerComponents()
-        {
-            return [
-                'Acme\Blog\Components\Post' => 'blogPost'
-            ];
-        }
+        return [
+            'name' => 'Blog Plugin',
+            'description' => 'Provides some really cool blog features.',
+            'author' => 'ACME Corporation',
+            'icon' => 'icon-snowflake-o'
+        ];
     }
+
+    public function registerComponents()
+    {
+        return [
+            'Acme\Blog\Components\Post' => 'blogPost'
+        ];
+    }
+}
+```
 
 <a name="registration-methods"></a>
 ### Supported methods
@@ -215,38 +219,55 @@ Key | Description
 **name** | the plugin name, required.
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
-**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, optional.
-**iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
+**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**. This key is required if `iconSvg` is not set.
+**iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors. This key is required if `icon` is not set.
 **homepage** | a link to the author's website address, optional.
 
 <a name="routing-initialization"></a>
 ## Routing and initialization
 
-Plugin registration files can contain two methods `boot` and `register`. With these methods you can do anything you like, like register routes or attach handlers to events.
+Plugin registration files can contain two methods: `boot` and `register`. These methods are run at separate points in the Winter CMS boot process.
 
-The `register` method is called immediately when the plugin is registered. The `boot` method is called right before a request is routed. So if your actions rely on another plugin, you should use the boot method. For example, inside the `boot` method you can extend models:
+The `register` method is called immediately when the plugin is found and the Plugin registration file is read. It can be used to register or provide global services, define functionality within the underlying framework or initialize functionality for the plugin.
 
-    public function boot()
-    {
-        User::extend(function($model) {
-            $model->hasOne['author'] = ['Acme\Blog\Models\Author'];
-        });
-    }
-
-> **NOTE:** The `boot` and `register` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
-
-Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router). For example:
-
-    Route::group(['prefix' => 'api_acme_blog'], function() {
-
-        Route::get('cleanup_posts', function(){ return Posts::cleanUp(); });
-
+```php
+public function register()
+{
+    App::register(MyProviderClass::class, function ($app) {
+        return new MyProviderClass();
     });
+}
+```
+
+> **NOTE:** The `register` method is run very early on in the Winter CMS boot process, and some functions within Winter CMS or Laravel may not be available at that stage, especially in respect to third-party plugins or services. You should use the `boot` method for any functionality that is dependent on third-party plugins or services.
+
+The `boot` method is called after all services are loaded and all plugins are registered. This method should be used to define functionality that is to be run on each page load, such as extending plugins or attaching to events.
+
+```php
+public function boot()
+{
+    User::extend(function($model) {
+        $model->hasOne['author'] = ['Acme\Blog\Models\Author'];
+    });
+}
+```
+
+The `boot` and `register` methods are not called during the update process, or within some critical Backend sections and command-line tools, to protect the system from critical errors. To overcome this limitation, use [elevated permissions](#elevated-plugin).
+
+Plugins can also supply a file named **routes.php** that may contain custom routing logic, as defined in the [router service](../services/router). For example:
+
+```php
+Route::group(['prefix' => 'api_acme_blog'], function() {
+    Route::get('cleanup_posts', function(){ return Posts::cleanUp(); });
+});
+```
+
+Finally, plugins can also supply a file named **init.php**. This file acts similar to the `boot` method in that it can be used to define functionality run on each page load, but in a more global context.
 
 <a name="dependency-definitions"></a>
 ## Dependency definitions
 
-A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
+A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file). The property should contain an array of plugin names that are considered requirements for this plugin to function. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
 
 ```php
 namespace Acme\Blog;
@@ -262,9 +283,9 @@ class Plugin extends \System\Classes\PluginBase
 }
 ```
 
-Dependency definitions will affect how the plugin operates and [how the update process applies updates](../plugin/updates#update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
+Dependency definitions will affect how the plugin operates and [how the update process orders and applies updates](../plugin/updates#update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies, it will be automatically disabled to prevent system errors.
 
-Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
+Care should be taken to ensure that circular dependency references are not made - for example, if the **Acme.Demo** plugin depends on the **Acme.Blog** plugin, the **Acme.Blog** plugins should not also depend on the **Acme.Demo** plugin.
 
 <a name="extending-twig"></a>
 ## Extending Twig
@@ -441,225 +462,3 @@ Define the `$elevated` property to grant elevated permissions for your plugin.
  */
 public $elevated = true;
 ```
-
-<a name="plugin-replace"></a>
-## Plugin replacement & forking
-
-Plugin replacement is a feature that allows you to create a plugin that replaces (or overrides) another plugin. This is useful when you're forking a plugin to add your own functionality but want to be able to seamlessly migrate from and act as a drop in replacement for the original plugin (i.e. retaining original data, fulfilling other plugin's dependencies on the original plugin, etc).
-
-<a name="plugin-replace-registration"></a>
-### Registering as a replacement
-
-To enable the plugin replacement feature, specify the identifier for the plugin your plugin is replacing in your plugin details along with the version constraints that define what versions of the plugin are able to be replaced by your plugin.
-
-```php
-public function pluginDetails()
-{
-    return [
-        'name'     => 'Acme Plugin',
-        'replaces' => [
-            'Acme.Original' => '>=5.0 <=6.0.4'
-        ],
-    ];
-}
-```
-
-<a name="version-constraints"></a>
-#### Version constraints
-
-Version constraints allow you to restrict your plugin to only override currently installed plugins of specific versions. The above example showcases only replacing a plugin if the original plugin is any version between `5.0` and `6.0.4` inclusive. Most of the time the actual version constraint you'll use will be much simpler, a simple `<2.0` to indicate all versions immediately prior to the version you first release your replacement plugin as.
-
-This means you don't have to worry about new versions of the original plugin having changes that may conflict with your changes to the plugin.
-
-Version constraints are specified in the [same format that Composer uses](https://getcomposer.org/doc/articles/versions.md#writing-version-constraints). Some valid examples would be:
-
-- `1.0`
-- `>=1.0.3`
-- `<2.0`
-- `>=1.5.0 <2.0.0`
-- `self.version`
-
-By specifying a version, your plugin will check what version the original plugin is installed at and only if it's version matches the constraint will it disable the original and enable the replacement. If this match fails, then the replacement will be disabled and the original plugin will stay enabled.
-
-<a name="aliases"></a>
-### Aliases
-
-> **NOTE:** This is for reference only. By registering as a plugin replacement using the above feature Winter already handles registering these aliases throughout the system for you.
-
-<!-- TODO: Group the into their own docs -->
-
-Aliasing is a feature of Winter that allows for backwards compatibility and support for inheriting replaced plugins:
-
-- Configs
-- Lang
-- Settings
-- Navigation
-
-<a name="aliases-config"></a>
-#### Config
-
-Config supports 2 different types of aliasing: `registerNamespaceAlias` & `registerPackageFallback`.
-
-##### registerNamespaceAlias
-
-This method allows for redirection of the alias to the namespace while accessing config values.
-
-```php
-Config::registerNamespaceAlias('winter.replacement', 'winter.original');
-```
-
-For example, register the following config as `plugins/winter/replacement/config/config.php`:
-
-```php
-<?php
-
-return [
-    'foo' => 'bar'
-];
-```
-
-The config will be accessible via the alias registered:
-
-```php
-config('winter.original::foo'); // returns bar
-```
-
-##### registerPackageFallback
-
-This method allows falling back to an aliased global config (a config specified in `/config/acme/plugin/config.php`).
-
-```php
-Config::registerPackageFallback('winter.replacement', 'winter.original');
-```
-
-The logic to this is as follows:
-
-- If `/config/winter/replacement/config.php` exists it will be registered under the `winter.replacement` namespace.
-- If `/config/winter/replacement/config.php` does not exist, it will check `/config/winter/original/config.php` and if found,
-  it will be registered under the `winter.replacement`.
-
-<a name="aliases-lang"></a>
-#### Lang
-
-Allows for redirection of calls to the alias and returns values from the namespace.
-
-```php
-Lang::registerNamespaceAlias('winter.replacement', 'winter.original');
-```
-
-For example, register the following config as `plugins/winter/replacement/lang/en/lang.php`:
-
-```php
-<?php
-
-return [
-    'foo' => 'bar'
-];
-```
-
-The lang will be accessible via the alias registered:
-
-```php
-Lang::get('winter.original::foo'); // returns bar
-```
-
-<a name="aliases-settings"></a>
-#### Settings
-
-There are 2 methods for registering settings aliases. Firstly the aliases can be registered prior to the `PluginManager` init via `lazyRegisterOwnerAlias`.
-
-```php
-SettingsManager::lazyRegisterOwnerAlias('Winter.Replacement', 'Winter.Original');
-```
-
-If the `PluginManager` has been loaded, then aliases can be registered via:
-
-```php
-SettingsManager::instance()->registerOwnerAlias('Winter.Replacement', 'Winter.Original');
-```
-
-<a name="aliases-navigation"></a>
-#### Navigation
-
-There are 2 methods for registering settings aliases. Firstly the aliases can be registered prior to the `PluginManager` init via `lazyRegisterOwnerAlias`.
-
-```php
-NavigationManager::lazyRegisterOwnerAlias('Winter.Replacement', 'Winter.Original');
-```
-
-If the `PluginManager` has been loaded, then aliases can be registered via:
-
-```php
-NavigationManager::instance()->registerOwnerAlias('Winter.Replacement', 'Winter.Original');
-```
-
-<a name="plugin-replace-data"></a>
-### Migrations, seeders and table references
-
-When forking a plugin and using the replace functionality, you will need to handle migrating the data from the original plugin to your replacing plugin via migrations, seeders and the model classes. To do this we recommend the following:
-
-- Create a migration to rename tables
-- Update models to reference your new table
-- Check migrations for any usage of models
-
-#### Table renaming
-
-An example migration could look something like this:
-
-```php
-<?php namespace Winter\Plugin\Updates;
-
-use Schema;
-use Winter\Storm\Database\Updates\Migration;
-
-class RenameTables extends Migration
-{
-    const TABLES = [
-        'example',
-        'foo',
-        'bar'
-    ];
-
-    public function up()
-    {
-        foreach (self::TABLES as $table) {
-            $from = 'acme_plugin_' . $table;
-            $to = 'winter_plugin_' . $table;
-
-            if (Schema::hasTable($from) && !Schema::hasTable($to)) {
-                Schema::rename($from, $to);
-            }
-        }
-    }
-
-    public function down()
-    {
-        foreach (self::TABLES as $table) {
-            $from = 'winter_plugin_' . $table;
-            $to = 'acme_plugin_' . $table;
-
-            if (Schema::hasTable($from) && !Schema::hasTable($to)) {
-                Schema::rename($from, $to);
-            }
-        }
-    }
-}
-```
-
-#### Migrations using models
-
-If an old migration (i.e. any migration that runs before the migration that renames the tables) is using a model to populate data, it will be referencing the new table and that will cause issues while updating. The solution to this is dynamically renaming the table before inserting/modifying data:
-
-```php
-ExampleModel::extend(function ($model) {
-    $model->setTable('acme_plugin_example');
-});
-
-// execute seeding code
-
-ExampleModel::extend(function ($model) {
-    $model->setTable('winter_plugin_example');
-});
-```
-
-If the models use the `unique` validation rule, you should make sure that the rule is implemented without any modifiers (i.e. just `'slug' => 'unique'`, not `'slug' => 'unique:winter_plugin_table'` so that the call to `$model->setTable()` will also take effect in that validation logic.

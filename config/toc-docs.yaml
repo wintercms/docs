@@ -53,6 +53,7 @@ Plugins:
     plugin/localization: "Localization"
     plugin/scheduling: "Task Scheduling"
     plugin/extending: "Extending Plugins"
+    plugin/replacement: "Replacement & Forking"
 
 "AJAX Framework":
   icon: "icon-bolt"
