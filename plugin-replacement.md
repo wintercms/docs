@@ -12,9 +12,9 @@
 Plugin replacement is a feature that allows you to create a plugin that replaces (or overrides) another plugin. This is useful when you're forking a plugin to add your own functionality but want to be able to seamlessly migrate from and act as a drop in replacement for the original plugin (i.e. retaining original data, fulfilling other plugin's dependencies on the original plugin, etc).
 
 <a name="plugin-replace-registration"></a>
-## Registering as a replacement
+## Registering a plugin as a replacement
 
-To enable the plugin replacement feature, specify the identifier for the plugin your plugin is replacing in your plugin details along with the version constraints that define what versions of the plugin are able to be replaced by your plugin.
+To enable the plugin replacement feature, specify the identifier for the plugin that your plugin is replacing in the `replaces` key within the `pluginDetails` array, along with the version constraints that define what versions of the plugin are able to be replaced by your plugin.
 
 ```php
 public function pluginDetails()
@@ -48,7 +48,7 @@ By specifying a version, your plugin will check what version the original plugin
 <a name="aliases"></a>
 ## Aliasing
 
-> **NOTE:** This is for reference only. By registering as a plugin replacement using the above feature Winter already handles registering these aliases throughout the system for you.
+> **NOTE:** This is for reference only. By registering a plugin as a replacement in the Plugin registration file, Winter automatically handles registering these aliases for you.
 
 Aliasing is a feature of Winter that allows for backwards compatibility and support for inheriting replaced plugins:
 
@@ -56,6 +56,8 @@ Aliasing is a feature of Winter that allows for backwards compatibility and supp
 - Languages & translations
 - Settings
 - Navigation
+
+This will allow, for example, plugins that use the original plugin functionality to still work even if the original class names are used. If a plugin replaces an original plugin that is a dependency of a third plugin, aliasing will resolve the dependency for the third plugin, allowing the third plugin to continue to function.
 
 <a name="aliases-config"></a>
 ### Configuration
