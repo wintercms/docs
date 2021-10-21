@@ -23,11 +23,17 @@
     - [Remove theme](#theme-remove-command)
     - [Sync theme](#theme-sync-command)
 - [Utilities](#utility-commands)
-    - [Clear application cache](#cache-clear-command)
-    - [Remove demo data](#winter-fresh-command)
-    - [Mirror public directory](#cache-clear-command)
-    - [Enable DotEnv configuration](#winter-env-command)
-    - [Miscellaneous commands](#winter-util-command)
+    - [Clear Application Cache](#cache-clear-command)
+    - [Remove Demo Data](#winter-fresh-command)
+    - [Mirror Public Directory](#cache-clear-command)
+    - [Enable DotEnv Configuration](#winter-env-command)
+    - [Run Unit Tests](#winter-test-command)
+    - [Miscellaneous Commands](#winter-util-command)
+        - [Compile Asset Bundles](#winter-util-compile-assets-command)
+        - [Recursively Git Pull](#winter-util-git-pull-command)
+        - [Purge Thumbnails](#winter-util-purge-thumbs-command)
+        - [Purge Uploaded Files](#winter-util-purge-uploads-command)
+        - [Purge Orphaned Files](#winter-util-purge-orphans-command)
 
 Winter includes several command-line interface (CLI) commands and utilities that allow to install Winter, update it, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development) or speed up development with the provided [scaffolding commands](../console/scaffolding).
 
@@ -41,17 +47,29 @@ Console installation can be performed using the native system or with [Composer]
 
 Download the application source code by using `create-project` in your terminal. The following command will install to a directory called **/mywinter**.
 
-    composer create-project wintercms/winter mywinter
+```bash
+composer create-project wintercms/winter mywinter
+```
 
 Once this task has finished, open the file **config/cms.php** and enable the `disableCoreUpdates` setting. This will disable core updates from being delivered by the Winter gateway.
 
+```php
+return [
+    // ...
+
     'disableCoreUpdates' => true,
+
+    // ...
+];
+```
 
 When updating Winter, use the composer update command as normal before performing a [database migration](#console-up-command).
 
-    composer update
+```bash
+composer update
+```
 
-Composer is configured to look inside plugin directories for composer dependencies and these will be included in updates.
+Composer is configured to look inside plugin directories for composer dependencies through the use of the `wikimedia-merge-plugin` and these will be included when running `composer update`.
 
 > **NOTE:** To use composer with a Winter instance that has been installed using the [Wizard installation](../setup/installation#wizard-installation), simply copy the `tests/` directory and `composer.json` file from [GitHub](https://github.com/wintercms/winter) into your Winter instance and then run `composer install`.
 
@@ -63,7 +81,9 @@ Composer is configured to look inside plugin directories for composer dependenci
 
 The `winter:install` command will guide you through the process of setting up Winter CMS for the first time. It will ask for the database configuration, application URL, encryption key and administrator details.
 
-    php artisan winter:install
+```bash
+php artisan winter:install
+```
 
 You also may wish to inspect **config/app.php** and **config/cms.php** to change any additional configuration.
 
@@ -74,7 +94,9 @@ You also may wish to inspect **config/app.php** and **config/cms.php** to change
 
 The `winter:update` command will request updates from the Winter gateway. It will update the core application and plugin files, then perform a database migration.
 
-    php artisan winter:update
+```bash
+php artisan winter:update
+```
 
 > **IMPORTANT**: If you are using [using composer](#console-install-composer) do **NOT** run this command without first making sure that `cms.disableCoreUpdates` is set to true. Doing so will cause conflicts between the marketplace version of Winter and the version available through composer. In order to update the core Winter installation when using composer run `composer update` instead.
 
@@ -83,18 +105,24 @@ The `winter:update` command will request updates from the Winter gateway. It wil
 
 The `winter:up` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
 
-    php artisan winter:up
+```bash
+php artisan winter:up
+```
 
 The inverse command `winter:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#plugin-refresh-command) is a useful alternative for debugging a single plugin.
 
-    php artisan winter:down
+```bash
+php artisan winter:down
+```
 
 <a name="change-backend-user-password-command"></a>
 ### Change backend user password
 
 The `winter:passwd` command will allow the password of a backend user or administrator to be changed via the command-line. This is useful if someone gets locked out of their Winter CMS install, or for changing the password for the default administrator account.
 
-    php artisan winter:passwd username password
+```bash
+php artisan winter:passwd username password
+```
 
 You may provide the username/email and password as both the first and second argument, or you may leave the arguments blank, in which case the command will be run interactively.
 
@@ -108,50 +136,65 @@ Winter includes a number of commands for managing plugins.
 
 `plugin:install` - downloads and installs the plugin by its name. The next example will install a plugin called **AuthorName.PluginName**. Note that your installation should be bound to a project in order to use this command. You can create projects on Winter website, in the [Account / Projects](https://wintercms.com/account/project/dashboard) section.
 
-    php artisan plugin:install AuthorName.PluginName
+```bash
+php artisan plugin:install AuthorName.PluginName
+```
+
+> **NOTE:** If you have already have the plugin files locally either through Composer or manually uploading them then you can just run [`winter:up`](#console-up-command) to run the plugin's pending migrations to "install" it. This command is mostly meant for instaling plugins sourced from the [Winter CMS Marketplace](https://wintercms.com/marketplace)
 
 <a name="plugin-refresh-command"></a>
 ### Refresh plugin
 
 `plugin:refresh` - destroys the plugin's database tables and recreates them. This command is useful for development.
 
-    php artisan plugin:refresh AuthorName.PluginName
-
+```bash
+php artisan plugin:refresh AuthorName.PluginName
+```
 
 <a name="plugin-rollback-command"></a>
 ### Rollback plugin
 
 `plugin:rollback` - Rollback the specified plugin's migrations. The second parameter is optional, if specified the rollback process will stop at the specified version.
 
-    php artisan plugin:rollback AuthorName.PluginName 1.2.3
+```bash
+php artisan plugin:rollback AuthorName.PluginName 1.2.3
+```
 
 <a name="plugin-list-command"></a>
 ### List Plugins
 
 `plugin:list` - Displays a list of installed plugins.
 
-    php artisan plugin:list
+```bash
+php artisan plugin:list
+```
 
 <a name="plugin-disable-command"></a>
 ### Disable Plugin
 
 `plugin:disable` - Disable an existing plugin.
 
-    php artisan plugin:disable AuthorName.PluginName
+```bash
+php artisan plugin:disable AuthorName.PluginName
+```
 
 <a name="plugin-enable-command"></a>
 ### Enable Plugin
 
 `plugin:enable` - Enable a disabled plugin.
 
-    php artisan plugin:enable AuthorName.PluginName
+```bash
+php artisan plugin:enable AuthorName.PluginName
+```
 
 <a name="plugin-remove-command"></a>
 ### Remove plugin
 
 `plugin:remove` - destroys the plugin's database tables and deletes the plugin files from the filesystem.
 
-    php artisan plugin:remove AuthorName.PluginName
+```bash
+php artisan plugin:remove AuthorName.PluginName
+```
 
 <a name="theme-commands"></a>
 ## Theme management
@@ -163,32 +206,42 @@ Winter includes a number of commands for managing themes.
 
 `theme:install` - download and install a theme from the [Marketplace](https://wintercms.com/marketplace). The following example will install the theme in `/themes/authorname-themename`
 
-    php artisan theme:install AuthorName.ThemeName
+```bash
+php artisan theme:install AuthorName.ThemeName
+```
 
 If you wish to install the theme in a custom directory, simply provide the second argument. The following example will download `AuthorName.ThemeName` and install it in `/themes/my-theme`
 
-    php artisan theme:install AuthorName.ThemeName my-theme
+```bash
+php artisan theme:install AuthorName.ThemeName my-theme
+```
 
 <a name="theme-list-command"></a>
 ### List themes
 
 `theme:list` - list installed themes. Use the **-m** option to include popular themes in the Marketplace.
 
-    php artisan theme:list
+```bash
+php artisan theme:list
+```
 
 <a name="theme-use-command"></a>
 ### Enable theme
 
 `theme:use` - switch the active theme. The following example will switch to the theme in `/themes/winter-vanilla`
 
-    php artisan theme:use winter-vanilla
+```bash
+php artisan theme:use winter-vanilla
+```
 
 <a name="theme-remove-command"></a>
 ### Remove theme
 
 `theme:remove` - delete a theme. The following example will delete the directory `/themes/winter-vanilla`
 
-    php artisan theme:remove winter-vanilla
+```bash
+php artisan theme:remove winter-vanilla
+```
 
 <a name="theme-sync-command"></a>
 ### Sync theme
@@ -229,21 +282,25 @@ php artisan theme:sync --paths=partials/header.htm,content/contact.md
 Winter includes a number of utility commands.
 
 <a name="cache-clear-command"></a>
-### Clear application cache
+### Clear Application Cache
 
 `cache:clear` - clears the application, twig and combiner cache directories. Example:
 
-    php artisan cache:clear
+```bash
+php artisan cache:clear
+```
 
 <a name="winter-fresh-command"></a>
-### Remove demo data
+### Remove Demo Data
 
 `winter:fresh` - removes the demo theme and plugin that ships with Winter.
 
-    php artisan winter:fresh
+```bash
+php artisan winter:fresh
+```
 
 <a name="cache-clear-command"></a>
-### Mirror public directory
+### Mirror Public Directory
 
 `winter:mirror` - creates a mirrored copy of the public files needed to serve the application, using symbolic linking. This command is used when [setting up a public folder](../setup/configuration#public-folder).
 
@@ -258,61 +315,14 @@ php artisan winter:mirror public --relative
 ```
 
 <a name="winter-env-command"></a>
-### Enable DotEnv configuration
+### Enable DotEnv Configuration
 
 `winter:env` - changes common configuration values to [DotEnv syntax](../setup/configuration#dotenv-configuration).
 
     php artisan winter:env
 
-<a name="winter-util-command"></a>
-### Miscellaneous commands
-
-`winter:util` - a generic command to perform general utility tasks, such as cleaning up files or combining files. The arguments passed to this command will determine the task used.
-
-#### Compile assets
-
-Outputs combined system files for JavaScript (js), StyleSheets (less), client side language (lang), or everything (assets).
-
-    php artisan winter:util compile assets
-    php artisan winter:util compile lang
-    php artisan winter:util compile js
-    php artisan winter:util compile less
-
-To combine without minification, pass the `--debug` option.
-
-    php artisan winter:util compile js --debug
-
-#### Pull all repos
-
-This will execute the command `git pull` on all theme and plugin directories.
-
-    php artisan winter:util git pull
-
-#### Purge thumbnails
-
-Deletes all generated thumbnails in the uploads directory.
-
-    php artisan winter:util purge thumbs
-
-
-#### Purge uploads
-
-Deletes files in the uploads directory that do not exist in the "system_files" table.
-
-    php artisan winter:util purge uploads
-
-#### Purge orphans
-
-Deletes records in "system_files" table that do not belong to any other model.
-
-    php artisan winter:util purge orphans
-
-To also delete records that have no associated file in the local storage, pass the `--missing-files` option.
-
-    php artisan winter:util purge orphans --missing-files
-
-<a name="winter-test"></a>
-#### Run unit tests
+<a name="winter-test-command"></a>
+### Run unit tests
 
 Runs the unit tests for the entire project, a specific plugin, or the Winter CMS core.
 
@@ -320,3 +330,93 @@ To run the entire project's unit tests:
 
 ```bash
 php artisan winter:test
+```
+
+Or, to run only the core unit tests, use the `-o` or `--core` option:
+
+```bash
+php artisan winter:test -o
+```
+
+To run a specific plugin's tests, use the `-p` or `--plugin=` option:
+
+```bash
+php artisan winter:test -p Acme.Demo
+```
+
+To run a custom test suite, use the `-c` or `--configuration=` option:
+
+```bash
+php artisan winter:test -c ./custom-path/phpunit.xml
+```
+
+If using additional PHPUnit parameters / options, they must be included after the winter:test command's options:
+
+```bash
+php artisan winter:test -p Acme.Demo --filter=FilteredTest --stop-on-failure
+```
+
+<a name="winter-util-command"></a>
+### Miscellaneous commands
+
+`winter:util` - a generic command to perform general utility tasks, such as cleaning up files or combining files. The arguments passed to this command will determine the task used.
+
+<a name="winter-util-compile-assets-command"></a>
+#### Compile Asset Bundles
+
+Outputs combined system files for JavaScript (js), StyleSheets (less), client side language (lang), or everything (assets).
+
+```bash
+php artisan winter:util compile assets
+php artisan winter:util compile lang
+php artisan winter:util compile js
+php artisan winter:util compile less
+```
+
+To combine without minification, pass the `--debug` option.
+
+```bash
+php artisan winter:util compile js --debug
+```
+
+<a name="winter-util-git-pull-command"></a>
+#### Pull all repos
+
+This will execute the command `git pull` on all theme and plugin directories.
+
+```bash
+php artisan winter:util git pull
+```
+
+<a name="winter-util-purge-thumbs-command"></a>
+#### Purge Thumbnails
+
+Deletes all generated thumbnails in the uploads directory.
+
+```bash
+php artisan winter:util purge thumbs
+```
+
+<a name="winter-util-purge-uploads-command"></a>
+#### Purge Uploaded Files
+
+Deletes files in the uploads directory that do not exist in the "system_files" table.
+
+```bash
+php artisan winter:util purge uploads
+```
+
+<a name="winter-util-purge-orphans-command"></a>
+#### Purge Orphaned Files
+
+Deletes records in "system_files" table that do not belong to any other model.
+
+```bash
+php artisan winter:util purge orphans
+```
+
+To also delete records that have no associated file in the local storage, pass the `--missing-files` option.
+
+```bash
+php artisan winter:util purge orphans --missing-files
+```
