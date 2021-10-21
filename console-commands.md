@@ -310,3 +310,13 @@ Deletes records in "system_files" table that do not belong to any other model.
 To also delete records that have no associated file in the local storage, pass the `--missing-files` option.
 
     php artisan winter:util purge orphans --missing-files
+
+<a name="winter-test"></a>
+#### Run unit tests
+
+Runs the unit tests for the entire project, a specific plugin, or the Winter CMS core.
+
+To run the entire project's unit tests:
+
+```bash
+php artisan winter:test
