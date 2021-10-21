@@ -15,7 +15,7 @@
 - [Navigation menus](#navigation-menus)
 - [Registering middleware](#registering-middleware)
 - [Elevated permissions](#elevated-plugin)
-- [Plugin replacement & forking](#plugin-replace)
+- [Plugin replacement & forking](replacement)
 
 <div class="og-description">
     Learn how to create and register plugins for Winter CMS.
