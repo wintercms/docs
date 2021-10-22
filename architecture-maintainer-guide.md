@@ -1,11 +1,5 @@
 # Maintainers Guide to the Galaxy
 
-## Introduction
-
-This document immortalises the processes involved with maintaining the Winter CMS repositories. This is intended to give the maintainers of the project a clear idea as to how to review and manage the inflow of code and ensure the qualities and philosophies of Winter CMS and its first-party plugins are maintained.
-
-## Table of Contents
-
 - [Preface](#preface)
 - [Roles](#roles)
 - [Main Philosophy](#main-philosophy)
@@ -28,9 +22,11 @@ This document immortalises the processes involved with maintaining the Winter CM
 <a name="preface"></a>
 ## Preface
 
+This document immortalises the processes involved with maintaining the Winter CMS repositories. This is intended to give the maintainers of the project a clear idea as to how to review and manage the inflow of code and ensure the qualities and philosophies of Winter CMS and its first-party plugins are maintained.
+
 The Winter CMS project is the result of a fork that occurred on March 5th, 2021 after it became apparent to the maintainer group of October CMS that the original founders of October CMS had no intention of working collaboratively with the maintainer group. [The announcment of the fork](https://github.com/wintercms/winter/issues/5) goes into more details on what occurred as well as the reasoning for the fork.
 
-This document was originally written (and agreed to by at least one of the founders) for October CMS, but has been repurposed for Winter CMS.
+This document was originally written for October CMS, but has been repurposed for Winter CMS.
 
 <a name="roles"></a>
 ## Roles
