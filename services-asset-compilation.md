@@ -149,7 +149,7 @@ If you are wanting to render the injected assets in any other context, you can c
 
 While the majority of the time dynamic asset compilation through `addJs()`, `addCss()`, or the [`| theme` filter](../markup/filter-theme) should be sufficient for your needs, you may occassionally have a complex asset compilation that you would like to just generate a static file on command instead of dynamically.
 
-The Winter CMS core registers several such bundles for internal usage that are compiled whenever the [`artisan winter:util compile assets` command](console/commands#winter-util-command) is run.
+The Winter CMS core registers several such bundles for internal usage that are compiled whenever the [`artisan winter:util compile assets` command](../console/commands#winter-util-command) is run.
 
 <a name="extending-compiler"></a>
 ## Extending the Asset Compiler

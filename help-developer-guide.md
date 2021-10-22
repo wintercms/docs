@@ -404,7 +404,7 @@ $user->winter_forum_member
 <a name="model-scopes"></a>
 ### Model scopes
 
-[Model scopes](../database/model#query-scopes) should always return the scoped `QueryBuilder` instance to support scope chaining. If a scope is not returning a `QueryBuilder` instance then it is not a scope and should be a regular / static method instead.
+[Model scopes](../../database/model#query-scopes) should always return the scoped `QueryBuilder` instance to support scope chaining. If a scope is not returning a `QueryBuilder` instance then it is not a scope and should be a regular / static method instead.
 
 ```php
 // Valid scope method
