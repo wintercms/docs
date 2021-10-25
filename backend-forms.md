@@ -666,7 +666,7 @@ Option | Description
 
 <a name="widget-colorpicker"></a>
 ### Color picker
-`colorpicker` - renders controls to select a hexadecimal color value.
+`colorpicker` - renders controls to select a color value.
 
     color:
         label: Background
@@ -674,17 +674,20 @@ Option | Description
 
 Option | Description
 ------------- | -------------
-**availableColors** |  list of available colors.
-**allowEmpty** | allows empty input value. Default: false
+**availableColors** |  list of available colors. If not provided, the widget will use the global available colors.
+**allowCustom** | If `false`, only colors specified in `availableColors` will be available for selection. The color picker palette selector will be disabled. Default: `true`
+**allowEmpty** | allows empty input value. Default: `false`
+**formats** | Specifies the color format(s) to store. Can be a string or an array of values out of `cmyk`, `hex`, `hsl` and `rgb`. Specifying `all` as a string will allow all formats. Default: `hex`
+**showAlpha** | If `true`, the opacity slider will be available. Default: `false`
 
-There are two ways to provide the available colors for the colorpicker. The first method defines the `availableColors` directly as a list of hex color codes in the YAML file:
+There are two ways to provide the available colors for the colorpicker. The first method defines the `availableColors` directly as a list of color codes in the YAML file:
 
     color:
         label: Background
         type: colorpicker
         availableColors: ['#000000', '#111111', '#222222']
 
-The second method uses a specific method declared in the model class.  This method should return an array of hex colors in the same format as in the example above. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form.
+The second method uses a specific method declared in the model class.  This method should return an array of colors in the same format as in the example above. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form.
 
     color:
         label: Background
@@ -698,7 +701,7 @@ Supplying the available colors in the model class:
         return ['#000000', '#111111', '#222222']
     }
 
-If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors.
+If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors. You can also define a custom set of default colors to be used in all color pickers that do not have the `availableColors` field specified. This can be managed in the **Customize back-end** area of the Settings.
 
 <a name="widget-datatable"></a>
 ### Data table
