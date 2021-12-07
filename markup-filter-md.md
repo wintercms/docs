@@ -6,4 +6,4 @@ The `| md` filter converts the value from Markdown to HTML format.
 
 The above will output the following:
 
-    <strong>Text</strong> is bold.
+    <p><strong>Text</strong> is bold.</p>
