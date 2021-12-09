@@ -177,6 +177,15 @@ If you pass an array containing either `text` or `html` keys, this will be an ex
         //
     });
 
+This also applies to usage of `Mail::rawTo()`
+
+```php
+Mail::rawTo('name@example.com', [
+    'text' => 'This is plain text',
+    'html' => '<strong>This is HTML</strong>'
+]);
+```
+
 <a name="attachments"></a>
 ### Attachments
 
