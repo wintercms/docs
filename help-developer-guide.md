@@ -9,6 +9,7 @@
     - [Vendor naming](#vendor-naming)
     - [Repository naming](#repository-naming)
     - [PHP Variable naming](#variable-naming)
+    - [PHP Class naming](#class-naming)
     - [HTML element naming](#element-naming)
     - [View file naming](#view-naming)
     - [Class naming](#class-naming)
@@ -204,6 +205,26 @@ Use **camelCase** everywhere except for the following:
 1. Database attributes and relationships should use **snake_case**
 1. Postback parameters and HTML elements should use **snake_case**
 1. Language keys should use **snake_case**
+
+<a name="class-naming"></a>
+### PHP Class naming
+
+Use **PascalCase** for all classes. Underscores are to be avoided as they have been known to cause issues with autoloading due to the historical use of underscores in class names for pseudo namespacing before namespacing was officially supported in PHP. Numbers can be used if necessary (generally to denote that a class interacts with a specific version of a service, i.e. `Conman` vs `Conman4`) but should never be used at the start of a class name. Avoid all special characters.
+
+If you find yourself wanting to use underscores in your class names for organizational purposes, don't. Use namespacing instead.
+
+Don't:
+
+- `jet`
+- `myJet`
+- `my_jet`
+- `API_Jet`
+
+Do:
+
+- `Jet`
+- `MyJet`
+- `API\Jet`
 
 <a name="element-naming"></a>
 ### HTML element naming
