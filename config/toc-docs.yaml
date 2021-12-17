@@ -121,4 +121,5 @@ Events:
   pages:
     api: "API Docs@"
     "https://laravel.com/docs/6.x": "Laravel Docs@"
+    "https://twig.symfony.com/doc/2.x": "Twig Docs@"
     "https://www.php.net/manual/en/intro-whatis.php": "PHP Docs@"
