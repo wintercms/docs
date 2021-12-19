@@ -954,7 +954,7 @@ Option | Description
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
 **searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
 **searchScope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
-**useRelation** | Flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
+**useRelation** | Flag for using the name of the field as a relation name to interact with directly on the parent model. Default: `true`. Set to `false` in order to bypass the relationship logic and only store and retrieve the selected record using its primary key. Best suited for use in [`jsonable` attributes](../database/model#property-jsonable) or where the relationship is unabled to be loaded. **NOTE:** When this is disabled the field name **MUST** be the actual name of the field where the value will be stored / retrieved, it cannot be the name of a relationship.
 **modelClass** | Class of the model to use for listing records when useRelation = false
 
 <a name="widget-relation"></a>
