@@ -169,7 +169,9 @@ Use the `Config` class for accessing the configuration values defined in the con
 
     $maxItems = Config::get('acme.demo::maxItems', 50);
 
-A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`, or `config/acme/todo/dev/config.php` for different environment. Please note, you need to provide an original configuration in the plugin for the override to work - even an empty array there will work, if you expect all the configuration come from the `config/author/plugin/config.php` file.
+A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`, or `config/acme/todo/dev/config.php` for an environment specific override (in this case `dev`). 
+
+> **NOTE:** In order for the config override to work, the plugin must contain a default config file (i.e. `plugins/author/plugin/config/config.php`. Even if you expect all configuration to come from the project override instead of the default configuration file it is still **highly** recommended that a default configuration file is provided as a form of documentation as to what configuration options are available to be modified on the project level.
 
 Inside the overridden configuration file you can return only values you want to override:
 
