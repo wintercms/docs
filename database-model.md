@@ -80,17 +80,17 @@ There are some standard properties that can be found on models, in addition to t
 
 Property | Description
 ------------- | -------------
-**$primaryKey** | primary key name used to identify the model.
-**$incrementing** | boolean that if false indicates that the primary key is not an incrementing integer value.
-**$exists** | boolean that if true indicates that the model exists.
-**$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
-**$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
-**$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
-**$fillable** | values are fields accessible to [mass assignment](#mass-assignment).
-**$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
-**$visible** | values are fields made visible when [serializing the model data](../database/serialization).
-**$hidden** | values are fields made hidden when [serializing the model data](../database/serialization).
-**$connection** | string that contains the [connection name](../database/basics#accessing-connections) that's utilised by the model by default.
+`$primaryKey` | primary key name used to identify the model.
+`$incrementing` | boolean that if false indicates that the primary key is not an incrementing integer value.
+`$exists` | boolean that if true indicates that the model exists.
+`$dates` | values are converted to an instance of Carbon/DateTime objects after fetching.
+`$timestamps` | boolean that if true will automatically set created_at and updated_at fields.
+`$jsonable` | values are encoded as JSON before saving and converted to arrays after fetching.
+`$fillable` | values are fields accessible to [mass assignment](#mass-assignment).
+`$guarded` | values are fields guarded from [mass assignment](#mass-assignment).
+`$visible` | values are fields made visible when [serializing the model data](../database/serialization).
+`$hidden` | values are fields made hidden when [serializing the model data](../database/serialization).
+`$connection` | string that contains the [connection name](../database/basics#accessing-connections) that's utilised by the model by default.
 
 <a name="property-primary-key"></a>
 #### Primary key
@@ -566,20 +566,20 @@ Models fire several events, allowing you to hook into various points in the mode
 
 Event | Description
 ------------- | -------------
-**beforeCreate** | before the model is saved, when first created.
-**afterCreate** | after the model is saved, when first created.
-**beforeSave** | before the model is saved, either created or updated.
-**afterSave** | after the model is saved, either created or updated.
-**beforeValidate** | before the supplied model data is validated.
-**afterValidate** | after the supplied model data has been validated.
-**beforeUpdate** | before an existing model is saved.
-**afterUpdate** | after an existing model is saved.
-**beforeDelete** | before an existing model is deleted.
-**afterDelete** | after an existing model is deleted.
-**beforeRestore** | before a soft-deleted model is restored.
-**afterRestore** | after a soft-deleted model has been restored.
-**beforeFetch** | before an existing model is populated.
-**afterFetch** | after an existing model has been populated.
+`beforeCreate` | before the model is saved, when first created.
+`afterCreate` | after the model is saved, when first created.
+`beforeSave` | before the model is saved, either created or updated.
+`afterSave` | after the model is saved, either created or updated.
+`beforeValidate` | before the supplied model data is validated.
+`afterValidate` | after the supplied model data has been validated.
+`beforeUpdate` | before an existing model is saved.
+`afterUpdate` | after an existing model is saved.
+`beforeDelete` | before an existing model is deleted.
+`afterDelete` | after an existing model is deleted.
+`beforeRestore` | before a soft-deleted model is restored.
+`afterRestore` | after a soft-deleted model has been restored.
+`beforeFetch` | before an existing model is populated.
+`afterFetch` | after an existing model has been populated.
 
 An example of using an event:
 
