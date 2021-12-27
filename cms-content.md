@@ -14,9 +14,9 @@ Content blocks files reside in the **/content** subdirectory of a theme director
 
 Extension | Description
 ------------- | -------------
-**htm** | Used for HTML markup.
-**txt** | Used for plain text.
-**md** | Used for Markdown syntax.
+`htm` | Used for HTML markup.
+`txt` | Used for plain text.
+`md` | Used for Markdown syntax.
 
 The extension affects the way content blocks are displayed in the backend user interface (with a WYSIWYG editor or with a plain text editor) and how the blocks are rendered on the website. Markdown blocks are converted to HTML before they are displayed.
 
@@ -25,22 +25,27 @@ The extension affects the way content blocks are displayed in the backend user i
 
 Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pages), [partial](partials) or [layout](layouts). Example of a page rendering a content block:
 
-    url = "/contacts"
-    ==
-    <div class="contacts">
-        {% content 'contacts.htm' %}
-    </div>
+```twig
+url = "/contacts"
+==
+<div class="contacts">
+    {% content 'contacts.htm' %}
+</div>
+```
 
 <a name="content-variables"></a>
 ## Passing variables to content blocks
 
 Sometimes you may need to pass variables to a content block from the external code. While content blocks do not support the use of Twig markup, they do support using variables with a basic syntax. You can pass variables to content blocks by specifying them after the content block name in the `{% content %}` tag:
 
-    {% content 'welcome.htm' name='John' %}
-
+```twig
+{% content 'welcome.htm' name='John' %}
+```
 Inside the content block, variables can be accessed using singular *curly brackets*:
 
-    <h1>This is a demo for {name}</h1>
+```twig
+<h1>This is a demo for {name}</h1>
+```
 
 More information can be found [in the Markup guide](../markup/tag-content).
 
@@ -49,6 +54,8 @@ More information can be found [in the Markup guide](../markup/tag-content).
 
 You may register variables that are globally available to all content blocks with the `View::share` method.
 
-    View::share('site_name', 'Winter CMS');
+```php
+View::share('site_name', 'Winter CMS');
+```
 
 This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{site_name}` will be available inside all content blocks.
