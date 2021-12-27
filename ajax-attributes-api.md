@@ -21,7 +21,7 @@ Attribute | Description
 `data-request-redirect` | specifies a URL to redirect the browser after the successful AJAX request.
 `data-request-url` | specifies a URL to which the request is sent. default: `window.location.href`
 `data-request-update` | specifies a list of partials and page elements (CSS selectors) to update. The format is as follows: `partial: selector, partial: selector`. Usage of quotes is required in some cases, for example: `'my-partial': '#myelement'`. If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content. If the selector string is prepended with the `^` symbol, the content will be prepended instead.
-`data-request-ajax-global` | false by default. Set true to enable jQuery [ajax events](http://api.jquery.com/category/ajax/global-ajax-event-handlers/) globally : `ajaxStart`, `ajaxStop`, `ajaxComplete`, `ajaxError`, `ajaxSuccess` and `ajaxSend`.
+`data-request-ajax-global` | `false` by default. Set `true` to enable jQuery [ajax events](https://api.jquery.com/category/ajax/global-ajax-event-handlers/) globally : `ajaxStart`, `ajaxStop`, `ajaxComplete`, `ajaxError`, `ajaxSuccess` and `ajaxSend`.
 `data-request-data` | specifies additional POST parameters to be sent to the server. The format is following: `var: value, var: value`. Use quotes if needed: `var: 'some string'`. The attribute can be used on the triggering element, for example on the button that also has the `data-request` attribute, on the closest element of the triggering element and on the parent form element. The framework merges values of the `data-request-data` attributes. If the attribute on different elements defines parameters with the same name, the framework uses the following priority: the triggering element `data-request-data`, the closer parent elements `data-request-data`, the form input data.
 `data-request-before-update` | specifies JavaScript code to execute directly before the page contents are updated. Inside the JavaScript code you can access the following variables: `this` (the page element triggered the request), the `context` object, the `data` object received from the server, the `textStatus` text string, and the `jqXHR` object.
 `data-request-success` | specifies JavaScript code to execute after the request is successfully completed. Inside the JavaScript code you can access the following variables: `this` (the page element triggered the request), the `context` object, the `data` object received from the server, the `textStatus` text string, and the `jqXHR` object.
@@ -46,38 +46,52 @@ Element | Event
 <a name="data-attribute-examples"></a>
 ## Usage examples
 
-Trigger the `onCalculate` handler when the form is submitted. Update the element with the identifier "result"` with the **calcresult** partial:
+Trigger the `onCalculate` handler when the form is submitted. Update the element with the identifier "result" with the **calcresult** partial:
 
-    <form data-request="onCalculate" data-request-update="calcresult: '#result'">
+```html
+<form data-request="onCalculate" data-request-update="calcresult: '#result'">
+```
 
 Request a confirmation when the Delete button is clicked before the request is sent:
 
-    <form ... >
-        ...
-        <button data-request="onDelete" data-request-confirm="Are you sure?">Delete</button>
+```html
+<form ... >
+    ...
+    <button data-request="onDelete" data-request-confirm="Are you sure?">Delete</button>
+```
 
 Redirect to another page after the successful request:
 
-    <form data-request="onLogin" data-request-redirect="/admin">
+```html
+<form data-request="onLogin" data-request-redirect="/admin">
+```
 
 Show a popup window after the successful request:
 
-    <form data-request="onLogin" data-request-success="alert('Yay!')">
+```html
+<form data-request="onLogin" data-request-success="alert('Yay!')">
+```
 
 Send a POST parameter `mode` with a value `update`:
 
-    <form data-request="onUpdate" data-request-data="mode: 'update'">
+```html
+<form data-request="onUpdate" data-request-data="mode: 'update'">
+```
 
 Send a POST parameter `id` with value `7` across multiple elements:
 
-    <div data-request-data="id: 7">
-        <button data-request="onDelete">Delete</button>
-        <button data-request="onSave">Update</button>
-    </div>
+```html
+<div data-request-data="id: 7">
+    <button data-request="onDelete">Delete</button>
+    <button data-request="onSave">Update</button>
+</div>
+```
 
 Including [file uploads](../services/request-input#files) with a request:
 
-    <form data-request="onSubmit" data-request-files>
-        <input type="file" name="photo" accept="image/*" />
-        <button type="submit">Submit</button>
-    </form>
+```html
+<form data-request="onSubmit" data-request-files>
+    <input type="file" name="photo" accept="image/*" />
+    <button type="submit">Submit</button>
+</form>
+```
