@@ -91,10 +91,10 @@ The first argument in `sendTo` is used for the recipients can take different val
 
 Type | Description
 ------------- | -------------
-String | a single recipient address, with no name defined.
-Array | multiple recipients where the array key is the address and the value is the name.
-Object | a single recipient object, where the *email* property is used for the address and the *name* is optionally used for the name.
-Collection | a collection of recipient objects, as above.
+`String` | a single recipient address, with no name defined.
+`Array` | multiple recipients where the array key is the address and the value is the name.
+`Object` | a single recipient object, where the *email* property is used for the address and the *name* is optionally used for the name.
+`Collection` | a collection of recipient objects, as above.
 
 The complete signature of `sendTo` is as follows:
 
