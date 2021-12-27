@@ -51,35 +51,37 @@ Note that you should use the **scoreboard-item** class for your scoreboard eleme
 
 Indicators are simple reporting element that have a title, a value and a description. You can use the `positive` and `negative` classes on the value element. [Font Autumn](http://daftspunk.github.io/Font-Autumn/) icon classes allow to add an icon before the value.
 
-    <div class="scoreboard-item title-value">
-        <h4>Weight</h4>
-        <p>100</p>
-        <p class="description">unit: kg</p>
-    </div>
+```html
+<div class="scoreboard-item title-value">
+    <h4>Weight</h4>
+    <p>100</p>
+    <p class="description">unit: kg</p>
+</div>
 
-    <div class="scoreboard-item title-value">
-        <h4>Comments</h4>
-        <p class="positive">44</p>
-        <p class="description">previous month: 32</p>
-    </div>
+<div class="scoreboard-item title-value">
+    <h4>Comments</h4>
+    <p class="positive">44</p>
+    <p class="description">previous month: 32</p>
+</div>
 
-    <div class="scoreboard-item title-value">
-        <h4>Length</h4>
-        <p class="negative">31</p>
-        <p class="description">previous: 42</p>
-    </div>
+<div class="scoreboard-item title-value">
+    <h4>Length</h4>
+    <p class="negative">31</p>
+    <p class="description">previous: 42</p>
+</div>
 
-    <div class="scoreboard-item title-value">
-        <h4>Latest commenter</h4>
-        <p class="wn-icon-star">John Smith</p>
-        <p class="description">registered: yes</p>
-    </div>
+<div class="scoreboard-item title-value">
+    <h4>Latest commenter</h4>
+    <p class="wn-icon-star">John Smith</p>
+    <p class="description">registered: yes</p>
+</div>
 
-    <div class="scoreboard-item title-value" data-control="goal-meter" data-value="88">
-        <h4>goal meter</h4>
-        <p>88%</p>
-        <p class="description">37 posts remain</p>
-    </div>
+<div class="scoreboard-item title-value" data-control="goal-meter" data-value="88">
+    <h4>goal meter</h4>
+    <p>88%</p>
+    <p class="description">37 posts remain</p>
+</div>
+```
 
 ![image](https://github.com/wintercms/docs/blob/main/images/name-title-indicators.png?raw=true) {.img-responsive .frame}
 
@@ -90,17 +92,19 @@ Indicators are simple reporting element that have a title, a value and a descrip
 
 The pie chart outputs information as a circle diagram, with optional label in the center. Example markup:
 
-    <div
-        class="control-chart centered wrap-legend"
-        data-control="chart-pie"
-        data-size="200"
-        data-center-text="100">
-        <ul>
-            <li>Label 1 <span>100</span></li>
-            <li>Label 2 <span>100</span></li>
-            <li>Label 3 <span>100</span></li>
-        </ul>
-    </div>
+```html
+<div
+    class="control-chart centered wrap-legend"
+    data-control="chart-pie"
+    data-size="200"
+    data-center-text="100">
+    <ul>
+        <li>Label 1 <span>100</span></li>
+        <li>Label 2 <span>100</span></li>
+        <li>Label 3 <span>100</span></li>
+    </ul>
+</div>
+```
 
 ![image](https://github.com/wintercms/docs/blob/main/images/traffic-sources.png?raw=true) {.img-responsive .frame}
 
@@ -109,16 +113,18 @@ The pie chart outputs information as a circle diagram, with optional label in th
 
 The next example shows a bar chart markup. The **wrap-legend** class is optional, it manages the legend layout. The **data-height** and **data-full-width** attributes are optional as well.
 
-    <div
-        class="control-chart wrap-legend"
-        data-control="chart-bar"
-        data-height="100"
-        data-full-width="1">
-        <ul>
-            <li>Label 1 <span>100</span></li>
-            <li>Label 2 <span>100</span></li>
-            <li>Label 3 <span>100</span></li>
-        </ul>
-    </div>
+```html
+<div
+    class="control-chart wrap-legend"
+    data-control="chart-bar"
+    data-height="100"
+    data-full-width="1">
+    <ul>
+        <li>Label 1 <span>100</span></li>
+        <li>Label 2 <span>100</span></li>
+        <li>Label 3 <span>100</span></li>
+    </ul>
+</div>
+```
 
 ![image](https://github.com/wintercms/docs/blob/main/images/bar-chart.png?raw=true) {.img-responsive .frame}

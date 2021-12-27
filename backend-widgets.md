@@ -40,74 +40,90 @@ Widget classes reside inside the **widgets** directory of the plugin directory. 
 
 The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). Example widget controller class definition:
 
-    <?php namespace Backend\Widgets;
+```php
+<?php namespace Backend\Widgets;
 
-    use Backend\Classes\WidgetBase;
+use Backend\Classes\WidgetBase;
 
-    class Lists extends WidgetBase
-    {
-        /**
-         * @var string A unique alias to identify this widget.
-         */
-        protected $defaultAlias = 'list';
+class Lists extends WidgetBase
+{
+    /**
+     * @var string A unique alias to identify this widget.
+     */
+    protected $defaultAlias = 'list';
 
-        // ...
-    }
+    // ...
+}
+```
 
-The widget class must contain a **render()** method for producing the widget markup by rendering a widget partial. Example:
+The widget class must contain a `render()` method for producing the widget markup by rendering a widget partial. Example:
 
-    public function render()
-    {
-        return $this->makePartial('list');
-    }
+```php
+public function render()
+{
+    return $this->makePartial('list');
+}
+```
 
 To pass variables to partials you can either add them to the `$vars` property.
 
-    public function render()
-    {
-        $this->vars['var'] = 'value';
+```php
+public function render()
+{
+    $this->vars['var'] = 'value';
 
-        return $this->makePartial('list');
-    }
+    return $this->makePartial('list');
+}
+```
 
 Alternatively you may pass the variables to the second parameter of the makePartial() method:
 
-    public function render()
-    {
-        return $this->makePartial('list', ['var' => 'value']);
-    }
+```php
+public function render()
+{
+    return $this->makePartial('list', ['var' => 'value']);
+}
+```
 
 <a name="generic-ajax-handlers"></a>
 ### AJAX handlers
 
 Widgets implement the same AJAX approach as the [backend controllers](controllers-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
 
-    <a
-        href="javascript:;"
-        data-request="<?= $this->getEventHandler('onPaginate') ?>"
-        title="Next page">Next</a>
+```html
+<a
+    href="javascript:;"
+    data-request="<?= $this->getEventHandler('onPaginate') ?>"
+    title="Next page">Next</a>
+```
 
 When called from a widget class or partial the AJAX handler will target itself. For example, if the widget uses the alias of **mywidget** the handler will be targeted with `mywidget::onName`. The above would output the following attribute value:
 
-    data-request="mywidget::onPaginate"
+```none
+data-request="mywidget::onPaginate"
+```
 
 <a name="generic-binding"></a>
 ### Binding widgets to controllers
 
 A widget should be bound to a [backend controller](controllers-ajax) before you can start using it in a backend page or partial. Use the widget's `bindToController` method for binding it to a controller. The best place to initialize a widget is the controller's constructor. Example:
 
-    public function __construct()
-    {
-        parent::__construct();
+```php
+public function __construct()
+{
+    parent::__construct();
 
-        $myWidget = new MyWidgetClass($this);
-        $myWidget->alias = 'myWidget';
-        $myWidget->bindToController();
-    }
+    $myWidget = new MyWidgetClass($this);
+    $myWidget->alias = 'myWidget';
+    $myWidget->bindToController();
+}
+```
 
 After binding the widget you can access it in the controller's view or partial by its alias:
 
-    <?= $this->widget->myWidget->render() ?>
+```php
+<?= $this->widget->myWidget->render() ?>
+```
 
 <a name="form-widgets"></a>
 ## Form Widgets
@@ -132,93 +148,101 @@ Form Widget classes reside inside the **formwidgets** directory of the plugin di
 
 The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). A registered widget can be used in the backend [form field definition](../backend/forms#form-fields) file. Example form widget class definition:
 
-    namespace Backend\Widgets;
+```php
+namespace Backend\Widgets;
 
-    use Backend\Classes\FormWidgetBase;
+use Backend\Classes\FormWidgetBase;
 
-    class CodeEditor extends FormWidgetBase
-    {
-        /**
-         * @var string A unique alias to identify this widget.
-         */
-        protected $defaultAlias = 'codeeditor';
+class CodeEditor extends FormWidgetBase
+{
+    /**
+     * @var string A unique alias to identify this widget.
+     */
+    protected $defaultAlias = 'codeeditor';
 
-        public function render() {}
-    }
+    public function render() {}
+}
+```
 
 <a name="form-widget-properties"></a>
 ### Form widget properties
 
 Form widgets may have properties that can be set using the [form field configuration](../backend/forms#form-fields). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
 
-    class DatePicker extends FormWidgetBase
+```php
+class DatePicker extends FormWidgetBase
+{
+    //
+    // Configurable properties
+    //
+
+    /**
+     * @var bool Display mode: datetime, date, time.
+     */
+    public $mode = 'datetime';
+
+    /**
+     * @var string the minimum/earliest date that can be selected.
+     * eg: 2000-01-01
+     */
+    public $minDate = null;
+
+    /**
+     * @var string the maximum/latest date that can be selected.
+     * eg: 2020-12-31
+     */
+    public $maxDate = null;
+
+    //
+    // Object properties
+    //
+
+    /**
+     * {@inheritDoc}
+     */
+    protected $defaultAlias = 'datepicker';
+
+    /**
+     * {@inheritDoc}
+     */
+    public function init()
     {
-        //
-        // Configurable properties
-        //
-
-        /**
-         * @var bool Display mode: datetime, date, time.
-         */
-        public $mode = 'datetime';
-
-        /**
-         * @var string the minimum/earliest date that can be selected.
-         * eg: 2000-01-01
-         */
-        public $minDate = null;
-
-        /**
-         * @var string the maximum/latest date that can be selected.
-         * eg: 2020-12-31
-         */
-        public $maxDate = null;
-
-        //
-        // Object properties
-        //
-
-        /**
-         * {@inheritDoc}
-         */
-        protected $defaultAlias = 'datepicker';
-
-        /**
-         * {@inheritDoc}
-         */
-        public function init()
-        {
-            $this->fillFromConfig([
-                'mode',
-                'minDate',
-                'maxDate',
-            ]);
-        }
-
-        // ...
+        $this->fillFromConfig([
+            'mode',
+            'minDate',
+            'maxDate',
+        ]);
     }
+
+    // ...
+}
+```
 
 The property values then become available to set from the [form field definition](../backend/forms#form-fields) when using the widget.
 
-    born_at:
-        label: Date of Birth
-        type: datepicker
-        mode: date
-        minDate: 1984-04-12
-        maxDate: 2014-04-23
+```yaml
+born_at:
+    label: Date of Birth
+    type: datepicker
+    mode: date
+    minDate: 1984-04-12
+    maxDate: 2014-04-23
+```
 
 <a name="form-widget-registration"></a>
 ### Form widget registration
 
 Plugins should register form widgets by overriding the `registerFormWidgets` method inside the [Plugin registration class](../plugin/registration#registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
 
-    public function registerFormWidgets()
-    {
-        return [
-            'Backend\FormWidgets\CodeEditor' => 'codeeditor',
-            'Backend\FormWidgets\RichEditor' => 'richeditor'
-        ];
-    }
+```php
+public function registerFormWidgets()
+{
+    return [
+        'Backend\FormWidgets\CodeEditor' => 'codeeditor',
+        'Backend\FormWidgets\RichEditor' => 'richeditor'
+    ];
+}
+```
 
 The short code is optional and can be used when referencing the widget in the [Form field definitions](forms#field-widget), it should be a unique value to avoid conflicts with other form fields.
 
@@ -227,35 +251,43 @@ The short code is optional and can be used when referencing the widget in the [F
 
 The main purpose of the form widget is to interact with your model, which means in most cases loading and saving the value via the database. When a form widget renders, it will request its stored value using the `getLoadValue` method. The `getId` and `getFieldName` methods will return a unique identifier and name for a HTML element used in the form. These values are often passed to the widget partial at render time.
 
-    public function render()
-    {
-        $this->vars['id'] = $this->getId();
-        $this->vars['name'] = $this->getFieldName();
-        $this->vars['value'] = $this->getLoadValue();
+```php
+public function render()
+{
+    $this->vars['id'] = $this->getId();
+    $this->vars['name'] = $this->getFieldName();
+    $this->vars['value'] = $this->getLoadValue();
 
-        return $this->makePartial('myformwidget');
-    }
+    return $this->makePartial('myformwidget');
+}
+```
 
 At a basic level the form widget can send the user input value back using an input element. From the above example, inside the **myformwidget** partial the element can be rendered using the prepared variables.
 
-    <input id="<?= $id ?>" name="<?= $name ?>" value="<?= e($value) ?>" />
+```html
+<input id="<?= $id ?>" name="<?= $name ?>" value="<?= e($value) ?>" />
+```
 
 <a name="form-widget-save-data"></a>
 ### Saving form data
 
 When the time comes to take the user input and store it in the database, the form widget will call the `getSaveValue` internally to request the value. To modify this behavior simply override the method in your form widget class.
 
-    public function getSaveValue($value)
-    {
-         return $value;
-    }
+```php
+public function getSaveValue($value)
+{
+        return $value;
+}
+```
 
 In some cases you intentionally don't want any value to be given, for example, a form widget that displays information without saving anything. Return the special constant called `FormField::NO_SAVE_DATA` derived from the `Backend\Classes\FormField` class to have the value ignored.
 
-    public function getSaveValue($value)
-    {
-         return \Backend\Classes\FormField::NO_SAVE_DATA;
-    }
+```php
+public function getSaveValue($value)
+{
+        return \Backend\Classes\FormField::NO_SAVE_DATA;
+}
+```
 
 <a name="report-widgets"></a>
 ## Report Widgets
@@ -280,76 +312,82 @@ The report widget classes should extend the `Backend\Classes\ReportWidgetBase` c
 
 Example report widget class definition:
 
-    namespace Winter\GoogleAnalytics\ReportWidgets;
+```php
+namespace Winter\GoogleAnalytics\ReportWidgets;
 
-    use Backend\Classes\ReportWidgetBase;
+use Backend\Classes\ReportWidgetBase;
 
-    class TrafficSources extends ReportWidgetBase
+class TrafficSources extends ReportWidgetBase
+{
+    public function render()
     {
-        public function render()
-        {
-            return $this->makePartial('widget');
-        }
+        return $this->makePartial('widget');
     }
+}
+```
 
 The widget partial could contain any HTML markup you want to display in the widget. The markup should be wrapped into the DIV element with the **report-widget** class. Using H3 element to output the widget header is preferable. Example widget partial:
 
-    <div class="report-widget">
-        <h3>Traffic sources</h3>
+```html
+<div class="report-widget">
+    <h3>Traffic sources</h3>
 
-        <div
-            class="control-chart"
-            data-control="chart-pie"
-            data-size="200"
-            data-center-text="180">
-            <ul>
-                <li>Direct <span>1000</span></li>
-                <li>Social networks <span>800</span></li>
-            </ul>
-        </div>
+    <div
+        class="control-chart"
+        data-control="chart-pie"
+        data-size="200"
+        data-center-text="180">
+        <ul>
+            <li>Direct <span>1000</span></li>
+            <li>Social networks <span>800</span></li>
+        </ul>
     </div>
+</div>
+```
 
 ![image](https://raw.githubusercontent.com/wintercms/docs/main/images/traffic-sources.png)
 
 Inside report widgets you can use any [charts or indicators](../ui/form), lists or any other markup you wish. Remember that the report widgets extend the generic backend widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
 
-    <div class="report-widget">
-        <h3>Top pages</h3>
+```html
+<div class="report-widget">
+    <h3>Top pages</h3>
 
-        <div class="table-container">
-            <table class="table data" data-provides="rowlink">
-                <thead>
-                    <tr>
-                        <th><span>Page URL</span></th>
-                        <th><span>Pageviews</span></th>
-                        <th><span>% Pageviews</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>/</td>
-                        <td>90</td>
-                        <td>
-                            <div class="progress">
-                                <div class="bar" style="90%"></div>
-                                <a href="/">90%</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>/docs</td>
-                        <td>10</td>
-                        <td>
-                            <div class="progress">
-                                <div class="bar" style="10%"></div>
-                                <a href="/docs">10%</a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="table-container">
+        <table class="table data" data-provides="rowlink">
+            <thead>
+                <tr>
+                    <th><span>Page URL</span></th>
+                    <th><span>Pageviews</span></th>
+                    <th><span>% Pageviews</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>/</td>
+                    <td>90</td>
+                    <td>
+                        <div class="progress">
+                            <div class="bar" style="90%"></div>
+                            <a href="/">90%</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>/docs</td>
+                    <td>10</td>
+                    <td>
+                        <div class="progress">
+                            <div class="bar" style="10%"></div>
+                            <a href="/docs">10%</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
+```
 
 <a name="report-properties"></a>
 ### Report widget properties
@@ -360,48 +398,52 @@ Report widgets may have properties that users can manage with the Inspector:
 
 The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components#component-properties). Example:
 
-    public function defineProperties()
-    {
-        return [
-            'title' => [
-                'title'             => 'Widget title',
-                'default'           => 'Top Pages',
-                'type'              => 'string',
-                'validationPattern' => '^.+$',
-                'validationMessage' => 'The Widget Title is required.'
-            ],
-            'days' => [
-                'title'             => 'Number of days to display data for',
-                'default'           => '7',
-                'type'              => 'string',
-                'validationPattern' => '^[0-9]+$'
-            ]
-        ];
-    }
+```php
+public function defineProperties()
+{
+    return [
+        'title' => [
+            'title'             => 'Widget title',
+            'default'           => 'Top Pages',
+            'type'              => 'string',
+            'validationPattern' => '^.+$',
+            'validationMessage' => 'The Widget Title is required.'
+        ],
+        'days' => [
+            'title'             => 'Number of days to display data for',
+            'default'           => '7',
+            'type'              => 'string',
+            'validationPattern' => '^[0-9]+$'
+        ]
+    ];
+}
+```
 
 <a name="report-widget-registration"></a>
 ### Report widget registration
 
 Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [Plugin registration class](../plugin/registration#registration-file). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values. Example:
 
-    public function registerReportWidgets()
-    {
-        return [
-            'Winter\GoogleAnalytics\ReportWidgets\TrafficOverview' => [
-                'label'   => 'Google Analytics traffic overview',
-                'context' => 'dashboard',
-                'permissions' => [
-                    'winter.googleanalytics.widgets.traffic_overview',
-                ],
+```php
+public function registerReportWidgets()
+{
+    return [
+        'Winter\GoogleAnalytics\ReportWidgets\TrafficOverview' => [
+            'label'   => 'Google Analytics traffic overview',
+            'context' => 'dashboard',
+            'permissions' => [
+                'winter.googleanalytics.widgets.traffic_overview',
             ],
-            'Winter\GoogleAnalytics\ReportWidgets\TrafficSources' => [
-                'label'   => 'Google Analytics traffic sources',
-                'context' => 'dashboard',
-                'permissions' => [
-                    'winter.googleanaltyics.widgets.traffic_sources',
-                ],
-            ]
-        ];
-    }
+        ],
+        'Winter\GoogleAnalytics\ReportWidgets\TrafficSources' => [
+            'label'   => 'Google Analytics traffic sources',
+            'context' => 'dashboard',
+            'permissions' => [
+                'winter.googleanaltyics.widgets.traffic_sources',
+            ],
+        ]
+    ];
+}
+```
 
-The **label** element defines the widget name for the Add Widget popup window. The **context** element defines the context where the widget could be used. Winter's report widget system allows to host the report container on any page, and the container context name is unique. The widget container on the Dashboard page uses the **dashboard** context.
+The `label` element defines the widget name for the Add Widget popup window. The `context` element defines the context where the widget could be used. Winter's report widget system allows to host the report container on any page, and the container context name is unique. The widget container on the Dashboard page uses the `dashboard` context.

@@ -34,15 +34,17 @@ Each controller consists of a PHP file which resides in the the **/controllers**
 
 Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The most basic representation of a Controller used inside a Plugin looks like this:
 
-    namespace Acme\Blog\Controllers;
+```php
+namespace Acme\Blog\Controllers;
 
-    class Posts extends \Backend\Classes\Controller {
+class Posts extends \Backend\Classes\Controller {
 
-        public function index()    // <=== Action method
-        {
+    public function index()    // <=== Action method
+    {
 
-        }
     }
+}
+```
 
 Usually each controller implements functionality for working with a single type of data - like blog posts or categories. All backend behaviors described below assume this convention.
 
@@ -53,67 +55,83 @@ The backend controller base class defines a number of properties that allow to c
 
 Property | Description
 ------------- | -------------
-**$fatalError** | allows to store a fatal exception generated in an action method in order to display it in the view.
-**$user** | contains a reference to the the backend user object.
-**$suppressView** | allows to prevent the view display. Can be updated in the action method or in the controller constructor.
-**$params** | an array of the routed parameters.
-**$action** | a name of the action method being executed in the current request.
-**$publicActions** | defines an array of actions available without the backend user authentication. Can be overridden in the class definition.
-**$requiredPermissions** | permissions required to view this page. Can be set in the class definition or in the controller constructor. See [users & permissions](users) for details.
-**$pageTitle** | sets the page title. Can be set in the action method.
-**$bodyClass** | body class property used for customizing the layout. Can be set in the controller constructor or action method.
-**$guarded** | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
-**$layout** | specify a custom layout for the controller views (see [layouts](#layouts) below).
+`$fatalError` | allows to store a fatal exception generated in an action method in order to display it in the view.
+`$user` | contains a reference to the the backend user object.
+`$suppressView` | allows to prevent the view display. Can be updated in the action method or in the controller constructor.
+`$params` | an array of the routed parameters.
+`$action` | a name of the action method being executed in the current request.
+`$publicActions` | defines an array of actions available without the backend user authentication. Can be overridden in the class definition.
+`$requiredPermissions` | permissions required to view this page. Can be set in the class definition or in the controller constructor. See [users & permissions](users) for details.
+`$pageTitle` | sets the page title. Can be set in the action method.
+`$bodyClass` | body class property used for customizing the layout. Can be set in the controller constructor or action method.
+`$guarded` | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
+`$layout` | specify a custom layout for the controller views (see [layouts](#layouts) below).
 
 <a name="actions-views-routing"></a>
 ## Actions, views and routing
 
 Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
 
-    <h1>Hello World</h1>
+```php
+<h1>Hello World</h1>
+```
 
 URL of this page is made up of the author name, plugin name, controller name and action name.
 
-    backend/[author name]/[plugin name]/[controller name]/[action name]
+```none
+backend/[author name]/[plugin name]/[controller name]/[action name]
+```
 
 The above Controller results in the following:
 
-    http://example.com/backend/acme/blog/users/index
+```none
+https://example.com/backend/acme/blog/users/index
+```
 
 <a name="passing-data-to-views"></a>
 ## Passing data to views
 
 Use the controller's `$vars` property to pass any data directly to your view:
 
-    $this->vars['myVariable'] = 'value';
+```php
+$this->vars['myVariable'] = 'value';
+```
 
 The variables passed with the `$vars` property can now be accessed directly in your view:
 
-    <p>The variable value is <?= $myVariable ?></p>
+```php
+<p>The variable value is <?= $myVariable ?></p>
+```
 
 <a name="navigation-context"></a>
 ## Setting the navigation context
 
 Plugins can register the backend navigation menus and submenus in the [plugin registration file](../plugin/registration#navigation-menus). The navigation context determines what backend menu and submenu are active for the current backend page. You can set the navigation context with the `BackendMenu` class:
 
-    BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
+```php
+BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
+```
 
 The first parameter specifies the author and plugin names. The second parameter sets the menu code. The optional third parameter specifies the submenu code. Usually you call the `BackendMenu::setContext` in the controller constructor.
 
-    namespace Acme\Blog\Controllers;
+```php
+namespace Acme\Blog\Controllers;
 
-    class Categories extends \Backend\Classes\Controller {
+class Categories extends \Backend\Classes\Controller {
 
-    public function __construct()
-    {
-        parent::__construct();
+public function __construct()
+{
+    parent::__construct();
 
-        BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
-    }
+    BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
+}
+```
 
 You can set the title of the backend page with the `$pageTitle` property of the controller class (note that the form and list behaviors can do it for you):
 
-    $this->pageTitle = 'Blog categories';
+```php
+$this->pageTitle = 'Blog categories';
+```
 
 <a name="ajax"></a>
 ## Using AJAX handlers
@@ -127,30 +145,34 @@ The backend AJAX handlers can be defined in the controller class or [widgets](wi
 
 Backend AJAX handlers can return an array of data, throw an exception or redirect to another page (see [AJAX event handlers](../ajax/handlers)). You can use `$this->vars` to set variables and the controller's `makePartial` method to render a partial and return its contents as a part of the response data.
 
-    public function onOpenTemplate()
-    {
-        if (Request::input('someVar') != 'someValue') {
-            throw new ApplicationException('Invalid value');
-        }
-
-        $this->vars['foo'] = 'bar';
-
-        return [
-            'partialContents' => $this->makePartial('some-partial')
-        ];
+```php
+public function onOpenTemplate()
+{
+    if (Request::input('someVar') != 'someValue') {
+        throw new ApplicationException('Invalid value');
     }
+
+    $this->vars['foo'] = 'bar';
+
+    return [
+        'partialContents' => $this->makePartial('some-partial')
+    ];
+}
+```
 
 <a name="triggering-ajax-requests"></a>
 ### Triggering AJAX requests
 
 The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [frontend AJAX library](../ajax/introduction) for details. The following example shows how to trigger a request with a backend button.
 
-    <button
-        type="button"
-        data-request="onDoSomething"
-        class="btn btn-default">
-        Do something
-    </button>
+```html
+<button
+    type="button"
+    data-request="onDoSomething"
+    class="btn btn-default">
+    Do something
+</button>
+```
 
 > **NOTE**: You can specifically target the AJAX handler of a widget using a prefix `widget::onName`. See the [widget AJAX handler article](../backend/widgets#generic-ajax-handlers) for more details.
 
