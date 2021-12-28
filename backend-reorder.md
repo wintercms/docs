@@ -100,6 +100,6 @@ The lookup query for the list [database model](../database/model) can be extende
 ```php
 public function reorderExtendQuery($query)
 {
-	$query->withTrashed();
+    $query->withTrashed();
 }
 ```
