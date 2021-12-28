@@ -72,7 +72,7 @@ Property | Description
 
 Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
 
-```php
+```html
 <h1>Hello World</h1>
 ```
 
