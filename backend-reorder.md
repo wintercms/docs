@@ -56,8 +56,8 @@ modelClass: Acme\Shop\Models\Category
 
 # Toolbar widget configuration
 toolbar:
-	# Partial for toolbar buttons
-	buttons: reorder_toolbar
+    # Partial for toolbar buttons
+    buttons: reorder_toolbar
 ```
 
 The configuration options listed below can be used.
