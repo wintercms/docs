@@ -25,13 +25,13 @@ namespace Acme\Shop\Controllers;
 
 class Categories extends Controller
 {
-	public $implement = [
-		'Backend.Behaviors.ReorderController',
-	];
+    public $implement = [
+        'Backend.Behaviors.ReorderController',
+    ];
 
-	public $reorderConfig = 'config_reorder.yaml';
+    public $reorderConfig = 'config_reorder.yaml';
 
-	// [...]
+    // [...]
 }
 ```
 
