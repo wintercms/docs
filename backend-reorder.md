@@ -25,13 +25,13 @@ namespace Acme\Shop\Controllers;
 
 class Categories extends Controller
 {
-	public $implement = [
-		'Backend.Behaviors.ReorderController',
-	];
+    public $implement = [
+        'Backend.Behaviors.ReorderController',
+    ];
 
-	public $reorderConfig = 'config_reorder.yaml';
+    public $reorderConfig = 'config_reorder.yaml';
 
-	// [...]
+    // [...]
 }
 ```
 
@@ -56,8 +56,8 @@ modelClass: Acme\Shop\Models\Category
 
 # Toolbar widget configuration
 toolbar:
-	# Partial for toolbar buttons
-	buttons: reorder_toolbar
+    # Partial for toolbar buttons
+    buttons: reorder_toolbar
 ```
 
 The configuration options listed below can be used.
@@ -100,6 +100,6 @@ The lookup query for the list [database model](../database/model) can be extende
 ```php
 public function reorderExtendQuery($query)
 {
-	$query->withTrashed();
+    $query->withTrashed();
 }
 ```
