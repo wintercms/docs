@@ -576,7 +576,7 @@ public function getCityOptions($scopes = null)
 }
 ```
 
-> **NOTE:** Scope dependencies with `type: group` are only supported at this stage.
+> **NOTE:** Only scope dependencies with `type: group` are supported at this point.
 
 <a name="scope-types"></a>
 ### Available scope types
@@ -1021,6 +1021,8 @@ public function listFilterExtendQuery($query, $scope)
     }
 }
 ```
+    
+>**NOTE:** In order to apply the `limit()` scope to the query you have to disable the default pagination behavior of the `ListController` to prevent it from overriding any changes to the query `LIMIT`. This can be done by setting `recordsPerPage: 0` in your list definition configuration.
 
 <a name="extend-records-collection"></a>
 ### Extending the records collection
