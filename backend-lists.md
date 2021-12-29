@@ -512,7 +512,7 @@ In the above example, the `city` scope will refresh when the `country` scope has
         }
     }
 
-> **NOTE:** Scope dependencies with `type: group` are only supported at this stage.
+> **NOTE:** Only scope dependencies with `type: group` are supported at this point.
 
 <a name="scope-types"></a>
 ### Available scope types
@@ -911,6 +911,8 @@ The [list filter](#list-filters) model query can also be extended by overriding 
             $query->where('status', '<>', 'all');
         }
     }
+    
+>**NOTE:** In order to apply the `limit()` scope to the query you have to disable the default pagination behavior of the `ListController` to prevent it from overriding any changes to the query `LIMIT`. This can be done by setting `recordsPerPage: 0` in your list definition configuration.
 
 <a name="extend-records-collection"></a>
 ### Extending the records collection
