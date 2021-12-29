@@ -99,7 +99,7 @@ Widgets implement the same AJAX approach as the [backend controllers](controller
 
 When called from a widget class or partial the AJAX handler will target itself. For example, if the widget uses the alias of **mywidget** the handler will be targeted with `mywidget::onName`. The above would output the following attribute value:
 
-```none
+```
 data-request="mywidget::onPaginate"
 ```
 

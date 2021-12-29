@@ -47,25 +47,25 @@ The definition of what should be updated is specified as a JSON-like object wher
 
 The following will request to update the `#myDiv` element with **mypartial** contents.
 
-```none
+```
 mypartial: '#myDiv'
 ```
 
 Multiple partials are separated by commas.
 
-```none
+```
 firstpartial: '#myDiv', secondpartial: '#otherDiv'
 ```
 
 If the partial name contains a slash or a dash, it is important to 'quote' the left side.
 
-```none
+```
 'folder/mypartial': '#myDiv', 'my-partial': '#myDiv'
 ```
 
 The target element will always be on the right side since it can also be a HTML element in JavaScript.
 
-```none
+```
 mypartial: document.getElementById('myDiv')
 ```
 
@@ -74,13 +74,13 @@ mypartial: document.getElementById('myDiv')
 
 If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
 
-```none
+```
 'folder/append': '@#myDiv'
 ```
 
 If the selector string is prepended with the `^` symbol, the content will be prepended instead.
 
-```none
+```
 'folder/append': '^#myDiv'
 ```
 

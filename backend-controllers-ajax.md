@@ -78,13 +78,13 @@ Public controller methods, called **actions** are coupled to **view files** whic
 
 URL of this page is made up of the author name, plugin name, controller name and action name.
 
-```none
+```
 backend/[author name]/[plugin name]/[controller name]/[action name]
 ```
 
 The above Controller results in the following:
 
-```none
+```
 https://example.com/backend/acme/blog/users/index
 ```
 

@@ -44,7 +44,7 @@ By default files in S3 buckets cannot be accessed directly. To make the bucket p
 
 Click **Save** button to apply the policy. The policy gives public read-only access to all folders and directories in the bucket. If you're going to use the bucket for other needs, it's possible to setup a public access to a specific folder in the bucket, just specify the directory name in the **Resource** value: 
 
-```none
+```
 "arn:aws:s3:::BUCKETNAME/media/*"
 ```
 

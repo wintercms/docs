@@ -80,7 +80,7 @@ BackendAuth::login($user);
 
 Plugins can register backend user permissions by overriding the `registerPermissions` method inside the [Plugin registration class](../plugin/registration#registration-file). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
 
-```none
+```
 acme.blog.access_categories
 ```
 
