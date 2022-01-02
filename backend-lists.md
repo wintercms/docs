@@ -119,7 +119,7 @@ Option | Description
 
 The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](../ui/scoreboard) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
 
-```html
+```php
 <div data-control="toolbar">
     <a
         href="<?= Backend::url('acme/blog/posts/create') ?>"
