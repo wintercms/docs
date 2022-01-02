@@ -290,8 +290,8 @@ To perform a "cross join" use the `crossJoin` method with the name of the table 
 
 ```php
 $users = Db::table('sizes')
-            ->crossJoin('colors')
-            ->get();
+    ->crossJoin('colors')
+    ->get();
 ```
 
 #### Advanced join statements
