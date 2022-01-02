@@ -534,8 +534,8 @@ $users = Db::table('users')
                 ->get();
 
 $users = Db::table('users')
-                ->whereJsonLength('options->languages', '>', 1)
-                ->get();
+    ->whereJsonLength('options->languages', '>', 1)
+    ->get();
 ```
 
 <a name="conditional-clauses"></a>
