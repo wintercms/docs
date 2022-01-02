@@ -514,8 +514,8 @@ You may use `whereJsonContains` to query JSON arrays (not supported on SQLite):
 
 ```php
 $users = Db::table('users')
-                ->whereJsonContains('options->languages', 'en')
-                ->get();
+    ->whereJsonContains('options->languages', 'en')
+    ->get();
 ```
 
 MySQL and PostgreSQL support `whereJsonContains` with multiple values:
