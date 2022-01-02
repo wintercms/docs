@@ -522,8 +522,8 @@ MySQL and PostgreSQL support `whereJsonContains` with multiple values:
 
 ```php
 $users = Db::table('users')
-                ->whereJsonContains('options->languages', ['en', 'de'])
-                ->get();
+    ->whereJsonContains('options->languages', ['en', 'de'])
+    ->get();
 ```
 
 You may use `whereJsonLength` to query JSON arrays by their length:
