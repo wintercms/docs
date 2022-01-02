@@ -561,12 +561,12 @@ You may pass another Closure as the third parameter to the `when` method. This C
 $sortBy = null;
 
 $users = Db::table('users')
-                ->when($sortBy, function ($query, $sortBy) {
-                    return $query->orderBy($sortBy);
-                }, function ($query) {
-                    return $query->orderBy('name');
-                })
-                ->get();
+    ->when($sortBy, function ($query, $sortBy) {
+        return $query->orderBy($sortBy);
+    }, function ($query) {
+        return $query->orderBy('name');
+    })
+    ->get();
 ```
 
 <a name="ordering-grouping-limit-and-offset"></a>
