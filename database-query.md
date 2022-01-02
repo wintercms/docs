@@ -547,10 +547,10 @@ Sometimes you may want clauses to apply to a query only when something else is t
 $role = $request->input('role');
 
 $users = Db::table('users')
-                ->when($role, function ($query, $role) {
-                    return $query->where('role_id', $role);
-                })
-                ->get();
+    ->when($role, function ($query, $role) {
+        return $query->where('role_id', $role);
+    })
+    ->get();
 ```
 
 The `when` method only executes the given Closure when the first parameter is `true`. If the first parameter is `false`, the Closure will not be executed.
