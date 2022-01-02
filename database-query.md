@@ -530,8 +530,8 @@ You may use `whereJsonLength` to query JSON arrays by their length:
 
 ```php
 $users = Db::table('users')
-                ->whereJsonLength('options->languages', 0)
-                ->get();
+    ->whereJsonLength('options->languages', 0)
+    ->get();
 
 $users = Db::table('users')
     ->whereJsonLength('options->languages', '>', 1)
