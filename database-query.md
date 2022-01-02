@@ -323,9 +323,9 @@ You may use the `joinSub`, `leftJoinSub`, and `rightJoinSub` methods to join a q
 
 ```php
 $latestPosts = Db::table('posts')
-                    ->select('user_id', Db::raw('MAX(created_at) as last_post_created_at'))
-                    ->where('is_published', true)
-                    ->groupBy('user_id');
+    ->select('user_id', Db::raw('MAX(created_at) as last_post_created_at'))
+    ->where('is_published', true)
+    ->groupBy('user_id');
 
 $users = Db::table('users')
             ->joinSub($latestPosts, 'latest_posts', function ($join) {
