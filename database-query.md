@@ -502,8 +502,8 @@ Winter CMS also supports querying JSON column types on databases that provide su
 
 ```php
 $users = Db::table('users')
-                ->where('options->language', 'en')
-                ->get();
+    ->where('options->language', 'en')
+    ->get();
 
 $users = Db::table('users')
                 ->where('preferences->dining->meal', 'salad')
