@@ -328,9 +328,9 @@ $latestPosts = Db::table('posts')
     ->groupBy('user_id');
 
 $users = Db::table('users')
-            ->joinSub($latestPosts, 'latest_posts', function ($join) {
-                $join->on('users.id', '=', 'latest_posts.user_id');
-            })->get();
+    ->joinSub($latestPosts, 'latest_posts', function ($join) {
+        $join->on('users.id', '=', 'latest_posts.user_id');
+    })->get();
 ```
 
 <a name="unions"></a>
