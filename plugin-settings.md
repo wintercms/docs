@@ -40,13 +40,16 @@ The `$settingsCode` property is required for settings models. It defines the uni
 
 The `$settingsFields` property is required if are going to build a backend settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [backend forms](../backend/forms) article. The YAML file should be placed to the directory with the name matching the model class name in lowercase. For the model from the previous example the directory structure would look like this:
 
-    plugins/
-      acme/
-        demo/
-          models/
-            settings/        <=== Model files directory
-              fields.yaml    <=== Model form fields
-            Settings.php     <=== Model script
+```
+📂 plugins
+ ┗ 📂 acme
+   ┗ 📂 demo
+     ┗ 📂 models
+       ┣ 📂 settings         <=== Model files directory
+       ┃ ┗ 📜 fields.yaml    <=== Model form fields
+       ┃
+       ┗ 📜 Settings.php     <=== Model script
+```
 
 Settings models [can be registered](#backend-pages) to appear on the **backend Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 

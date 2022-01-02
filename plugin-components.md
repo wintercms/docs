@@ -24,14 +24,18 @@
 
 Components files and directories reside in the **/components** subdirectory of a plugin directory. Each component has a PHP file defining the component class and an optional component partials directory. The component partials directory name matches the component class name written in lowercase. An example of a component directory structure:
 
-    plugins/
-      acme/
-        myplugin/
-          components/
-            componentname/       <=== Component partials directory
-              default.htm        <=== Component default markup (optional)
-            ComponentName.php    <=== Component class file
-          Plugin.php
+```
+📂 plugins
+ ┗ 📂 acme
+   ┗ 📂 myplugin
+     ┣ 📂 components
+     ┃ ┣ 📂 componentname        <=== Component partials directory
+     ┃ ┃ ┗ 📜 default.htm        <=== Component default markup (optional)
+     ┃ ┃
+     ┃ ┗ 📜 ComponentName.php    <=== Component class file
+     ┃
+     ┗ 📜 Plugin.php
+```
 
 Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents` method.
 
