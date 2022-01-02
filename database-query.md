@@ -506,8 +506,8 @@ $users = Db::table('users')
     ->get();
 
 $users = Db::table('users')
-                ->where('preferences->dining->meal', 'salad')
-                ->get();
+    ->where('preferences->dining->meal', 'salad')
+    ->get();
 ```
 
 You may use `whereJsonContains` to query JSON arrays (not supported on SQLite):
