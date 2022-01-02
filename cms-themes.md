@@ -74,22 +74,31 @@ Below, you can see an example theme directory structure. Each Winter theme is re
 
 Winter supports single level subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have any structure. This simplifies the organization of large websites. In the example directory structure below, you can see that the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
 
-    themes/
-      website/
-        pages/
-          home.htm
-          blog/                  <=== Subdirectory
-            archive.htm
-            category.htm
-        partials/
-          sidebar.htm
-          blog/                  <=== Subdirectory
-            category-list.htm
-        content/
-          footer-contacts.txt
-          home/                  <=== Subdirectory
-            intro.htm
-        ...
+```
+📦 themes
+ ┗ 📂 website
+   ┣ 📂 pages
+   ┃ ┣ 📜home.htm
+   ┃ ┃
+   ┃ ┗ 📂 blog                  <=== Subdirectory
+   ┃   ┣ 📜 archive.htm
+   ┃   ┗ 📜 category.htm
+   ┃
+   ┣ 📂 partials
+   ┃ ┣ 📜 sidebar.htm
+   ┃ ┃
+   ┃ ┗ 📂 blog                  <=== Subdirectory
+   ┃   ┗ 📜 category-list.htm
+   ┃
+   ┣ 📂 content
+   ┃ ┣ 📜 footer-contacts.txt
+   ┃ ┃
+   ┃ ┗ 📂 home                  <=== Subdirectory
+   ┃   ┗ 📜 intro.htm
+   ┃
+  ...
+
+```
 
 To refer to a partial or a content file from a subdirectory, specify the subdirectory's name before the template's name. Example of rendering a partial from a subdirectory:
 

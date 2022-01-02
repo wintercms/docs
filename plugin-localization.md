@@ -58,7 +58,7 @@ The localization strings can be loaded with the `Lang` class. The parameter it a
 System users can override plugin localization strings without altering the plugins' files. This is done by adding localization files to the **lang** directory. For example, to override the lang.php file of the **acme/blog** plugin you should create the file in the following location:
 
 ```
-📂 lang                 <=== App localization directory
+📦 lang                 <=== App localization directory
  ┗ 📂 en                <=== Language directory
    ┗ 📂 acme            <=== Plugin / Module directory
      ┗ 📂 blog          <===^

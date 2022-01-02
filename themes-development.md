@@ -18,8 +18,8 @@ The theme information file **theme.yaml** contains the theme description, the au
 
 ```
 📂 themes
- ┣ 📂 example-theme
- ┃ ┗ 📜 theme.yaml      <-- Theme information file
+ ┗ 📂 example-theme
+   ┗ 📜 theme.yaml      <-- Theme information file
 ```
 
 The following fields are supported in the **theme.yaml** file:
@@ -52,8 +52,8 @@ The theme version file **version.yaml** defines the current theme version and th
 
 ```
 📂 themes
- ┣ 📂 example-theme
- ┃ ┗ 📜 version.yaml      <-- Theme version file
+ ┗ 📂 example-theme
+   ┗ 📜 version.yaml      <-- Theme version file
 ```
 
 The file format is following:
@@ -71,10 +71,10 @@ The theme preview image is used in the backend theme selector. The image file **
 
 ```
 📂 themes
- ┣ 📂 example-theme
- ┃ ┣ 📂 assets
- ┃ ┃ ┣ 📂 images
- ┃ ┃ ┃ ┗ 📜 theme-preview.png   <-- Theme Preview Image
+ ┗ 📂 example-theme
+   ┗ 📂 assets
+     ┗ 📂 images
+       ┗ 📜 theme-preview.png   <-- Theme Preview Image
 ```
 
 The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
@@ -189,12 +189,13 @@ Below is an example of the theme's lang directory:
 
 ```
 📦themes
- ┣ 📂 example-theme     <-- Theme directory
- ┃ ┣ 📂 lang            <-- Localization directory
- ┃ ┃ ┣ 📂 en            <-- Specific locale directory
- ┃ ┃ ┃ ┗ 📜 lang.php    <-- Localization file
- ┃ ┃ ┣ 📂 fr
- ┃ ┃ ┃ ┗ 📜 lang.php
+ ┗ 📂 example-theme     <-- Theme directory
+   ┗ 📂 lang            <-- Localization directory
+     ┣ 📂 en            <-- Specific locale directory
+     ┃ ┗ 📜 lang.php    <-- Localization file
+     ┃
+     ┗ 📂 fr
+       ┗ 📜 lang.php
  ```
 
 The **lang.php** file should define and return an array of any depth, for example:
