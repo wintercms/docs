@@ -93,7 +93,9 @@ Winter supports single level subdirectories for **pages**, **partials**, **layou
 
 To refer to a partial or a content file from a subdirectory, specify the subdirectory's name before the template's name. Example of rendering a partial from a subdirectory:
 
-    {% partial "blog/category-list" %}
+```twig
+{% partial "blog/category-list" %}
+```
 
 > **NOTE:** The template paths are always absolute. If, in a partial, you render another partial from the same subdirectory, you still need to specify the subdirectory's name.
 
@@ -104,77 +106,87 @@ Pages, partials and layout templates can include up to 3 sections: **configurati
 Sections are separated with the `==` sequence.
 For example:
 
-    url = "/blog"
-    layout = "default"
-    ==
-    function onStart()
-    {
-        $this['posts'] = ...;
-    }
-    ==
-    <h3>Blog archive</h3>
-    {% for post in posts %}
-        <h4>{{ post.title }}</h4>
-        {{ post.content }}
-    {% endfor %}
+```twig
+url = "/blog"
+layout = "default"
+==
+function onStart()
+{
+    $this['posts'] = ...;
+}
+==
+<h3>Blog archive</h3>
+{% for post in posts %}
+    <h4>{{ post.title }}</h4>
+    {{ post.content }}
+{% endfor %}
+```
 
 <a name="configuration-section"></a>
 ### Configuration section
 
 The configuration section sets the template parameters. Supported configuration parameters are specific for different CMS templates and described in their corresponding documentation articles. The configuration section uses the simple [INI format](http://en.wikipedia.org/wiki/INI_file), where string parameter values are enclosed within quotes. Example configuration section for a page template:
 
-    url = "/blog"
-    layout = "default"
+```ini
+url = "/blog"
+layout = "default"
 
-    [component]
-    parameter = "value"
+[component]
+parameter = "value"
+```
 
 <a name="php-section"></a>
 ### PHP code section
 
 The code in the PHP section executes every time before the template is rendered. The PHP section is optional for all CMS templates and its contents depend on the template type where it is defined. The PHP code section can contain optional open and close PHP tags to enable syntax highlighting in text editors. The open and close tags should always be specified on a different line to the section separator `==`.
 
-    url = "/blog"
-    layout = "default"
-    ==
-    <?
-    function onStart()
-    {
-        $this['posts'] = ...;
-    }
-    ?>
-    ==
-    <h3>Blog archive</h3>
-    {% for post in posts %}
-        <h4>{{ post.title }}</h4>
-        {{ post.content }}
-    {% endfor %}
+```twig
+url = "/blog"
+layout = "default"
+==
+<?
+function onStart()
+{
+    $this['posts'] = ...;
+}
+?>
+==
+<h3>Blog archive</h3>
+{% for post in posts %}
+    <h4>{{ post.title }}</h4>
+    {{ post.content }}
+{% endfor %}
+```
 
 In the PHP section, you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed. Example of using a namespace reference:
 
-    url = "/blog"
-    layout = "default"
-    ==
-    <?
-    use Acme\Blog\Classes\Post;
+```php
+url = "/blog"
+layout = "default"
+==
+<?
+use Acme\Blog\Classes\Post;
 
-    function onStart()
-    {
-        $this['posts'] = Post::get();
-    }
-    ?>
-    ==
+function onStart()
+{
+    $this['posts'] = Post::get();
+}
+?>
+==
+```
 
 As a general way of setting variables, you should use the array access method on `$this`, although for simplicity you can use **object access as read-only**, for example:
 
-    // Write via array
-    $this['foo'] = 'bar';
+```php
+// Write via array
+$this['foo'] = 'bar';
 
-    // Read via array
-    echo $this['foo'];
+// Read via array
+echo $this['foo'];
 
-    // Read-only via object
-    echo $this->foo;
+// Read-only via object
+echo $this->foo;
+```
 
 <a name="twig-section"></a>
 ### Twig markup section

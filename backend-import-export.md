@@ -58,10 +58,10 @@ The configuration options listed below are optional. Define them if you want the
 
 Option | Description
 ------------- | -------------
-**defaultRedirect** | used as a fallback redirection page when no specific redirect page is defined.
-**import** | a configuration array or reference to a config file for the Import page.
-**export** | a configuration array or reference to a config file for the Export page.
-**defaultFormatOptions** | a configuration array or reference to a config file for the default CSV format options.
+`defaultRedirect` | used as a fallback redirection page when no specific redirect page is defined.
+`import` | a configuration array or reference to a config file for the Import page.
+`export` | a configuration array or reference to a config file for the Export page.
+`defaultFormatOptions` | a configuration array or reference to a config file for the default CSV format options.
 
 <a name="import-page"></a>
 ### Import page
@@ -80,11 +80,11 @@ The following configuration options are supported for the Import page:
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
-**list** | defines the list columns available for importing.
-**form** | provides additional fields used as import options, optional.
-**redirect** | redirection page when the import is complete, optional
-**permissions** | user permissions needed to perform the operation, optional
+`title` | a page title, can refer to a [localization string](../plugin/localization).
+`list` | defines the list columns available for importing.
+`form` | provides additional fields used as import options, optional.
+`redirect` | redirection page when the import is complete, optional
+`permissions` | user permissions needed to perform the operation, optional
 
 <a name="export-page"></a>
 ### Export page
@@ -103,12 +103,12 @@ The following configuration options are supported for the Export page:
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
-**fileName** | the file name to use for the exported file, default **export.csv**.
-**list** | defines the list columns available for exporting.
-**form** | provides additional fields used as import options, optional.
-**redirect** | redirection page when the export is complete, optional.
-**useList** | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
+`title` | a page title, can refer to a [localization string](../plugin/localization).
+`fileName` | the file name to use for the exported file, default **export.csv**.
+`list` | defines the list columns available for exporting.
+`form` | provides additional fields used as import options, optional.
+`redirect` | redirection page when the export is complete, optional.
+`useList` | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
 
 <a name="format-options"></a>
 ### Format options
@@ -127,10 +127,10 @@ The following configuration options (all optional) are supported for the format 
 
 Option | Description
 ------------- | -------------
-**delimiter** | Delimiter character.
-**enclosure** | Enclosure character.
-**escape** | Escape character.
-**encoding** | File encoding (only used for the import).
+`delimiter` | Delimiter character.
+`enclosure` | Enclosure character.
+`escape` | Escape character.
+`encoding` | File encoding (only used for the import).
 
 <a name="import-export-views"></a>
 ## Import and export views
@@ -168,7 +168,7 @@ The **import.htm** view represents the Import page that allows users to import d
 <a name="export-view"></a>
 ### Export view
 
-The **export.htm** view represents the Export page that allows users to export a file from the database. A typical Export page contains breadcrumbs, the export section itself, and the submission buttons. The **data-request** attribute should refer to the `onExport` AJAX handler provided by the behavior. Below is a contents of the typical export.htm form.
+The **export.htm** view represents the Export page that allows users to export a file from the database. A typical Export page contains breadcrumbs, the export section itself, and the submission buttons. The `data-request` attribute should refer to the `onExport` AJAX handler provided by the behavior. Below is a contents of the typical export.htm form.
 
 ```html
 <?= Form::open(['class' => 'layout']) ?>
@@ -331,5 +331,5 @@ The following configuration options are supported:
 
 Option | Description
 ------------- | -------------
-**definition** | the list definition to source records from, optional.
-**raw** | output the raw attribute values from the record, default: false.
+`definition` | the list definition to source records from, optional.
+`raw` | output the raw attribute values from the record, default: `false`.

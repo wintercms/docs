@@ -12,10 +12,18 @@ The JavaScript API is more powerful than the data attributes API. The `request` 
 
 The `request` method has a single required argument - the AJAX handler name. Example:
 
-    <form onsubmit="$(this).request('onProcess'); return false;">
-        ...
+```html
+<form onsubmit="$(this).request('onProcess'); return false;">
+    ...
+```
 
 The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the Winter framework:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -35,6 +43,12 @@ Option | Description
 
 You may also override some of the request logic by passing new functions as options. These logic handlers are available.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Handler | Description
 ------------- | -------------
 `handleConfirmMessage(message)` | called when requesting confirmation from the user.
@@ -48,55 +62,75 @@ Handler | Description
 
 Request a confirmation before the onDelete request is sent:
 
-    $('form').request('onDelete', {
-        confirm: 'Are you sure?',
-        redirect: '/dashboard'
-    })
+```js
+$('form').request('onDelete', {
+    confirm: 'Are you sure?',
+    redirect: '/dashboard'
+})
+```
 
 Run `onCalculate` handler and inject the rendered **calcresult** partial into the page element with the **result** CSS class:
 
-    $('form').request('onCalculate', {
-        update: {calcresult: '.result'}
-    })
+```js
+$('form').request('onCalculate', {
+    update: {calcresult: '.result'}
+})
+```
 
 Run `onCalculate` handler with some extra data:
 
-    $('form').request('onCalculate', {data: {value: 55}})
+```js
+$('form').request('onCalculate', {data: {value: 55}})
+```
 
 Run `onCalculate` handler and run some custom code before the page elements update:
 
-    $('form').request('onCalculate', {
-        update: {calcresult: '.result'},
-        beforeUpdate: function() { /* do something */ }
-    })
+```js
+$('form').request('onCalculate', {
+    update: {calcresult: '.result'},
+    beforeUpdate: function() { /* do something */ }
+})
+```
 
 Run `onCalculate` handler and if successful, run some custom code and the default `success` function:
 
-    $('form').request('onCalculate', {success: function(data) {
-        //... do something ...
-        this.success(data);
-    }})
+```js
+$('form').request('onCalculate', {success: function(data) {
+    //... do something ...
+    this.success(data);
+}})
+```
 
 Execute a request without a FORM element:
 
-    $.request('onCalculate', {
-        success: function() {
-            console.log('Finished!');
-        }
-    })
+```js
+$.request('onCalculate', {
+    success: function() {
+        console.log('Finished!');
+    }
+})
+```
 
 Run `onCalculate` handler and if successful, run some custom code after the default `success` function is done:
 
-    $('form').request('onCalculate', {success: function(data) {
-        this.success(data).done(function() {
-            //... do something after parent success() is finished ...
-        });
-    }})
+```js
+$('form').request('onCalculate', {success: function(data) {
+    this.success(data).done(function() {
+        //... do something after parent success() is finished ...
+    });
+}})
+```
 
 <a name="global-events"></a>
 ## Global AJAX events
 
 The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Event | Description
 ------------- | -------------
@@ -124,35 +158,41 @@ Event | Description
 
 Executes JavaScript code when the `ajaxUpdate` event is triggered on an element.
 
-    $('.calcresult').on('ajaxUpdate', function() {
-        console.log('Updated!');
-    })
+```js
+$('.calcresult').on('ajaxUpdate', function() {
+    console.log('Updated!');
+})
+```
 
 Execute a single request that shows a Flash Message using logic handler.
 
-    $.request('onDoSomething', {
-        flash: 1,
-        handleFlashMessage: function(message, type) {
-            $.wn.flashMsg({ text: message, class: type })
-        }
-    })
+```js
+$.request('onDoSomething', {
+    flash: 1,
+    handleFlashMessage: function(message, type) {
+        $.wn.flashMsg({ text: message, class: type })
+    }
+})
+```
 
 Applies configurations to all AJAX requests globally.
 
-    $(document).on('ajaxSetup', function(event, context) {
-        // Enable AJAX handling of Flash messages on all AJAX requests
-        context.options.flash = true
+```js
+$(document).on('ajaxSetup', function(event, context) {
+    // Enable AJAX handling of Flash messages on all AJAX requests
+    context.options.flash = true
 
-        // Enable the StripeLoadIndicator on all AJAX requests
-        context.options.loading = $.wn.stripeLoadIndicator
+    // Enable the StripeLoadIndicator on all AJAX requests
+    context.options.loading = $.wn.stripeLoadIndicator
 
-        // Handle Error Messages by triggering a flashMsg of type error
-        context.options.handleErrorMessage = function(message) {
-            $.wn.flashMsg({ text: message, class: 'error' })
-        }
+    // Handle Error Messages by triggering a flashMsg of type error
+    context.options.handleErrorMessage = function(message) {
+        $.wn.flashMsg({ text: message, class: 'error' })
+    }
 
-        // Handle Flash Messages by triggering a flashMsg of the message type
-        context.options.handleFlashMessage = function(message, type) {
-            $.wn.flashMsg({ text: message, class: type })
-        }
-    })
+    // Handle Flash Messages by triggering a flashMsg of the message type
+    context.options.handleFlashMessage = function(message, type) {
+        $.wn.flashMsg({ text: message, class: type })
+    }
+})
+```
