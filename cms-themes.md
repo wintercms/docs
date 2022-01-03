@@ -84,7 +84,6 @@ Winter supports single level subdirectories for **pages**, **partials**, **layou
    ┃   ┗ 📜 category.htm
    ┣ 📂 partials
    ┃ ┣ 📜 sidebar.htm
-   ┃ ┃
    ┃ ┗ 📂 blog                  <=== Subdirectory
    ┃   ┗ 📜 category-list.htm
    ┣ 📂 content

@@ -45,9 +45,9 @@ The simplest plugins only require the **Plugin.php** file described below.
 
 ```css
 📂 plugins
- ┣ 📂 myauthor          /* Author name */
- ┃ ┣ 📂 myplugin        /* Plugin name */
- ┃ ┃ ┗ 📜 Plugin.php    /* Plugin registration file, required */
+ ┗ 📂 myauthor          /* Author name */
+   ┗ 📂 myplugin        /* Plugin name */
+     ┗ 📜 Plugin.php    /* Plugin registration file, required */
 ```
 
 <a name="typical-structure"></a>
@@ -59,20 +59,20 @@ The following is an example of what most plugins would end up looking like when 
 
 ```css
 📂 plugins
- ┣ 📂 myauthor              /* Author name */
- ┃ ┣ 📂 myplugin            /* Plugin name */
- ┃ ┃ ┣ 📂 assets            /* CSS, JavaScript and image assets for pages and components */
- ┃ ┃ ┣ 📂 controllers       /* Backend controllers */
- ┃ ┃ ┣ 📂 lang              /* Localization files */
- ┃ ┃ ┃ ┗ 📂 en              /* Specific locale folder */
- ┃ ┃ ┃ ┃ ┗ 📜 lang.php      /* Translations */
- ┃ ┃ ┣ 📂 models            /* Models */
- ┃ ┃ ┣ 📂 updates           /* Database migrations */
- ┃ ┃ ┃ ┗ 📜 version.yaml    /* Changelog */
- ┃ ┃ ┣ 📂 views             /* Custom view files */
- ┃ ┃ ┃ ┗ 📂 mail            /* Custom mail templates */
- ┃ ┃ ┣ 📜 README.md         /* Documentation describing the purpose of the plugin */
- ┃ ┃ ┗ 📜 Plugin.php        /* Plugin registration class */
+ ┗ 📂 myauthor              /* Author name */
+   ┗ 📂 myplugin            /* Plugin name */
+     ┣ 📂 assets            /* CSS, JavaScript and image assets for pages and components */
+     ┣ 📂 controllers       /* Backend controllers */
+     ┣ 📂 lang              /* Localization files */
+     ┃ ┗ 📂 en              /* Specific locale folder */
+     ┃   ┗ 📜 lang.php      /* Translations */
+     ┣ 📂 models            /* Models */
+     ┣ 📂 updates           /* Database migrations */
+     ┃ ┗ 📜 version.yaml    /* Changelog */
+     ┣ 📂 views             /* Custom view files */
+     ┃ ┗ 📂 mail            /* Custom mail templates */
+     ┣ 📜 README.md         /* Documentation describing the purpose of the plugin */
+     ┗ 📜 Plugin.php        /* Plugin registration class */
 ```
 
 <a name="complex-structure"></a>
@@ -82,62 +82,62 @@ The following is an example of what a complex plugin could look like when using 
 
 ```css
 📂 plugins
- ┣ 📂 myauthor                              /* Author name */
- ┃ ┣ 📂 myplugin                            /* Plugin name */
- ┃ ┃ ┣ 📂 assets                            /* CSS, JavaScript and image assets for pages and components */
- ┃ ┃ ┃ ┣ 📂 css
- ┃ ┃ ┃ ┣ 📂 favicons
- ┃ ┃ ┃ ┣ 📂 images
- ┃ ┃ ┃ ┣ 📂 js
- ┃ ┃ ┃ ┗ 📂 scss
- ┃ ┃ ┣ 📂 behaviors                         /* Any custom behaviors provided by the plugin */
- ┃ ┃ ┣ 📂 classes                           /* Any custom classes provided by the plugin */
- ┃ ┃ ┣ 📂 config                            /* Configuration files */
- ┃ ┃ ┃ ┗ 📜 config.php
- ┃ ┃ ┣ 📂 console                           /* Any custom CLI commands provided by the plugin */
- ┃ ┃ ┣ 📂 controllers                       /* Backend controllers */
- ┃ ┃ ┃ ┣ 📂 records                         /* Directory for the view and configuration files for the given controller */
- ┃ ┃ ┃ ┃ ┣ 📜 _list_toolbar.htm             /* List toolbar partial file */
- ┃ ┃ ┃ ┃ ┣ 📜 config_filter.yaml            /* Configuration for the Filter widget present on the controller lists */
- ┃ ┃ ┃ ┃ ┣ 📜 config_form.yaml              /* Configuration for the Form widget present on the controller */
- ┃ ┃ ┃ ┃ ┣ 📜 config_importexport.yaml      /* Configuration for the Import/Export behavior */
- ┃ ┃ ┃ ┃ ┣ 📜 config_list.yaml              /* Configuration for the Lists widget present on the controller */
- ┃ ┃ ┃ ┃ ┣ 📜 config_relation.yaml          /* Configuration for the RelationController behavior */
- ┃ ┃ ┃ ┃ ┣ 📜 create.htm                    /* View file for the create action */
- ┃ ┃ ┃ ┃ ┣ 📜 index.htm                     /* View file for the index action */
- ┃ ┃ ┃ ┃ ┣ 📜 preview.htm                   /* View file for the preview action */
- ┃ ┃ ┃ ┃ ┗ 📜 update.htm                    /* View file for the update action */
- ┃ ┃ ┃ ┣ 📜 Records.php                     /* Backend controller for the Record model */
- ┃ ┃ ┣ 📂 docs                              /* Any plugin-specific documentation should live here */
- ┃ ┃ ┣ 📂 formwidgets                       /* Any custom FormWidgets provided by the plugin */
- ┃ ┃ ┣ 📂 lang                              /* Localization files */
- ┃ ┃ ┃ ┗ 📂 en                              /* Specific locale folder */
- ┃ ┃ ┃ ┃ ┗ 📜 lang.php                      /* Translations for that locale */
- ┃ ┃ ┣ 📂 layouts                           /* Any custom backend layouts used by the plugin */
- ┃ ┃ ┣ 📂 models                            /* Models provided by the plugin */
- ┃ ┃ ┃ ┣ 📂 record                          /* Directory containing configuration files specific to that model */
- ┃ ┃ ┃ ┃ ┣ 📜 columns.yaml                  /* Configuration file used for the Lists widget */
- ┃ ┃ ┃ ┃ ┗ 📜 fields.yaml                   /* Configuration file used for the Form widget */
- ┃ ┃ ┃ ┣ 📜 Record.php                      /* Model class for the Record model */
- ┃ ┃ ┣ 📂 partials                          /* Any custom partials used by the plugin */
- ┃ ┃ ┣ 📂 reportwidgets                     /* Any custom ReportWidgets provided by the plugin */
- ┃ ┃ ┣ 📂 tests                             /* Test suite for the plugin */
- ┃ ┃ ┣ 📂 traits                            /* Any custom Traits provided by the plugin */
- ┃ ┃ ┣ 📂 updates                           /* Database migrations */
- ┃ ┃ ┃ ┃ ┣ 📂 v1.0.0                        /* Migrations for a specific version of the plugin */
- ┃ ┃ ┃ ┃ ┃ ┗ 📜 create_records_table.php    /* Database migration file, referenced in version.yaml */
- ┃ ┃ ┃ ┗ 📜 version.yaml                    /* Changelog */
- ┃ ┃ ┣ 📂 views                             /* Custom view files */
- ┃ ┃ ┃ ┗ 📂 mail                            /* Custom mail templates provided by the plugin */
- ┃ ┃ ┣ 📂 widgets                           /* Any custom Widgets provided by the plugin */
- ┃ ┃ ┣ 📜 LICENSE                           /* License file */
- ┃ ┃ ┣ 📜 README.md                         /* Documentation describing the purpose of the plugin */
- ┃ ┃ ┣ 📜 Plugin.php                        /* Plugin registration file */
- ┃ ┃ ┣ 📜 composer.json                     /* Composer file to manage dependencies for the plugin */
- ┃ ┃ ┣ 📜 helpers.php                       /* Global helpers provided by the plugin loaded via composer.json */
- ┃ ┃ ┣ 📜 phpunit.xml                       /* Unit testing configuration */
- ┃ ┃ ┣ 📜 plugin.yaml                       /* Simplified plugin registration configuration YAML file, used by Builder plugin */
- ┃ ┃ ┗ 📜 routes.php                        /* Any custom routes provided by the plugin */
+ ┗ 📂 myauthor                              /* Author name */
+   ┗ 📂 myplugin                            /* Plugin name */
+     ┣ 📂 assets                            /* CSS, JavaScript and image assets for pages and components */
+     ┃ ┣ 📂 css
+     ┃ ┣ 📂 favicons
+     ┃ ┣ 📂 images
+     ┃ ┣ 📂 js
+     ┃ ┗ 📂 scss
+     ┣ 📂 behaviors                         /* Any custom behaviors provided by the plugin */
+     ┣ 📂 classes                           /* Any custom classes provided by the plugin */
+     ┣ 📂 config                            /* Configuration files */
+     ┃ ┗ 📜 config.php
+     ┣ 📂 console                           /* Any custom CLI commands provided by the plugin */
+     ┣ 📂 controllers                       /* Backend controllers */
+     ┃ ┣ 📂 records                         /* Directory for the view and configuration files for the given controller */
+     ┃ ┃ ┣ 📜 _list_toolbar.htm             /* List toolbar partial file */
+     ┃ ┃ ┣ 📜 config_filter.yaml            /* Configuration for the Filter widget present on the controller lists */
+     ┃ ┃ ┣ 📜 config_form.yaml              /* Configuration for the Form widget present on the controller */
+     ┃ ┃ ┣ 📜 config_importexport.yaml      /* Configuration for the Import/Export behavior */
+     ┃ ┃ ┣ 📜 config_list.yaml              /* Configuration for the Lists widget present on the controller */
+     ┃ ┃ ┣ 📜 config_relation.yaml          /* Configuration for the RelationController behavior */
+     ┃ ┃ ┣ 📜 create.htm                    /* View file for the create action */
+     ┃ ┃ ┣ 📜 index.htm                     /* View file for the index action */
+     ┃ ┃ ┣ 📜 preview.htm                   /* View file for the preview action */
+     ┃ ┃ ┗ 📜 update.htm                    /* View file for the update action */
+     ┃ ┗ 📜 Records.php                     /* Backend controller for the Record model */
+     ┣ 📂 docs                              /* Any plugin-specific documentation should live here */
+     ┣ 📂 formwidgets                       /* Any custom FormWidgets provided by the plugin */
+     ┣ 📂 lang                              /* Localization files */
+     ┃ ┗ 📂 en                              /* Specific locale folder */
+     ┃   ┗ 📜 lang.php                      /* Translations for that locale */
+     ┣ 📂 layouts                           /* Any custom backend layouts used by the plugin */
+     ┣ 📂 models                            /* Models provided by the plugin */
+     ┃ ┣ 📂 record                          /* Directory containing configuration files specific to that model */
+     ┃ ┃ ┣ 📜 columns.yaml                  /* Configuration file used for the Lists widget */
+     ┃ ┃ ┗ 📜 fields.yaml                   /* Configuration file used for the Form widget */
+     ┃ ┗ 📜 Record.php                      /* Model class for the Record model */
+     ┣ 📂 partials                          /* Any custom partials used by the plugin */
+     ┣ 📂 reportwidgets                     /* Any custom ReportWidgets provided by the plugin */
+     ┣ 📂 tests                             /* Test suite for the plugin */
+     ┣ 📂 traits                            /* Any custom Traits provided by the plugin */
+     ┣ 📂 updates                           /* Database migrations */
+     ┃ ┃ ┗ 📂 v1.0.0                        /* Migrations for a specific version of the plugin */
+     ┃ ┃   ┗ 📜 create_records_table.php    /* Database migration file, referenced in version.yaml */
+     ┃ ┗ 📜 version.yaml                    /* Changelog */
+     ┣ 📂 views                             /* Custom view files */
+     ┃ ┗ 📂 mail                            /* Custom mail templates provided by the plugin */
+     ┣ 📂 widgets                           /* Any custom Widgets provided by the plugin */
+     ┣ 📜 LICENSE                           /* License file */
+     ┣ 📜 README.md                         /* Documentation describing the purpose of the plugin */
+     ┣ 📜 Plugin.php                        /* Plugin registration file */
+     ┣ 📜 composer.json                     /* Composer file to manage dependencies for the plugin */
+     ┣ 📜 helpers.php                       /* Global helpers provided by the plugin loaded via composer.json */
+     ┣ 📜 phpunit.xml                       /* Unit testing configuration */
+     ┣ 📜 plugin.yaml                       /* Simplified plugin registration configuration YAML file, used by Builder plugin */
+     ┗ 📜 routes.php                        /* Any custom routes provided by the plugin */
  ```
 
 <a name="namespaces"></a>

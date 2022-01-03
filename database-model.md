@@ -34,7 +34,7 @@ Model classes reside in the **models** subdirectory of a plugin directory. An ex
      ┃ ┃ ┣ 📜 columns.yaml    <=== Model config files
      ┃ ┃ ┗ 📜 fields.yaml     <==^
      ┃ ┗ 📜 User.php          <=== Model class
-     ┗ Plugin.php
+     ┗ 📜 Plugin.php
 ```
 
 The model configuration directory could contain the model's [list column](../backend/lists#list-columns) and [form field](../backend/forms#form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
