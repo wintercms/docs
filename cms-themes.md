@@ -86,13 +86,10 @@ Winter supports single level subdirectories for **pages**, **partials**, **layou
    ┃ ┣ 📜 sidebar.htm
    ┃ ┗ 📂 blog                  <=== Subdirectory
    ┃   ┗ 📜 category-list.htm
-   ┣ 📂 content
-   ┃ ┣ 📜 footer-contacts.txt
-   ┃ ┗ 📂 home                  <=== Subdirectory
-   ┃   ┗ 📜 intro.htm
-   ┃
-  ...
-
+   ┗ 📂 content
+     ┣ 📜 footer-contacts.txt
+     ┗ 📂 home                  <=== Subdirectory
+       ┗ 📜 intro.htm
 ```
 
 To refer to a partial or a content file from a subdirectory, specify the subdirectory's name before the template's name. Example of rendering a partial from a subdirectory:
