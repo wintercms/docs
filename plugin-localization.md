@@ -13,14 +13,13 @@ Plugins can have localization files in the **lang** subdirectory of the plugin d
 
 Below is an example of the plugin's lang directory:
 
-```
+```css
 📂 plugins
  ┗ 📂 acme
    ┗ 📂 todo              <=== Plugin directory
      ┗ 📂 lang            <=== Localization directory
        ┣ 📂 en            <=== Language directory
        ┃ ┗ 📜 lang.php    <=== Localization file
-       ┃
        ┗ 📂 fr
          ┗ 📜 lang.php
 ```
@@ -57,8 +56,8 @@ The localization strings can be loaded with the `Lang` class. The parameter it a
 
 System users can override plugin localization strings without altering the plugins' files. This is done by adding localization files to the **lang** directory. For example, to override the lang.php file of the **acme/blog** plugin you should create the file in the following location:
 
-```
-📦 lang                 <=== App localization directory
+```css
+📂 lang                 <=== App localization directory
  ┗ 📂 en                <=== Language directory
    ┗ 📂 acme            <=== Plugin / Module directory
      ┗ 📂 blog          <===^

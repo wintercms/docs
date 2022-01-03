@@ -25,17 +25,15 @@ Winter provides a beautiful and simple Active Record implementation for working 
 
 Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
 
-```
-📦 plugins
+```css
+📂 plugins
  ┗ 📂 acme
    ┗ 📂 blog
      ┣ 📂 models
      ┃ ┣ 📂 user              <=== Model config directory
      ┃ ┃ ┣ 📜 columns.yaml    <=== Model config files
      ┃ ┃ ┗ 📜 fields.yaml     <==^
-     ┃ ┃
      ┃ ┗ 📜 User.php          <=== Model class
-     ┃
      ┗ Plugin.php
 ```
 

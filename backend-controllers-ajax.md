@@ -29,6 +29,7 @@ Each controller consists of a PHP file which resides in the the **/controllers**
      ┃ ┃ ┗ 📜 index.htm           <=== Controller view file
      ┃ ┗ 📜 Users.php             <=== Controller class
      ┗ 📜 Plugin.php
+```
 
 <a name="class-definition"></a>
 ### Class definition

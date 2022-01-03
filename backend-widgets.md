@@ -24,19 +24,16 @@ Widgets are the backend equivalent of frontend [Components](../cms/components). 
 
 Widget classes reside inside the **widgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example widget directory structure looks like this:
 
-```
-📦 widgets
+```css
+📂 widgets
  ┣ 📂 form
  ┃ ┣ 📂 partials
  ┃ ┃ ┗ 📜 _form.htm     <=== Widget partial file
- ┃ ┃
  ┃ ┗ 📂 assets
  ┃   ┣ 📂 js
  ┃   ┃ ┗ 📜 form.js     <=== Widget JavaScript file
- ┃   ┃
  ┃   ┗ 📂 css
  ┃     ┗ 📜 form.css    <=== Widget StyleSheet file
- ┃
  ┗ 📜 Form.php          <=== Widget class
 ```
 
@@ -137,19 +134,16 @@ With form widgets you can add new control types to the backend [forms](../backen
 
 Form Widget classes reside inside the **formwidgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
 
-```
+```css
 📂 formwidgets
  ┣ 📂 form
  ┃ ┣ 📂 partials
  ┃ ┃ ┗ 📜 _form.htm     <=== Widget partial file
- ┃ ┃
  ┃ ┗ 📂 assets
  ┃   ┣ 📂 js
  ┃   ┃ ┗ 📜 form.js     <=== Widget JavaScript file
- ┃   ┃
  ┃   ┗ 📂 css
  ┃     ┗ 📜 form.css    <=== Widget StyleSheet file
- ┃
  ┗ 📜 Form.php          <=== Widget class
 ```
 
@@ -311,7 +305,7 @@ Report widgets can be used on the backend dashboard and in other backend report 
 
 The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
-```
+```css
 📂 plugins
  ┗ 📂 winter                      <=== Author name
    ┗ 📂 googleanalytics           <=== Plugin name
@@ -319,7 +313,6 @@ The report widget classes should extend the `Backend\Classes\ReportWidgetBase` c
        ┣ 📂 trafficsources        <=== Widget files directory
        ┃ ┗ 📂 partials
        ┃   ┗ 📜 _widget.htm
-       ┃
        ┗ 📜 TrafficSources.php    <=== Widget class file
 ```
 
