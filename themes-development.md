@@ -188,7 +188,7 @@ Themes can provide backend localization keys through files placed in the **lang*
 Below is an example of the theme's lang directory:
 
 ```css
-📂themes
+📂 themes
  ┗ 📂 example-theme     <-- Theme directory
    ┗ 📂 lang            <-- Localization directory
      ┣ 📂 en            <-- Specific locale directory
