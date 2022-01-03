@@ -143,13 +143,15 @@ The **filter** option should make reference to a [filter configuration file](#li
 
 List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location:
 
-    plugins/
-      acme/
-        blog/
-          models/                  <=== Plugin models directory
-            post/                  <=== Model configuration directory
-              list_columns.yaml    <=== Model list columns config file
-            Post.php               <=== model class
+```css
+📂 plugins
+ ┗ 📂 acme
+   ┗ 📂 blog
+     ┗ 📂 models                   <=== Plugin models directory
+       ┣ 📂 post                   <=== Model configuration directory
+       ┃ ┗ 📜 list_columns.yaml    <=== Model list columns config file
+       ┗ 📜 Post.php               <=== model class
+```
 
 The next example shows the typical contents of a list column definitions file.
 

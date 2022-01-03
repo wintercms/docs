@@ -16,13 +16,13 @@ The change log is stored in a YAML file called `version.yaml` inside the **/upda
 
 ```css
 📂 plugins
- ┣ 📂 myauthor                              <-- Author name
- ┃ ┣ 📂 myplugin                            <-- Plugin name
- ┃ ┃ ┣ 📂 updates                           <-- Database migrations
- ┃ ┃ ┃ ┃ ┣ 📂 v1.0.0                        <-- Migrations for a specific version of the plugin
- ┃ ┃ ┃ ┃ ┃ ┣ 📜 seed_the_database.php       <-- Database seed file, referenced in version.yaml
- ┃ ┃ ┃ ┃ ┃ ┗ 📜 create_records_table.php    <-- Database migration file, referenced in version.yaml
- ┃ ┃ ┃ ┗ 📜 version.yaml                    <-- Changelog
+ ┗ 📂 myauthor                            <-- Author name
+   ┗ 📂 myplugin                          <-- Plugin name
+     ┗ 📂 updates                         <-- Database migrations
+       ┣ 📂 v1.0.0                        <-- Migrations for a specific version of the plugin
+       ┃ ┣ 📜 seed_the_database.php       <-- Database seed file, referenced in version.yaml
+       ┃ ┗ 📜 create_records_table.php    <-- Database migration file, referenced in version.yaml
+       ┗ 📜 version.yaml                  <-- Changelog
  ```
 
 <a name="update-process"></a>

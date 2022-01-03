@@ -32,39 +32,39 @@ Object | Description
 
 Below, you can see an example theme directory structure. Each Winter theme is represented with a separate directory and generally, one active theme is used for displaying the website. This example displays the "example-theme" theme directory.
 
-```
+```css
 📂 themes
- ┣ 📂 example-theme
- ┃ ┣ 📂 assets                <-- Theme assets
- ┃ ┃ ┣ 📂 css
- ┃ ┃ ┣ 📂 fonts
- ┃ ┃ ┣ 📂 images
- ┃ ┃ ┣ 📂 javascript
- ┃ ┃ ┣ 📂 scss
- ┃ ┃ ┗ 📂 vendor
- ┃ ┣ 📂 content               <-- Static content files
- ┃ ┃ ┗ 📂 static-pages        <-- Content files from the Winter.Pages plugin
- ┃ ┃ ┃ ┗ 📜 index.htm
- ┃ ┃ ┗ 📜 welcome.htm
- ┃ ┣ 📂 layouts               <-- Theme Layouts (Page scaffolds / templates)
- ┃ ┃ ┣ 📜 default.htm
- ┃ ┃ ┗ 📜 sidebar.htm
- ┃ ┣ 📂 meta                  <-- Menu definitions and other plugin specific YAML files
- ┃ ┃ ┣ 📂 menus
- ┃ ┃ ┃ ┣ 📜 main-menu.yaml
- ┃ ┃ ┃ ┗ 📜 sitemap.yaml      <-- Meta file describing the sitemap
- ┃ ┃ ┗ 📜 static-pages.yaml   <-- Meta file describing the structure of the Winter.Pages static pages
- ┃ ┣ 📂 pages                 <-- Theme Pages (Contain the routing for the frontend)
- ┃ ┃ ┣ 📜 404.htm             <-- Page for 404 responses
- ┃ ┃ ┣ 📜 home.htm
- ┃ ┃ ┣ 📜 error.htm           <-- Page for 500 responses
- ┃ ┃ ┗ 📜 sitemap.htm         <-- Page for rendering the sitemap response
- ┃ ┣ 📂 partials              <-- Theme Partials (Reusable pieces of HTML markup)
- ┃ ┃ ┣ 📜 html-footer.htm
- ┃ ┃ ┣ 📜 html-header.htm
- ┃ ┃ ┗ 📜 navbar.htm
- ┃ ┣ 📜 theme.yaml            <-- Theme information file
- ┃ ┗ 📜 version.yaml          <-- Theme updates file
+ ┗ 📂 example-theme
+   ┣ 📂 assets                <-- Theme assets
+   ┃ ┣ 📂 css
+   ┃ ┣ 📂 fonts
+   ┃ ┣ 📂 images
+   ┃ ┣ 📂 javascript
+   ┃ ┣ 📂 scss
+   ┃ ┗ 📂 vendor
+   ┣ 📂 content               <-- Static content files
+   ┃ ┣ 📂 static-pages        <-- Content files from the Winter.Pages plugin
+   ┃ ┃ ┗ 📜 index.htm
+   ┃ ┗ 📜 welcome.htm
+   ┣ 📂 layouts               <-- Theme Layouts (Page scaffolds / templates)
+   ┃ ┣ 📜 default.htm
+   ┃ ┗ 📜 sidebar.htm
+   ┣ 📂 meta                  <-- Menu definitions and other plugin specific YAML files
+   ┃ ┣ 📂 menus
+   ┃ ┃ ┣ 📜 main-menu.yaml
+   ┃ ┃ ┗ 📜 sitemap.yaml      <-- Meta file describing the sitemap
+   ┃ ┗ 📜 static-pages.yaml   <-- Meta file describing the structure of the Winter.Pages static pages
+   ┣ 📂 pages                 <-- Theme Pages (Contain the routing for the frontend)
+   ┃ ┣ 📜 404.htm             <-- Page for 404 responses
+   ┃ ┣ 📜 home.htm
+   ┃ ┣ 📜 error.htm           <-- Page for 500 responses
+   ┃ ┗ 📜 sitemap.htm         <-- Page for rendering the sitemap response
+   ┣ 📂 partials              <-- Theme Partials (Reusable pieces of HTML markup)
+   ┃ ┣ 📜 html-footer.htm
+   ┃ ┣ 📜 html-header.htm
+   ┃ ┗ 📜 navbar.htm
+   ┣ 📜 theme.yaml            <-- Theme information file
+   ┗ 📜 version.yaml          <-- Theme updates file
 ```
 
 > The active theme is set with the `activeTheme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Frontend Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
@@ -74,22 +74,23 @@ Below, you can see an example theme directory structure. Each Winter theme is re
 
 Winter supports single level subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have any structure. This simplifies the organization of large websites. In the example directory structure below, you can see that the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
 
-    themes/
-      website/
-        pages/
-          home.htm
-          blog/                  <=== Subdirectory
-            archive.htm
-            category.htm
-        partials/
-          sidebar.htm
-          blog/                  <=== Subdirectory
-            category-list.htm
-        content/
-          footer-contacts.txt
-          home/                  <=== Subdirectory
-            intro.htm
-        ...
+```css
+📂 themes
+ ┗ 📂 website
+   ┣ 📂 pages
+   ┃ ┣ 📜home.htm
+   ┃ ┗ 📂 blog                  <=== Subdirectory
+   ┃   ┣ 📜 archive.htm
+   ┃   ┗ 📜 category.htm
+   ┣ 📂 partials
+   ┃ ┣ 📜 sidebar.htm
+   ┃ ┗ 📂 blog                  <=== Subdirectory
+   ┃   ┗ 📜 category-list.htm
+   ┗ 📂 content
+     ┣ 📜 footer-contacts.txt
+     ┗ 📂 home                  <=== Subdirectory
+       ┗ 📜 intro.htm
+```
 
 To refer to a partial or a content file from a subdirectory, specify the subdirectory's name before the template's name. Example of rendering a partial from a subdirectory:
 
