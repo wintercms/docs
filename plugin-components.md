@@ -236,8 +236,8 @@ public function getStateOptions()
     $countryCode = Request::input('country'); // Load the country property value from POST
 
     $states = [
-        'ca' => ['ab'=>'Alberta', 'bc'=>'British columbia'],
-        'us' => ['al'=>'Alabama', 'ak'=>'Alaska']
+        'ca' => ['ab' => 'Alberta', 'bc' => 'British Columbia'],
+        'us' => ['al' => 'Alabama', 'ak' => 'Alaska'],
     ];
 
     return $states[$countryCode];
