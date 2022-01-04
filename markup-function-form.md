@@ -67,7 +67,7 @@ Attributes can be passed in the second argument.
 
 The above example would output as the following:
 
-```twig
+```html
 <form data-request="onSave" class="form-horizontal">
 ```
 
