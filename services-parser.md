@@ -103,10 +103,10 @@ The array can be iterated using the following syntax:
 YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the backend development of Winter, such as [form field](../backend/forms#form-fields) and [list column](../backend/lists##list-columns) definitions. An example of some YAML:
 
 ```yaml
-receipt:     Acme Purchase Invoice
-date:        2015-10-02
+receipt: Acme Purchase Invoice
+date: 2015-10-02
 user:
-    name:    Joe
+    name: Joe
     surname: Blogs
 ```
 
