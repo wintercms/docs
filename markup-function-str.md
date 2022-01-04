@@ -8,7 +8,7 @@ Functions prefixed with `str_` perform tasks that are useful when dealing with s
 
 is the PHP equivalent of the following:
 
-```twig
+```php
 <?= Str::camel() ?>
 ```
 
