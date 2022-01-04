@@ -55,7 +55,7 @@ It can also be useful with letters:
 The `..` operator can take any expression at both sides:
 
 ```twig
-{% for letter in 'a'|upper..'z'|upper %}
+{% for letter in 'a' | upper..'z' | upper %}
     - {{ letter }}
 {% endfor %}
 ```
