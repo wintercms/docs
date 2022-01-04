@@ -202,7 +202,7 @@ public function defineProperties()
 
 public function getCountryOptions()
 {
-    return ['us'=>'United states', 'ca'=>'Canada'];
+    return ['us' => 'United states', 'ca' => 'Canada'];
 }
 ```
 
