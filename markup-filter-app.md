@@ -8,7 +8,7 @@ The `| app` filter returns an address relative to the public path of the website
 
 If the website address is __https://example.com__ the above example would output the following:
 
-```twig
+```html
 <link rel="icon" href="https://example.com/favicon.ico" />
 ```
 
