@@ -214,6 +214,12 @@ Method | Description
 
 The `pluginDetails` is a required method of the plugin registration class. It should return an array containing the following keys:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Key | Description
 ------------- | -------------
 `name` | the plugin name, required.
@@ -336,6 +342,14 @@ public function makeTextAllCaps($text)
 
 The following Twig custom options are available:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > *,
+    .attributes-table-precessor + table td:nth-child(3),
+    .attributes-table-precessor + table td:nth-child(3) > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 | Option | Type | Default | Description |
 | ------ | ---- | ------- | ----------- |
 | `needs_environment` | boolean | `false` | if true provides the current `TwigEnvironment` as the first argument to the filter call |
@@ -395,6 +409,12 @@ When you register the backend navigation you can use [localization strings](loca
 
 To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the backend controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Key | Description
 ------------- | -------------
 `label` | specifies the menu label localization string key, required.
@@ -425,7 +445,7 @@ public function boot()
 
 Alternatively, you can push it directly into the Kernel via the following.
 
-```
+```php
 public function boot()
 {
     // Add a new middleware to beginning of the stack.

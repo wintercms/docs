@@ -32,20 +32,24 @@ Winter has basic configuration that should be applied to your webserver. Common 
 
 If your webserver is running Apache there are some extra system requirements:
 
-1. mod_rewrite should be installed
-1. AllowOverride option should be switched on
+1. `mod_rewrite` should be installed
+1. `AllowOverride` option should be switched on
 
 In some cases you may need to uncomment this line in the `.htaccess` file:
 
-    ##
-    ## You may need to uncomment the following line for some hosting environments,
-    ## if you have installed to a subdirectory, enter the name here also.
-    ##
-    # RewriteBase /
+```apacheconf
+##
+## You may need to uncomment the following line for some hosting environments,
+## if you have installed to a subdirectory, enter the name here also.
+##
+# RewriteBase /
+```
 
 If you have installed to a subdirectory, you should add the name of the subdirectory also:
 
-    RewriteBase /mysubdirectory/
+```apacheconf
+RewriteBase /mysubdirectory/
+```
 
 <a name="nginx-configuration"></a>
 ### Nginx configuration
@@ -56,59 +60,61 @@ There are small changes required to configure your site in Nginx.
 
 Use the following code in **server** section. If you have installed Winter into a subdirectory, replace the first `/` in location directives with the directory Winter was installed under:
 
-    location / {
-        # Let Winter CMS handle everything by default.
-        # The path not resolved by Winter CMS router will return Winter CMS's 404 page.
-        # Everything that does not match with the whitelist below will fall into this.
-        rewrite ^/.*$ /index.php last;
-    }
+```nginx
+location / {
+    # Let Winter CMS handle everything by default.
+    # The path not resolved by Winter CMS router will return Winter CMS's 404 page.
+    # Everything that does not match with the whitelist below will fall into this.
+    rewrite ^/.*$ /index.php last;
+}
 
-    # Pass the PHP scripts to FastCGI server
-    location ~ ^/index.php {
-        # Write your FPM configuration here
+# Pass the PHP scripts to FastCGI server
+location ~ ^/index.php {
+    # Write your FPM configuration here
 
-    }
+}
 
-    # Whitelist
-    ## Let Winter handle if static file not exists
-    location ~ ^/favicon\.ico { try_files $uri /index.php; }
-    location ~ ^/sitemap\.xml { try_files $uri /index.php; }
-    location ~ ^/robots\.txt { try_files $uri /index.php; }
-    location ~ ^/humans\.txt { try_files $uri /index.php; }
+# Whitelist
+## Let Winter handle if static file not exists
+location ~ ^/favicon\.ico { try_files $uri /index.php; }
+location ~ ^/sitemap\.xml { try_files $uri /index.php; }
+location ~ ^/robots\.txt { try_files $uri /index.php; }
+location ~ ^/humans\.txt { try_files $uri /index.php; }
 
-    # Block access to all dot files and folders except .well-known
-    location ~ /\.(?!well-known).* { deny all; }
+# Block access to all dot files and folders except .well-known
+location ~ /\.(?!well-known).* { deny all; }
 
-    ## Let nginx return 404 if static file not exists
-    location ~ ^/storage/app/uploads/public { try_files $uri 404; }
-    location ~ ^/storage/app/media { try_files $uri 404; }
-    location ~ ^/storage/app/resized { try_files $uri 404; }
-    location ~ ^/storage/temp/public { try_files $uri 404; }
+## Let nginx return 404 if static file not exists
+location ~ ^/storage/app/uploads/public { try_files $uri 404; }
+location ~ ^/storage/app/media { try_files $uri 404; }
+location ~ ^/storage/app/resized { try_files $uri 404; }
+location ~ ^/storage/temp/public { try_files $uri 404; }
 
-    location ~ ^/modules/.*/assets { try_files $uri 404; }
-    location ~ ^/modules/.*/resources { try_files $uri 404; }
-    location ~ ^/modules/.*/behaviors/.*/assets { try_files $uri 404; }
-    location ~ ^/modules/.*/behaviors/.*/resources { try_files $uri 404; }
-    location ~ ^/modules/.*/widgets/.*/assets { try_files $uri 404; }
-    location ~ ^/modules/.*/widgets/.*/resources { try_files $uri 404; }
-    location ~ ^/modules/.*/formwidgets/.*/assets { try_files $uri 404; }
-    location ~ ^/modules/.*/formwidgets/.*/resources { try_files $uri 404; }
-    location ~ ^/modules/.*/reportwidgets/.*/assets { try_files $uri 404; }
-    location ~ ^/modules/.*/reportwidgets/.*/resources { try_files $uri 404; }
+location ~ ^/modules/.*/assets { try_files $uri 404; }
+location ~ ^/modules/.*/resources { try_files $uri 404; }
+location ~ ^/modules/.*/behaviors/.*/assets { try_files $uri 404; }
+location ~ ^/modules/.*/behaviors/.*/resources { try_files $uri 404; }
+location ~ ^/modules/.*/widgets/.*/assets { try_files $uri 404; }
+location ~ ^/modules/.*/widgets/.*/resources { try_files $uri 404; }
+location ~ ^/modules/.*/formwidgets/.*/assets { try_files $uri 404; }
+location ~ ^/modules/.*/formwidgets/.*/resources { try_files $uri 404; }
+location ~ ^/modules/.*/reportwidgets/.*/assets { try_files $uri 404; }
+location ~ ^/modules/.*/reportwidgets/.*/resources { try_files $uri 404; }
 
-    location ~ ^/plugins/.*/.*/assets { try_files $uri 404; }
-    location ~ ^/plugins/.*/.*/resources { try_files $uri 404; }
-    location ~ ^/plugins/.*/.*/behaviors/.*/assets { try_files $uri 404; }
-    location ~ ^/plugins/.*/.*/behaviors/.*/resources { try_files $uri 404; }
-    location ~ ^/plugins/.*/.*/reportwidgets/.*/assets { try_files $uri 404; }
-    location ~ ^/plugins/.*/.*/reportwidgets/.*/resources { try_files $uri 404; }
-    location ~ ^/plugins/.*/.*/formwidgets/.*/assets { try_files $uri 404; }
-    location ~ ^/plugins/.*/.*/formwidgets/.*/resources { try_files $uri 404; }
-    location ~ ^/plugins/.*/.*/widgets/.*/assets { try_files $uri 404; }
-    location ~ ^/plugins/.*/.*/widgets/.*/resources { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/assets { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/resources { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/behaviors/.*/assets { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/behaviors/.*/resources { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/reportwidgets/.*/assets { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/reportwidgets/.*/resources { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/formwidgets/.*/assets { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/formwidgets/.*/resources { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/widgets/.*/assets { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/widgets/.*/resources { try_files $uri 404; }
 
-    location ~ ^/themes/.*/assets { try_files $uri 404; }
-    location ~ ^/themes/.*/resources { try_files $uri 404; }
+location ~ ^/themes/.*/assets { try_files $uri 404; }
+location ~ ^/themes/.*/resources { try_files $uri 404; }
+```
 
 <a name="lighttpd-configuration"></a>
 ### Lighttpd configuration
@@ -119,20 +125,22 @@ If your webserver is running Lighttpd you can use the following configuration to
 
 Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
 
-    $HTTP["host"] =~ "domain.example.com" {
-        server.document-root = "/var/www/example/"
+```
+$HTTP["host"] =~ "domain.example.com" {
+    server.document-root = "/var/www/example/"
 
-        url.rewrite-once = (
-            "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
-            "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
-            "^/storage/app/uploads/public/[\w-]+/.*$" => "$0",
-            "^/storage/app/media/.*$" => "$0",
-            "^/storage/app/resized/.*$" => "$0",
-            "^/storage/temp/public/[\w-]+/.*$" => "$0",
-            "^/(favicon\.ico)$" => "$0",
-            "(.*)" => "/index.php$1"
-        )
-    }
+    url.rewrite-once = (
+        "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
+        "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
+        "^/storage/app/uploads/public/[\w-]+/.*$" => "$0",
+        "^/storage/app/media/.*$" => "$0",
+        "^/storage/app/resized/.*$" => "$0",
+        "^/storage/temp/public/[\w-]+/.*$" => "$0",
+        "^/(favicon\.ico)$" => "$0",
+        "(.*)" => "/index.php$1"
+    )
+}
+```
 
 <a name="iis-configuration"></a>
 ### IIS configuration
@@ -206,35 +214,41 @@ The Winter platform and some marketplace plugins will implement changes in two s
 
 You can instruct the platform to prefer test builds from the marketplace by changing the `edgeUpdates` parameter in the `config/cms.php` configuration file.
 
-    /*
-    |--------------------------------------------------------------------------
-    | Bleeding edge updates
-    |--------------------------------------------------------------------------
-    |
-    | If you are developing with Winter, it is important to have the latest
-    | code base, set this value to 'true' to tell the platform to download
-    | and use the development copies of core files and plugins.
-    |
-    */
+```php
+/*
+|--------------------------------------------------------------------------
+| Bleeding edge updates
+|--------------------------------------------------------------------------
+|
+| If you are developing with Winter, it is important to have the latest
+| code base, set this value to 'true' to tell the platform to download
+| and use the development copies of core files and plugins.
+|
+*/
 
-    'edgeUpdates' => false,
+'edgeUpdates' => false,
+```
 
 > **NOTE:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
 
 > **NOTE:** If using [Composer](../console/commands#console-install-composer) to manage updates, then replace the default Winter CMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch.
 
-    "winter/storm": "dev-develop as 1.0",
-    "winter/wn-system-module": "dev-develop",
-    "winter/wn-backend-module": "dev-develop",
-    "winter/wn-cms-module": "dev-develop",
-    "laravel/framework": "~6.0",
+```json
+"winter/storm": "dev-develop as 1.0",
+"winter/wn-system-module": "dev-develop",
+"winter/wn-backend-module": "dev-develop",
+"winter/wn-cms-module": "dev-develop",
+"laravel/framework": "~6.0",
+```
 
 <a name="public-folder"></a>
 ### Using a public folder
 
 For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `winter:mirror` command.
 
-    php artisan winter:mirror public/
+```bash
+php artisan winter:mirror public/
+```
 
 This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
 
@@ -247,16 +261,18 @@ If you share a server with other users, you should act as if your neighbor's sit
 
 You can setup this protection in the file location `config/cms.php` in the section titled **Default permission mask**.
 
-    /*
-    |--------------------------------------------------------------------------
-    | Default permission mask
-    |--------------------------------------------------------------------------
-    |
-    | Specifies a default file and folder permission for newly created objects.
-    |
-    */
+```php
+/*
+|--------------------------------------------------------------------------
+| Default permission mask
+|--------------------------------------------------------------------------
+|
+| Specifies a default file and folder permission for newly created objects.
+|
+*/
 
-    'defaultMask' => ['file' => '644', 'folder' => '755'],
+'defaultMask' => ['file' => '644', 'folder' => '755'],
+```
 
 > **NOTE**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your cPanel and set them.
 
@@ -335,6 +351,7 @@ The `trustedProxyHeaders` value specifies which headers will be allowed to defin
 ```
 
 > **NOTE:** Amazon Elastic Load Balancing users must use the `HEADER_X_FORWARDED_AWS_ELB` option to accept the correct headers.
+>
 > ```php
 > 'trustedProxyHeaders' => Illuminate\Http\Request::HEADER_X_FORWARDED_AWS_ELB
 > ```
@@ -361,19 +378,21 @@ In both of the above examples, the environment is set to the new value `dev`. Co
 
 For example, to use a different MySQL database for the `dev` environment only, create a file called **config/dev/database.php** using this content:
 
-    <?php
+```php
+<?php
 
-    return [
-        'connections' => [
-            'mysql' => [
-                'host'     => 'localhost',
-                'port'     => '',
-                'database' => 'database',
-                'username' => 'root',
-                'password' => ''
-            ]
+return [
+    'connections' => [
+        'mysql' => [
+            'host'     => 'localhost',
+            'port'     => '',
+            'database' => 'database',
+            'username' => 'root',
+            'password' => ''
         ]
-    ];
+    ]
+];
+```
 
 <a name="domain-environment"></a>
 ### Domain driven environment
@@ -382,25 +401,31 @@ Winter supports using an environment detected by a specific hostname. You may pl
 
 Using this file contents below, when the application is accessed via **global.website.tld** the environment will be set to `global` and likewise for the others.
 
-    <?php
+```php
+<?php
 
-    return [
-        'hosts' => [
-            'global.website.tld' => 'global',
-            'local.website.tld' => 'local',
-        ]
-    ];
+return [
+    'hosts' => [
+        'global.website.tld' => 'global',
+        'local.website.tld' => 'local',
+    ]
+];
+```
 
 <a name="dotenv-configuration"></a>
 ### Converting to DotEnv configuration
 
 As an alternative to the [base environment configuration](#base-environment) you may place common values in the environment instead of using configuration files. The config is then accessed using [DotEnv](https://github.com/vlucas/phpdotenv) syntax. Run the `winter:env` command to move common config values to the environment:
 
-    php artisan winter:env
+```bash
+php artisan winter:env
+```
 
 This will create an **.env** file in project root directory and modify configuration files to use `env` helper function. The first argument contains the key name found in the environment, the second argument contains an optional default value.
 
-    'debug' => env('APP_DEBUG', true),
+```php
+'debug' => env('APP_DEBUG', true),
+```
 
 Your `.env` file should not be committed to your application's source control, since each developer or server using your application could require a different environment configuration.
 

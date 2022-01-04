@@ -24,16 +24,22 @@ The theme information file **theme.yaml** contains the theme description, the au
 
 The following fields are supported in the **theme.yaml** file:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Field | Description
 ------------- | -------------
-**name** | specifies the theme name, required.
-**author** | specifies the author name, required.
-**homepage** | specifies the author website URL, required.
-**description** | the theme description, required.
-**previewImage** | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
-**code** | the theme code, optional. The value is used on the Winter CMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
-**form** | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
-**require** | an array of plugin names used for [theme dependencies](#dependencies), optional.
+`name` | specifies the theme name, required.
+`author` | specifies the author name, required.
+`homepage` | specifies the author website URL, required.
+`description` | the theme description, required.
+`previewImage` | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
+`code` | the theme code, optional. The value is used on the Winter CMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
+`form` | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
+`require` | an array of plugin names used for [theme dependencies](#dependencies), optional.
 
 Example of the theme information file:
 
@@ -162,7 +168,7 @@ a { color: @link-color }
 <a name="dependencies"></a>
 ## Theme dependencies
 
-A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
+A theme can depend on plugins by defining a `require` option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
 
 ```yaml
 name: "Winter CMS Demo"

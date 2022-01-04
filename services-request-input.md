@@ -13,31 +13,43 @@ You may access all user input with a few simple methods. You do not need to worr
 
 #### Retrieving an input value
 
-    $name = Input::get('name');
+```php
+$name = Input::get('name');
+```
 
 #### Retrieving a default value if the input value is absent
 
-    $name = Input::get('name', 'Sally');
+```php
+$name = Input::get('name', 'Sally');
+```
 
 #### Determining if an input value is present
 
-    if (Input::has('name')) {
-        //
-    }
+```php
+if (Input::has('name')) {
+    //
+}
+```
 
 #### Getting all input for the request
 
-    $input = Input::all();
+```php
+$input = Input::all();
+```
 
 #### Getting only some of the request input
 
-    $input = Input::only('username', 'password');
+```php
+$input = Input::only('username', 'password');
 
-    $input = Input::except('credit_card');
+$input = Input::except('credit_card');
+```
 
 When working on forms with "array" inputs, you may use dot notation to access the arrays:
 
-    $input = Input::get('products.0.name');
+```php
+$input = Input::get('products.0.name');
+```
 
 > **NOTE:** Some JavaScript libraries such as Backbone may send input to the application as JSON. You may access this data via `Input::get` like normal.
 
@@ -50,23 +62,31 @@ By default, all cookies created by the Winter are encrypted and signed with an a
 
 #### Retrieving a cookie value
 
-    $value = Cookie::get('name');
+```php
+$value = Cookie::get('name');
+```
 
 #### Attaching a new cookie to a response
 
-    $response = Response::make('Hello World');
+```php
+$response = Response::make('Hello World');
 
-    $response->withCookie(Cookie::make('name', 'value', $minutes));
+$response->withCookie(Cookie::make('name', 'value', $minutes));
+```
 
 #### Queueing a cookie for the next response
 
 If you would like to set a cookie before a response has been created, use the `Cookie::queue` method. The cookie will automatically be attached to the final response from your application.
 
-    Cookie::queue($name, $value, $minutes);
+```php
+Cookie::queue($name, $value, $minutes);
+```
 
 #### Creating a cookie that lasts forever
 
-    $cookie = Cookie::forever('name', 'value');
+```php
+$cookie = Cookie::forever('name', 'value');
+```
 
 #### Handling cookies without encryption
 
@@ -75,28 +95,32 @@ This is useful, for example, when you want to pass data from frontend to server 
 
 Add names of the cookies that should not be encrypted or decrypted to `unencryptedCookies` parameter in the `config/cookie.php` configuration file.
 
-    /*
-    |--------------------------------------------------------------------------
-    | Cookies without encryption
-    |--------------------------------------------------------------------------
-    |
-    | Winter CMS encrypts/decrypts cookies by default. You can specify cookies
-    | that should not be encrypted or decrypted here. This is useful, for
-    | example, when you want to pass data from frontend to server side backend
-    | via cookies, and vice versa.
-    |
-    */
+```php
+/*
+|--------------------------------------------------------------------------
+| Cookies without encryption
+|--------------------------------------------------------------------------
+|
+| Winter CMS encrypts/decrypts cookies by default. You can specify cookies
+| that should not be encrypted or decrypted here. This is useful, for
+| example, when you want to pass data from frontend to server side backend
+| via cookies, and vice versa.
+|
+*/
 
-    'unencryptedCookies' => [
-        'my_cookie',
-    ],
+'unencryptedCookies' => [
+    'my_cookie',
+],
+```
 
 Alternatively for plugins, you can also add these dynamically from `Plugin.php` of your plugin.
 
-    public function boot()
-    {
-        Config::push('cookie.unencryptedCookies', "my_cookie");
-    }
+```php
+public function boot()
+{
+    Config::push('cookie.unencryptedCookies', "my_cookie");
+}
+```
 
 <a name="old-input"></a>
 ## Old input
@@ -105,72 +129,98 @@ You may need to keep input from one request until the next request. For example,
 
 #### Flashing input to the session
 
-    Input::flash();
+```php
+Input::flash();
+```
 
 #### Flashing only some input to the session
 
-    Input::flashOnly('username', 'email');
+```php
+Input::flashOnly('username', 'email');
 
-    Input::flashExcept('password');
+Input::flashExcept('password');
+```
 
 Since you often will want to flash input in association with a redirect to the previous page, you may easily chain input flashing onto a redirect.
 
-    return Redirect::to('form')->withInput();
+```php
+return Redirect::to('form')->withInput();
 
-    return Redirect::to('form')->withInput(Input::except('password'));
+return Redirect::to('form')->withInput(Input::except('password'));
+```
 
 > **NOTE:** You may flash other data across requests using the [Session](../services/session) class.
 
 #### Retrieving old data
 
-    Input::old('username');
+```php
+Input::old('username');
+```
 
 <a name="files"></a>
 ## Files
 
 #### Retrieving an uploaded file
 
-    $file = Input::file('photo');
+```php
+$file = Input::file('photo');
+```
 
 #### Determining if a file was uploaded
 
-    if (Input::hasFile('photo')) {
-        //
-    }
+```php
+if (Input::hasFile('photo')) {
+    //
+}
+```
 
 The object returned by the `file` method is an instance of the `Symfony\Component\HttpFoundation\File\UploadedFile` class, which extends the PHP `SplFileInfo` class and provides a variety of methods for interacting with the file.
 
 #### Determining if an uploaded file is valid
 
-    if (Input::file('photo')->isValid()) {
-        //
-    }
+```php
+if (Input::file('photo')->isValid()) {
+    //
+}
+```
 
 #### Moving an uploaded file
 
-    Input::file('photo')->move($destinationPath);
+```php
+Input::file('photo')->move($destinationPath);
 
-    Input::file('photo')->move($destinationPath, $fileName);
+Input::file('photo')->move($destinationPath, $fileName);
+```
 
 #### Retrieving the path to an uploaded file
 
-    $path = Input::file('photo')->getRealPath();
+```php
+$path = Input::file('photo')->getRealPath();
+```
 
 #### Retrieving the original name of an uploaded file
 
-    $name = Input::file('photo')->getClientOriginalName();
+```php
+$name = Input::file('photo')->getClientOriginalName();
+```
 
 #### Retrieving the extension of an uploaded file
 
-    $extension = Input::file('photo')->getClientOriginalExtension();
+```php
+$extension = Input::file('photo')->getClientOriginalExtension();
+```
 
 #### Retrieving the size of an uploaded file
 
-    $size = Input::file('photo')->getSize();
+```php
+$size = Input::file('photo')->getSize();
+```
 
 #### Retrieving the MIME type of an uploaded file
 
-    $mime = Input::file('photo')->getMimeType();
+```php
+$mime = Input::file('photo')->getMimeType();
+```
 
 <a name="request-information"></a>
 ## Request information
@@ -179,66 +229,90 @@ The `Request` class provides many methods for examining the HTTP request for you
 
 #### Retrieving the request URI
 
-    $uri = Request::path();
+```php
+$uri = Request::path();
+```
 
 #### Retrieving the request method
 
-    $method = Request::method();
+```php
+$method = Request::method();
 
-    if (Request::isMethod('post')) {
-        //
-    }
+if (Request::isMethod('post')) {
+    //
+}
+```
 
 #### Determining if the request path matches a pattern
 
-    if (Request::is('admin/*')) {
-        //
-    }
+```php
+if (Request::is('admin/*')) {
+    //
+}
+```
 
 #### Get the request URL
 
-    $url = Request::url();
+```php
+$url = Request::url();
+```
 
 #### Retrieve a request URI segment
 
-    $segment = Request::segment(1);
+```php
+$segment = Request::segment(1);
+```
 
 #### Retrieving a request header
 
-    $value = Request::header('Content-Type');
+```php
+$value = Request::header('Content-Type');
+```
 
 #### Retrieving values from $_SERVER
 
-    $value = Request::server('PATH_INFO');
+```php
+$value = Request::server('PATH_INFO');
+```
 
 #### Determining if the request is over HTTPS
 
-    if (Request::secure()) {
-        //
-    }
+```php
+if (Request::secure()) {
+    //
+}
+```
 
 #### Determine if the request is using AJAX
 
-    if (Request::ajax()) {
-        //
-    }
+```php
+if (Request::ajax()) {
+    //
+}
+```
 
 #### Determine if the request has JSON content type
 
-    if (Request::isJson()) {
-        //
-    }
+```php
+if (Request::isJson()) {
+    //
+}
+```
 
 #### Determine if the request is asking for JSON
 
-    if (Request::wantsJson()) {
-        //
-    }
+```php
+if (Request::wantsJson()) {
+    //
+}
+```
 
 #### Checking the requested response format
 
 The `Request::format` method will return the requested response format based on the HTTP Accept header:
 
-    if (Request::format() == 'json') {
-        //
-    }
+```php
+if (Request::format() == 'json') {
+    //
+}
+```

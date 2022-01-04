@@ -55,7 +55,7 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 5. In your web browser, navigate to the URL pointing to that folder, and include `/install.html` at the end of the URL.
 6. Follow the instructions given in the installer.
 
-![image](https://github.com/wintercms/docs/blob/main/images/web-installer.jpg?raw=true) {.img-responsive .frame}
+![Winter CMS Installer](https://github.com/wintercms/docs/blob/main/images/web-installer.jpg?raw=true) {.img-responsive .frame}
 
 <a name="troubleshoot-installation"></a>
 ### Troubleshooting installation
@@ -85,8 +85,10 @@ There are some things you may need to set up after the installation is complete.
 
 If you have used the [Wizard installer](#wizard-installation), for security reasons you should verify the installation files have been deleted. The Winter installer attempts to cleanup after itself, but you should always verify that they have been successfullly removed:
 
-    install/      <== Installation directory
-    install.html  <== Installation script
+```css
+ ┣ 📂 install       <== Installation directory
+ ┣ 📜 install.html  <== Installation script
+```
 
 <a name="config-review"></a>
 ### Review configuration
