@@ -325,7 +325,7 @@ Text input for Markdown content.
 Renders in Twig as
 
 ```twig
-{{ content|md }}
+{{ content | md }}
 ```
 
 <hr>
