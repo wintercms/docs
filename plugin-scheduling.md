@@ -153,9 +153,9 @@ Using the `pingBefore` and `thenPing` methods, the scheduler can automatically p
 
 ```php
 $schedule->command('emails:send')
-         ->daily()
-         ->pingBefore($url)
-         ->thenPing($url);
+    ->daily()
+    ->pingBefore($url)
+    ->thenPing($url);
 ```
 
 > You need to install [Drivers plugin](https://wintercms.com/plugin/winter-drivers) before you can use either the `pingBefore($url)` or `thenPing($url)` features.
