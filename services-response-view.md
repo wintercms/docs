@@ -69,9 +69,9 @@ Keep in mind that most response methods are chainable, allowing for the fluent b
 
 ```php
 return Response::make($content)
-               ->header('Content-Type', $type)
-               ->header('X-Header-One', 'Header Value')
-               ->header('X-Header-Two', 'Header Value');
+    ->header('Content-Type', $type)
+    ->header('X-Header-One', 'Header Value')
+    ->header('X-Header-Two', 'Header Value');
 ```
 
 A practical example of this could be returning an XML response:
