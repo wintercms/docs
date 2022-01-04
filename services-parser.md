@@ -339,7 +339,7 @@ File selector for media library items. This tag value will contain the relative 
 Renders in Twig as
 
 ```twig
-{{ logo|media }}
+{{ logo | media }}
 ```
 
 <hr>
