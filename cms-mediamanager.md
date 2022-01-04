@@ -141,6 +141,12 @@ You should create an API user that Winter CMS will use for managing files in the
 
 Now you have all the information to update Winter CMS configuration. Open **config/filesystem.php** script and find the **disks** section. It already contains Rackspace configuration, you need to replace the API credentials and container information parameters:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Parameter | Value
 ------------- | -------------
 `username` | Rackspace user name (for example winter.cdn.api).
@@ -244,6 +250,12 @@ There are several options that allow you to fine-tune the Media Manager. All of 
 ],
 ```
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Parameter | Value
 ------------- | -------------
 `ignore` | a list of file and directory names to ignore. Defaults to ['.svn', '.git', '.DS_Store'].
@@ -256,6 +268,12 @@ Parameter | Value
 ## Events
 
 The Media Manager provides a few [events](../services/events) that you can listen for in order to improve extensibility.
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Event | Description | Parameters
 ------------- | ------------- | -------------

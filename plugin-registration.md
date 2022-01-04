@@ -190,6 +190,12 @@ class Plugin extends \System\Classes\PluginBase
 
 The following methods are supported in the plugin registration class:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Method | Description
 ------------- | -------------
 `pluginDetails()` | returns information about the plugin.
@@ -462,6 +468,12 @@ public function boot()
 ## Elevated permissions
 
 By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the backend. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Request | Description
 ------------- | -------------

@@ -325,6 +325,7 @@ Mail views reside in the file system and the code used represents the path to th
     ┗ 📂 views             <=== View directory
       ┗ 📂 mail            <=== "mail" segment
         ┗ 📜 message.htm   <=== "message" segment
+```
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:
 

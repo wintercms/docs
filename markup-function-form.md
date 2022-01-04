@@ -42,6 +42,12 @@ There are some special options that can also be used alongside the attributes.
 
 The function support the following options:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `method` | Request method. Corresponds to the `method` FORM tag attribute. Eg: `POST`, `GET`, `PUT`, `DELETE`
@@ -87,6 +93,12 @@ There are some special options that can also be used alongside the attributes.
 ```
 
 The function support the following options:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------

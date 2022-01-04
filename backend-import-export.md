@@ -56,6 +56,12 @@ export:
 
 The configuration options listed below are optional. Define them if you want the behavior to support the [Import](#import-page) or [Export](#export-page), or both.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `defaultRedirect` | used as a fallback redirection page when no specific redirect page is defined.
@@ -100,6 +106,12 @@ export:
 ```
 
 The following configuration options are supported for the Export page:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -226,6 +238,12 @@ class SubscriberImport extends \Backend\Models\ImportModel
 
 The class must define a method called `importData` used for processing the imported data. The first parameter `$results` will contain an array containing the data to import. The second parameter `$sessionKey` will contain the session key used for the request.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Method | Description
 ------------- | -------------
 `logUpdated()` | Called when a record is updated.
@@ -328,6 +346,12 @@ export:
 ```
 
 The following configuration options are supported:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------

@@ -61,6 +61,12 @@ recordUrl: acme/blog/posts/update/:id
 
 The following fields are required in the list configuration file:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Field | Description
 ------------- | -------------
 `title` | a title for this list.
@@ -68,6 +74,12 @@ Field | Description
 `modelClass` | a model class name, the list data is loaded from this model.
 
 The configuration options listed below are optional.
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -109,6 +121,12 @@ Option | Description
 `search` | reference to a Search Widget configuration file, or an array with configuration.
 
 The search configuration supports the following options:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -169,6 +187,12 @@ columns:
 ### Column options
 
 For each column can specify these options (where applicable):
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -525,6 +549,12 @@ scopes:
 ### Scope options
 
 For each scope you can specify these options (where applicable):
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------

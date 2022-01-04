@@ -67,6 +67,12 @@ Key | Description | Default | Options
 
 The `mode` option allows you to specify how the image should be resized. The available modes are as follows:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Mode | Description
 --- | ---
 `auto` | Automatically choose between `portrait` and `landscape` based on the image's orientation
