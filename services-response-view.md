@@ -218,7 +218,7 @@ A simple view could look something like this:
 
 Views can also be parsed using PHP templating by using the `.php` extension:
 
-```twig
+```php
 <!-- View stored in plugins/acme/blog/views/greeting.php -->
 
 <html>
