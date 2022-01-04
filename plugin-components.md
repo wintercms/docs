@@ -478,7 +478,7 @@ If inside a component partial you need to render another component partial conca
 If an identical component is called twice on the same page, an `id` property can be used to reference each instance.
 
 ```twig
-{{__SELF__.id}}
+{{ __SELF__.id }}
 ```
 
 The ID is unique each time the component is displayed.
