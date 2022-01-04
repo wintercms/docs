@@ -67,7 +67,7 @@ Filters can take arguments like a function.
 Filters can be applied in succession.
 
 ```twig
-{{ 'Winter Glory'|upper|replace({'Winter': 'Morning'}) }}
+{{ 'Winter Glory' | upper | replace({'Winter': 'Morning'}) }}
 ```
 
 Filters are listed under the **Filters** section.
