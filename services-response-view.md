@@ -122,7 +122,7 @@ If you would like to create a JSONP response, you may use the `json` method in a
 
 ```php
 return Response::json(['name' => 'Steve', 'state' => 'CA'])
-               ->setCallback(Input::get('callback'));
+    ->setCallback(Input::get('callback'));
 ```
 
 <a name="file-downloads"></a>
