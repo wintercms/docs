@@ -124,9 +124,9 @@ Using the `emailOutputTo` method, you may e-mail the output to an e-mail address
 
 ```php
 $schedule->command('foo')
-         ->daily()
-         ->sendOutputTo($filePath)
-         ->emailOutputTo('foo@example.com');
+    ->daily()
+    ->sendOutputTo($filePath)
+    ->emailOutputTo('foo@example.com');
 ```
 
 > **NOTE:** The `emailOutputTo` and `sendOutputTo` methods are exclusive to the `command` method and are not supported for `call`.
