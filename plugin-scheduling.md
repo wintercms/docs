@@ -138,13 +138,13 @@ Using the `before` and `after` methods, you may specify code to be executed befo
 
 ```php
 $schedule->command('emails:send')
-         ->daily()
-         ->before(function () {
-             // Task is about to start...
-         })
-         ->after(function () {
-             // Task is complete...
-         });
+    ->daily()
+    ->before(function () {
+        // Task is about to start...
+    })
+    ->after(function () {
+        // Task is complete...
+    });
 ```
 
 #### Pinging URLs
