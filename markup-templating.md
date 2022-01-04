@@ -55,7 +55,7 @@ Tags can take on many different syntaxes and are listed under the **Tags** secti
 Filters act as modifiers to variables for a single instance and are applied using a *pipe symbol* followed by the filter name.
 
 ```twig
-{{ 'string'|filter }}
+{{ 'string' | filter }}
 ```
 
 Filters can take arguments like a function.
