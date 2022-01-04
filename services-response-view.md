@@ -276,7 +276,7 @@ The sub-view can then be rendered from the parent view:
 <html>
     <body>
         <h1>Hello!</h1>
-        {{ child|raw }}
+        {{ child | raw }}
     </body>
 </html>
 ```
