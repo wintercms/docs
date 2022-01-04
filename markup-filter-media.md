@@ -8,6 +8,6 @@ The `| media` filter returns an address relative to the public path of the [medi
 
 If the media manager address is `https://cdn.wintercms.com` the above example would output the following:
 
-```twig
+```html
 <img src="https://cdn.wintercms.com/banner.jpg" />
 ```
