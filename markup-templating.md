@@ -61,7 +61,7 @@ Filters act as modifiers to variables for a single instance and are applied usin
 Filters can take arguments like a function.
 
 ```twig
-{{ price|currency('USD') }}
+{{ price | currency('USD') }}
 ```
 
 Filters can be applied in succession.
