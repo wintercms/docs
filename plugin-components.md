@@ -252,13 +252,13 @@ Sometimes components need to create links to the website pages. For example, the
 ```php
 public function defineProperties()
 {
-        return [
-            'postPage' => [
-                'title' => 'Post page',
-                'type' => 'dropdown',
-                'default' => 'blog/post'
-            ]
-        ];
+    return [
+        'postPage' => [
+            'title' => 'Post page',
+            'type' => 'dropdown',
+            'default' => 'blog/post'
+        ]
+    ];
 }
 
 public function getPostPageOptions()
