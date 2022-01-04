@@ -116,8 +116,8 @@ The scheduler provides several convenient methods for working with the output ge
 
 ```php
 $schedule->command('emails:send')
-         ->daily()
-         ->sendOutputTo($filePath);
+    ->daily()
+    ->sendOutputTo($filePath);
 ```
 
 Using the `emailOutputTo` method, you may e-mail the output to an e-mail address of your choice. Note that the output must first be sent to a file using the `sendOutputTo` method. Also before e-mailing the output of a task, you should configure [mail services](../services/mail):
