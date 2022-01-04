@@ -366,7 +366,7 @@ Renders in Twig as
 ```twig
 {% for fields in repeater %}
     <h2>{{ fields.title }}</h2>
-    <p>{{ fields.content|raw }}</p>
+    <p>{{ fields.content | raw }}</p>
 {% endfor %}
 ```
 
