@@ -433,7 +433,7 @@ Text input for rich content (WYSIWYG).
 Renders in Twig as
 
 ```twig
-{{ content|raw }}
+{{ content | raw }}
 ```
 
 <hr>
