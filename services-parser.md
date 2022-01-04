@@ -40,7 +40,7 @@ $html = Markdown::parse($markdown);
 You may also use the `|md` filter for [parsing Markdown in your frontend markup](../markup/filter-md).
 
 ```twig
-{{ '**Text** is bold.'|md }}
+{{ '**Text** is bold.' | md }}
 ```
 
 <a name="twig-parser"></a>
