@@ -55,7 +55,7 @@ Obfuscates an e-mail address to prevent spam-bots from sniffing it.
 For example:
 
 ```twig
-<a href="mailto: {{ html_email('a@b.c')|raw }}">Email me</a>
+<a href="mailto: {{ html_email('a@b.c') | raw }}">Email me</a>
 
 <!-- The above will output -->
 <a href="mailto: &#109;&#97;&#105;&#108;&#x74;o&#x3a;&#97;&#64;b.&#x63;">Email me</a>
