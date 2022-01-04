@@ -30,7 +30,7 @@ description="example page"
 
 The page rendered with the template would result in:
 
-```twig
+```html
 <html>
     <head>
         <meta name="foo" content="bar">
