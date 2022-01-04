@@ -21,20 +21,22 @@ You can create models for storing settings in the database by implementing the `
 
 The settings model classes should extend the Model class and implement the `System.Behaviors.SettingsModel` behavior. The settings models, like any other models, should be defined in the **models** subdirectory of the plugin directory. The model from the next example should be defined in the `plugins/acme/demo/models/Settings.php` script.
 
-    <?php namespace Acme\Demo\Models;
+```php
+<?php namespace Acme\Demo\Models;
 
-    use Model;
+use Model;
 
-    class Settings extends Model
-    {
-        public $implement = ['System.Behaviors.SettingsModel'];
+class Settings extends Model
+{
+    public $implement = ['System.Behaviors.SettingsModel'];
 
-        // A unique code
-        public $settingsCode = 'acme_demo_settings';
+    // A unique code
+    public $settingsCode = 'acme_demo_settings';
 
-        // Reference to field configuration
-        public $settingsFields = 'fields.yaml';
-    }
+    // Reference to field configuration
+    public $settingsFields = 'fields.yaml';
+}
+```
 
 The `$settingsCode` property is required for settings models. It defines the unique settings key which is used for saving the settings to the database.
 
@@ -57,35 +59,38 @@ Settings models [can be registered](#backend-pages) to appear on the **backend S
 
 The settings model has the static `set` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
 
-    use Acme\Demo\Models\Settings;
+```php
+use Acme\Demo\Models\Settings;
 
-    ...
+...
 
-    // Set a single value
-    Settings::set('api_key', 'ABCD');
+// Set a single value
+Settings::set('api_key', 'ABCD');
 
-    // Set an array of values
-    Settings::set(['api_key' => 'ABCD']);
+// Set an array of values
+Settings::set(['api_key' => 'ABCD']);
 
-    // Set object values
-    $settings = Settings::instance();
-    $settings->api_key = 'ABCD';
-    $settings->save();
+// Set object values
+$settings = Settings::instance();
+$settings->api_key = 'ABCD';
+$settings->save();
+```
 
 <a name="reading-settings"></a>
 ### Reading from a settings model
 
 The settings model has the static `get` method that enables you to load individual properties. Also, when you instantiate a model with the `instance` method, it loads the properties from the database and you can access them directly.
 
-    // Outputs: ABCD
-    echo Settings::instance()->api_key;
+```php
+// Outputs: ABCD
+echo Settings::instance()->api_key;
 
-    // Get a single value
-    echo Settings::get('api_key');
+// Get a single value
+echo Settings::get('api_key');
 
-    // Get a value and return a default value if it doesn't exist
-    echo Settings::get('is_activated', true);
-
+// Get a value and return a default value if it doesn't exist
+echo Settings::get('is_activated', true);
+```
 
 <a name="backend-pages"></a>
 ## Backend settings pages
@@ -97,40 +102,44 @@ The backend contains a dedicated area for housing settings and configuration, it
 
 The backend settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific backend page, or create a link to a settings model. The next example shows how to create a link to a backend page.
 
-    public function registerSettings()
-    {
-        return [
-            'location' => [
-                'label'       => 'Locations',
-                'description' => 'Manage available user countries and states.',
-                'category'    => 'Users',
-                'icon'        => 'icon-globe',
-                'url'         => Backend::url('acme/user/locations'),
-                'order'       => 500,
-                'keywords'    => 'geography place placement'
-            ]
-        ];
-    }
+```php
+public function registerSettings()
+{
+    return [
+        'location' => [
+            'label'       => 'Locations',
+            'description' => 'Manage available user countries and states.',
+            'category'    => 'Users',
+            'icon'        => 'icon-globe',
+            'url'         => Backend::url('acme/user/locations'),
+            'order'       => 500,
+            'keywords'    => 'geography place placement'
+        ]
+    ];
+}
+```
 
 > **NOTE:** Backend settings pages should [set the settings context](#settings-page-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
 
 The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#database-settings) section.
 
-    public function registerSettings()
-    {
-        return [
-            'settings' => [
-                'label'       => 'User Settings',
-                'description' => 'Manage user based settings.',
-                'category'    => 'Users',
-                'icon'        => 'icon-cog',
-                'class'       => 'Acme\User\Models\Settings',
-                'order'       => 500,
-                'keywords'    => 'security location',
-                'permissions' => ['acme.users.access_settings']
-            ]
-        ];
-    }
+```php
+public function registerSettings()
+{
+    return [
+        'settings' => [
+            'label'       => 'User Settings',
+            'description' => 'Manage user based settings.',
+            'category'    => 'Users',
+            'icon'        => 'icon-cog',
+            'class'       => 'Acme\User\Models\Settings',
+            'order'       => 500,
+            'keywords'    => 'security location',
+            'permissions' => ['acme.users.access_settings']
+        ]
+    ];
+}
+```
 
 The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
 
@@ -139,15 +148,17 @@ The optional `keywords` parameter is used by the settings search feature. If key
 
 Just like [setting navigation context in the controller](../backend/controllers-ajax#navigation-context), Backend settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
 
-    public function __construct()
-    {
-        parent::__construct();
+```php
+public function __construct()
+{
+    parent::__construct();
 
-        [...]
+    [...]
 
-        BackendMenu::setContext('Winter.System', 'system', 'settings');
-        SettingsManager::setContext('You.Plugin', 'settings');
-    }
+    BackendMenu::setContext('Winter.System', 'system', 'settings');
+    SettingsManager::setContext('You.Plugin', 'settings');
+}
+```
 
 The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the backend settings page](#link-registration).
 
@@ -156,20 +167,24 @@ The first argument of the `setContext` method is the settings item owner in the 
 
 Plugins can have a configuration file `config.php` in the `config` subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file `plugins/acme/demo/config/config.php`:
 
-    <?php
+```php
+<?php
 
-    return [
-        'maxItems' => 10,
-        'display' => 5
-    ];
+return [
+    'maxItems' => 10,
+    'display' => 5
+];
+```
 
 Use the `Config` class for accessing the configuration values defined in the configuration file. The `Config::get($name, $default = null)` method accepts the plugin and the parameter name in the following format: **Acme.Demo::maxItems**. The second optional parameter defines the default value to return if the configuration parameter doesn't exist. Example:
 
-    use Config;
+```php
+use Config;
 
-    ...
+...
 
-    $maxItems = Config::get('acme.demo::maxItems', 50);
+$maxItems = Config::get('acme.demo::maxItems', 50);
+```
 
 A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`, or `config/acme/todo/dev/config.php` for an environment specific override (in this case `dev`). 
 
@@ -177,11 +192,13 @@ A plugin configuration can be overridden by the application by creating a config
 
 Inside the overridden configuration file you can return only values you want to override:
 
-    <?php
+```php
+<?php
 
-    return [
-        'maxItems' => 20
-    ];
+return [
+    'maxItems' => 20
+];
+```
 
 If you want to use separate configurations across different environments (eg: **dev**, **production**), simply create another file in `config/author/plugin/environment/config.php`. Replace **environment** with the environment name. This will be merged with `config/author/plugin/config.php`.
 
@@ -189,10 +206,12 @@ Example:
 
 **config/author/plugin/production/config.php:**
 
-    <?php
+```php
+<?php
 
-    return [
-        'maxItems' => 25
-    ];
+return [
+    'maxItems' => 25
+];
+```
 
 This will set `maxItems` to 25 when `APP_ENV` is set to **production**.

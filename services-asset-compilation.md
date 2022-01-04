@@ -103,12 +103,14 @@ Symbol | Description
 
 The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](../ajax/introduction#framework-script) can be included in the combiner:
 
-    <script src="{{ [
-        '@jquery',
-        '@framework',
-        '@framework.extras',
-        'assets/javascript/app.js'
-    ] | theme }}"></script>
+```twig
+<script src="{{ [
+    '@jquery',
+    '@framework',
+    '@framework.extras',
+    'assets/javascript/app.js'
+] | theme }}"></script>
+```
 
 The following aliases are supported:
 
@@ -169,6 +171,7 @@ CombineAssets::registerCallback(function ($combiner) {
     $this->registerAlias('jquery', '~/modules/backend/assets/js/vendor/jquery-and-migrate.min.js');
 });
 ```
+
 <a name="extend-register-bundle"></a>
 ### Register Custom Asset Bundles
 

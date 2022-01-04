@@ -32,7 +32,7 @@ In order to use Composer with a Winter CMS instance that has been installed usin
 
 If you plan on submitting pull requests to the Winter CMS project via GitHub, or are actively developing a project based on Winter CMS and want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place. Doing this will allow you to catch any potential issues that may be introduced (as rare as they are) right when they happen and get them fixed while you're still actively working on your project instead of only discovering them several months down the road if they eventually make it into production.
 
-```
+```json
 "winter/storm": "dev-develop as 1.1",
 "winter/wn-system-module": "dev-develop",
 "winter/wn-backend-module": "dev-develop",
@@ -89,24 +89,26 @@ composer require --dev <your package name> "<version constraint>"
 
 When publishing your plugins or themes to the marketplace, you may wish to also make them available via Composer. An example `composer.json` file for a plugin is included below:
 
-    {
-        "name": "winter/wn-demo-plugin",
-        "type": "winter-plugin",
-        "description": "Demo Winter CMS plugin",
-        "keywords": ["winter", "cms", "demo", "plugin"],
-        "license": "MIT",
-        "authors": [
-            {
-                "name": "Winter CMS Maintainers",
-                "url": "https://wintercms.com",
-                "role": "Maintainer"
-            }
-        ],
-        "require": {
-            "php": ">=7.2",
-            "composer/installers": "~1.0"
+```json
+{
+    "name": "winter/wn-demo-plugin",
+    "type": "winter-plugin",
+    "description": "Demo Winter CMS plugin",
+    "keywords": ["winter", "cms", "demo", "plugin"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Winter CMS Maintainers",
+            "url": "https://wintercms.com",
+            "role": "Maintainer"
         }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "composer/installers": "~1.0"
     }
+}
+```
 
 Be sure to start your package `name` with **wn-** and end it with **-plugin** or **-theme** respectively - this will help others find your package and is in  accordance with the [quality guidelines](../help/developer/guide#repository-naming).
 
@@ -166,47 +168,51 @@ However, this can create problems with Winter's plugin oriented design, since th
 
 You may place this code in your Plugin registration file and call it from the  the `boot()` method.
 
-    public function bootPackages()
-    {
-        // Get the namespace code of the current plugin
-        $pluginNamespace = str_replace('\\', '.', strtolower(__NAMESPACE__));
+```php
+public function bootPackages()
+{
+    // Get the namespace code of the current plugin
+    $pluginNamespace = str_replace('\\', '.', strtolower(__NAMESPACE__));
 
-        // Locate the packages to boot
-        $packages = \Config::get($pluginNamespace . '::packages');
+    // Locate the packages to boot
+    $packages = \Config::get($pluginNamespace . '::packages');
 
-        // Boot each package
-        foreach ($packages as $name => $options) {
-            // Apply the configuration for the package
-            if (
-                !empty($options['config']) &&
-                !empty($options['config_namespace'])
-            ) {
-                Config::set($options['config_namespace'], $options['config']);
-            }
+    // Boot each package
+    foreach ($packages as $name => $options) {
+        // Apply the configuration for the package
+        if (
+            !empty($options['config']) &&
+            !empty($options['config_namespace'])
+        ) {
+            Config::set($options['config_namespace'], $options['config']);
         }
     }
+}
+```
 
 Now you are free to provide the packages configuration values the same way you would with regular plugin configuration values.
 
-    return [
-        // Laravel Package Configuration
-        'packages' => [
-            'packagevendor/packagename' => [
-                // The accessor for the config item, for example,
-                // to access via Config::get('purifier.' . $key)
-                'config_namespace' => 'purifier',
+```php
+return [
+    // Laravel Package Configuration
+    'packages' => [
+        'packagevendor/packagename' => [
+            // The accessor for the config item, for example,
+            // to access via Config::get('purifier.' . $key)
+            'config_namespace' => 'purifier',
 
-                // The configuration file for the package itself.
-                // Copy this from the package configuration.
-                'config' => [
-                    'encoding'      => 'UTF-8',
-                    'finalize'      => true,
-                    'cachePath'     => storage_path('app/purifier'),
-                    'cacheFileMode' => 0755,
-                ],
+            // The configuration file for the package itself.
+            // Copy this from the package configuration.
+            'config' => [
+                'encoding'      => 'UTF-8',
+                'finalize'      => true,
+                'cachePath'     => storage_path('app/purifier'),
+                'cacheFileMode' => 0755,
             ],
         ],
-    ];
+    ],
+];
+```
 
 Now the package configuration has been included natively in Winter CMS and the values can be changed normally using the [standard configuration approach](../plugin/settings#file-configuration).
 

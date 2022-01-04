@@ -47,6 +47,14 @@ If `$width` or `$height` is falsey or `'auto'`, that value is calculated using o
 
 The following elements are supported in the options array are supported:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > *,
+    .attributes-table-precessor + table td:nth-child(3),
+    .attributes-table-precessor + table td:nth-child(3) > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Key | Description | Default | Options
 --- | --- | --- | ---
 `mode` | How the image should be fitted to dimensions | `auto` | `exact`, `portrait`, `landscape`, `auto`, `fit`, or `crop`

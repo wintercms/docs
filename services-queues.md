@@ -175,7 +175,7 @@ Winter includes some [console commands](../console/commands) that will process j
 
 To process new jobs as they are pushed onto the queue, run the `queue:work` command:
 
-```
+```bash
 php artisan queue:work
 ```
 
@@ -187,7 +187,7 @@ Queue worker processes store the booted application state in memory. They will n
 
 To process only the first job on the queue, use the `--once` option:
 
-```
+```bash
 php artisan queue:work --once
 ```
 
@@ -195,13 +195,13 @@ php artisan queue:work --once
 
 You may also specify which queue connection the worker should utilize:
 
-```
+```bash
 php artisan queue:work --once connection
 ```
 
 You may pass a comma-delimited list of queue connections to the `work` command to set queue priorities:
 
-```
+```bash
 php artisan queue:work --once --queue=high,low
 ```
 
@@ -211,7 +211,7 @@ In this example, jobs on the `high` queue will always be processed before moving
 
 You may also set the length of time (in seconds) each job should be allowed to run:
 
-```
+```bash
 php artisan queue:work --once --timeout=60
 ```
 
@@ -219,7 +219,7 @@ php artisan queue:work --once --timeout=60
 
 In addition, you may specify the number of seconds to wait before polling for new jobs:
 
-```
+```bash
 php artisan queue:work --once --sleep=5
 ```
 
@@ -232,7 +232,7 @@ By default `queue:work` will process jobs without ever re-booting the framework.
 
 To start a queue worker in daemon mode, simply omit the `--once` flag:
 
-```
+```bash
 php artisan queue:work connection
 
 php artisan queue:work connection --sleep=3
@@ -248,7 +248,7 @@ The simplest way to deploy an application using daemon queue workers is to put t
 
 The easiest way to restart your workers is to include the following command in your deployment script:
 
-```
+```bash
 php artisan queue:restart
 ```
 
@@ -278,7 +278,7 @@ Below are two examples of common system daemon managers.
 
 You can register a new service to run the queue worker by running the following command as the webhost user in your CLI terminal:
 
-```
+```bash
 systemctl --user edit --force --full queue-worker.service
 ```
 
@@ -303,13 +303,13 @@ You should use your project's root folder as the `WorkingDirectory` definition. 
 
 Once you save your configuration, you will need to enable it.
 
-```
+```bash
 systemctl --user enable queue-worker.service
 ```
 
 If you make any changes to your service's configuration, you must reload the configuration in `systemd`, which can be done by running the following:
 
-```
+```bash
 systemctl --user daemon-reload
 ```
 
@@ -317,19 +317,19 @@ systemctl --user daemon-reload
 
 To start your queue worker daemon, simply run the following:
 
-```
+```bash
 systemctl --user start queue-worker.service
 ```
 
 And to stop the queue worker daemon:
 
-```
+```bash
 systemctl --user stop queue-worker.service
 ```
 
 Finally, to restart it:
 
-```
+```bash
 systemctl --user restart queue-worker.service
 ```
 
@@ -339,7 +339,7 @@ systemctl --user restart queue-worker.service
 
 If you wish to check on the status of your queue worker, you can run the following:
 
-```
+```bash
 systemctl --user status queue-worker.service
 ```
 
@@ -347,7 +347,7 @@ By default, `systemd` will show whether your service is active or not, and provi
 
 You can also get the full logs by querying `journalctl`:
 
-```
+```bash
 journalctl --user -u queue-worker.service
 ```
 
@@ -356,7 +356,7 @@ journalctl --user -u queue-worker.service
 
 Supervisor is a process monitor for the Linux operating system, and will automatically restart your `queue:work` process if it fails. To install Supervisor on Ubuntu, you may use the following command:
 
-```
+```bash
 sudo apt-get install supervisor
 ```
 
@@ -382,7 +382,7 @@ In this example, the `numprocs` directive will instruct Supervisor to run 8 `que
 
 Once the configuration file has been created, you may update the Supervisor configuration and start the processes using the following commands:
 
-```
+```bash
 sudo supervisorctl reread
 
 sudo supervisorctl update
@@ -399,7 +399,7 @@ Since things don't always go as planned, sometimes your queued jobs will fail. D
 
 You can specify the maximum number of times a job should be attempted using the `--tries` switch on the `queue:work` command:
 
-```
+```bash
 php artisan queue:work connection-name --tries=3
 ```
 
@@ -426,24 +426,24 @@ The original array of `data` will also be automatically passed onto the failed m
 
 To view all of your failed jobs, you may use the `queue:failed` Artisan command:
 
-```
+```bash
 php artisan queue:failed
 ```
 
 The `queue:failed` command will list the job ID, connection, queue, and failure time. The job ID may be used to retry the failed job. For instance, to retry a failed job that has an ID of 5, the following command should be issued:
 
-```
+```bash
 php artisan queue:retry 5
 ```
 
 If you would like to delete a failed job, you may use the `queue:forget` command:
 
-```
+```bash
 php artisan queue:forget 5
 ```
 
 To delete all of your failed jobs, you may use the `queue:flush` command:
 
-```
+```bash
 php artisan queue:flush
 ```

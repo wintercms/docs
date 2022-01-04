@@ -26,30 +26,36 @@ Below is an example of the plugin's lang directory:
 
 The **lang.php** file should define and return an array of any depth, for example:
 
-    <?php
+```php
+<?php
 
-    return [
-        'app' => [
-            'name' => 'Winter CMS',
-            'tagline' => 'Getting back to basics'
-        ]
-    ];
+return [
+    'app' => [
+        'name' => 'Winter CMS',
+        'tagline' => 'Getting back to basics'
+    ]
+];
+```
 
 The **validation.php** file has a similar structure to the **lang.php** and is used to specify your [custom validation](../services/validation#localization) messages in a language file, for example:
 
-    <?php
+```php
+<?php
 
-    return [
-        'required' => 'We need to know your xxx!',
-        'email.required' => 'We need to know your e-mail address!',
-    ];
+return [
+    'required' => 'We need to know your xxx!',
+    'email.required' => 'We need to know your e-mail address!',
+];
+```
 
 <a name="accessing-strings"></a>
 ## Accessing localization strings
 
 The localization strings can be loaded with the `Lang` class. The parameter it accepts is the localization key string that consists of the plugin name, the localization file name and the path to the localization string inside the array returned from the file. The next example loads the **app.name** string from the plugins/acme/blog/lang/en/lang.php file (the language is set with the `locale` parameter in the `config/app.php` configuration file):
 
-    echo Lang::get('acme.blog::lang.app.name');
+```php
+echo Lang::get('acme.blog::lang.app.name');
+```
 
 <a name="overriding"></a>
 ## Overriding localization strings
@@ -66,10 +72,12 @@ System users can override plugin localization strings without altering the plugi
 
 The file could contain only strings you want to override, there is no need to replace the entire file. Example:
 
-    <?php
+```php
+<?php
 
-    return [
-        'app' => [
-            'name' => 'Winter CMS!'
-        ]
-    ];
+return [
+    'app' => [
+        'name' => 'Winter CMS!'
+    ]
+];
+```
