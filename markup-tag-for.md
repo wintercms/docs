@@ -76,6 +76,12 @@ Unlike in PHP there is no function to `break` or `continue` in a loop, however y
 
 Inside of a `for` loop block you can access some special variables:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Variable | Description
 ------------- | -------------
 `loop.index` | The current iteration of the loop. (1 indexed)

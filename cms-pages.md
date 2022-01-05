@@ -28,6 +28,12 @@ url = "/"
 
 Page configuration is defined in the [Configuration Section](themes#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and its [Components](../cms/components), which are explained in another article. The following configuration parameters are supported for pages:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Parameter | Description
 ------------- | -------------
 `url` | the page URL, required. The URL syntax is described below.

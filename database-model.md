@@ -84,6 +84,12 @@ class User extends Model
 }
 ```
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Property | Description
 ------------- | -------------
 `$primaryKey` | primary key name used to identify the model.
@@ -629,6 +635,12 @@ User::withoutGlobalScopes([
 ## Events
 
 Models fire several events, allowing you to hook into various points in the model's lifecycle. Events allow you to easily execute code each time a specific model class is saved or updated in the database. Events are defined by overriding special methods in the class, the following method overrides are available:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Event | Description
 ------------- | -------------

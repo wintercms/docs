@@ -32,6 +32,12 @@ You can also disable the ability to hide a hint by setting the key value to a nu
 
 The following properties are available:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Property | Description
 ------------- | -------------
 `type` | Sets the color of the hint, supported types: `danger`, `info`, `success`, `warning`. Default: `info`.

@@ -85,6 +85,12 @@ items:
 
 The following options are then used for each relationship name definition:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `label` | a label for the relation, in the singular tense, required.
@@ -96,6 +102,12 @@ Option | Description
 `deferredBinding` | [defers all binding actions using a session key](../database/model#deferred-binding) when it is available. default: `false`
 
 These configuration values can be specified for the **view** or **manage** options, where applicable to the render type of list, form or both.
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Type | Description
 ------------- | ------------- | -------------
@@ -112,6 +124,12 @@ Option | Type | Description
 
 These configuration values can be specified only for the **view** options.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Type | Description
 ------------- | ------------- | -------------
 `showCheckboxes` | List | displays checkboxes next to each record.
@@ -122,6 +140,12 @@ Option | Type | Description
 `toolbarButtons` | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `link`, & `unlink`. Example: `add\|remove`. <br/> Additionally, you can customize the text inside these buttons by setting this property to an associative array, with the key being the button type and the value being the text for that button. Example: `create: 'Assign User'`. The value also supports translation.
 
 These configuration values can be specified only for the **manage** options.
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Type | Description
 ------------- | ------------- | -------------

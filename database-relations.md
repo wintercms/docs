@@ -76,6 +76,12 @@ public $hasMany = [
 
 The following are parameters that can be used with all relations:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Argument | Description
 ------------- | -------------
 `order` | sorting order for multiple records.
@@ -421,6 +427,12 @@ public $belongsToMany = [
 ```
 
 These are the parameters supported for `belongsToMany` relations:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Argument | Description
 ------------- | -------------

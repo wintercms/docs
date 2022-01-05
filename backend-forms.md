@@ -74,6 +74,12 @@ preview:
 
 The following fields are required in the form configuration file:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Field | Description
 ------------- | -------------
 `name` | the name of the object being managed by this form.
@@ -81,6 +87,12 @@ Field | Description
 `modelClass` | a model class name, the form data is loaded and saved against this model.
 
 The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#form-create-page), [Update](#form-update-page) or [Preview](#form-preview-page) pages.
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -104,6 +116,12 @@ create:
 
 The following configuration options are supported for the Create page:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `title` | a page title, can refer to a [localization string](../plugin/localization).
@@ -126,6 +144,12 @@ update:
 ```
 
 The following configuration options are supported for the Update page:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -218,6 +242,12 @@ Fields from related models can be rendered with the [Relation Widget](#widget-re
 
 For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `stretch` | specifies if this tab stretches to fit the parent height.
@@ -259,6 +289,12 @@ tabs:
 ### Field options
 
 For each field you can specify these options (where applicable):
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -739,6 +775,12 @@ css_content:
     language: html
 ```
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `language` | code language, for example, php, css, javascript, html. Default: `php`.
@@ -755,6 +797,12 @@ color:
     label: Background
     type: colorpicker
 ```
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -822,6 +870,12 @@ data:
 
 The following lists the configuration values of the data table widget itself.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------ | -----------
 `adding` | allow records to be added to the data table. Default: `true`.
@@ -858,6 +912,12 @@ columns:
         title: Name
 ```
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------ | -----------
 `type` | the input type for this column's cells. Must be one of the following: `string`, `checkbox`, `dropdown` or `autocomplete`.
@@ -870,6 +930,12 @@ Option | Description
 #### Column validation
 
 Column cells can be validated against the below types of validation. Validation should be specified as an array, with the type of validation used as a key, and an optional message specified as the `message` attrbute for that validation.
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Validation | Description
 ---------- | -----------
@@ -890,6 +956,12 @@ published_at:
     type: datepicker
     mode: date
 ```
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -923,6 +995,12 @@ avatar:
         interlace: false
         extension: auto
 ```
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -966,6 +1044,12 @@ background_image:
     type: mediafinder
     mode: image
 ```
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -1047,6 +1131,12 @@ user:
     modelClass: Winter\User\Models\User
 ```
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `keyFrom` | the name of column to use in the relation used for key. Default: `id`.
@@ -1086,6 +1176,12 @@ user:
 
 You can also provide a model scope to use to filter the results with the `scope` property.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `nameFrom` | a model attribute name used for displaying the relation label. Default: `name`.
@@ -1115,6 +1211,12 @@ extra_information:
                 label: This field is the title when collapsed
                 type: text
 ```
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -1224,6 +1326,12 @@ api_secret:
     hideOnTabChange: true
 ```
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `allowCopy` | adds a "copy" action to the sensitive field, allowing the user to copy the password without revealing it. Default: `false`
@@ -1259,6 +1367,12 @@ tags:
     type: taglist
     mode: relation
 ```
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -1391,6 +1505,12 @@ slug:
 
 The following options are available for the `preset` option:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `field` | defines the other field name to source the value from.
@@ -1429,6 +1549,12 @@ send_at:
 ```
 
 In the above example the `send_at` form field will only be shown if the `is_delayed` field is checked. In other words, the field will show (action) if the other form input (field) is checked (condition). The `trigger` definition specifies these options:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------

@@ -55,6 +55,12 @@ Usually each controller implements functionality for working with a single type 
 
 The backend controller base class defines a number of properties that allow to configure the page appearance and manage the page security:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Property | Description
 ------------- | -------------
 `$fatalError` | allows to store a fatal exception generated in an action method in order to display it in the view.

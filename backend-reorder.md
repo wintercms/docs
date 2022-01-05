@@ -62,6 +62,12 @@ toolbar:
 
 The configuration options listed below can be used.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
 `title` | used for the page title.
