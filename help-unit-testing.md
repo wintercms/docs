@@ -91,14 +91,14 @@ The test class should extend the base class `PluginTestCase` and this is a speci
 
 #### Changing database engine for plugins tests
 
-By default Winter CMS uses SQLite stored in memory for the plugin testing environment. If you want to override the default behavior set the `useConfigForTesting` config to `true` in your `/config/database.php` file. When the `APP_ENV` is `testing` and the `useConfigForTesting` is `true` database parameters will be taken from `/config/database.php`.
+By default Winter CMS uses SQLite stored in memory for the plugin testing environment. You can override this behavior by using environment configuration files (i.e. creating a `config/testing/database.php` file to override the default `config/database.php` file).
 
 You can override the `/config/database.php` file by creating `/config/testing/database.php`. In this case variables from the latter file will be taken.
 
 <a name="system-testing"></a>
 ## System testing
 
-To perform unit testing on the core Winter files, you should download a development copy using Composer or cloning the Git repository. This will ensure you have the `tests/` directory necessary to run unit tests.
+To perform unit testing on the core Winter files, you should download a development copy by using Composer or cloning the Git repository. This will ensure you have the `tests/` directory necessary to run unit tests.
 
 ### Unit tests
 
