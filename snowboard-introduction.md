@@ -24,7 +24,7 @@ The framework takes advantage of the incredible enhancements made to the JavaScr
 
 > Before proceeding, please read the [Migration Guide](../snowboard/migration-guide), especially if you intend to use this framework on an existing project.
 
-Snowboard is optionally included in your [CMS theme](../cms/themes). To use the framework, you should include it by placing the `{% snowboard %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts) where you would like the JavaScript assets to be loaded - generally, this should be at the bottom of the page before the closing `</body>` tag. You must use this tag *before* you load any assets that rely on the framework, such as plugins or event listeners.
+Snowboard can be optionally included in your [CMS theme](../cms/themes). To use the framework, you should include it by placing the `{% snowboard %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts) where you would like the JavaScript assets to be loaded - generally, this should be at the bottom of the page before the closing `</body>` tag. You must use this tag *before* you load any assets that rely on the framework, such as plugins or event listeners.
 
 By default, this tag just loads the base framework and does not include any of the additional functionality, such as the AJAX framework, in order to allow usage of Snowboard without any clutter.
 
