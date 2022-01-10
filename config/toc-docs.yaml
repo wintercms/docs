@@ -71,11 +71,11 @@ Snowboard:
   pages:
     snowboard/introduction: "Introduction"
     snowboard/migration-guide: "Migration Guide"
+    snowboard/handlers: "Serverside Event Handlers"
     snowboard/request: "AJAX Requests (JavaScript API)"
-    snowboard/data-attr: "AJAX Requests (Data Attributes API)"
+    snowboard/data-attributes: "AJAX Requests (Data Attributes API)"
     snowboard/extras: "Extra Features"
     snowboard/plugin-development: "Plugin Development"
-    snowboard/event-handling: "Event Handling"
 
 Database:
   icon: "icon-hdd"

@@ -41,16 +41,16 @@ To add Snowboard to your theme with all of its features enabled, you would use t
 
 ```twig
 {% snowboard all %}
-``
+```
 
 To include the framework with just the JavaScript AJAX request functionality:
 
 ```twig
 {% snowboard request %}
-``
+```
 
 Or to include both the JavaScript AJAX and HTML data attribute request functionality:
 
 ```twig
 {% snowboard request attr %}
-``
+```
