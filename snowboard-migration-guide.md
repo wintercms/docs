@@ -12,7 +12,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-While care has been given to ensure that the new Winter JavaScript framework covers the entire scope of functionality that the original [AJAX framework](../ajax/introduction) provided, there are subtle differences between the two frameworks. Please take the time to read through this document to ensure that you are across the changes, especially if you intend to upgrade an existing project to use this new framework.
+While care has been given to ensure that the Snowboard framework covers the entire scope of functionality that the original [AJAX framework](../ajax/introduction) provided, there are subtle differences between the two frameworks. Please take the time to read through this document to ensure that you are across the changes, especially if you intend to upgrade an existing project to use this new framework.
 
 <a name="breaking-changes"></a>
 ## Breaking changes
@@ -20,7 +20,7 @@ While care has been given to ensure that the new Winter JavaScript framework cov
 <a name="browser-support"></a>
 ### Browser support is more strict
 
-The new framework drops support for Internet Explorer, as well as some less-used, or discontinued, browsers such as the Samsung Internet Browser and Opera Mini. The framework targets, at the very least, support for the ECMAScript 2015 (ES2015) JavaScript language.
+Snowboard drops support for Internet Explorer, as well as some less-used, or discontinued, browsers such as the Samsung Internet Browser and Opera Mini. The framework targets, at the very least, support for the ECMAScript 2015 (ES2015) JavaScript language.
 
 Our build script is set up to consider the following browsers as compatible with the framework:
 
@@ -43,7 +43,7 @@ The original [AJAX framework](../ajax/attributes-api#data-attributes) allowed fo
 
 We have dropped support of this feature due to its use of the `eval()` method in JavaScript to execute this JavaScript, which has security implications (especially on front-facing code) and prevents people from using content security policies on their sites without the use of the `unsafe-eval` [CSP rule](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src).
 
-If you wish to use JavaScript with the AJAX functionality, you must either use the [JavaScript Request functionality](../jsframework/request), or use the original [AJAX framework](../ajax/introduction) which retains this feature.
+If you wish to use JavaScript with the AJAX functionality, you must either use the [JavaScript Request functionality](../snowboard/request), or use the original [AJAX framework](../ajax/introduction) which retains this feature.
 
 <a name="ajax-dom-events"></a>
 ### AJAX events are triggered as DOM events
@@ -70,7 +70,7 @@ $('#element').on('ajaxAlways', function (event) {
 });
 ```
 
-Please review the [JavaScript Request](../jsframework/requests) documentation for information on what properties are available for DOM events.
+Please review the [JavaScript Request](../snowboard/request) documentation for information on what properties are available for DOM events.
 
 <a name="other-changes"></a>
 ## Other changes
@@ -89,5 +89,5 @@ $('#element').request('onAjaxHandler')
 This is now changed to use the base Winter class to call the Request extension:
 
 ```js
-Winter.request('#element', 'onAjaxHandler');
+Snowboard.request('#element', 'onAjaxHandler');
 ```
