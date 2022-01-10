@@ -15,7 +15,7 @@ The framework takes advantage of the incredible enhancements made to the JavaScr
 ## Features
 
 - Rewritten AJAX and JavaScript framework, built from the ground-up using the latest JavaScript syntax (ES2015+) and functionality.
-- jQuery is no longer a "hard" dependency, allowing the framework to be used across a wide varierty of JavaScript frameworks.
+- jQuery is no longer a "hard" dependency, allowing the framework to be used across a wide variety of JavaScript frameworks.
 - Easy, comprehensive extensibility and event handling in-built into the framework.
 - Small footprint and full control over which core functionalities to include ensures your website loads quick.
 
