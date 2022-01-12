@@ -24,7 +24,7 @@ The framework takes advantage of the incredible enhancements made to the JavaScr
 
 > Before proceeding, please read the [Migration Guide](../snowboard/migration-guide), especially if you intend to use this framework on an existing project.
 
-Snowboard can be optionally included in your [CMS theme](../cms/themes). To use the framework, you should include it by placing the `{% snowboard %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts) where you would like the JavaScript assets to be loaded - generally, this should be at the bottom of the page before the closing `</body>` tag. You must use this tag *before* you load any assets that rely on the framework, such as plugins or event listeners.
+Snowboard can be optionally included in your [CMS theme](../cms/themes). To use the framework, you should include it by placing the `{% snowboard %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts) where you would like the JavaScript assets to be loaded - generally, this should be at the bottom of the page before the closing `</body>` tag. You must use this tag *before* you load any assets that rely on the framework, such as plugins or event listeners, and should also be located before the `{% scripts %}` tag to allow [plugins](../snowboard/plugin-development) to provide Snowboard plugins if they wish.
 
 By default only the base Snowboard framework is included by the `{% snowboard %}` token in order to allow for complete control over which additional features (such as the AJAX framework) are desired to be included in your themes.
 
@@ -34,7 +34,7 @@ Attribute | Includes
 --------- | --------
 `all` | Includes all available plugins
 `request` | The base [JavaScript AJAX](../snowboard/request) request functionality
-`attr` | The [HTML data attribute](../snowboard/data-attr) request functionality
+`attr` | The [HTML data attribute](../snowboard/data-attributes) request functionality
 `extras` | [Several useful UI enhancements](../snowboard/extras), including flash messages, loading states and transitions.
 
 To add Snowboard to your theme with all of its features enabled, you would use the following:

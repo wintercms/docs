@@ -83,11 +83,11 @@ Please review the [JavaScript Request](../snowboard/request) documentation for i
 The original framework used a jQuery extension to call AJAX requests via JavaScript:
 
 ```js
-$('#element').request('onAjaxHandler')
+$('#element').request('onAjaxHandler', { /* ... options .. */ })
 ```
 
-This is now changed to use the base Winter class to call the Request extension:
+This is now changed to use the base Winter class to call the Request plugin:
 
 ```js
-Snowboard.request('#element', 'onAjaxHandler');
+Snowboard.request('#element', 'onAjaxHandler', { /* ... options .. */ });
 ```
