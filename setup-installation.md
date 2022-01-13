@@ -21,14 +21,14 @@ There are two ways you can install Winter, either using the [Web-based installer
 
 Winter CMS has some server requirements for web hosting:
 
-1. PHP version 7.2 or higher
-1. PDO PHP Extension (and relevant driver for the database you want to connect to)
-1. cURL PHP Extension
-1. OpenSSL PHP Extension
-1. Mbstring PHP Extension
-1. ZipArchive PHP Extension
-1. GD PHP Extension
-1. SimpleXML PHP Extension
+- PHP version 7.2 or higher
+- PDO PHP Extension (and relevant driver for the database you want to connect to)
+- cURL PHP Extension
+- OpenSSL PHP Extension
+- Mbstring PHP Extension
+- ZipArchive PHP Extension
+- GD PHP Extension
+- SimpleXML PHP Extension
 
 Some OS distributions may require you to manually install some of the required PHP extensions.
 
@@ -46,7 +46,7 @@ When using the SQL Server database engine, you will need to install the [group c
 
 The [Web Installer](https://github.com/wintercms/web-installer) is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
 
-> **NOTE:** If you are a developer, we recommend that you [install via Composer instead](../console/commands#console-install-composer)
+> **NOTE:** If you are a developer, we recommend that you [install via Composer instead](../console/commands#console-install-composer).
 
 1. Prepare an empty directory on the web server that will host your Winter CMS installation. It can be a main domain, sub-domain or subfolder.
 2. [Download the "install.zip" file](https://github.com/wintercms/web-installer/releases/latest) from the latest release of the Winter CMS Web Installer into this folder.
@@ -58,7 +58,7 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 ![Winter CMS Installer](https://github.com/wintercms/docs/blob/main/images/web-installer.jpg?raw=true) {.img-responsive .frame}
 
 <a name="troubleshoot-installation"></a>
-### Troubleshooting installation
+### Troubleshooting a web-based installation
 
 1. **Unable to connect to the Winter Marketplace API**: If your server has a firewall blocking requests to port 443, you will need to allow requests and responses for this port. Contact your system administrator to allow access to this port.
 
@@ -93,7 +93,7 @@ If you have used the [Wizard installer](#wizard-installation), for security reas
 <a name="config-review"></a>
 ### Review configuration
 
-Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) available for your circumstances.
+Configuration files are stored in the `config` directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) available for your circumstances.
 
 For example, in production environments you may want to enable [CSRF protection](../setup/configuration#csrf-protection). While in development environments, you may want to enable [bleeding edge updates](../setup/configuration#edge-updates).
 
@@ -102,17 +102,17 @@ While most configuration is optional, we strongly recommend disabling [debug mod
 <a name="crontab-setup"></a>
 ### Setting up the scheduler
 
-For *scheduled tasks* to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
+For scheduled tasks to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
 
     * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
 
-Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of Winter. This Cron will call the command scheduler every minute. Then Winter evaluates any scheduled tasks and runs the tasks that are due.
+Be sure to replace `/path/to/artisan` with the absolute path to the `artisan` file in the root directory of Winter. This cron will call the command scheduler every minute, in which Winter will evaluate any scheduled tasks and run the tasks that are due.
 
-> **NOTE**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
+> **NOTE**: If you are adding this to `/etc/cron.d`, you'll need to specify a user immediately after `* * * * *`.
 
 <a name="queue-setup"></a>
 ### Setting up queue workers
 
-You may optionally set up an external queue for processing *queued jobs*, by default these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
+You may optionally set up an external queue for processing queued jobs. By default, these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
 
 If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue.
