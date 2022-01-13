@@ -88,7 +88,7 @@ The `create:reportwidget` command generates a backend report widget, view and ba
 ## Create a console command
 
 ```bash
-php artisan create:command <plugin code> <commad name>
+php artisan create:command <plugin code> <command name>
 ```
 
 The `create:command` command generates a [new console command](../console/development). The first argument specifies the plugin code of the plugin that this console command will be added into, and the second parameter specifies the command name.
