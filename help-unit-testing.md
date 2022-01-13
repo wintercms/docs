@@ -6,7 +6,7 @@
 <a name="testing-plugins"></a>
 ## Testing plugins
 
-Individual plugin test cases can be run by running [the `winter:test` command](../console/commands/#winter-test-command) with the `--p|plugin=` option.
+Individual plugin test cases can be run by running [the `winter:test` command](../console/utilities#winter-test) with the `--p|plugin=` option.
 
 ### Creating plugin tests
 
@@ -110,7 +110,7 @@ To perform unit testing on the core Winter files, you should download a developm
 
 ### Unit tests
 
-Unit tests can be performed by running [the `winter:test` command](../console/commands/#winter-test-command) with the `--o|-core` option.
+Unit tests can be performed by running [the `winter:test` command](../console/utilities#winter-test) with the `--o|-core` option.
 
 ### Functional tests
 

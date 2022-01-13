@@ -1,6 +1,7 @@
-# Console Development
+# Command Line Interface
 
 - [Introduction](#introduction)
+- [List of available commands](#command-list)
 - [Building a command](#building-a-command)
     - [Defining arguments](#defining-arguments)
     - [Defining options](#defining-options)
@@ -12,12 +13,78 @@
 <a name="introduction"></a>
 ## Introduction
 
-In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory. You can generate the class file using the [command line scaffolding tool](../console/scaffolding#scaffold-create-command).
+Winter includes several command-line interface (CLI) commands and utilities that allow to install and manage Winter and its plugins and themes, perform site maintenance and speed up the development process. The console commands are executed through Laravel's [Artisan](http://laravel.com/docs/artisan) command-line tool.
+
+Commands are executed by using your terminal or shell and running the following command in the root folder of your project:
+
+```bash
+php artisan [command]
+```
+
+You can get a list of available commands by not providing any command to the Artisan tool:
+
+```bash
+php artisan
+```
+
+If you require help or a list of available arguments and options for each command, simply suffix the command with the `--help` flag:
+
+```bash
+php artisan [command] --help
+```
+
+<a name="command-list"></a>
+## List of available commands
+
+The following commands are made available to every Winter installation. Click the name of a command to view more information about the usage of that command.
+
+Command | Description
+------- | -----------
+**Setup & Maintenance** |
+[`winter:install`](../console/setup-maintenance#winter-install) | Install Winter via command line.
+[`winter:update`](../console/setup-maintenance#winter-update) | Update Winter and its plugins via command line.
+[`winter:up`](../console/setup-maintenance#winter-up) | Run database migrations.
+[`winter:passwd`](../console/setup-maintenance#winter-passwd) | Change the password of an administrator.
+[`winter:env`](../console/setup-maintenance#winter-env) | Use environment files and configuration for Winter.
+[`winter:version`](../console/setup-maintenance#winter-version) | Display the version of Winter in use.
+[`winter:fresh`](../console/setup-maintenance#winter-fresh) | Remove the demo plugin and theme.
+[`winter:mirror`](../console/setup-maintenance#winter-mirror) | Mirror publicly accessible files in another directory.
+**Plugin management** |
+[`plugin:install`](../console/plugin-management#plugin-install) | Download and install a plugin for Winter.
+[`plugin:list`](../console/plugin-management#plugin-list) | List installed plugins.
+[`plugin:rollback`](../console/plugin-management#plugin-rollback) | Rolls back a plugin and its database tables.
+[`plugin:refresh`](../console/plugin-management#plugin-refresh) | Rolls back a plugin and its database tables, and re-runs all updates.
+[`plugin:disable`](../console/plugin-management#plugin-disable) | Disables a plugin.
+[`plugin:enable`](../console/plugin-management#plugin-enable) | Enables a plugin.
+[`plugin:remove`](../console/plugin-management#plugin-install) | Removes a plugin.
+**Theme management** |
+[`theme:install`](../console/theme-management#theme-install) | Download and install a theme for Winter.
+[`theme:list`](../console/theme-management#theme-list) | List available themes.
+[`theme:use`](../console/theme-management#theme-use) | Switches Winter to the given theme.
+[`theme:remove`](../console/theme-management#theme-install) | Removes a theme.
+[`theme:sync`](../console/theme-management#theme-sync) | Synchronises a theme between the filesystem and the database, if you use the [Database Templates](../cms/themes#database-driven-themes) feature.
+**Scaffolding** |
+[`create:theme`](../console/scaffolding#create-theme) | Create a theme.
+[`create:plugin`](../console/scaffolding#create-plugin) | Create a plugin.
+[`create:component`](../console/scaffolding#create-component) | Create a component in a plugin.
+[`create:model`](../console/scaffolding#create-model) | Create a model in a plugin.
+[`create:settings`](../console/scaffolding#create-settings) | Create a settings model in a plugin.
+[`create:controller`](../console/scaffolding#create-controller) | Create a controller in a plugin.
+[`create:formwidget`](../console/scaffolding#create-formwidget) | Create a form widget in a plugin.
+[`create:reportwidget`](../console/scaffolding#create-reportwidget) | Create a report widget in a plugin.
+[`create:command`](../console/scaffolding#create-command) | Create a console command in a plugin.
+**Utilities** |
+[`cache:clear`](../console/utilities#cache-clear) | Clear the application cache.
+[`winter:test`](../console/utilities#winter-test) | Run unit tests on Winter and plugins.
+[`winter:util`](../console/utilities#winter-util) | A collection of utilities for Winter development.
+
 
 <a name="building-a-command"></a>
 ## Building a command
 
-If you wanted to create a console command called `acme:mycommand`, you might create the associated class for that command in a file called **plugins/acme/blog/console/MyCommand.php** and paste the following contents to get started:
+Plugins can also provide additional commands to augment additional functionality to Winter.
+
+If you wanted to create a console command called `acme:mycommand`, you might create the associated class for that command in a file called `plugins/acme/blog/console/MyCommand.php` and paste the following contents to get started:
 
 ```php
 <?php namespace Acme\Blog\Console;

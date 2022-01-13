@@ -35,7 +35,7 @@ class Plugin extends PluginBase
 }
 ```
 
-In addition to scheduling `Closure` calls, you may also schedule [console commands](../console/commands) and operating system commands. For example, you may use the `command` method to schedule a console command:
+In addition to scheduling `Closure` calls, you may also schedule [console commands](../console/introduction) and operating system commands. For example, you may use the `command` method to schedule a console command:
 
 ```php
 $schedule->command('cache:clear')->daily();
@@ -107,7 +107,7 @@ By default, scheduled tasks will be run even if the previous instance of the tas
 $schedule->command('emails:send')->withoutOverlapping();
 ```
 
-In this example, the `emails:send` [console command](../console/commands) will be run every minute if it is not already running. The `withoutOverlapping` method is especially useful if you have tasks that vary drastically in their execution time, preventing you from needing to predict exactly how long a given task will take.
+In this example, the `emails:send` [console command](../console/introduction) will be run every minute if it is not already running. The `withoutOverlapping` method is especially useful if you have tasks that vary drastically in their execution time, preventing you from needing to predict exactly how long a given task will take.
 
 <a name="task-output"></a>
 ## Task output
