@@ -163,7 +163,7 @@ It is possible to know if the current request is being performed in the administ
 App::runningInBackend();
 ```
 
-You may also use the `runningInConsole` method to check if the executing code is taking place inside the [command line interface](../console/commands):
+You may also use the `runningInConsole` method to check if the executing code is taking place inside the [command line interface](../console/introduction):
 
 ```php
 App::runningInConsole();

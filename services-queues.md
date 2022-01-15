@@ -171,7 +171,7 @@ When using Iron.io [push queues](#push-queues), you should take extra precaution
 <a name="running-the-queue-worker"></a>
 ## Running the queue worker
 
-Winter includes some [console commands](../console/commands) that will process jobs in the queue.
+Winter includes some [console commands](../console/introduction) that will process jobs in the queue.
 
 To process new jobs as they are pushed onto the queue, run the `queue:work` command:
 

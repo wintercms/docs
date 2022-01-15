@@ -139,7 +139,7 @@ Create **media** folder in the container. The folder name doesn't matter. This f
 
 You should create an API user that Winter CMS will use for managing files in the CDN container. Open Account / User Management page in Rackspace console. Click **Create user** button. Fill in the user name (for example winter.cdn.api), password, security question and answer. In the **Product Access** section select **Custom** and in the CDN row select **Admin**. Use **No Access** role in the **Account** section and use **Technical Contact** type in the **Contact Information** section. Save the user account. After saving the account you will see the Login Details section with the **API Key** row that contains a value you need to use in Winter CMS configuration files.
 
-Now you have all the information to update Winter CMS configuration. Open **config/filesystem.php** script and find the **disks** section. It already contains Rackspace configuration, you need to replace the API credentials and container information parameters:
+Now you have all the information to update Winter CMS configuration. Open **config/filesystems.php** script and find the **disks** section. It already contains Rackspace configuration, you need to replace the API credentials and container information parameters:
 
 <style>
     .attributes-table-precessor + table td:first-child,
