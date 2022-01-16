@@ -42,7 +42,7 @@ Command | Description
 ------- | -----------
 **Setup & Maintenance** |
 [`winter:install`](../console/setup-maintenance#winter-install) | Install Winter via command line.
-[`winter:update`](../console/setup-maintenance#winter-update) | Update Winter and its plugins via command line.
+[`winter:update`](../console/setup-maintenance#winter-update) | Update Winter and its plugins using the [Marketplace](https://wintercms.com/marketplace) via the command line.
 [`winter:up`](../console/setup-maintenance#winter-up) | Run database migrations.
 [`winter:passwd`](../console/setup-maintenance#winter-passwd) | Change the password of an administrator.
 [`winter:env`](../console/setup-maintenance#winter-env) | Use environment files and configuration for Winter.
@@ -84,10 +84,10 @@ Command | Description
 
 Plugins can also provide additional commands to augment additional functionality to Winter.
 
-If you wanted to create a console command called `acme:mycommand`, you might create the associated class for that command in a file called `plugins/acme/blog/console/MyCommand.php` and paste the following contents to get started:
+If you wanted to create a console command called `myauthor:mycommand`, you can run the `php artisan create:command MyAuthor.MyPlugin MyCommand` [scaffolding command](../console/scaffolding#create-command) which would create the  associated class for that command in a file called `plugins/myauthor/myplugin/console/MyCommand.php` with the following contents:
 
 ```php
-<?php namespace Acme\Blog\Console;
+<?php namespace MyAuthor\MyPlugin\Console;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -98,7 +98,7 @@ class MyCommand extends Command
     /**
      * @var string The console command name.
      */
-    protected $name = 'acme:mycommand';
+    protected $name = 'myauthor:mycommand';
 
     /**
      * @var string The console command description.
@@ -131,7 +131,6 @@ class MyCommand extends Command
     {
         return [];
     }
-
 }
 ```
 
@@ -306,7 +305,7 @@ For more advanced options, check out the [Symfony Progress Bar component documen
 Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [Plugin registration file](../plugin/registration#registration-methods) using  the `registerConsoleCommand` helper method.
 
 ```php
-class Blog extends PluginBase
+class MyPlugin extends PluginBase
 {
     public function pluginDetails()
     {
@@ -315,15 +314,15 @@ class Blog extends PluginBase
 
     public function register()
     {
-        $this->registerConsoleCommand('acme.mycommand', 'Acme\Blog\Console\MyConsoleCommand');
+        $this->registerConsoleCommand('myauthor.mycommand', \MyAuthor\MyPlugin\Console\MyCommand::class);
     }
 }
 ```
 
-Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place command registration logic. Within this file, you may use the `Artisan::add` method to register the command:
+Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place command registration logic. Within this file, you could use the `Artisan::add` method to register the command:
 
 ```php
-Artisan::add(new Acme\Blog\Console\MyCommand);
+Artisan::add(new MyAuthor\MyPlugin\Console\MyCommand);
 ```
 
 #### Registering a command in the application container
@@ -331,7 +330,7 @@ Artisan::add(new Acme\Blog\Console\MyCommand);
 If your command is registered in the [application container](../services/application#app-container), you may use the `Artisan::resolve` method to make it available to Artisan:
 
 ```php
-Artisan::resolve('binding.name');
+Artisan::resolve('myauthor.mycommand');
 ```
 
 #### Registering commands in a service provider
@@ -341,11 +340,11 @@ If you need to register commands from within a [service provider](../services/ap
 ```php
 public function boot()
 {
-    $this->app->singleton('acme.mycommand', function() {
-        return new \Acme\Blog\Console\MyConsoleCommand;
+    $this->app->singleton('myauthor.mycommand', function() {
+        return new \MyAuthor\MyCommand\Console\MyCommand;
     });
 
-    $this->commands('acme.mycommand');
+    $this->commands('myauthor.mycommand');
 }
 ```
 
