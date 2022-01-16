@@ -1,7 +1,7 @@
 # Extra Features
 
 - [Introduction](#introduction)
-- [Loading Indicator](#loader-stripe)
+- [Loading indicator](#loader-stripe)
 - [Form Validation](#ajax-validation)
     - [Throwing a Validation Error](#throw-validation-exception)
     - [Displaying Error Messages](#error-messages)
@@ -10,7 +10,7 @@
 - [Flash Messages](#ajax-flash)
 - [Usage Example](#usage-example)
 
-<a name="introduction">
+<a name="introduction"></a>
 ## Introduction
 
 When using the Snowboard framework, you have the option to specify the **extras** flag which includes additional features. These features are often useful when working with AJAX requests in frontend CMS pages.
@@ -19,18 +19,12 @@ When using the Snowboard framework, you have the option to specify the **extras*
 {% snowboard extras %}
 ```
 
-Or
-
-```twig
-{% snowboard all %}
-```
-
 <a name="loader-stripe"></a>
-## Loading Indicator
+## Loading indicator
 
-The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../ajax/javascript-api#global-events) used by the AJAX framework.
+The loading indicator is a loading bar that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../snowboard/request#global-events) used by the Snowboard framework.
 
-When an AJAX request starts the `ajaxPromise` event is fired that displays the indicator and puts the mouse cursor in a loading state. The `ajaxFail` and `ajaxDone` events are used to detect when the request finishes, where the indicator is hidden again.
+When an AJAX request starts, the `ajaxPromise` event is fired. This displays the loading indicator at the top of the page. When this promise is resolved, the loading bar is removed.
 
 <a name="ajax-validation"></a>
 ## Form validation
