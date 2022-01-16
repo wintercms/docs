@@ -109,9 +109,12 @@ Services:
 Console:
   icon: "icon-terminal"
   pages:
-    console/commands: "Command List"
+    console/introduction: "Introduction"
+    console/setup-maintenance: "Setup & Maintenance"
+    console/plugin-management: "Plugin Management"
+    console/theme-management: "Theme Management"
     console/scaffolding: "Scaffolding"
-    console/development: "Development"
+    console/utilities: "Utilities"
 
 Events:
   pages:

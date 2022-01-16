@@ -231,7 +231,7 @@ You can instruct the platform to prefer test builds from the marketplace by chan
 
 > **NOTE:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
 
-> **NOTE:** If using [Composer](../console/commands#console-install-composer) to manage updates, then replace the default Winter CMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch.
+> **NOTE:** If using [Composer](../help/using-composer) to manage updates, then replace the default Winter CMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch.
 
 ```json
 "winter/storm": "dev-develop as 1.0",

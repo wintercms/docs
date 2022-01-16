@@ -4,6 +4,7 @@
     - [Converting from a basic installation](#converting-from-basic-install)
     - [Development branch](#development-branch)
     - [Deployment best practices](#deployment-best-practices)
+- [Installing Winter via Composer](#installing-winter)
 - [Installing a plugin or theme](#installing-plugin-theme)
 - [Publishing blugins or themes](#publishing-products)
 - [Package descriptions](#package-descriptions)
@@ -16,7 +17,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-Using [Composer](https://getcomposer.org/) as an alternative package manager to using the standard one-click update manager is recommended for more advanced users and developers. See the console command on how to [first install Winter using composer](../console/commands#console-install-composer).
+Using [Composer](https://getcomposer.org/) as an alternative package manager to using the standard one-click update manager is recommended for more advanced users and developers.
 
 Composer is the de-facto standard for package management in the PHP ecosystem, and can handle the downloading, installation and management of Winter CMS plugins and themes, as well as third-party Laravel packages and vendor libraries.
 
@@ -33,10 +34,10 @@ In order to use Composer with a Winter CMS instance that has been installed usin
 If you plan on submitting pull requests to the Winter CMS project via GitHub, or are actively developing a project based on Winter CMS and want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place. Doing this will allow you to catch any potential issues that may be introduced (as rare as they are) right when they happen and get them fixed while you're still actively working on your project instead of only discovering them several months down the road if they eventually make it into production.
 
 ```json
-"winter/storm": "dev-develop as 1.1",
-"winter/wn-system-module": "dev-develop",
-"winter/wn-backend-module": "dev-develop",
-"winter/wn-cms-module": "dev-develop",
+"winter/storm": "dev-develop as 1.1.999",
+"winter/wn-system-module": "dev-develop as 1.1.999",
+"winter/wn-backend-module": "dev-develop as 1.1.999",
+"winter/wn-cms-module": "dev-develop as 1.1.999",
 "laravel/framework": "~6.0",
 ```
 
@@ -51,6 +52,27 @@ Using the following best practices with Composer and Winter CMS will make deploy
 - Add a `.gitignore` file inside the `modules` folder to ignore all changes within this folder, as the modules will be installed and updated by Composer.
 - Add a `.gitignore` file inside the `plugins` folder to ignore all changes within this folder if you install your plugins via Composer. You can optionally allow custom plugins that are only being used for that specific project.
 - Use `composer install --no-dev` on your production instance to specifically exclude any "development" packages and libraries that won't be used in production.
+
+<a name="installing-winter"></a>
+## Installing Winter via Composer
+
+Installing Winter via Composer is easy. You can use the `create-project` command through Composer to quickly set up a new Winter installation.
+
+```bash
+composer create-project wintercms/winter <your installation directory>
+
+# Example:
+#   composer create-project wintercms/winter mywinter
+```
+
+If you wish to install a specific version of Winter, you can also specify the version.
+
+```bash
+composer create-project wintercms/winter <your installation directory> "<version>"
+
+# Example:
+#   composer create-project wintercms/winter mywinter "1.0.474"
+```
 
 <a name="installing-plugin-theme"></a>
 ## Installing a plugin or theme using Composer
