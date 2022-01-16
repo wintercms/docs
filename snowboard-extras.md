@@ -2,13 +2,13 @@
 
 - [Introduction](#introduction)
 - [Loading indicator](#loader-stripe)
-- [Form Validation](#ajax-validation)
-    - [Throwing a Validation Error](#throw-validation-exception)
-    - [Displaying Error Messages](#error-messages)
-    - [Displaying Errors with Fields](#field-errors)
-- [Loading Button](#loader-button)
-- [Flash Messages](#ajax-flash)
-- [Usage Example](#usage-example)
+- [Form validation](#ajax-validation)
+    - [Throwing a validation error](#throw-validation-exception)
+    - [Displaying error messages](#error-messages)
+    - [Displaying errors with fields](#field-errors)
+- [Loading button](#loader-button)
+- [Flash messages](#ajax-flash)
+- [Usage examples](#usage-examples)
 
 <a name="introduction"></a>
 ## Introduction
@@ -29,7 +29,7 @@ When an AJAX request starts, the `ajaxPromise` event is fired. This displays the
 <a name="ajax-validation"></a>
 ## Form validation
 
-You may specify the `data-request-validate` attribute on a form to enable validation features.
+You may specify the `data-request-validate` attribute on a form to enable server-side validation features with fields and forms.
 
 ```html
 <form
@@ -42,7 +42,7 @@ You may specify the `data-request-validate` attribute on a form to enable valida
 <a name="throw-validation-exception"></a>
 ### Throwing a validation error
 
-In the server side AJAX handler you may throw a [validation exception](../services/error-log#validation-exception) using the `ValidationException` class to make a field invalid, where the first argument is an array. The array should use field names for the keys and the error messages for the values.
+In the server side AJAX handler, you may throw a [validation exception](../services/error-log#validation-exception) using the `ValidationException` class to make a field invalid. The exception should be provided an array, which states the field names for the keys, and the error messages for the values.
 
 ```php
 function onSubmit()
@@ -51,7 +51,7 @@ function onSubmit()
 }
 ```
 
-> **NOTE**: You can also pass an instance of the [validation service](../services/validation) as the first argument of the exception.
+> **NOTE**: You can also pass a [Validator](../services/validation) instance as the first argument of the exception instead, to use the in-built validation service.
 
 <a name="error-messages"></a>
 ### Displaying error messages
@@ -70,17 +70,7 @@ To display multiple error messages, include an element with the `data-message` a
 </div>
 ```
 
-To add custom classes on AJAX invalidation, hook into the `ajaxInvalidField` and `ajaxPromise` JS events.
-
-```js
-$(window).on('ajaxInvalidField', function(event, fieldElement, fieldName, errorMsg, isFirst) {
-    $(fieldElement).closest('.form-group').addClass('has-error');
-});
-
-$(document).on('ajaxPromise', '[data-request]', function() {
-    $(this).closest('form').find('.form-group.has-error').removeClass('has-error');
-});
-```
+The `handleValidationErrors` callback, and the `ajaxValidationErrors` global event, that are available with the [Request API](../snowboard/request#global-events) allow you to fully customise the client-side validation handling. The `handleValidationErrors` callback can be used to control validation per request, while the `ajaxValidationErrors` global event can be used by [Snowboard plugins](../snowboard/plugin-development) to augment the client-side validation in a global fashion.
 
 <a name="field-errors"></a>
 ### Displaying errors with fields
@@ -158,8 +148,8 @@ To remain consistent with AJAX based flash messages, you can render a [standard 
 {% endflash %}
 ```
 
-<a name="usage-example"></a>
-## Usage example
+<a name="usage-examples"></a>
+## Usage examples
 
 Below is a complete example of form validation. It calls the `onDoSomething` event handler that triggers a loading submit button, performs validation on the form fields, then displays a successful flash message.
 
