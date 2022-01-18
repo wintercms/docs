@@ -6,7 +6,7 @@
     - [Deployment best practices](#deployment-best-practices)
 - [Installing Winter via Composer](#installing-winter)
 - [Installing a plugin or theme](#installing-plugin-theme)
-- [Publishing blugins or themes](#publishing-products)
+- [Publishing plugins or themes](#publishing-products)
 - [Package descriptions](#package-descriptions)
 - [Marketplace builds](#marketplace-builds)
 - [Using Laravel packages](#laravel-packages)
