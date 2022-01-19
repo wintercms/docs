@@ -11,19 +11,21 @@
 <a name="introduction"></a>
 ## Introduction
 
-Snowboard provides core AJAX functionality via the `Request` JavaScript class. The `Request` class provides powerful flexibility and reusability in making AJAX Requests with the Backend functionality in Winter. It can be loaded by adding the following tag into your CMS Theme's page or layout:
+Snowboard provides core AJAX functionality via the `Request` Snowboard plugin. The `Request` plugin provides powerful flexibility and reusability in making AJAX Requests with the Backend functionality in Winter. It can be loaded by adding the following tag into your CMS Theme's page or layout:
 
 ```twig
 {% snowboard request %}
 ```
 
-And can be called using the following code in your JavaScript:
+And called using the following code in your JavaScript:
 
 ```js
 Snowboard.request('#element', 'onAjax', {});
 ```
 
-The base `Request` class, by default, uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) provided in most modern browsers to execute AJAX requests from the frontend to the backend in Winter.
+The base `Request` plugin uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) provided in most modern browsers to execute AJAX requests from the frontend to the backend in Winter.
+
+>**NOTE:** If you would like to replace any part of the functionality of the base `Request` plugin then you can write a custom [Snowboard Plugin](plugin-development) that extends and overrides the base `Request` plugin to customize it as desired.
 
 The `request` method takes three parameters:
 
@@ -78,7 +80,7 @@ Option | Type | Description
 `update` | `Object` | Specifies a list of partials and page elements that can be changed through the AJAX response. The key of the object represents the partial name and the value represents the page element (as a CSS selector) to target for the update. If the selector string is prepended with an `@` symbol, the content will be appended to the target. If the selector string is prepended with a `^` symbol, it will instead be prepended to the target.
 `fetchOptions` | `Object` | If specified, this will override the options used with the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch) to make the request.
 
-The following callbacks may also be specified in the `options` parameter. All callbacks expect a function to be provided. The `this` keyword inside all callbacks will be assigned the `Request` instance that represents this AJAX request.
+The following callbacks may also be specified in the `options` parameter. All callbacks expect a function to be provided. The `this` keyword inside all callbacks will be assigned the `Request` instance that represents the current AJAX request.
 
 Callback | Description
 -------- | -----------
@@ -87,7 +89,7 @@ Callback | Description
 `error` | Executes when the AJAX request fails due to a server-side error or validation error. The function receives two parameters: the response data from the AJAX response as an object, and the `Request` instance.
 `complete` | Executes when the AJAX request is complete, regardless of success or failure. The function receives two parameters: the response data from the AJAX response as an object, and the `Request` instance.
 
-Finally, the following option parameters define override functionality for various actions that the `Request` instance may take during the processing of a response. As with the callback methods, these must be provided a function.
+Finally, the following option parameters define override functionality for various actions that the `Request` instance may take during the processing of a response. As with the callback methods, these must be provided as a function.
 
 <style>
     .attributes-table-precessor + table td:first-child,
