@@ -1,19 +1,19 @@
-# Extra Features
+# Extra UI Features
 
 - [Introduction](#introduction)
 - [Loading indicator](#loader-stripe)
+- [Loading button](#loader-button)
+- [Flash messages](#ajax-flash)
 - [Form validation](#ajax-validation)
     - [Throwing a validation error](#throw-validation-exception)
     - [Displaying error messages](#error-messages)
     - [Displaying errors with fields](#field-errors)
-- [Loading button](#loader-button)
-- [Flash messages](#ajax-flash)
-- [Usage examples](#usage-examples)
+    - [Usage examples](#usage-examples)
 
 <a name="introduction"></a>
 ## Introduction
 
-When using the Snowboard framework, you have the option to specify the **extras** flag which includes additional features. These features are often useful when working with AJAX requests in frontend CMS pages.
+When using the Snowboard framework, you have the option to specify the `extras` flag which includes additional UI features. These features are often useful when working with AJAX requests in frontend CMS pages.
 
 ```twig
 {% snowboard extras %}
@@ -25,6 +25,61 @@ When using the Snowboard framework, you have the option to specify the **extras*
 The loading indicator is a loading bar that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../snowboard/request#global-events) used by the Snowboard framework.
 
 When an AJAX request starts, the `ajaxPromise` event is fired. This displays the loading indicator at the top of the page. When this promise is resolved, the loading bar is removed.
+
+<a name="loader-button"></a>
+## Loading button
+
+When any element contains the `data-attach-loading` attribute, the CSS class `wn-loading` will be added to it during the AJAX request. This class will spawn a *loading spinner* on button and anchor elements using the `:after` CSS selector.
+
+```html
+<form data-request="onSubmit">
+    <button data-attach-loading>
+        Submit
+    </button>
+</form>
+
+<a
+    href="#"
+    data-request="onDoSomething"
+    data-attach-loading>
+    Do something
+</a>
+```
+
+<a name="ajax-flash"></a>
+## Flash messages
+
+Specify the `data-request-flash` attribute on a form to enable the use of flash messages on successful AJAX requests.
+
+```html
+<form
+    data-request="onSuccess"
+    data-request-flash>
+    <!-- ... -->
+</form>
+```
+
+Combined with use of the `Flash` facade in the event handler, a flash message will appear after the request finishes.
+
+```php
+function onSuccess()
+{
+    Flash::success('You did it!');
+}
+```
+
+When using AJAX Flash messages you should also ensure that your theme supports [standard flash messages](../markup/tag-flash) by placing the following code in your page or layout in order to render Flash messages that haven't been displayed yet when the page loads.
+
+```twig
+{% flash %}
+    <p
+        data-control="flash-message"
+        class="flash-message fade {{ type }}"
+        data-interval="5">
+        {{ message }}
+    </p>
+{% endflash %}
+```
 
 <a name="ajax-validation"></a>
 ## Form validation
@@ -93,63 +148,8 @@ If the element is left empty, it will be populated with the validation text from
 </div>
 ```
 
-<a name="loader-button"></a>
-## Loading button
-
-When any element contains the `data-attach-loading` attribute, the CSS class `wn-loading` will be added to it during the AJAX request. This class will spawn a *loading spinner* on button and anchor elements using the `:after` CSS selector.
-
-```html
-<form data-request="onSubmit">
-    <button data-attach-loading>
-        Submit
-    </button>
-</form>
-
-<a
-    href="#"
-    data-request="onDoSomething"
-    data-attach-loading>
-    Do something
-</a>
-```
-
-<a name="ajax-flash"></a>
-## Flash messages
-
-Specify the `data-request-flash` attribute on a form to enable the use of flash messages on successful AJAX requests.
-
-```html
-<form
-    data-request="onSuccess"
-    data-request-flash>
-    <!-- ... -->
-</form>
-```
-
-Combined with use of the `Flash` facade in the event handler, a flash message will appear after the request finishes.
-
-```php
-function onSuccess()
-{
-    Flash::success('You did it!');
-}
-```
-
-To remain consistent with AJAX based flash messages, you can render a [standard flash message](../markup/tag-flash) when the page loads by placing this code in your page or layout.
-
-```twig
-{% flash %}
-    <p
-        data-control="flash-message"
-        class="flash-message fade {{ type }}"
-        data-interval="5">
-        {{ message }}
-    </p>
-{% endflash %}
-```
-
 <a name="usage-examples"></a>
-## Usage examples
+### Usage examples
 
 Below is a complete example of form validation. It calls the `onDoSomething` event handler that triggers a loading submit button, performs validation on the form fields, then displays a successful flash message.
 
