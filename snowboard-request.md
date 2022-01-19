@@ -23,9 +23,15 @@ And can be called using the following code in your JavaScript:
 Snowboard.request('#element', 'onAjax', {});
 ```
 
-The base `Request` class, by default, uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) provided in most modern browsers to execute AJAX requests from the frontend to the backend in Winter. 
+The base `Request` class, by default, uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) provided in most modern browsers to execute AJAX requests from the frontend to the backend in Winter.
 
 The `request` method takes three parameters:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Parameter | Required | Description
 --------- | -------- | -----------
@@ -54,6 +60,12 @@ AJAX requests made through the `Request` class go through the following process:
 
 All options below are optional.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Type | Description
 ------ | ---- | -----------
 `confirm` | `string` | If provided, the user will be prompted with this confirmation message, and will be required to confirm if they wish to proceed with the request.
@@ -76,6 +88,12 @@ Callback | Description
 `complete` | Executes when the AJAX request is complete, regardless of success or failure. The function receives two parameters: the response data from the AJAX response as an object, and the `Request` instance.
 
 Finally, the following option parameters define override functionality for various actions that the `Request` instance may take during the processing of a response. As with the callback methods, these must be provided a function.
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------ | -----------
@@ -101,7 +119,7 @@ class HandleFlash extends Snowboard.Singleton
     listens() {
         return {
             // when the "ajaxFlashMessages" event is called, run the "doFlashMessage" method in this class
-            ajaxFlashMessages: 'doFlashMessages', 
+            ajaxFlashMessages: 'doFlashMessages',
         };
     }
 
@@ -128,7 +146,7 @@ class ConfirmEverything extends Snowboard.Singleton
     listens() {
         return {
             // when the "ajaxConfirmMessage" event is called, run the "confirm" method in this class
-            ajaxConfirmMessage: 'confirm', 
+            ajaxConfirmMessage: 'confirm',
         };
     }
 
@@ -140,6 +158,12 @@ class ConfirmEverything extends Snowboard.Singleton
 ```
 
 The following events are called during the Request process:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Event | Promise? | Description
 ----- | -------- | -----------
@@ -183,6 +207,12 @@ element.addEventListener('ajaxSetup', (event) => {
 ```
 
 The following events are called during the Request process directly on the element that triggered the request:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Event | Description
 ----- | -----------

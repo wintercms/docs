@@ -7,10 +7,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-The Data Attributes API is the more simple way of embedding AJAX functionality in your themes and plugins, and removes
-the need to be experienced with JavaScript. While the [JavaScript API](../snowboard/request) has had numerous changes
-from the original [AJAX framework](../ajax/introduction), the Data Attributes API has remain largely unchanged, whilst
-still being powered by the new JavaScript functionality under the hood.
+The Data Attributes API is the simpler way of embedding AJAX functionality in your themes and plugins, and removes the need to be experienced with JavaScript. While the [JavaScript API](../snowboard/request) has had numerous changes from the original [AJAX framework](../ajax/introduction), the Data Attributes API has remain largely unchanged, despite being powered by the new Snowboard framework under the hood.
 
 It can be loaded by adding the following tag into your CMS Theme's page or layout:
 
@@ -18,12 +15,18 @@ It can be loaded by adding the following tag into your CMS Theme's page or layou
 {% snowboard request attr %}
 ```
 
-> **Note:** As per the [Migration Guide](../snowboard/migration-guide), arbitrary JavaScript is no longer allowed through the Data Attributes API. Thus, the `data-request-before-update`, `data-request-success`, `data-request-error` and `data-request-complete` attributes are no longer supported. Please use the [JavaScript API](../snowboard/request) if you require this functionality.
+> **NOTE:** As per the [Migration Guide](../snowboard/migration-guide), arbitrary JavaScript is no longer allowed through the Data Attributes API. Thus, the `data-request-before-update`, `data-request-success`, `data-request-error` and `data-request-complete` attributes are no longer supported. Please use the [JavaScript API](../snowboard/request) if you require this functionality.
 
 <a name="available-attributes"></a>
 ## Available Data Attributes
 
-Triggering an AJAX request from a valid element is as simple as adding the `data-request` attribute to that element. This generally should be done on a button, link or form. You can also customize the AJAX request using the following attributes:
+Triggering an AJAX request from a valid element is as simple as adding the `data-request` attribute to that element. This generally should be done on a button, link, or form. You can also customize the AJAX request using the following attributes:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Attribute | Description
 --------- | -----------
