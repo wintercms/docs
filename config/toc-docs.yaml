@@ -75,6 +75,7 @@ Snowboard:
     snowboard/request: "AJAX Requests (JavaScript API)"
     snowboard/data-attributes: "AJAX Requests (Data Attributes API)"
     snowboard/extras: "Extra Features"
+    snowboard/utilities: "Utilities"
     snowboard/plugin-development: "Plugin Development"
 
 Database:
