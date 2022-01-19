@@ -29,14 +29,16 @@ If two handlers with the same name are defined in a page and layout together, th
 <a name="calling-handlers"></a>
 ### Calling a handler
 
-Every AJAX request should specify a handler name. When the request is made, the server will search all the registered handlers and locates the prioritised handler.
+Every AJAX request should specify a handler name. When the request is made, the server will search all the registered handlers and run the handler with the highest priority.
 
 ```html
 <!-- Attributes API -->
 <button data-request="onSubmitContactForm">Go</button>
 
 <!-- JavaScript API -->
-<script> Snowboard.request(null, 'onSubmitContactForm') </script>
+<script>
+    Snowboard.request(null, 'onSubmitContactForm')
+</script>
 ```
 
 If two components register the same handler name, it is advised to prefix the handler with the [component short name or alias](../cms/components#aliases). If a component uses an alias of **mycomponent** the handler can be targeted with `mycomponent::onName`.
@@ -45,7 +47,7 @@ If two components register the same handler name, it is advised to prefix the ha
 <button data-request="mycomponent::onSubmitContactForm">Go</button>
 ```
 
-You may want to use the [`__SELF__`](../plugin/components#referencing-self) reference variable instead of the hard coded alias in case the user changes the component alias used on the page.
+You should use the [`__SELF__`](../plugin/components#referencing-self) variable instead of the hard coded alias in order to support multiple instances of your component existing on the same page.
 
 ```twig
 <form data-request="{{ __SELF__ }}::onCalculate" data-request-update="'{{ __SELF__ }}::calcresult': '#result'">
@@ -53,10 +55,24 @@ You may want to use the [`__SELF__`](../plugin/components#referencing-self) refe
 <a name="generic-handler"></a>
 ### Generic handler
 
-Sometimes you may need to make an AJAX request for the sole purpose of updating page contents, not needing to execute any code. You may use the `onAjax` handler for this purpose. This handler is available everywhere without needing to write any code.
+Sometimes you may need to make an AJAX request for the sole purpose of updating page contents by pulling partial updates without executing any code. You may use the `onAjax` handler for this purpose. This handler is available everywhere the AJAX framework can respond.
 
-```html
-<button data-request="onAjax">Do nothing</button>
+#### `clock.htm` Partial
+```twig
+The time is {{ 'now' | date('H:i:s') }}
+```
+
+#### `index.htm` Page
+```twig
+<span id="clock-display">
+    {% partial 'clock' %}
+</span>
+<button
+    data-request="onAjax"
+    data-request-update="'clock': '#clock-display'"
+>
+    Check the time
+</button>
 ```
 
 <a name="redirects-in-handlers"></a>
