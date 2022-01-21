@@ -719,6 +719,8 @@ content:
     path: $/acme/blog/models/comments/_content_field.htm
 ```
 
+>**NOTE:** If your partial field is meant only for display and will not be providing a value to the server to be stored then it is best practice to prefix the field name with an underscore (`_`) [to prevent the  FormController` behavior from attempting to process it](#prevent-field-submission)
+
 <a name="field-hint"></a>
 ### Hint
 
