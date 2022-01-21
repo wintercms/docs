@@ -11,9 +11,9 @@
         - [secure](#cookie-attributes-secure)
         - [sameSite](#cookie-attributes-sameSite)
         - [Setting Defaults](#cookie-attributes-defaults)
-    - [Converters](#cookie-converters)
-        - [Read](#cookie-converters-read)
-        - [Write](#cookie-converters-write)
+    - [Cookie Events](#cookie-events)
+        - [`cookie.get`](#cookie-event-get)
+        - [`cookie.set`](#cookie-event-set)
 - [JSON Parser](#json-parser)
 - [Sanitizer](#sanitizer)
 
