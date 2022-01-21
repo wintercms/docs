@@ -97,13 +97,13 @@ Finally, the following option parameters define override functionality for vario
 </style>
 <div class="attributes-table-precessor"></div>
 
-Option | Description
------- | -----------
-`handleConfirmMessage` | Defines a custom handler for any confirmations requested of the user. It will be provided one parameter: the confirmation message, as a string.
-`handleErrorMessage` | Defines a custom handler for any errors occuring during the request. It will be provided one parameter: the error message, as string.
-`handleValidationMessage` | Defines a custom handler for validation errors occurring during the request. It will be provided two parameters: the first being the message returned, as a string. The second will be an object, with field names as the key and messages as the value.
-`handleFlashMessage` | Defines a custom handler for flash messages. It will be provided two parameters: the message of the flash message as a string, and the type of flash message as a string.
-`handleRedirectResponse` | Defines a custom handler for any redirects. It will be provided one parameter: the URL to redirect to, as a string.
+Option | Parameters | Description
+------ | ---------- | -----------
+`handleConfirmMessage` | `(string) confirmationMessage` | Handles any confirmations requested of the user.
+`handleErrorMessage` | `(string) errorMessage` | Handles any errors occuring during the request
+`handleValidationMessage` | `(string) message, (Object) fieldMessages` | Handles validation errors occurring during the request. `fieldMessages` has field names as the key and messages as the value.
+`handleFlashMessage` | `(string) message, (string) type` | Handles flash messages.
+`handleRedirectResponse` | `(string) redirectUrl` | Handles redirect responses.
 
 <a name="global-events"></a>
 ## Global events
@@ -167,22 +167,22 @@ The following events are called during the Request process:
 </style>
 <div class="attributes-table-precessor"></div>
 
-Event | Promise? | Description
------ | -------- | -----------
-`ajaxSetup` | No | Called after the Request is initialized and checked that it can be called. It is provided one parameter: the `Request` instance. It is intended to be used for modifying the Request parameters before sending to the server. Returning `false` in any event listeners will cancel the request.
-`ajaxConfirmMessage` | Yes | Called if `confirm` is specified, and the Request is ready to be sent to the server. This allows developers to customise the confirmation process or display. It is provided two parameters: the `Request` instance, and the confirmation message as a string. If an event listener rejects the Promise, this will cancel the request.
-`ajaxBeforeSend` | No | Called immediately before the Request is sent. It can be used for final changes to the Request, or cancelling it prematurely. It is provided one parameter: the `Request` instance. Returning `false` in any event listeners will cancel the request.
-`ajaxFetchOptions` | No | Called immediately when the `Fetch API` is initialised to make the request. It can be used to modify the Fetch options via a plugin. It is provided two parameters: the current Fetch options, as an object, and the `Request` instance. This event cannot be cancelled.
-`ajaxStart` | No | Called when the Request is sent. It is provided two parameters: a Promise tied to the AJAX call that is resolved or rejected by the response, and the `Request` instance. This event cannot be cancelled.
-`ajaxBeforeUpdate` | Yes | Called when a successful response is returned and partials are going to be updated. It is provided two parameters: the raw response data, and the `Request` instance. It can be used to determine which partials will be updated, or can also be used to cancel the partial updates. If an event listener rejects the Promise, no partials will be updated.
-`ajaxUpdate` | No | Called when an individual partial is updated. It is provided three parameters: the element that is updated, the content that has been added to the element, and the `Request` instance. It can be used to make further updates to an element, or handle updates. Note that this event is fired *after* the element is updated. This event cannot be cancelled.
-`ajaxUpdateComplete` | No | Called when the partials are updated. It is provided two parameters: an array of elements that have been updated, and the `Request` instance. It can be used to determine which partials have been updated. This event cannot be cancelled.
-`ajaxSuccess` | No | Called when a successful response is returned and all partial updating is completed. It is provided two parameters: the raw response data as an object, and the `Request` instance. It can be used to cancel further response handling (ie. redirects, flash messages). Returning `false` in any event listeners will prevent any further response handling from taking place.
-`ajaxError` | No | Called when an unsuccessful response is returned from the AJAX request. It is provided two parameters: the raw response data as an object, and the `Request` instance. It can be used to cancel further error handling. Returning `false` in any event listeners will prevent any further response handling from taking place.
-`ajaxRedirect` | No | Called when a redirect is to take place, either from the response or through the `redirect` option. It is provided two parameters: the URL to redirect to as a string, and the `Request` instance. Returning `false` in any event listeners will prevent the redirect from executing.
-`ajaxErrorMessage` | No | Called when an error message is to be shown to the user. It is provided two parameters: the error message as a string, and the `Request` instance. Returning `false` in any event listeners will prevent the default error handling (showing an alert to the user) from executing.
-`ajaxFlashMessages` | No | Called when one or more flash messages are to be shown to the user. It is provided two parameters: the flash messages as an array of objects, and the `Request` instance. There is no default functionality for flash messages, so if no event listeners trigger for this event, no activity will occur.
-`ajaxValidationErrors` | No | Called when a validation error is returned in the response. It is provided three parameters: the form where validation failed as a `HTMLElement`, an array of fields and messages within the form, and the `Request` instance. There is no default functionality for validation errors, so if no event listeners trigger for this event, no activity will occur.
+Event | Promise? | Parameters | Description
+----- | -------- | ---------- | -----------
+`ajaxSetup` | No | `(Request) request` | Called after the Request is initialized and checked that it can be called. It is intended to be used for modifying the Request parameters before sending to the server. Returning `false` in any event listeners will cancel the request.
+`ajaxConfirmMessage` | Yes | `(Request) request, (string) confirmationMessage` | Called if `confirm` is specified, and the Request is ready to be sent to the server. This allows developers to customise the confirmation process or display. If an event listener rejects the Promise, this will cancel the request.
+`ajaxBeforeSend` | No | `(Request) request` | Called immediately before the Request is sent. It can be used for final changes to the Request, or cancelling it prematurely. Returning `false` in any event listeners will cancel the request.
+`ajaxFetchOptions` | No | `(Object) fetchOptions, (Request) request` | Called immediately when the `Fetch API` is initialised to make the request. It can be used to modify the Fetch options via a plugin. This event cannot be cancelled.
+`ajaxStart` | No | `(Promise) callback, (Request) request` | Called when the Request is sent. This event cannot be cancelled.
+`ajaxBeforeUpdate` | Yes | `(mixed) response, (Request) request` | Called when a successful response is returned and partials are going to be updated. It can be used to determine which partials will be updated, or can also be used to cancel the partial updates. If an event listener rejects the Promise, no partials will be updated.
+`ajaxUpdate` | No | `(HTMLElement) element, (string) content, (Request) request` | Called when an individual partial is updated. It can be used to make further updates to an element, or handle updates. Note that this event is fired *after* the element is updated. This event cannot be cancelled.
+`ajaxUpdateComplete` | No | `(array of HTMLElement) elements, (Request) request)` | Called when the partials are updated. It can be used to determine which partials have been updated. This event cannot be cancelled.
+`ajaxSuccess` | No | `(Object) responseData, (Request) request` | Called when a successful response is returned and all partial updating is completed. It can be used to cancel further response handling (ie. redirects, flash messages). Returning `false` in any event listeners will prevent any further response handling from taking place.
+`ajaxError` | No | `(Object) responseData, (Request) request` | Called when an unsuccessful response is returned from the AJAX request. It can be used to cancel further error handling. Returning `false` in any event listeners will prevent any further response handling from taking place.
+`ajaxRedirect` | No | `(string) redirectUrl, (Request) request` | Called when a redirect is to take place, either from the response or through the `redirect` option. Returning `false` in any event listeners will prevent the redirect from executing.
+`ajaxErrorMessage` | No | `(string) message, (Request) request` | Called when an error message is to be shown to the user. Returning `false` in any event listeners will prevent the default error handling (showing an alert to the user) from executing.
+`ajaxFlashMessages` | No | `(array of Object) flashMessages, (Request) request` | Called when one or more flash messages are to be shown to the user. There is no default functionality for flash messages, so if no event listeners trigger for this event, no activity will occur.
+`ajaxValidationErrors` | No | `(HTMLElement) form, (array) fieldMessages, (Request) request` | Called when a validation error is returned in the response. There is no default functionality for validation errors, so if no event listeners trigger for this event, no activity will occur.
 
 <a name="element-events"></a>
 ## Element events
