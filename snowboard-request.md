@@ -187,7 +187,7 @@ Event | Promise? | Parameters | Description
 <a name="element-events"></a>
 ## Element events
 
-In addition to global events, local events are fired on elements that trigger an AJAX request. These events are treated as [DOM events](https://developer.mozilla.org/en-US/docs/Web/API/Event) and thus can be listened to by normal DOM event listeners or your framework of choice. The `Request` class will inject properties in the event depending on the type of event, however, the `event.request` property will always be the `Request` instance.
+In addition to global events, local events are fired on elements that trigger an AJAX request. These events are treated as [DOM events](https://developer.mozilla.org/en-US/docs/Web/API/Event) and thus can be listened to by normal DOM event listeners or your framework of choice. The `Request` class will inject properties in the event depending on the type of event and the `event.request` property will always be the `Request` instance.
 
 ```js
 const element = document.getElementById('my-button');

@@ -14,7 +14,6 @@
     - [Converters](#cookie-converters)
         - [Read](#cookie-converters-read)
         - [Write](#cookie-converters-write)
-- [Debounce](#debounce)
 - [JSON Parser](#json-parser)
 - [Sanitizer](#sanitizer)
 
@@ -185,22 +184,29 @@ Snowboard.cookie().remove('name')
 <a name="cookie-attributes-defaults"></a>
 #### Setting up defaults
 
+In order to set global defaults that are used for every cookie that is created with the `Snowboard.cookie().set('name', 'value')` method you can call the `setDefaults(options)` method on the Cookie plugin and it will set the provided options as the global defaults.
+
+If you want to get the current defaults, call `Snowboard.cookie().getDefaults()`.
+
 ```js
-const Cookies = Snowboard.cookie().withAttributes({ path: '/', domain: '.example.com' })
-Cookies.set('example', 'value');
+Snowboard.cookie().setDefaults({ path: '/', domain: '.example.com' });
+Snowboard.cookie().set('example', 'value');
 ```
 
-<a name="cookie-converters"></a>
-### Converters
+<a name="cookie-events"></a>
+### Events
 
-<a name="cookie-converters-read"></a>
-#### Read
+The Cookie plugin provides the ability to interact with cookies and modify their values during accessing or creating.
 
-Create a new instance that overrides the default decoding implementation. All get methods that rely in a proper decoding to work, such as `Snowboard.cookie().get()` and `Snowboard.cookie().get('name')`, will run the given converter for each cookie. The returned value will be used as the cookie value.
+<a name="cookie-event-get"></a>
+#### `cookie.get`
+
+This event runs during `Snowboard.cookie().get()` and provides the `(string) name` & `(string) value` parameters. Returning a result from your listener will replace the original result in the results of `Snowboard.cookie().get()`.
 
 Example from reading one of the cookies that can only be decoded using the `escape` function:
 
 ```js
+// TODO: ADJUST EXAMPLE HERE TO USE LISTENER
 document.cookie = 'escaped=%u5317';
 document.cookie = 'default=%E5%8C%97';
 var Cookies = Snowboard.cookie().withConverter({
@@ -217,23 +223,21 @@ Cookies.get('default') // 北
 Cookies.get() // { escaped: '北', default: '北' }
 ```
 
-<a name="cookie-converters-write"></a>
-#### Write
+<a name="cookie-event-set"></a>
+#### `cookie.set`
+
+This event runs during `Snowboard.cookie().set()` and provides the `(string) name` & `(string) value` parameters. Returning a result from your listener will replace the original value in the call to `Snowboard.cookie().set()` and will be the value actually stored for the cookie.
 
 Create a new instance that overrides the default encoding implementation:
 
 ```js
+// TODO: ADJUST EXAMPLE HERE TO USE LISTENER
 var Cookies = Snowboard.cookie().withConverter({
     write: function (value, name) {
         return value.toUpperCase();
     }
 });
 ```
-
-<a name="debounce"></a>
-## Debounce
-
-...
 
 <a name="json-parser"></a>
 ## JSON Parser

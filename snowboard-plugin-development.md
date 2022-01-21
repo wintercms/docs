@@ -8,6 +8,8 @@
 
 ...
 
+**NOTE:** Document `Snowboard.debug()` method.
+
 <a name="concepts">
 ## Framework Concepts
 
