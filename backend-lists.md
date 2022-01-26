@@ -28,25 +28,36 @@
 
 The **List behavior** is a controller [behavior](../services/behaviors) used for managing lists of records on a page. The behavior provides the sortable and searchable list with optional links for each of its records. The behavior provides the controller action `index`; however the list can be rendered anywhere and multiple list definitions can be used.
 
-The list behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+The list behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the List behavior you should add the `\Backend\Behaviors\ListController::class` definition to the `$implement` property of the controller class.
 
 ```php
 namespace Acme\Blog\Controllers;
 
 class Categories extends \Backend\Classes\Controller
 {
-    public $implement = ['Backend.Behaviors.ListController'];
-
-    public $listConfig = 'list_config.yaml';
+    /**
+     * @var array List of behaviors implemented by this controller
+     */
+    public $implement = [
+        \Backend\Behaviors\ListController::class,
+    ];
 }
 ```
 
-> **NOTE:** Very often the list and [form behavior](../ui/form) are used together in a same controller.
+> **NOTE:** Very often the list and [form behaviors](form) are used together in a same controller.
 
 <a name="configuring-list"></a>
 ## Configuring the list behavior
 
-The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical list behavior configuration file:
+The List behaviour will load its configuration in the YAML format from a `config_list.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_list.yaml`) by default.
+
+This can be changed by overriding the `$listConfig` property on your controller to reference a different filename or a full configuration array:
+
+```php
+public $listConfig = 'my_custom_list_config.yaml';
+```
+
+Below is an example of a typical List behavior configuration file:
 
 ```yaml
 # ===================================
@@ -896,9 +907,12 @@ You can extend the columns of another controller from outside by calling the `ex
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    public $implement = ['Backend.Behaviors.ListController'];
-
-    public $listConfig = 'list_config.yaml';
+    /**
+     * @var array List of behaviors implemented by this controller
+     */
+    public $implement = [
+        \Backend\Behaviors\ListController::class,
+    ];
 }
 ```
 
@@ -1053,7 +1067,7 @@ public function listFilterExtendQuery($query, $scope)
     }
 }
 ```
-    
+
 >**NOTE:** In order to apply the `limit()` scope to the query you have to disable the default pagination behavior of the `ListController` to prevent it from overriding any changes to the query `LIMIT`. This can be done by setting `recordsPerPage: 0` in your list definition configuration.
 
 <a name="extend-records-collection"></a>

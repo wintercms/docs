@@ -18,27 +18,34 @@ The behavior depends on a [model class](../database/model) which must implement 
 
 > **NOTE**: If adding sorting to a previously unsorted model under the control of a third party is desired, you can use the [`Winter\Storm\Database\Behaviors\Sortable`](../database/behaviors#sortable) behavior, which can be dynamically implemented. However, you will need to ensure that the model table has a `sort_order` column present on it.
 
-In order to use the reorder behavior you should add it to the `$implement` property of the controller class. Also, the `$reorderConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+In order to use the Reorder behavior you should add the `\Backend\Behaviors\ReorderController::class` definition to the `$implement` property of the controller class.
 
 ```php
 namespace Acme\Shop\Controllers;
 
 class Categories extends Controller
 {
+    /**
+     * @var array List of behaviors implemented by this controller
+     */
     public $implement = [
-        'Backend.Behaviors.ReorderController',
+        \Backend\Behaviors\ReorderController::class,
     ];
-
-    public $reorderConfig = 'config_reorder.yaml';
-
-    // [...]
 }
 ```
 
 <a name="configuring-reorder"></a>
 ## Configuring the behavior
 
-The configuration file referred in the `$reorderConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a configuration file:
+The Reorder behaviour will load its configuration in the YAML format from a `config_reorder.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_reorder.yaml`) by default.
+
+This can be changed by overriding the `$reorderConfig` property on your controller to reference a different filename or a full configuration array:
+
+```php
+public $reorderConfig = 'my_custom_reorder_config.yaml';
+```
+
+Below is an example of a typical Reorder behavior configuration file:
 
 ```yaml
 # ===================================
