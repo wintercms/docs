@@ -730,6 +730,8 @@ content:
     path: $/acme/blog/models/comments/_content_field.htm
 ```
 
+>**NOTE:** If your partial field is meant only for display and will not be providing a value to the server to be stored then it is best practice to prefix the field name with an underscore (`_`) [to prevent the  FormController` behavior from attempting to process it](#prevent-field-submission)
+
 <a name="field-hint"></a>
 ### Hint
 
@@ -1569,9 +1571,9 @@ In the above example the `send_at` form field will only be shown if the `is_dela
 
 Option | Description
 ------------- | -------------
-`action` | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
+`action` | defines the action applied to this field when the condition is met. Supported values: `show`, `hide`, `enable`, `disable`, `empty`.
 `field` | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#widget-repeater), only fields in that same [repeater widget](#widget-repeater) will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a [repeater widget](#widget-repeater) or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
-`condition` | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
+`condition` | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: `checked`, `unchecked`, `value[somevalue]`.
 
 <a name="field-dependencies"></a>
 ### Field dependencies
