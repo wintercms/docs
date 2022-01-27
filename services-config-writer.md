@@ -5,6 +5,7 @@
   - [Multidimensional arrays](#multidimensional-arrays)
   - [Setting env defaults](#setting-env-defaults)
   - [Setting function calls](#setting-function-calls)
+  - [Setting constants](#setting-const)
   - [Returning rendered PHP](#returning-rendered-php)
   - [Config sorting](#config-sorting)
   - [Writing to a different file than read](#writing-to-a-different-file)
@@ -51,12 +52,23 @@ ConfigFile::read('/path/to/file.php')->set([
 <a name="multidimensional-arrays"></a>
 ### Multidimensional arrays
 
-Multidimensional arrays can be set via dot notation.
+Multidimensional arrays can be set via dot notation, or by passing an array.
 
 ```php
 ConfigFile::read('/path/to/file.php')->set([
     'foo.bar.a' => 'bar',
     'foo.bar.b' => 'foo'
+])->write();
+
+// or
+
+ConfigFile::read('/path/to/file.php')->set([
+    'foo' => [
+        'bar' => [
+            'a' => 'bar',
+            'b' => 'foo' 
+        ]
+    ] 
 ])->write();
 ```
 
@@ -131,6 +143,29 @@ ConfigFile::read('/path/to/file.php')->set([
 $config = ConfigFile::read('/path/to/file.php');
 $config->set([
     'foo.bar' => $config->function('env', ['argument1', 'argument1']),
+]);
+$config->write();
+```
+
+<a name="setting-const"></a>
+### Setting const
+
+Constants can be added to your config either via the `ConfigConst` class or using the `const()` helper method
+on the `ConfigFile` object.
+
+```php
+use Winter\Storm\Config\ConfigFile;
+use Winter\Storm\Config\ConfigConst;
+
+ConfigFile::read('/path/to/file.php')->set([
+    'foo.bar' => new ConfigConst('PHP_OS'),
+])->write();
+
+// or
+
+$config = ConfigFile::read('/path/to/file.php');
+$config->set([
+    'foo.bar' => $config->const('\Path\To\Class::VALUE'),
 ]);
 $config->write();
 ```
