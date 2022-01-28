@@ -27,9 +27,9 @@ The framework takes advantage of the incredible enhancements made to the JavaScr
 
 Snowboard can be included in your [CMS theme](../cms/themes) by placing the `{% snowboard %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts) where you would like the JavaScript assets to be loaded - generally, this should be at the bottom of the page before the closing `</body>` tag. You must use this tag *before* you load any assets that rely on the framework, such as plugins or event listeners, and it should also be located before the `{% scripts %}` tag to allow third party code (i.e. [Winter Plugins](../plugin/registration#Introduction)) to provide [Snowboard plugins](plugin-development) if they wish.
 
-By default, only the base Snowboard framework is included by the `{% snowboard %}` token in order to allow for complete control over which additional features (such as the AJAX framework) are desired to be included in your themes.
+By default, only the base Snowboard framework and [necessary utilties](../snowboard/utilities) are included by the `{% snowboard %}` token in order to allow for complete control over which additional features (such as the AJAX framework) are desired to be included in your themes.
 
-You can then specify further attributes to the tag to include optional additional functionality for the framework:
+You can specify further attributes to the tag to include optional additional functionality for the framework:
 
 Attribute | Includes
 --------- | --------
