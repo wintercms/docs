@@ -125,6 +125,7 @@ Console:
     console/setup-maintenance: "Setup & Maintenance"
     console/plugin-management: "Plugin Management"
     console/theme-management: "Theme Management"
+    console/asset-compilation: "Asset Compilation (Mix)"
     console/scaffolding: "Scaffolding"
     console/utilities: "Utilities"
 
