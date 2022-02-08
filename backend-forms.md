@@ -33,16 +33,19 @@
 
 The **Form behavior** is a controller [behavior](../services/behaviors) used for easily adding form functionality to a backend page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
-The Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+The Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model). In order to use the Form behavior you should add the `\Backend\Behaviors\FormController::class` definition to the `$implement` property of the controller class.
 
 ```php
 namespace Acme\Blog\Controllers;
 
 class Categories extends \Backend\Classes\Controller
 {
-    public $implement = ['Backend.Behaviors.FormController'];
-
-    public $formConfig = 'config_form.yaml';
+    /**
+     * @var array List of behaviors implemented by this controller
+     */
+    public $implement = [
+        \Backend\Behaviors\FormController::class,
+    ];
 }
 ```
 
@@ -51,7 +54,15 @@ class Categories extends \Backend\Classes\Controller
 <a name="configuring-form"></a>
 ## Configuring the form behavior
 
-The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical form behavior configuration file:
+The form behaviour will load its configuration in the YAML format from a `config_form.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_form.yaml`) by default.
+
+This can be changed by overriding the `$formConfig` property on your controller to reference a different filename or a full configuration array:
+
+```php
+public $formConfig = 'my_custom_form_config.yaml';
+```
+
+Below is an example of a typical form behavior configuration file:
 
 ```yaml
 # ===================================
@@ -718,6 +729,8 @@ content:
     type: partial
     path: $/acme/blog/models/comments/_content_field.htm
 ```
+
+>**NOTE:** If your partial field is meant only for display and will not be providing a value to the server to be stored then it is best practice to prefix the field name with an underscore (`_`) [to prevent the  FormController` behavior from attempting to process it](#prevent-field-submission)
 
 <a name="field-hint"></a>
 ### Hint
@@ -1558,9 +1571,9 @@ In the above example the `send_at` form field will only be shown if the `is_dela
 
 Option | Description
 ------------- | -------------
-`action` | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
+`action` | defines the action applied to this field when the condition is met. Supported values: `show`, `hide`, `enable`, `disable`, `empty`.
 `field` | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#widget-repeater), only fields in that same [repeater widget](#widget-repeater) will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a [repeater widget](#widget-repeater) or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
-`condition` | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
+`condition` | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: `checked`, `unchecked`, `value[somevalue]`. To match multiple values, the following syntax can be used: `value[somevalue][othervalue]`.
 
 <a name="field-dependencies"></a>
 ### Field dependencies
@@ -1718,9 +1731,12 @@ You can extend the fields of another controller from outside by calling the `ext
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    public $implement = ['Backend.Behaviors.FormController'];
-
-    public $formConfig = 'config_form.yaml';
+    /**
+     * @var array List of behaviors implemented by this controller
+     */
+    public $implement = [
+        \Backend\Behaviors\FormController::class,
+    ];
 }
 ```
 

@@ -1,4 +1,4 @@
-# form()
+# form_*()
 
 Functions prefixed with `form_` perform tasks that are useful when dealing with forms. The helper maps directly to the `Form` PHP class and its methods. For example:
 

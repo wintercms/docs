@@ -92,30 +92,20 @@ public function registerPermissions()
     return [
         'acme.blog.access_posts' => [
             'label' => 'Manage the blog posts',
-            'tab' => 'Blog',
+            'tab'   => 'Blog',
             'order' => 200,
+            'roles' => [\Backend\Models\UserRole::CODE_DEVELOPER, \Backend\Models\UserRole::CODE_PUBLISHER],
         ],
         // ...
     ];
 }
 ```
 
-You may also specify a `roles` option as an array with each value as a role API code. When a role is created with this code, it becomes a system role that always grants this permission to users with that role.
+When developing a plugin that will be used by more projects than just your own (i.e. published on the marketplace) it is highly recommended that you populate the `roles` property with either `\Backend\Models\UserRole::CODE_DEVELOPER` or `\Backend\Models\UserRole::CODE_PUBLISHER` or both depending on the level of access you would like users with those default system-provided roles to have to your plugin's permissions.
 
-```php
-public function registerPermissions()
-{
-    return [
-        'acme.blog.access_categories' => [
-            'label' => 'Manage the blog categories',
-            'tab' => 'Blog',
-            'order' => 200,
-            'roles' => ['developer']
-        ]
-        // ...
-    ];
-}
-```
+You can also provide the API codes (`$role->code`) of non-default roles, but note that doing that will automatically convert that role into a "system" role which means that only the permissions that are explicitly registered to it in code will be attached to it. System roles cannot have their permissions be edited through the backend interface or in the database. Avoid attaching your permissions to non-default system roles (i.e. `CODE_DEVELOPER` & `CODE_PUBLISHER`) if you will be publishing the plugin on the marketplace or otherwise making it available for use in other projects that may not have your custom roles defined (unless your plugin itself provides said custom role via a seeder run during the migration process).
+
+>**NOTE:** If the `roles` property isn't provided then the only users that will have access to the permission by default will be superusers or users with the `\Backend\Models\UserRole::CODE_DEVELOPER` role which inherits all "orphaned permissions" (permissions without any roles specified).
 
 <a name="page-access"></a>
 ## Restricting access to backend pages
