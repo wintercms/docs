@@ -16,7 +16,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-Winter brings first-class support for handling Node-based compilation for front-end assets through the Mix commands. The comamnds use the [Laravel Mix](https://laravel-mix.com/) wrapper, a user-friendly and simple interface to setting up compilation of multiple types of front-end asset through Webpack and various libraries.
+Winter brings first-class support for handling Node-based compilation for frontend assets through the Mix commands. The comamnds use the [Laravel Mix](https://laravel-mix.com/) wrapper, a user-friendly and simple interface to setting up compilation of multiple types of frontend asset through Webpack and various libraries.
 
 <a name="registering-packages"></a>
 ## Registering a package
@@ -70,7 +70,7 @@ php artisan mix:install
 <a name="registering-plugins"></a>
 ### Registering plugins
 
-To register front-end assets to be compiled through Mix in your plugin, you can use the `System\Classes\MixAssets` class to register the package. The following code can be added to your [`Plugin.php`](../plugin/registration) registration file's `boot()` method to register a callback method that registers the package when asset compilation is processed:
+To register frontend assets to be compiled through Mix in your plugin, you can use the `System\Classes\MixAssets` class to register the package. The following code can be added to your [`Plugin.php`](../plugin/registration) registration file's `boot()` method to register a callback method that registers the package when asset compilation is processed:
 
 ```php
 public function boot()
@@ -145,7 +145,7 @@ mix.setPublicPath(__dirname);
 <a name="examples"></a>
 ### Examples
 
-Here are some examples of installing common front-end libraries for use with the asset compilation.
+Here are some examples of installing common frontend libraries for use with the asset compilation.
 
 #### Tailwind CSS
 
@@ -184,7 +184,7 @@ Your theme will now be ready for Tailwind CSS development.
 ### Install Node dependencies
 
 ```bash
-php artisan mix:install [-p <package name>] [--npm <path to npm>] 
+php artisan mix:install [-p <package name>] [--npm <path to npm>]
 ```
 
 The `mix:install` command will install Node dependencies for all registered Mix packages. This command will cycle through each registered package, running the `npm install` command and displaying the output of this command.
