@@ -1,12 +1,13 @@
 # Asset Compilation (Mix)
 
 - [Introduction](#introduction)
+- [Requirements](#requirements)
 - [Registering a package](#registering-packages)
-    - [First steps](#first-steps)
-    - [Plugins](#registering-plugins)
-    - [Themes](#registering-themes)
-    - [Mix configuration](#mix-configuration)
-    - [Examples](#examples)
+    - [Automatic registration](#automatic-registration)
+    - [Registering plugin packages](#registering-plugins)
+    - [Registering theme packages](#registering-themes)
+- [Mix configuration](#mix-configuration)
+- [Examples](#examples)
 - [Commands](#commands)
     - [Install Node dependencies](#mix-install)
     - [List registered Mix packages](#mix-list)
@@ -16,88 +17,48 @@
 <a name="introduction"></a>
 ## Introduction
 
-Winter brings first-class support for handling Node-based compilation for frontend assets through the Mix commands. The comamnds use the [Laravel Mix](https://laravel-mix.com/) wrapper, a user-friendly and simple interface to setting up compilation of multiple types of frontend asset through Webpack and various libraries.
+Winter brings first-class support for handling Node-based compilation for frontend assets through the Mix commands. The comamnds use the [Laravel Mix](https://laravel-mix.com/) wrapper, a user-friendly and simple interface for setting up compilation of multiple types of frontend assets through Webpack and various libraries.
+
+<a name="requirements"></a>
+### Requirements
+
+To take advantage of Mix asset compilation, you must have Node and the Node package manager (NPM) installed in your development environment. This will be dependent on your operating system - please review the [Download NodeJS](https://nodejs.org/en/download/) page for more information on installing Node.
+
+[Laravel Mix](https://laravel-mix.com/) should also be present in the `package.json` file for any packages that will be using it (either as a `dependency` or a `devDependency`) but if it is not specified in the project's `package.json` file then it can be optionally automatically added when running the [`mix:install`](#mix-install) command.
 
 <a name="registering-packages"></a>
 ## Registering a package
 
-Registering for asset compilation through Mix is very easy, and only changes slightly depending on whether the asset compilation is for a plugin or a theme.
+Registering for asset compilation through Mix is very easy. Automatic registration should meet your needs most of the time, and if not there are several methods available to manually register Mix packages.
 
-<a name="first-steps"></a>
-### First steps
+<a name="automatic-registration"></a>
+### Automatic registration
 
-To take advantage of asset compilation, you must have Node and the Node package manager (NPM) installed in your development environment. This will be dependent on your operating system - please review the [Download NodeJS](https://nodejs.org/en/download/) page for more information on installing Node.
+By default, Winter will scan all available and enabled Modules, Plugins, & Themes for the presence of a `winter.mix.js` file under each extension's root folder (i.e. `modules/system/winter.mix.js`, `plugins/myauthor/myplugin/winter.mix.js`, or `themes/mytheme/winter.mix.js`).
 
-You will need to create a package configuration file (`package.json`) in your plugin or theme that defines the dependencies that you require for your assets to compile. In the majority of cases, you will only need Laravel Mix as a dependency.
-
-We recommend that the `package.json` file is located in the root folder of your plugin or theme. You can use the `npm init` command in your CLI to quickly create this file:
-
-```bash
-# For a plugin
-cd plugins/author/myplugin
-# For a theme
-cd themes/mytheme
-
-# Run the initialization
-npm init
-
-# You will be asked a series of questions:
-# - package name: [your theme or plugin name]
-# - version: [a version number, default 1.0.0]
-# - description: [enter a description for your theme or plugin]
-# - entry point: index.js
-# - test command: *keep blank*
-# - git repository: [enter in your git repository URL, or keep blank]
-# - keywords: [enter in some keywords on what your theme or plugin does, or keep blank]
-# - author: [enter in your name and email in the format "Your Name <your@email.com>"]
-# - license: [enter a license - see https://docs.npmjs.com/cli/v8/configuring-npm/package-json#license for licenses]
-# - Press ENTER if OK
-```
-
-Once your `package.json` file is created, you can then add dependencies to it. One that is required for these commands is Laravel Mix:
-
-```bash
-npm i --save-dev laravel-mix
-```
-
-If you edit the `package.json` file directly, you will need to ensure that the dependencies are installed before using the commands. You can use the [`mix:install`](#mix-install) command to install all dependencies.
-
-```bash
-# In your project root folder
-php artisan mix:install
-```
+If the `winter.mix.js` file is found it will be automatically registered as a package and will show up when running the Mix commands. Most of the time this should be all you need to do in order to get started with Laravel Mix based asset compilation in Winter CMS.
 
 <a name="registering-plugins"></a>
 ### Registering plugins
 
-To register frontend assets to be compiled through Mix in your plugin, you can use the `System\Classes\MixAssets` class to register the package. The following code can be added to your [`Plugin.php`](../plugin/registration) registration file's `boot()` method to register a callback method that registers the package when asset compilation is processed:
+To register frontend assets to be compiled through Mix in your plugin, simply return an array with the package names as the keys and the package paths relative to the plugin's directory as the values to register from your [`Plugin.php`](../plugin/registration) registration file's `registerMixPackages()` method. See below example.
 
 ```php
-public function boot()
+public function registerMixPackages()
 {
-    \System\Classes\MixAssets::registerCallback(function ($mix) {
-        $mix->registerPackage('<name of package>', '<directory where package.json is located>');
-    });
-}
-```
+    return [
+        'package-name-2' => 'assets/js/build.js',
 
-The `registerPackage()` method takes 3 arguments: the name of the package which should be a kebab-case string that represents your package name, the directory where to find the `package.json` file and the Mix configuration file and an optional third parameter which defines the filename of your Mix configuration file. By default, we use `winter-mix.js` as this filename, but you may rename it to any other filename that you wish and define it as the third argument.
-
-For example, if you want to register a package called `my-plugin`, and the `package.json` and `winter-mix.js` file can be located in the `plugins/author/myplugin/assets` folder, you would use the following code block:
-
-```php
-public function boot()
-{
-    \System\Classes\MixAssets::registerCallback(function ($mix) {
-        $mix->registerPackage('my-plugin', '~/plugins/author/myplugin/assets');
-    });
+        // winter.mix.js is assumed to be the config file in this path
+        'package-name-3' => 'assets/css',
+    ];
 }
 ```
 
 <a name="registering-themes"></a>
 ### Registering themes
 
-Registration of asset compilation of themes is even easier, and can be done by adding a `mix` definition to your [theme information file](../themes-development#version-file) (`theme.yaml`).
+Registration of asset compilation of themes is even easier, and can be done by adding a `mix` definition to your [theme information file](../themes/development#theme-information) (`theme.yaml`).
 
 ```yaml
 name: "Winter CMS Demo"
@@ -107,10 +68,10 @@ homepage: "https://wintercms.com"
 code: "demo"
 
 mix:
-    <name of package>: winter-mix.js
+    <name of package>: winter.mix.js
 ```
 
-The `mix` definition takes any number of registered packages as a YAML object, with the key being the name of the package as a kebab-case string and the location of your `winter-mix.js` file relative to the theme root directory.
+The `mix` definition takes any number of registered packages as a YAML object, with the key being the name of the package as a kebab-case string and the location of your `winter.mix.js` file relative to the theme's root directory.
 
 For example, if you want to register two packages called `demo-theme-style` and `demo-theme-shop` located in the assets folder, you would use the following definition:
 
@@ -122,32 +83,37 @@ homepage: "https://wintercms.com"
 code: "demo"
 
 mix:
-    demo-theme-style: assets/style/winter-mix.js
-    demo-theme-shop: assets/shop/winter-mix.js
+    demo-theme-style: assets/style/winter.mix.js
+    demo-theme-shop: assets/shop/winter.mix.js
 ```
 
 <a name="mix-configuration"></a>
-### Mix configuration
+## Mix configuration
 
-The Mix configuration file (`winter-mix.js`) is a configuration file that manages the configuration of Laravel Mix itself. In conjunction with the `package.json` file that defines your dependencies, this file defines how Laravel Mix will compile your assets.
+The Mix configuration file (`winter.mix.js`) is a configuration file that manages the configuration of Laravel Mix itself. In conjunction with the `package.json` file that defines your dependencies, this file defines how Laravel Mix will compile your assets.
 
 You can [review examples](https://laravel-mix.com/docs/6.0/examples) or the [full Mix API](https://laravel-mix.com/docs/6.0/api) at the [Laravel Mix website](https://laravel-mix.com).
 
-Your `winter-mix.js` file must include Mix as a requirement, and must also define the public path to the current directory, as follows:
+Your `winter.mix.js` file must include Mix as a requirement, and must also define the public path to the current directory, as follows:
 
 ```js
 const mix = require('laravel-mix');
-mix.setPublicPath(__dirname);
+
+// For assets in the current directory
+// mix.setPublicPath(__dirname);
+
+// For assets in a /assets subdirectory
+mix.setPublicPath(__dirname + '/assets');
 
 // Your mix configuration below
 ```
 
 <a name="examples"></a>
-### Examples
+## Examples
 
 Here are some examples of installing common frontend libraries for use with the asset compilation.
 
-#### Tailwind CSS
+### Tailwind CSS
 
 For themes that wish to use Tailwind CSS, include the `tailwindcss`, `postcss` and `autoprefixer` dependencies in your `package.json` file.
 
@@ -161,7 +127,7 @@ npx taildwindcss init
 
 This will create a Tailwind configuration file (`tailwind.config.js`) inside your theme that you may [configure](https://tailwindcss.com/docs/installation) to your specific theme's needs.
 
-Then, add a `winter-mix.js` configuration file that will compile Tailwind as needed:
+Then, add a `winter.mix.js` configuration file that will compile Tailwind as needed:
 
 ```js
 const mix = require('laravel-mix');
@@ -187,9 +153,13 @@ Your theme will now be ready for Tailwind CSS development.
 php artisan mix:install [-p <package name>] [--npm <path to npm>]
 ```
 
-The `mix:install` command will install Node dependencies for all registered Mix packages. This command will cycle through each registered package, running the `npm install` command and displaying the output of this command.
+The `mix:install` command will install Node dependencies for all registered Mix packages.
 
-You can optionally provide a `-p` flag to install dependencies for one or more packages. To define multiple packages, simply add more `-p` flags to the end of the command.
+This command will add each registered package to the `workspaces.packages` property of your root `package.json` file and then run and display the results of `npm install` from your project root to install all of the dependencies for all of the registered packages at once.
+
+You can optionally provide a `-p` or `--package` flag to install dependencies for one or more packages. To define multiple packages, simply add more `-p` flags to the end of the command.
+
+If the command is run with a `-p` or `--package` flag and the provided package name is not already registered and the name matches a valid module, plugin, or theme package name (modules are prefixed with `module-$moduleDirectory`, themes are prefixed with `theme-$themeDirectory`, and plugins are simply `Author.Plugin`) then a `winter.mix.js` file will be automatically generated for that package and will be included in future runs of any mix commands through the [automatic registration](#automatic-registration) feature.
 
 The `--npm` flag can also be provided if you have a custom path to the `npm` program. If this is not provided, the system will try to guess where `npm` is located.
 
