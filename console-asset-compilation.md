@@ -24,7 +24,7 @@ Winter brings first-class support for handling Node-based compilation for fronte
 
 To take advantage of Mix asset compilation, you must have Node and the Node package manager (NPM) installed in your development environment. This will be dependent on your operating system - please review the [Download NodeJS](https://nodejs.org/en/download/) page for more information on installing Node.
 
-[Laravel Mix](https://laravel-mix.com/) should also be present in the `package.json` file for any packages that will be using it (either as a `dependency` or a `devDependency`) but if it is not specified in the project's `package.json` file then it can be optionally automatically added when running the [`mix:install`](#mix-install) command.
+[Laravel Mix](https://laravel-mix.com/) should also be present in the `package.json` file for any packages that will be using it (either in `dependencies` or a `devDependencies`) but if it is not specified in the project's `package.json` file then it can be optionally automatically added when running the [`mix:install`](#mix-install) command.
 
 <a name="registering-packages"></a>
 ## Registering a package
