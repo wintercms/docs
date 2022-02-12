@@ -108,6 +108,12 @@ mix.setPublicPath(__dirname + '/assets');
 // Your mix configuration below
 ```
 
+### Paths
+
+When the `winter.mix.js` file is evaluated, regardless of where you ran `mix:compile` from, the working directory is set to the parent directory of the `winter.mix.js` file. That means that any relative paths used in the configuration will be relative to the current directory of the `winter.mix.js` file.
+
+>**NOTE:** Winter's [path symbols](../services/helpers#path-symbols) are also supported in the `winter.mix.js` file.
+
 <a name="examples"></a>
 ## Examples
 
