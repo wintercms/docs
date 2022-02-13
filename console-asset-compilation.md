@@ -34,9 +34,9 @@ Registering for asset compilation through Mix is very easy. Automatic registrati
 <a name="automatic-registration"></a>
 ### Automatic registration
 
-By default, Winter will scan all available and enabled Modules, Plugins, & Themes for the presence of a `winter.mix.js` file under each extension's root folder (i.e. `modules/system/winter.mix.js`, `plugins/myauthor/myplugin/winter.mix.js`, or `themes/mytheme/winter.mix.js`).
+By default, Winter will scan all available and enabled modules, plugins and themes for the presence of a `winter.mix.js` file under each extension's root folder (i.e. `modules/system/winter.mix.js`, `plugins/myauthor/myplugin/winter.mix.js`, or `themes/mytheme/winter.mix.js`).
 
-If the `winter.mix.js` file is found it will be automatically registered as a package and will show up when running the Mix commands. Most of the time this should be all you need to do in order to get started with Laravel Mix based asset compilation in Winter CMS.
+If the `winter.mix.js` file is found, it will be automatically registered as a package with an automatically generated package name, and will show up when running the Mix commands. Most of the time, this should be all you need to do in order to get started with Laravel Mix asset compilation in Winter CMS.
 
 <a name="registering-plugins"></a>
 ### Registering plugins
