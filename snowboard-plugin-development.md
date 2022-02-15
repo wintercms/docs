@@ -6,6 +6,7 @@
   - [The PluginLoader class](#plugin-loader-class)
   - [The PluginBase and Singleton abstracts](#plugin-base-singleton)
   - [Global events](#global-events)
+  - [Mocking](#mocking)
 
 <a name="introduction"></a>
 ## Introduction
@@ -51,8 +52,8 @@ Method | Parameters | Description
 `getPlugins` | | Returns an object of added plugins as [PluginLoader](#plugin-loader-class) instances, keyed by the name of the plugin.
 `getPluginNames` | | Returns all added plugins by name as an array of strings.
 `listensToEvent` | eventName(`String`) | Returns an array of plugin names as strings for all plugins that listen to the given event name. This works for both Promise and non-Promise [global events](#global-events).
-`globalEvent` | eventName(`String`)<br>*...parameters* | Calls a non-Promise [global event](#global-event). This will trigger event callbacks for all plugins listening to the given event. This method can be provided additional parameters that will be forwarded through to the event callbacks. This method returns `false` if the event was cancelled by a plugin.
-`globalPromiseEvent` | eventName(`String`)<br>*...parameters* | Calls a Promise [global event](#global-event). This will trigger event callbacks for all plugins listening to the given event. This method can be provided additional parameters that will be forwarded through to the event callbacks. This method returns a Promise that will either be resolved or rejected depending on the response from the event callbacks of the plugins.
+`globalEvent` | eventName(`String`)<br>*...parameters* | Calls a non-Promise [global event](#global-events). This will trigger event callbacks for all plugins listening to the given event. This method can be provided additional parameters that will be forwarded through to the event callbacks. This method returns `false` if the event was cancelled by a plugin.
+`globalPromiseEvent` | eventName(`String`)<br>*...parameters* | Calls a Promise [global event](#global-events). This will trigger event callbacks for all plugins listening to the given event. This method can be provided additional parameters that will be forwarded through to the event callbacks. This method returns a Promise that will either be resolved or rejected depending on the response from the event callbacks of the plugins.
 `debug` | *...parameters* | When the application is in debug mode, this method logs debug messages to the console. Each log message can display one or more parameters at the same time, and includes a trace of the entire call stack up to when the debug call was made.
 
 #### Debugging in Snowboard
@@ -91,4 +92,88 @@ Method | Parameters | Description
 `getInstances` | | Returns all current instances of the plugin.
 `getDependencies` | | Returns an array of the names of all plugins that the current plugin depends on, as strings.
 `dependenciesFulfilled` | | Returns `true` if the current plugin's dependencies have been fulfilled.
-`mock` | methodName(`String`)<br>callback(`Function`) | Defines a mock for the current plugin, replacing the given method with the provided callback.
+`mock` | methodName(`String`)<br>callback(`Function`) | Defines a mock for the current plugin, replacing the given method with the provided callback. See the [Mocking](#mocking) section for more information.
+`unmock` | methodName(`String`) | Restores the original functionality for a previously-mocked method. See the [Mocking](#mocking) section for more information.
+
+<a name="plugin-base-singleton"></a>
+### The `PluginBase` and `Singleton` abstracts
+
+These classes are the base of all plugins in Snowboard, and represent the base functionality that each plugin contains. When creating a plugin class, you will almost always extend one of these abstract classes.
+
+There are two key differences between these abstracts, based on the reusability of the plugin and how it is instantiated in the course of the JavaScript functionality of your project:
+
+Detail | `PluginBase` | `Singleton`
+------ | ------------ | -----------
+Reusability | Each use of the plugin creates a new instance of the plugin | Each use of the plugin uses the same instance.
+Instantiation | Must be instantiated manually when it is needed to be used | Instantiated automatically when the page is loaded
+
+The reason for the separation is to provide better definition on how your plugin is intended to be used. For `PluginBase`, you would use this when you want each instance to have its own scope and data. Contrarily, you would use `Singleton` if you want the same data and scope to be shared no matter how many times you use the plugin.
+
+Here are some examples of when you would use one or the other:
+
+- `PluginBase`
+  - AJAX requests
+  - Flash messages
+  - Reusable widgets with their own data
+- `Singleton`
+  - Event listeners
+  - Global utilities
+  - Base user-interface handlers
+
+<a name="global-events"></a>
+### Global events
+
+Global events are an intrinsic feature of the Snowboard framework, allowing Snowboard plugins to respond to specific events in the course of certain functionality, similar in concept to DOM events or the Event functionality of Winter CMS.
+
+There are two entities that are involved in any global event:
+
+- The **triggering** class, which fires the global event with optional extra context, and,
+- The **listening** class, which listens for when a global event is fired, and actions its own functionality.
+
+There are also two types of global events that can be triggered, they are:
+
+- A **standard** event, which fires and executes all listeners in listening classes, and,
+- A **Promise** event, which fires and waits for the Promise to be resolved before triggering further functionality.
+
+In practice, you would generally use standard events for events in where you do not necessarily want to wait for a response. In all other cases, you would use a Promise event which allows all listening classes to respond to the event in due course.
+
+Firing either event is done by calling either the `globalEvent` or `globalPromiseEvent` method directly on the main Snowboard class.
+
+```js
+// Standard event
+snowboard.globalEvent('myEvent', context);
+
+// Promise event
+snowboard.globalPromiseEvent('myPromiseEvent').then(
+  () => {
+    // functionality when the promise is resolved
+  },
+  () => {
+    // functionality when the promise is rejected
+  }
+);
+```
+
+For a plugin to register as a listening class, it must specify a `listens` method in the plugin class that returns an object. Each key should be the global event being listened for, and the value should be the name of a method inside the class that will handle the event when fired. This is the same whether the event is a standard event or a Promise event.
+
+```js
+class MyPlugin extends PluginBase {
+  listens() {
+    return {
+      ready: 'ready',
+      eventName: 'myHandler',
+    };
+  }
+
+  ready() {
+    // This method is run when the `ready` global event is fired.
+  }
+
+  myHandler(context) {
+    // This method is run when the `eventName` global event is fired.
+  }
+}
+```
+
+Snowboard only has one in-built global event that is fired - the `ready` event, which is fired when the DOM is loaded and the page is ready. This event is synonymous with jQuery's `ready` event, and is mainly used to instantiate the Singletons that have been registered with Snowboard.
+
