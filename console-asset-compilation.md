@@ -150,6 +150,7 @@ Your theme will now be ready for Tailwind CSS development.
 <a name="commands"></a>
 ## Commands
 
+<a name="mix-install"></a>
 ### Install Node dependencies
 
 ```bash
@@ -166,6 +167,7 @@ If the command is run with a `-p` or `--package` flag and the provided package n
 
 The `--npm` flag can also be provided if you have a custom path to the `npm` program. If this is not provided, the system will try to guess where `npm` is located.
 
+<a name="mix-list"></a>
 ### List registered Mix packages
 
 ```bash
@@ -176,6 +178,7 @@ The `mix:list` command will list all registered Mix packages found in the Winter
 
 The command will list all packages, as well as the directory for the asset and the configuration file that has been defined during registration.
 
+<a name="mix-compile"></a>
 ### Compile a Mix packages
 
 ```bash
@@ -192,6 +195,7 @@ The command will generate a report of all compiled files and their final size on
 
 If you wish to pass extra options to the Webpack CLI, for special cases of compilation, you can add `--` to the end of the command, followed by [any parameters](https://webpack.js.org/api/cli/) as per the Webpack CLI options.
 
+<a name="mix-watch"></a>
 ### Watch a Mix package
 
 ```bash
