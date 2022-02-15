@@ -16,7 +16,7 @@ The Snowboard framework has been designed to be extensible and customisable for 
 <a name="concepts"></a>
 ## Framework Concepts
 
-Snowboard works on the concept of an encompassing application, which acts as the base of functionality and is then extended through plugins. The main method of communication and functionality is through the use of [JavaScript classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) which offer instances and extendability, and global events - a feature in-built into Snowboard.
+Snowboard works on the concept of an encompassing application, which acts as the base of functionality and is then extended through plugins. The main method of communication and functionality is through the use of [JavaScript classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) which offer instances and extendability, and global events - a feature built into Snowboard.
 
 The following classes and abstracts are included in the Snowboard framework.
 
