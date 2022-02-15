@@ -201,42 +201,45 @@ The Cookie plugin provides the ability to interact with cookies and modify their
 <a name="cookie-event-get"></a>
 #### `cookie.get`
 
-This event runs during `Snowboard.cookie().get()` and provides the `(string) name` & `(string) value` parameters. Returning a result from your listener will replace the original result in the results of `Snowboard.cookie().get()`.
-
-Example from reading one of the cookies that can only be decoded using the `escape` function:
+This event runs during `Snowboard.cookie().get()` and provides the `(string) name` & `(string) value` parameters, along with a callback method that can be used by a plugin to override the cookie value programatically. This can be used to manipulate or decode cookie values.
 
 ```js
-// TODO: ADJUST EXAMPLE HERE TO USE LISTENER
-document.cookie = 'escaped=%u5317';
-document.cookie = 'default=%E5%8C%97';
-var Cookies = Snowboard.cookie().withConverter({
-    read: function (value, name) {
-        if (name === 'escaped') {
-            return unescape(value);
+class CookieDecryptor extends Singleton
+{
+    listens() {
+        return {
+            'cookie.get': 'decryptCookie',
         }
-        // Fall back to default for all other cookies
-        return Snowboard.cookie().converter.read(value, name);
     }
-})
-Cookies.get('escaped') // 北
-Cookies.get('default') // 北
-Cookies.get() // { escaped: '北', default: '北' }
+
+    decryptCookie(name, value, setValue) {
+        if (name === 'secureCookie') {
+            setValue(decrypt(value));
+        }
+    }
+}
 ```
 
 <a name="cookie-event-set"></a>
 #### `cookie.set`
 
-This event runs during `Snowboard.cookie().set()` and provides the `(string) name` & `(string) value` parameters. Returning a result from your listener will replace the original value in the call to `Snowboard.cookie().set()` and will be the value actually stored for the cookie.
-
-Create a new instance that overrides the default encoding implementation:
+This event runs during `Snowboard.cookie().set()` and provides the `(string) name` & `(string) value` parameters, along with a callback method that can be used by a plugin to override the value saved to the cookie programatically. This will allow you to manipulate or encrypt cookie values before storing them with the browser.
 
 ```js
-// TODO: ADJUST EXAMPLE HERE TO USE LISTENER
-var Cookies = Snowboard.cookie().withConverter({
-    write: function (value, name) {
-        return value.toUpperCase();
+class CookieEncryptor extends Singleton
+{
+    listens() {
+        return {
+            'cookie.set': 'encryptCookie',
+        }
     }
-});
+
+    encryptCookie(name, value, setValue) {
+        if (name === 'secureCookie') {
+            setValue(encrypt(value));
+        }
+    }
+}
 ```
 
 <a name="json-parser"></a>
