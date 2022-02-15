@@ -209,7 +209,7 @@ class CookieDecryptor extends Singleton
     listens() {
         return {
             'cookie.get': 'decryptCookie',
-        }
+        };
     }
 
     decryptCookie(name, value, setValue) {
@@ -231,7 +231,7 @@ class CookieEncryptor extends Singleton
     listens() {
         return {
             'cookie.set': 'encryptCookie',
-        }
+        };
     }
 
     encryptCookie(name, value, setValue) {
