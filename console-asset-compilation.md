@@ -47,10 +47,7 @@ To register frontend assets to be compiled through Mix in your plugin, simply re
 public function registerMixPackages()
 {
     return [
-        'package-name-2' => 'assets/js/build.js',
-
-        // winter.mix.js is assumed to be the config file in this path
-        'package-name-3' => 'assets/css',
+        'custom-package-name' => 'assets/js/build.mix.js',
     ];
 }
 ```
