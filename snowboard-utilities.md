@@ -263,7 +263,7 @@ let object = Snowboard.jsonParser().parse(`{${data}}`);
 
 The Sanitizer utility is a client-side HTML sanitizer designed mostly to prevent self-XSS attacks. Such an attack could look like a user copying content from a website that uses clipboard injection to hijack the values actually stored in the clipboard and then having the user paste the content into an environment where the content would be treated as HTML, typically in richeditor / WYSIWYG fields.
 
-The sanitizer utility will strip all attributes that start with `on` (usually JS event handlers as attributes, i.e. `onload` or `onerror`) or contain the `javascript:` pseudo protocol in their values.
+The sanitizer utility will strip all attributes that start with `on` (usually JS event handlers as attributes, i.e. `onload` or `onerror`) or that contain the `javascript:` pseudo protocol in their values.
 
 It is available both as a global function (`wnSanitize(html)`) and as a Snowboard plugin.
 
