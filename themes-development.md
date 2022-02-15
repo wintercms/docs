@@ -40,6 +40,7 @@ Field | Description
 `code` | the theme code, optional. The value is used on the Winter CMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
 `form` | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
 `require` | an array of plugin names used for [theme dependencies](#dependencies), optional.
+`mix` | an object that defines Mix packages contained in your theme for [asset compilation](../console/asset-compilation).
 
 Example of the theme information file:
 
