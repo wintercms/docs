@@ -58,7 +58,7 @@ Method | Parameters | Description
 
 #### Debugging in Snowboard
 
-As indicated just prior, the Snowboard class provides a `debug` method that allows developers to easily debug their Snowboard application and plugins. This method only works if the Winter application is in debug mode, by setting `debug` to `true` in the `config/app.php` file.
+The Snowboard class provides a `debug` method that allows developers to easily debug their Snowboard application and plugins. This method only works if the Winter application is in debug mode (`'debug' => true` in the `config/app.php` file).
 
 Debugging can be called anywhere that the Snowboard class is accessible.
 
