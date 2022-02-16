@@ -94,10 +94,10 @@ The following is an example of what a complex plugin could look like when using 
      ┣ 📂 behaviors                         /* Any custom behaviors provided by the plugin */
      ┣ 📂 classes                           /* Any custom classes provided by the plugin */
      ┣ 📂 components                        /* Components frontend */
-     ┃ ┣ 📂 record                          /* */
-     ┃ ┃ ┗ 📜 default.htm                   /* */
-     ┃ ┣ 📂 partials                        /* */
-     ┃ ┗ 📜 Record.php                      /* */
+     ┃ ┣ 📂 record                          /* Folder for the Record component's partials */
+     ┃ ┃ ┗ 📜 default.htm                   /* The default partial that's rendered by the component */
+     ┃ ┣ 📂 partials                        /* Any partials shared by more than one component in the plugin */
+     ┃ ┗ 📜 Record.php                      /* Record Component that probably handles retrieving and displaying a single record */
      ┣ 📂 config                            /* Configuration files */
      ┃ ┗ 📜 config.php
      ┣ 📂 console                           /* Any custom CLI commands provided by the plugin */
