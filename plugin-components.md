@@ -31,6 +31,8 @@ Components files and directories reside in the **/components** subdirectory of a
      ┣ 📂 components
      ┃ ┣ 📂 componentname        <=== Component partials directory
      ┃ ┃ ┗ 📜 default.htm        <=== Component default markup (optional)
+     ┃ ┣ 📂 partials             <=== Any partials shared by more than one component in the plugin
+     ┃ ┃ ┗ 📜 partialname.htm
      ┃ ┗ 📜 ComponentName.php    <=== Component class file
      ┗ 📜 Plugin.php
 ```
