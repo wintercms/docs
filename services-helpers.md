@@ -16,6 +16,7 @@ Winter includes a variety of "helper" PHP functions. Many of these functions are
 ### Arrays
 
 <div class="collection-method-list" markdown="1">
+[Laravel `Arr::*()` Helpers](https://laravel.com/docs/6.x/helpers#available-methods)
 [array_add](#method-array-add)
 [array_divide](#method-array-divide)
 [array_dot](#method-array-dot)
@@ -56,6 +57,7 @@ Winter includes a variety of "helper" PHP functions. Many of these functions are
 ### Strings
 
 <div class="collection-method-list" markdown="1">
+[Laravel `Str::*()` Helpers](https://laravel.com/docs/6.x/helpers#available-methods)
 [camel_case](#method-camel-case)
 [class_basename](#method-class-basename)
 [e](#method-e)
@@ -771,6 +773,14 @@ Generate a URL for an asset using the current scheme of the request (HTTP or HTT
 
 ```php
 $url = asset('img/photo.jpg');
+```
+
+You can configure the asset URL host by setting the `ASSET_URL` variable in your `.env` file (or `asset_url` in your `config/app.php` file). This can be useful if you host your assets on an external service like Amazon S3 or another CDN:
+
+```php
+// ASSET_URL=http://example.com/assets
+
+$url = asset('img/photo.jpg'); // http://example.com/assets/img/photo.jpg
 ```
 
 <a name="method-config"></a>

@@ -31,6 +31,8 @@ Components files and directories reside in the **/components** subdirectory of a
      ┣ 📂 components
      ┃ ┣ 📂 componentname        <=== Component partials directory
      ┃ ┃ ┗ 📜 default.htm        <=== Component default markup (optional)
+     ┃ ┣ 📂 partials             <=== Any partials shared by more than one component in the plugin
+     ┃ ┃ ┗ 📜 partialname.htm
      ┃ ┗ 📜 ComponentName.php    <=== Component class file
      ┗ 📜 Plugin.php
 ```
@@ -169,7 +171,9 @@ To access the property from the Twig partials for the component, utilize the `__
 <a name="dropdown-properties"></a>
 ### Dropdown and Set properties
 
-The option list for dropdown and set properties can be static or dynamic. Static options are defined with the `options` element of the property definition. Example:
+A `dropdown` allows you to select a single value from a series of options. A `set` allows you to select multiple values from a series of options. 
+
+The option list for `dropdown` and `set` properties can be static or dynamic. Static options are defined with the `options` property for dropdowns and the `items` property for sets. Example:
 
 ```php
 public function defineProperties()
@@ -181,12 +185,22 @@ public function defineProperties()
             'default'     => 'imperial',
             'placeholder' => 'Select units',
             'options'     => ['metric'=>'Metric', 'imperial'=>'Imperial']
-        ]
+        ],
+        'favoriteFruits' => [
+            'title' => 'Favorite fruits',
+            'type' => 'set',
+            'items' => [
+                'apples' => 'Apples',
+                'bananas' => 'Bananas',
+                'cantaloupes' => 'Cantaloupes',
+            ],
+            'default' => ['bananas', 'cantaloupes'],
+        ],
     ];
 }
 ```
 
-The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown or set property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*Property*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition:
+The list of options or items could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted for dropdowns or the `items` parameter is omitted for sets, the list is considered dynamic. The component class must define a method returning this list. The method should have a name in the following format: `get*Property*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition:
 
 ```php
 public function defineProperties()
@@ -206,7 +220,7 @@ public function getCountryOptions()
 }
 ```
 
-Dynamic dropdown and set lists can depend on other properties. For example, the state list could depend on the selected country. The dependencies are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
+Dynamic `dropdown` and `set` lists can depend on other properties. For example, the state list could depend on the selected country. The dependencies are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
 
 ```php
 public function defineProperties()

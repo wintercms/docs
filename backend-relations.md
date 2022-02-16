@@ -17,29 +17,37 @@
 
 The **Relation behavior** is a controller [behavior](../services/behaviors) used for easily managing complex [model](../database/model) relationships on a page. It is not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
 
-The Relation behavior depends on [relation definitions](#relation-definitions). In order to use the relation behavior you should add the `Backend.Behaviors.RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#configuring-relation).
+The Relation behavior depends on [relation definitions](#relation-definitions). In order to use the relation behavior you should add the `\Backend\Behaviors\RelationController::class` definition to the `$implement` property of the controller class.
 
 ```php
 namespace Acme\Projects\Controllers;
 
 class Projects extends Controller
 {
+    /**
+     * @var array List of behaviors implemented by this controller
+     */
     public $implement = [
-        'Backend.Behaviors.FormController',
-        'Backend.Behaviors.RelationController',
+        \Backend\Behaviors\FormController::class,
+        \Backend\Behaviors\RelationController::class,
     ];
-
-    public $formConfig = 'config_form.yaml';
-    public $relationConfig = 'config_relation.yaml';
 }
 ```
 
-> **NOTE:** Very often the relation behavior is used together with the [form behavior](forms).
+> **NOTE:** The relation behavior is frequently used together with the [form behavior](forms).
 
 <a name="configuring-relation"></a>
 ## Configuring the relation behavior
 
-The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
+The relation behaviour will load its configuration in the YAML format from a `config_relation.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_relation.yaml`) by default.
+
+This can be changed by overriding the `$relationConfig` property on your controller to reference a different filename or a full configuration array:
+
+```php
+public $relationConfig = 'my_custom_relation_config.yaml';
+```
+
+The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
 
 The first level field in the relation configuration file defines the relationship name in the target model. For example:
 

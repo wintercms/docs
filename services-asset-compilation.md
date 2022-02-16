@@ -114,6 +114,12 @@ The asset combiner supports common aliases that substitute file paths, these wil
 
 The following aliases are supported:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Alias | Description
 ------------- | -------------
 `@jquery` | Reference to the jQuery library (v3.4.0) used in the backend. (JavaScript)

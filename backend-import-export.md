@@ -18,25 +18,32 @@
 
 The **Import Export behavior** is a controller [behavior](../services/behaviors) that provides features for importing and exporting data. The behavior provides two pages called Import and Export. The Import page allows a user to upload a CSV file and match the columns to the database. The Export page is the opposite and allows a user to download columns from the database as a CSV file. The behavior provides the controller actions `import()` and `export()`.
 
-The behavior configuration is defined in two parts, each part depends on a special model class along with a list and form field definition file. To use the importing and exporting behavior you should add it to the `$implement` property of the controller class. Also, the `$importExportConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+The behavior configuration is defined in two parts, each part depends on a special model class along with a list and form field definition file. In order to use the Import Export behavior you should add the `\Backend\Behaviors\ImportExportController::class` definition to the `$implement` property of the controller class.
 
 ```php
 class Products extends Controller
 {
+    /**
+     * @var array List of behaviors implemented by this controller
+     */
     public $implement = [
-        'Backend.Behaviors.ImportExportController',
+        \Backend\Behaviors\ImportExportController::class,
     ];
-
-    public $importExportConfig = 'config_import_export.yaml';
-
-    // [...]
 }
 ```
 
 <a name="configuring-import-export"></a>
 ## Configuring the behavior
 
-The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a configuration file:
+The Import Export behaviour will load its configuration in the YAML format from a `config_import_export.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_import_export.yaml`) by default.
+
+This can be changed by overriding the `$importExportConfig` property on your controller to reference a different filename or a full configuration array:
+
+```php
+public $importExportConfig = 'my_custom_import_export_config.yaml';
+```
+
+Below is an example of a typical Import Export behavior configuration file:
 
 ```yaml
 # ===================================
@@ -321,7 +328,7 @@ class SubscriberImport extends \Backend\Models\ImportModel
 <a name="list-behavior-integration"></a>
 ## Integration with list behavior
 
-There is an alternative approach to exporting data that uses the [list behavior](lists) to provide the export data. In order to use this feature you should have the `Backend.Behaviors.ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
+There is an alternative approach to exporting data that uses the [list behavior](lists) to provide the export data. In order to use this feature you should have the `\Backend\Behaviors\ListController::class` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
 
 ```yaml
 export:

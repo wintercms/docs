@@ -66,6 +66,18 @@ Plugins:
     ajax/javascript-api: "JavaScript API"
     ajax/extras: "Extra Features"
 
+Snowboard:
+  icon: "icon-bolt"
+  pages:
+    snowboard/introduction: "Introduction"
+    snowboard/migration-guide: "Migration Guide"
+    snowboard/handlers: "Serverside Event Handlers"
+    snowboard/request: "AJAX Requests (JavaScript API)"
+    snowboard/data-attributes: "AJAX Requests (Data Attributes API)"
+    snowboard/extras: "Extra Features"
+    snowboard/utilities: "Utilities"
+    snowboard/plugin-development: "Plugin Development"
+
 Database:
   icon: "icon-hdd"
   pages:
@@ -113,6 +125,7 @@ Console:
     console/setup-maintenance: "Setup & Maintenance"
     console/plugin-management: "Plugin Management"
     console/theme-management: "Theme Management"
+    console/asset-compilation: "Asset Compilation (Mix)"
     console/scaffolding: "Scaffolding"
     console/utilities: "Utilities"
 

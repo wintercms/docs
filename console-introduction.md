@@ -63,6 +63,11 @@ Command | Description
 [`theme:use`](../console/theme-management#theme-use) | Switches Winter to the given theme.
 [`theme:remove`](../console/theme-management#theme-install) | Removes a theme.
 [`theme:sync`](../console/theme-management#theme-sync) | Synchronises a theme between the filesystem and the database, if you use the [Database Templates](../cms/themes#database-driven-themes) feature.
+**Asset compilation (Mix)** |
+[`mix:install`](../console/asset-compilation#mix-install) | Install Node dependencies for registered Mix packages.
+[`mix:list`](../console/asset-compilation#mix-list) | Lists all registered Mix packages.
+[`mix:compile`](../console/asset-compilation#mix-compile) | Compiles one or more Mix packages.
+[`mix:watch`](../console/asset-compilation#mix-watch) | Watches changes within a Mix package and automatically compiles the package on any change.
 **Scaffolding** |
 [`create:theme`](../console/scaffolding#create-theme) | Create a theme.
 [`create:plugin`](../console/scaffolding#create-plugin) | Create a plugin.

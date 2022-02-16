@@ -442,7 +442,7 @@ Argument | Description
 `otherKey` | the key column name of the related model (inside pivot table). Default value is combined from model name and `_id` suffix, i.e. `role_id`
 `relatedKey` | the key column name of the related model (inside related model table). Default: id
 `pivot` | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
-`pivotModel` | specify a custom model class to return when accessing the pivot relation. Defaults to `Winter\Storm\Database\Pivot`.
+`pivotModel` | specify a custom model class to return when accessing the pivot relation. Defaults to `Winter\Storm\Database\Pivot`. Note: `pivot` still needs to be defined in order to include the pivot columns in any database queries.
 `timestamps` | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
 
 <a name="has-many-through"></a>

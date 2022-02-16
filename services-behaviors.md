@@ -245,11 +245,11 @@ This unique ability to extend constructors allows behaviors to be implemented dy
 
 ```php
 /**
- * Extend the Winter.Users controller to include the RelationController behavior too
+ * Extend the Winter.Users Users controller to include the RelationController behavior too
  */
 Winter\Users\Controllers\Users::extend(function($controller) {
     // Implement the list controller behavior dynamically
-    $controller->implement[] = 'Backend.Behaviors.RelationController';
+    $controller->implement[] = \Backend\Behaviors\RelationController::class;
 
     // Declare the relationConfig property dynamically for the RelationController behavior to use
     $controller->addDynamicProperty('relationConfig', '$/myvendor/myplugin/controllers/users/config_relation.yaml');
@@ -338,7 +338,7 @@ echo $controller->asExtension('FormController')->otherMethod();
 To check if an object has been extended with a behavior, you may use the `isClassExtendedWith` method on the object.
 
 ```php
-$controller->isClassExtendedWith('Backend.Behaviors.RelationController');
+$controller->isClassExtendedWith(\Backend\Behaviors\RelationController::class);
 ```
 
 Below is an example of dynamically extending a `UsersController` of a third-party plugin utilizing this method to avoid preventing other plugins from also extending the afore-mentioned third-party plugin.
@@ -346,8 +346,8 @@ Below is an example of dynamically extending a `UsersController` of a third-part
 ```php
 UsersController::extend(function($controller) {
     // Implement behavior if not already implemented
-    if (!$controller->isClassExtendedWith('Backend.Behaviors.RelationController')) {
-        $controller->implement[] = 'Backend.Behaviors.RelationController';
+    if (!$controller->isClassExtendedWith(\Backend\Behaviors\RelationController::class)) {
+        $controller->implement[] = \Backend\Behaviors\RelationController::class;
     }
 
     // Define property if not already defined

@@ -2,6 +2,7 @@ Markup:
   icon: "icon-code"
   pages:
     markup/templating: "Templating"
+    "https://twig.symfony.com/doc/2.x/": "Twig Docs@"
 
 Variables:
   icon: "icon-subscript"
@@ -37,21 +38,22 @@ Filters:
   itemClass: "code-item"
   pages:
     markup/filter-app: "| app"
-    markup/filter-page: "| page"
-    markup/filter-theme: "| theme"
-    markup/filter-media: "| media"
-    markup/filter-resize: "| resize"
+    markup/filter-asset: "| asset"
+    markup/filter-default: "| default"
     markup/filter-image-width: "| imageWidth"
     markup/filter-image-height: "| imageHeight"
-    markup/filter-md: "| md"
+    markup/filter-md: "| md[_line|_safe]"
+    markup/filter-media: "| media"
+    markup/filter-page: "| page"
     markup/filter-raw: "| raw"
-    markup/filter-default: "| default"
+    markup/filter-resize: "| resize"
+    markup/filter-theme: "| theme"
 
 Functions:
   icon: "icon-eraser"
   itemClass: "code-item"
   pages:
-    markup/function-str: "str()"
-    markup/function-form: "form()"
+    markup/function-str: "str_*()"
+    markup/function-form: "form_*()"
     markup/function-html: "html()"
     markup/function-dump: "dump()"
