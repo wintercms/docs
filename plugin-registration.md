@@ -62,7 +62,7 @@ The following is an example of what most plugins would end up looking like when 
  ┗ 📂 myauthor              /* Author name */
    ┗ 📂 myplugin            /* Plugin name */
      ┣ 📂 assets            /* CSS, JavaScript and image assets for pages and components */
-     ┣ 📂 components        /* Components */
+     ┣ 📂 components        /* Frontend components */
      ┣ 📂 controllers       /* Backend controllers */
      ┣ 📂 lang              /* Localization files */
      ┃ ┗ 📂 en              /* Specific locale folder */
