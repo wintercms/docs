@@ -62,6 +62,7 @@ The following is an example of what most plugins would end up looking like when 
  ┗ 📂 myauthor              /* Author name */
    ┗ 📂 myplugin            /* Plugin name */
      ┣ 📂 assets            /* CSS, JavaScript and image assets for pages and components */
+     ┣ 📂 components        /* Frontend components */
      ┣ 📂 controllers       /* Backend controllers */
      ┣ 📂 lang              /* Localization files */
      ┃ ┗ 📂 en              /* Specific locale folder */
@@ -92,6 +93,11 @@ The following is an example of what a complex plugin could look like when using 
      ┃ ┗ 📂 scss
      ┣ 📂 behaviors                         /* Any custom behaviors provided by the plugin */
      ┣ 📂 classes                           /* Any custom classes provided by the plugin */
+     ┣ 📂 components                        /* Components frontend */
+     ┃ ┣ 📂 record                          /* Folder for the Record component's partials */
+     ┃ ┃ ┗ 📜 default.htm                   /* The default partial that's rendered by the component */
+     ┃ ┣ 📂 partials                        /* Any partials shared by more than one component in the plugin */
+     ┃ ┗ 📜 Record.php                      /* Record Component that probably handles retrieving and displaying a single record */
      ┣ 📂 config                            /* Configuration files */
      ┃ ┗ 📜 config.php
      ┣ 📂 console                           /* Any custom CLI commands provided by the plugin */
