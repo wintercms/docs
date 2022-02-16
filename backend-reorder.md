@@ -18,60 +18,78 @@ The behavior depends on a [model class](../database/model) which must implement 
 
 > **NOTE**: If adding sorting to a previously unsorted model under the control of a third party is desired, you can use the [`Winter\Storm\Database\Behaviors\Sortable`](../database/behaviors#sortable) behavior, which can be dynamically implemented. However, you will need to ensure that the model table has a `sort_order` column present on it.
 
-In order to use the reorder behavior you should add it to the `$implement` property of the controller class. Also, the `$reorderConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+In order to use the Reorder behavior you should add the `\Backend\Behaviors\ReorderController::class` definition to the `$implement` property of the controller class.
 
-    namespace Acme\Shop\Controllers;
+```php
+namespace Acme\Shop\Controllers;
 
-    class Categories extends Controller
-    {
-        public $implement = [
-            'Backend.Behaviors.ReorderController',
-        ];
-
-        public $reorderConfig = 'config_reorder.yaml';
-
-        // [...]
-    }
+class Categories extends Controller
+{
+    /**
+     * @var array List of behaviors implemented by this controller
+     */
+    public $implement = [
+        \Backend\Behaviors\ReorderController::class,
+    ];
+}
+```
 
 <a name="configuring-reorder"></a>
 ## Configuring the behavior
 
-The configuration file referred in the `$reorderConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a configuration file:
+The Reorder behaviour will load its configuration in the YAML format from a `config_reorder.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_reorder.yaml`) by default.
 
-	# ===================================
-	#  Reorder Behavior Config
-	# ===================================
+This can be changed by overriding the `$reorderConfig` property on your controller to reference a different filename or a full configuration array:
 
-	# Reorder Title
-	title: Reorder Categories
+```php
+public $reorderConfig = 'my_custom_reorder_config.yaml';
+```
 
-	# Attribute name
-	nameFrom: title
+Below is an example of a typical Reorder behavior configuration file:
 
-	# Model Class name
-	modelClass: Acme\Shop\Models\Category
+```yaml
+# ===================================
+#  Reorder Behavior Config
+# ===================================
 
-	# Toolbar widget configuration
-	toolbar:
-	    # Partial for toolbar buttons
-	    buttons: reorder_toolbar
+# Reorder Title
+title: Reorder Categories
 
+# Attribute name
+nameFrom: title
+
+# Model Class name
+modelClass: Acme\Shop\Models\Category
+
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: reorder_toolbar
+```
 
 The configuration options listed below can be used.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
-**title** | used for the page title.
-**nameFrom** | specifies which attribute should be used as a label for each record.
-**modelClass** | a model class name, the record data is loaded from this model.
-**toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration.
+`title` | used for the page title.
+`nameFrom` | specifies which attribute should be used as a label for each record.
+`modelClass` | a model class name, the record data is loaded from this model.
+`toolbar` | reference to a Toolbar Widget configuration file, or an array with configuration.
 
 <a name="reorder-display"></a>
 ## Displaying the reorder page
 
 You should provide a [view file](controllers-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
 
-    <?= $this->reorderRender() ?>
+```php
+<?= $this->reorderRender() ?>
+```
 
 <a name="override-sortable-partials"></a>
 ## Override Sortable Partials
@@ -92,7 +110,9 @@ in
 
 The lookup query for the list [database model](../database/model) can be extended by overriding the `reorderExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
 
-	public function reorderExtendQuery($query)
-	{
-	    $query->withTrashed();
-	}
+```php
+public function reorderExtendQuery($query)
+{
+    $query->withTrashed();
+}
+```

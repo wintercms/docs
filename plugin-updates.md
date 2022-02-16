@@ -16,13 +16,13 @@ The change log is stored in a YAML file called `version.yaml` inside the **/upda
 
 ```css
 📂 plugins
- ┣ 📂 myauthor                              <-- Author name
- ┃ ┣ 📂 myplugin                            <-- Plugin name
- ┃ ┃ ┣ 📂 updates                           <-- Database migrations
- ┃ ┃ ┃ ┃ ┣ 📂 v1.0.0                        <-- Migrations for a specific version of the plugin
- ┃ ┃ ┃ ┃ ┃ ┣ 📜 seed_the_database.php       <-- Database seed file, referenced in version.yaml
- ┃ ┃ ┃ ┃ ┃ ┗ 📜 create_records_table.php    <-- Database migration file, referenced in version.yaml
- ┃ ┃ ┃ ┗ 📜 version.yaml                    <-- Changelog
+ ┗ 📂 myauthor                            <-- Author name
+   ┗ 📂 myplugin                          <-- Plugin name
+     ┗ 📂 updates                         <-- Database migrations
+       ┣ 📂 v1.0.0                        <-- Migrations for a specific version of the plugin
+       ┃ ┣ 📜 seed_the_database.php       <-- Database seed file, referenced in version.yaml
+       ┃ ┗ 📜 create_records_table.php    <-- Database migration file, referenced in version.yaml
+       ┗ 📜 version.yaml                  <-- Changelog
  ```
 
 <a name="update-process"></a>
@@ -32,7 +32,7 @@ During an update the system will notify the user about recent changes to plugins
 
 1. When an administrator signs in to the backend.
 1. When the system is updated using the update feature in the backend area.
-1. When the [console command](../console/commands#console-up-command) `php artisan winter:up` is called in the command line from the application directory.
+1. When the [console command](../console/setup-maintenance#winter-up) `php artisan winter:up` is called in the command line from the application directory.
 
 > **NOTE:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
 

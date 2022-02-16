@@ -16,24 +16,31 @@ The theme directory could include the **theme.yaml**, **version.yaml** and **ass
 
 The theme information file **theme.yaml** contains the theme description, the author name, URL of the author's website and some other information. The file should be placed to the theme root directory:
 
-```
+```css
 📂 themes
- ┣ 📂 example-theme
- ┃ ┗ 📜 theme.yaml      <-- Theme information file
+ ┗ 📂 example-theme
+   ┗ 📜 theme.yaml    <-- Theme information file
 ```
 
 The following fields are supported in the **theme.yaml** file:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Field | Description
 ------------- | -------------
-**name** | specifies the theme name, required.
-**author** | specifies the author name, required.
-**homepage** | specifies the author website URL, required.
-**description** | the theme description, required.
-**previewImage** | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
-**code** | the theme code, optional. The value is used on the Winter CMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
-**form** | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
-**require** | an array of plugin names used for [theme dependencies](#dependencies), optional.
+`name` | specifies the theme name, required.
+`author` | specifies the author name, required.
+`homepage` | specifies the author website URL, required.
+`description` | the theme description, required.
+`previewImage` | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
+`code` | the theme code, optional. The value is used on the Winter CMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
+`form` | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
+`require` | an array of plugin names used for [theme dependencies](#dependencies), optional.
+`mix` | an object that defines Mix packages contained in your theme for [asset compilation](../console/asset-compilation).
 
 Example of the theme information file:
 
@@ -50,10 +57,10 @@ code: "demo"
 
 The theme version file **version.yaml** defines the current theme version and the change log. The file should be placed to the theme root directory:
 
-```
+```css
 📂 themes
- ┣ 📂 example-theme
- ┃ ┗ 📜 version.yaml      <-- Theme version file
+ ┗ 📂 example-theme
+   ┗ 📜 version.yaml    <-- Theme version file
 ```
 
 The file format is following:
@@ -69,12 +76,12 @@ The file format is following:
 
 The theme preview image is used in the backend theme selector. The image file **theme-preview.png** should be placed to the theme's **assets/images** directory:
 
-```
+```css
 📂 themes
- ┣ 📂 example-theme
- ┃ ┣ 📂 assets
- ┃ ┃ ┣ 📂 images
- ┃ ┃ ┃ ┗ 📜 theme-preview.png   <-- Theme Preview Image
+ ┗ 📂 example-theme
+   ┗ 📂 assets
+     ┗ 📂 images
+       ┗ 📜 theme-preview.png    <-- Theme Preview Image
 ```
 
 The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
@@ -162,7 +169,7 @@ a { color: @link-color }
 <a name="dependencies"></a>
 ## Theme dependencies
 
-A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
+A theme can depend on plugins by defining a `require` option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
 
 ```yaml
 name: "Winter CMS Demo"
@@ -187,14 +194,14 @@ Themes can provide backend localization keys through files placed in the **lang*
 
 Below is an example of the theme's lang directory:
 
-```
-📦themes
- ┣ 📂 example-theme     <-- Theme directory
- ┃ ┣ 📂 lang            <-- Localization directory
- ┃ ┃ ┣ 📂 en            <-- Specific locale directory
- ┃ ┃ ┃ ┗ 📜 lang.php    <-- Localization file
- ┃ ┃ ┣ 📂 fr
- ┃ ┃ ┃ ┗ 📜 lang.php
+```css
+📂 themes
+ ┗ 📂 example-theme     <-- Theme directory
+   ┗ 📂 lang            <-- Localization directory
+     ┣ 📂 en            <-- Specific locale directory
+     ┃ ┗ 📜 lang.php    <-- Localization file
+     ┗ 📂 fr
+       ┗ 📜 lang.php
  ```
 
 The **lang.php** file should define and return an array of any depth, for example:

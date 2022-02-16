@@ -12,60 +12,72 @@ Layouts define the page scaffold, usually including everything that is present o
 
 Layout templates reside in the **/layouts** subdirectory of a theme directory. Layout template files should have the **htm** extension. Inside the layout file you should use the `{% page %}` tag to output the page content. Simplest layout example:
 
-    <html>
-        <body>
-            {% page %}
-        </body>
-    </html>
+```twig
+<html>
+    <body>
+        {% page %}
+    </body>
+</html>
+```
 
 To use a layout for a [page](pages) the page should refer the layout file name (without extension) in the [Configuration](themes#configuration-section) section. Remember that if you refer a layout from a [subdirectory](themes#subdirectories) you should specify the subdirectory name. Example page template using the default.htm layout:
 
-    url = "/"
-    layout = "default"
-    ==
-    <p>Hello, world!</p>
+```ini
+url = "/"
+layout = "default"
+==
+<p>Hello, world!</p>
+```
 
 When this page is requested its content is merged with the layout, or more precisely - the layout's `{% page %}` tag is replaced with the page content. The previous examples would generate the following markup:
 
-    <html>
-        <body>
-            <p>Hello, world!</p>
-        </body>
-    </html>
+```html
+<html>
+    <body>
+        <p>Hello, world!</p>
+    </body>
+</html>
+```
 
 Note that you can render [partials](partials) in layouts. This lets you to share the common markup elements between different layouts. For example, you can have a partial that outputs the website CSS and JavaScript links. This approach simplifies the resource management - if you want to add a JavaScript reference you should modify a single partial instead of editing all the layouts.
 
 The [Configuration](themes#configuration-section) section is optional for layouts. The supported configuration parameters are **name** and **description**. The parameters are optional and used in the backend user interface. Example layout template with a description:
 
-    description = "Basic layout example"
-    ==
-    <html>
-        <body>
-            {% page %}
-        </body>
-    </html>
+```twig
+description = "Basic layout example"
+==
+<html>
+    <body>
+        {% page %}
+    </body>
+</html>
+```
 
 <a name="placeholders"></a>
 ## Placeholders
 
 Placeholders allow pages to inject content to the layout. Placeholders are defined in the layout templates with the `{% placeholder %}` tag. The next example shows a layout template with a placeholder **head** defined in the HTML HEAD section.
 
-    <html>
-        <head>
-            {% placeholder head %}
-        </head>
-        ...
+```twig
+<html>
+    <head>
+        {% placeholder head %}
+    </head>
+    ...
+```
 
 Pages can inject content to placeholders with the `{% put %}` and `{% endput %}` tags. The following example demonstrates a simple page template which injects a CSS link to the placeholder **head** defined in the previous example.
 
-    url = "/my-page"
-    layout = "default"
-    ==
-    {% put head %}
-        <link href="/themes/demo/assets/css/page.css" rel="stylesheet">
-    {% endput %}
+```twig
+url = "/my-page"
+layout = "default"
+==
+{% put head %}
+    <link href="/themes/demo/assets/css/page.css" rel="stylesheet">
+{% endput %}
 
-    <p>The page content goes here.</p>
+<p>The page content goes here.</p>
+```
 
 More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder).
 

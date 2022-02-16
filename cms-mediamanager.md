@@ -24,25 +24,29 @@ Create **media** folder in the bucket. The folder name doesn't matter. This fold
 
 By default files in S3 buckets cannot be accessed directly. To make the bucket public, return to the bucket list and click the bucket. Click **Properties** button in the right sidebar. Expand **Permissions** tab. Click **Edit bucket policy** link. Paste the following code to the policy popup window. Replace the bucket name with your actual bucket name:
 
-    {
-        "Version": "2008-10-17",
-        "Id": "Policy1397632521960",
-        "Statement": [
-            {
-                "Sid": "Stmt1397633323327",
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": "*"
-                },
-                "Action": "s3:GetObject",
-                "Resource": "arn:aws:s3:::BUCKETNAME/*"
-            }
-        ]
-    }
+```json
+{
+    "Version": "2008-10-17",
+    "Id": "Policy1397632521960",
+    "Statement": [
+        {
+            "Sid": "Stmt1397633323327",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::BUCKETNAME/*"
+        }
+    ]
+}
+```
 
 Click **Save** button to apply the policy. The policy gives public read-only access to all folders and directories in the bucket. If you're going to use the bucket for other needs, it's possible to setup a public access to a specific folder in the bucket, just specify the directory name in the **Resource** value: 
 
-    "arn:aws:s3:::BUCKETNAME/media/*"
+```
+"arn:aws:s3:::BUCKETNAME/media/*"
+```
 
 You should also create an API user that Winter CMS will use for managing the bucket files. In AWS console go to IAM section. Go to Users tab and create a new user. The user name doesn't matter. Make sure that "Generate an access key for each user" checkbox is checked when you create a new user. After AWS creates a user, it allows you to see the security credentials - the user **Access Key ID** and **Secret Access Key**. Copy the keys and put them into a temporary text file.
 
@@ -52,10 +56,10 @@ Now you have all the information to update Winter CMS configuration. Open **conf
 
 Parameter | Value
 ------------- | -------------
-**key** | the **Access Key ID** value of the user that you created before.
-**secret** | the **Secret Access Key** value of the user that you created fore.
-**bucket** | your bucket name.
-**region** | the bucket region code, see below.
+`key` | the **Access Key ID** value of the user that you created before.
+`secret` | the **Secret Access Key** value of the user that you created fore.
+`bucket` | your bucket name.
+`region` | the bucket region code, see below.
 
 You can find the bucket region in S3 management console, in the bucket properties. The Properties tab displays the region name, for example Oregon. S3 driver configuration requires a bucket code. Use this table to find code for your bucket (you can also take a look at [AWS documentation](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)):
 
@@ -85,40 +89,44 @@ Region | Code
 
 Example configuration after update:
 
-    'disks' => [
-        ...
-        's3' => [
-            'driver' => 's3',
-            'key'    => 'XXXXXXXXXXXXXXXXXXXX',
-            'secret' => 'xxxXxXX+XxxxxXXxXxxxxxxXxxXXXXXXXxxxX9Xx',
-            'region' => 'us-west-2',
-            'bucket' => 'my-bucket'
-        ],
-        ...
-    ]
+```php
+'disks' => [
+    ...
+    's3' => [
+        'driver' => 's3',
+        'key'    => 'XXXXXXXXXXXXXXXXXXXX',
+        'secret' => 'xxxXxXX+XxxxxXXxXxxxxxxXxxXXXXXXXxxxX9Xx',
+        'region' => 'us-west-2',
+        'bucket' => 'my-bucket'
+    ],
+    ...
+]
+```
 
 Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters: 
 
 Parameter | Value
 ------------- | -------------
-**disk** | use **s3** value.
-**folder** | the name of the folder you created in S3 bucket.
-**path** | the public path of the folder in the bucket, see below.
+`disk` | use **s3** value.
+`folder` | the name of the folder you created in S3 bucket.
+`path` | the public path of the folder in the bucket, see below.
 
 To obtain the path of the folder, open AWS console and go to S3 section. Navigate to the bucket and click the folder you created before. Upload any file to the folder and click the file. Click **Properties** button in the right sidebar. The file URL is in the **Link** parameter. Copy the URL and remove the file name and the trailing slash from it.
 
 Example storage configuration:
 
-    'storage' => [
-        ...
-        'media' => [
-            'disk'   => 's3',
-            'folder' => 'media',
-            'path' => 'https://s3-us-west-2.amazonaws.com/your-bucket-name/media'
-        ]
+```php
+'storage' => [
+    ...
+    'media' => [
+        'disk'   => 's3',
+        'folder' => 'media',
+        'path' => 'https://s3-us-west-2.amazonaws.com/your-bucket-name/media'
     ]
+]
+```
 
-Congratulations! Now you're ready to use Amazon S3 with Winter CMS. Note that you can also configure Amazon CloudFront CDN  to work with your bucket. This topic is not covered in this document, please refer to [CloudFront documentation](http://aws.amazon.com/cloudfront/). After you configure CloudFront, you will need to update the **path** parameter in the storage configuration.
+Congratulations! Now you're ready to use Amazon S3 with Winter CMS. Note that you can also configure Amazon CloudFront CDN  to work with your bucket. This topic is not covered in this document, please refer to [CloudFront documentation](https://aws.amazon.com/cloudfront/). After you configure CloudFront, you will need to update the **path** parameter in the storage configuration.
 
 <a name="rackspace-cdn"></a>
 ## Configuring Rackspace CDN access
@@ -131,52 +139,62 @@ Create **media** folder in the container. The folder name doesn't matter. This f
 
 You should create an API user that Winter CMS will use for managing files in the CDN container. Open Account / User Management page in Rackspace console. Click **Create user** button. Fill in the user name (for example winter.cdn.api), password, security question and answer. In the **Product Access** section select **Custom** and in the CDN row select **Admin**. Use **No Access** role in the **Account** section and use **Technical Contact** type in the **Contact Information** section. Save the user account. After saving the account you will see the Login Details section with the **API Key** row that contains a value you need to use in Winter CMS configuration files.
 
-Now you have all the information to update Winter CMS configuration. Open **config/filesystem.php** script and find the **disks** section. It already contains Rackspace configuration, you need to replace the API credentials and container information parameters:
+Now you have all the information to update Winter CMS configuration. Open **config/filesystems.php** script and find the **disks** section. It already contains Rackspace configuration, you need to replace the API credentials and container information parameters:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Parameter | Value
 ------------- | -------------
-**username** | Rackspace user name (for example winter.cdn.api).
-**key** | the user's **API Key** that you can copy from Rackspace user profile page.
-**container** | the container name.
-**region** | the bucket region code, see below.
-**endpoint** | leave the value as is.
-**region** | you can find the region in the CDN container list in Rackspace control panel. The code is a 3-letter value, for example it's **ORD** for Chicago. 
+`username` | Rackspace user name (for example winter.cdn.api).
+`key` | the user's **API Key** that you can copy from Rackspace user profile page.
+`container` | the container name.
+`region` | the bucket region code, see below.
+`endpoint` | leave the value as is.
+`region` | you can find the region in the CDN container list in Rackspace control panel. The code is a 3-letter value, for example it's **ORD** for Chicago. 
 
 Example configuration after update:
 
-    'disks' => [
-        ...
-        'rackspace' => [
-            'driver'    => 'rackspace',
-            'username'  => 'winter.api.cdn',
-            'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
-            'container' => 'my-bucket',
-            'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
-            'region'    => 'ORD'
-        ],
-        ...
-    ]
+```php
+'disks' => [
+    ...
+    'rackspace' => [
+        'driver'    => 'rackspace',
+        'username'  => 'winter.api.cdn',
+        'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
+        'container' => 'my-bucket',
+        'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
+        'region'    => 'ORD'
+    ],
+    ...
+]
+```
 
 Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters: 
 
 Parameter | Value
 ------------- | -------------
-**disk** | use **rackspace** value.
-**folder** | the name of the folder you created in CDN container.
-**path** | the public path of the folder in the container, see below.
+`disk` | use **rackspace** value.
+`folder` | the name of the folder you created in CDN container.
+`path` | the public path of the folder in the container, see below.
 
 To obtain the path of the folder, go to the CDN container list in Rackspace console. Click the container and open the media folder. Upload any file. After the file is uploaded, click it. The file will open in a new browser tab. Copy the file URL and remove the file name and trailing slash from it. 
 
 Example storage configuration:
 
-    'storage' => [
-        ...
-        'media' => [
-            'disk'   => 'rackspace',
-            'folder' => 'media',
-            'path' => 'https://xxxxxxxxx-xxxxxxxxx.r00.cf0.rackcdn.com/media'
-        ]
+```php
+'storage' => [
+    ...
+    'media' => [
+        'disk'   => 'rackspace',
+        'folder' => 'media',
+        'path' => 'https://xxxxxxxxx-xxxxxxxxx.r00.cf0.rackcdn.com/media'
     ]
+]
+```
 
 Congratulations! Now you're ready to use Rackspace CDN with Winter CMS.
 
@@ -185,81 +203,106 @@ Congratulations! Now you're ready to use Rackspace CDN with Winter CMS.
 
 By default the system uses HTML5 audio and video tags to render audio and video files:
 
-    <video src="video.mp4" controls></video>
+```html
+<video src="video.mp4" controls></video>
+```
 
 or
 
-    <audio src="audio.mp3" controls></audio>
+```html
+<audio src="audio.mp3" controls></audio>
+```
 
 This behavior can be overridden. If there are **wn-audio-player.htm** and **wn-video-player.htm** CMS partials, they will be used for displaying audio and video contents. Inside the partials use the variable **src** to output a link to the source file. Example:
 
-    <video src="{{ src }}" width="320" height="200" controls preload></video>
+```twig
+<video src="{{ src }}" width="320" height="200" controls preload></video>
+```
 
 If you don't want to use HTML5 player you can provide any other markup in the partials. There's a [third-party script](https://html5media.info/) that enables support of HTML5 video and audio tags in older browsers.
 
 As the partials are written with Twig, you can automate adding alternative video sources based on a naming convention. For example, if there's a convention that there's always a smaller resolution video for each full resolution video, and the smaller resolution file has extension "iphone.mp4", the generated markup could look like this:
 
-    <video controls>
-        <source
-            src="{{ src }}"
-            media="only screen and (min-device-width: 568px)"></source>
-        <source
-            src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}"
-            media="only screen and (max-device-width: 568px)"></source>
-    </video>
+```twig
+<video controls>
+    <source
+        src="{{ src }}"
+        media="only screen and (min-device-width: 568px)"></source>
+    <source
+        src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}"
+        media="only screen and (max-device-width: 568px)"></source>
+</video>
+```
 
 <a name="configuration-options"></a>
 ## Other configuration options
 
 There are several options that allow you to fine-tune the Media Manager. All of them could be defined in **config/cms.php** script, in the **storage/media** section, for example:
 
-    'storage' => [
+```php
+'storage' => [
+    ...
+
+    'media' => [
         ...
+        'ignore' => ['.svn', '.git', '.DS_Store']
+    ]
+],
+```
 
-        'media' => [
-            ...
-            'ignore' => ['.svn', '.git', '.DS_Store']
-        ]
-    ],
-
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Parameter | Value
 ------------- | -------------
-**ignore** | a list of file and directory names to ignore. Defaults to ['.svn', '.git', '.DS_Store'].
-**ttl** | specifies the cache time-to-live, in minutes. The default value is 10. The cache invalidates automatically when Library items are added, updated or deleted.
-**imageExtensions** | file extensions corresponding to the Image document type. The default value is **['gif', 'png', 'jpg', 'jpeg', 'bmp']**.
-**videoExtensions** | file extensions corresponding to the Video document type. The default value is **['mp4', 'avi', 'mov', 'mpg']**.
-**audioExtensions** | file extensions corresponding to the Audio document type. The default value is **['mp3', 'wav', 'wma', 'm4a']**.
+`ignore` | a list of file and directory names to ignore. Defaults to ['.svn', '.git', '.DS_Store'].
+`ttl` | specifies the cache time-to-live, in minutes. The default value is 10. The cache invalidates automatically when Library items are added, updated or deleted.
+`imageExtensions` | file extensions corresponding to the Image document type. The default value is `['gif', 'png', 'jpg', 'jpeg', 'bmp']`.
+`videoExtensions` | file extensions corresponding to the Video document type. The default value is `['mp4', 'avi', 'mov', 'mpg']`.
+`audioExtensions` | file extensions corresponding to the Audio document type. The default value is `['mp3', 'wav', 'wma', 'm4a']`.
 
 <a name="events"></a>
 ## Events
 
 The Media Manager provides a few [events](../services/events) that you can listen for in order to improve extensibility.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Event | Description | Parameters
 ------------- | ------------- | -------------
-**folder.delete** | Called when a folder is deleted | `(string) $path`
-**file.delete** | Called when a file is deleted | `(string) $path`
-**folder.rename** | Called when a folder is renamed | `(string) $originalPath`, `(string) $newPath`
-**file.rename** | Called when a file is renamed | `(string) $originalPath`, `(string) $newPath`
-**folder.create** | Called when a folder is created | `(string) $newFolderPath`
-**folder.move** | Called when a folder is moved | `(string) $path`, `(string) $dest`
-**file.move** | Called when a file is moved | `(string) $path`, `(string) $dest`
-**file.upload** | Called when a file is uploaded | `(string) $filePath`, `(\Symfony\Component\HttpFoundation\File\UploadedFile) $uploadedFile`
+`folder.delete` | Called when a folder is deleted | `(string) $path`
+`file.delete` | Called when a file is deleted | `(string) $path`
+`folder.rename` | Called when a folder is renamed | `(string) $originalPath`, `(string) $newPath`
+`file.rename` | Called when a file is renamed | `(string) $originalPath`, `(string) $newPath`
+`folder.create` | Called when a folder is created | `(string) $newFolderPath`
+`folder.move` | Called when a folder is moved | `(string) $path`, `(string) $dest`
+`file.move` | Called when a file is moved | `(string) $path`, `(string) $dest`
+`file.upload` | Called when a file is uploaded | `(string) $filePath`, `(\Symfony\Component\HttpFoundation\File\UploadedFile) $uploadedFile`
 
 **To hook into these events, either extend the `Backend\Widgets\MediaManager` class directly:**
 
-    Backend\Widgets\MediaManager::extend(function($widget) {
-        $widget->bindEvent('file.rename', function ($originalPath, $newPath) {
-            // Update custom references to path here
-        });
-    });
-    
-**Or listen globally via the `Event` facade (each event is prefixed with `media.` and will be passed the instantiated `Backend\Widgets\MediaManager` object as the first parameter):**
-
-    Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
+```php
+Backend\Widgets\MediaManager::extend(function($widget) {
+    $widget->bindEvent('file.rename', function ($originalPath, $newPath) {
         // Update custom references to path here
     });
+});
+```
+
+**Or listen globally via the `Event` facade (each event is prefixed with `media.` and will be passed the instantiated `Backend\Widgets\MediaManager` object as the first parameter):**
+
+```php
+Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
+    // Update custom references to path here
+});
+```
 
 <a name="troubleshooting"></a>
 ## Troubleshooting

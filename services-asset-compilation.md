@@ -103,14 +103,22 @@ Symbol | Description
 
 The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](../ajax/introduction#framework-script) can be included in the combiner:
 
-    <script src="{{ [
-        '@jquery',
-        '@framework',
-        '@framework.extras',
-        'assets/javascript/app.js'
-    ] | theme }}"></script>
+```twig
+<script src="{{ [
+    '@jquery',
+    '@framework',
+    '@framework.extras',
+    'assets/javascript/app.js'
+] | theme }}"></script>
+```
 
 The following aliases are supported:
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Alias | Description
 ------------- | -------------
@@ -149,7 +157,7 @@ If you are wanting to render the injected assets in any other context, you can c
 
 While the majority of the time dynamic asset compilation through `addJs()`, `addCss()`, or the [`| theme` filter](../markup/filter-theme) should be sufficient for your needs, you may occassionally have a complex asset compilation that you would like to just generate a static file on command instead of dynamically.
 
-The Winter CMS core registers several such bundles for internal usage that are compiled whenever the [`artisan winter:util compile assets` command](../console/commands#winter-util-command) is run.
+The Winter CMS core registers several such bundles for internal usage that are compiled whenever the [`artisan winter:util compile assets` command](../console/utilities#winter-util-compile-assets) is run.
 
 <a name="extending-compiler"></a>
 ## Extending the Asset Compiler
@@ -169,6 +177,7 @@ CombineAssets::registerCallback(function ($combiner) {
     $this->registerAlias('jquery', '~/modules/backend/assets/js/vendor/jquery-and-migrate.min.js');
 });
 ```
+
 <a name="extend-register-bundle"></a>
 ### Register Custom Asset Bundles
 

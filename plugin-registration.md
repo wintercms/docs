@@ -45,9 +45,9 @@ The simplest plugins only require the **Plugin.php** file described below.
 
 ```css
 📂 plugins
- ┣ 📂 myauthor          /* Author name */
- ┃ ┣ 📂 myplugin        /* Plugin name */
- ┃ ┃ ┗ 📜 Plugin.php    /* Plugin registration file, required */
+ ┗ 📂 myauthor          /* Author name */
+   ┗ 📂 myplugin        /* Plugin name */
+     ┗ 📜 Plugin.php    /* Plugin registration file, required */
 ```
 
 <a name="typical-structure"></a>
@@ -59,20 +59,21 @@ The following is an example of what most plugins would end up looking like when 
 
 ```css
 📂 plugins
- ┣ 📂 myauthor              /* Author name */
- ┃ ┣ 📂 myplugin            /* Plugin name */
- ┃ ┃ ┣ 📂 assets            /* CSS, JavaScript and image assets for pages and components */
- ┃ ┃ ┣ 📂 controllers       /* Backend controllers */
- ┃ ┃ ┣ 📂 lang              /* Localization files */
- ┃ ┃ ┃ ┗ 📂 en              /* Specific locale folder */
- ┃ ┃ ┃ ┃ ┗ 📜 lang.php      /* Translations */
- ┃ ┃ ┣ 📂 models            /* Models */
- ┃ ┃ ┣ 📂 updates           /* Database migrations */
- ┃ ┃ ┃ ┗ 📜 version.yaml    /* Changelog */
- ┃ ┃ ┣ 📂 views             /* Custom view files */
- ┃ ┃ ┃ ┗ 📂 mail            /* Custom mail templates */
- ┃ ┃ ┣ 📜 README.md         /* Documentation describing the purpose of the plugin */
- ┃ ┃ ┗ 📜 Plugin.php        /* Plugin registration class */
+ ┗ 📂 myauthor              /* Author name */
+   ┗ 📂 myplugin            /* Plugin name */
+     ┣ 📂 assets            /* CSS, JavaScript and image assets for pages and components */
+     ┣ 📂 components        /* Frontend components */
+     ┣ 📂 controllers       /* Backend controllers */
+     ┣ 📂 lang              /* Localization files */
+     ┃ ┗ 📂 en              /* Specific locale folder */
+     ┃   ┗ 📜 lang.php      /* Translations */
+     ┣ 📂 models            /* Models */
+     ┣ 📂 updates           /* Database migrations */
+     ┃ ┗ 📜 version.yaml    /* Changelog */
+     ┣ 📂 views             /* Custom view files */
+     ┃ ┗ 📂 mail            /* Custom mail templates */
+     ┣ 📜 README.md         /* Documentation describing the purpose of the plugin */
+     ┗ 📜 Plugin.php        /* Plugin registration class */
 ```
 
 <a name="complex-structure"></a>
@@ -82,62 +83,67 @@ The following is an example of what a complex plugin could look like when using 
 
 ```css
 📂 plugins
- ┣ 📂 myauthor                              /* Author name */
- ┃ ┣ 📂 myplugin                            /* Plugin name */
- ┃ ┃ ┣ 📂 assets                            /* CSS, JavaScript and image assets for pages and components */
- ┃ ┃ ┃ ┣ 📂 css
- ┃ ┃ ┃ ┣ 📂 favicons
- ┃ ┃ ┃ ┣ 📂 images
- ┃ ┃ ┃ ┣ 📂 js
- ┃ ┃ ┃ ┗ 📂 scss
- ┃ ┃ ┣ 📂 behaviors                         /* Any custom behaviors provided by the plugin */
- ┃ ┃ ┣ 📂 classes                           /* Any custom classes provided by the plugin */
- ┃ ┃ ┣ 📂 config                            /* Configuration files */
- ┃ ┃ ┃ ┗ 📜 config.php
- ┃ ┃ ┣ 📂 console                           /* Any custom CLI commands provided by the plugin */
- ┃ ┃ ┣ 📂 controllers                       /* Backend controllers */
- ┃ ┃ ┃ ┣ 📂 records                         /* Directory for the view and configuration files for the given controller */
- ┃ ┃ ┃ ┃ ┣ 📜 _list_toolbar.htm             /* List toolbar partial file */
- ┃ ┃ ┃ ┃ ┣ 📜 config_filter.yaml            /* Configuration for the Filter widget present on the controller lists */
- ┃ ┃ ┃ ┃ ┣ 📜 config_form.yaml              /* Configuration for the Form widget present on the controller */
- ┃ ┃ ┃ ┃ ┣ 📜 config_importexport.yaml      /* Configuration for the Import/Export behavior */
- ┃ ┃ ┃ ┃ ┣ 📜 config_list.yaml              /* Configuration for the Lists widget present on the controller */
- ┃ ┃ ┃ ┃ ┣ 📜 config_relation.yaml          /* Configuration for the RelationController behavior */
- ┃ ┃ ┃ ┃ ┣ 📜 create.htm                    /* View file for the create action */
- ┃ ┃ ┃ ┃ ┣ 📜 index.htm                     /* View file for the index action */
- ┃ ┃ ┃ ┃ ┣ 📜 preview.htm                   /* View file for the preview action */
- ┃ ┃ ┃ ┃ ┗ 📜 update.htm                    /* View file for the update action */
- ┃ ┃ ┃ ┣ 📜 Records.php                     /* Backend controller for the Record model */
- ┃ ┃ ┣ 📂 docs                              /* Any plugin-specific documentation should live here */
- ┃ ┃ ┣ 📂 formwidgets                       /* Any custom FormWidgets provided by the plugin */
- ┃ ┃ ┣ 📂 lang                              /* Localization files */
- ┃ ┃ ┃ ┗ 📂 en                              /* Specific locale folder */
- ┃ ┃ ┃ ┃ ┗ 📜 lang.php                      /* Translations for that locale */
- ┃ ┃ ┣ 📂 layouts                           /* Any custom backend layouts used by the plugin */
- ┃ ┃ ┣ 📂 models                            /* Models provided by the plugin */
- ┃ ┃ ┃ ┣ 📂 record                          /* Directory containing configuration files specific to that model */
- ┃ ┃ ┃ ┃ ┣ 📜 columns.yaml                  /* Configuration file used for the Lists widget */
- ┃ ┃ ┃ ┃ ┗ 📜 fields.yaml                   /* Configuration file used for the Form widget */
- ┃ ┃ ┃ ┣ 📜 Record.php                      /* Model class for the Record model */
- ┃ ┃ ┣ 📂 partials                          /* Any custom partials used by the plugin */
- ┃ ┃ ┣ 📂 reportwidgets                     /* Any custom ReportWidgets provided by the plugin */
- ┃ ┃ ┣ 📂 tests                             /* Test suite for the plugin */
- ┃ ┃ ┣ 📂 traits                            /* Any custom Traits provided by the plugin */
- ┃ ┃ ┣ 📂 updates                           /* Database migrations */
- ┃ ┃ ┃ ┃ ┣ 📂 v1.0.0                        /* Migrations for a specific version of the plugin */
- ┃ ┃ ┃ ┃ ┃ ┗ 📜 create_records_table.php    /* Database migration file, referenced in version.yaml */
- ┃ ┃ ┃ ┗ 📜 version.yaml                    /* Changelog */
- ┃ ┃ ┣ 📂 views                             /* Custom view files */
- ┃ ┃ ┃ ┗ 📂 mail                            /* Custom mail templates provided by the plugin */
- ┃ ┃ ┣ 📂 widgets                           /* Any custom Widgets provided by the plugin */
- ┃ ┃ ┣ 📜 LICENSE                           /* License file */
- ┃ ┃ ┣ 📜 README.md                         /* Documentation describing the purpose of the plugin */
- ┃ ┃ ┣ 📜 Plugin.php                        /* Plugin registration file */
- ┃ ┃ ┣ 📜 composer.json                     /* Composer file to manage dependencies for the plugin */
- ┃ ┃ ┣ 📜 helpers.php                       /* Global helpers provided by the plugin loaded via composer.json */
- ┃ ┃ ┣ 📜 phpunit.xml                       /* Unit testing configuration */
- ┃ ┃ ┣ 📜 plugin.yaml                       /* Simplified plugin registration configuration YAML file, used by Builder plugin */
- ┃ ┃ ┗ 📜 routes.php                        /* Any custom routes provided by the plugin */
+ ┗ 📂 myauthor                              /* Author name */
+   ┗ 📂 myplugin                            /* Plugin name */
+     ┣ 📂 assets                            /* CSS, JavaScript and image assets for pages and components */
+     ┃ ┣ 📂 css
+     ┃ ┣ 📂 favicons
+     ┃ ┣ 📂 images
+     ┃ ┣ 📂 js
+     ┃ ┗ 📂 scss
+     ┣ 📂 behaviors                         /* Any custom behaviors provided by the plugin */
+     ┣ 📂 classes                           /* Any custom classes provided by the plugin */
+     ┣ 📂 components                        /* Components frontend */
+     ┃ ┣ 📂 record                          /* Folder for the Record component's partials */
+     ┃ ┃ ┗ 📜 default.htm                   /* The default partial that's rendered by the component */
+     ┃ ┣ 📂 partials                        /* Any partials shared by more than one component in the plugin */
+     ┃ ┗ 📜 Record.php                      /* Record Component that probably handles retrieving and displaying a single record */
+     ┣ 📂 config                            /* Configuration files */
+     ┃ ┗ 📜 config.php
+     ┣ 📂 console                           /* Any custom CLI commands provided by the plugin */
+     ┣ 📂 controllers                       /* Backend controllers */
+     ┃ ┣ 📂 records                         /* Directory for the view and configuration files for the given controller */
+     ┃ ┃ ┣ 📜 _list_toolbar.htm             /* List toolbar partial file */
+     ┃ ┃ ┣ 📜 config_filter.yaml            /* Configuration for the Filter widget present on the controller lists */
+     ┃ ┃ ┣ 📜 config_form.yaml              /* Configuration for the Form widget present on the controller */
+     ┃ ┃ ┣ 📜 config_importexport.yaml      /* Configuration for the Import/Export behavior */
+     ┃ ┃ ┣ 📜 config_list.yaml              /* Configuration for the Lists widget present on the controller */
+     ┃ ┃ ┣ 📜 config_relation.yaml          /* Configuration for the RelationController behavior */
+     ┃ ┃ ┣ 📜 create.htm                    /* View file for the create action */
+     ┃ ┃ ┣ 📜 index.htm                     /* View file for the index action */
+     ┃ ┃ ┣ 📜 preview.htm                   /* View file for the preview action */
+     ┃ ┃ ┗ 📜 update.htm                    /* View file for the update action */
+     ┃ ┗ 📜 Records.php                     /* Backend controller for the Record model */
+     ┣ 📂 docs                              /* Any plugin-specific documentation should live here */
+     ┣ 📂 formwidgets                       /* Any custom FormWidgets provided by the plugin */
+     ┣ 📂 lang                              /* Localization files */
+     ┃ ┗ 📂 en                              /* Specific locale folder */
+     ┃   ┗ 📜 lang.php                      /* Translations for that locale */
+     ┣ 📂 layouts                           /* Any custom backend layouts used by the plugin */
+     ┣ 📂 models                            /* Models provided by the plugin */
+     ┃ ┣ 📂 record                          /* Directory containing configuration files specific to that model */
+     ┃ ┃ ┣ 📜 columns.yaml                  /* Configuration file used for the Lists widget */
+     ┃ ┃ ┗ 📜 fields.yaml                   /* Configuration file used for the Form widget */
+     ┃ ┗ 📜 Record.php                      /* Model class for the Record model */
+     ┣ 📂 partials                          /* Any custom partials used by the plugin */
+     ┣ 📂 reportwidgets                     /* Any custom ReportWidgets provided by the plugin */
+     ┣ 📂 tests                             /* Test suite for the plugin */
+     ┣ 📂 traits                            /* Any custom Traits provided by the plugin */
+     ┣ 📂 updates                           /* Database migrations */
+     ┃ ┃ ┗ 📂 v1.0.0                        /* Migrations for a specific version of the plugin */
+     ┃ ┃   ┗ 📜 create_records_table.php    /* Database migration file, referenced in version.yaml */
+     ┃ ┗ 📜 version.yaml                    /* Changelog */
+     ┣ 📂 views                             /* Custom view files */
+     ┃ ┗ 📂 mail                            /* Custom mail templates provided by the plugin */
+     ┣ 📂 widgets                           /* Any custom Widgets provided by the plugin */
+     ┣ 📜 LICENSE                           /* License file */
+     ┣ 📜 README.md                         /* Documentation describing the purpose of the plugin */
+     ┣ 📜 Plugin.php                        /* Plugin registration file */
+     ┣ 📜 composer.json                     /* Composer file to manage dependencies for the plugin */
+     ┣ 📜 helpers.php                       /* Global helpers provided by the plugin loaded via composer.json */
+     ┣ 📜 phpunit.xml                       /* Unit testing configuration */
+     ┣ 📜 plugin.yaml                       /* Simplified plugin registration configuration YAML file, used by Builder plugin */
+     ┗ 📜 routes.php                        /* Any custom routes provided by the plugin */
  ```
 
 <a name="namespaces"></a>
@@ -190,38 +196,50 @@ class Plugin extends \System\Classes\PluginBase
 
 The following methods are supported in the plugin registration class:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Method | Description
 ------------- | -------------
-**pluginDetails()** | returns information about the plugin.
-**register()** | register method, called when the plugin is first registered.
-**boot()** | boot method, called right before the request route.
-**registerComponents()** | registers any [frontend components](components#component-registration) used by this plugin.
-**registerFormWidgets()** | registers any [backend form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
-**registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
-**registerMailLayouts()** | registers any [mail view layouts](../services/mail#mail-template-registration) supplied by this plugin.
-**registerMailPartials()** | registers any [mail view partials](../services/mail#mail-template-registration) supplied by this plugin.
-**registerMailTemplates()** | registers any [mail view templates](../services/mail#mail-template-registration) supplied by this plugin.
-**registerMarkupTags()** | registers [additional markup tags](#extending-twig) that can be used in the CMS.
-**registerNavigation()** | registers [backend navigation menu items](#navigation-menus) for this plugin.
-**registerPermissions()** | registers any [backend permissions](../backend/users#permission-registration) used by this plugin.
-**registerReportWidgets()** | registers any [backend report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
-**registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
-**registerSettings()** | registers any [backend configuration links](settings#link-registration) used by this plugin.
-**registerValidationRules()** | registers any [custom validators](../services/validation#custom-validation-rules) supplied by this plugin.
+`pluginDetails()` | returns information about the plugin.
+`register()` | register method, called when the plugin is first registered.
+`boot()` | boot method, called right before the request route.
+`registerComponents()` | registers any [frontend components](components#component-registration) used by this plugin.
+`registerFormWidgets()` | registers any [backend form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
+`registerListColumnTypes()` | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
+`registerMailLayouts()` | registers any [mail view layouts](../services/mail#mail-template-registration) supplied by this plugin.
+`registerMailPartials()` | registers any [mail view partials](../services/mail#mail-template-registration) supplied by this plugin.
+`registerMailTemplates()` | registers any [mail view templates](../services/mail#mail-template-registration) supplied by this plugin.
+`registerMarkupTags()` | registers [additional markup tags](#extending-twig) that can be used in the CMS.
+`registerNavigation()` | registers [backend navigation menu items](#navigation-menus) for this plugin.
+`registerPermissions()` | registers any [backend permissions](../backend/users#permission-registration) used by this plugin.
+`registerReportWidgets()` | registers any [backend report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
+`registerSchedule()` | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
+`registerSettings()` | registers any [backend configuration links](settings#link-registration) used by this plugin.
+`registerValidationRules()` | registers any [custom validators](../services/validation#custom-validation-rules) supplied by this plugin.
 
 <a name="basic-plugin-information"></a>
 ### Basic plugin information
 
 The `pluginDetails` is a required method of the plugin registration class. It should return an array containing the following keys:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Key | Description
 ------------- | -------------
-**name** | the plugin name, required.
-**description** | the plugin description, required.
-**author** | the plugin author name, required.
-**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**. This key is required if `iconSvg` is not set.
-**iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors. This key is required if `icon` is not set.
-**homepage** | a link to the author's website address, optional.
+`name` | the plugin name, required.
+`description` | the plugin description, required.
+`author` | the plugin author name, required.
+`icon` | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**. This key is required if `iconSvg` is not set.
+`iconSvg` | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors. This key is required if `icon` is not set.
+`homepage` | a link to the author's website address, optional.
 
 <a name="routing-initialization"></a>
 ## Routing and initialization
@@ -336,6 +354,14 @@ public function makeTextAllCaps($text)
 
 The following Twig custom options are available:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > *,
+    .attributes-table-precessor + table td:nth-child(3),
+    .attributes-table-precessor + table td:nth-child(3) > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 | Option | Type | Default | Description |
 | ------ | ---- | ------- | ----------- |
 | `needs_environment` | boolean | `false` | if true provides the current `TwigEnvironment` as the first argument to the filter call |
@@ -395,19 +421,25 @@ When you register the backend navigation you can use [localization strings](loca
 
 To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the backend controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Key | Description
 ------------- | -------------
-**label** | specifies the menu label localization string key, required.
-**icon** | an icon name from the [Winter CMS icon collection](../ui/icon), optional.
-**iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
-**url** | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
-**counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
-**counterLabel** | a string value to describe the numeric reference in counter, optional.
-**badge** | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
-**attributes** | an associative array of attributes and values to apply to the menu item, optional.
-**permissions** | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.
-**code** | a string value that acts as an unique identifier for that menu option. **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
-**owner** | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin". **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
+`label` | specifies the menu label localization string key, required.
+`icon` | an icon name from the [Winter CMS icon collection](../ui/icon), optional.
+`iconSvg` | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
+`url` | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
+`counter` | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
+`counterLabel` | a string value to describe the numeric reference in counter, optional.
+`badge` | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
+`attributes` | an associative array of attributes and values to apply to the menu item, optional.
+`permissions` | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.
+`code` | a string value that acts as an unique identifier for that menu option. **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
+`owner` | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin". **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
 
 <a name="registering-middleware"></a>
 ## Registering middleware
@@ -425,7 +457,7 @@ public function boot()
 
 Alternatively, you can push it directly into the Kernel via the following.
 
-```
+```php
 public function boot()
 {
     // Add a new middleware to beginning of the stack.
@@ -443,16 +475,22 @@ public function boot()
 
 By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the backend. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Request | Description
 ------------- | -------------
-**/combine** | the asset combiner generator URL
-**/backend/system/updates** | the site updates context
-**/backend/system/install** | the installer path
-**/backend/backend/auth** | the backend authentication path (login, logout)
-**winter:up** | the CLI command that runs all pending migrations
-**winter:update** | the CLI command that triggers the update process
-**winter:env** | the CLI command that converts configuration files to environment variables in a `.env` file
-**winter:version** | the CLI command that detects the version of Winter CMS that is installed
+`/combine` | the asset combiner generator URL
+`/backend/system/updates` | the site updates context
+`/backend/system/install` | the installer path
+`/backend/backend/auth` | the backend authentication path (login, logout)
+`winter:up` | the CLI command that runs all pending migrations
+`winter:update` | the CLI command that triggers the update process
+`winter:env` | the CLI command that converts configuration files to environment variables in a `.env` file
+`winter:version` | the CLI command that detects the version of Winter CMS that is installed
 
 Define the `$elevated` property to grant elevated permissions for your plugin.
 

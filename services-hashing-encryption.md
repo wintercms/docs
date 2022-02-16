@@ -16,9 +16,11 @@ The `Hash` facade provides secure Bcrypt hashing for storing user passwords. Bcr
 
 You may hash a password by calling the `make` method on the `Hash` facade:
 
-    $user = new User;
-    $user->password = Hash::make('mypassword');
-    $user->save();
+```php
+$user = new User;
+$user->password = Hash::make('mypassword');
+$user->save();
+```
 
 Alternatively, models can implement the [Hashable trait](../database/traits#hashable) to automatically hash attributes.
 
@@ -26,17 +28,21 @@ Alternatively, models can implement the [Hashable trait](../database/traits#hash
 
 The `check` method allows you to verify that a given plain-text string corresponds to a given hash.
 
-    if (Hash::check('plain-text', $hashedPassword)) {
-        // The passwords match...
-    }
+```php
+if (Hash::check('plain-text', $hashedPassword)) {
+    // The passwords match...
+}
+```
 
 #### Checking if a password needs to be rehashed
 
 The `needsRehash` function allows you to determine if the work factor used by the hasher has changed since the password was hashed:
 
-    if (Hash::needsRehash($hashed)) {
-        $hashed = Hash::make('plain-text');
-    }
+```php
+if (Hash::needsRehash($hashed)) {
+    $hashed = Hash::make('plain-text');
+}
+```
 
 <a name="encryption"></a>
 ## Encryption
@@ -45,19 +51,23 @@ You may encrypt a value using the `Crypt` facade. All encrypted values are encry
 
 For example, we may use the `encrypt` method to encrypt a secret and store it on a [database model](../database/model):
 
-    $user = new User;
-    $user->secret = Crypt::encrypt('shhh no telling');
-    $user->save();
+```php
+$user = new User;
+$user->secret = Crypt::encrypt('shhh no telling');
+$user->save();
+```
 
 #### Decrypting a value
 
 Of course, you may decrypt values using the `decrypt` method on the `Crypt` facade. If the value can not be properly decrypted, such as when the MAC is invalid, an `Illuminate\Contracts\Encryption\DecryptException` exception will be thrown:
 
-    use Illuminate\Contracts\Encryption\DecryptException;
+```php
+use Illuminate\Contracts\Encryption\DecryptException;
 
-    try {
-        $decrypted = Crypt::decrypt($encryptedValue);
-    }
-    catch (DecryptException $ex) {
-        //
-    }
+try {
+    $decrypted = Crypt::decrypt($encryptedValue);
+}
+catch (DecryptException $ex) {
+    //
+}
+```

@@ -18,25 +18,32 @@
 
 The **Import Export behavior** is a controller [behavior](../services/behaviors) that provides features for importing and exporting data. The behavior provides two pages called Import and Export. The Import page allows a user to upload a CSV file and match the columns to the database. The Export page is the opposite and allows a user to download columns from the database as a CSV file. The behavior provides the controller actions `import()` and `export()`.
 
-The behavior configuration is defined in two parts, each part depends on a special model class along with a list and form field definition file. To use the importing and exporting behavior you should add it to the `$implement` property of the controller class. Also, the `$importExportConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+The behavior configuration is defined in two parts, each part depends on a special model class along with a list and form field definition file. In order to use the Import Export behavior you should add the `\Backend\Behaviors\ImportExportController::class` definition to the `$implement` property of the controller class.
 
 ```php
 class Products extends Controller
 {
+    /**
+     * @var array List of behaviors implemented by this controller
+     */
     public $implement = [
-        'Backend.Behaviors.ImportExportController',
+        \Backend\Behaviors\ImportExportController::class,
     ];
-
-    public $importExportConfig = 'config_import_export.yaml';
-
-    // [...]
 }
 ```
 
 <a name="configuring-import-export"></a>
 ## Configuring the behavior
 
-The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a configuration file:
+The Import Export behaviour will load its configuration in the YAML format from a `config_import_export.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_import_export.yaml`) by default.
+
+This can be changed by overriding the `$importExportConfig` property on your controller to reference a different filename or a full configuration array:
+
+```php
+public $importExportConfig = 'my_custom_import_export_config.yaml';
+```
+
+Below is an example of a typical Import Export behavior configuration file:
 
 ```yaml
 # ===================================
@@ -56,12 +63,18 @@ export:
 
 The configuration options listed below are optional. Define them if you want the behavior to support the [Import](#import-page) or [Export](#export-page), or both.
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
-**defaultRedirect** | used as a fallback redirection page when no specific redirect page is defined.
-**import** | a configuration array or reference to a config file for the Import page.
-**export** | a configuration array or reference to a config file for the Export page.
-**defaultFormatOptions** | a configuration array or reference to a config file for the default CSV format options.
+`defaultRedirect` | used as a fallback redirection page when no specific redirect page is defined.
+`import` | a configuration array or reference to a config file for the Import page.
+`export` | a configuration array or reference to a config file for the Export page.
+`defaultFormatOptions` | a configuration array or reference to a config file for the default CSV format options.
 
 <a name="import-page"></a>
 ### Import page
@@ -80,11 +93,11 @@ The following configuration options are supported for the Import page:
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
-**list** | defines the list columns available for importing.
-**form** | provides additional fields used as import options, optional.
-**redirect** | redirection page when the import is complete, optional
-**permissions** | user permissions needed to perform the operation, optional
+`title` | a page title, can refer to a [localization string](../plugin/localization).
+`list` | defines the list columns available for importing.
+`form` | provides additional fields used as import options, optional.
+`redirect` | redirection page when the import is complete, optional
+`permissions` | user permissions needed to perform the operation, optional
 
 <a name="export-page"></a>
 ### Export page
@@ -101,14 +114,20 @@ export:
 
 The following configuration options are supported for the Export page:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
-**fileName** | the file name to use for the exported file, default **export.csv**.
-**list** | defines the list columns available for exporting.
-**form** | provides additional fields used as import options, optional.
-**redirect** | redirection page when the export is complete, optional.
-**useList** | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
+`title` | a page title, can refer to a [localization string](../plugin/localization).
+`fileName` | the file name to use for the exported file, default **export.csv**.
+`list` | defines the list columns available for exporting.
+`form` | provides additional fields used as import options, optional.
+`redirect` | redirection page when the export is complete, optional.
+`useList` | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
 
 <a name="format-options"></a>
 ### Format options
@@ -127,10 +146,10 @@ The following configuration options (all optional) are supported for the format 
 
 Option | Description
 ------------- | -------------
-**delimiter** | Delimiter character.
-**enclosure** | Enclosure character.
-**escape** | Escape character.
-**encoding** | File encoding (only used for the import).
+`delimiter` | Delimiter character.
+`enclosure` | Enclosure character.
+`escape` | Escape character.
+`encoding` | File encoding (only used for the import).
 
 <a name="import-export-views"></a>
 ## Import and export views
@@ -168,7 +187,7 @@ The **import.htm** view represents the Import page that allows users to import d
 <a name="export-view"></a>
 ### Export view
 
-The **export.htm** view represents the Export page that allows users to export a file from the database. A typical Export page contains breadcrumbs, the export section itself, and the submission buttons. The **data-request** attribute should refer to the `onExport` AJAX handler provided by the behavior. Below is a contents of the typical export.htm form.
+The **export.htm** view represents the Export page that allows users to export a file from the database. A typical Export page contains breadcrumbs, the export section itself, and the submission buttons. The `data-request` attribute should refer to the `onExport` AJAX handler provided by the behavior. Below is a contents of the typical export.htm form.
 
 ```html
 <?= Form::open(['class' => 'layout']) ?>
@@ -225,6 +244,12 @@ class SubscriberImport extends \Backend\Models\ImportModel
 ```
 
 The class must define a method called `importData` used for processing the imported data. The first parameter `$results` will contain an array containing the data to import. The second parameter `$sessionKey` will contain the session key used for the request.
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
 
 Method | Description
 ------------- | -------------
@@ -303,7 +328,7 @@ class SubscriberImport extends \Backend\Models\ImportModel
 <a name="list-behavior-integration"></a>
 ## Integration with list behavior
 
-There is an alternative approach to exporting data that uses the [list behavior](lists) to provide the export data. In order to use this feature you should have the `Backend.Behaviors.ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
+There is an alternative approach to exporting data that uses the [list behavior](lists) to provide the export data. In order to use this feature you should have the `\Backend\Behaviors\ListController::class` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
 
 ```yaml
 export:
@@ -329,7 +354,13 @@ export:
 
 The following configuration options are supported:
 
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
 Option | Description
 ------------- | -------------
-**definition** | the list definition to source records from, optional.
-**raw** | output the raw attribute values from the record, default: false.
+`definition` | the list definition to source records from, optional.
+`raw` | output the raw attribute values from the record, default: `false`.

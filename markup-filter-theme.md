@@ -8,7 +8,7 @@ The `| theme` filter returns an address relative to the active theme path of the
 
 If the website address is __https://example.com__ and the active theme is called `website` the above example would output the following:
 
-```twig
+```html
 <script type="text/javascript" src="https://example.com/themes/website/assets/js/menu.js"></script>
 ```
 
