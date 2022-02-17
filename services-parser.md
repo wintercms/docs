@@ -470,12 +470,12 @@ Multiple line input for larger blocks of text.
         This is our vision for things to come
     {/textarea}
 
-<a name="#file-parser-array"></a>
+<a name="file-parser-array"></a>
 ## Data File Parser: Array
 
 Winter CMS uses PHP array files (PHP files that do nothing except return a single array) for managing [configuration](../plugin/settings#file-configuration) and [translation data files](../plugin/localization#file-structure). In order to simplify working with these files programatically, Winter provides the `Winter\Storm\Parse\PHP\ArrayFile` parser in the core.
 
-<a name="#array-file-load"></a>
+<a name="array-file-load"></a>
 ### Load `ArrayFile`
 
 The `ArrayFile` class can be used to modify a PHP array file. The `ArrayFile::open()` method will initialize the `ArrayFile` parser with the contents of the provided path (if the path does not exist it will be created on a call to `$arrayFile->write()`).
