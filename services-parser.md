@@ -22,10 +22,11 @@
     - [Write `ArrayFile`](#array-file-write)
     - [Render contents](#array-file-render)
 - [Data File Parser: `.env`](#file-parser-env)
-    - [Setting properties](#setting-properties-env)
-    - [Writing to a different file than read](#writing-to-a-different-file-env)
-    - [Adding new lines](#adding-new-lines)
-
+    - [Set values](#env-file-set-values)
+        - [Empty lines](#env-file-empty-lines)
+    - [Write `EnvFile`](#env-file-write)
+    - [Render contents](#env-file-render)
+    - [Get variables](#env-file-get-variables)
 
 <a name="introduction"></a>
 ## Introduction
@@ -687,4 +688,107 @@ If you require the PHP `ArrayFile` contents as a string instead of writing direc
 $phpConfigString = ArrayFile::open('/path/to/file.php')->set([
     'foo.bar' => 'Winter CMS',
 ])->render();
+```
+
+<a name="file-parser-env"></a>
+## Data File Parser: `.env`
+
+Winter supports the use of [DotEnv](https://github.com/vlucas/phpdotenv) files (`.env`) to manage environment specific variables.
+
+Getting these values is as easy as using the [`env()` helper function](https://wintercms.com/docs/services/helpers#method-env). Winter also provides a way to programmatically set the values in the `.env` file through the use of the `Winter\Storm\Parse\EnvFile` parser in the core.
+
+<a name="env-file-load"></a>
+## Load `EnvFile`
+
+The `EnvFile` class can be used to modify a PHP array file. The `EnvFile::open()` method will initialize the `EnvFile` parser with the contents of the provided path (if the path does not exist it will be created on a call to `$envFile->write()`).
+
+By default, the `.env` file interacted with will be `base_path('.env')`, this can be changed if required by passing the path to the `open()` method.
+
+<a name="env-file-set-values"></a>
+## Set values
+
+Values can be set either one at a time or by passing an array of values to set.
+
+```php
+$env = EnvFile::read();
+$env->set('FOO', 'bar');
+$env->set('BAR', 'foo');
+$env->write();
+
+// or
+
+EnvFile::read()->set([
+    'FOO' => 'bar'
+    'BAR' => 'foo'
+])->write();
+```
+
+> NOTE: Array dot notation and nested arrays are not supported by `EnvFile`
+
+```php
+use Winter\Storm\Config\EnvFile;
+
+$env = EnvFile::read();
+$env->set('FOO', 'bar');
+$env->write();
+```
+
+> NOTE: Values are set in the order they are provided, automatic sorting is not currently supported because comments and empty lines make that a lot more complex.
+
+<a name="env-file-empty-lines"></a>
+#### Empty lines
+
+It is also possible to add empty lines into the env file, usually for organizational purposes:
+
+```php
+$env = EnvFile::read();
+$env->set('FOO', 'bar');
+$env->addEmptyLine();
+$env->set('BAR', 'foo');
+$env->write();
+```
+
+Will output:
+
+```dotenv
+FOO="bar"
+
+BAR="foo"
+```
+
+<a name="env-file-write"></a>
+### Write `EnvFile`
+
+By default, calling `$envFile->write()` will write the current state of the `EnvFile` to the path provided when it was initialized with `EnvFile::open($path)`. (defaulting to `base_path('.env')` when no `$path` is provided).
+
+If desired, you can specify a different path to write to as the first argument provided to the `write($path)` method:
+
+```php
+EnvFile::read()->set([
+    'FOO' => 'bar',
+])->write('/path/to/.env.alternative');
+```
+
+<a name="env-file-render"></a>
+### Render contents
+
+If you require the `EnvFile` contents as a string; instead of writing directly to a file with `write()`, the `render()` method can be used.
+
+```php
+$envFileString = EnvFile::open()->set([
+    'APP_NAME' => 'Winter CMS',
+])->render();
+```
+
+<a name="env-file-get-variables"></a>
+### Get variables
+
+The `EnvFile` parser provides a `getVariables()` method that can be used to get an associative array of the current variables excluding any comments or empty lines.
+
+```php
+$envVariables = EnvFile::open()->set([
+    'APP_NAME' => 'Winter CMS',
+])->getVariables();
+
+echo $envVariables['APP_NAME']; // echos "Winter CMS"
 ```
