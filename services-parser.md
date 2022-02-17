@@ -488,6 +488,8 @@ $arrayFile->set('foo', 'bar');
 $arrayFile->write();
 ```
 
+The `ArrayFile::open()` method accepts a second argument `$throwIfMissing` that defaults to `false`. If `true`, a `\InvalidArgumentException` will be thrown if the provided `$filePath` does not point to an existing file.
+
 <a name="array-file-set-values"></a>
 ### Set values
 
