@@ -73,20 +73,19 @@ You can use the asset combiner twig filter like this to include your stylesheets
 
 ```twig
 <link rel="stylesheet" href="{{ [
-	'@snowboard.extras.css',
-	[other assets here]
+    '@snowboard.extras.css',
+    [other assets here]
 ] | theme }}">
-```
+``
 
 You can use the asset combiner twig filter like this to include your scripts:
 
 ```twig
 <script src="{{ [
-	'@snowboard.base',
-	'@snowboard.attr',
-	'@snowboard.request',
-	'@snowboard.extras',
-	[other assets here]
+    '@snowboard.base',
+    '@snowboard.attr',
+    '@snowboard.request',
+    '@snowboard.extras',
 ] | theme }}"></script>
-```
+``
 
