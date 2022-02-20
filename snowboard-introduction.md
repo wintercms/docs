@@ -76,7 +76,7 @@ You can use the asset combiner twig filter like this to include your stylesheets
     '@snowboard.extras.css',
     [other assets here]
 ] | theme }}">
-``
+```
 
 You can use the asset combiner twig filter like this to include your scripts:
 
@@ -87,5 +87,5 @@ You can use the asset combiner twig filter like this to include your scripts:
     '@snowboard.request',
     '@snowboard.extras',
 ] | theme }}"></script>
-``
+```
 
