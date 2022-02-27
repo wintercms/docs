@@ -1,6 +1,5 @@
 # Utility Commands
 
-- [Clear the cache](#clear-cache)
 - [Run unit tests](#winter-test)
 - [Utility runner](#winter-util)
   - [Compile Winter assets](#winter-util-compile-assets)
@@ -10,15 +9,6 @@
   - [Purge orphaned uploads](#winter-util-purge-orphans)
 
 The following commands are utility commands available on Winter installations.
-
-<a name="clear-cache"></a>
-## Clear the cache
-
-```bash
-php artisan cache:clear
-```
-
-The `cache:clear` command flushes the entire application cache that is used to increase the performance of Winter. We routinely cache compiled template files and system data, however, in rare cases this cached data can result in your project showing outdated data or not reflecting more recent changes. This command will delete the cache and ensure the latest data is available.
 
 <a name="winter-test"></a>
 ## Run unit tests
