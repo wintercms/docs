@@ -288,13 +288,13 @@ This example will replace the label for CMS and Pages in the backend with *...*.
         {
             Event::listen('backend.menu.extendItems', function($manager) {
 
-                $manager->addMainMenuItems('October.Cms', [
+                $manager->addMainMenuItems('Winter.Cms', [
                     'cms' => [
                         'label' => '...'
                     ]
                 ]);
 
-                $manager->addSideMenuItems('October.Cms', 'cms', [
+                $manager->addSideMenuItems('Winter.Cms', 'cms', [
                     'pages' => [
                         'label' => '...'
                     ]
@@ -308,7 +308,7 @@ Similarly we can remove the menu items with the same event:
 
     Event::listen('backend.menu.extendItems', function($manager) {
 
-        $manager->removeMainMenuItem('October.Cms', 'cms');
-        $manager->removeSideMenuItem('October.Cms', 'cms', 'pages');
+        $manager->removeMainMenuItem('Winter.Cms', 'cms');
+        $manager->removeSideMenuItem('Winter.Cms', 'cms', 'pages');
 
     });

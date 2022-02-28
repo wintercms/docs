@@ -10,13 +10,13 @@ in a class or by extending the class. You can read more about behaviors [here](.
 ## Purgeable
 
 Purged attributes will not be saved to the database when a model is created or updated. To purge
-attributes in your model, implement the `October.Rain.Database.Behaviors.Purgeable` behavior and declare
+attributes in your model, implement the `Winter.Rain.Database.Behaviors.Purgeable` behavior and declare
 a `$purgeable` property with an array containing the attributes to purge.
 
     class User extends Model
     {
         public $implement = [
-            'October.Rain.Database.Behaviors.Purgeable'
+            'Winter.Rain.Database.Behaviors.Purgeable'
         ];
 
         /**
@@ -33,7 +33,7 @@ You can also dynamically implement this behavior in a class.
     RainLab\User\Models\User::extend(function($model) {
 
         // Implement the purgeable behavior dynamically
-        $model->implement[] = 'October.Rain.Database.Behaviors.Purgeable';
+        $model->implement[] = 'Winter.Rain.Database.Behaviors.Purgeable';
         
         // Declare the purgeable property dynamically for the purgeable behavior to use
         $model->addDynamicProperty('purgeable', []);

@@ -10,12 +10,12 @@
     - [Setting up the scheduler](#crontab-setup)
     - [Setting up queue workers](#queue-setup)
 
-There are two ways you can install October, either using the [Wizard installer](#wizard-installation) or [Command-line installation](../console/commands#console-install) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
+There are two ways you can install Winter, either using the [Wizard installer](#wizard-installation) or [Command-line installation](../console/commands#console-install) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
 
 <a name="system-requirements"></a>
 ## Minimum system requirements
 
-October CMS has some server requirements for web hosting:
+Winter CMS has some server requirements for web hosting:
 
 1. PHP version 7.0.8 or higher
 1. PDO PHP Extension
@@ -32,16 +32,16 @@ When using the SQL Server database engine, you will need to install the [group c
 <a name="wizard-installation"></a>
 ## Wizard installation
 
-The wizard installation is a recommended way to install October. It is simpler than the command-line installation and doesn't require any special skills.
+The wizard installation is a recommended way to install Winter. It is simpler than the command-line installation and doesn't require any special skills.
 
 1. Prepare a directory on your server that is empty. It can be a sub-directory, domain root or a sub-domain.
-1. [Download the installer archive file](http://octobercms.com/download).
+1. [Download the installer archive file](http://wintercms.com/download).
 1. Unpack the installer archive to the prepared directory.
 1. Grant writing permissions on the installation directory and all its subdirectories and files.
 1. Navigate to the install.php script in your web browser.
 1. Follow the installation instructions.
 
-![image](https://github.com/octobercms/docs/blob/master/images/wizard-installer.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/wintercms/docs/blob/master/images/wizard-installer.png?raw=true) {.img-responsive .frame}
 
 <a name="troubleshoot-installation"></a>
 ### Troubleshooting installation
@@ -69,7 +69,7 @@ There are some things you may need to set up after the installation is complete.
 <a name="delete-install-files"></a>
 ### Delete installation files
 
-If you have used the [Wizard installer](#wizard-installation) you should delete the installation files for security reasons. October will never delete files from your system automatically, so you should delete these files and directories manually:
+If you have used the [Wizard installer](#wizard-installation) you should delete the installation files for security reasons. Winter will never delete files from your system automatically, so you should delete these files and directories manually:
 
     install_files/      <== Installation directory
     install.php         <== Installation script
@@ -90,7 +90,7 @@ For *scheduled tasks* to operate correctly, you should add the following Cron en
 
     * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
 
-Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October. This Cron will call the command scheduler every minute. Then October evaluates any scheduled tasks and runs the tasks that are due.
+Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of Winter. This Cron will call the command scheduler every minute. Then Winter evaluates any scheduled tasks and runs the tasks that are due.
 
 > **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 

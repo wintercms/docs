@@ -1,6 +1,6 @@
 # Helpers
 
-October includes a variety of "helper" PHP functions. Many of these functions are used internally by October itself, however, you are free to use them in your own plugins and applications if you find them useful.
+Winter includes a variety of "helper" PHP functions. Many of these functions are used internally by Winter itself, however, you are free to use them in your own plugins and applications if you find them useful.
 
 <style>
     .collection-method-list > p {
@@ -570,9 +570,9 @@ The `str_singular` function converts a string to its singular form. This functio
 
 The `str_slug` function generates a URL friendly "slug" from the given string:
 
-    $title = str_slug("October CMS", "-");
+    $title = str_slug("Winter CMS", "-");
 
-    // october-cms
+    // winter-cms
 
 <a name="method-studly-case"></a>
 #### `studly_case()` {#collection-method}

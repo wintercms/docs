@@ -307,7 +307,7 @@ The widget partial could contain any HTML markup you want to display in the widg
         </div>
     </div>
 
-![image](https://raw.githubusercontent.com/octobercms/docs/master/images/traffic-sources.png)
+![image](https://raw.githubusercontent.com/wintercms/docs/master/images/traffic-sources.png)
 
 Inside report widgets you can use any [charts or indicators](controls), lists or any other markup you wish. Remember that the report widgets extend the generic back-end widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
 
@@ -354,7 +354,7 @@ Inside report widgets you can use any [charts or indicators](controls), lists or
 
 Report widgets may have properties that users can manage with the Inspector:
 
-![image](https://github.com/octobercms/docs/blob/master/images/report-widget-inspector.png?raw=true)
+![image](https://github.com/wintercms/docs/blob/master/images/report-widget-inspector.png?raw=true)
 
 The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components#component-properties). Example:
 
@@ -402,4 +402,4 @@ Plugins can register report widgets by overriding the `registerReportWidgets` me
         ];
     }
 
-The **label** element defines the widget name for the Add Widget popup window. The **context** element defines the context where the widget could be used. October's report widget system allows to host the report container on any page, and the container context name is unique. The widget container on the Dashboard page uses the **dashboard** context.
+The **label** element defines the widget name for the Add Widget popup window. The **context** element defines the context where the widget could be used. Winter's report widget system allows to host the report container on any page, and the container context name is unique. The widget container on the Dashboard page uses the **dashboard** context.

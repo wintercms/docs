@@ -49,12 +49,12 @@ Not all plugin directories are required. The only required file is the **Plugin.
           components/
           Plugin.php     <=== Plugin registration file
 
-> **Note:** if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
+> **Note:** if you are developing a plugin for the [Marketplace](http://wintercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
 
 <a name="namespaces"></a>
 ### Plugin namespaces
 
-Plugin namespaces are very important, especially if you are going to publish your plugins on the [October Marketplace](http://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
+Plugin namespaces are very important, especially if you are going to publish your plugins on the [Winter Marketplace](http://wintercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
 <a name="registration-file"></a>
 ## Registration file
@@ -187,7 +187,7 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
             ],
             'functions' => [
                 // A static method call, i.e Form::open()
-                'form_open' => ['October\Rain\Html\Form', 'open'],
+                'form_open' => ['Winter\Storm\Html\Form', 'open'],
 
                 // Using an inline closure
                 'helloWorld' => function() { return 'Hello World!'; }
@@ -279,8 +279,8 @@ Request | Description
 **/backend/system/updates** | the site updates context
 **/backend/system/install** | the installer path
 **/backend/backend/auth** | the backend authentication path (login, logout)
-**october:up** | the CLI command that runs all pending migrations
-**october:update** | the CLI command that triggers the update process
+**winter:up** | the CLI command that runs all pending migrations
+**winter:update** | the CLI command that triggers the update process
 
 Define the `$elevated` property to grant elevated permissions for your plugin.
 

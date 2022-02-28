@@ -7,7 +7,7 @@
 <a name="configuration"></a>
 ## Configuration
 
-When you first installed October, a random key should have been generated for you. You can confirm this by checking the `key` option of your `config/app.php` configuration file. If the key remains unchanged, you should set it to a 32 character, random string. If this value is not properly set, all encrypted values will be insecure.
+When you first installed Winter, a random key should have been generated for you. You can confirm this by checking the `key` option of your `config/app.php` configuration file. If the key remains unchanged, you should set it to a 32 character, random string. If this value is not properly set, all encrypted values will be insecure.
 
 <a name="hashing"></a>
 ## Hashing

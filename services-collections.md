@@ -7,9 +7,9 @@
 <a name="introduction"></a>
 ## Introduction
 
-The `October\Rain\Support\Collection` class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We'll create a new collection instance from the array, run the `strtoupper` function on each element, and then remove all empty elements:
+The `Winter\Storm\Support\Collection` class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We'll create a new collection instance from the array, run the `strtoupper` function on each element, and then remove all empty elements:
 
-    $collection = new October\Rain\Support\Collection(['stewie', 'brian', null]);
+    $collection = new Winter\Storm\Support\Collection(['stewie', 'brian', null]);
 
     $collection = $collection
         ->map(function ($name) {
@@ -25,9 +25,9 @@ The `Collection` class allows you to chain its methods to perform fluent mapping
 <a name="creating-collections"></a>
 ## Creating collections
 
-As described above, passing an array to the constructor of the `October\Rain\Support\Collection` class will return a new instance for the given array. So, creating a collection is as simple as:
+As described above, passing an array to the constructor of the `Winter\Storm\Support\Collection` class will return a new instance for the given array. So, creating a collection is as simple as:
 
-    $collection = new October\Rain\Support\Collection([1, 2, 3]);
+    $collection = new Winter\Storm\Support\Collection([1, 2, 3]);
 
 By default, collections of [database models](../database/model) are always returned as `Collection` instances; however, feel free to use the `Collection` class wherever it is convenient for your application.
 
@@ -310,26 +310,26 @@ The `flatten` method flattens a multi-dimensional collection into a single dimen
 
 The `flip` method swaps the collection's keys with their corresponding values:
 
-    $collection = new Collection(['name' => 'peter', 'platform' => 'october']);
+    $collection = new Collection(['name' => 'peter', 'platform' => 'winter']);
 
     $flipped = $collection->flip();
 
     $flipped->all();
 
-    // ['peter' => 'name', 'october' => 'platform']
+    // ['peter' => 'name', 'winter' => 'platform']
 
 <a name="method-forget"></a>
 #### `forget()` {.collection-method}
 
 The `forget` method removes an item from the collection by its key:
 
-    $collection = new Collection(['name' => 'peter', 'platform' => 'october']);
+    $collection = new Collection(['name' => 'peter', 'platform' => 'winter']);
 
     $collection->forget('name');
 
     $collection->all();
 
-    // ['platform' => 'october']
+    // ['platform' => 'winter']
 
 > **Note:** Unlike most other collection methods, `forget` does not return a new modified collection; it modifies the collection it is called on.
 
@@ -351,7 +351,7 @@ The method requires the page number and the number of items to show per page, re
 
 The `get` method returns the item at a given key. If the key does not exist, `null` is returned:
 
-    $collection = new Collection(['name' => 'peter', 'platform' => 'october']);
+    $collection = new Collection(['name' => 'peter', 'platform' => 'winter']);
 
     $value = $collection->get('name');
 
@@ -359,7 +359,7 @@ The `get` method returns the item at a given key. If the key does not exist, `nu
 
 You may optionally pass a default value as the second argument:
 
-    $collection = new Collection(['name' => 'peter', 'platform' => 'october']);
+    $collection = new Collection(['name' => 'peter', 'platform' => 'winter']);
 
     $value = $collection->get('foo', 'default-value');
 

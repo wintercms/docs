@@ -21,18 +21,18 @@ Migrations and seed files allow you to build, modify and populate database table
 <a name="migration-structure"></a>
 ## Migration structure
 
-A migration file should define a class that extends the `October\Rain\Database\Updates\Migration` class and contains two methods: `up` and `down`. The `up` method is used to add new tables, columns, or indexes to your database, while the `down` method should simply reverse the operations performed by the `up` method. Within both of these methods you may use the [schema builder](#creating-tables) to expressively create and modify tables. For example, let's look at a sample migration that creates a `october_blog_posts` table:
+A migration file should define a class that extends the `Winter\Storm\Database\Updates\Migration` class and contains two methods: `up` and `down`. The `up` method is used to add new tables, columns, or indexes to your database, while the `down` method should simply reverse the operations performed by the `up` method. Within both of these methods you may use the [schema builder](#creating-tables) to expressively create and modify tables. For example, let's look at a sample migration that creates a `winter_blog_posts` table:
 
     <?php namespace Acme\Blog\Updates;
 
     use Schema;
-    use October\Rain\Database\Updates\Migration;
+    use Winter\Storm\Database\Updates\Migration;
 
     class CreatePostsTable extends Migration
     {
         public function up()
         {
-            Schema::create('october_blog_posts', function($table)
+            Schema::create('winter_blog_posts', function($table)
             {
                 $table->engine = 'InnoDB';
                 $table->increments('id');
@@ -48,7 +48,7 @@ A migration file should define a class that extends the `October\Rain\Database\U
 
         public function down()
         {
-            Schema::drop('october_blog_posts');
+            Schema::drop('winter_blog_posts');
         }
     }
 

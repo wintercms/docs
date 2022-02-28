@@ -66,9 +66,9 @@ In fact, [plugin registration files](../plugin/registration) inherit service pro
 
 #### Defining a service provider
 
-To create a service provider, simply extend the `October\Rain\Support\ServiceProvider` class and define a `register` method:
+To create a service provider, simply extend the `Winter\Storm\Support\ServiceProvider` class and define a `register` method:
 
-    use October\Rain\Support\ServiceProvider;
+    use Winter\Storm\Support\ServiceProvider;
 
     class FooServiceProvider extends ServiceProvider
     {

@@ -143,7 +143,7 @@ Just like [setting navigation context in the controller](../backend/controllers-
 
         [...]
 
-        BackendMenu::setContext('October.System', 'system', 'settings');
+        BackendMenu::setContext('Winter.System', 'system', 'settings');
         SettingsManager::setContext('You.Plugin', 'settings');
     }
 

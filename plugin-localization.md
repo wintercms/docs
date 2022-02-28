@@ -6,7 +6,7 @@
 
 Plugins can have localization files in the **lang** subdirectory of the plugin directory. Plugins' localization files are registered automatically. The localization strings are supported automatically in the back-end user interface menus, form labels, etc. - if you provide the localization key instead of a real string, the system will try to load it from the localization file. In other cases you need to load the localization string [with the API](#accessing-strings).
 
-> **Note**: For translating front-end content, [there are plugins that can be used](http://octobercms.com/plugin/rainlab-translate) for this purpose.
+> **Note**: For translating front-end content, [there are plugins that can be used](http://wintercms.com/plugin/rainlab-translate) for this purpose.
 
 <a name="file-structure"></a>
 ## Localization directory and file structure
@@ -29,12 +29,12 @@ The **lang.php** file should define and return an array of any depth, for exampl
 
     return [
         'app' => [
-            'name' => 'OctoberCMS',
+            'name' => 'Winter CMS',
             'tagline' => 'Getting back to basics'
         ]
     ];
     
-The **validation.php** file has a similar structure to the **lang.php** and is used to specify your [custom validation](https://octobercms.com/docs/services/validation#localization) messages in a language file, for example:
+The **validation.php** file has a similar structure to the **lang.php** and is used to specify your [custom validation](https://wintercms.com/docs/services/validation#localization) messages in a language file, for example:
 
     <?php
 
@@ -67,6 +67,6 @@ The file could contain only strings you want to override, there is no need to re
 
     return [
         'app' => [
-            'name' => 'OctoberCMS!'
+            'name' => 'Winter CMS!'
         ]
     ];

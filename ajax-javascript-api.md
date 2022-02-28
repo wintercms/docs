@@ -15,7 +15,7 @@ The `request` method has a single required argument - the AJAX handler name. Exa
     <form onsubmit="$(this).request('onProcess'); return false;">
         ...
 
-The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
+The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the Winter framework:
 
 Option | Description
 ------------- | -------------
@@ -30,7 +30,7 @@ Option | Description
 **form** | a form element to use for sourcing the form data sent with the request, either passed as a selector string or a form element.
 **flash** | when true, instructs the server to clear and send any flash messages with the response. default: false
 **files** | when true, the request will accept file uploads, this requires `FormData` interface support by the browser. default: false
-**loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element, the object should support the `show()` and `hide()` functions to manage the visibility. You may pass the global object `$.oc.stripeLoadIndicator` when using the [framework extras](../ajax/extras).
+**loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element, the object should support the `show()` and `hide()` functions to manage the visibility. You may pass the global object `$.wn.stripeLoadIndicator` when using the [framework extras](../ajax/extras).
 
 You may also override some of the request logic by passing new functions as options. These logic handlers are available.
 
@@ -132,7 +132,7 @@ Execute a single request that shows a Flash Message using logic handler.
     $.request('onDoSomething', {
         flash: 1,
         handleFlashMessage: function(message, type) {
-            $.oc.flashMsg({ text: message, class: type })
+            $.wn.flashMsg({ text: message, class: type })
         }
     })
 
@@ -143,15 +143,15 @@ Applies configurations to all AJAX requests globally.
         context.options.flash = true
 
         // Enable the StripeLoadIndicator on all AJAX requests
-        context.options.loading = $.oc.stripeLoadIndicator
+        context.options.loading = $.wn.stripeLoadIndicator
 
         // Handle Error Messages by triggering a flashMsg of type error
         context.options.handleErrorMessage = function(message) {
-            $.oc.flashMsg({ text: message, class: 'error' })
+            $.wn.flashMsg({ text: message, class: 'error' })
         }
 
         // Handle Flash Messages by triggering a flashMsg of the message type
         context.options.handleFlashMessage = function(message, type) {
-            $.oc.flashMsg({ text: message, class: type })
+            $.wn.flashMsg({ text: message, class: type })
         }
     })

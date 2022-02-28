@@ -13,8 +13,8 @@
 
 The behavior depends on a [model class](../database/model) which must implement one of the following [model traits](../database/traits):
 
-1. `October\Rain\Database\Traits\Sortable`
-1. `October\Rain\Database\Traits\NestedTree`
+1. `Winter\Storm\Database\Traits\Sortable`
+1. `Winter\Storm\Database\Traits\NestedTree`
 
 In order to use the reorder behavior you should add it to the `$implement` property of the controller class. Also, the `$reorderConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 

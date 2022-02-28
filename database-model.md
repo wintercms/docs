@@ -19,7 +19,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-October provides a beautiful and simple Active Record implementation for working with your database, based on [Eloquent by Laravel](http://laravel.com/docs/eloquent). Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records into the table.
+Winter provides a beautiful and simple Active Record implementation for working with your database, based on [Eloquent by Laravel](http://laravel.com/docs/eloquent). Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records into the table.
 
 Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
 
@@ -163,7 +163,7 @@ When attributes names are passed to the `$jsonable` property, the values will be
 <a name="retrieving-models"></a>
 ## Retrieving models
 
-When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
+When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [Winter\Storm\Database\Builder](../api/winter/storm/database/builder).
 
 > **Note**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. While the cache should automatically invalidate itself most of the time, sometimes you will need to use the `$model->reload()` method to flush the cache for more complex use cases.
 

@@ -4,6 +4,6 @@ The `|media` filter returns an address relative to the public path of the [media
 
     <img src="{{ 'banner.jpg'|media }}" />
 
-If the media manager address is __http://cdn.octobercms.com__ the above example would output the following:
+If the media manager address is __http://cdn.wintercms.com__ the above example would output the following:
 
-    <img src="http://cdn.octobercms.com/banner.jpg" />
+    <img src="http://cdn.wintercms.com/banner.jpg" />

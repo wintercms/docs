@@ -9,14 +9,14 @@
 
 By default Media Manager works with the storage/app/media subdirectory of the installation directory. In order to use Amazon S3 or Rackspace CDN, you should update the system configuration.
 
-> You need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers) before you can use Amazon S3 or Rackspace CDN features.
+> You need to install [Drivers plugin](http://wintercms.com/plugin/winter-drivers) before you can use Amazon S3 or Rackspace CDN features.
 
 Please note that after you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
 
 <a name="amazon-s3"></a>
 ## Configuring Amazon S3 access
 
-To use Amazon S3 with OctoberCMS, you should create S3 bucket, folder in the bucket and API user.
+To use Amazon S3 with Winter CMS, you should create S3 bucket, folder in the bucket and API user.
 
 Sign up for Amazon AWS account or sign in with your existing account to AWS Console. Open S3 management panel. Create a new bucket and assign it any name (the name of the bucket will be a part of your public file URLs).
 
@@ -44,11 +44,11 @@ Click **Save** button to apply the policy. The policy gives public read-only acc
 
     "arn:aws:s3:::BUCKETNAME/media/*"
 
-You should also create an API user that OctoberCMS will use for managing the bucket files. In AWS console go to IAM section. Go to Users tab and create a new user. The user name doesn't matter. Make sure that "Generate an access key for each user" checkbox is checked when you create a new user. After AWS creates a user, it allows you to see the security credentials - the user **Access Key ID** and **Secret Access Key**. Copy the keys and put them into a temporary text file.
+You should also create an API user that Winter CMS will use for managing the bucket files. In AWS console go to IAM section. Go to Users tab and create a new user. The user name doesn't matter. Make sure that "Generate an access key for each user" checkbox is checked when you create a new user. After AWS creates a user, it allows you to see the security credentials - the user **Access Key ID** and **Secret Access Key**. Copy the keys and put them into a temporary text file.
 
 Return to the user list and click the user you just created. In the **Permissions** section click **Attach Policy** button. Select **AmazonS3FullAccess** policy in the list and click **Attach Policy** button.
 
-Now you have all the information to update OctoberCMS configuration. Open **config/filesystem.php** script and find the **disks** section. It already contains s3 configuration, you need to replace the API credentials and bucket information parameters:
+Now you have all the information to update Winter CMS configuration. Open **config/filesystem.php** script and find the **disks** section. It already contains s3 configuration, you need to replace the API credentials and bucket information parameters:
 
 Parameter | Value
 ------------- | -------------
@@ -118,24 +118,24 @@ Example storage configuration:
         ]
     ]
 
-Congratulations! Now you're ready to use Amazon S3 with OctoberCMS. Note that you can also configure Amazon CloudFront CDN  to work with your bucket. This topic is not covered in this document, please refer to [CloudFront documentation](http://aws.amazon.com/cloudfront/). After you configure CloudFront, you will need to update the **path** parameter in the storage configuration.
+Congratulations! Now you're ready to use Amazon S3 with Winter CMS. Note that you can also configure Amazon CloudFront CDN  to work with your bucket. This topic is not covered in this document, please refer to [CloudFront documentation](http://aws.amazon.com/cloudfront/). After you configure CloudFront, you will need to update the **path** parameter in the storage configuration.
 
 <a name="rackspace-cdn"></a>
 ## Configuring Rackspace CDN access
 
-To use Rackspace CDN with OctoberCMS, you should create Rackspace CDN container, folder in the container and API user.
+To use Rackspace CDN with Winter CMS, you should create Rackspace CDN container, folder in the container and API user.
 
 Log into Rackspace management console and navigate to Storage / Files page. Create a new container. The container name doesn't matter, it will be a part of your public file URLs. Select **Public (Enabled CDN)** type for the new container.
 
 Create **media** folder in the container. The folder name doesn't matter. This folder will be a root of your Media Library.
 
-You should create an API user that OctoberCMS will use for managing files in the CDN container. Open Account / User Management page in Rackspace console. Click **Create user** button. Fill in the user name (for example october.cdn.api), password, security question and answer. In the **Product Access** section select **Custom** and in the CDN row select **Admin**. Use **No Access** role in the **Account** section and use **Technical Contact** type in the **Contact Information** section. Save the user account. After saving the account you will see the Login Details section with the **API Key** row that contains a value you need to use in OctoberCMS configuration files.
+You should create an API user that Winter CMS will use for managing files in the CDN container. Open Account / User Management page in Rackspace console. Click **Create user** button. Fill in the user name (for example winter.cdn.api), password, security question and answer. In the **Product Access** section select **Custom** and in the CDN row select **Admin**. Use **No Access** role in the **Account** section and use **Technical Contact** type in the **Contact Information** section. Save the user account. After saving the account you will see the Login Details section with the **API Key** row that contains a value you need to use in Winter CMS configuration files.
 
-Now you have all the information to update OctoberCMS configuration. Open **config/filesystem.php** script and find the **disks** section. It already contains Rackspace configuration, you need to replace the API credentials and container information parameters:
+Now you have all the information to update Winter CMS configuration. Open **config/filesystem.php** script and find the **disks** section. It already contains Rackspace configuration, you need to replace the API credentials and container information parameters:
 
 Parameter | Value
 ------------- | -------------
-**username** | Rackspace user name (for example october.cdn.api).
+**username** | Rackspace user name (for example winter.cdn.api).
 **key** | the user's **API Key** that you can copy from Rackspace user profile page.
 **container** | the container name.
 **region** | the bucket region code, see below.
@@ -148,7 +148,7 @@ Example configuration after update:
         ...
         'rackspace' => [
             'driver'    => 'rackspace',
-            'username'  => 'october.api.cdn',
+            'username'  => 'winter.api.cdn',
             'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
             'container' => 'my-bucket',
             'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
@@ -178,7 +178,7 @@ Example storage configuration:
         ]
     ]
 
-Congratulations! Now you're ready to use Rackspace CDN with OctoberCMS.
+Congratulations! Now you're ready to use Rackspace CDN with Winter CMS.
 
 <a name="audio-and-video-players"></a>
 ## Audio and video players

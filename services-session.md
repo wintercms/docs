@@ -7,9 +7,9 @@
 <a name="configuration"></a>
 ## Configuration
 
-Since HTTP driven applications are stateless, sessions provide a way to store information about the user across requests. October ships with a variety of session back-ends available for use through a clean, unified API. Support for popular back-ends such as [Memcached](http://memcached.org), [Redis](http://redis.io), and databases is included out of the box.
+Since HTTP driven applications are stateless, sessions provide a way to store information about the user across requests. Winter ships with a variety of session back-ends available for use through a clean, unified API. Support for popular back-ends such as [Memcached](http://memcached.org), [Redis](http://redis.io), and databases is included out of the box.
 
-The session configuration is stored in `config/session.php`. Be sure to review the well documented options available to you in this file. By default, October is configured to use the `file` session driver, which will work well for the majority of applications.
+The session configuration is stored in `config/session.php`. Be sure to review the well documented options available to you in this file. By default, Winter is configured to use the `file` session driver, which will work well for the majority of applications.
 
 <div class="content-list" markdown="1">
 - `file` - sessions are stored in `storage/framework/sessions`.
@@ -23,7 +23,7 @@ The session configuration is stored in `config/session.php`. Be sure to review t
 
 #### Reserved keys
 
-October uses the `flash` session key internally, so you should not add an item to the session by that name.
+Winter uses the `flash` session key internally, so you should not add an item to the session by that name.
 
 <a name="session-usage"></a>
 ## Session usage

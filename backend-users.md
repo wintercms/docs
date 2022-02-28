@@ -11,7 +11,7 @@ The user management for the back-end includes features like roles, groups, permi
 <a name="users-and-permissions"></a>
 ## Users and Permissions
 
-Access to all parts of an OctoberCMS instance is controlled by the Permissions system. At the lowest level, there are Super Users (users with the `is_superuser` flag set to true), Administrators (users) and permissions. The `\Backend\Models\User` models are the containers that hold all the important information about a user.
+Access to all parts of an Winter CMS instance is controlled by the Permissions system. At the lowest level, there are Super Users (users with the `is_superuser` flag set to true), Administrators (users) and permissions. The `\Backend\Models\User` models are the containers that hold all the important information about a user.
 
 Superusers have access to everything in the system and are only manageable by themselves or other superusers; they are not visible to nor editable by regular administrators, not even if an administrator has the `backend.manage_users` permission.
 
@@ -19,7 +19,7 @@ Permissions are string keys in the form of `author.plugin.permission_name` that 
 
 When checking if a user has a specific permission, the permission settings for that user's role are inherited and then overridden by any permissions applied directly to that user. For example, if user **Bob** has role **Genius**, and role **Genius** has the `eat_cake` permission, but **Bob** has the `eat_cake` permission specifically set to deny then **Bob** will not get to `eat_cake`. However, if **Bob** has the permission `eat_vegetables` assigned directly to him, but the **Genius** role does not, then **Bob** still gets to `eat_vegetables`.
 
-Roles (`\Backend\Models\UserRole`) are groupings of permissions with a name and description used to identify the role. An Administrator can only have one role assigned to them at once. A Role could be assigned to multiple administrators. October ships with two system roles by default, `developer` and `publisher`. Any number of custom roles with their own combinations of permissions can be created and applied to users.
+Roles (`\Backend\Models\UserRole`) are groupings of permissions with a name and description used to identify the role. An Administrator can only have one role assigned to them at once. A Role could be assigned to multiple administrators. Winter ships with two system roles by default, `developer` and `publisher`. Any number of custom roles with their own combinations of permissions can be created and applied to users.
 
 > **Note:** Any user with the `manage_users` permissions can manage the assignment of roles, but only to other users (not to themselves), and roles can only be created or modified by a superuser.
 
@@ -30,7 +30,7 @@ Groups (`\Backend\Models\UserGroup`) are an organizational tool for grouping adm
 <a name="backend-auth-facade"></a>
 ## Backend user helper
 
-The global `BackendAuth` facade can be used for managing administrative users, which primarily inherits the `October\Rain\Auth\Manager` class. To register a new administrator user account, use the `BackendAuth::register` method.
+The global `BackendAuth` facade can be used for managing administrative users, which primarily inherits the `Winter\Storm\Auth\Manager` class. To register a new administrator user account, use the `BackendAuth::register` method.
 
     $user = BackendAuth::register([
         'name' => 'Some User',

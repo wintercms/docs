@@ -9,9 +9,9 @@
 <a name="configuration"></a>
 ## Configuration
 
-October provides a unified API for various caching systems and the cache configuration is located at `config/cache.php`. In this file you may specify which cache driver you would like used by default throughout your application. Popular caching systems like [Memcached](http://memcached.org) and [Redis](http://redis.io) are supported out of the box.
+Winter provides a unified API for various caching systems and the cache configuration is located at `config/cache.php`. In this file you may specify which cache driver you would like used by default throughout your application. Popular caching systems like [Memcached](http://memcached.org) and [Redis](http://redis.io) are supported out of the box.
 
-The cache configuration file also contains various other options, which are documented within the file, so make sure to read over these options. By default, OctoberCMS is configured to use the `file` cache driver which stores the serialized, cached objects in the filesystem. For larger applications, it is recommended that you use an in-memory cache such as Memcached or APC. You may even configure multiple cache configurations for the same driver.
+The cache configuration file also contains various other options, which are documented within the file, so make sure to read over these options. By default, Winter CMS is configured to use the `file` cache driver which stores the serialized, cached objects in the filesystem. For larger applications, it is recommended that you use an in-memory cache such as Memcached or APC. You may even configure multiple cache configurations for the same driver.
 
 ### Cache prerequisites
 
@@ -45,7 +45,7 @@ You may also set the `host` option to a UNIX socket path. If you do this, the `p
 
 #### Redis
 
-> You need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers) before you can use the Redis cache driver.
+> You need to install [Drivers plugin](http://wintercms.com/plugin/winter-drivers) before you can use the Redis cache driver.
 
 The Redis configuration for your application is located in the `config/database.php` configuration file. Within this file, you will see a `redis` array containing the Redis servers used by your application:
 
@@ -68,7 +68,7 @@ If your Redis server requires authentication, you may supply a password by addin
 <a name="cache-usage"></a>
 ## Cache usage
 
-While most caching is handled internally by October, the `Cache` facade provides some simple methods for caching your own data.
+While most caching is handled internally by Winter, the `Cache` facade provides some simple methods for caching your own data.
 
 <a name="retrieving-items-from-the-cache"></a>
 ### Retrieving items from the cache

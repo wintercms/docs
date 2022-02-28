@@ -12,7 +12,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-October provides a powerful filesystem abstraction thanks to Laravel and the wonderful [Flysystem](https://github.com/thephpleague/flysystem) PHP package. The Flysystem integration provides simple to use drivers for working with local filesystems, Amazon S3, and Rackspace Cloud Storage. Even better, it's amazingly simple to switch between these storage options as the API remains the same for each system.
+Winter provides a powerful filesystem abstraction thanks to Laravel and the wonderful [Flysystem](https://github.com/thephpleague/flysystem) PHP package. The Flysystem integration provides simple to use drivers for working with local filesystems, Amazon S3, and Rackspace Cloud Storage. Even better, it's amazingly simple to switch between these storage options as the API remains the same for each system.
 
 <a name="configuration"></a>
 ## Configuration
@@ -29,7 +29,7 @@ When using the `local` driver, note that all file operations are relative to the
 
 #### Other driver prerequisites
 
-Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
+Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](http://wintercms.com/plugin/winter-drivers).
 
 <a name="basic-usage"></a>
 ## Basic usage

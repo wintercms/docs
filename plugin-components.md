@@ -82,7 +82,7 @@ Components must be registered by overriding the `registerComponents` method insi
     public function registerComponents()
     {
         return [
-            'October\Demo\Components\Todo' => 'demoTodo'
+            'Winter\Demo\Components\Todo' => 'demoTodo'
         ];
     }
 
@@ -213,7 +213,7 @@ In order to load the state list you should know what country is currently select
 <a name="page-list-properties"></a>
 ### Page list properties
 
-Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup#page-filter)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
+Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup#page-filter)). Winter includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
 
     public function defineProperties()
     {
@@ -279,7 +279,7 @@ Components can be involved in the Page execution cycle events by overriding the 
 <a name="page-cycle-handlers"></a>
 ### Page execution life cycle handlers
 
-When a page loads, October executes handler functions that could be defined in the layout and page [PHP section](../cms/themes#php-section) and component classes. The sequence the handlers are executed is following:
+When a page loads, Winter executes handler functions that could be defined in the layout and page [PHP section](../cms/themes#php-section) and component classes. The sequence the handlers are executed is following:
 
 1. Layout `onInit()` function.
 1. Page `onInit()` function.
@@ -342,7 +342,7 @@ If the alias for this component was *demoTodo* this handler can be accessed by `
 
 All components can come with default markup that is used when including it on a page with the `{% component %}` tag, although this is optional. Default markup is kept inside the **component partials directory**, which has the same name as the component class in lower case.
 
-The default component markup should be placed in a file named **default.htm**. For example, the default markup for the Demo ToDo component is defined in the file **/plugins/october/demo/components/todo/default.htm**. It can then be inserted anywhere on the page by using the `{% component %}` tag:
+The default component markup should be placed in a file named **default.htm**. For example, the default markup for the Demo ToDo component is defined in the file **/plugins/winter/demo/components/todo/default.htm**. It can then be inserted anywhere on the page by using the `{% component %}` tag:
 
     url = "/todo"
 
@@ -367,7 +367,7 @@ These properties will not be available in the `onRun` method since they are esta
 <a name="component-partials"></a>
 ## Component partials
 
-In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/october/demo/components/todo/pagination.htm** and displayed on the page using:
+In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/winter/demo/components/todo/pagination.htm** and displayed on the page using:
 
     {% partial 'demoTodo::pagination' %}
 

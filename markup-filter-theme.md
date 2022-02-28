@@ -4,9 +4,9 @@ The `|theme` filter returns an address relative to the active theme path of the 
 
     <script type="text/javascript" src="{{ 'assets/js/menu.js'|theme }}"></script>
 
-If the website address is __https://octobercms.com__ and the active theme is called `website` the above example would output the following:
+If the website address is __https://wintercms.com__ and the active theme is called `website` the above example would output the following:
 
-    <script type="text/javascript" src="http://october.com/themes/website/assets/js/menu.js"></script>
+    <script type="text/javascript" src="http://winter.com/themes/website/assets/js/menu.js"></script>
 
 <a name="combine-css-javascript"></a>
 ## Combining CSS and JavaScript

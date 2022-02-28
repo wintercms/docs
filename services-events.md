@@ -17,7 +17,7 @@
 <a name="basic-usage"></a>
 ## Basic usage
 
->**Note:** For a list of all events available in OctoberCMS itself, see the [api documentation](https://octobercms.com/docs/api/translator/beforeresolve).
+>**Note:** For a list of all events available in Winter CMS itself, see the [api documentation](https://wintercms.com/docs/api/translator/beforeresolve).
 
 The `Event` class provides a simple observer implementation, allowing you to subscribe and listen for events in your application. For example, you may listen for when a user signs in and update their last login date.
 
@@ -242,11 +242,11 @@ You may also use the [Application IoC container](application) to resolve your su
 <a name="event-emitter-trait"></a>
 ## Event emitter trait
 
-Sometimes you want to bind events to a single instance of an object. You may use an alternative event system by implementing the `October\Rain\Support\Traits\Emitter` trait inside your class.
+Sometimes you want to bind events to a single instance of an object. You may use an alternative event system by implementing the `Winter\Storm\Support\Traits\Emitter` trait inside your class.
 
     class UserManager
     {
-        use \October\Rain\Support\Traits\Emitter;
+        use \Winter\Storm\Support\Traits\Emitter;
     }
 
 This trait provides a method to listen for events with `bindEvent`.
