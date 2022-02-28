@@ -41,7 +41,7 @@ The wizard installation is a recommended way to install Winter. It is simpler th
 1. Navigate to the install.php script in your web browser.
 1. Follow the installation instructions.
 
-![image](https://github.com/wintercms/docs/blob/master/images/wizard-installer.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/wintercms/docs/blob/1.0/images/wizard-installer.png?raw=true) {.img-responsive .frame}
 
 <a name="troubleshoot-installation"></a>
 ### Troubleshooting installation
