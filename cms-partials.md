@@ -79,6 +79,24 @@ There are special functions that can be defined in the PHP section of partials: 
 function onStart()
 {
     $this['hello'] = "Hello world!";
+
+    /**
+     * Variables that are already present on the page for Twig to use
+     * can be accessed through the embedded controller instance.
+     * If this partial was rendered by calling {% partial customVar="test" %}
+     * then you could access that value with the following:
+     */
+    $this->controller->vars['customVar'];
+
+    /**
+     * Partial code sections also have access to the addJs() / addCss() asset
+     * loading methods which include support for deduplicating asset references
+     * which means that if you have a block-based system for editing theme content
+     * using grouped repeaters and a particular block partial requires CSS or JS
+     * dependencies, they can be loaded directly in the partial that uses them.
+     */
+    $this->addJs('https://cdn.example.com/js/vendor.js');
+    $this->addCss('https://cdn.example.com/css/vendor.css');
 }
 ==
 <h3>{{ hello }}</h3>
