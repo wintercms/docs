@@ -409,6 +409,9 @@ public function registerNavigation()
                     'label'       => 'Categories',
                     'icon'        => 'icon-copy',
                     'url'         => Backend::url('acme/blog/categories'),
+                    // If the value is a callable and it returns `0`, then it will be treated as if it returns `null`, displaying nothing.
+                    // If the value is an explicit value, then `0` will be displayed if provided.
+                    'counter'     => 0,
                     'permissions' => ['acme.blog.access_categories'],
                 ]
             ]
@@ -433,7 +436,7 @@ Key | Description
 `icon` | an icon name from the [Winter CMS icon collection](../ui/icon), optional.
 `iconSvg` | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
 `url` | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
-`counter` | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
+`counter` | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional. 
 `counterLabel` | a string value to describe the numeric reference in counter, optional.
 `badge` | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
 `attributes` | an associative array of attributes and values to apply to the menu item, optional.
