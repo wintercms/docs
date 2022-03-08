@@ -25,7 +25,7 @@ Snowboard drops support for Internet Explorer, as well as some less-used, or dis
 Our build script is set up to consider the following browsers as compatible with the framework:
 
 - The browser must have at least a 0.5% market share.
-- The browser must be within the last 4 released versions of that browser.
+- The browser must be within the last 2 released versions of that browser.
 - The browser must NOT be Internet Explorer.
 - The browser must NOT be discontinued by the developer.
 
