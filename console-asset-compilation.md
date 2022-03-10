@@ -125,7 +125,7 @@ For themes that wish to use Tailwind CSS, include the `tailwindcss`, `postcss` a
 npm install --save-dev tailwindcss postcss autoprefixer
 
 # Run the Tailwind initialisation
-npx taildwindcss init
+npx tailwindcss init
 ```
 
 This will create a Tailwind configuration file (`tailwind.config.js`) inside your theme that you may [configure](https://tailwindcss.com/docs/installation) to your specific theme's needs.
