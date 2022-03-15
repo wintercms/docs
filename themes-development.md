@@ -141,7 +141,7 @@ fields:
 #### Theme attachments
 
 When using a `fileupload` field in your theme, Winter will automatically add the field to an `attachOne` relationship.  
-If you want to use multiple files upload for a field (`attachMany` relationship), you have to add the `multiple: true` flag to the field definition.
+If you want to use multiple files upload for a field (`attachMany` relationship), you have to add the `multiple: true` option to the field definition.
 
 <a name="combiner-vars"></a>
 ### Asset Compiler Variables
