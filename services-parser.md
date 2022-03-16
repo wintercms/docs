@@ -712,14 +712,14 @@ By default, the `.env` file interacted with will be `base_path('.env')`, this ca
 Values can be set either one at a time or by passing an array of values to set.
 
 ```php
-$env = EnvFile::read();
+$env = EnvFile::open();
 $env->set('FOO', 'bar');
 $env->set('BAR', 'foo');
 $env->write();
 
 // or
 
-EnvFile::read()->set([
+EnvFile::open()->set([
     'FOO' => 'bar'
     'BAR' => 'foo'
 ])->write();
@@ -730,7 +730,7 @@ EnvFile::read()->set([
 ```php
 use Winter\Storm\Config\EnvFile;
 
-$env = EnvFile::read();
+$env = EnvFile::open();
 $env->set('FOO', 'bar');
 $env->write();
 ```
@@ -743,7 +743,7 @@ $env->write();
 It is also possible to add empty lines into the env file, usually for organizational purposes:
 
 ```php
-$env = EnvFile::read();
+$env = EnvFile::open();
 $env->set('FOO', 'bar');
 $env->addEmptyLine();
 $env->set('BAR', 'foo');
@@ -766,7 +766,7 @@ By default, calling `$envFile->write()` will write the current state of the `Env
 If desired, you can specify a different path to write to as the first argument provided to the `write($path)` method:
 
 ```php
-EnvFile::read()->set([
+EnvFile::open()->set([
     'FOO' => 'bar',
 ])->write('/path/to/.env.alternative');
 ```
