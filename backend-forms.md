@@ -1239,6 +1239,7 @@ Option | Description
 `minItems` | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
 `maxItems` | maximum number of items to allow within the repeater.
 `groups` | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
+`sortable` | whether or not items in the repeater can be reordered. Default: `true`.
 `style` | the behavior style to apply for repeater items. Can be one of the following: `default`, `collapsed` or `accordion`. See the **Repeater styles** section below for more information.
 
 The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
