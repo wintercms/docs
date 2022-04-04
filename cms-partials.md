@@ -114,3 +114,5 @@ Since they are instantiated late, during the time the page is rendered, some lim
 1. Regular POST form handling will occur at the time the partial is rendered.
 
 In general, component usage in partials is designed for basic components that render simple markup without much processing, such as a *Like* or *Tweet* button.
+
+> **NOTE:** If you wish to use AJAX events in a component that exists within a partial, as a workaround, you may add the component to the page or layout that the partial is used within. This instance of the component will be able to handle the AJAX requests made within the partial. Be warned that the AJAX requests will use the configuration of the component within the page or layout, so ensure that all instances of the component in this setup have the same configuration.
