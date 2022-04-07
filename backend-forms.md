@@ -473,9 +473,9 @@ status_type:
     type: dropdown
     default: published
     options:
-        draft
-        published
-        archived
+        - draft
+        - published
+        - archived
 ```
 
 (key / value):
