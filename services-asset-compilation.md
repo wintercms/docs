@@ -13,7 +13,7 @@
     - [Register Custom Asset Bundles](#extend-register-bundle)
 
 <div class="og-description">
-    Learn more about the Asset Compilation features in-built directly into Winter CMS.
+    Learn more about the Asset Compilation features included with Winter CMS.
 </div>
 
 <a name="introduction"></a>
