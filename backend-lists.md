@@ -44,7 +44,7 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-> **NOTE:** Very often the list and [form behaviors](form) are used together in a same controller.
+> **NOTE:** Very often the list and [form behaviors](forms) are used together in a same controller.
 
 <a name="configuring-list"></a>
 ## Configuring the list behavior

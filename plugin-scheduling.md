@@ -158,4 +158,4 @@ $schedule->command('emails:send')
     ->thenPing($url);
 ```
 
-> You need to install [Drivers plugin](https://wintercms.com/plugin/winter-drivers) before you can use either the `pingBefore($url)` or `thenPing($url)` features.
+> You need to install [Drivers plugin](https://github.com/wintercms/wn-drivers-plugin) before you can use either the `pingBefore($url)` or `thenPing($url)` features.
