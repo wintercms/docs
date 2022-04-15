@@ -95,7 +95,7 @@ The configuration options listed below are optional.
 Option | Description
 ------------- | -------------
 `filter` | filter configuration, see [filtering the list](#adding-filters).
-`recordUrl` | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
+`recordUrl` | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](../backend/forms).
 `recordOnClick` | custom JavaScript code to execute when clicking on a record.
 `noRecordsMessage` | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
 `deleteMessage` | a message to display when records are bulk deleted, can refer to a [localization string](../plugin/localization).
@@ -146,7 +146,7 @@ Option | Description
 `scope` | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the search query. The first argument will contain the query object (as per a regular scope method), the second will contain the search term, and the third will be an array of the columns to be searched.
 `searchOnEnter` | setting this to true will make the search widget wait for the Enter key to be pressed before it starts searching (the default behavior is that it starts searching automatically after someone enters something into the search field and then pauses for a short moment).  Default: `false`.
 
-The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](../ui/scoreboard) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
+The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](../ui/scoreboard) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](../backend/forms):
 
 ```php
 <div data-control="toolbar">
