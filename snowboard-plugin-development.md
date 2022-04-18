@@ -6,6 +6,7 @@
   - [The PluginLoader class](#plugin-loader-class)
   - [The PluginBase and Singleton abstracts](#plugin-base-singleton)
   - [Global events](#global-events)
+  - [Dependencies](#dependencies)
   - [Mocking](#mocking)
 
 <a name="introduction"></a>
@@ -112,9 +113,9 @@ The reason for the separation is to provide better definition on how your plugin
 Here are some examples of when you would use one or the other:
 
 - `PluginBase`
-  - AJAX requests
+  - Single-use AJAX requests
   - Flash messages
-  - Reusable widgets with their own data
+  - Widget instances with their own data
 - `Singleton`
   - Event listeners
   - Global utilities
@@ -135,13 +136,13 @@ There are also two types of global events that can be triggered, they are:
 - A **standard** event, which fires and executes all listeners in listening classes, and,
 - A **Promise** event, which fires and waits for the Promise to be resolved before triggering further functionality.
 
-In practice, you would generally use standard events for events in where you do not necessarily want to wait for a response. In all other cases, you would use a Promise event which allows all listening classes to respond to the event in due course.
+In practice, you would generally use standard events for events in where you do not necessarily want to wait for a response (an asynchronous event). In all other cases, you would use a Promise event which allows all listening classes to respond to the event in due course, and only proceed further once all listening classes have resolved their response (a synchronous event).
 
 Firing either event is done by calling either the `globalEvent` or `globalPromiseEvent` method directly on the main Snowboard class.
 
 ```js
 // Standard event
-snowboard.globalEvent('myEvent', context);
+snowboard.globalEvent('myEvent');
 
 // Promise event
 snowboard.globalPromiseEvent('myPromiseEvent').then(
@@ -175,5 +176,61 @@ class MyPlugin extends PluginBase {
 }
 ```
 
-Snowboard only has one in-built global event that is fired - the `ready` event, which is fired when the DOM is loaded and the page is ready. This event is synonymous with jQuery's `ready` event, and is mainly used to instantiate the Singletons that have been registered with Snowboard.
+Global events may specify one or more parameters after the event name, which will be passed through to the listeners as arguments for the listener method.
 
+```js
+// Adding more parameters to the global event...
+snowboard.globalEvent('myEvent', 'parameterOne', 'parameterTwo');
+
+// Makes them available to the listeners as arguments inside a plugin listener!
+myHandler(param1, param2) {
+  console.log(param1); // "parameterOne"
+  console.log(param2); // "parameterTwo"
+}
+```
+
+Snowboard only has one in-built global event that is fired - the `ready` event - which is fired when the DOM is loaded and the page is ready. This event is synonymous with jQuery's `ready` event, and is mainly used to instantiate the Singletons that have been registered with Snowboard.
+
+<a name="dependencies"></a>
+### Dependencies
+
+Snowboard includes a simple dependency system that allows a plugin to specify that it needs other Snowboard plugins to be active before the given plugin will work. This system will allow some measure of handling if plugin sources files are deferred or are loaded out of order.
+
+It is stated as a "simple" dependency system because JavaScript does not have the concept of interfaces or class definitions like the PHP languages does, so there is no way to enforce a rigid structure. Instead, we simply check to see if a plugin has been registered with a certain name.
+
+Defining dependencies is as simple as providing a `dependencies` method that provides an array of plugin names that the plugin intends to use:
+
+```js
+class MyPlugin extends PluginBase {
+  dependencies() {
+    return ['anotherPlugin'];
+  }
+}
+
+Snowboard.addPlugin('myPlugin', MyPlugin);
+```
+
+If we use the plugin now, it will throw an Error stating that the `anotherPlugin` dependency has not be met. Thus, we need another plugin that will fulfill this dependency:
+
+```js
+class AnotherPlugin extends PluginBase {
+}
+
+Snowboard.addPlugin('anotherPlugin', AnotherPlugin);
+```
+
+Now, using the `myPlugin` plugin above will work without issue.
+
+With singletons, dependency checking is slightly more controlled. As singletons have their `ready` event automatically fired, the dependencies will be checked to ensure that the singleton's dependencies are fulfilled. If they are not, the `ready` event will be deferred until the dependencies are fulfilled. This way, the singleton still maintains its automatic ready state, but allows for plugin loading to be deferred or delayed until necessary.
+
+```js
+class MySingleton extends Singleton {
+  dependencies() {
+    return ['myDependency'];
+  }
+
+  ready() {
+    // This method won't fire until a plugin registers with the "myDependency" name
+  }
+}
+```
