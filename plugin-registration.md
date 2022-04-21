@@ -325,7 +325,7 @@ public function registerMarkupTags()
             'plural' => 'str_plural',
 
             // A local method, i.e $this->makeTextAllCaps()
-            'uppercase' => [$this, 'makeTextAllCaps']
+            'uppercase' => [$this, 'makeTextAllCaps'],
 
             // Any callable with custom options defined - first element method
             'userInputToEmojis' => ['input_to_emojis', 'options' => ['is_safe' => []]],
@@ -335,7 +335,7 @@ public function registerMarkupTags()
             'form_open' => ['Winter\Storm\Html\Form', 'open'],
 
             // Using an inline closure
-            'helloWorld' => function() { return 'Hello World!'; }
+            'helloWorld' => function() { return 'Hello World!'; },
 
             // Any callable with custom options defined - named 'callable' method
             'goodbyeWorld' => [
@@ -394,7 +394,7 @@ public function registerNavigation()
             'counter'     => ['\Author\Plugin\Classes\MyMenuCounterService', 'getBlogMenuCount'],
             'counterLabel'=> 'Label describing a dynamic menu counter',
             // Optionally you can set a badge value instead of a counter to display a string instead of a numerical counter
-            'badge'       => 'New'
+            'badge'       => 'New',
 
             'sideMenu' => [
                 'posts' => [
