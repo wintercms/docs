@@ -328,7 +328,7 @@ class SubscriberImport extends \Backend\Models\ImportModel
 <a name="list-behavior-integration"></a>
 ## Integration with list behavior
 
-There is an alternative approach to exporting data that uses the [list behavior](lists) to provide the export data. In order to use this feature you should have the `\Backend\Behaviors\ListController::class` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
+There is an alternative approach to exporting data that uses the [list behavior](../backend/lists) to provide the export data. In order to use this feature you should have the `\Backend\Behaviors\ListController::class` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
 
 ```yaml
 export:

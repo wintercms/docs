@@ -34,7 +34,7 @@ class Projects extends Controller
 }
 ```
 
-> **NOTE:** The relation behavior is frequently used together with the [form behavior](forms).
+> **NOTE:** The relation behavior is frequently used together with the [form behavior](../backend/forms).
 
 <a name="configuring-relation"></a>
 ## Configuring the relation behavior
@@ -341,7 +341,7 @@ $post = Post::where('id', 7)->first();
 $this->initRelation($post);
 ```
 
-> **NOTE:** The [form behavior](forms) will automatically initialize the model on its create, update and preview actions.
+> **NOTE:** The [form behavior](../backend/forms) will automatically initialize the model on its create, update and preview actions.
 
 The relation manager can then be displayed for a specified relation definition by calling the `relationRender` method. For example, if you want to display the relation manager on the [Preview](forms#form-preview-view) page, the **preview.htm** view contents could look like this:
 
