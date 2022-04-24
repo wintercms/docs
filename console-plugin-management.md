@@ -19,7 +19,7 @@ php artisan plugin:install <plugin code>
 
 The `plugin:install` command downloads and installs the plugin by its plugin code in the format **AuthorName.PluginName**. You can retrieve the plugin code through the Winter marketplace.
 
-Note that your installation should be bound to a project in order to use this command. You can create projects on Winter website, in the [Account / Projects](https://wintercms.com/account/project/dashboard) section.
+Note that your installation should be bound to a project in order to use this command. You can create projects on the Winter website, in the [Account / Projects](https://wintercms.com/account/project/dashboard) section.
 
 > **NOTE:** If you have already have the plugin files locally either through Composer or manually uploading them then you can just run [`winter:up`](#console-up-command) to run the plugin's pending migrations to "install" it. This command is mostly meant for instaling plugins sourced from the [Winter CMS Marketplace](https://wintercms.com/marketplace).
 
@@ -81,4 +81,4 @@ The `plugin:disable` command allows you to disable a previously enabled plugin. 
 php artisan plugin:remove <plugin code>
 ```
 
-The `plugin:remove` command allows you remove a plugin installed on your Winter CMS installation. This will remove both the files for the plugin, and the database records and tables. **This is a destructive action.** You will be prompted to confirm the action before proceeding.
+The `plugin:remove` command allows you to remove a plugin installed on your Winter CMS installation. This will remove both the files for the plugin, and the database records and tables. **This is a destructive action.** You will be prompted to confirm the action before proceeding.
