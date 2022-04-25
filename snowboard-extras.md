@@ -74,8 +74,9 @@ When using AJAX Flash messages you should also ensure that your theme supports [
 {% flash %}
     <p
         data-control="flash-message"
-        class="flash-message fade {{ type }}"
-        data-interval="5">
+        class="flash-message fade"
+        data-flash-type="{{ type }}"
+        data-flash-duration="5">
         {{ message }}
     </p>
 {% endflash %}
