@@ -997,6 +997,7 @@ Option | Description
 `firstDay` | the first day of the week. Default: 0 (Sunday).
 `showWeekNumber` | show week numbers at head of row. Default: `false`
 `ignoreTimezone` | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
+`default` | the default value can be `now`. This sets the current date, datetime or time as default value.
 
 <a name="widget-fileupload"></a>
 ### File upload
