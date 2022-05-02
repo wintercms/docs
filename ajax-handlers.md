@@ -62,7 +62,7 @@ If you need to redirect the browser to another location, return the `Redirect` o
 ```php
 function onRedirectMe()
 {
-    return Redirect::to('http://google.com');
+    return Redirect::to('https://google.com');
 }
 ```
 
