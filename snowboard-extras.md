@@ -9,6 +9,10 @@
     - [Displaying error messages](#error-messages)
     - [Displaying errors with fields](#field-errors)
     - [Usage examples](#usage-examples)
+- [Asset Manager](#asset-manager)
+- [Data configuration](#data-config)
+    - [Example](#data-config-example)
+    - [Usage](#data-config-usage)
 
 <a name="introduction"></a>
 ## Introduction
@@ -80,6 +84,16 @@ When using AJAX Flash messages you should also ensure that your theme supports [
         {{ message }}
     </p>
 {% endflash %}
+```
+
+Flash messages may also be called from your JavaScript files through Snowboard.
+
+```js
+Snowboard.flash(
+    'This is a flash message', // message, as a string
+    'info',                    // flash type, as a string - one of "info", "default", "success", "warning" or "error"
+    7                          // duration (seconds), as an integer. Set to 0 to keep flash message until clicked on.
+);
 ```
 
 <a name="ajax-validation"></a>
@@ -202,3 +216,158 @@ function onDoSomething()
     Flash::success('Jobs done!');
 }
 ```
+
+<a name="asset-manager"></a>
+## Asset Manager
+
+Included in the Snowboard extras is an asset manager, allowing simple loading of assets within a page within JavaScript. This manager also allows components to inject assets into your CMS pages when responding to AJAX requests, allowing assets to be deferred until needed.
+
+The following assets can be loaded through the Asset Manager:
+
+- **JavaScript files:** These files will be pre-loaded and injected into the page, before the closing body tag (`</body>`).
+- **CSS stylesheets:** These files will be pre-loaded and injected into the page, before the closing head tag (`</head>`)
+- **Images:** These files will be pre-loaded but will not be injected into the page, making it useful as an image preloader for images that may be displayed in a component's markup.
+
+By default, the Asset Manager will simply listen for AJAX requests that contain assets in their response, and will automatically load and populate these assets for you as required. However, you can also use this manager to manually inject assets as required:
+
+```js
+Snowboard.assetManager().processAssets({
+    js: [
+        // URLs of JavaScript files to load, as an array
+    ],
+    css: [
+        // URLs of CSS stylesheet files to load, as an array
+    ],
+    img: [
+        // URLs of images to pre-load, as an array
+    ]
+});
+```
+
+The Asset Manager will ensure that assets are only loaded once - any repeated requests of the same asset will be ignored.
+
+<a name="data-config"></a>
+## Data configuration
+
+A common way of including configuration for Winter widgets and Snowboard plugins is to provide an element with data attribute tags that represent the configuration options and values. Snowboard includes a Data Configuration plugin with the extras package that allows you to quickly extract the configuration for a particular plugin from an element's data attributes.
+
+This allows you to pass configuration from the PHP side, such as a component's configuration file, to the partial HTML which can then be read by a corresponding Snowboard plugin on the JavaScript side, allowing a user to manipulate the configuration and experience of a widget entirely through the Winter backend.
+
+<a name="data-config-example"></a>
+### Example
+
+Let's say, for example, you have a gallery component that has some configuration options that you pass through to the page when using the component:
+
+```php
+namespace Acme\Gallery\Components;
+
+class Gallery extends \Cms\Classes\ComponentBase
+{
+    public function componentDetails()
+    {
+        return [
+            'name' => 'Gallery',
+            'description' => 'My ultra-cool gallery component',
+        ];
+    }
+
+    public function defineProperties()
+    {
+        return [
+            'numImages' => [
+                'title'       => 'Number of images',
+                'type'        => 'dropdown',
+                'default'     => 3,
+                'options' => [
+                    1 => 1,
+                    2 => 2,
+                    3 => 3,
+                    4 => 4,
+                    5 => 5,
+                ]
+            ],
+            'showCaption' => [
+                'title'       => 'Show caption?',
+                'type'        => 'checkbox'
+                'default'     => true,
+            ],
+        ];
+    }
+
+    public function settings()
+    {
+        return [
+            'numImages' => $this->property('numImages', 3),
+            'showCaption' => $this->property('showCaption', true) ? 'true' : 'false',
+        ];
+    }
+}
+```
+
+You might then have a default (or overwritten) partial which contains the HTML that will be used by your Snowboard plugin.
+
+```twig
+<div
+    class="gallery"
+    data-gallery
+    data-num-images="{{ __SELF__.settings.numImages }}"
+    data-show-caption="{{ __SELF__.settings.showCaption }}"
+>
+    <img src="picture-1.png" title="This is a cool picture">
+    <img src="picture-2.png" title="This is another cool picture">
+    <img src="picture-3.png" title="Look at this">
+    <img src="picture-4.png" title="Wow, so cool!">
+    <img src="picture-5.png" title="Nice!">
+</div>
+```
+
+With this in place, your Snowboard plugin can now initialise a gallery with configuration direct from the Backend.
+
+```js
+class Gallery extends Snowboard.PluginBase {
+
+    constructor(snowboard, element) {
+        super(snowboard);
+        this.element = element;
+
+        // Initialise the configuration, and make it available in the plugin as "this.config"
+        this.config = this.snowboard.config(this, element);
+
+        this.createGallery();
+    }
+
+    defaults() {
+        return {
+
+        }
+    }
+
+    createGallery() {
+        const numImages = this.config.get('numImages'); // Will return 3 by default, as per the component config
+        const showCaption = this.config.get('showCaption'); // Will be true by default, as per the config
+    }
+}
+```
+
+Following this structure, you have full-stack control over the experience of your component whilst still providing an easy mechanism for controlling the component from the backend.
+
+<a name="data-config-usage"></a>
+### Usage
+
+Initialising a data configuration requires two parameters, the Snowboard plugin that you wish to make the config available to, and a HTML element to extract the data configuration from.
+
+```js
+this.config = this.snowboard.config(
+    this, // Use the current instance to add the config to
+    element, // This should be the HTML element you wish to get the config from
+);
+```
+
+By populating it to a plugin variable, you can use it through the plugin.
+
+> **NOTE:** The configuration keys (ie. the name from the data attribute name) follows the [name conversion](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset#name_conversion) methodology of the HTML Element dataset. This means, in general, that names will be converted to "camelCase". In the above example, `data-num-images` is converted to `numImages` within the configuration on the JavaScript side.
+
+The configuration plugin provides a few methods for using the configuration:
+
+#### `get(configKey)`
+
