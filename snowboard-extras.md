@@ -13,6 +13,7 @@
 - [Data configuration](#data-config)
     - [Example](#data-config-example)
     - [Usage](#data-config-usage)
+    - [Further notes](#data-config-notes)
 
 <a name="introduction"></a>
 ## Introduction
@@ -310,8 +311,8 @@ You might then have a default (or overwritten) partial which contains the HTML t
 <div
     class="gallery"
     data-gallery
-    data-num-images="{{ __SELF__.settings.numImages }}"
-    data-show-caption="{{ __SELF__.settings.showCaption }}"
+    data-num-images="{{ __SELF__.settings().numImages }}"
+    data-show-caption="{{ __SELF__.settings().showCaption }}"
 >
     <img src="picture-1.png" title="This is a cool picture">
     <img src="picture-2.png" title="This is another cool picture">
@@ -338,18 +339,19 @@ class Gallery extends Snowboard.PluginBase {
 
     defaults() {
         return {
-
-        }
+            numImages: 5,
+            showCaption: false,
+        };
     }
 
     createGallery() {
-        const numImages = this.config.get('numImages'); // Will return 3 by default, as per the component config
-        const showCaption = this.config.get('showCaption'); // Will be true by default, as per the config
+        const numImages = this.config.get('numImages'); // Will return 3, as per the default component config
+        const showCaption = this.config.get('showCaption'); // Will be true, as per the default component config
     }
 }
 ```
 
-Following this structure, you have full-stack control over the experience of your component whilst still providing an easy mechanism for controlling the component from the backend.
+Following this structure, you have full-stack control over the experience of your component, providing an easy mechanism for controlling the front-end widget from the backend.
 
 <a name="data-config-usage"></a>
 ### Usage
@@ -359,15 +361,94 @@ Initialising a data configuration requires two parameters, the Snowboard plugin 
 ```js
 this.config = this.snowboard.config(
     this, // Use the current instance to add the config to
-    element, // This should be the HTML element you wish to get the config from
+    element, // This should be the HTML element that you wish to get the config from
 );
 ```
 
-By populating it to a plugin variable, you can use it through the plugin.
+By populating it to a plugin variable, you can use it throughout the plugin.
 
-> **NOTE:** The configuration keys (ie. the name from the data attribute name) follows the [name conversion](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset#name_conversion) methodology of the HTML Element dataset. This means, in general, that names will be converted to "camelCase". In the above example, `data-num-images` is converted to `numImages` within the configuration on the JavaScript side.
+> **NOTE:** The configuration keys (ie. the name from the data attribute name) follow the [name conversion](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset#name_conversion) methodology of the HTML Element dataset. This means, in general, that names will be converted to "camelCase" without the `data-` prefix. In the above example, `data-num-images` is converted to `numImages` within the configuration on the JavaScript side.
 
-The configuration plugin provides a few methods for using the configuration:
+When determining the available configuration options, the data configuration will look for a `defaults` method in the plugin instance. This method must return an object that has the accepted configuration options as the object keys, and the default values of these options as the object values.
 
-#### `get(configKey)`
+```js
+class Gallery extends Snowboard.PluginBase {
 
+    // ...
+
+    defaults() {
+        return {
+            numImages: 5,
+            showCaption: false,
+        };
+    }
+
+    // ...
+
+}
+```
+
+In the above example, this would allow the `data-num-images` and `data-show-caption` attributes in the given element to populate the configuration, however, if another data attribute (such as `data-allow-zoom`) were added, this would *not* be available as a configuration option.
+
+If you would like to accept any data attribute as a configuration value, you may instead add a property to the plugin instance called `acceptAllDataConfigs` with the value as `true`.
+
+```js
+class Gallery extends Snowboard.PluginBase {
+
+    constructor(snowboard, this, element) {
+        super(snowboard);
+
+        this.element = element;
+        this.acceptAllDataConfigs = true;
+        this.config = this.snowboard.config(this, element);
+    }
+
+    // ...
+
+}
+```
+
+<a name="data-config-methods"></a>
+### Methods
+
+The config instance that is returned by `this.snowboard.config()` provides the following methods for interacting with the configuration of a plugin instance.
+
+#### `get()`
+
+Gets the entire configuration as an object, with the configuration name as the object keys and the values as the object values. This object will be made up of the defaults, merged together with the values of the data attributes, which take precedence.
+
+#### `get(configName: string)`
+
+Gets the configuration value for the given configuration name. This will be retrieved from the data attribute of the element providing the configuration, or from the the defaults if not specified on the element.
+
+This will return `undefined` if there is no configuration value in the element's data attributes or the defaults.
+
+#### `set(configName: string, configValue: any, persist: boolean)`
+
+Sets a configuration value for the given configuration name at run-time. This will act as an override - it will replace the data configuration and any default for the configuration option.
+
+By default, this override will not persist - if the data configuration is refreshed, it will be replaced by the data attribute value or default once more. If the third parameter `persist` is set to `true`, this value will be persisted, and will be kept even if refreshed.
+
+#### `refresh()`
+
+Refreshes the entire configuration. This will repopulate the configuration with the data attribute configuration or default values once more. This can be useful if you allow the data attributes of the element to be modified externally.
+
+<a name="data-config-notes"></a>
+### Further notes
+
+#### Configuration value coercion
+
+Configuration values provided by a data attribute or through the `set()` method will be "coerced" to a variable type depending on the content, by converting all given contents to a string and applying the following rules:
+
+- A string `"null"` or `"undefined"` will be interpreted as a JavaScript `null` and `undefined`, respectively.
+- A string `"true"` or `"yes"` will be interpreted as a boolean `true`.
+- A string `"false"` or `"no"` will be interpreted as a boolean `false`.
+- A string numeric will be converted to a JavaScript number.
+- The strings will be finally be run through a JSON parser - if the parser succeeds, this value will be used.
+- If all above fails, the string value is kept as a string.
+
+#### Data attributes without a value
+
+The data configuration interprets a data attribute that has no value to be a boolean `true`, similar to how a checkbox uses the `checked` attribute without a value to make the checkbox checked, or a select option uses the `selected` attribute without a value to make it the selected option.
+
+In cases such as this, it is a good idea to make the default value of the configuration option `false` to make the data attribute a simple toggle.
