@@ -704,7 +704,7 @@ A `Rule` object represents a single reusable validation rule for your models tha
 <?php
 use Winter\Storm\Validation\Rule;
 
-class Uppercase implements Rule
+class Uppercase extends Rule
 {
     /**
      * Determine if the validation rule passes.
