@@ -351,7 +351,7 @@ class Gallery extends Snowboard.PluginBase {
 }
 ```
 
-Following this structure, you have full-stack control over the experience of your component, providing an easy mechanism for controlling the front-end widget from the backend.
+Following this structure, you have full-stack control over the experience of your component, providing an easy mechanism for controlling the frontend widget from the backend.
 
 <a name="data-config-usage"></a>
 ### Usage
