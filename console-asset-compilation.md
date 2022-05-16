@@ -10,6 +10,7 @@
 - [Examples](#examples)
 - [Commands](#commands)
     - [Install Node dependencies](#mix-install)
+    - [Update Node dependencies](#mix-update)
     - [List registered Mix packages](#mix-list)
     - [Compile a Mix package](#mix-compile)
     - [Watch a Mix package](#mix-watch)
@@ -166,6 +167,19 @@ You can optionally provide a `-p` or `--package` flag to install dependencies fo
 If the command is run with a `-p` or `--package` flag and the provided package name is not already registered and the name matches a valid module, plugin, or theme package name (modules are prefixed with `module-$moduleDirectory`, themes are prefixed with `theme-$themeDirectory`, and plugins are simply `Author.Plugin`) then a `winter.mix.js` file will be automatically generated for that package and will be included in future runs of any mix commands through the [automatic registration](#automatic-registration) feature.
 
 The `--npm` flag can also be provided if you have a custom path to the `npm` program. If this is not provided, the system will try to guess where `npm` is located.
+
+<a name="mix-update"></a>
+### Update Node dependencies
+
+```bash
+php artisan mix:update [-p <package name>] [--npm <path to npm>]
+```
+
+The `mix:update` command will update Node dependencies for all registered Mix packages.
+
+This command operates very similar to `mix:install`, except that it only updates previously installed packages. This allows you to keep dependencies up to date, especially in the case of security fixes or breaking updates from your Node dependencies.
+
+Please see the `mix:install` documentation for the available arguments and options.
 
 <a name="mix-list"></a>
 ### List registered Mix packages
