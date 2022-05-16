@@ -424,11 +424,19 @@ The configuration instance that is returned by `this.snowboard.config(bindTo, el
 
 Gets the entire configuration as an object, with the configuration name as the object keys and the values as the object values. This object will be made up of the defaults, merged together with the values of the data attributes, which take precedence.
 
+```js
+this.config.get(); // Returns an object of all configuration options and their values.
+```
+
 #### `get(configName: string)`
 
 Gets the configuration value for the given configuration name. This will be retrieved from the data attribute of the element providing the configuration, or from the the defaults if not specified on the element.
 
 This will return `undefined` if there is no configuration value in the element's data attributes or the defaults.
+
+```js
+this.config.get('configKey'); // Returns the value of one configuration option.
+```
 
 #### `set(configName: string, configValue: any, persist: boolean)`
 
@@ -436,9 +444,32 @@ Sets a configuration value for the given configuration name at run-time. This wi
 
 By default, this override will not persist - if the data configuration is refreshed, it will be replaced by the data attribute value or default once more. If the third parameter `persist` is set to `true`, this value will be persisted, and will be kept even if refreshed.
 
+```js
+this.config.set('configKey', 'new value');
+this.config.get('configKey'); // Returns "new value".
+```
+
 #### `refresh()`
 
 Refreshes the entire configuration. This will repopulate the configuration with the data attribute configuration or default values once more. This can be useful if you allow the data attributes of the element to be modified externally.
+
+```js
+// Assuming that "data-config-key" on the element is set to "old"
+
+this.config.set('configKey', 'new');
+this.config.get('configKey'); // Returns "new"
+
+// Let's do a refresh
+this.config.refresh();
+this.config.get('configKey'); // Returns "old", as per the data attribute on the element.
+
+// Let's persist the configuration value.
+this.config.set('configKey', 'new', true);
+
+// Another refresh
+this.config.refresh();
+this.config.get('configKey'); // Returns "new", as the new value was persisted.
+```
 
 <a name="data-config-notes"></a>
 ### Further notes
