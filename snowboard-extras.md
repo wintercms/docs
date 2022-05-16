@@ -223,6 +223,8 @@ function onDoSomething()
 
 Included in the Snowboard extras is an asset loader, allowing simple loading of assets within a page within JavaScript. This loader also allows components to inject assets into your CMS pages when responding to AJAX requests, allowing assets to be deferred until needed.
 
+The Asset Loader plugin is registered within Snowboard as the `assetLoader` singleton.
+
 The following assets can be loaded through the Asset Loader:
 
 - **JavaScript files:** These files will be pre-loaded and injected into the page, before the closing body tag (`</body>`).
@@ -339,7 +341,7 @@ class Gallery extends Snowboard.PluginBase {
         this.element = element;
 
         // Initialise the configuration, and make it available in the plugin as "this.config"
-        this.config = this.snowboard.config(this, element);
+        this.config = this.snowboard.dataConfig(this, element);
 
         this.createGallery();
     }
@@ -363,10 +365,12 @@ Following this structure, you have full-stack control over the experience of you
 <a name="data-config-usage"></a>
 ### Usage
 
+The Data configuration functionality is registered within Snowboard as the `dataConfig` plugin and can be initialised with `this.snowboard.dataConfig()`.
+
 Initialising a data configuration requires two parameters, the Snowboard plugin that you wish to make the config available to, and a HTML element to extract the data configuration from.
 
 ```js
-this.config = this.snowboard.config(
+this.config = this.snowboard.dataConfig(
     this, // Add the config to the current instance
     element, // HTML element to get the config values from
 );
@@ -407,7 +411,7 @@ class Gallery extends Snowboard.PluginBase {
 
         this.element = element;
         this.acceptAllDataConfigs = true;
-        this.config = this.snowboard.config(this, element);
+        this.config = this.snowboard.dataConfig(this, element);
     }
 
     // ...
