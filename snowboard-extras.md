@@ -450,6 +450,7 @@ Configuration values provided by a data attribute or through the `set()` method 
 - A string `"null"` or `"undefined"` will be interpreted as a JavaScript `null` and `undefined`, respectively.
 - A string `"true"` or `"yes"` will be interpreted as a boolean `true`.
 - A string `"false"` or `"no"` will be interpreted as a boolean `false`.
+- A string prefixed with `base64:` followed by a base64-encoded string will be decoded and then run through value coercion with the decoded value.
 - A string numeric will be converted to a JavaScript number.
 - The strings will be finally be run through a JSON parser - if the parser succeeds, this value will be used.
 - If all above fails, the string value is kept as a string.
