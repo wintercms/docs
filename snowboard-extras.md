@@ -9,7 +9,7 @@
     - [Displaying error messages](#error-messages)
     - [Displaying errors with fields](#field-errors)
     - [Usage examples](#usage-examples)
-- [Asset Manager](#asset-manager)
+- [Asset Loader](#asset-loader)
 - [Data configuration](#data-config)
     - [Example](#data-config-example)
     - [Usage](#data-config-usage)
@@ -218,21 +218,21 @@ function onDoSomething()
 }
 ```
 
-<a name="asset-manager"></a>
-## Asset Manager
+<a name="asset-loader"></a>
+## Asset Loader
 
-Included in the Snowboard extras is an asset manager, allowing simple loading of assets within a page within JavaScript. This manager also allows components to inject assets into your CMS pages when responding to AJAX requests, allowing assets to be deferred until needed.
+Included in the Snowboard extras is an asset loader, allowing simple loading of assets within a page within JavaScript. This loader also allows components to inject assets into your CMS pages when responding to AJAX requests, allowing assets to be deferred until needed.
 
-The following assets can be loaded through the Asset Manager:
+The following assets can be loaded through the Asset Loader:
 
 - **JavaScript files:** These files will be pre-loaded and injected into the page, before the closing body tag (`</body>`).
 - **CSS stylesheets:** These files will be pre-loaded and injected into the page, before the closing head tag (`</head>`)
 - **Images:** These files will be pre-loaded but will not be injected into the page, making it useful as an image preloader for images that may be displayed in a component's markup.
 
-By default, the Asset Manager will simply listen for AJAX requests that contain assets in their response, and will automatically load and populate these assets for you as required. However, you can also use this manager to manually inject assets as required:
+By default, the Asset Loader will simply listen for AJAX requests that contain assets in their response, and will automatically load and populate these assets for you as required. However, you can also use this loader to manually inject assets as required:
 
 ```js
-Snowboard.assetManager().processAssets({
+Snowboard.assetLoader().processAssets({
     js: [
         // URLs of JavaScript files to load, as an array
     ],
@@ -245,7 +245,14 @@ Snowboard.assetManager().processAssets({
 });
 ```
 
-The Asset Manager will ensure that assets are only loaded once - any repeated requests of the same asset will be ignored.
+The Asset Loader will ensure that assets are only loaded once - any repeated requests of the same asset will be ignored.
+
+The asset loader fires off two events, depending on whether an asset is successfully loaded or not:
+
+Event | Promise? | Parameters | Description
+----- | -------- | ---------- | -----------
+`assetLoader.loaded` | No | `(String) type, (String) asset, (HTMLElement) assetElement` | Called when an asset is successfully loaded and injected into the page. The first parameter will be the type of asset (one of `script`, `style` or `image`, the second parameter will be the asset's URL and the third parameter will be HTML element of the injected asset.
+`assetLoader.error` | No | `(String) type, (String) asset, (HTMLElement) assetElement` | Called when an asset fails to load. The parameters are the same as the `loaded` event, as the asset will be injected in order to trigger the loading of the asset.
 
 <a name="data-config"></a>
 ## Data configuration
