@@ -367,8 +367,8 @@ Initialising a data configuration requires two parameters, the Snowboard plugin 
 
 ```js
 this.config = this.snowboard.config(
-    this, // Use the current instance to add the config to
-    element, // This should be the HTML element that you wish to get the config from
+    this, // Add the config to the current instance
+    element, // HTML element to get the config values from
 );
 ```
 
