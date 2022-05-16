@@ -353,7 +353,7 @@ class Gallery extends Snowboard.PluginBase {
 
     createGallery() {
         const numImages = this.config.get('numImages'); // Will return 3, as per the default component config
-        const showCaption = this.config.get('showCaption'); // Will be true, as per the default component config
+        const showCaption = this.config.get('showCaption'); // Will be true, since the attribute has been set by the default value defined in the PHP component class
     }
 }
 ```
