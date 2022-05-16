@@ -418,7 +418,7 @@ class Gallery extends Snowboard.PluginBase {
 <a name="data-config-methods"></a>
 ### Methods
 
-The config instance that is returned by `this.snowboard.config()` provides the following methods for interacting with the configuration of a plugin instance.
+The configuration instance that is returned by `this.snowboard.config(bindTo, elementFrom)` provides the following methods:
 
 #### `get()`
 
