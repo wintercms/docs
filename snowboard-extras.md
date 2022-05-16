@@ -232,7 +232,7 @@ The following assets can be loaded through the Asset Loader:
 By default, the Asset Loader will simply listen for AJAX requests that contain assets in their response, and will automatically load and populate these assets for you as required. However, you can also use this loader to manually inject assets as required:
 
 ```js
-Snowboard.assetLoader().processAssets({
+Snowboard.assetLoader().load({
     js: [
         // URLs of JavaScript files to load, as an array
     ],
