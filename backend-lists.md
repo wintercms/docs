@@ -218,7 +218,7 @@ Option | Description
 `valueFrom` | defines a model attribute to use for the value.
 `relation` | defines a model relationship column.
 `useRelationCount` | use the count of the defined `relation` as the value for this column. Default: `false`
-`cssClass` | assigns a CSS class to the column container (see [Asset Compilation](services-asset-compilation#injecting-page-assets)).
+`cssClass` | assigns a CSS class to the column container (see [Asset Compilation](../services/asset-compilation#injecting-page-assets) for injecting custom CSS files into the backend).
 `headCssClass` | assigns a CSS class to the column header container.
 `width` | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 `align` | specifies the column alignment. Possible values are `left`, `right` and `center`.
