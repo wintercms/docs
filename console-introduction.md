@@ -7,6 +7,7 @@
     - [Defining input expectations](#defining-input-expectations)
     - [Retrieving input](#retrieving-input)
     - [Handling process signals](#handling-process-signals)
+    - [Processing Records](#processes-query)
     - [Writing output](#writing-output)
 - [Registering commands](#registering-commands)
 - [Calling other commands](#calling-other-commands)
@@ -310,6 +311,79 @@ If your command defines a `--force` option in its signature, then that option ca
 ### Handling process signals
 
 See the [Symfony documentation](https://symfony.com/blog/new-in-symfony-5-2-console-signals) for more information.
+
+<a name="processes-query">
+### Processing Records
+
+Winter provides the `Winter\Storm\Console\ProcessesQuery` trait for use in console commands that have to process a large number of records sourced from a database query. An example use of the trait is provided below:
+
+```php
+<?php namespace MyAuthor\MyPlugin\Console;
+
+use Winter\Storm\Console\Command;
+use MyAuthor\MyPlugin\Models\MyModel;
+
+class ProcessRecords extends Command
+{
+    use \Winter\Storm\Console\Traits\ProcessesQuery;
+    use \Winter\Storm\Console\Traits\ConfirmsWithInput;
+
+    /**
+     * @var string The console command name.
+     */
+    protected static $defaultName = 'myplugin:processrecords';
+
+    /**
+     * @var string The name and signature of this command.
+     */
+    protected $signature = 'myplugin:processrecords
+        {--limit=0 : The maximum number of records to process. Defaults to all.}
+        {--chunk=100 : The number of records to process at once.}
+        {--f|force : Force the operation to run and ignore production warnings and confirmation questions.}
+    ';
+
+    /**
+     * @var string The console command description.
+     */
+    protected $description = 'Processes the selected records';
+
+    /**
+     * Execute the console command.
+     */
+    public function handle(): int
+    {
+        // Build the query that will retrieve all the records to be processed
+        $query = MyModel::query()->withTrashed();
+
+        // Get the total number of records to be processed for the alert message
+        $totalRecords = $query->count();
+
+        // Ask the user to confirm the processing action by entering the number
+        // of records to be affected
+        if (!$this->confirmWithInput(
+            sprintf(
+                'This will process all selected records, a total of %s.',
+                number_format($totalRecords)
+            ),
+            $totalRecords
+        )) {
+            return 1;
+        }
+
+        // Process the records
+        $this->processQuery(
+            $query,
+            function ($record) {
+                $record->myCustomAction();
+            },
+            $this->option('chunk'),
+            $this->option('limit')
+        );
+
+        return 0;
+    }
+}
+```
 
 <a name="writing-output"></a>
 ### Writing output
