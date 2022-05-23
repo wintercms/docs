@@ -203,6 +203,8 @@ In order to provide input suggestions for a given argument or option, all you ha
 Methods providing values for arguments should end in `Values` and methods providing values for options should end in `Options`. See below for a couple of example implementations:
 
 ```php
+// ...
+
     /**
      * Example implementation of a suggestion method for the "myArgument" argument
      */
@@ -221,6 +223,8 @@ Methods providing values for arguments should end in `Values` and methods provid
     {
         return Package::all()->pluck('name')->all();
     }
+
+// ...
 ```
 
 See the [Symfony documentation](https://symfony.com/blog/new-in-symfony-5-4-console-autocompletion) for more information.
@@ -239,6 +243,16 @@ use System\Console\Traits\HasPluginArgument;
 class MyCommand extends Command
 {
     use HasPluginArgument;
+
+    // ...
+
+    /**
+     * @var string The name and signature of this command.
+     */
+    protected $signature = 'myauthor:mycommand
+        {plugin : The plugin to interact with. <info>(eg: Winter.Blog)</info>}';
+
+    // ...
 
     /**
      * @var string What type of plugins to suggest in the CLI autocompletion. Valid values: "enabled", "disabled", "all"
