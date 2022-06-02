@@ -6,6 +6,8 @@
     - [Filtering the list](#adding-filters)
 - [Defining list columns](#list-columns)
     - [Column options](#column-options)
+    - [Custom value selection](#custom-value-selection)
+    - [Nested column selection](#nested-column-selection)
 - [Available column types](#column-types)
 - [Displaying the list](#displaying-list)
 - [Multiple list definitions](#multiple-list-definitions)
@@ -223,6 +225,30 @@ Option | Description
 `width` | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 `align` | specifies the column alignment. Possible values are `left`, `right` and `center`.
 `permissions` | the [permissions](users#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+
+
+<a name="custom-value-selection"></a>
+### Custom value selection
+
+It is possible to change the source and display values for each column. If you want to source the column value from another column, do so with the `valueFrom` option.
+
+```yaml
+other_name:
+    label: Something Great
+    valueFrom: name
+```
+<a id="nested-column-selection"></a>
+### Nested column selection
+
+In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations.md) column or a [jsonable array](../database/model.md#standard-properties). The only drawback of doing this is the column cannot use searchable or sortable options.
+
+```yaml
+content[title]:
+    name: Title
+    sortable: false
+```
+
+The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#events).
 
 <a name="column-types"></a>
 ## Available column types
