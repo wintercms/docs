@@ -133,7 +133,7 @@ Event::fire('foo.event', function ($arg1, $arg2) {
 }
 ```
 
-When using a wildcard event listener, this would map to the following:
+When using a wildcard listener, this would map to the following:
 ```php
 Event::listen('foo.*', function ($event, $params) {
     $arg1 = $params[0];
@@ -322,6 +322,8 @@ $manager->bindEvent('user.beforeRegister', function ($user) {
 });
 ```
 
+> **NOTE**: wildcard listeners are currently not supported for this trait.
+
 The `fireEvent` method is used to fire events.
 
 ```php
@@ -330,3 +332,4 @@ $manager->fireEvent('user.beforeRegister', [$user]);
 ```
 
 These events will only occur on the local object as opposed to globally.
+
