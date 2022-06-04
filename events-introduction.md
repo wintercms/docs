@@ -20,7 +20,7 @@
 The `Event` class provides a simple observer implementation, allowing you to subscribe and listen for events in your application. For example, you may listen for when a user signs in and update their last login date.
 
 ```php
-Event::listen('auth.login', function($user) {
+Event::listen('auth.login', function ($user) {
     $user->last_login = new DateTime;
     $user->save();
 });
@@ -44,7 +44,7 @@ Event::listen('acme.blog.myevent', ...);
 The second argument can be a closure that specifies what should happen when the event is fired. The closure can accept optional some arguments, provided by [the firing event](#events-firing).
 
 ```php
-Event::listen('acme.blog.myevent', function($arg1, $arg2) {
+Event::listen('acme.blog.myevent', function ($arg1, $arg2) {
     // Do something
 });
 ```
@@ -91,10 +91,10 @@ You may also specify a priority as the third argument when subscribing to events
 
 ```php
 // Run first
-Event::listen('auth.login', function() { ... }, 10);
+Event::listen('auth.login', function () { ... }, 10);
 
 // Run second
-Event::listen('auth.login', function() { ... }, 5);
+Event::listen('auth.login', function () { ... }, 5);
 ```
 
 <a name="subscribing-halting"></a>
@@ -103,7 +103,7 @@ Event::listen('auth.login', function() { ... }, 5);
 Sometimes you may wish to stop the propagation of an event to other listeners. You may do so using by returning `false` from your listener:
 
 ```php
-Event::listen('auth.login', function($event) {
+Event::listen('auth.login', function ($event) {
     // Handle the event
 
     return false;
@@ -118,19 +118,27 @@ When registering an event listener, you may use asterisks to specify wildcard li
 The following listener will handle all events that begin with `foo.`.
 
 ```php
-Event::listen('foo.*', function($event, $params) {
+Event::listen('foo.*', function ($event, $params) {
     // Handle the event...
 });
 ```
 
-You may use the `Event::firing` method to determine exactly which event was fired:
+`$event` provides the event name that was fired.
+`$params` is the event payload; it's an array of the fired event's arguments.
 
+Given the following event:
 ```php
-Event::listen('foo.*', function($event, $params) {
-    if (Event::firing() === 'foo.bar') {
-        // ...
-    }
-});
+Event::fire('foo.event', function ($arg1, $arg2) {
+   // ...
+}
+```
+
+When using a wildcard event listener, this would map to the following:
+```php
+Event::listen('foo.*', function ($event, $params) {
+    $arg1 = $params[0];
+    $arg2 = $params[1];
+}
 ```
 
 <a name="events-firing"></a>
@@ -309,7 +317,7 @@ This trait provides a method to listen for events with `bindEvent`.
 
 ```php
 $manager = new UserManager;
-$manager->bindEvent('user.beforeRegister', function($user) {
+$manager->bindEvent('user.beforeRegister', function ($user) {
     // Check if the $user is a spammer
 });
 ```
