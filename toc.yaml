@@ -1,9 +1,9 @@
-ignorePaths:
+rootPage: setup/installation
+ignoredPaths:
     - LICENSE.md
     - README.md
     - config
     - markup
-
 sections:
     "Getting Started":
         pages:
