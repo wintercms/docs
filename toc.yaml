@@ -1,0 +1,131 @@
+ignorePaths:
+    - LICENSE.md
+    - README.md
+    - config
+    - markup
+
+sections:
+    "Getting Started":
+        pages:
+            setup/installation: "Installation"
+            setup/configuration: "Configuration"
+
+    "Architecture Concepts":
+        pages:
+            architecture/introduction: "Introduction"
+            help/unit-testing: "Unit Testing"
+            help/using-composer: "Using Composer"
+            help/developer/guide: "Developer Guide"
+            architecture/maintainer-guide: "Maintainer Guide"
+
+    "Backend (Admin)":
+        pages:
+            backend/controllers-ajax: "Controllers & AJAX"
+            backend/views-partials: "Views & Partials"
+            backend/widgets: "Widgets"
+            backend/forms: "Forms"
+            backend/lists: "Lists"
+            backend/relations: "Relations"
+            backend/reorder: "Sorting records"
+            backend/import-export: "Importing & Exporting"
+            backend/users: "Users & Permissions"
+            backend/controls: "UI Elements"
+            ui: "User Interface Guide@"
+
+    "Frontend":
+        pages:
+            cms/themes: "Themes"
+            themes/development: "Developing Themes"
+            cms/pages: "Pages"
+            cms/partials: "Partials"
+            cms/layouts: "Layouts"
+            cms/content: "Content Blocks"
+            cms/components: "Components"
+            cms/mediamanager: "Media Manager"
+            markup: "Markup Guide@"
+            "https://twig.symfony.com/doc/2.x/": "Twig Docs@"
+
+    "Plugins":
+        pages:
+            plugin/registration: "Registration"
+            plugin/updates: "Version History"
+            plugin/components: "Building Components"
+            plugin/settings: "Settings & Config"
+            plugin/localization: "Localization"
+            plugin/scheduling: "Task Scheduling"
+            plugin/extending: "Extending Plugins"
+            plugin/replacement: "Replacement & Forking"
+
+    "AJAX Framework":
+        pages:
+            ajax/introduction: "Introduction"
+            ajax/handlers: "Event Handlers"
+            ajax/update-partials: "Updating Partials"
+            ajax/attributes-api: "Data Attributes API"
+            ajax/javascript-api: "JavaScript API"
+            ajax/extras: "Extra Features"
+
+    "Snowboard":
+        pages:
+            snowboard/introduction: "Introduction"
+            snowboard/migration-guide: "Migration Guide"
+            snowboard/handlers: "Serverside Event Handlers"
+            snowboard/request: "AJAX Requests (JavaScript API)"
+            snowboard/data-attributes: "AJAX Requests (Data Attributes API)"
+            snowboard/extras: "Extra Features"
+            snowboard/utilities: "Utilities"
+            snowboard/plugin-development: "Plugin Development"
+
+    "Database":
+        pages:
+            database/basics: "Getting Started"
+            database/structure: "Structure"
+            database/query: "Queries"
+            database/model: "Models"
+            database/relations: "Relationships"
+            database/attachments: "File Attachments"
+            database/collection: "Collections"
+            database/mutators: "Mutators"
+            database/serialization: "Serialization"
+            database/traits: "Traits"
+            database/behaviors: "Behaviors"
+
+    "Services":
+        pages:
+            services/application: "Application"
+            services/asset-compilation: "Asset Compilation"
+            services/behaviors: "Behaviors"
+            services/cache: "Cache"
+            services/collections: "Collections"
+            services/error-log: "Errors & Logging"
+            services/events: "Events"
+            services/filesystem-cdn: "Filesystem / CDN"
+            services/html: "Forms & Html"
+            services/hashing-encryption: "Hashing & Encryption"
+            services/helpers: "Helpers"
+            services/image-resizing: "Image Resizing"
+            services/mail: "Mail"
+            services/pagination: "Pagination"
+            services/parser: "Parser"
+            services/queues: "Queues"
+            services/router: "Router"
+            services/request-input: "Request & Input"
+            services/response-view: "Response & View"
+            services/session: "Session"
+            services/validation: "Validation"
+
+    "Console":
+        pages:
+            console/introduction: "Introduction"
+            console/setup-maintenance: "Setup & Maintenance"
+            console/plugin-management: "Plugin Management"
+            console/theme-management: "Theme Management"
+            console/asset-compilation: "Asset Compilation (Mix)"
+            console/scaffolding: "Scaffolding"
+            console/utilities: "Utilities"
+
+    "Further Reading":
+        pages:
+            api: "API Docs@"
+            "https://laravel.com/docs/6.x": "Laravel Docs@"
+            "https://www.php.net/manual/en/intro-whatis.php": "PHP Docs@"
