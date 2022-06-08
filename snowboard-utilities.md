@@ -16,6 +16,9 @@
         - [`cookie.set`](#cookie-event-set)
 - [JSON Parser](#json-parser)
 - [Sanitizer](#sanitizer)
+- [URL handling](#url-handling)
+  - [Base URL detection](#base-url-detection)
+  - [URL generation](#url-generation)
 
 <a name="introduction"></a>
 ## Introduction
@@ -273,4 +276,41 @@ The following example shows how the Froala WYSIWYG editor can be hooked into to 
 $froalaEditor.on('froalaEditor.paste.beforeCleanup', function (ev, editor, clipboard_html) {
     return Snowboard.sanitizer().sanitize(clipboard_html);
 });
+```
+
+<a name="url-handling"></a>
+## URL Handling
+
+Snowboard contains some useful URL handling functionality for ensuring URLs within Snowboard functionality are correctly based. This is provided by the `Snowboard.url()` plugin.
+
+<a name="base-url-detection"></a>
+### Base URL detection
+
+When the URL plugin is loaded, it will automatically detect the base URL for the current project, based on three sources in order:
+
+- If Snowboard is loaded via the `{% snowboard %}` Twig tag, which is the recommended way of loading Snowboard, then a `data-base-url` attribute is added to the script tag, and will be passed through to Snowboard as the base URL.
+- If Snowboard is manually loaded, it will attempt to find a `<base>` tag in the HTML. If one is found, the `href` of this tag will be used as the base URL.
+- If neither option above work, then the base URL will be determined to be the hostname of the site per the current URL. This will *not work* if you host Winter in a subdirectory, so please use either of the options above in this situation.
+
+You can retrieve the base URL by calling `Snowboard.url().baseUrl()` anywhere in your JavaScript.
+
+<a name="url-generation"></a>
+### URL generation
+
+You can generate a URL that is correctly based through the `to` method in the URL plugin. This will ensure that any URLs you use in your JavaScript are pointing to the correct URL.
+
+If an absolute URL is provided to this helper, it will be returned unchanged:
+
+```js
+Snowboard.url().baseUrl();
+// returns "https://mysite.com/"
+
+Snowboard.url().to('/');
+// returns "https://mysite.com/"
+
+Snowboard.url().to('my-page/my-sub-page');
+// returns "https://mysite.com/my-page/my-sub-page"
+
+Snowboard.url().to('https://google.com');
+// returns "https://google.com"
 ```

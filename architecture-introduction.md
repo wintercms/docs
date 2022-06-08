@@ -145,7 +145,7 @@ It works by accepting a variety of image sources and normalizing the pipeline fo
 
 Future loads of the image are automatically pointed to the static URL of the resized image without even hitting the resizer route.
 
-<a name="behaviors"></a>
+<a name="behaviors-dynamic-class-extension"></a>
 ### Behaviors & Dynamic Class Extension
 
 In Winter CMS, it is possible to dynamically extend the constructor of most classes to add new properties and methods. This also allows [binding to local events](../events/introduction#event-emitter-trait) only present on specific object instances instead of globaly.

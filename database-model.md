@@ -349,7 +349,7 @@ MyVendor\MyPlugin\Models\Flight::upsert([
 <a name="mass-assignment"></a>
 ### Mass assignment
 
-You may also use the `create` method to save a new model in a single line. The inserted model instance will be returned to you from the method. However, before doing so, you will need to specify either a `fillable` or `guarded` attribute on the model, as all models protect against mass-assignment. Note that neither `fillable` or `guarded` affect the submission of backend forms, only the use of `create` or `fill` method.
+You may also use the `create` method to save a new model in a single line. The inserted model instance will be returned to you from the method. However, before doing so, you will need to specify either a `fillable` or `guarded` attribute on the model, as all models protect against mass-assignment by default. Note that neither `fillable` or `guarded` affect the submission of backend forms, only the use of `create` or `fill` method directly on the model.
 
 A mass-assignment vulnerability occurs when a user passes an unexpected HTTP parameter through a request, and that parameter changes a column in your database you did not expect. For example, a malicious user might send an `is_admin` parameter through an HTTP request, which is then mapped onto your model's `create` method, allowing the user to escalate themselves to an administrator.
 
@@ -373,7 +373,8 @@ Once we have made the attributes mass assignable, we can use the `create` method
 $flight = Flight::create(['name' => 'Flight 10']);
 ```
 
-While `$fillable` serves as a "white list" of attributes that should be mass assignable, you may also choose to use `$guarded`. The `$guarded` property should contain an array of attributes that you do not want to be mass assignable. All other attributes not in the array will be mass assignable. So, `$guarded` functions like a "black list". Of course, you should use either `$fillable` or `$guarded` - not both:
+Using the `$fillable` property makes it clear which fields are allowed to be mass-assignable, but does require the
+developer to add additional fields to this array when new columns are added to the database. Conversely, you may use the `$guarded` property instead to assume all fields are fillable *except* for the fields defined in the `$guarded` array. This can be useful for models with large amounts of fields.
 
 ```php
 class Flight extends Model
@@ -387,7 +388,9 @@ class Flight extends Model
 }
 ```
 
-In the example above, all attributes **except for `price`** will be mass assignable.
+In the example above, all attributes **except for `price`** will be mass-assignable.
+
+> **TIP:** In general, we recommend the use of `$fillable` over `$guarded`, as does [the Laravel framework](https://blog.laravel.com/security-release-laravel-61835-7240). While it does involve an extra step when creating new fields for your models, it also guards against potentially unwanted or malicious data being written to new fields through prior functionality.
 
 #### Other creation methods
 

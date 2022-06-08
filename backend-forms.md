@@ -801,10 +801,22 @@ css_content:
 
 Option | Description
 ------------- | -------------
+`autoclosing` | automatically close tags and special boundary characters like quotation marks, parenthesis or brackets. Default `true`.
+`autocompletion` | sets the autocompletion mode, out of `manual`, `basic` and `live`. Default: `manual`.
+`codeFolding` | defines the code folding mode used, out of `manual`, `markbegin` (show fold toggles at the beginning of a code block) and `markend` (show fold toggles at the end of a code block). Default: `manual`.
+`displayIndentGuides` | if `true`, indentation guides will be visible in the editor. Default: `true`.
+`enableSnippets` | allows the editor to use snippets. Default: `true`.
+`fontSize` | the text font size. Default: `12`.
+`highlightActiveLine` | highlights the active line where the text cursor is. Default: `true`.
 `language` | code language, for example, php, css, javascript, html. Default: `php`.
+`margin` | sets the editor margin size. Default: `0`.
 `showGutter` | shows a gutter with line numbers. Default: `true`.
+`showInvisibles` | shows invisible characters like spaces, tabs and line breaks. Default: `false`.
+`showPrintMargin` | shows the print margin. Default: `false`.
+`tabSize` | defines how many spaces represent one level of indentation. Default: `4`.
+`theme` | sets the [editor theme](https://ace.c9.io/build/kitchen-sink.html). Default: `twilight`.
+`useSoftTabs` | if `true`, use soft tabs (spaces) for indentation. Default: `true`.
 `wrapWords` | breaks long lines on to a new line. Default `true`.
-`fontSize` | the text font size. Default: 12.
 
 <a name="widget-colorpicker"></a>
 ### Color picker
@@ -1244,6 +1256,7 @@ Option | Description
 `minItems` | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
 `maxItems` | maximum number of items to allow within the repeater.
 `groups` | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
+`sortable` | whether or not items in the repeater can be reordered. Default: `true`.
 `style` | the behavior style to apply for repeater items. Can be one of the following: `default`, `collapsed` or `accordion`. See the **Repeater styles** section below for more information.
 
 The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.

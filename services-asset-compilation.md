@@ -12,12 +12,18 @@
     - [Register Custom Aliases](#extend-register-alias)
     - [Register Custom Asset Bundles](#extend-register-bundle)
 
+<div class="og-description">
+    Learn more about the Asset Compilation features included with Winter CMS.
+</div>
+
 <a name="introduction"></a>
 ## Introduction
 
 Winter CMS includes a server-side Asset Compiler that makes use of the [Assetic Framework](https://github.com/assetic-php/assetic) to compile and combine assets like CSS and JavaScript serverside, through PHP, negating the need for complex build workflows. The Asset Compiler provides on-the-fly server-side compilation of SASS and LESS stylesheets as well as [run-once manual compilation of assets](#compiler-bundles) without requiring additional workflow tools like Node or NPM. It is also able to combine and minify CSS and JS files.
 
 Additionally, you can [define variables in the theme.yaml file](../themes/development#combiner-vars) that can be modified in the Theme Settings area of the backend which are then injected into the compiled files, creating flexibility for theming and branding.
+
+> **NOTE:** Looking for a way to compile or build Node-based assets in your project? Check out the [Winter Mix](../console/asset-compilation) functionality which can handle this for you.
 
 <a name="injecting-page-assets"></a>
 ## Injecting Page Assets
