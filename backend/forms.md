@@ -1,34 +1,5 @@
 # Backend Forms
 
-- [Introduction](#introduction)
-- [Configuring the form behavior](#configuring-form)
-    - [Create page](#form-create-page)
-    - [Update page](#form-update-page)
-    - [Preview page](#form-preview-page)
-- [Defining form fields](#form-fields)
-    - [Tab options](#form-tab-options)
-    - [Field options](#form-field-options)
-- [Available field types](#field-types)
-- [Form widgets](#form-widgets)
-- [Form views](#form-views)
-    - [Create view](#form-create-view)
-    - [Update view](#form-update-view)
-    - [Preview view](#form-preview-view)
-- [Applying conditions to fields](#field-conditions)
-    - [Input preset converter](#field-input-preset)
-    - [Trigger events](#field-trigger-events)
-    - [Field dependencies](#field-dependencies)
-    - [Preventing a field from being submitted](#prevent-field-submission)
-- [Extending form behavior](#extend-form-behavior)
-    - [Form Model Events](#form-model-events)
-    - [Overriding controller action](#overriding-action)
-    - [Overriding controller redirect](#overriding-redirect)
-    - [Extending form model query](#extend-model-query)
-    - [Extending form fields](#extend-form-fields)
-    - [Filtering form fields](#filter-form-fields)
-- [Validating form fields](#validate-form-fields)
-
-<a name="introduction"></a>
 ## Introduction
 
 The **Form behavior** is a controller [behavior](../services/behaviors) used for easily adding form functionality to a backend page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
@@ -51,7 +22,6 @@ class Categories extends \Backend\Classes\Controller
 
 > **NOTE:** Very often the form and [list behavior](../backend/lists) are used together in a same controller.
 
-<a name="configuring-form"></a>
 ## Configuring the form behavior
 
 The form behaviour will load its configuration in the YAML format from a `config_form.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_form.yaml`) by default.
@@ -85,12 +55,6 @@ preview:
 
 The following fields are required in the form configuration file:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Field | Description
 ------------- | -------------
 `name` | the name of the object being managed by this form.
@@ -99,12 +63,6 @@ Field | Description
 
 The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#form-create-page), [Update](#form-update-page) or [Preview](#form-preview-page) pages.
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `defaultRedirect` | used as a fallback redirection page when no specific redirect page is defined.
@@ -112,7 +70,6 @@ Option | Description
 `update` | a configuration array or reference to a config file for the Update page.
 `preview` | a configuration array or reference to a config file for the Preview page.
 
-<a name="form-create-page"></a>
 ### Create page
 
 To support the Create page add the following configuration to the YAML file:
@@ -127,12 +84,6 @@ create:
 
 The following configuration options are supported for the Create page:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `title` | a page title, can refer to a [localization string](../plugin/localization).
@@ -141,7 +92,6 @@ Option | Description
 `flashSave` | flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
 `form` | overrides the default form fields definitions for the create page only.
 
-<a name="form-update-page"></a>
 ### Update page
 
 To support the Update page add the following configuration to the YAML file:
@@ -156,12 +106,6 @@ update:
 
 The following configuration options are supported for the Update page:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `title` | a page title, can refer to a [localization string](../plugin/localization).
@@ -171,7 +115,6 @@ Option | Description
 `flashDelete` | flash message to display when record is deleted, can refer to a [localization string](../plugin/localization).
 `form` | overrides the default form fields definitions for the update page only.
 
-<a name="form-preview-page"></a>
 ### Preview page
 
 To support the Preview page add the following configuration to the YAML file:
@@ -188,7 +131,6 @@ Option  | Description
 `title` | a page title, can refer to a [localization string](../plugin/localization).
 `form` | overrides the default form fields definitions for the preview page only.
 
-<a name="form-fields"></a>
 ## Defining form fields
 
 Form fields are defined with the YAML file. The form fields configuration is used by the form behavior for creating the form controls and binding them to the model fields. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but **fields.yaml** and **form_fields.yaml** are common names. Example form fields file location:
@@ -248,16 +190,9 @@ Fields from related models can be rendered with the [Relation Widget](#widget-re
     [...]
 ```
 
-<a name="form-tab-options"></a>
 ### Tab options
 
 For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -296,16 +231,9 @@ tabs:
             tab: Groups
 ```
 
-<a name="form-field-options"></a>
 ### Field options
 
 For each field you can specify these options (where applicable):
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -334,28 +262,12 @@ Option | Description
 `containerAttributes` | specify custom HTML attributes to add to the form field container.
 `permissions` | the [permissions](users#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
-<a name="field-types"></a>
 ## Available field types
 
 There are various native field types that can be used for the **type** setting. For more advanced form fields, a [form widget](#form-widgets) can be used instead.
 
-<style>
-    .collection-method-list {
-        column-count: 2; -moz-column-count: 2; -webkit-column-count: 2;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-@media (min-width: 576px) {
-    .collection-method-list {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-    }
-}
+<div class="content-list collection-method-list">
 
-    .collection-method-list a {
-        display: block;
-    }
-</style>
-
-<div class="content-list collection-method-list" markdown="1">
 - [Text](#field-text)
 - [Number](#field-number)
 - [Password](#field-password)
@@ -371,9 +283,9 @@ There are various native field types that can be used for the **type** setting. 
 - [Partial](#field-partial)
 - [Hint](#field-hint)
 - [Widget](#field-widget)
+
 </div>
 
-<a name="field-text"></a>
 ### Text
 
 `text` - renders a single line text box. This is the default type used if none is specified.
@@ -384,7 +296,6 @@ blog_title:
     type: text
 ```
 
-<a name="field-number"></a>
 ### Number
 
 `number` - renders a single line text box that takes numbers only.
@@ -411,7 +322,6 @@ public $rules = [
 
 For more information on model validation, please visit [the documentation page](../services/validation#rule-numeric).
 
-<a name="field-password"></a>
 ### Password
 
 `password ` - renders a single line password field.
@@ -422,7 +332,6 @@ user_password:
     type: password
 ```
 
-<a name="field-email"></a>
 ### Email
 
 `email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
@@ -446,7 +355,6 @@ public $rules = [
 
 For more information on model validation, please visit [the documentation page](../services/validation#rule-email).
 
-<a name="field-textarea"></a>
 ### Textarea
 
 `textarea` - renders a multiline text box. A size can also be specified with possible values: `tiny`, `small`, `large`, `huge`, `giant`.
@@ -458,7 +366,6 @@ blog_contents:
     size: large
 ```
 
-<a name="field-dropdown"></a>
 ### Dropdown
 
 `dropdown` - renders a dropdown with specified options. There are 6 ways to provide the drop-down options.
@@ -618,7 +525,6 @@ status:
     showSearch: false
 ```
 
-<a name="field-radio"></a>
 ### Radio List
 
 `radio` - renders a list of radio options, where only one item can be selected at a time.
@@ -648,7 +554,6 @@ security_level:
 
 Radio lists support the same methods for defining the options as the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
-<a name="field-balloon"></a>
 ### Balloon Selector
 
 `balloon-selector` - renders a list, where only one item can be selected at a time.
@@ -665,7 +570,6 @@ gender:
 
 Balloon selectors support the same methods for defining the options as the [dropdown field type](#field-dropdown).
 
-<a name="field-checkbox"></a>
 ### Checkbox
 
 `checkbox` - renders a single checkbox.
@@ -677,7 +581,6 @@ show_content:
     default: true
 ```
 
-<a name="field-checkboxlist"></a>
 ### Checkbox List
 
 `checkboxlist` - renders a list of checkboxes.
@@ -698,7 +601,6 @@ permissions:
 
 Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
-<a name="field-switch"></a>
 ### Switch
 
 `switch` - renders a switchbox.
@@ -712,7 +614,6 @@ show_content:
     off: myauthor.myplugin::lang.models.mymodel.show_content.off
 ```
 
-<a name="field-section"></a>
 ### Section
 
 `section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
@@ -724,7 +625,6 @@ user_details_section:
     comment: This section contains details about the user.
 ```
 
-<a name="field-partial"></a>
 ### Partial
 
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
@@ -737,7 +637,6 @@ content:
 
 >**NOTE:** If your partial field is meant only for display and will not be providing a value to the server to be stored then it is best practice to prefix the field name with an underscore (`_`) [to prevent the  FormController` behavior from attempting to process it](#prevent-field-submission)
 
-<a name="field-hint"></a>
 ### Hint
 
 `hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
@@ -748,7 +647,6 @@ content:
     path: content_field
 ```
 
-<a name="field-widget"></a>
 ### Widget
 
 `widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
@@ -759,12 +657,12 @@ blog_content:
     size: huge
 ```
 
-<a name="form-widgets"></a>
 ## Form widgets
 
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets#form-widgets) article.
 
-<div class="content-list collection-method-list" markdown="1">
+<div class="content-list collection-method-list">
+
 - [Code editor](#widget-codeeditor)
 - [Color picker](#widget-colorpicker)
 - [Data table](#widget-datatable)
@@ -779,9 +677,9 @@ There are various form widgets included as standard, although it is common for p
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Sensitive](#widget-sensitive)
 - [Tag list](#widget-taglist)
+
 </div>
 
-<a name="widget-codeeditor"></a>
 ### Code editor
 
 `codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the backend.
@@ -792,12 +690,6 @@ css_content:
     size: huge
     language: html
 ```
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -818,7 +710,6 @@ Option | Description
 `useSoftTabs` | if `true`, use soft tabs (spaces) for indentation. Default: `true`.
 `wrapWords` | breaks long lines on to a new line. Default `true`.
 
-<a name="widget-colorpicker"></a>
 ### Color picker
 `colorpicker` - renders controls to select a color value.
 
@@ -827,12 +718,6 @@ color:
     label: Background
     type: colorpicker
 ```
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -871,7 +756,6 @@ public function myColorList($fieldName, $value, $formData)
 
 If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors. You can also define a custom set of default colors to be used in all color pickers that do not have the `availableColors` field specified. This can be managed in the **Customize back-end** area of the Settings.
 
-<a name="widget-datatable"></a>
 ### Data table
 
 `datatable` - renders an editable table of records, formatted as a grid. Cell content can be editable directly in the grid, allowing for the management of several rows and columns of information.
@@ -899,12 +783,6 @@ data:
 #### Table configuration
 
 The following lists the configuration values of the data table widget itself.
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------ | -----------
@@ -942,12 +820,6 @@ columns:
         title: Name
 ```
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------ | -----------
 `type` | the input type for this column's cells. Must be one of the following: `string`, `checkbox`, `dropdown` or `autocomplete`.
@@ -961,12 +833,6 @@ Option | Description
 
 Column cells can be validated against the below types of validation. Validation should be specified as an array, with the type of validation used as a key, and an optional message specified as the `message` attrbute for that validation.
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Validation | Description
 ---------- | -----------
 `float` | Validates the data as a float. An optional boolean `allowNegative` attribute can be provided, allowing for negative float numbers.
@@ -975,7 +841,6 @@ Validation | Description
 `regex` | Validates the data against a regular expression. A string `pattern` attribute must be provided, defining the regular expression to test the data against.
 `required` | Validates that the data must be entered before saving.
 
-<a name="widget-datepicker"></a>
 ### Date picker
 
 `datepicker` - renders a text field used for selecting date and times.
@@ -987,12 +852,6 @@ published_at:
     mode: date
 ```
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `mode` | the expected result, either date, datetime or time. Default: `datetime`.
@@ -1003,7 +862,6 @@ Option | Description
 `showWeekNumber` | show week numbers at head of row. Default: `false`
 `ignoreTimezone` | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
 
-<a name="widget-fileupload"></a>
 ### File upload
 
 `fileupload` - renders a file uploader for images or regular files.
@@ -1026,12 +884,6 @@ avatar:
         extension: auto
 ```
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `mode` | the expected file type, either file or image. Default: image.
@@ -1047,7 +899,6 @@ Option | Description
 
 > **NOTE:** Unlike the [Media Finder FormWidget](#widget-mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
 
-<a name="widget-markdowneditor"></a>
 ### Markdown editor
 
 `markdown` - renders a basic editor for markdown formatted text.
@@ -1063,7 +914,6 @@ Option | Description
 ------------- | -------------
 `mode` | the expected view mode, either tab or split. Default: `tab`.
 
-<a name="widget-mediafinder"></a>
 ### Media finder
 
 `mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
@@ -1075,12 +925,6 @@ background_image:
     mode: image
 ```
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `mode` | the expected file type, either file or image. Default: file.
@@ -1090,7 +934,6 @@ Option | Description
 
 > **NOTE:** Unlike the [File Upload FormWidget](#widget-fileupload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
 
-<a name="widget-nestedform"></a>
 ### Nested Form
 
 `nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained.
@@ -1137,7 +980,6 @@ Option | Description
 `form`  | same as in [form definition](#form-fields)
 `usePanelStyles` | defines if a panel like look is applied or not (defaults `true`)
 
-<a name="widget-recordfinder"></a>
 ### Record finder
 
 `recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationships only.
@@ -1161,12 +1003,6 @@ user:
     modelClass: Winter\User\Models\User
 ```
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `keyFrom` | the name of column to use in the relation used for key. Default: `id`.
@@ -1183,7 +1019,6 @@ Option | Description
 `useRelation` | Flag for using the name of the field as a relation name to interact with directly on the parent model. Default: `true`. Set to `false` in order to bypass the relationship logic and only store and retrieve the selected record using its primary key. Best suited for use in [`jsonable` attributes](../database/model#property-jsonable) or where the relationship is unabled to be loaded. **NOTE:** When this is disabled the field name **MUST** be the actual name of the field where the value will be stored / retrieved, it cannot be the name of a relationship.
 **modelClass** | Class of the model to use for listing records when useRelation = false
 
-<a name="widget-relation"></a>
 ### Relation
 
 `relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list. The label used for displaying each relation is sourced by the `nameFrom` or `select` definition.
@@ -1206,12 +1041,6 @@ user:
 
 You can also provide a model scope to use to filter the results with the `scope` property.
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `nameFrom` | a model attribute name used for displaying the relation label. Default: `name`.
@@ -1220,7 +1049,6 @@ Option | Description
 `emptyOption` | text to display when there is no available selections.
 `scope` | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
 
-<a name="widget-repeater"></a>
 ### Repeater
 
 `repeater` - renders a repeating set of form fields defined within.
@@ -1241,12 +1069,6 @@ extra_information:
                 label: This field is the title when collapsed
                 type: text
 ```
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -1319,7 +1141,6 @@ The `style` attribute of the repeater widget controls the behaviour of repeater 
 - `collapsed:` Shows all the repeater items as collapsed (minimised) on page load. The user can collapse or expand items as they wish.
 - `accordion:` Shows only the first repeater item as expanded on load, with all others collapsed. When another item is exanded, any other expanded item is collapsed, effectively making it so that only one item is expanded at a time.
 
-<a name="widget-richeditor"></a>
 ### Rich editor / WYSIWYG
 
 `richeditor` - renders a visual editor for rich formatted text, also known as a WYSIWYG editor.
@@ -1343,7 +1164,6 @@ fullscreen, bold, italic, underline, strikeThrough, subscript, superscript, font
 
 > **NOTE**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
 
-<a name="widget-sensitive"></a>
 ### Sensitive
 
 `sensitive` - renders a revealable password field that can be used for sensitive information such as API keys or secrets, configuration values, etc. A sensitive field can be toggled visible and hidden at the user's request.
@@ -1357,19 +1177,12 @@ api_secret:
     hideOnTabChange: true
 ```
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `allowCopy` | adds a "copy" action to the sensitive field, allowing the user to copy the password without revealing it. Default: `false`
 `hiddenPlaceholder` | sets the placeholder text that is used to simulate a hidden, unrevealed value. You can change this to a long or short string to emulate different length values. Default: `__hidden__`
 `hideOnTabChange` | if true, the sensitive field will automatically be hidden if the user navigates to a different tab, or minimizes their browser. Default: `true`
 
-<a name="widget-taglist"></a>
 ### Tag list
 
 `taglist` - renders a field for inputting a list of tags.
@@ -1399,12 +1212,6 @@ tags:
     mode: relation
 ```
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `mode` | controls how the value is returned, either string, array or relation. Default: `string`
@@ -1414,14 +1221,12 @@ Option | Description
 `nameFrom` | if relation mode is used, a model attribute name for displaying the tag name. Default: `name`
 `useKey` | use the key instead of value for saving and reading data. Default: `false`
 
-<a name="form-views"></a>
 ## Form views
 
 For each page your form supports [Create](#form-create-page), [Update](#form-update-page) and [Preview](#form-preview-page) you should provide a [view file](#introduction) with the corresponding name - `create.htm`, `update.htm` and `preview.htm`.
 
 The form behavior adds two methods to the controller class: `formRender` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
 
-<a name="form-create-view"></a>
 ### Create view
 
 The **create.htm** view represents the Create page that allows users to create new records. A typical Create page contains breadcrumbs, the form itself, and the form buttons. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical create.htm form.
@@ -1453,7 +1258,6 @@ The **create.htm** view represents the Create page that allows users to create n
 <?= Form::close() ?>
 ```
 
-<a name="form-update-view"></a>
 ### Update view
 
 The **update.htm** view represents the Update page that allows users to update or delete existing records. A typical Update page contains breadcrumbs, the form itself, and the form buttons. The Update page is very similar to the Create page, but usually has the Delete button. The `data-request` attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical update.htm form.
@@ -1492,7 +1296,6 @@ The **update.htm** view represents the Update page that allows users to update o
 <?= Form::close() ?>
 ```
 
-<a name="form-preview-view"></a>
 ### Preview view
 
 The **preview.htm** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.htm form.
@@ -1503,12 +1306,10 @@ The **preview.htm** view represents the Preview page that allows users to previe
 </div>
 ```
 
-<a name="field-conditions"></a>
 ## Applying conditions to fields
 
 Sometimes you may want to manipulate the value or appearance of a form field under certain conditions, for example, you may want to hide an input if a checkbox is ticked. There are a few ways you can do this, either by using the trigger API or field dependencies. The input preset converter is primarily used to converting field values. These options are described in more detail below.
 
-<a name="field-input-preset"></a>
 ### Input preset converter
 
 The input preset converter is defined with the `preset` [form field option](#form-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
@@ -1536,12 +1337,6 @@ slug:
 
 The following options are available for the `preset` option:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `field` | defines the other field name to source the value from.
@@ -1558,7 +1353,6 @@ Type | Description
 `camel` | formats the copied value with camelCase
 `file` | formats the copied value as a file name with whitespace replaced with dashes
 
-<a name="field-trigger-events"></a>
 ### Trigger events
 
 Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
@@ -1581,11 +1375,6 @@ send_at:
 
 In the above example the `send_at` form field will only be shown if the `is_delayed` field is checked. In other words, the field will show (action) if the other form input (field) is checked (condition). The `trigger` definition specifies these options:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -1593,7 +1382,6 @@ Option | Description
 `field` | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#widget-repeater), only fields in that same [repeater widget](#widget-repeater) will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a [repeater widget](#widget-repeater) or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
 `condition` | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: `checked`, `unchecked`, `value[somevalue]`. To match multiple values, the following syntax can be used: `value[somevalue][othervalue]`.
 
-<a name="field-dependencies"></a>
 ### Field dependencies
 
 Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field. Examples below:
@@ -1673,7 +1461,6 @@ public function filterFields($fields, $context = null)
 
 In the above example, both the `provider1` and `provider2` fields will automatically refresh whenever either the `dnsprovider` or `registrar` fields are modified. When this occurs, the full form cycle will be processed, which means that any logic defined in `filterFields` methods would be run again, allowing you to filter which fields get displayed dynamically.
 
-<a name="prevent-field-submission"></a>
 ### Preventing a field from being submitted
 
 Sometimes you may need to prevent a field from being submitted. In order to do that, just add an underscore (\_) before the name of the field in the form configuration file. Form fields beginning with an underscore are purged automatically and no longer saved to the model.
@@ -1688,19 +1475,16 @@ _map:
     type: mapviewer
 ```
 
-<a name="extend-form-behavior"></a>
 ## Extending form behavior
 
 Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
 
-<a name="form-model-events"></a>
 ### Form Model Events
 
 Several controller methods can called at various points during the lifecycle of the `FormController` to provide injection points for custom logic. See the [API docs](/docs/api/develop/Backend/Behaviors/FormController.html#method_formBeforeSave) for a full reference of what they are. Generally speaking any method in the API docs prefixed with `form` can be overridden in your controller to change the default behaviour or act as an injection point for custom logic.
 
 > **NOTE:** It may be more desirable to use [model events](/docs/events/event/model.beforeSave) to implement your logic instead as those are always run when applicable if the model is being affected, no matter where the interaction with the model is occuring.
 
-<a name="overriding-action"></a>
 ### Overriding controller action
 
 You can use your own logic for the `create`, `update` or `preview` action method in the controller, then optionally call the Form behavior parent method.
@@ -1717,7 +1501,6 @@ public function update($recordId, $context = null)
 }
 ```
 
-<a name="overriding-redirect"></a>
 ### Overriding controller redirect
 
 You can specify the URL to redirect to after the model is saved by overriding the `formGetRedirectUrl` method. This method returns the location to redirect to with relative URLs being treated as backend URLs.
@@ -1729,7 +1512,6 @@ public function formGetRedirectUrl($context = null, $model = null)
 }
 ```
 
-<a name="extend-model-query"></a>
 ### Extending model query
 
 The lookup query for the form [database model](../database/model) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
@@ -1741,7 +1523,6 @@ public function formExtendQuery($query)
 }
 ```
 
-<a name="extend-form-fields"></a>
 ### Extending form fields
 
 You can extend the fields of another controller from outside by calling the `extendFormFields` static method on the controller class. This method can take three arguments, **$form** will represent the Form widget object, **$model** represents the model used by the form and **$context** is a string containing the form context. Take this controller for example:
@@ -1802,7 +1583,6 @@ Method | Description
 
 Each method takes an array of fields similar to the [form field configuration](#form-fields).
 
-<a name="filter-form-fields"></a>
 ### Filtering form fields
 
 You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields) and **$context** represents the active form context.
@@ -1827,7 +1607,6 @@ public function filterFields($fields, $context = null)
 
 The above example will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies).
 
-<a name="validate-form-fields"></a>
 ## Validating form fields
 
 To validate the fields of your form you can make use of the [Validation](../database/traits#validation) trait in your model.

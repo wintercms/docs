@@ -1,20 +1,9 @@
 # Filesystem / CDN
 
-- [Introduction](#introduction)
-- [Configuration](#configuration)
-- [Basic usage](#basic-usage)
-    - [Obtaining disk instances](#obtaining-disk-instances)
-    - [Retrieving files](#retrieving-files)
-    - [Storing files](#storing-files)
-    - [Deleting files](#deleting-files)
-    - [Directories](#directories)
-
-<a name="introduction"></a>
 ## Introduction
 
 Winter provides a powerful filesystem abstraction thanks to Laravel and the wonderful [Flysystem](https://github.com/thephpleague/flysystem) PHP package. The Flysystem integration provides simple to use drivers for working with local filesystems, Amazon S3, and Rackspace Cloud Storage. Even better, it's amazingly simple to switch between these storage options as the API remains the same for each system.
 
-<a name="configuration"></a>
 ## Configuration
 
 The filesystem configuration file is located at `config/filesystems.php`. Within this file you may configure all of your "disks". Each disk represents a particular storage driver and storage location. Example configurations for each supported driver is included in the configuration file. So, simply modify the configuration to reflect your storage preferences and credentials.
@@ -32,10 +21,8 @@ Storage::disk('local')->put('file.txt', 'Contents');
 
 Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](https://github.com/wintercms/wn-drivers-plugin).
 
-<a name="basic-usage"></a>
 ## Basic usage
 
-<a name="obtaining-disk-instances"></a>
 ### Obtaining disk instances
 
 The `Storage` facade may be used to interact with any of your configured disks. For example, you may use the `put` method on the facade to store an avatar on the default disk. If you call methods on the `Storage` facade without first calling the `disk` method, the method call will automatically be passed to the default disk:
@@ -56,7 +43,6 @@ $disk = Storage::disk('s3');
 $contents = Storage::disk('local')->get('file.jpg')
 ```
 
-<a name="retrieving-files"></a>
 ### Retrieving files
 
 The `get` method may be used to retrieve the contents of a given file. The raw string contents of the file will be returned by the method:
@@ -85,7 +71,6 @@ The `lastModified` method returns the UNIX timestamp of the last time the file w
 $time = Storage::lastModified('file1.jpg');
 ```
 
-<a name="storing-files"></a>
 ### Storing files
 
 The `put` method may be used to store a file on disk. You may also pass a PHP `resource` to the `put` method, which will use Flysystem's underlying stream support. Using streams is greatly recommended when dealing with large files:
@@ -118,7 +103,6 @@ Storage::prepend('file.log', 'Prepended Text');
 Storage::append('file.log', 'Appended Text');
 ```
 
-<a name="deleting-files"></a>
 ### Deleting files
 
 The `delete` method accepts a single filename or an array of files to remove from the disk:
@@ -129,7 +113,6 @@ Storage::delete('file.jpg');
 Storage::delete(['file1.jpg', 'file2.jpg']);
 ```
 
-<a name="directories"></a>
 ### Directories
 
 #### Get all files within a directory

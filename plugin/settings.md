@@ -1,20 +1,9 @@
 # Plugin Settings & Configuration
 
-- [Introduction](#introduction)
-- [Database settings](#database-settings)
-    - [Writing to a settings model](#writing-settings)
-    - [Reading from a settings model](#reading-settings)
-- [Backend settings pages](#backend-pages)
-    - [Settings link registration](#link-registration)
-    - [Setting the page navigation context](#settings-page-context)
-- [File-based configuration](#file-configuration)
-
-<a name="introduction"></a>
 ## Introduction
 
 There are two ways to configure plugins - with backend settings forms and with configuration files. Using database settings with backend pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
 
-<a name="database-settings"></a>
 ## Database settings
 
 You can create models for storing settings in the database by implementing the `SettingsModel` behavior in a model class. This model can be used directly for creating the backend settings form. You don't need to create a database table and a controller for creating the backend settings forms based on the settings model.
@@ -54,7 +43,6 @@ The `$settingsFields` property is required if are going to build a backend setti
 
 Settings models [can be registered](#backend-pages) to appear on the **backend Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 
-<a name="writing-settings"></a>
 ### Writing to a settings model
 
 The settings model has the static `set` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
@@ -76,7 +64,6 @@ $settings->api_key = 'ABCD';
 $settings->save();
 ```
 
-<a name="reading-settings"></a>
 ### Reading from a settings model
 
 The settings model has the static `get` method that enables you to load individual properties. Also, when you instantiate a model with the `instance` method, it loads the properties from the database and you can access them directly.
@@ -92,12 +79,10 @@ echo Settings::get('api_key');
 echo Settings::get('is_activated', true);
 ```
 
-<a name="backend-pages"></a>
 ## Backend settings pages
 
 The backend contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
 
-<a name="link-registration"></a>
 ### Settings link registration
 
 The backend settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific backend page, or create a link to a settings model. The next example shows how to create a link to a backend page.
@@ -143,7 +128,6 @@ public function registerSettings()
 
 The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
 
-<a name="settings-page-context"></a>
 ### Setting the page navigation context
 
 Just like [setting navigation context in the controller](../backend/controllers-ajax#navigation-context), Backend settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
@@ -162,7 +146,6 @@ public function __construct()
 
 The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the backend settings page](#link-registration).
 
-<a name="file-configuration"></a>
 ## File-based configuration
 
 Plugins can have a configuration file `config.php` in the `config` subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file `plugins/acme/demo/config/config.php`:
@@ -186,7 +169,7 @@ use Config;
 $maxItems = Config::get('acme.demo::maxItems', 50);
 ```
 
-A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`, or `config/acme/todo/dev/config.php` for an environment specific override (in this case `dev`). 
+A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`, or `config/acme/todo/dev/config.php` for an environment specific override (in this case `dev`).
 
 > **NOTE:** In order for the config override to work, the plugin must contain a default config file (i.e. `plugins/author/plugin/config/config.php`. Even if you expect all configuration to come from the project override instead of the default configuration file it is still **highly** recommended that a default configuration file is provided as a form of documentation as to what configuration options are available to be modified on the project level.
 

@@ -1,41 +1,11 @@
 # Database: Relationships
 
-- [Introduction](#introduction)
-- [Defining relationships](#defining-relationships)
-    - [Detailed definitions](#detailed-relationships)
-- [Relationship types](#relationship-types)
-    - [One To One](#one-to-one)
-    - [One To Many](#one-to-many)
-    - [Many To Many](#many-to-many)
-    - [Has Many Through](#has-many-through)
-    - [Has One Through](#has-one-through)
-- [Polymorphic relations](#polymorphic-relations)
-    - [One To One](#one-to-one-polymorphic-relations)
-    - [One To Many](#one-to-many-polymorphic-relations)
-    - [Many To Many](#many-to-many-polymorphic-relations)
-    - [Custom Polymorphic Types](#custom-polymorphic-types)
-- [Querying relations](#querying-relations)
-    - [Access via relationship method](#querying-method)
-    - [Access via dynamic property](#querying-dynamic-property)
-    - [Querying relationship existence](#querying-existence)
-- [Eager loading](#eager-loading)
-    - [Constraining eager loads](#constraining-eager-loads)
-    - [Lazy eager loading](#lazy-eager-loading)
-- [Inserting related models](#inserting-related-models)
-    - [Insert via relationship method](#inserting-method)
-    - [Insert via dynamic property](#inserting-dynamic-property)
-    - [Many To Many relations](#inserting-many-to-many-relations)
-    - [Touching parent timestamps](#touching-parent-timestamps)
-- [Deferred binding](#deferred-binding)
-
-<a name="introduction"></a>
 ## Introduction
 
 Database tables are often related to one another. For example, a blog post may have many comments, or an order could be related to the user who placed it. Winter makes managing and working with these relationships easy and supports several different types of relationships.
 
 > **NOTE:** If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, Winter cannot connect the relations.
 
-<a name="defining-relationships"></a>
 ## Defining relationships
 
 Model relationships are defined as properties on your model classes. An example of defining relationships:
@@ -63,7 +33,6 @@ $user->posts;
 
 > **NOTE**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. The `load($relation)` method won't force cache to flush. To reload the memory cache use the `reloadRelations()` or the `reload()` methods on the model object.
 
-<a name="detailed-relationships"></a>
 ### Detailed definitions
 
 Each definition can be an array where the key is the relation name and the value is a detail array. The detail array's first value is always the related model class name and all other values are parameters that must have a key name.
@@ -75,12 +44,6 @@ public $hasMany = [
 ```
 
 The following are parameters that can be used with all relations:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Argument | Description
 ------------- | -------------
@@ -135,7 +98,6 @@ public $belongsToMany = [
 ];
 ```
 
-<a name="relationship-types"></a>
 ## Relationship types
 
 The following relations types are available:
@@ -147,7 +109,6 @@ The following relations types are available:
 - [Polymorphic relations](#polymorphic-relations)
 - [Many To Many Polymorphic relations](#many-to-many-polymorphic-relations)
 
-<a name="one-to-one"></a>
 ### One To One
 
 A one-to-one relationship is a very basic relation. For example, a `User` model might be associated with one `Phone`. To define this relationship, we add a `phone` entry to the `$hasOne` property on the `User` model.
@@ -237,7 +198,6 @@ public $belongsTo = [
 ];
 ```
 
-<a name="one-to-many"></a>
 ### One To Many
 
 A one-to-many relationship is used to define relationships where a single model owns any amount of other models. For example, a blog post may have an infinite number of comments. Like all other relationships, one-to-many relationships are defined adding an entry to the `$hasMany` property on your model:
@@ -314,7 +274,6 @@ public $belongsTo = [
 ];
 ```
 
-<a name="many-to-many"></a>
 ### Many To Many
 
 Many-to-many relations are slightly more complicated than `hasOne` and `hasMany` relationships. An example of such a relationship is a user with many roles, where the roles are also shared by other users. For example, many users may have the role of "Admin". To define this relationship, three database tables are needed: `users`, `roles`, and `role_user`. The `role_user` table is derived from the alphabetical order of the related model names, and contains the `user_id` and `role_id` columns.
@@ -428,12 +387,6 @@ public $belongsToMany = [
 
 These are the parameters supported for `belongsToMany` relations:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Argument | Description
 ------------- | -------------
 `table` | the name of the join table.
@@ -445,7 +398,6 @@ Argument | Description
 `pivotModel` | specify a custom model class to return when accessing the pivot relation. Defaults to `Winter\Storm\Database\Pivot`. Note: `pivot` still needs to be defined in order to include the pivot columns in any database queries.
 `timestamps` | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
 
-<a name="has-many-through"></a>
 ### Has Many Through
 
 The has-many-through relationship provides a convenient short-cut for accessing distant relations via an intermediate relation. For example, a `Country` model might have many `Post` models through an intermediate `User` model. In this example, you could easily gather all blog posts for a given country. Let's look at the tables required to define this relationship:
@@ -496,7 +448,6 @@ public $hasManyThrough = [
 ];
 ```
 
-<a name="has-one-through"></a>
 ### Has One Through
 
 The has-one-through relationship links models through a single intermediate relation. For example, if each supplier has one user, and each user is associated with one user history record, then the supplier model may access the user's history through the user. Let's look at the database tables necessary to define this relationship:
@@ -542,12 +493,10 @@ public $hasOneThrough = [
 ];
 ```
 
-<a name="polymorphic-relations"></a>
 ### Polymorphic relations
 
 Polymorphic relations allow a model to belong to more than one other model on a single association.
 
-<a name="one-to-one-polymorphic-relations"></a>
 ### One To One
 
 #### Table structure
@@ -617,7 +566,6 @@ $imageable = $photo->imageable;
 
 The `imageable` relation on the `Photo` model will return either a `Staff` or `Product` instance, depending on which type of model owns the photo.
 
-<a name="one-to-many-polymorphic-relations"></a>
 ### One To Many
 
 #### Table Structure
@@ -699,7 +647,6 @@ $comment->commentable = $video;
 $comment->save();
 ```
 
-<a name="many-to-many-polymorphic-relations"></a>
 ### Many To Many
 
 #### Table structure
@@ -772,7 +719,6 @@ foreach ($tag->videos as $video) {
 }
 ```
 
-<a name="custom-polymorphic-types"></a>
 #### Custom Polymorphic types
 
 By default, the fully qualified class name is used to store the related model type. For instance, given the example above where a `Photo` may belong to `Staff` or a `Product`, the default `imageable_type` value is either `Acme\Blog\Models\Staff` or `Acme\Blog\Models\Product` respectively.
@@ -790,7 +736,6 @@ Relation::morphMap([
 
 The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
 
-<a name="querying-relations"></a>
 ## Querying relations
 
 Since all types of Model relationships can be called via functions, you may call those functions to obtain an instance of the relationship without actually executing the relationship queries. In addition, all types of relationships also serve as [query builders](query), allowing you to continue to chain constraints onto the relationship query before finally executing the SQL against your database.
@@ -806,7 +751,6 @@ class User extends Model
 }
 ```
 
-<a name="querying-method"></a>
 ### Access via relationship method
 
 You may query the **posts** relationship and add additional constraints to the relationship using the `posts` method. This gives you the ability to chain any of the [query builder](query) methods on the relationship.
@@ -819,7 +763,6 @@ $posts = $user->posts()->where('is_active', 1)->get();
 $post = $user->posts()->first();
 ```
 
-<a name="querying-dynamic-property"></a>
 ### Access via dynamic property
 
 If you do not need to add additional constraints to a relationship query, you may simply access the relationship as if it were a property. For example, continuing to use our `User` and `Post` example models, we may access all of a user's posts using the `$user->posts` property instead.
@@ -834,7 +777,6 @@ foreach ($user->posts as $post) {
 
 Dynamic properties are "lazy loading", meaning they will only load their relationship data when you actually access them. Because of this, developers often use [eager loading](#eager-loading) to pre-load relationships they know will be accessed after loading the model. Eager loading provides a significant reduction in SQL queries that must be executed to load a model's relations.
 
-<a name="querying-existence"></a>
 ### Querying relationship existence
 
 When accessing the records for a model, you may wish to limit your results based on the existence of a relationship. For example, imagine you want to retrieve all blog posts that have at least one comment. To do so, you may pass the name of the relationship to the `has` method:
@@ -867,7 +809,6 @@ $posts = Post::whereHas('comments', function ($query) {
 })->get();
 ```
 
-<a name="eager-loading"></a>
 ## Eager loading
 
 When accessing relationships as properties, the relationship data is "lazy loaded". This means the relationship data is not actually loaded until you first access the property. However, models can "eager load" relationships at the time you query the parent model. Eager loading alleviates the N + 1 query problem. To illustrate the N + 1 query problem, consider a `Book` model that is related to `Author`:
@@ -927,7 +868,6 @@ To eager load nested relationships, you may use "dot" syntax. For example, let's
 $books = Book::with('author.contacts')->get();
 ```
 
-<a name="constraining-eager-loads"></a>
 ### Constraining eager loads
 
 Sometimes you may wish to eager load a relationship, but also specify additional query constraints for the eager loading query. Here's an example:
@@ -950,7 +890,6 @@ $users = User::with([
 ])->get();
 ```
 
-<a name="lazy-eager-loading"></a>
 ### Lazy eager loading
 
 Sometimes you may need to eager load a relationship after the parent model has already been retrieved. For example, this may be useful if you need to dynamically decide whether to load related models:
@@ -973,12 +912,10 @@ $books->load([
 ]);
 ```
 
-<a name="inserting-related-models"></a>
 ## Inserting related models
 
 Just like you would [query a relationship](#querying-relations), Winter supports defining a relationship using a method or dynamic property approach. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship.
 
-<a name="inserting-method"></a>
 ### Insert via relationship method
 
 Winter provides convenient methods for adding new models to relationships. Primarily models can be added to a relationship or removed from a relationship. In each case the relationship is associated or disassociated respectively.
@@ -1058,7 +995,6 @@ $comment = $post->comments()->create([
 
 Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model#mass-assignment) as the attributes in the PHP array are restricted by the model's "fillable" definition.
 
-<a name="inserting-dynamic-property"></a>
 ### Insert via dynamic property
 
 Relationships can be set directly via their properties in the same way you would access them. Setting a relationship using this approach will overwrite any relationship that existed previously. The model should be saved afterwards like you would with any attribute.
@@ -1105,7 +1041,6 @@ $post->comments = [$comment];
 $post->save();
 ```
 
-<a name="inserting-many-to-many-relations"></a>
 ### Many To Many relations
 
 #### Attaching / Detaching
@@ -1158,7 +1093,6 @@ You may also pass additional intermediate table values with the IDs:
 $user->roles()->sync([1 => ['expires' => true], 2, 3]);
 ```
 
-<a name="touching-parent-timestamps"></a>
 ### Touching parent timestamps
 
 When a model `belongsTo` or `belongsToMany` another model, such as a `Comment` which belongs to a `Post`, it is sometimes helpful to update the parent's timestamp when the child model is updated. For example, when a `Comment` model is updated, you may want to automatically "touch" the `updated_at` timestamp of the owning `Post`. Just add a `touches` property containing the names of the relationships to the child model:
@@ -1190,14 +1124,12 @@ $comment->text = 'Edit to this comment!';
 $comment->save();
 ```
 
-<a name="deferred-binding"></a>
 ## Deferred binding
 
 Deferred bindings allows you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
 
 You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the backend [Form behavior](../backend/forms) automatically, but you may want to use this feature in other places.
 
-<a name="deferred-session-key"></a>
 ### Generating a session key
 
 The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that both [backend forms](../backend/forms) and the [frontend `form()` function](../markup/function-form) generates a hidden field containing the session key automatically.
@@ -1206,7 +1138,6 @@ The session key is required for deferred bindings. You can think of a session ke
 $sessionKey = uniqid('session_key', true);
 ```
 
-<a name="defer-binding"></a>
 ### Defer a relation binding
 
 The comment in the next example will not be added to the post unless the post is saved.
@@ -1222,7 +1153,6 @@ $post->comments()->add($comment, $sessionKey);
 
 > **NOTE**: the `$post` object has not been saved but the relationship will be created if the saving happens.
 
-<a name="defer-unbinding"></a>
 ### Defer a relation unbinding
 
 The comment in the next example will not be deleted unless the post is saved.
@@ -1233,7 +1163,6 @@ $post = Post::find(1);
 $post->comments()->remove($comment, $sessionKey);
 ```
 
-<a name="list-all-bindings"></a>
 ### List all bindings
 
 Use the `withDeferred` method of a relation to load all records, including deferred. The results will include existing relations as well.
@@ -1242,7 +1171,6 @@ Use the `withDeferred` method of a relation to load all records, including defer
 $post->comments()->withDeferred($sessionKey)->get();
 ```
 
-<a name="cancel-all-bindings"></a>
 ### Cancel all bindings
 
 It's a good idea to cancel deferred binding and delete the slave objects rather than leaving them as orphans.
@@ -1251,7 +1179,6 @@ It's a good idea to cancel deferred binding and delete the slave objects rather 
 $post->cancelDeferred($sessionKey);
 ```
 
-<a name="commit-all-bindings"></a>
 ### Commit all bindings
 
 You can commit (bind or unbind) all deferred bindings when you save the master model by providing the session key with the second argument of the `save` method.
@@ -1268,7 +1195,6 @@ The same approach works with the model's `create` method:
 $post = Post::create(['title' => 'First blog post'], $sessionKey);
 ```
 
-<a name="lazily-commit-bindings"></a>
 ### Lazily commit bindings
 
 If you are unable to supply the `$sessionKey` when saving, you can commit the bindings at any time using the the next code:
@@ -1277,7 +1203,6 @@ If you are unable to supply the `$sessionKey` when saving, you can commit the bi
 $post->commitDeferred($sessionKey);
 ```
 
-<a name="cleanup-bindings"></a>
 ### Clean up orphaned bindings
 
 Destroys all bindings that have not been committed and are older than 1 day:
@@ -1288,7 +1213,6 @@ Winter\Storm\Database\Models\DeferredBinding::cleanUp(1);
 
 > **NOTE:** Winter automatically destroys deferred bindings that are older than 5 days. It happens when a backend user logs into the system.
 
-<a name="disable-deferred-binding"></a>
 ### Disable Deferred Binding
 
 Sometimes you might need to disable deferred binding entirely for a given model, for instance if you are loading it from a separate database connection. In order to do that, you need to make sure that the model's `sessionKey` property is `null` before the pre and post deferred binding hooks in the internal save method are run. To do that, you can bind to the model's `model.saveInternal` event:

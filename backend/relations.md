@@ -1,18 +1,5 @@
 # Backend Relations
 
-- [Introduction](#introduction)
-- [Configuring the relation behavior](#configuring-relation)
-- [Relationship types](#relationship-types)
-    - [Has many](#has-many)
-    - [Belongs to many](#belongs-to-many)
-    - [Belongs to many (with Pivot Data)](#belongs-to-many-pivot)
-    - [Belongs to](#belongs-to)
-    - [Has one](#has-one)
-- [Displaying a relation manager](#relation-display)
-- [Extending relation behavior](#extend-relation-behavior)
-- [Overriding relation partials](#override-relation-partials)
-
-<a name="introduction"></a>
 ## Introduction
 
 The **Relation behavior** is a controller [behavior](../services/behaviors) used for easily managing complex [model](../database/model) relationships on a page. It is not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
@@ -36,7 +23,6 @@ class Projects extends Controller
 
 > **NOTE:** The relation behavior is frequently used together with the [form behavior](../backend/forms).
 
-<a name="configuring-relation"></a>
 ## Configuring the relation behavior
 
 The relation behaviour will load its configuration in the YAML format from a `config_relation.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_relation.yaml`) by default.
@@ -93,12 +79,6 @@ items:
 
 The following options are then used for each relationship name definition:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `label` | a label for the relation, in the singular tense, required.
@@ -110,12 +90,6 @@ Option | Description
 `deferredBinding` | [defers all binding actions using a session key](../database/model#deferred-binding) when it is available. default: `false`
 
 These configuration values can be specified for the **view** or **manage** options, where applicable to the render type of list, form or both.
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Option | Type | Description
 ------------- | ------------- | -------------
@@ -132,12 +106,6 @@ Option | Type | Description
 
 These configuration values can be specified only for the **view** options.
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Type | Description
 ------------- | ------------- | -------------
 `showCheckboxes` | List | displays checkboxes next to each record.
@@ -149,18 +117,11 @@ Option | Type | Description
 
 These configuration values can be specified only for the **manage** options.
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Type | Description
 ------------- | ------------- | -------------
 `title` | Both | a popup title, can refer to a [localization string](../plugin/localization). <br/> Additionally, you can customize the title for each mode individually by setting this to an associative array, with the key being the mode and the value being the title used when displaying that mode. Eg: `form: acme.blog::lang.subcategory.FormTitle`.
 `context` | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
-<a name="relationship-types"></a>
 ## Relationship types
 
 How the relation manager is displayed depends on the relationship definition in the target model. The relationship type will also determine the configuration requirements, these are shown in **bold**. The following relationship types are available:
@@ -171,7 +132,6 @@ How the relation manager is displayed depends on the relationship definition in 
 - [Belongs to](#belongs-to)
 - [Has one](#has-one)
 
-<a name="has-many"></a>
 ### Has many
 
 1. Related records are displayed as a list (**view.list**).
@@ -198,7 +158,6 @@ comments:
         toolbarButtons: create|delete
 ```
 
-<a name="belongs-to-many"></a>
 ### Belongs to many
 
 1. Related records are displayed as a list (**view.list**).
@@ -224,7 +183,6 @@ roles:
         form: $/acme/user/models/role/fields.yaml
 ```
 
-<a name="belongs-to-many-pivot"></a>
 ### Belongs to many (with Pivot Data)
 
 1. Related records are displayed as a list (**view.list**).
@@ -277,7 +235,6 @@ teams:
                     label: Team color
 ```
 
-<a name="belongs-to"></a>
 ### Belongs to
 
 1. Related record is displayed as a preview form (**view.form**).
@@ -304,7 +261,6 @@ person:
         list: $/acme/user/models/person/columns.yaml
 ```
 
-<a name="has-one"></a>
 ### Has one
 
 1. Related record is displayed as a preview form (**view.form**).
@@ -331,7 +287,6 @@ phone:
         list: $/acme/user/models/phone/columns.yaml
 ```
 
-<a name="relation-display"></a>
 ## Displaying a relation manager
 
 Before relations can be managed on any page, the target model must first be initialized in the controller by calling the `initRelation` method.
@@ -357,7 +312,6 @@ You may instruct the relation manager to render in read only mode by passing the
 <?= $this->relationRender('comments', ['readOnly' => true]) ?>
 ```
 
-<a name="extend-relation-behavior"></a>
 ## Extending relation behavior
 
 Sometimes you may wish to modify the default relation behavior and there are several ways you can do this.
@@ -369,7 +323,6 @@ Sometimes you may wish to modify the default relation behavior and there are sev
 - [Extending the filter widgets](#extend-filter-widgets)
 - [Extending refresh results](#extend-refresh-results)
 
-<a name="extend-relation-config"></a>
 ### Extending relation configuration
 
 Provides an opportunity to manipulate the relation configuration. The following example can be used to inject a different columns.yaml file based on a property of your model.
@@ -388,7 +341,6 @@ public function relationExtendConfig($config, $field, $model)
 }
 ```
 
-<a name="extend-view-widget"></a>
 ### Extending the view widget
 
 Provides an opportunity to manipulate the view widget.
@@ -409,7 +361,6 @@ public function relationExtendViewWidget($widget, $field, $model)
 }
 ```
 
-<a name="remove-column"></a>
 #### How to remove a column
 Since the widget has not completed initializing at this point of the runtime cycle you can't call $widget->removeColumn(). The addColumns() method as described in the [ListController documentation](/docs/backend/lists#extend-list-columns) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the relationExtendViewWidget() method. The following example shows how to remove a column:
 
@@ -430,7 +381,6 @@ public function relationExtendViewWidget($widget, $field, $model)
 }
 ```
 
-<a name="extend-manage-widget"></a>
 ### Extending the manage widget
 
 Provides an opportunity to manipulate the manage widget of your relation.
@@ -446,7 +396,6 @@ public function relationExtendManageWidget($widget, $field, $model)
 }
 ```
 
-<a name="extend-pivot-widget"></a>
 ### Extending the pivot widget
 
 Provides an opportunity to manipulate the pivot widget of your relation.
@@ -462,7 +411,6 @@ public function relationExtendPivotWidget($widget, $field, $model)
 }
 ```
 
-<a name="extend-filter-widgets"></a>
 ### Extending the filter widgets
 
 There are two filter widgets that may be extended using the following methods, one for the view mode and one for the manage mode of the `RelationController`.
@@ -481,7 +429,6 @@ public function relationExtendManageFilterWidget($widget, $field, $model)
 
 Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [backend list documentation](/docs/backend/lists#extend-filter-scopes).
 
-<a name="extend-refresh-results"></a>
 ### Extending the refresh results
 
 The view widget is often refreshed when the manage widget makes a change, you can use this method to inject additional containers when this process occurs. Return an array with the extra values to send to the browser, eg:
@@ -497,7 +444,6 @@ public function relationExtendRefreshResults($field)
 }
 ```
 
-<a name="override-relation-partials"></a>
 ## Overriding relation partials
 
 Sometimes you may wish to override the [default relation partials](https://github.com/wintercms/winter/tree/develop/modules/backend/behaviors/relationcontroller/partials). To do so, create a file with the same name as the default partial, but prepend it with *_relation* and store it within your controllers directory. Your partial will be autodetected and used instead of the default one.

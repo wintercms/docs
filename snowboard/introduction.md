@@ -1,20 +1,13 @@
 # Snowboard.js - Winter JavaScript Framework
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Including the framework](#framework-script)
-- [Including the framework manually](#framework-script-manual)
-
 ![image](https://github.com/wintercms/docs/blob/main/images/header-snowboard.png?raw=true) {.img-responsive .frame}
 
-<a name="introduction"></a>
 ## Introduction
 
 Winter includes an optional JavaScript framework called **Snowboard**, which acts as an upgrade to the previous [AJAX Framework](../ajax/introduction) and provides many new useful features in an extensible fashion, whilst dropping previous hard dependencies to supercharge your projects even further.
 
 The framework takes advantage of the incredible enhancements made to the JavaScript ecosystem in recent years to provide a unique experience, available only on Winter.
 
-<a name="features"></a>
 ## Features
 
 - Rewritten AJAX and JavaScript framework, built from the ground-up using the latest JavaScript syntax (ES2015+) and functionality.
@@ -22,7 +15,6 @@ The framework takes advantage of the incredible enhancements made to the JavaScr
 - Easy, comprehensive extensibility and event handling.
 - Small footprint and full control over which core functionalities to include ensures your website loads quick.
 
-<a name="framework-script"></a>
 ## Including the framework
 
 > Before proceeding, please read the [Migration Guide](../snowboard/migration-guide), especially if you intend to use this framework on an existing project.
@@ -58,7 +50,6 @@ Or to include both the JavaScript AJAX and HTML data attribute request functiona
 {% snowboard request attr %}
 ```
 
-<a name="framework-script-manual"></a>
 ## Including the framework manually
 
 The following asset aliases have been created so that the framework can easily be included using the asset combiner:

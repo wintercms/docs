@@ -1,25 +1,5 @@
 # Maintainers Guide to the Galaxy
 
-- [Preface](#preface)
-- [Roles](#roles)
-- [Main Philosophy](#main-philosophy)
-- [Projects](#projects)
-    - [Winter CMS](#winter-cms)
-        - [Main Branches](#winter-cms-main-branches)
-        - [Milestones](#winter-cms-milestones)
-        - [Reviewing Issues and Pull Requests](#winter-cms-reviewing-issues-and-prs)
-        - [Merging Pull Requests](#winter-cms-merging-pull-requests)
-        - [Standard Workflow for Maintainers](#winter-cms-standard-workflow)
-        - [Release Process](#winter-cms-release-process)
-    - [First party plugins](#plugins)
-        - [Main Branches](#plugins-main-branches)
-        - [Milestones](#plugins-milestones)
-        - [Reviewing Issues and Pull Requests](#plugins-reviewing-issues-and-prs)
-        - [Merging Pull Requests](#plugins-merging-pull-requests)
-        - [Standard Workflow for Maintainers](#plugins-standard-workflow)
-        - [Release Process](#plugins-release-process)
-
-<a name="preface"></a>
 ## Preface
 
 This document immortalises the processes involved with maintaining the Winter CMS repositories. This is intended to give the maintainers of the project a clear idea as to how to review and manage the inflow of code and ensure the qualities and philosophies of Winter CMS and its first-party plugins are maintained.
@@ -28,7 +8,6 @@ The Winter CMS project is the result of a fork that occurred on March 5th, 2021 
 
 This document was originally written for October CMS, but has been repurposed for Winter CMS.
 
-<a name="roles"></a>
 ## Roles
 
 The project is considered a flat-level of management with equal responsibility of the project between all the maintainers. The current maintainers (as of October 11th, 2021) are as follows:
@@ -40,7 +19,6 @@ The project is considered a flat-level of management with equal responsibility o
 
 Luke Towers has been designated the Lead Maintainer by the maintainer group, as the longest-serving maintainer of October CMS.
 
-<a name="main-philosophy"></a>
 ## Main Philosophy
 
 Winter CMS operates under the philosophy that "Everything should be made as simple as possible, but not simpler", as it was for October CMS before it. This phrase has been attributed to Albert Einstein ([although this has been disputed](https://quoteinvestigator.com/2011/05/13/einstein-simple/)), and succinctly describes the ethos of Winter CMS.
@@ -53,15 +31,12 @@ At the same time, Winter CMS has a responsibility to its users to ensure that be
 
 Where possible, Winter CMS follows the LTS (long-term support) versions of the Laravel framework as the foundation framework, which does include the deprecation of unsupported PHP versions as required.
 
-<a name="projects"></a>
 ## Projects
 
-<a name="winter-cms"></a>
 ### Winter CMS
 
 The following protocols are in place for all current and future repositories underneath the [@wintercms](https://github.com/wintercms) organisation. This includes the [Winter CMS](https://github.com/wintercms/winter) and [Storm library](https://github.com/wintercms/storm) repositories, as well as its [installer](https://github.com/wintercms/web-installer) and [documentation](https://github.com/wintercms/docs).
 
-<a name="winter-cms-main-branches"></a>
 #### Main Branches
 
 Winter CMS and the Storm library both have one main branch for their repositories - `develop`, where all ongoing development for the next release on the current branch is stored. Both repositories also contain a branch for each of the main release branches (including older,
@@ -69,7 +44,6 @@ end-of-life branches that may still receive small updates and security fixes fro
 
 For the installer and documentation repositories, the `main` branch represents the latest development snapshot. Commits to the `main` branch can be done on an as-needed basis, as long as commits are small and are clearly explained and justified in the commit message. It is still preferred that pull requests are used for larger commits. There is no `develop` branch for these repositories.
 
-<a name="winter-cms-milestones"></a>
 #### Milestones
 
 The Winter CMS repositories use milestones to track which changes are to be released with each build.
@@ -91,7 +65,6 @@ The maintainers will, when appropriate, deem a milestone to be locked from furth
 
 Once the build is released by the maintainers, the Milestone should be locked completely and closed.
 
-<a name="winter-cms-reviewing-issues-and-prs"></a>
 #### Reviewing Issues and Pull Requests
 
 Maintainers must review all issues and pull requests that are made to the Winter CMS repositories to ensure that they meet the standards of code quality and adherence to the principles of Winter CMS.
@@ -118,7 +91,6 @@ To keep track of the progress of issues and pull requests, we use the labelling 
 
 Once a build has been decided, the milestone should be set to the milestone of the build it will be released in.
 
-<a name="winter-cms-merging-pull-requests"></a>
 #### Merging Pull Requests
 
 When a Pull Request is assigned to the *current* build milestone, it can be merged into the `develop` branch. Maintainers should use the **Squash and merge** option in GitHub to squash PRs into one commit that is then merged into the `develop` branch. This function creates a commit with the name of the PR followed by the PR number in parenthesis to give a quick and useful link back to the merged PR. Note that if the commit history of the PR provides meaningful value to the project without cluttering it with unnecessary commits a Merge Commit may be used to include the history of the PR into the project as well instead of squashing it down to one commit.
@@ -143,7 +115,6 @@ Credit to @bennothommo. Fixes #1212 and https://github.com/wintercms/wn-blog-plu
 
 A merged pull request - and any linked issues that the pull request resolves - should have the `Status: Completed` label assigned to them and all other Status labels should be unassigned. If the pull request does not have a build milestone assigned to it yet, this should also be changed to the current build milestone.
 
-<a name="winter-cms-standard-workflow"></a>
 #### Standard Workflow for Maintainers
 
 Where possible, all work done on Winter CMS should be done through pull requests. Pull requests allow the opportunity for all maintainers to be able to review the proposed changes and provide feedback or determine any perceived issues, and in addition allow the automated tests to pick up any issues with code quality or our test scenarios before it reaches the main branches.
@@ -162,7 +133,6 @@ Direct commits to the `develop` branch should be avoided where possible in favou
 - Fixing disclosed security vulnerabilities.
 - Minor tweaks / bug fixes that do not change any current behaviours of Winter CMS.
 
-<a name="winter-cms-release-process"></a>
 #### Release process
 
 The release process is one undertaken by the maintainers to release a new build of Winter CMS.
@@ -175,17 +145,14 @@ The following steps are undertaken by the maintainers for release:
 - Once tagged, a subsplit of the repository is actioned which separates the modules of Winter CMS from the main repository to make them available to be pulled in separately via Composer.
 - The [releases page on the Winter CMS website](https://wintercms.com/releases) is automatically updated to include the newest release and its details.
 
-<a name="plugins"></a>
 ### First-party plugins
 
 The following protocols are in place for all first-party plugins published in the Winter CMS organisation. Note that a lot of the processes are the same as for Winter CMS, so this section defines any *differences* in the processes to be used.
 
-<a name="plugins-main-branches"></a>
 #### Main Branches
 
 All first-party plugin repositories contain a `main` branch which is the combined efforts of all contributions to the plugin. Maintainers may commit changes to the `main` branch on an as-needed basis, but as with the Winter CMS repositories, it is still preferred that substantial changes or new or changed features be done in pull requests.
 
-<a name="plugins-milestones"></a>
 #### Milestones
 
 First-party plugins, like the Winter CMS repositories, use milestones to track which changes are implemented with which version of the plugin. Milestones in the first-party plugins use a more "semantic" versioning and so have major, minor and point releases in the format of `major.minor.point`. For example:
@@ -202,7 +169,6 @@ The following scenarios would determine which version number needs to change:
 
 Maintainers should make sure that a `minor` and a `point` milestone is available for first-party plugins at all times, and use their best determination of which is the appropriate milestone for all incoming PRs and issues.
 
-<a name="plugins-reviewing-issues-and-prs"></a>
 #### Reviewing Issues and Pull Requests
 
 Maintainers should use the [same processes for Winter CMS](#winter-cms-reviewing-issues-and-prs) when reviewing issues and PRs for first-party plugins.
@@ -211,17 +177,14 @@ Pull requests should be made to the `main` branch at all times, unless it is a c
 
 For pull requests that contain changes to the `updates/version.yaml` file, maintainers should request that contributors do not include these changes in their pull request. This file should only be modified as part of the [Release Process](#plugins-release-process).
 
-<a name="plugins-merging-pull-requests"></a>
 #### Merging Pull Requests
 
 As with reviewing issues and PRs, first-party plugins use the [same processes as Winter CMS](#winter-cms-merging-pull-requests) when merging pull requests.
 
-<a name="plugins-standard-workflow"></a>
 #### Standard Workflow for Maintainers
 
 The workflow for first-party plugins is the [same as Winter](#winter-cms-standard-workflow), except that maintainers may commit changes to the `main` branch instead of the `develop` branch on an as-needed basis. As with Winter CMS, the primary mechanism for implementing changes is still recommended to be pull requests.
 
-<a name="plugins-release-process"></a>
 #### Release Process
 
 Before a new version is released, the maintainer should ensure that all tasks assigned to the new version's milestone are completed and merged into `main`. Once this is done, the maintainer should update the `updates/version.yaml` file with the new version, and a one-line summary of the changes. Some example of these one-line changes can be found below:

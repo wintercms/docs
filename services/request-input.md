@@ -1,12 +1,5 @@
 # Requests & Input
 
-- [Basic input](#basic-input)
-- [Cookies](#cookies)
-- [Old input](#old-input)
-- [Files](#files)
-- [Request information](#request-information)
-
-<a name="basic-input"></a>
 ## Basic input
 
 You may access all user input with a few simple methods. You do not need to worry about the HTTP verb for the request when using the `Input` facade, as input is accessed in the same way for all verbs. The global `input` [helper function](../services/helpers) is an alias for `Input::get`.
@@ -53,7 +46,6 @@ $input = Input::get('products.0.name');
 
 > **NOTE:** Some JavaScript libraries such as Backbone may send input to the application as JSON. You may access this data via `Input::get` like normal.
 
-<a name="cookies"></a>
 ## Cookies
 
 By default, all cookies created by the Winter are encrypted and signed with an authentication code, meaning they will be considered invalid if they have been changed by the client. Cookies named in the `cookie.unencryptedCookies` config key will not be encrypted.
@@ -122,7 +114,6 @@ public function boot()
 }
 ```
 
-<a name="old-input"></a>
 ## Old input
 
 You may need to keep input from one request until the next request. For example, you may need to re-populate a form after checking it for validation errors.
@@ -157,7 +148,6 @@ return Redirect::to('form')->withInput(Input::except('password'));
 Input::old('username');
 ```
 
-<a name="files"></a>
 ## Files
 
 #### Retrieving an uploaded file
@@ -222,7 +212,6 @@ $size = Input::file('photo')->getSize();
 $mime = Input::file('photo')->getMimeType();
 ```
 
-<a name="request-information"></a>
 ## Request information
 
 The `Request` class provides many methods for examining the HTTP request for your application and extends the `Symfony\Component\HttpFoundation\Request` class. Here are some of the highlights.

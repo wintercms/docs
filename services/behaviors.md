@@ -1,23 +1,5 @@
 # Behaviors & Dynamic Class Extension
 
-- [Introduction](#introduction)
-- [Comparison to Traits](#compare-traits)
-- [Extending Constructors](#constructor-extension)
-    - [Dynamically Declaring Properties](#dynamically-declaring-properties)
-    - [Retrieving Dynamic Properties](#retrieving-dynamic-properties)
-    - [Dynamically Creating Methods](#dynamically-creating-methods)
-    - [Checking the Existence of a Method](#check-method-existence)
-    - [List Available Methods](#list-available-methods)
-    - [Dynamically Implementing Behaviors](#dynamically-implementing-behaviors)
-- [Usage Examples](#usage-example)
-    - [Behavior / Extension Class](#behavior-extension-class)
-    - [Extending a Class](#extending-class)
-        - [Using the Extension](#using-extension)
-        - [Detecting Utilized Extensions](#detecting-utilized-extensions)
-    - [Soft Definitions](#soft-definitions)
-- [Using Traits instead of Base Classes](#using-traits)
-
-<a name="introduction"></a>
 ## Introduction
 
 Dynamic class extension provides the following benefits:
@@ -66,7 +48,6 @@ Dynamic Class Extension also adds the ability for classes to have *private trait
 
 The best of example of the power of behaviors would be the backend [form](../backend/forms), [list](../backend/lists), and [relation](../backend/relations) ControllerBehaviors that implement the majority of CRUD requirements in Winter CMS for any controllers that implement them.
 
-<a name="compare-traits"></a>
 ## Comparison to Traits
 
 Where you might use a PHP trait like this:
@@ -130,7 +111,6 @@ To summarize:
 
 > **NOTE**: See [Using traits instead of base classes](#using-traits)
 
-<a name="constructor-extension"></a>
 ## Extending Constructors
 
 Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend` method. The argument should pass a closure that will be called as part of the class constructor.
@@ -141,7 +121,6 @@ MyNamespace\Controller::extend(function($controller) {
 });
 ```
 
-<a name="dynamically-declaring-properties"></a>
 ### Dynamically declaring properties
 
 Properties can be declared on an extendable object by calling `addDynamicProperty` and passing a property name and value.
@@ -154,7 +133,6 @@ Post::extend(function($model) {
 
 > **NOTE**: Attempting to set undeclared properties through normal means (`$this->foo = 'bar';`) on an object that implements the **Winter\Storm\Extension\ExtendableTrait** will not work. It won't throw an exception, but it will not autodeclare the property either. `addDynamicProperty` must be called in order to set previously undeclared properties on extendable objects.
 
-<a name="retrieving-dynamic-properties"></a>
 ### Retrieving Dynamic Properties
 
 Properties created dynamically can be retrieved with the getDynamicProperties function inherited from
@@ -175,7 +153,6 @@ If we know what property we want we can simply append the key (property name) to
 $model->getDynamicProperties()[$key];
 ```
 
-<a name="dynamically-creating-methods"></a>
 ### Dynamically Creating Methods
 
 Methods can be created to an extendable object by calling `addDynamicMethod` and passing a method name and callable object, like a `Closure`.
@@ -194,7 +171,6 @@ Post::extend(function($model) {
 });
 ```
 
-<a name="check-method-existence"></a>
 ### Checking the Existence of a Method
 
 You can check for the existence of a method in an `Extendable` class by using the `methodExists` method - similar to the PHP `method_exists()` function. This will detect both standard methods and dynamic methods that have been added through a `addDynamicMethod` call. `methodExists` accepts one parameter: a string of the method name to check the existence of.
@@ -212,7 +188,6 @@ $post->methodExists('getTagsAttribute'); // true
 $post->methodExists('missingMethod'); // false
 ```
 
-<a name="list-available-methods"></a>
 ### List all Available Methods
 
 To retrieve a list of all available methods in an `Extendable` class, you can use the `getClassMethods` method. This method operates similar to the PHP `get_class_methods()` function in that it returns an array of available methods in a class, but in addition to defined methods in the class, it will also list any methods provided by an extension or through an `addDynamicMethod` call.
@@ -238,7 +213,6 @@ $methods = $post->getClassMethods();
  */
 ```
 
-<a name="dynamically-implementing-behaviors"></a>
 ### Dynamically Implementing Behaviors
 
 This unique ability to extend constructors allows behaviors to be implemented dynamically, for example:
@@ -256,10 +230,8 @@ Winter\Users\Controllers\Users::extend(function($controller) {
 });
 ```
 
-<a name="usage-example"></a>
 ## Usage Examples
 
-<a name="behavior-extension-class"></a>
 ### Behavior / Extension class
 
 ```php
@@ -292,7 +264,6 @@ class FormController extends \Winter\Storm\Extension\ExtensionBase
 }
 ```
 
-<a name="extending-class"></a>
 ### Extending a class
 
 This `Controller` class will implement the `FormController` behavior and then the methods will become available (mixed in) to the class. We will override the `otherMethod` method.
@@ -316,7 +287,6 @@ class Controller extends \Winter\Storm\Extension\Extendable
 }
 ```
 
-<a name="using-extension"></a>
 #### Using the Extension
 
 ```php
@@ -332,7 +302,6 @@ echo $controller->otherMethod();
 echo $controller->asExtension('FormController')->otherMethod();
 ```
 
-<a name="detecting-utilized-extensions"></a>
 #### Detecting utilized extensions
 
 To check if an object has been extended with a behavior, you may use the `isClassExtendedWith` method on the object.
@@ -365,7 +334,6 @@ UsersController::extend(function($controller) {
 }
 ```
 
-<a name="soft-definitions"></a>
 ### Soft Definitions
 
 If a behavior class does not exist, like a trait, a *Class not found* error will be thrown. In some cases you may wish to suppress this error, for conditional implementation if a behavior is present in the system. You can do this by placing an `@` symbol at the beginning of the class name.
@@ -395,7 +363,6 @@ class User extends \Winter\Storm\Extension\Extendable
 }
 ```
 
-<a name="using-traits"></a>
 ## Using Traits instead of Base Classes
 
 For those cases where you may not wish to extend the `ExtensionBase` or `Extendable` classes, you can use the traits instead. Your classes will have to be implemented as follows:

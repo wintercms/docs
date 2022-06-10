@@ -1,22 +1,19 @@
 # Session Services
 
-- [Configuration](#configuration)
-- [Session usage](#session-usage)
-- [Flash data](#flash-data)
-
-<a name="configuration"></a>
 ## Configuration
 
 Since HTTP driven applications are stateless, sessions provide a way to store information about the user across requests. Winter ships with a variety of session backends available for use through a clean, unified API. Support for popular backends such as [Memcached](https://memcached.org), [Redis](https://redis.io), and databases is included out of the box.
 
 The session configuration is stored in `config/session.php`. Be sure to review the well documented options available to you in this file. By default, Winter is configured to use the `file` session driver, which will work well for the majority of applications.
 
-<div class="content-list" markdown="1">
+<div class="content-list">
+
 - `file` - sessions are stored in `storage/framework/sessions`.
 - `cookie` - sessions are stored in secure, encrypted cookies.
 - `database` - sessions are stored in a database used by your application.
 - `memcached` / `redis` - sessions are stored in one of these fast, cache based stores.
 - `array` - sessions are stored in a simple PHP array and will not be persisted across requests.
+
 </div>
 
 > **NOTE:** The array driver is typically used for running unit tests to prevent session data from persisting.
@@ -25,7 +22,6 @@ The session configuration is stored in `config/session.php`. Be sure to review t
 
 Winter uses the `flash` session key internally, so you should not add an item to the session by that name.
 
-<a name="session-usage"></a>
 ## Session usage
 
 #### Storing data in the session
@@ -100,7 +96,6 @@ If you need to regenerate the session ID, you may use the `regenerate` method:
 Session::regenerate();
 ```
 
-<a name="flash-data"></a>
 ## Flash data
 
 Sometimes you may wish to store items in the session only for the next request. You may do so using the `Session::flash` method. Data stored in the session using this method will only be available during the subsequent HTTP request, and then will be deleted. Flash data is primarily useful for short-lived status messages:

@@ -1,17 +1,7 @@
 # Developing Themes
 
-- [Theme information file](#theme-information)
-- [Version file](#version-file)
-- [Theme preview image](#preview-image)
-- [Theme customization](#customization)
-    - [Asset Compiler Variables](#combiner-vars)
-- [Theme dependencies](#dependencies)
-- [Localization](#localization)
-    - [Localization Directory and File Structure](#localization-file-structure)
-
 The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the Winter CMS Marketplace.
 
-<a name="theme-information"></a>
 ## Theme information file
 
 The theme information file **theme.yaml** contains the theme description, the author name, URL of the author's website and some other information. The file should be placed to the theme root directory:
@@ -23,12 +13,6 @@ The theme information file **theme.yaml** contains the theme description, the au
 ```
 
 The following fields are supported in the **theme.yaml** file:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Field | Description
 ------------- | -------------
@@ -52,7 +36,6 @@ homepage: "https://wintercms.com"
 code: "demo"
 ```
 
-<a name="version-file"></a>
 ## Version file
 
 The theme version file **version.yaml** defines the current theme version and the change log. The file should be placed to the theme root directory:
@@ -71,7 +54,6 @@ The file format is following:
 "v1.0.3": Some features are removed
 ```
 
-<a name="preview-image"></a>
 ## Theme preview image
 
 The theme preview image is used in the backend theme selector. The image file **theme-preview.png** should be placed to the theme's **assets/images** directory:
@@ -86,7 +68,6 @@ The theme preview image is used in the backend theme selector. The image file **
 
 The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
 
-<a name="customization"></a>
 ## Theme customization
 
 Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms#form-fields) for more information.
@@ -140,7 +121,6 @@ fields:
         default: My Amazing Site!
 ```
 
-<a name="combiner-vars"></a>
 ### Asset Compiler Variables
 
 Assets combined using the [Asset Compiler](../services/asset-compilation) (usually through thh `| theme` [filter](../markup/filter-theme)) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
@@ -168,7 +148,6 @@ Using some example content inside **themes/yourtheme/assets/less/theme.less**:
 a { color: @link-color }
 ```
 
-<a name="dependencies"></a>
 ## Theme dependencies
 
 A theme can depend on plugins by defining a `require` option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
@@ -184,14 +163,12 @@ require:
 
 When the theme is installed for the first time, the system will attempt to install the required plugins at the same time.
 
-<a name="localization"></a>
 ## Localization
 
 Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the Winter backend and can be used for form labels just like [plugin localization](../plugin/localization)
 
 > **NOTE**: Translating frontend content should be handled with the [Winter.Translate](https://github.com/wintercms/wn-translate-plugin) plugin.
 
-<a name="localization-file-structure"></a>
 ### Localization directory and file structure
 
 Below is an example of the theme's lang directory:

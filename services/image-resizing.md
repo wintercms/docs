@@ -1,13 +1,5 @@
 # Image Resizing
 
-- [Introduction](#introduction)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Available Parameters](#resize-parameters)
-- [Available Modes](#available-modes)
-- [Available Sources](#resize-sources)
-
-<a name="introduction"></a>
 ## Introduction
 
 The Image Resizing service can be used for resizing any image resources accessible to the application.
@@ -16,7 +8,6 @@ It works by accepting a variety of image sources and normalizing the pipeline fo
 
 Future loads of the image are automatically pointed to the static URL of the resized image without even hitting the resizer route.
 
-<a name="configuration"></a>
 ## Configuration
 
 The functionality of this class is controlled by these config items:
@@ -27,7 +18,6 @@ The functionality of this class is controlled by these config items:
 
 > **NOTE:** The image resizing service requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this service.
 
-<a name="usage"></a>
 ## Usage
 
 The Image Resizer can be access through a number of different methods:
@@ -38,7 +28,6 @@ The Image Resizer can be access through a number of different methods:
 - Passing a supported `$image` source to [`System\Classes\ImageResizer::filterGetUrl()`](https://wintercms.com/docs/api/develop/System/Classes/ImageResizer.html#method_filterGetUrl)
 - Instantiating an instance of the [`System\Classes\ImageResizer` class](https://wintercms.com/docs/api/develop/System/Classes/ImageResizer.html#method___construct) and using that as desired
 
-<a name="resize-parameters"></a>
 ## Available Parameters
 
 The basic parameters provided to the ImageResizer are `(int) $width`, `(int) $height`, and `(array) $options`.
@@ -47,14 +36,6 @@ If `$width` or `$height` is falsey or `'auto'`, that value is calculated using o
 
 The following elements are supported in the options array are supported:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > *,
-    .attributes-table-precessor + table td:nth-child(3),
-    .attributes-table-precessor + table td:nth-child(3) > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Key | Description | Default | Options
 --- | --- | --- | ---
 `mode` | How the image should be fitted to dimensions | `auto` | `exact`, `portrait`, `landscape`, `auto`, `fit`, or `crop`
@@ -62,16 +43,9 @@ Key | Description | Default | Options
 `quality` | Quality of the resized image | `90` | `0-100`
 `sharpen` | Amount to sharpen the image | `0` | `0-100`
 
-<a name="available-modes"></a>
 ## Available Modes
 
 The `mode` option allows you to specify how the image should be resized. The available modes are as follows:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Mode | Description
 --- | ---
@@ -82,7 +56,6 @@ Mode | Description
 `crop` | Crop to the given dimensions after fitting as much of the image as possible inside those
 `fit` | Fit the image inside the given maximal dimensions, keeping the aspect ratio
 
-<a name="resize-sources"></a>
 ## Available Sources
 
 The available sources that images can be resized from are as follows:

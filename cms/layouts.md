@@ -1,11 +1,5 @@
 # CMS Layouts
 
-- [Introduction](#introduction)
-- [Placeholders](#placeholders)
-- [Dynamic layouts](#dynamic-layouts)
-    - [Layout execution life cycle](#layout-life-cycle)
-
-<a name="introduction"></a>
 ## Introduction
 
 Layouts define the page scaffold, usually including everything that is present on multiple pages such as headers and footers. Layouts often contain the HTML tag as well as the HEAD, TITLE and BODY tags.
@@ -53,7 +47,6 @@ description = "Basic layout example"
 </html>
 ```
 
-<a name="placeholders"></a>
 ## Placeholders
 
 Placeholders allow pages to inject content to the layout. Placeholders are defined in the layout templates with the `{% placeholder %}` tag. The next example shows a layout template with a placeholder **head** defined in the HTML HEAD section.
@@ -81,12 +74,10 @@ layout = "default"
 
 More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder).
 
-<a name="dynamic-layouts"></a>
 ## Dynamic layouts
 
 Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details.
 
-<a name="layout-life-cycle"></a>
 ### Layout execution life cycle
 
 Inside the layout's [PHP section](themes#php-section) you can define the following functions for handling the page execution life cycle: `onInit`, `onStart`, `onBeforePageStart` and `onEnd`.

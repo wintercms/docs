@@ -1,16 +1,7 @@
 # Utility Commands
 
-- [Run unit tests](#winter-test)
-- [Utility runner](#winter-util)
-  - [Compile Winter assets](#winter-util-compile-assets)
-  - [Git pull](#winter-util-git-pull)
-  - [Purge thumbnails](#winter-util-purge-thumbs)
-  - [Purge uploads](#winter-util-purge-uploads)
-  - [Purge orphaned uploads](#winter-util-purge-orphans)
-
 The following commands are utility commands available on Winter installations.
 
-<a name="winter-test"></a>
 ## Run unit tests
 
 ```bash
@@ -49,12 +40,10 @@ If using additional PHPUnit parameters / options, they must be included after th
 php artisan winter:test -p Acme.Demo --filter=FilteredTest --stop-on-failure
 ```
 
-<a name="winter-util"></a>
 ## Utility runner
 
 `winter:util` - a generic command to perform general utility tasks, such as cleaning up files or combining files. The arguments passed to this command will determine the task used.
 
-<a name="winter-util-compile-assets"></a>
 ### Compile Winter assets
 
 Outputs combined system files for JavaScript (js), StyleSheets (less), client side language (lang), or everything (assets).
@@ -72,7 +61,6 @@ To combine without minification, pass the `--debug` option.
 php artisan winter:util compile js --debug
 ```
 
-<a name="winter-util-git-pull"></a>
 ### Pull all repos
 
 This will execute the command `git pull` on all theme and plugin directories.
@@ -81,7 +69,6 @@ This will execute the command `git pull` on all theme and plugin directories.
 php artisan winter:util git pull
 ```
 
-<a name="winter-util-purge-thumbs"></a>
 ### Purge thumbnails
 
 Deletes all generated thumbnails in the uploads directory.
@@ -90,7 +77,6 @@ Deletes all generated thumbnails in the uploads directory.
 php artisan winter:util purge thumbs
 ```
 
-<a name="winter-util-purge-uploads"></a>
 ### Purge uploads
 
 Deletes files in the uploads directory that do not exist in the "system_files" table.
@@ -99,7 +85,6 @@ Deletes files in the uploads directory that do not exist in the "system_files" t
 php artisan winter:util purge uploads
 ```
 
-<a name="winter-util-purge-orphans"></a>
 ### Purge orphaned uploads
 
 Deletes records in "system_files" table that do not belong to any other model.

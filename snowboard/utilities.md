@@ -1,36 +1,13 @@
 # Snowboard Utilities
 
-- [Introduction](#introduction)
-- [Cookie](#cookie)
-    - [Basic Usage](#cookie-basic-usage)
-    - [Encoding](#cookie-encoding)
-    - [Cookie Attributes](#cookie-attributes)
-        - [expires](#cookie-attributes-expires)
-        - [path](#cookie-attributes-path)
-        - [domain](#cookie-attributes-domain)
-        - [secure](#cookie-attributes-secure)
-        - [sameSite](#cookie-attributes-sameSite)
-        - [Setting Defaults](#cookie-attributes-defaults)
-    - [Cookie Events](#cookie-events)
-        - [`cookie.get`](#cookie-event-get)
-        - [`cookie.set`](#cookie-event-set)
-- [JSON Parser](#json-parser)
-- [Sanitizer](#sanitizer)
-- [URL handling](#url-handling)
-  - [Base URL detection](#base-url-detection)
-  - [URL generation](#url-generation)
-
-<a name="introduction"></a>
 ## Introduction
 
 The Snowboard framework included several small utilities by default that help make development easier.
 
-<a name="cookie"></a>
 ## Cookie
 
 The Cookie utility is a small wrapper around the [js-cookie](https://github.com/js-cookie/js-cookie/) package that provides a simple, lightweight JS API for interacting with browser cookies.
 
-<a name="cookie-basic-usage"></a>
 ### Basic Usage
 
 Create a cookie, valid across the entire site:
@@ -88,7 +65,6 @@ Snowboard.cookie().remove('name', { path: '', domain: '.yourdomain.com' })
 
 >**NOTE:** Removing a nonexistent cookie neither raises any exception nor returns any value.
 
-<a name="cookie-encoding"></a>
 ### Encoding
 
 The package is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant. All special characters that are not allowed in the cookie-name or cookie-value are encoded with each one's UTF-8 Hex equivalent using [percent-encoding](http://en.wikipedia.org/wiki/Percent-encoding).
@@ -97,14 +73,12 @@ Please note that the default encoding/decoding strategy is meant to be interoper
 
 >**NOTE:** According to [RFC 6265](https://tools.ietf.org/html/rfc6265#section-6.1), your cookies may get deleted if they are too big or there are too many cookies in the same domain, [more details here](https://github.com/js-cookie/js-cookie/wiki/Frequently-Asked-Questions#why-are-my-cookies-being-deleted).
 
-<a name="cookie-attributes"></a>
 ### Cookie Attributes
 
 Cookie attributes can be set globally by creating an instance of the API via `withAttributes()`, or individually for each call to `Snowboard.cookie().set(...)` by passing a plain object as the last argument. Per-call attributes override the default attributes.
 
 >**NOTE:** You should never allow untrusted input to set the cookie attributes or you might be exposed to a [XSS attack](https://github.com/js-cookie/js-cookie/issues/396).
 
-<a name="cookie-attributes-expires"></a>
 #### expires
 
 Defines when the cookie will be removed. Value must be a [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number) which will be interpreted as days from time of creation or a [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) instance. If omitted, the cookie becomes a session cookie.
@@ -121,7 +95,6 @@ Snowboard.cookie().get('name') // => 'value'
 Snowboard.cookie().remove('name')
 ```
 
-<a name="cookie-attributes-path"></a>
 #### path
 
 A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) indicating the path where the cookie is visible.
@@ -136,7 +109,6 @@ Snowboard.cookie().get('name') // => 'value'
 Snowboard.cookie().remove('name', { path: '' })
 ```
 
-<a name="cookie-attributes-domain"></a>
 #### domain
 
 A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) indicating a valid domain where the cookie should be visible. The cookie will also be visible to all subdomains.
@@ -152,7 +124,6 @@ Snowboard.cookie().set('name', 'value', { domain: 'subdomain.example.com' })
 Snowboard.cookie().get('name') // => undefined (need to read at 'subdomain.example.com')
 ```
 
-<a name="cookie-attributes-secure"></a>
 #### secure
 
 Either `true` or `false`, indicating if the cookie transmission requires a secure protocol (https).
@@ -167,7 +138,6 @@ Snowboard.cookie().get('name') // => 'value'
 Snowboard.cookie().remove('name')
 ```
 
-<a name="cookie-attributes-sameSite"></a>
 #### sameSite
 
 A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String), allowing to control whether the browser is sending a cookie along with cross-site requests.
@@ -184,7 +154,6 @@ Snowboard.cookie().get('name') // => 'value'
 Snowboard.cookie().remove('name')
 ```
 
-<a name="cookie-attributes-defaults"></a>
 #### Setting up defaults
 
 In order to set global defaults that are used for every cookie that is created with the `Snowboard.cookie().set('name', 'value')` method you can call the `setDefaults(options)` method on the Cookie plugin and it will set the provided options as the global defaults.
@@ -196,12 +165,10 @@ Snowboard.cookie().setDefaults({ path: '/', domain: '.example.com' });
 Snowboard.cookie().set('example', 'value');
 ```
 
-<a name="cookie-events"></a>
 ### Events
 
 The Cookie plugin provides the ability to interact with cookies and modify their values during accessing or creating.
 
-<a name="cookie-event-get"></a>
 #### `cookie.get`
 
 This event runs during `Snowboard.cookie().get()` and provides the `(string) name` & `(string) value` parameters, along with a callback method that can be used by a plugin to override the cookie value programatically. This can be used to manipulate or decode cookie values.
@@ -223,7 +190,6 @@ class CookieDecryptor extends Singleton
 }
 ```
 
-<a name="cookie-event-set"></a>
 #### `cookie.set`
 
 This event runs during `Snowboard.cookie().set()` and provides the `(string) name` & `(string) value` parameters, along with a callback method that can be used by a plugin to override the value saved to the cookie programatically. This will allow you to manipulate or encrypt cookie values before storing them with the browser.
@@ -245,7 +211,6 @@ class CookieEncryptor extends Singleton
 }
 ```
 
-<a name="json-parser"></a>
 ## JSON Parser
 
 The JSON Parser utility is used to safely parse JSON-like (JS-object strings) data that does not strictly meet the JSON specifications. It is especially useful for parsing the values provided in the `data-request-data` attribute used by the [Data Attributes](data-attributes) functionality.
@@ -261,7 +226,6 @@ let data = "key: value, otherKey: 'other value';
 let object = Snowboard.jsonParser().parse(`{${data}}`);
 ```
 
-<a name="sanitizer"></a>
 ## Sanitizer
 
 The Sanitizer utility is a client-side HTML sanitizer designed mostly to prevent self-XSS attacks. Such an attack could look like a user copying content from a website that uses clipboard injection to hijack the values actually stored in the clipboard and then having the user paste the content into an environment where the content would be treated as HTML, typically in richeditor / WYSIWYG fields.
@@ -278,12 +242,10 @@ $froalaEditor.on('froalaEditor.paste.beforeCleanup', function (ev, editor, clipb
 });
 ```
 
-<a name="url-handling"></a>
 ## URL Handling
 
 Snowboard contains some useful URL handling functionality for ensuring URLs within Snowboard functionality are correctly based. This is provided by the `Snowboard.url()` plugin.
 
-<a name="base-url-detection"></a>
 ### Base URL detection
 
 When the URL plugin is loaded, it will automatically detect the base URL for the current project, based on three sources in order:
@@ -294,7 +256,6 @@ When the URL plugin is loaded, it will automatically detect the base URL for the
 
 You can retrieve the base URL by calling `Snowboard.url().baseUrl()` anywhere in your JavaScript.
 
-<a name="url-generation"></a>
 ### URL generation
 
 You can generate a URL that is correctly based through the `to` method in the URL plugin. This will ensure that any URLs you use in your JavaScript are pointing to the correct URL.

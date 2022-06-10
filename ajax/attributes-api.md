@@ -1,18 +1,8 @@
 # Data Attributes API
 
-- [Available Data Attributes](#data-attributes)
-- [Usage examples](#data-attribute-examples)
-
-<a name="data-attributes"></a>
 ## Available Data Attributes
 
 The data attributes API lets you issue AJAX requests without any JavaScript. In many cases the data attributes API is less verbose than the JavaScript API - you write less code to get the same result. The supported AJAX data attributes are:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Attribute | Description
 ------------- | -------------
@@ -43,7 +33,6 @@ Element | Event
 **Text, number, and password fields** | when the text is changed and only if the `data-track-input` attribute is presented.
 **Dropdowns, checkboxes, radios** | when the element is selected.
 
-<a name="data-attribute-examples"></a>
 ## Usage examples
 
 Trigger the `onCalculate` handler when the form is submitted. Update the element with the identifier "result" with the **calcresult** partial:

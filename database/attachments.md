@@ -1,20 +1,11 @@
 # Database: File Attachments
 
-- [Introduction](#introduction)
-- [File attachments](#file-attachments)
-    - [Creating new attachments](#creating-attachments)
-    - [Viewing attachments](#viewing-attachments)
-    - [Usage example](#attachments-usage-example)
-    - [Validation example](#attachments-validation-example)
-
-<a name="introduction"></a>
 ## Introduction
-    
+
 Winter CMS provides a few different ways to manage files depending on your needs. File attachments are files that are stored on the filesystem and have database records associated with them in order to simplify connecting them to other database records.
-    
+
 When using the `System\Models\File` model, you are able to configure the disk and paths that are used to store and retrieve the files managed by that model by modifying the `storage.uploads` setting in the [`config/cms.php` file](https://github.com/wintercms/winter/blob/develop/config/cms.php#L317).
 
-<a name="file-attachments"></a>
 ## File attachments
 
 Models can support file attachments using a subset of the [polymorphic relationship](../database/relations#polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
@@ -47,7 +38,6 @@ public $attachOne = [
 ];
 ```
 
-<a name="creating-attachments"></a>
 ### Creating new attachments
 
 For singular attach relations (`$attachOne`), you may create an attachment directly via the model relationship, by setting its value using the `Input::file` method, which reads the file data from an input upload.
@@ -100,7 +90,6 @@ Occasionally you may need to change a file name. You may do so by using second m
     $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg', 'somefilename.jpg');
 ```
 
-<a name="viewing-attachments"></a>
 ### Viewing attachments
 
 The `getPath` method returns the full URL of an uploaded public file. The following code would print something like **example.com/uploads/public/path/to/avatar.jpg**
@@ -131,7 +120,6 @@ echo $model->avatar->output();
 
 You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter. Read more about these parameters on the [Image Resizing](../services/image-resizing#resize-parameters) page.
 
-<a name="attachments-usage-example"></a>
 ### Usage example
 
 This section shows a full usage example of the model attachments feature - from defining the relation in a model to displaying the uploaded image on a page.
@@ -219,7 +207,6 @@ $user = $file->attachment;
 
 For more information read the [polymorphic relationships](../database/relations#polymorphic-relations)
 
-<a name="attachments-validation-example"></a>
 ### Validation example
 
 The example below uses [array validation](../services/validation#validating-arrays) to validate `$attachMany` relationships.

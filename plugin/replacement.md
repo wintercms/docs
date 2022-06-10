@@ -1,17 +1,7 @@
 # Plugin Replacement & Forking
 
-- [Registering a plugin as a replacement](#replace-registration)
-    - [Version constraints](#version-constraints)
-- [Aliasing](#aliasing)
-    - [Configuration](#aliases-config)
-    - [Language & Translations](#aliases-lang)
-    - [Settings](#aliases-settings)
-    - [Navigation](#aliases-navigation)
-- [Handling migrations, seeders and table references](#plugin-replace-data)
-
 Plugin replacement is a feature that allows you to create a plugin that replaces (or overrides) another plugin. This is useful when you're forking a plugin to add your own functionality but want to be able to seamlessly migrate from and act as a drop in replacement for the original plugin (i.e. retaining original data, fulfilling other plugin's dependencies on the original plugin, etc).
 
-<a name="plugin-replace-registration"></a>
 ## Registering a plugin as a replacement
 
 To enable the plugin replacement feature, specify the identifier for the plugin that your plugin is replacing in the `replaces` key within the `pluginDetails` array, along with the version constraints that define what versions of the plugin are able to be replaced by your plugin.
@@ -28,7 +18,6 @@ public function pluginDetails()
 }
 ```
 
-<a name="version-constraints"></a>
 ### Version constraints
 
 Version constraints allow you to restrict your plugin to only override currently installed plugins of specific versions. The above example showcases only replacing a plugin if the original plugin is any version between `5.0` and `6.0.4` inclusive. Most of the time the actual version constraint you'll use will be much simpler, a simple `<2.0` to indicate all versions immediately prior to the version you first release your replacement plugin as.
@@ -45,7 +34,6 @@ Version constraints are specified in the [same format that Composer uses](https:
 
 By specifying a version, your plugin will check what version the original plugin is installed at and only if it's version matches the constraint will it disable the original and enable the replacement. If this match fails, then the replacement will be disabled and the original plugin will stay enabled.
 
-<a name="aliases"></a>
 ## Aliasing
 
 > **NOTE:** This is for reference only. By registering a plugin as a replacement in the Plugin registration file, Winter automatically handles registering these aliases for you.
@@ -59,7 +47,6 @@ Aliasing is a feature of Winter that allows for backwards compatibility and supp
 
 This will allow, for example, plugins that use the original plugin functionality to still work even if the original class names are used. If a plugin replaces an original plugin that is a dependency of a third plugin, aliasing will resolve the dependency for the third plugin, allowing the third plugin to continue to function.
 
-<a name="aliases-config"></a>
 ### Configuration
 
 Configuration supports 2 different types of aliasing: `registerNamespaceAlias` & `registerPackageFallback`.
@@ -102,7 +89,6 @@ The logic to this is as follows:
 - If `/config/winter/replacement/config.php` does not exist, it will check `/config/winter/original/config.php` and if found,
   it will be registered under the `winter.replacement`.
 
-<a name="aliases-lang"></a>
 ### Languages & translation
 
 Allows for redirection of calls to the alias and returns values from the namespace.
@@ -127,7 +113,6 @@ The translation will be accessible via the alias registered:
 Lang::get('winter.original::foo'); // returns bar
 ```
 
-<a name="aliases-settings"></a>
 ### Settings
 
 There are 2 methods for registering settings aliases. Firstly the aliases can be registered prior to the `PluginManager` init via `lazyRegisterOwnerAlias`.
@@ -142,7 +127,6 @@ If the `PluginManager` has been loaded, then aliases can be registered via:
 SettingsManager::instance()->registerOwnerAlias('Winter.Replacement', 'Winter.Original');
 ```
 
-<a name="aliases-navigation"></a>
 ### Navigation
 
 There are 2 methods for registering settings aliases. Firstly the aliases can be registered prior to the `PluginManager` init via `lazyRegisterOwnerAlias`.
@@ -157,7 +141,6 @@ If the `PluginManager` has been loaded, then aliases can be registered via:
 NavigationManager::instance()->registerOwnerAlias('Winter.Replacement', 'Winter.Original');
 ```
 
-<a name="plugin-replace-data"></a>
 ## Handling migrations, seeders and table references
 
 When forking a plugin and using the replace functionality, you will need to handle migrating the data from the original plugin to your replacing plugin via migrations, seeders and the model classes. To do this we recommend the following:

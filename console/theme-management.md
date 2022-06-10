@@ -1,14 +1,7 @@
 # Theme Management Commands
 
-- [Download and install a theme for Winter](#theme-install)
-- [List installed themes](#theme-list)
-- [Switch theme](#theme-use)
-- [Remove a theme](#theme-remove)
-- [Synchronise database templates](#theme-sync)
-
 The following commands are used for managing themes within your Winter installation.
 
-<a name="theme-install"></a>
 ## Download and install a theme for Winter
 
 ```bash
@@ -19,7 +12,6 @@ The `theme:install` command downloads and installs the theme by its theme code i
 
 By default, the theme will be installed in the `themes` folder, in a subdirectory `authorname-themename`. You can customise the subdirectory name by specifying the optional `directory` argument.
 
-<a name="theme-list"></a>
 ## List installed themes
 
 ```bash
@@ -28,7 +20,6 @@ php artisan theme:list
 
 The `theme:list` command will present a list of themes installed in the Winter installation. It will also display whether the theme is active or not besides each theme item.
 
-<a name="theme-use"></a>
 ## Switch theme
 
 ```bash
@@ -37,7 +28,6 @@ php artisan theme:use <theme code>
 
 The `theme:use` command allows you to switch to a specific theme for your Winter installation. This theme will then be used for the public pages on your project.
 
-<a name="theme-remove"></a>
 ## Remove a theme
 
 ```bash
@@ -46,7 +36,6 @@ php artisan theme:remove <theme code>
 
 The `theme:remove` command allows you remove a theme installed on your Winter CMS installation. This will remove the files for theme. **This is a destructive action.** You will prompted to confirm the action before proceeding.
 
-<a name="theme-sync"></a>
 ## Synchronise database templates
 
 ```bash

@@ -1,27 +1,5 @@
 # Developer Guide
 
-- [Writing documentation](#writing-docs)
-- [Exceptions to PSR standards](#psr-exceptions)
-    - [Controller methods can have a single underscore](#psr-exception-methods)
-    - [Subsequent expressions on same line as closing curly brace](#psr-exception-newline-expressions)
-    - [Use of trailing commas](#psr-exception-trailing-commas)
-- [Developer standards and patterns](#developer-standards)
-    - [Vendor naming](#vendor-naming)
-    - [Repository naming](#repository-naming)
-    - [PHP Variable naming](#variable-naming)
-    - [PHP Class naming](#class-naming)
-    - [HTML element naming](#element-naming)
-    - [View file naming](#view-naming)
-    - [Class naming](#class-naming)
-    - [Event naming](#event-naming)
-    - [Database table naming](#db-table-naming)
-    - [Component naming](#component-naming)
-    - [Controller naming](#controller-naming)
-    - [Model naming](#model-naming)
-    - [Model scopes](#model-scopes)
-    - [Class guidance](#class-guide)
-
-<a name="writing-docs"></a>
 ## Writing documentation
 
 Your contributions to the Winter documentation are very welcome. Please follow the Winter CMS documentation guidelines if you would like  to contribute:
@@ -39,12 +17,10 @@ Your contributions to the Winter documentation are very welcome. Please follow t
 1. Cross links to other documentation articles is highly encouraged. Adding links to the same article in the same paragraph is not necessary.
 1. See the [cms-pages.md](https://github.com/wintercms/docs/blob/main/cms-pages.md) or [cms-themes.md](https://github.com/wintercms/docs/blob/main/cms-themes.md) files for your reference.
 
-<a name="psr-exceptions"></a>
 ## Exceptions to PSR standards
 
 There are some exceptions to the PSR standard used by Winter.
 
-<a name="psr-exception-methods"></a>
 ### Controller methods can have a single underscore
 
 PSR-2 states that methods must be in **camelCase**. However, in backend controllers Winter will prefix AJAX handlers with the action name to define a controlled context. For example:
@@ -68,7 +44,6 @@ public function onDoSomethingElse()
 
 An exception must be granted for these scenarios.
 
-<a name="psr-exception-newline-expressions"></a>
 ### Subsequent expressions on same line as closing curly brace
 
 PSR-2 does not explicitly state that subsequent expressions should be on the same line as the closing curly brace.
@@ -134,7 +109,6 @@ if ($condition) {
 }
 ```
 
-<a name="psr-exception-trailing-commas"></a>
 ### Use of trailing commas
 
 Although not specified one way or another in [PSR-2](https://www.php-fig.org/psr/psr-2/), Winter CMS highly recommends the use of trailing commas in multi-line arrays, especially for localization files. Trailing commas make it easier to perform maintenance on multiline array items without causing unnecessary visual clutter in diffs or version control history.
@@ -159,12 +133,10 @@ $items = [
 ];
 ```
 
-<a name="developer-standards"></a>
 ## Developer standards and patterns
 
 This section describes some standards that we highly recommend to follow for everybody, especially if you are going to publish your products on the Marketplace.
 
-<a name="vendor-naming"></a>
 ### Vendor naming
 
 The vendor or author code in a namespace must begin with an uppercase character and should not contain underscores or dashes. These are examples of valid names:
@@ -179,7 +151,6 @@ These are examples of names that are **not** valid:
     winterStorm.user
     Happy_gilmore.Golf
 
-<a name="repository-naming"></a>
 ### Repository naming
 
 When publishing work to a repository, such as Git, use the following naming as a convention. Plugins should be named with a `-plugin` suffix and optional `wn-` prefix.
@@ -197,7 +168,6 @@ Projects can be named with a `wn-` prefix and suffix indicating the project type
     wn-wintercms.com-site
     wn-api.wintercms.com-app
 
-<a name="variable-naming"></a>
 ### PHP Variable naming
 
 Use **camelCase** everywhere except for the following:
@@ -206,7 +176,6 @@ Use **camelCase** everywhere except for the following:
 1. Postback parameters and HTML elements should use **snake_case**
 1. Language keys should use **snake_case**
 
-<a name="class-naming"></a>
 ### PHP Class naming
 
 Use **PascalCase** for all classes. Underscores are to be avoided as they have been known to cause issues with autoloading due to the historical use of underscores in class names for pseudo namespacing before namespacing was officially supported in PHP. Numbers can be used if necessary (generally to denote that a class interacts with a specific version of a service, i.e. `Conman` vs `Conman4`) but should never be used at the start of a class name. Avoid all special characters.
@@ -226,7 +195,6 @@ Do:
 - `MyJet`
 - `API\Jet`
 
-<a name="element-naming"></a>
 ### HTML element naming
 
 Form element names should use snake_case (underscores)
@@ -262,7 +230,6 @@ Element classes names should use hyphen-case (dashes)
 </div>
 ```
 
-<a name="view-naming"></a>
 ### View file naming
 
 Partial views should begin with an underscore character. Whereas Controller and Layout views do not begin with an underscore character. Since views are often found in a single folder, the underscore (_) and dash (-) characters can be used to organise the files. A dash is used as a substitute for a space character. An underscore is used as a substitute for a slash character (folder or namespace).
@@ -274,7 +241,6 @@ Partial views should begin with an underscore character. Whereas Controller and 
 
 View files must end with the `.htm` file extension.
 
-<a name="class-naming"></a>
 ### Class naming
 
 Classes commonly are placed in the `classes` directory. There is a number of class suffixes and prefixes that we recommend to use.
@@ -297,7 +263,6 @@ Classes commonly are placed in the `classes` directory. There is a number of cla
 
 > Don't get naming paralysis. Yes, names are very important but they're not important enough to waste huge amounts of time on. If you can't think up a good name in five minutes, move on.
 
-<a name="event-naming"></a>
 ### Event naming
 
 When specifying [event names](/docs/services/events). The term *after* is not used in Events, only the term *before* is used. For example:
@@ -343,7 +308,6 @@ $eventResults = array_merge(
 );
 ```
 
-<a name="db-table-naming"></a>
 ### Database table naming
 
 Tables names should be prefixed with the author and plugin name.
@@ -365,7 +329,6 @@ The author and plugin name acronym is also acceptable as a prefix:
 
     ab_category_id
 
-<a name="component-naming"></a>
 ### Component naming
 
 Component classes are commonly place in the `components` directory. The name of a component should represent its primary function.
@@ -388,7 +351,6 @@ Using the suffix helps avoid conflicts with controller and model names. Alternat
     SeoDirectory
     UserProfile
 
-<a name="controller-naming"></a>
 ### Controller naming
 
 Controllers are commonly are placed in `controllers` directory, for backend controllers. The name of a controller should be in plural form, for example:
@@ -398,7 +360,6 @@ Controllers are commonly are placed in `controllers` directory, for backend cont
     Categories
     ProductCategories
 
-<a name="model-naming"></a>
 ### Model naming
 
 Models are commonly are placed in `models` directory. The name of a model should be in singular form, for example:
@@ -422,7 +383,6 @@ The fully qualified plugin name is also acceptable, for example:
 $user->winter_forum_member
 ```
 
-<a name="model-scopes"></a>
 ### Model scopes
 
 [Model scopes](../../database/model#query-scopes) should always return the scoped `QueryBuilder` instance to support scope chaining. If a scope is not returning a `QueryBuilder` instance then it is not a scope and should be a regular / static method instead.
@@ -470,7 +430,6 @@ Whilst `apply` is the ideal prefix name for those situations, here are some othe
     - without
     - filter
 
-<a name="class-guide"></a>
 ### Class guidance
 
 These points are to be considered in a relaxed fashion:

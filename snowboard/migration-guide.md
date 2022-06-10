@@ -1,23 +1,11 @@
 # Migration Guide
 
-- [Introduction](#introduction)
-- [Breaking changes](#breaking-changes)
-  - [Browser support is more strict](#browser-support)
-  - [jQuery is no longer required](#no-jquery)
-  - [JavaScript in the HTML data attribute framework is deprecated](#html-callbacks)
-  - [AJAX events are triggered as DOM events](#ajax-dom-events)
-- [Other changes](#other-changes)
-  - [JavaScript AJAX Requests](#js-requests)
-
-<a name="introduction"></a>
 ## Introduction
 
 While care has been given to ensure that the Snowboard framework covers the entire scope of functionality that the original [AJAX framework](../ajax/introduction) provided, there are subtle differences between the two frameworks. Please take the time to read through this document to ensure that you are across the changes, especially if you intend to upgrade an existing project to use this new framework.
 
-<a name="breaking-changes"></a>
 ## Breaking changes
 
-<a name="browser-support"></a>
 ### Browser support is more strict
 
 Snowboard drops support for Internet Explorer, as well as some less-used, or discontinued, browsers such as the Samsung Internet Browser and Opera Mini. The framework targets, at the very least, support for the ECMAScript 2015 (ES2015) JavaScript language.
@@ -31,12 +19,10 @@ Our build script is set up to consider the following browsers as compatible with
 
 For people who wish to support older browsers such as Internet Explorer, you may continue to use the original [AJAX framework](../ajax/introduction), which is still supported by the Winter maintainer team, but will likely not be receiving any new features going forward.
 
-<a name="no-jquery"></a>
 ### jQuery is no longer required
 
 We have removed the hard dependency with jQuery, which also means that no jQuery functionality exists in this new framework. If you relied on jQuery being available for your own JavaScript functionality, you must include jQuery yourself in your theme.
 
-<a name="html-callbacks"></a>
 ### JavaScript in the HTML data attribute framework is deprecated
 
 The original [AJAX framework](../ajax/attributes-api#data-attributes) allowed for arbitrary JavaScript code to be specified within the callback data attributes, for example, `data-request-success`, `data-request-error` and `data-request-complete`, as a way of allowing JavaScript to run additional tasks depending on the success or failure of an AJAX request made through the HTML data attributes.
@@ -45,7 +31,6 @@ We have dropped support of this feature due to its use of the `eval()` method in
 
 If you wish to use JavaScript with the AJAX functionality, you must either use the [JavaScript Request functionality](../snowboard/request), or use the original [AJAX framework](../ajax/introduction) which retains this feature.
 
-<a name="ajax-dom-events"></a>
 ### AJAX events are triggered as DOM events
 
 Previously, the original AJAX framework used jQuery's Event system to trigger events on elements that are affected by an AJAX request. As jQuery is no longer used, we now use DOM events in their place.
@@ -72,10 +57,8 @@ $('#element').on('ajaxAlways', function (event) {
 
 Please review the [JavaScript Request](../snowboard/request) documentation for information on what properties are available for DOM events.
 
-<a name="other-changes"></a>
 ## Other changes
 
-<a name="js-requests"></a>
 ### JavaScript AJAX Requests
 
 #### Making a request

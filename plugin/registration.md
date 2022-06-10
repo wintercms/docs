@@ -1,27 +1,9 @@
 # Plugin Registration
 
-- [Introduction](#introduction)
-- [Directory structure](#directory-structure)
-    - [Simple](#simple-structure)
-    - [Typical](#typical-structure)
-    - [Complex](#complex-structure)
-- [Plugin namespaces](#namespaces)
-- [Registration file](#registration-file)
-    - [Supported methods](#registration-methods)
-    - [Basic plugin information](#basic-plugin-information)
-- [Routing and initialization](#routing-initialization)
-- [Dependency definitions](#dependency-definitions)
-- [Extending Twig](#extending-twig)
-- [Navigation menus](#navigation-menus)
-- [Registering middleware](#registering-middleware)
-- [Elevated permissions](#elevated-plugin)
-- [Plugin replacement & forking](replacement)
-
 <div class="og-description">
     Learn how to create and register plugins for Winter CMS.
 </div>
 
-<a name="Introduction"></a>
 ## Introduction
 
 Plugins are the foundation for adding new features or extending the base functionality of Winter CMS. The plugin registration process allows plugins to declare their features such as [components](components), navigation items and Backend pages. Some examples of what a plugin can do:
@@ -33,12 +15,10 @@ Plugins are the foundation for adding new features or extending the base functio
 - Alter [functionality of the core or other plugins](../services/events).
 - Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
 
-<a name="directory-structure"></a>
 ## Directory structure
 
 Plugins reside in the **/plugins** subdirectory of the application directory. Plugins can range from extremely simple to very complex depending on the requirements. The most simple plugin only requires a `Plugin.php` file, but they can accomodate all the way up to entire application structures as required.
 
-<a name="simple-structure"></a>
 ### Simple plugin structure
 
 The simplest plugins only require the **Plugin.php** file described below.
@@ -50,7 +30,6 @@ The simplest plugins only require the **Plugin.php** file described below.
      ┗ 📜 Plugin.php    /* Plugin registration file, required */
 ```
 
-<a name="typical-structure"></a>
 ### Typical plugin structure
 
 The following is an example of what most plugins would end up looking like when interacting with the most commonly used Winter CMS functionality.
@@ -76,7 +55,6 @@ The following is an example of what most plugins would end up looking like when 
      ┗ 📜 Plugin.php        /* Plugin registration class */
 ```
 
-<a name="complex-structure"></a>
 ### Complex plugin structure
 
 The following is an example of what a complex plugin could look like when using a significant number of the features provided by Winter CMS as well as providing some of its own.
@@ -146,7 +124,6 @@ The following is an example of what a complex plugin could look like when using 
      ┗ 📜 routes.php                        /* Any custom routes provided by the plugin */
  ```
 
-<a name="namespaces"></a>
 ## Plugin namespaces
 
 Plugin namespaces are very important, especially if you are going to publish your plugins on the [Winter Marketplace](https://wintercms.com/marketplace). By using a unique plugin namespace, you remove the chance that your plugin conflicts with another author.
@@ -155,7 +132,6 @@ When you register as an author on the Marketplace, you will be asked for the aut
 
 The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
-<a name="registration-file"></a>
 ## Registration file
 
 The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. This file is read in the boot process of Winter CMS when determining available plugins. Registration files can provide the following:
@@ -191,16 +167,9 @@ class Plugin extends \System\Classes\PluginBase
 }
 ```
 
-<a name="registration-methods"></a>
 ### Supported methods
 
 The following methods are supported in the plugin registration class:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Method | Description
 ------------- | -------------
@@ -221,16 +190,9 @@ Method | Description
 `registerSettings()` | registers any [backend configuration links](settings#link-registration) used by this plugin.
 `registerValidationRules()` | registers any [custom validators](../services/validation#custom-validation-rules) supplied by this plugin.
 
-<a name="basic-plugin-information"></a>
 ### Basic plugin information
 
 The `pluginDetails` is a required method of the plugin registration class. It should return an array containing the following keys:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Key | Description
 ------------- | -------------
@@ -241,7 +203,6 @@ Key | Description
 `iconSvg` | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors. This key is required if `icon` is not set.
 `homepage` | a link to the author's website address, optional.
 
-<a name="routing-initialization"></a>
 ## Routing and initialization
 
 Plugin registration files can contain two methods: `boot` and `register`. These methods are run at separate points in the Winter CMS boot process.
@@ -282,7 +243,6 @@ Route::group(['prefix' => 'api_acme_blog'], function() {
 
 Finally, plugins can also supply a file named **init.php**. This file acts similar to the `boot` method in that it can be used to define functionality run on each page load, but in a more global context.
 
-<a name="dependency-definitions"></a>
 ## Dependency definitions
 
 A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file). The property should contain an array of plugin names that are considered requirements for this plugin to function. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
@@ -305,7 +265,6 @@ Dependency definitions will affect how the plugin operates and [how the update p
 
 Care should be taken to ensure that circular dependency references are not made - for example, if the **Acme.Demo** plugin depends on the **Acme.Blog** plugin, the **Acme.Blog** plugins should not also depend on the **Acme.Demo** plugin.
 
-<a name="extending-twig"></a>
 ## Extending Twig
 
 Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags` method of the plugin registration class.
@@ -354,14 +313,6 @@ public function makeTextAllCaps($text)
 
 The following Twig custom options are available:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > *,
-    .attributes-table-precessor + table td:nth-child(3),
-    .attributes-table-precessor + table td:nth-child(3) > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 | Option | Type | Default | Description |
 | ------ | ---- | ------- | ----------- |
 | `needs_environment` | boolean | `false` | if true provides the current `TwigEnvironment` as the first argument to the filter call |
@@ -374,7 +325,6 @@ The following Twig custom options are available:
 | `alternative` | string | `''` | if `deprecated` is true, provides a recommended alternative filter to use instead. |
 
 
-<a name="navigation-menus"></a>
 ## Navigation menus
 
 Plugins can extend the backend navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the backend navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
@@ -424,19 +374,13 @@ When you register the backend navigation you can use [localization strings](loca
 
 To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the backend controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Key | Description
 ------------- | -------------
 `label` | specifies the menu label localization string key, required.
 `icon` | an icon name from the [Winter CMS icon collection](../ui/icon), optional.
 `iconSvg` | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
 `url` | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
-`counter` | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional. 
+`counter` | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
 `counterLabel` | a string value to describe the numeric reference in counter, optional.
 `badge` | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
 `attributes` | an associative array of attributes and values to apply to the menu item, optional.
@@ -444,7 +388,6 @@ Key | Description
 `code` | a string value that acts as an unique identifier for that menu option. **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
 `owner` | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin". **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
 
-<a name="registering-middleware"></a>
 ## Registering middleware
 
 To register a custom middleware, you can apply it directly to a backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
@@ -473,16 +416,9 @@ public function boot()
 }
 ```
 
-<a name="elevated-plugin"></a>
 ## Elevated permissions
 
 By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the backend. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Request | Description
 ------------- | -------------

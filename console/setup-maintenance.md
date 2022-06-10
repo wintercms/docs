@@ -1,17 +1,7 @@
 # Setup & Maintenance Commands
 
-- [Install Winter via command line](#winter-install)
-- [Update Winter and its plugins](#winter-update)
-- [Run database migrations](#winter-up)
-- [Change an administrator's password](#winter-passwd)
-- [Configure Winter through an environment file](#winter-env)
-- [Get the installed Winter version](#winter-version)
-- [Remove the demo plugin and theme](#winter-fresh)
-- [Mirror public files](#winter-mirror)
-
 The following commands are used for the setup and maintenance of a Winter installation.
 
-<a name="winter-install"></a>
 ## Install Winter via command line
 
 ```bash
@@ -24,7 +14,6 @@ You also may wish to inspect **config/app.php** and **config/cms.php** to change
 
 > **NOTE:** You cannot run `winter:install` after running [`winter:env`](#winter-env). The `winter:env` command takes the existing configuration values and puts them in the `.env` file while replacing the original values with calls to `env()` within the configuration files. `winter:install` cannot replace those calls to `env()` within the configuration files as that would be overly complex to manage.
 
-<a name="winter-update"></a>
 ## Update Winter and its plugins
 
 ```bash
@@ -35,7 +24,6 @@ The `winter:update` command will request updates from the Winter gateway. It wil
 
 > **IMPORTANT**: If you are using [using Composer](../help/using-composer), do **NOT** run this command without first making sure that `cms.disableCoreUpdates` is set to `true`. Doing so will cause conflicts between the marketplace version of Winter and the version available through Composer. In order to update the core Winter installation when using Composer, run `composer update` instead.
 
-<a name="winter-up"></a>
 ## Run database migrations
 
 ```bash
@@ -47,7 +35,6 @@ The `winter:up` command will perform a database migration, creating database tab
 
 The inverse command `winter:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#plugin-refresh-command) is a useful alternative for debugging a single plugin.
 
-<a name="winter-passwd"></a>
 ## Change an administrator's password
 
 ```bash
@@ -58,7 +45,6 @@ The `winter:passwd` command will allow the password of a backend user or adminis
 
 You may provide the username/email and password as both the first and second argument, or you may leave the arguments blank, in which case the command will be run interactively.
 
-<a name="winter-env"></a>
 ## Configure Winter through an environment file
 
 ```bash
@@ -71,7 +57,6 @@ This setup is recommend if you use automated deployment tools, and provides a le
 
 You are not restricted from providing environment variables through another method, for example, you may store the environment variables in your server's environment, or provide them through the PHP configuration.
 
-<a name="winter-version"></a>
 ## Get the installed Winter version
 
 ```bash
@@ -84,7 +69,6 @@ If modifications are detected, this command will try and best-guess which versio
 
 If you wish to review the files that have been modified, you can add the `--changes` flag to be provided with a list of files that have been added, modified or removed from Winter.
 
-<a name="winter-fresh"></a>
 ## Remove the demo plugin and theme
 
 ```bash
@@ -93,7 +77,6 @@ php artisan winter:fresh
 
 The `winter:fresh` command will remove the demo plugin and theme that is included with every Winter installation, if these are still found in your installation.
 
-<a name="winter-mirror"></a>
 ## Mirror public files
 
 ```bash

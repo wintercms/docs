@@ -1,16 +1,7 @@
 # Plugin Management Commands
 
-- [Download and install a plugin for Winter](#plugin-install)
-- [List installed plugins](#plugin-list)
-- [Refresh a plugin](#plugin-refresh)
-- [Rollback a plugin](#plugin-rollback)
-- [Enable a plugin](#plugin-enable)
-- [Disable a plugin](#plugin-disable)
-- [Remove a plugin](#plugin-remove)
-
 The following commands are used for managing plugins within your Winter installation.
 
-<a name="plugin-install"></a>
 ## Download and install a plugin for Winter
 
 ```bash
@@ -23,7 +14,6 @@ Note that your installation should be bound to a project in order to use this co
 
 > **NOTE:** If you have already have the plugin files locally either through Composer or manually uploading them then you can just run [`winter:up`](#console-up-command) to run the plugin's pending migrations to "install" it. This command is mostly meant for instaling plugins sourced from the [Winter CMS Marketplace](https://wintercms.com/marketplace).
 
-<a name="plugin-list"></a>
 ## List installed plugins
 
 ```bash
@@ -34,7 +24,6 @@ The `plugin:list` command will generate a table of installed plugins in your Win
 
 Each plugin is listed by its plugin code, allowing you to use the code for other plugin commands listed here.
 
-<a name="plugin-refresh"></a>
 ## Refresh a plugin
 
 ```bash
@@ -45,7 +34,6 @@ The `plugin:refresh` command allows you to rollback a plugin, destroying its dat
 
 This command is made available mainly for plugin development.
 
-<a name="plugin-rollback"></a>
 ## Rollback a plugin
 
 ```bash
@@ -56,7 +44,6 @@ The `plugin:rollback` command allows you to rollback a plugin, optionally to a s
 
 The `version` argument is optional - if it is not specified, the plugin is rolled back completely.
 
-<a name="plugin-enable"></a>
 ## Enable a plugin
 
 ```bash
@@ -65,7 +52,6 @@ php artisan plugin:enable <plugin code>
 
 The `plugin:enable` command allows you to enable a previously disabled plugin. The plugin will be able to function in your Winter installation once more.
 
-<a name="plugin-disable"></a>
 ## Disable a plugin
 
 ```bash
@@ -74,7 +60,6 @@ php artisan plugin:disable <plugin code>
 
 The `plugin:disable` command allows you to disable a previously enabled plugin. The plugin will no longer function in your Winter installation. If the plugin disabled is a requirement of another plugin installed, that plugin will also be disabled.
 
-<a name="plugin-remove"></a>
 ## Remove a plugin
 
 ```bash

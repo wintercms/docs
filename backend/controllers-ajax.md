@@ -1,17 +1,5 @@
 # Controllers & AJAX
 
-- [Introduction](#introduction)
-    - [Class definition](#class-definition)
-    - [Controller properties](#controller-properties)
-- [Actions, views and routing](#actions-views-routing)
-- [Passing data to views](#passing-data-to-views)
-- [Setting the navigation context](#navigation-context)
-- [Using AJAX handlers](#ajax)
-    - [Backend AJAX handlers](#ajax-handlers)
-    - [Triggering AJAX requests](#triggering-ajax-requests)
-- [Controller middleware](#controller-middleware)
-
-<a name="introduction"></a>
 ## Introduction
 
 The Winter CMS backend implements the MVC pattern. Controllers manage backend pages and implement various features like forms and lists. This article describes how to develop backend controllers and how to configure controller behaviors.
@@ -31,7 +19,6 @@ Each controller consists of a PHP file which resides in the the **/controllers**
      ┗ 📜 Plugin.php
 ```
 
-<a name="class-definition"></a>
 ### Class definition
 
 Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The most basic representation of a Controller used inside a Plugin looks like this:
@@ -50,16 +37,9 @@ class Posts extends \Backend\Classes\Controller {
 
 Usually each controller implements functionality for working with a single type of data - like blog posts or categories. All backend behaviors described below assume this convention.
 
-<a name="controller-properties"></a>
 ### Controller properties
 
 The backend controller base class defines a number of properties that allow to configure the page appearance and manage the page security:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Property | Description
 ------------- | -------------
@@ -75,7 +55,6 @@ Property | Description
 `$guarded` | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
 `$layout` | specify a custom layout for the controller views (see [layouts](#layouts) below).
 
-<a name="actions-views-routing"></a>
 ## Actions, views and routing
 
 Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
@@ -96,7 +75,6 @@ The above Controller results in the following:
 https://example.com/backend/acme/blog/users/index
 ```
 
-<a name="passing-data-to-views"></a>
 ## Passing data to views
 
 Use the controller's `$vars` property to pass any data directly to your view:
@@ -111,7 +89,6 @@ The variables passed with the `$vars` property can now be accessed directly in y
 <p>The variable value is <?= $myVariable ?></p>
 ```
 
-<a name="navigation-context"></a>
 ## Setting the navigation context
 
 Plugins can register the backend navigation menus and submenus in the [plugin registration file](../plugin/registration#navigation-menus). The navigation context determines what backend menu and submenu are active for the current backend page. You can set the navigation context with the `BackendMenu` class:
@@ -141,12 +118,10 @@ You can set the title of the backend page with the `$pageTitle` property of the 
 $this->pageTitle = 'Blog categories';
 ```
 
-<a name="ajax"></a>
 ## Using AJAX handlers
 
 The backend AJAX framework uses the same [AJAX library](../ajax/introduction) as the frontend pages. The library is loaded automatically on the backend pages.
 
-<a name="ajax-handlers"></a>
 ### Backend AJAX handlers
 
 The backend AJAX handlers can be defined in the controller class or [widgets](widgets). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
@@ -168,7 +143,6 @@ public function onOpenTemplate()
 }
 ```
 
-<a name="triggering-ajax-requests"></a>
 ### Triggering AJAX requests
 
 The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [frontend AJAX library](../ajax/introduction) for details. The following example shows how to trigger a request with a backend button.
@@ -184,7 +158,6 @@ The AJAX request can be triggered with the data attributes API or the JavaScript
 
 > **NOTE**: You can specifically target the AJAX handler of a widget using a prefix `widget::onName`. See the [widget AJAX handler article](../backend/widgets#generic-ajax-handlers) for more details.
 
-<a name="controller-middleware"></a>
 ## Controller middleware
 
 You can define middleware in your backend controllers, providing you with a convenient mechanism for making changes to the response of a HTTP request. For example, you may wish to specify a HTTP header for certain actions in your controller, or redirect users if they don't meet certain criteria.

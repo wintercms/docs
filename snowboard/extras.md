@@ -1,21 +1,5 @@
 # Extra UI Features
 
-- [Introduction](#introduction)
-- [Loading indicator](#loader-stripe)
-- [Loading button](#loader-button)
-- [Flash messages](#ajax-flash)
-- [Form validation](#ajax-validation)
-    - [Throwing a validation error](#throw-validation-exception)
-    - [Displaying error messages](#error-messages)
-    - [Displaying errors with fields](#field-errors)
-    - [Usage examples](#usage-examples)
-- [Asset Loader](#asset-loader)
-- [Data configuration](#data-config)
-    - [Example](#data-config-example)
-    - [Usage](#data-config-usage)
-    - [Further notes](#data-config-notes)
-
-<a name="introduction"></a>
 ## Introduction
 
 When using the Snowboard framework, you have the option to specify the `extras` flag which includes additional UI features. These features are often useful when working with AJAX requests in frontend CMS pages.
@@ -24,14 +8,12 @@ When using the Snowboard framework, you have the option to specify the `extras` 
 {% snowboard extras %}
 ```
 
-<a name="loader-stripe"></a>
 ## Loading indicator
 
 The loading indicator is a loading bar that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../snowboard/request#global-events) used by the Snowboard framework.
 
 When an AJAX request starts, the `ajaxPromise` event is fired. This displays the loading indicator at the top of the page. When this promise is resolved, the loading bar is removed.
 
-<a name="loader-button"></a>
 ## Loading button
 
 When any element contains the `data-attach-loading` attribute, the CSS class `wn-loading` will be added to it during the AJAX request. This class will spawn a *loading spinner* on button and anchor elements using the `:after` CSS selector.
@@ -51,7 +33,6 @@ When any element contains the `data-attach-loading` attribute, the CSS class `wn
 </a>
 ```
 
-<a name="ajax-flash"></a>
 ## Flash messages
 
 Specify the `data-request-flash` attribute on a form to enable the use of flash messages on successful AJAX requests.
@@ -97,7 +78,6 @@ Snowboard.flash(
 );
 ```
 
-<a name="ajax-validation"></a>
 ## Form validation
 
 You may specify the `data-request-validate` attribute on a form to enable server-side validation features with fields and forms.
@@ -110,7 +90,6 @@ You may specify the `data-request-validate` attribute on a form to enable server
 </form>
 ```
 
-<a name="throw-validation-exception"></a>
 ### Throwing a validation error
 
 In the server side AJAX handler, you may throw a [validation exception](../services/error-log#validation-exception) using the `ValidationException` class to make a field invalid. The exception should be provided an array, which states the field names for the keys, and the error messages for the values.
@@ -124,7 +103,6 @@ function onSubmit()
 
 > **NOTE**: You can also pass a [Validator](../services/validation) instance as the first argument of the exception instead, to use the in-built validation service.
 
-<a name="error-messages"></a>
 ### Displaying error messages
 
 Inside the form, you may display the first error message by using the `data-validate-error` attribute on a container element. The content inside the container will be set to the error message and the element will be made visible.
@@ -143,7 +121,6 @@ To display multiple error messages, include an element with the `data-message` a
 
 The `handleValidationErrors` callback, and the `ajaxValidationErrors` global event, that are available with the [Request API](../snowboard/request#global-events) allow you to fully customise the client-side validation handling. The `handleValidationErrors` callback can be used to control validation per request, while the `ajaxValidationErrors` global event can be used by [Snowboard plugins](../snowboard/plugin-development) to augment the client-side validation in a global fashion.
 
-<a name="field-errors"></a>
 ### Displaying errors with fields
 
 Alternatively, you can show validation messages for individual fields by defining an element that uses the `data-validate-for` attribute, passing the field name as the value.
@@ -164,7 +141,6 @@ If the element is left empty, it will be populated with the validation text from
 </div>
 ```
 
-<a name="usage-examples"></a>
 ### Usage examples
 
 Below is a complete example of form validation. It calls the `onDoSomething` event handler that triggers a loading submit button, performs validation on the form fields, then displays a successful flash message.
@@ -218,7 +194,6 @@ function onDoSomething()
 }
 ```
 
-<a name="asset-loader"></a>
 ## Asset Loader
 
 Included in the Snowboard extras is an asset loader, allowing simple loading of assets within a page within JavaScript. This loader also allows components to inject assets into your CMS pages when responding to AJAX requests, allowing assets to be deferred until needed.
@@ -256,14 +231,12 @@ Event | Promise? | Parameters | Description
 `assetLoader.loaded` | No | `(String) type, (String) asset, (HTMLElement) assetElement` | Called when an asset is successfully loaded and injected into the page. The first parameter will be the type of asset (one of `script`, `style` or `image`, the second parameter will be the asset's URL and the third parameter will be HTML element of the injected asset.
 `assetLoader.error` | No | `(String) type, (String) asset, (HTMLElement) assetElement` | Called when an asset fails to load. The parameters are the same as the `loaded` event, as the asset will be injected in order to trigger the loading of the asset.
 
-<a name="data-config"></a>
 ## Data configuration
 
 A common way of including configuration for Winter widgets and Snowboard plugins is to provide an element with data attribute tags that represent the configuration options and values. Snowboard includes a Data Configuration plugin with the extras package that allows you to quickly extract the configuration for a particular plugin from an element's data attributes.
 
 This allows you to pass configuration from the PHP side, such as a component's configuration file, to the partial HTML which can then be read by a corresponding Snowboard plugin on the JavaScript side, allowing a user to manipulate the configuration and experience of a widget entirely through the Winter backend.
 
-<a name="data-config-example"></a>
 ### Example
 
 Let's say, for example, you have a gallery component that has some configuration options that you pass through to the page when using the component:
@@ -362,7 +335,6 @@ class Gallery extends Snowboard.PluginBase {
 
 Following this structure, you have full-stack control over the experience of your component, providing an easy mechanism for controlling the frontend widget from the backend.
 
-<a name="data-config-usage"></a>
 ### Usage
 
 The Data configuration functionality is registered within Snowboard as the `dataConfig` plugin and can be initialised with `this.snowboard.dataConfig()`.
@@ -419,7 +391,6 @@ class Gallery extends Snowboard.PluginBase {
 }
 ```
 
-<a name="data-config-methods"></a>
 ### Methods
 
 The configuration instance that is returned by `this.snowboard.config(bindTo, elementFrom)` provides the following methods:
@@ -475,7 +446,6 @@ this.config.refresh();
 this.config.get('configKey'); // Returns "new", as the new value was persisted.
 ```
 
-<a name="data-config-notes"></a>
 ### Further notes
 
 #### Configuration value coercion

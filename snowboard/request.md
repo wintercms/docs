@@ -1,14 +1,5 @@
 # AJAX Requests (JavaScript API)
 
-- [Introduction](#introduction)
-- [Request workflow](#request-workflow)
-- [Available options](#available-options)
-- [Global events](#global-events)
-- [Element events](#element-events)
-- [Usage examples](#usage-examples)
-- [Extending or replacing the Request class](#extending-replacing)
-
-<a name="introduction"></a>
 ## Introduction
 
 Snowboard provides core AJAX functionality via the `Request` Snowboard plugin. The `Request` plugin provides powerful flexibility and reusability in making AJAX Requests with the Backend functionality in Winter. It can be loaded by adding the following tag into your CMS Theme's page or layout:
@@ -29,19 +20,12 @@ The base `Request` plugin uses the [Fetch API](https://developer.mozilla.org/en-
 
 The `request` method takes three parameters:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Parameter | Required | Description
 --------- | -------- | -----------
 `element` | No | The element that this AJAX request is targeting, either as a `HTMLElement` instance, or as a CSS-selector string. This can be any element, but usually will be used with a `form` element.
 `handler` | **Yes** | The AJAX handler to call. This should be in the format `on<Handler>`.
 `options` | No | The [AJAX request options](#available-options), as an object.
 
-<a name="request-workflow"></a>
 ## Request workflow
 
 AJAX requests made through the `Request` class go through the following process:
@@ -57,16 +41,9 @@ AJAX requests made through the `Request` class go through the following process:
   - If the response is unsuccessful due to any other error, then an error message will be shown.
 - The request is then complete.
 
-<a name="available-options"></a>
 ## Available options
 
 All options below are optional.
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Option | Type | Description
 ------ | ---- | -----------
@@ -91,12 +68,6 @@ Callback | Description
 
 Finally, the following option parameters define override functionality for various actions that the `Request` instance may take during the processing of a response. As with the callback methods, these must be provided as a function.
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Parameters | Description
 ------ | ---------- | -----------
 `handleConfirmMessage` | `(string) confirmationMessage` | Handles any confirmations requested of the user.
@@ -105,7 +76,6 @@ Option | Parameters | Description
 `handleFlashMessage` | `(string) message, (string) type` | Handles flash messages.
 `handleRedirectResponse` | `(string) redirectUrl` | Handles redirect responses.
 
-<a name="global-events"></a>
 ## Global events
 
 The `Request` class fires several global events which can be used by plugins to augment or override the functionality of the `Request` class. [Snowboard plugins](../snowboard/plugin-development) can be configured to listen to, and act upon, these events by using the `listen()` method to direct the event to a method with the plugin class.
@@ -161,12 +131,6 @@ class ConfirmEverything extends Snowboard.Singleton
 
 The following events are called during the Request process:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Event | Promise? | Parameters | Description
 ----- | -------- | ---------- | -----------
 `ajaxSetup` | No | `(Request) request` | Called after the Request is initialized and checked that it can be called. It is intended to be used for modifying the Request parameters before sending to the server. Returning `false` in any event listeners will cancel the request.
@@ -184,7 +148,6 @@ Event | Promise? | Parameters | Description
 `ajaxFlashMessages` | No | `(array of Object) flashMessages, (Request) request` | Called when one or more flash messages are to be shown to the user. There is no default functionality for flash messages, so if no event listeners trigger for this event, no activity will occur.
 `ajaxValidationErrors` | No | `(HTMLElement) form, (array) fieldMessages, (Request) request` | Called when a validation error is returned in the response. There is no default functionality for validation errors, so if no event listeners trigger for this event, no activity will occur.
 
-<a name="element-events"></a>
 ## Element events
 
 In addition to global events, local events are fired on elements that trigger an AJAX request. These events are treated as [DOM events](https://developer.mozilla.org/en-US/docs/Web/API/Event) and thus can be listened to by normal DOM event listeners or your framework of choice. The `Request` class will inject properties in the event depending on the type of event and the `event.request` property will always be the `Request` instance.
@@ -210,12 +173,6 @@ element.addEventListener('ajaxSetup', (event) => {
 
 The following events are called during the Request process directly on the element that triggered the request:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Event | Description
 ----- | -----------
 `ajaxSetup` | Called after the Request is initialized and checked that it can be called.
@@ -225,7 +182,6 @@ Event | Description
 `ajaxFail` | Called when this element makes an unsuccessful AJAX request. A property called `responseError` is provided with the error object.
 `ajaxAlways` | Called when an AJAX request is completed, regardless of success or failure.  It is provided two properties: `responseData` and `responseError`, which represent the raw response data and error object, depending on whether the AJAX request succeeded or failed.
 
-<a name="usage-examples"></a>
 ## Usage examples
 
 Make a simple request to an AJAX handler without specifying a triggering element.
@@ -313,7 +269,6 @@ class DisableFileUploads extends Snowboard.Singleton
 }
 ```
 
-<a name="extending-replacing"></a>
 ## Extending or replacing the Request class
 
 As part of making Snowboard an extensible and flexible platform, developers have the option to extend, or replace entirely, the base Request class. This allows developers to use their own preferred platforms and frameworks for executing the AJAX functionality, partial updates, and much more.

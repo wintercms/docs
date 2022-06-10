@@ -1,18 +1,5 @@
 # Router Service
 
-- [Basic routing](#basic-routing)
-- [Route parameters](#route-parameters)
-    - [Required parameters](#required-parameters)
-    - [Optional parameters](#parameters-optional-parameters)
-    - [Regular expression constraints](#parameters-regular-expression-constraints)
-- [Named routes](#named-routes)
-- [Route groups](#route-groups)
-    - [Sub-domain routing](#route-group-sub-domain-routing)
-    - [Route prefixes](#route-group-prefixes)
-    - [Route middleware](#route-middleware)
-- [Throwing 404 errors](#throwing-404-errors)
-
-<a name="basic-routing"></a>
 ## Basic routing
 
 While routing is handled automatically for the [backend controllers](../backend/controllers-ajax) and CMS pages define their own URL routes in their [page configuration](../cms/pages#configuration), the router service is useful primarily for defining fixed APIs and end points.
@@ -63,10 +50,8 @@ You may generate URLs to your routes using the `Url` facade:
 $url = Url::to('foo');
 ```
 
-<a name="route-parameters"></a>
 ## Route parameters
 
-<a name="required-parameters"></a>
 ### Required parameters
 
 Sometimes you will need to capture segments of the URI within your route, for example, you may need to capture a user's ID from the URL. You may do so by defining route parameters:
@@ -89,7 +74,6 @@ Route parameters are always encased within singular *curly brackets*. The parame
 
 > **NOTE:** Route parameters cannot contain the `-` character. Use an underscore (`_`) instead.
 
-<a name="parameters-optional-parameters"></a>
 ### Optional parameters
 
 Occasionally you may need to specify a route parameter, but make the presence of that route parameter optional. You may do so by placing a `?` mark after the parameter name:
@@ -104,7 +88,6 @@ Route::get('user/{name?}', function ($name = 'John') {
 });
 ```
 
-<a name="parameters-regular-expression-constraints"></a>
 ### Regular expression constraints
 
 You may constrain the format of your route parameters using the `where` method on a route instance. The `where` method accepts the name of the parameter and a regular expression defining how the parameter should be constrained:
@@ -123,7 +106,6 @@ Route::get('user/{id}/{name}', function ($id, $name) {
 })->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
 ```
 
-<a name="named-routes"></a>
 ## Named routes
 
 Named routes allow you to conveniently generate URLs or redirects for a specific route. You may specify a name for a route using the `as` array key when defining the route:
@@ -166,12 +148,10 @@ Route::get('user/{id}/profile', ['as' => 'profile', function ($id) {
 $url = Url::route('profile', ['id' => 1]);
 ```
 
-<a name="route-groups"></a>
 ## Route groups
 
 Route groups allow you to share route attributes across a large number of routes without needing to define those attributes on each individual route. Shared attributes are specified in an array format as the first parameter to the `Route::group` method.
 
-<a name="route-group-sub-domain-routing"></a>
 ### Sub-domain routing
 
 Route groups may also be used to route wildcard sub-domains. Sub-domains may be assigned route parameters just like route URIs, allowing you to capture a portion of the sub-domain for usage in your route or controller. The sub-domain may be specified using the `domain` key on the group attribute array:
@@ -184,7 +164,6 @@ Route::group(['domain' => '{account}.example.com'], function () {
 });
 ```
 
-<a name="route-group-prefixes"></a>
 ### Route prefixes
 
 The `prefix` group array attribute may be used to prefix each route in the group with a given URI. For example, you may want to prefix all route URIs within the group with `admin`:
@@ -207,7 +186,6 @@ Route::group(['prefix' => 'accounts/{account_id}'], function () {
 });
 ```
 
-<a name="route-middleware"></a>
 ### Route Middleware
 
 Registering middleware inside your plugin's `boot()` method will register it globally for each request.
@@ -235,7 +213,6 @@ Route::middleware(['Path\To\Your\Middleware'])->group(function() {
 
 You can of course add more than one middleware in a group, just one is used in the above examples for convenience.
 
-<a name="throwing-404-errors"></a>
 ## Throwing 404 errors
 
 There are two ways to manually trigger a 404 error from a route. First, you may use the `abort` helper. The `abort` helper simply throws a `Symfony\Component\HttpFoundation\Exception\HttpException` with the specified status code:

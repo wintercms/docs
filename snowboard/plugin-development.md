@@ -1,27 +1,15 @@
 # Snowboard Plugin Development
 
-- [Introduction](#introduction)
-- [Framework Concepts](#concepts)
-  - [The Snowboard class](#snowboard-class)
-  - [The PluginLoader class](#plugin-loader-class)
-  - [The PluginBase and Singleton abstracts](#plugin-base-singleton)
-  - [Global events](#global-events)
-  - [Dependencies](#dependencies)
-  - [Mocking](#mocking)
-
-<a name="introduction"></a>
 ## Introduction
 
 The Snowboard framework has been designed to be extensible and customisable for the needs of your project. To this end, the following documentation details the concepts of the framework, and how to develop your own functionality to extend or replace features within Snowboard.
 
-<a name="concepts"></a>
 ## Framework Concepts
 
 Snowboard works on the concept of an encompassing application, which acts as the base of functionality and is then extended through plugins. The main method of communication and functionality is through the use of [JavaScript classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) which offer instances and extendability, and global events - a feature built into Snowboard.
 
 The following classes and abstracts are included in the Snowboard framework.
 
-<a name="snowboard-class"></a>
 ### The Snowboard class
 
 The Snowboard class is the representation of the application. It is the main point of adding, managing and accessing functionality within the framework, synonymous to using `jQuery` or `Vue` in your scripts. It is injected into the global JavaScript scope, and can be accessed through the `Snowboard` variable anywhere within the application after the `{% snowboard %}` tag is used.
@@ -77,7 +65,6 @@ class MyPlugin extends PluginBase {
 
 In general, you would use the first parameter of the `debug` method to state the debug message. From there, additional parameters can be added to provide additional context. The method will print a collapsed debug message to your developer console on your browser. You may extend the debug message in your console to view a stack trace, showing the entire call stack up to when the debug message was triggered.
 
-<a name="plugin-loader-class"></a>
 ### The PluginLoader class
 
 The PluginLoader class is the conduit between your application (ie. the [Snowboard class](#snowboard-class)) and the plugins. It acts similar to a "factory", providing and managing instances of the plugins and allowing the Snowboard application to communicate to those instances. It also provides a basic level of mocking, to allow for testing or overwriting individual methods of the plugin dynamically.
@@ -96,7 +83,6 @@ Method | Parameters | Description
 `mock` | methodName(`String`)<br>callback(`Function`) | Defines a mock for the current plugin, replacing the given method with the provided callback. See the [Mocking](#mocking) section for more information.
 `unmock` | methodName(`String`) | Restores the original functionality for a previously-mocked method. See the [Mocking](#mocking) section for more information.
 
-<a name="plugin-base-singleton"></a>
 ### The `PluginBase` and `Singleton` abstracts
 
 These classes are the base of all plugins in Snowboard, and represent the base functionality that each plugin contains. When creating a plugin class, you will almost always extend one of these abstract classes.
@@ -121,7 +107,6 @@ Here are some examples of when you would use one or the other:
   - Global utilities
   - Base user-interface handlers
 
-<a name="global-events"></a>
 ### Global events
 
 Global events are an intrinsic feature of the Snowboard framework, allowing Snowboard plugins to respond to specific events in the course of certain functionality, similar in concept to DOM events or the Event functionality of Winter CMS.
@@ -191,7 +176,6 @@ myHandler(param1, param2) {
 
 Snowboard only has one in-built global event that is fired - the `ready` event - which is fired when the DOM is loaded and the page is ready. This event is synonymous with jQuery's `ready` event, and is mainly used to instantiate the Singletons that have been registered with Snowboard.
 
-<a name="dependencies"></a>
 ### Dependencies
 
 Snowboard includes a simple dependency system that allows a plugin to specify that it needs other Snowboard plugins to be active before the given plugin will work. This system will allow some measure of handling if plugin sources files are deferred or are loaded out of order.

@@ -1,19 +1,5 @@
 # Mail
 
-- [Introduction](#introduction)
-- [Sending mail](#sending-mail)
-    - [Attachments](#attachments)
-    - [Inline attachments](#inline-attachments)
-    - [Queueing mail](#queueing-mail)
-- [Message content](#message-content)
-    - [Mail views](#mail-views)
-    - [Mail templates](#mail-templates)
-    - [Mail layouts](#mail-layouts)
-    - [Registering mail layouts, templates & partials](#mail-template-registration)
-    - [Global variables](#mail-global-variables)
-- [Mail & local development](#mail-and-local-development)
-
-<a name="introduction"></a>
 ## Introduction
 
 Winter provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the backend interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
@@ -56,7 +42,6 @@ To use the Amazon SES driver set the `driver` option in your `config/mail.php` c
 ],
 ```
 
-<a name="sending-mail"></a>
 ## Sending mail
 
 To send a message, use the `send` method on the `Mail` facade which accepts three arguments. The first argument is a unique *mail code* used to locate either the [mail view](#mail-views) or [mail template](#mail-templates). The second argument is an array of data you wish to pass to the view. The third argument is a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:
@@ -100,12 +85,6 @@ Mail::rawTo('admin@domain.tld', 'Hello friend');
 ```
 
 The first argument in `sendTo` is used for the recipients can take different value types:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Type | Description
 ------------- | -------------
@@ -220,7 +199,6 @@ Mail::rawTo('name@example.com', [
 ]);
 ```
 
-<a name="attachments"></a>
 ### Attachments
 
 To add attachments to an e-mail, use the `attach` method on the `$message` object passed to your Closure. The `attach` method accepts the full path to the file as its first argument:
@@ -239,7 +217,6 @@ When attaching files to a message, you may also specify the display name and / o
 $message->attach($pathToFile, ['as' => $display, 'mime' => $mime]);
 ```
 
-<a name="inline-attachments"></a>
 ### Inline attachments
 
 #### Embedding an image in mail content
@@ -276,7 +253,6 @@ If you already have a raw data string you wish to embed into an e-mail message, 
 </body>
 ```
 
-<a name="queueing-mail"></a>
 ### Queueing mail
 
 #### Queueing a mail message
@@ -315,14 +291,12 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 });
 ```
 
-<a name="message-content"></a>
 ## Message content
 
 Mail messages can be sent in Winter using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the backend interface via *System > Mail templates*. All mail messages support using Twig for markup.
 
 Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the backend interface.
 
-<a name="mail-views"></a>
 ### Mail views
 
 Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin::mail.message** would use the content in following file:
@@ -380,7 +354,6 @@ Parameter | Description
 `subject` | the mail message subject, required.
 `layout` | the [mail layout](#mail-layouts) code, optional. Default value is `default`.
 
-<a name="mail-templates"></a>
 ### Using mail templates
 
 Mail templates reside in the database and can be created in the backend area via *Settings > Mail > Mail templates*. The **code** specified in the template is a unique identifier and cannot be changed once created.
@@ -402,7 +375,6 @@ Mail templates can also be generated automatically by [mail views that have been
 
 When a generated template is saved for the first time, the customized content will be used when sending mail for the assigned code. In this context, the mail view can be considered a *default view*.
 
-<a name="mail-layouts"></a>
 ### Using mail layouts
 
 Mail layouts can be created by selecting *Settings > Mail > Mail templates* and clicking the *Layouts* tab. These behave just like CMS layouts, they contain the scaffold for the mail message. Mail views and templates support the use of mail layouts.
@@ -414,7 +386,6 @@ Layout | Code | Description
 Default | `default` | Used for public facing, frontend mail
 System | `system` | Used for internal, backend mail
 
-<a name="mail-template-registration"></a>
 ### Registering mail layouts, templates & partials
 
 Mail views can be registered as templates that are automatically generated in the backend ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration#registration-file).
@@ -453,7 +424,6 @@ public function registerMailLayouts()
 
 The methods should return an array of [mail view names](#mail-views). The array key will be used as `code` property for the partial or layout.
 
-<a name="mail-global-variables"></a>
 ### Global variables
 
 You may register variables that are globally available to all mail templates with the `View::share` method.
@@ -464,7 +434,6 @@ View::share('site_name', 'Winter CMS');
 
 This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
 
-<a name="mail-and-local-development"></a>
 ## Mail & local development
 
 When developing an application that sends e-mail, you probably don't want to actually send e-mails to live e-mail addresses. There are several ways to "disable" the actual sending of e-mail messages.

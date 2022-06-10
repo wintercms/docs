@@ -1,24 +1,9 @@
 # Database: Structure & Seeding
 
-- [Introduction](#introduction)
-- [Migration structure](#migration-structure)
-    - [Creating tables](#creating-tables)
-    - [Renaming / dropping tables](#renaming-and-dropping-tables)
-    - [Creating columns](#creating-columns)
-    - [Modifying columns](#modifying-columns)
-    - [Dropping columns](#dropping-columns)
-    - [Creating indexes](#creating-indexes)
-    - [Dropping indexes](#dropping-indexes)
-    - [Foreign key constraints](#foreign-key-constraints)
-- [Seeder structure](#seeder-structure)
-    - [Calling additional seeders](#calling-additional-seeders)
-
-<a name="introduction"></a>
 ## Introduction
 
 Migrations and seed files allow you to build, modify and populate database tables. They are primarily used by a [plugin update file](../plugin/updates) and are paired with the version history of a plugin. All classes are stored in the `updates` directory of a plugin. Migrations should tell a story about your database history and this story can be played both forwards and backwards to build up and tear down the tables.
 
-<a name="migration-structure"></a>
 ## Migration structure
 
 A migration file should define a class that extends the `Winter\Storm\Database\Updates\Migration` class and contains two methods: `up` and `down`. The `up` method is used to add new tables, columns, or indexes to your database, while the `down` method should simply reverse the operations performed by the `up` method. Within both of these methods you may use the [schema builder](#creating-tables) to expressively create and modify tables. For example, let's look at a sample migration that creates a `winter_blog_posts` table:
@@ -54,7 +39,6 @@ class CreatePostsTable extends Migration
 }
 ```
 
-<a name="creating-tables"></a>
 ### Creating tables
 
 To create a new database table, use the `create` method on the `Schema` facade. The `create` method accepts two arguments. The first is the name of the table, while the second is a `Closure` which receives an object used to define the new table:
@@ -101,7 +85,6 @@ Schema::create('users', function ($table) {
 });
 ```
 
-<a name="renaming-and-dropping-tables"></a>
 ### Renaming / dropping tables
 
 To rename an existing database table, use the `rename` method:
@@ -118,7 +101,6 @@ Schema::drop('users');
 Schema::dropIfExists('users');
 ```
 
-<a name="creating-columns"></a>
 ### Creating columns
 
 To update an existing table, we will use the `table` method on the `Schema` facade. Like the `create` method, the `table` method accepts two arguments, the name of the table and a `Closure` that receives an object we can use to add columns to the table:
@@ -187,7 +169,6 @@ Modifier  | Description
 `->after('column')`  |  Place the column "after" another column (MySQL Only)
 `->comment('my comment')`  |  Add a comment to a column (MySQL Only)
 
-<a name="modifying-columns"></a>
 ### Modifying columns
 
 The `change` method allows you to modify an existing column to a new type, or modify the column's attributes. For example, you may wish to increase the size of a string column. To see the `change` method in action, let's increase the size of the `name` column from 25 to 50:
@@ -206,7 +187,6 @@ Schema::table('users', function ($table) {
 });
 ```
 
-<a name="renaming-columns"></a>
 #### Renaming columns
 
 To rename a column, you may use the `renameColumn` method on the Schema builder:
@@ -219,7 +199,6 @@ Schema::table('users', function ($table) {
 
 > **NOTE:** Renaming columns in a table with a `enum` column is not currently supported.
 
-<a name="dropping-columns"></a>
 ### Dropping columns
 
 To drop a column, use the `dropColumn` method on the Schema builder:
@@ -238,7 +217,6 @@ Schema::table('users', function ($table) {
 });
 ```
 
-<a name="creating-indexes"></a>
 ### Creating indexes
 
 The schema builder supports several types of indexes. First, let's look at an example that specifies a column's values should be unique. To create the index, we can simply chain the `unique` method onto the column definition:
@@ -273,7 +251,6 @@ Command  | Description
 `$table->unique('email');`  |  Add a unique index.
 `$table->index('state');`  |  Add a basic index.
 
-<a name="dropping-indexes"></a>
 ### Dropping indexes
 
 To drop an index, you must specify the index's name. If no name was specified manually, the system will automatically generate one, simply concatenate the table name, the name of the indexed column, and the index type. Here are some examples:
@@ -284,7 +261,6 @@ Command  | Description
 `$table->dropUnique('users_email_unique');`  |  Drop a unique index from the "users" table.
 `$table->dropIndex('geo_state_index');`  |  Drop a basic index from the "geo" table.
 
-<a name="foreign-key-constraints"></a>
 ### Foreign key constraints
 
 There is also support for creating foreign key constraints, which are used to force referential integrity at the database level. For example, let's define a `user_id` column on the `posts` table that references the `id` column on a `users` table:
@@ -320,7 +296,6 @@ To drop a foreign key, you may use the `dropForeign` method. Foreign key constra
 $table->dropForeign('posts_user_id_foreign');
 ```
 
-<a name="seeder-structure"></a>
 ## Seeder structure
 
 Like migration files, a seeder class only contains one method by default: `run`and should extend the `Seeder` class. The `run` method is called when the update process is executed. Within this method, you may insert data into your database however you wish. You may use the [query builder](../database/query) to manually insert data or you may use your [model classes](../database/model). In the example below, we'll create a new user using the `User` model inside the `run` method:
@@ -361,7 +336,6 @@ public function run()
 }
 ```
 
-<a name="calling-additional-seeders"></a>
 ### Calling additional seeders
 
 Within the `DatabaseSeeder` class, you may use the `call` method to execute additional seed classes. Using the `call` method allows you to break up your database seeding into multiple files so that no single seeder class becomes overwhelmingly large. Simply pass the name of the seeder class you wish to run:

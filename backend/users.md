@@ -1,14 +1,7 @@
 # Backend Users & Permissions
 
-- [Users and Permissions](#users-and-permissions)
-- [Backend user helper](#backend-auth-facade)
-- [Registering permissions](#permission-registration)
-- [Restricting access to backend pages](#page-access)
-- [Restricting access to features](#features)
-
 The user management for the backend includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also register permissions that control access to the features in the backend.
 
-<a name="users-and-permissions"></a>
 ## Users and Permissions
 
 Access to all parts of a Winter CMS instance is controlled by the Permissions system. At the lowest level, there are Super Users (users with the `is_superuser` flag set to true), Administrators (users) and permissions. The `\Backend\Models\User` models are the containers that hold all the important information about a user.
@@ -27,7 +20,6 @@ Roles (`\Backend\Models\UserRole`) are groupings of permissions with a name and 
 
 Groups (`\Backend\Models\UserGroup`) are an organizational tool for grouping administrators, they can be thought of as "user categories". They have nothing to do with permissions and are strictly for organizational purposes. For instance, if you wanted to send an email to all users that are in the group `Head Office Staff`, you would simply do `Mail::sendTo(UserGroup::where('code', 'head-office-staff')->get()->users, 'author.plugin::mail.important_notification', $data);`
 
-<a name="backend-auth-facade"></a>
 ## Backend user helper
 
 The global `BackendAuth` facade can be used for managing administrative users, which primarily inherits the `Winter\Storm\Auth\Manager` class. To register a new administrator user account, use the `BackendAuth::register` method.
@@ -75,7 +67,6 @@ $user = BackendAuth::authenticate([
 BackendAuth::login($user);
 ```
 
-<a name="permission-registration"></a>
 ## Registering permissions
 
 Plugins can register backend user permissions by overriding the `registerPermissions` method inside the [Plugin registration class](../plugin/registration#registration-file). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
@@ -107,7 +98,6 @@ You can also provide the API codes (`$role->code`) of non-default roles, but not
 
 >**NOTE:** If the `roles` property isn't provided then the only users that will have access to the permission by default will be superusers or users with the `\Backend\Models\UserRole::CODE_DEVELOPER` role which inherits all "orphaned permissions" (permissions without any roles specified).
 
-<a name="page-access"></a>
 ## Restricting access to backend pages
 
 In a backend controller class you can specify which permissions are required for access the pages provided by the controller. It's done with the `$requiredPermissions` controller's property. This property should contain an array of permission keys. If the user permissions match any permission from the list, the framework will let the user to see the controller pages.
@@ -129,7 +119,6 @@ You can also use the **asterisk** symbol to indicate the "all permissions" condi
 public $requiredPermissions = ['acme.blog.*'];
 ```
 
-<a name="features"></a>
 ## Restricting access to features
 
 The backend user model has methods that allow to determine whether the user has specific permissions. You can use this feature in order to limit the functionality of the backend user interface. The permission methods supported by the backend user are `hasAccess` and `hasPermission`. Both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.

@@ -11,7 +11,6 @@
 - [Push queues](#push-queues)
 - [Failed jobs](#failed-jobs)
 
-<a name="configuration"></a>
 ## Configuration
 
 Queues allow you to defer the processing of a time consuming task, such as sending an e-mail, until a later time, thus drastically speeding up the web requests to your application.
@@ -27,7 +26,6 @@ Two special queue drivers are also available:
 
 Before using the Amazon SQS, Beanstalkd, IronMQ or Redis drivers you will need to install [Drivers plugin](https://github.com/wintercms/wn-drivers-plugin).
 
-<a name="basic-usage"></a>
 ## Basic usage
 
 ### Pushing a job onto the queue
@@ -148,7 +146,6 @@ You may also access the job identifier:
 $job->getJobId();
 ```
 
-<a name="queueing-closures"></a>
 ## Queueing closures
 
 Instead of pushing a job class into the queue, you may also push a closure for simple tasks that need to be executed out of the current request cycle.
@@ -168,7 +165,6 @@ Queue::push(function () use ($id, $jobId) {
 
 When using Iron.io [push queues](#push-queues), you should take extra precaution queueing Closures. The end-point that receives your queue messages should check for a token to verify that the request is actually from Iron.io. For example, your push queue end-point should be something like: `https://example.com/queue/receive?token=SecretToken`. You may then check the value of the secret token in your application before marshalling the queue request.
 
-<a name="running-the-queue-worker"></a>
 ## Running the queue worker
 
 Winter includes some [console commands](../console/introduction) that will process jobs in the queue.
@@ -225,7 +221,6 @@ php artisan queue:work --once --sleep=5
 
 Note that the queue only "sleeps" if no jobs are on the queue. If more jobs are available, the queue will continue to work them without sleeping.
 
-<a name="daemon-queue-worker"></a>
 ## Daemon queue worker
 
 By default `queue:work` will process jobs without ever re-booting the framework. This results in a significant reduction of CPU usage when compared to the `queue:work --once` command, but at the added complexity of needing to drain the queues of currently executing jobs during your deployments.
@@ -262,14 +257,12 @@ Daemon queue workers do not restart the platform before processing each job. The
 
 Similarly, your database connection may disconnect when being used by long-running daemon. You may use the `Db::reconnect` method to ensure you have a fresh connection.
 
-<a name="using-a-system-daemon"></a>
 ## Using a system daemon
 
 While running a queue worker as a daemon through `php artisan` is good for development, using a system daemon manager on your server to run and monitor the queue worker will provide many benefits such as auto-restarting, better logging to the system and more control over the configuration.
 
 Below are two examples of common system daemon managers.
 
-<a name="systemd-daemon"></a>
 ### Systemd
 
 `systemd` is a common process manager in use on more recent releases of Linux distributions. It covers an array of system components and offers tight control and simple configuration. Since it is pre-installed on many Linux distrubtions to date, there is no extra software required to be installed to take advantage of it.
@@ -351,7 +344,6 @@ You can also get the full logs by querying `journalctl`:
 journalctl --user -u queue-worker.service
 ```
 
-<a name="supervisor-daemon"></a>
 ### Supervisor
 
 Supervisor is a process monitor for the Linux operating system, and will automatically restart your `queue:work` process if it fails. To install Supervisor on Ubuntu, you may use the following command:
@@ -392,7 +384,6 @@ sudo supervisorctl start winter-worker:*
 
 For more information on Supervisor, consult the [Supervisor documentation](http://supervisord.org/index.html).
 
-<a name="failed-jobs"></a>
 ## Failed jobs
 
 Since things don't always go as planned, sometimes your queued jobs will fail. Don't worry, it happens to the best of us! There is a convenient way to specify the maximum number of times a job should be attempted. After a job has exceeded this amount of attempts, it will be inserted into a `failed_jobs` table. The failed jobs table name can be configured via the `config/queue.php` configuration file.

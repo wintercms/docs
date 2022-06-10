@@ -1,11 +1,7 @@
 # Laravel Utility Commands
 
-- [Clear the cache](#clear-cache)
-
-
 The following commands are utility commands provided by Laravel available on Winter installations.
 
-<a name="clear-cache"></a>
 ## Clear the cache
 
 ```bash

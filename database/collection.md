@@ -1,14 +1,5 @@
 # Database: Collections
 
-- [Introduction](#introduction)
-- [Available methods](#available-methods)
-- [Custom collections](#custom-collections)
-- [Data feed](#data-feed)
-    - [Creating a new feed](#creating-feed)
-    - [Processing results](#data-feed-processing)
-    - [Ordering results](#data-feed-ordering)
-
-<a name="introduction"></a>
 ## Introduction
 
 All multi-result sets returned by a model are an instance of the `Illuminate\Database\Eloquent\Collection` object, including results retrieved via the `get` method or accessed via a relationship. The `Collection` object extends the [base collection](../services/collections), so it naturally inherits dozens of methods used to fluently work with the underlying array of models.
@@ -38,8 +29,6 @@ $names = $users->filter(function ($user) {
 
 > **NOTE:** While most model collection methods return a new instance of an `Eloquent` collection, the `pluck`, `keys`, `zip`, `collapse`, `flatten` and `flip` methods return a base collection instance. Likewise, if a `map` operation returns a collection that does not contain any models, it will be automatically cast to a base collection.
 
-<a name="usage-examples"></a>
-<a name="available-methods"></a>
 ## Available methods
 
 All model collections extend the base collection object; therefore, they inherit all of the powerful methods provided by the base collection class.
@@ -166,7 +155,6 @@ The `unique` method returns all of the unique models in the collection. Any mode
 $users = $users->unique();
 ```
 
-<a name="custom-collections"></a>
 ## Custom collections
 
 If you need to use a custom `Collection` object with your own extension methods, you may override the `newCollection` method on your model:
@@ -194,14 +182,12 @@ class CustomCollection extends CollectionBase
 }
 ```
 
-<a name="data-feed"></a>
 ## Data feed
 
 A data feed allows you to combine multiple model classes into a single collection. This can be useful for creating feeds and streams of data while supporting the use of pagination. It works by adding model objects in a prepared state, before the `get` method is called, which are then combined to make a collection that behaves the same as a regular dataset.
 
 The `DataFeed` class mimics a regular model and supports `limit` and `paginate` methods.
 
-<a name="creating-feed"></a>
 ### Creating a new feed
 
 The next example will combine the User, Post and Comment models in to a single collection and returns the first 10 records.
@@ -219,7 +205,6 @@ $feed->add('comment', function() {
 $results = $feed->limit(10)->get();
 ```
 
-<a name="data-feed-processing"></a>
 ### Processing results
 
 The `get` method will return a `Collection` object that contains the results. Records can be differentiated by using the `tag_name` attribute which was set as the first parameter when the model was added.
@@ -239,7 +224,6 @@ foreach ($results as $result) {
 }
 ```
 
-<a name="data-feed-ordering"></a>
 ### Ordering results
 
 Results can be ordered by a single database column, either shared default used by all datasets or individually specified with the `add` method. The direction of results must also be shared.

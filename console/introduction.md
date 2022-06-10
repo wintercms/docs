@@ -1,18 +1,5 @@
 # Command Line Interface
 
-- [Introduction](#introduction)
-- [Autocompletion](#autocompletion)
-- [List of available commands](#command-list)
-- [Building a command](#building-a-command)
-    - [Defining input expectations](#defining-input-expectations)
-    - [Retrieving input](#retrieving-input)
-    - [Handling process signals](#handling-process-signals)
-    - [Processing Records](#processes-query)
-    - [Writing output](#writing-output)
-- [Registering commands](#registering-commands)
-- [Calling other commands](#calling-other-commands)
-
-<a name="introduction"></a>
 ## Introduction
 
 Winter includes several command-line interface (CLI) commands and utilities that allow to install and manage Winter and its plugins and themes, perform site maintenance and speed up the development process. The console commands are executed through Laravel's [Artisan](http://laravel.com/docs/artisan) command-line tool.
@@ -35,7 +22,6 @@ If you require help or a list of available arguments and options for each comman
 php artisan [command] --help
 ```
 
-<a name="autocompletion"></a>
 ## Autocompletion / suggested input values
 
 With the upgrade to Laravel 9 / Symfony 6, [support was added](https://symfony.com/blog/new-in-symfony-5-4-console-autocompletion) for commands to be able to provide tab-autocomplete results to the shell for an improved user experience. Most Winter commands provide support for autocompletion of input values out of the box and it is easy to [add support in your own custom commands](#providing-suggested-values) when extending the `Winter\Storm\Console\Command` base class.
@@ -48,7 +34,6 @@ artisan completion --help
 
 Running just `artisan completion` will generate the shell script required to be imported into your shell in order to enable support for autocompletion of Winter / Laravel commands; passing the `--help` flag will provide detailed instructions on how to install the generated script.
 
-<a name="command-list"></a>
 ## List of available commands
 
 The following commands are made available to every Winter installation. Click the name of a command to view more information about the usage of that command.
@@ -127,7 +112,6 @@ Command | Description
 `up` | Bring the application out of maintenance mode
 `view:clear` | Clear all compiled view files
 
-<a name="building-a-command"></a>
 ## Building a command
 
 Plugins can also provide additional commands to augment additional functionality to Winter.
@@ -175,9 +159,6 @@ Once your class is created you should fill out the `defaultName`, `signature`, a
 
 The `handle` method will be called when your command is executed. You may place any command logic in this method.
 
-<a name="defining-arguments"></a>
-<a name="defining-options"></a>
-<a name="defining-input-expectations"></a>
 ### Defining input expectations
 
 See the [Laravel documentation](https://laravel.com/docs/9.x/artisan#defining-input-expectations) for how to define the input expectations (arguments & options) that your command has.
@@ -230,7 +211,6 @@ Methods providing values for arguments should end in `Values` and methods provid
 
 See the [Symfony documentation](https://symfony.com/blog/new-in-symfony-5-4-console-autocompletion) for more information.
 
-<a name="plugin-argument"></a>
 #### Plugin names as an argument
 
 If your command requires a plugin identifier as one of its arguments in order to scope the actions taken to that specific plugin, then you may use the `System\Console\Traits\HasPluginArgument` trait in order to provide automatic validation and normalization of the provided input as well as built in support for the [input autocompletion](#providing-suggested-values) feature.
@@ -270,7 +250,6 @@ class MyCommand extends Command
 }
 ```
 
-<a name="retrieving-input"></a>
 ### Retrieving input
 
 See the [Laravel documentation](https://laravel.com/docs/9.x/artisan#retrieving-input) for how to retrieve input.
@@ -400,7 +379,6 @@ class ProcessRecords extends Command
 }
 ```
 
-<a name="writing-output"></a>
 ### Writing output
 
 See the [Laravel documentation](https://laravel.com/docs/9.x/artisan#writing-output) for how to send output to the console.
@@ -415,7 +393,6 @@ Available output methods:
 - [Progress Bars](https://laravel.com/docs/9.x/artisan#progress-bars)
 - [Alerts](#output-alerts)
 
-<a name="output-alerts"></a>
 #### Alerts
 
 The `alert($message)` method makes it easy to render an "alert box" with the provided message in order to draw more attention to an important notice.
@@ -435,7 +412,6 @@ Will output
 *************************************************************
 ```
 
-<a name="registering-commands"></a>
 ## Registering commands
 
 #### Registering a console command
@@ -481,7 +457,6 @@ public function boot()
 }
 ```
 
-<a name="calling-other-commands"></a>
 ## Calling other commands
 
 See the [Laravel documentation](https://laravel.com/docs/9.x/artisan#programmatically-executing-commands) for how to call commands programmatically.

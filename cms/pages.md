@@ -1,18 +1,5 @@
 # CMS Pages
 
-- [Introduction](#introduction)
-- [Page configuration](#configuration)
-    - [URL syntax](#url-syntax)
-- [Dynamic pages](#dynamic-pages)
-    - [Page execution life cycle](#page-life-cycle)
-    - [Sending a custom response](#life-cycle-response)
-    - [Handling forms](#handling-forms)
-- [404 page](#404-page)
-- [Error page](#error-page)
-- [Page variables](#page-variables)
-- [Injecting page assets programmatically](#injecting-assets)
-
-<a name="introduction"></a>
 ## Introduction
 
 All websites have pages. In Winter, frontend pages are rendered by page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages, but the [PHP section](themes#php-section) is optional. Below, you can see the simplest home page example:
@@ -23,16 +10,9 @@ url = "/"
 <h1>Hello, world!</h1>
 ```
 
-<a name="configuration"></a>
 ## Page configuration
 
 Page configuration is defined in the [Configuration Section](themes#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and its [Components](../cms/components), which are explained in another article. The following configuration parameters are supported for pages:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Parameter | Description
 ------------- | -------------
@@ -42,7 +22,6 @@ Parameter | Description
 `description` | the page description for the backend interface, optional.
 `hidden` | hidden pages are accessible only by logged-in backend users, optional.
 
-<a name="url-syntax"></a>
 ### URL syntax
 
 The page URL is defined with the **url** configuration parameter. URLs should start with the forward slash character, and can contain parameters. URLs without parameters are fixed and strict. In the following example, the page URL is `/blog`.
@@ -113,19 +92,19 @@ url = "/blog/:slug?*"
 
 For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brown/make/volkswagen/beetle/retro/edit` and extract the following parameter values:
 
-<div class="content-list" markdown="1">
+<div class="content-list">
+
 - color: `brown`
 - make: `volkswagen/beetle/retro`
+
 </div>
 
 > **NOTE:** Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
 
-<a name="dynamic-pages"></a>
 ## Dynamic pages
 
 Inside the [Twig section](themes#twig-section) of a page template, you can use any [functions, filters, and tags provided by Winter](../markup). Any dynamic page requires **variables**. In Winter, variables may be prepared by the page, layout [PHP section](themes#php-section), or by [Components](../cms/components). In this article, we describe how to prepare variables in the PHP section.
 
-<a name="page-life-cycle"></a>
 ### Page execution life cycle
 
 There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](../cms/components) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use `array notation` to pass variables to the page:
@@ -164,7 +143,6 @@ function onStart()
 
 The default variables and Twig extensions provided by Winter are described in the [Markup Guide](../markup). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts#dynamic-layouts) article.
 
-<a name="life-cycle-response"></a>
 ### Sending a custom response
 
 All methods defined in the execution life cycle have the ability to halt the process and return a response - simply return a response from the life cycle function. The example below will not load any page contents, and instead return the string *Hello world!* to the browser:
@@ -185,7 +163,6 @@ public function onStart()
 }
 ```
 
-<a name="handling-forms"></a>
 ### Handling forms
 
 You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction) article). Use the [`form_open()`](../markup#standard-form) function to define a form that refers to an event handler. Example:
@@ -217,17 +194,14 @@ If you want to refer to a handler defined in a specific [component](../cms/compo
 {{ form_open({ request: 'myComponent::onHandleForm' }) }}
 ```
 
-<a name="404-page"></a>
 ## 404 page
 
 If the theme contains a page with the URL `/404`, it is displayed when the system can't find a requested page.
 
-<a name="error-page"></a>
 ## Error page
 
 By default, any errors will be shown with a detailed error page containing the file contents, line number, and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `config/app.php` script, and creating a page with the URL `/error`.
 
-<a name="page-variables"></a>
 ## Page variables
 
 The properties of a page can be accessed in the [PHP code section](../cms/themes#php-section), or [Components](../cms/components) by referencing `$this->page`.
@@ -247,7 +221,6 @@ They can also be accessed in the markup using the [`this.page` variable](../mark
 
 More information can be found at [`this.page` in the Markup guide](../markup/this-page).
 
-<a name="injecting-assets"></a>
 ## Injecting page assets programmatically
 
 If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes#php-section) of a page or [layout](layouts) template. Example:

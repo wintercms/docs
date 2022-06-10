@@ -1,19 +1,11 @@
 # Media Manager
 
-- [Amazon S3](#amazon-s3)
-- [Rackspace CDN](#rackspace-cdn)
-- [Audio and video players](#audio-and-video-players)
-- [Other configuration options](#configuration-options)
-- [Events](#events)
-- [Troubleshooting](#troubleshooting)
-
 By default Media Manager works with the storage/app/media subdirectory of the installation directory. In order to use Amazon S3 or Rackspace CDN, you should update the system configuration.
 
 > You need to install [Drivers plugin](https://github.com/wintercms/wn-drivers-plugin) before you can use Amazon S3 or Rackspace CDN features.
 
 Please note that after you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
 
-<a name="amazon-s3"></a>
 ## Configuring Amazon S3 access
 
 To use Amazon S3 with Winter CMS, you should create S3 bucket, folder in the bucket and API user.
@@ -42,7 +34,7 @@ By default files in S3 buckets cannot be accessed directly. To make the bucket p
 }
 ```
 
-Click **Save** button to apply the policy. The policy gives public read-only access to all folders and directories in the bucket. If you're going to use the bucket for other needs, it's possible to setup a public access to a specific folder in the bucket, just specify the directory name in the **Resource** value: 
+Click **Save** button to apply the policy. The policy gives public read-only access to all folders and directories in the bucket. If you're going to use the bucket for other needs, it's possible to setup a public access to a specific folder in the bucket, just specify the directory name in the **Resource** value:
 
 ```
 "arn:aws:s3:::BUCKETNAME/media/*"
@@ -65,27 +57,27 @@ You can find the bucket region in S3 management console, in the bucket propertie
 
 Region | Code
 ------------- | -------------
-<span class="nowrap">**US East (Ohio)**</span> | us-east-2
-<span class="nowrap">**US East (N. Virginia)**</span> | us-east-1
-<span class="nowrap">**US West (N. California)**</span> | us-west-1
-<span class="nowrap">**US West (Oregon)**</span> | us-west-2
-<span class="nowrap">**Asia Pacific (Hong Kong)**</span> | ap-east-1
-<span class="nowrap">**Asia Pacific (Mumbai)**</span> | ap-south-1
-<span class="nowrap">**Asia Pacific (Osaka-Local)**</span> | ap-northeast-3
-<span class="nowrap">**Asia Pacific (Seoul)**</span> | ap-northeast-2
-<span class="nowrap">**Asia Pacific (Singapore)**</span> | ap-southeast-1
-<span class="nowrap">**Asia Pacific (Sydney)**</span> | ap-southeast-2
-<span class="nowrap">**Asia Pacific (Tokyo)**</span> | ap-northeast-1
-<span class="nowrap">**Canada (Central)**</span> | ca-central-1
-<span class="nowrap">**China (Beijing)**</span> | cn-north-1
-<span class="nowrap">**China (Ningxia)**</span> | cn-northwest-1
-<span class="nowrap">**EU (Frankfurt)**</span> | eu-central-1
-<span class="nowrap">**EU (Ireland)**</span> | eu-west-1
-<span class="nowrap">**EU (London)**</span> | eu-west-2
-<span class="nowrap">**EU (Paris)**</span> | eu-west-3
-<span class="nowrap">**EU (Stockholm)**</span> | eu-north-1
-<span class="nowrap">**South America (São Paulo)**</span> | sa-east-1
-<span class="nowrap">**Middle East (Bahrain)**</span> | me-south-1
+US East (Ohio) | `us-east-2`
+US East (N. Virginia) | `us-east-1`
+US West (N. California) | `us-west-1`
+US West (Oregon) | `us-west-2`
+Asia Pacific (Hong Kong) | `ap-east-1`
+Asia Pacific (Mumbai) | `ap-south-1`
+Asia Pacific (Osaka-Local) | `ap-northeast-3`
+Asia Pacific (Seoul) | `ap-northeast-2`
+Asia Pacific (Singapore) | `ap-southeast-1`
+Asia Pacific (Sydney) | `ap-southeast-2`
+Asia Pacific (Tokyo) | `ap-northeast-1`
+Canada (Central) | `ca-central-1`
+China (Beijing) | `cn-north-1`
+China (Ningxia) | `cn-northwest-1`
+EU (Frankfurt) | `eu-central-1`
+EU (Ireland) | `eu-west-1`
+EU (London) | `eu-west-2`
+EU (Paris) | `eu-west-3`
+EU (Stockholm) | `eu-north-1`
+South America (São Paulo) | `sa-east-1`
+Middle East (Bahrain) | `me-south-1`
 
 Example configuration after update:
 
@@ -103,7 +95,7 @@ Example configuration after update:
 ]
 ```
 
-Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters: 
+Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
 
 Parameter | Value
 ------------- | -------------
@@ -128,7 +120,6 @@ Example storage configuration:
 
 Congratulations! Now you're ready to use Amazon S3 with Winter CMS. Note that you can also configure Amazon CloudFront CDN  to work with your bucket. This topic is not covered in this document, please refer to [CloudFront documentation](https://aws.amazon.com/cloudfront/). After you configure CloudFront, you will need to update the **path** parameter in the storage configuration.
 
-<a name="rackspace-cdn"></a>
 ## Configuring Rackspace CDN access
 
 To use Rackspace CDN with Winter CMS, you should create Rackspace CDN container, folder in the container and API user.
@@ -141,12 +132,6 @@ You should create an API user that Winter CMS will use for managing files in the
 
 Now you have all the information to update Winter CMS configuration. Open **config/filesystems.php** script and find the **disks** section. It already contains Rackspace configuration, you need to replace the API credentials and container information parameters:
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Parameter | Value
 ------------- | -------------
 `username` | Rackspace user name (for example winter.cdn.api).
@@ -154,7 +139,7 @@ Parameter | Value
 `container` | the container name.
 `region` | the bucket region code, see below.
 `endpoint` | leave the value as is.
-`region` | you can find the region in the CDN container list in Rackspace control panel. The code is a 3-letter value, for example it's **ORD** for Chicago. 
+`region` | you can find the region in the CDN container list in Rackspace control panel. The code is a 3-letter value, for example it's **ORD** for Chicago.
 
 Example configuration after update:
 
@@ -173,7 +158,7 @@ Example configuration after update:
 ]
 ```
 
-Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters: 
+Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
 
 Parameter | Value
 ------------- | -------------
@@ -181,7 +166,7 @@ Parameter | Value
 `folder` | the name of the folder you created in CDN container.
 `path` | the public path of the folder in the container, see below.
 
-To obtain the path of the folder, go to the CDN container list in Rackspace console. Click the container and open the media folder. Upload any file. After the file is uploaded, click it. The file will open in a new browser tab. Copy the file URL and remove the file name and trailing slash from it. 
+To obtain the path of the folder, go to the CDN container list in Rackspace console. Click the container and open the media folder. Upload any file. After the file is uploaded, click it. The file will open in a new browser tab. Copy the file URL and remove the file name and trailing slash from it.
 
 Example storage configuration:
 
@@ -198,7 +183,6 @@ Example storage configuration:
 
 Congratulations! Now you're ready to use Rackspace CDN with Winter CMS.
 
-<a name="audio-and-video-players"></a>
 ## Audio and video players
 
 By default the system uses HTML5 audio and video tags to render audio and video files:
@@ -234,7 +218,6 @@ As the partials are written with Twig, you can automate adding alternative video
 </video>
 ```
 
-<a name="configuration-options"></a>
 ## Other configuration options
 
 There are several options that allow you to fine-tune the Media Manager. All of them could be defined in **config/cms.php** script, in the **storage/media** section, for example:
@@ -250,12 +233,6 @@ There are several options that allow you to fine-tune the Media Manager. All of 
 ],
 ```
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Parameter | Value
 ------------- | -------------
 `ignore` | a list of file and directory names to ignore. Defaults to ['.svn', '.git', '.DS_Store'].
@@ -264,16 +241,9 @@ Parameter | Value
 `videoExtensions` | file extensions corresponding to the Video document type. The default value is `['mp4', 'avi', 'mov', 'mpg']`.
 `audioExtensions` | file extensions corresponding to the Audio document type. The default value is `['mp3', 'wav', 'wma', 'm4a']`.
 
-<a name="events"></a>
 ## Events
 
 The Media Manager provides a few [events](../services/events) that you can listen for in order to improve extensibility.
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Event | Description | Parameters
 ------------- | ------------- | -------------
@@ -304,7 +274,6 @@ Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
 });
 ```
 
-<a name="troubleshooting"></a>
 ## Troubleshooting
 
 The most common issue with using remote services is the SSL connection problem. If you get SSL errors, make sure that your server has fresh SSL certificates of public Certificate Authorities (CA).

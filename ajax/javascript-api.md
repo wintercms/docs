@@ -1,11 +1,5 @@
 # JavaScript API
 
-- [Introduction](#javascript-api)
-- [Usage examples](#javascript-examples)
-- [Global AJAX events](#global-events)
-- [Usage examples](#global-events-examples)
-
-<a name="javascript-api"></a>
 ## Introduction
 
 The JavaScript API is more powerful than the data attributes API. The `request` method can be used with any element that is inside a form, or on a form element. When the method is used with an element inside a form, it is forwarded to the form.
@@ -18,12 +12,6 @@ The `request` method has a single required argument - the AJAX handler name. Exa
 ```
 
 The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the Winter framework:
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Option | Description
 ------------- | -------------
@@ -43,12 +31,6 @@ Option | Description
 
 You may also override some of the request logic by passing new functions as options. These logic handlers are available.
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Handler | Description
 ------------- | -------------
 `handleConfirmMessage(message)` | called when requesting confirmation from the user.
@@ -57,7 +39,6 @@ Handler | Description
 `handleFlashMessage(message, type)` | called when a flash message is provided using the **flash** option (see above).
 `handleRedirectResponse(url)` | called when the browser should redirect to another location.
 
-<a name="javascript-examples"></a>
 ## Usage examples
 
 Request a confirmation before the onDelete request is sent:
@@ -121,16 +102,9 @@ $('form').request('onCalculate', {success: function(data) {
 }})
 ```
 
-<a name="global-events"></a>
 ## Global AJAX events
 
 The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.
-
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
 
 Event | Description
 ------------- | -------------
@@ -153,7 +127,6 @@ Event | Description
 `ajaxDone` | triggered finally if the AJAX request was successful.
 `ajaxAlways` | triggered regardless if the AJAX request fails or was successful.
 
-<a name="global-events-examples"></a>
 ## Usage examples
 
 Executes JavaScript code when the `ajaxUpdate` event is triggered on an element.

@@ -1,45 +1,25 @@
 # Asset Compilation (Mix)
 
-- [Introduction](#introduction)
-- [Requirements](#requirements)
-- [Registering a package](#registering-packages)
-    - [Automatic registration](#automatic-registration)
-    - [Registering plugin packages](#registering-plugins)
-    - [Registering theme packages](#registering-themes)
-- [Mix configuration](#mix-configuration)
-- [Examples](#examples)
-- [Commands](#commands)
-    - [Install Node dependencies](#mix-install)
-    - [Update Node dependencies](#mix-update)
-    - [List registered Mix packages](#mix-list)
-    - [Compile a Mix package](#mix-compile)
-    - [Watch a Mix package](#mix-watch)
-
-<a name="introduction"></a>
 ## Introduction
 
 Winter brings first-class support for handling Node-based compilation for frontend assets through the Mix commands. The comamnds use the [Laravel Mix](https://laravel-mix.com/) wrapper, a user-friendly and simple interface for setting up compilation of multiple types of frontend assets through Webpack and various libraries.
 
-<a name="requirements"></a>
 ### Requirements
 
 To take advantage of Mix asset compilation, you must have Node and the Node package manager (NPM) installed in your development environment. This will be dependent on your operating system - please review the [Download NodeJS](https://nodejs.org/en/download/) page for more information on installing Node.
 
 [Laravel Mix](https://laravel-mix.com/) should also be present in the `package.json` file for any packages that will be using it (either in `dependencies` or a `devDependencies`) but if it is not specified in the project's `package.json` file then it can be optionally automatically added when running the [`mix:install`](#mix-install) command.
 
-<a name="registering-packages"></a>
 ## Registering a package
 
 Registering for asset compilation through Mix is very easy. Automatic registration should meet your needs most of the time, and if not there are several methods available to manually register Mix packages.
 
-<a name="automatic-registration"></a>
 ### Automatic registration
 
 By default, Winter will scan all available and enabled modules, plugins and themes for the presence of a `winter.mix.js` file under each extension's root folder (i.e. `modules/system/winter.mix.js`, `plugins/myauthor/myplugin/winter.mix.js`, or `themes/mytheme/winter.mix.js`).
 
 If the `winter.mix.js` file is found, it will be automatically registered as a package with an automatically generated package name, and will show up when running the Mix commands. Most of the time, this should be all you need to do in order to get started with Laravel Mix asset compilation in Winter CMS.
 
-<a name="registering-plugins"></a>
 ### Registering plugins
 
 To register frontend assets to be compiled through Mix in your plugin, simply return an array with the package names as the keys and the package paths relative to the plugin's directory as the values to register from your [`Plugin.php`](../plugin/registration) registration file's `registerMixPackages()` method. See below example.
@@ -53,7 +33,6 @@ public function registerMixPackages()
 }
 ```
 
-<a name="registering-themes"></a>
 ### Registering themes
 
 Registration of asset compilation of themes is even easier, and can be done by adding a `mix` definition to your [theme information file](../themes/development#theme-information) (`theme.yaml`).
@@ -85,7 +64,6 @@ mix:
     demo-theme-shop: assets/shop/winter.mix.js
 ```
 
-<a name="mix-configuration"></a>
 ## Mix configuration
 
 The Mix configuration file (`winter.mix.js`) is a configuration file that manages the configuration of Laravel Mix itself. In conjunction with the `package.json` file that defines your dependencies, this file defines how Laravel Mix will compile your assets.
@@ -112,7 +90,6 @@ When the `winter.mix.js` file is evaluated, regardless of where you ran `mix:com
 
 >**NOTE:** Winter's [path symbols](../services/helpers#path-symbols) are also supported in the `winter.mix.js` file.
 
-<a name="examples"></a>
 ## Examples
 
 Here are some examples of installing common frontend libraries for use with the asset compilation.
@@ -148,10 +125,8 @@ In the example above, we have a base CSS file that contains the Tailwind styling
 
 Your theme will now be ready for Tailwind CSS development.
 
-<a name="commands"></a>
 ## Commands
 
-<a name="mix-install"></a>
 ### Install Node dependencies
 
 ```bash
@@ -168,7 +143,6 @@ If the command is run with a `-p` or `--package` flag and the provided package n
 
 The `--npm` flag can also be provided if you have a custom path to the `npm` program. If this is not provided, the system will try to guess where `npm` is located.
 
-<a name="mix-update"></a>
 ### Update Node dependencies
 
 ```bash
@@ -181,7 +155,6 @@ This command operates very similar to `mix:install`, except that it only updates
 
 Please see the `mix:install` documentation for the available arguments and options.
 
-<a name="mix-list"></a>
 ### List registered Mix packages
 
 ```bash
@@ -192,7 +165,6 @@ The `mix:list` command will list all registered Mix packages found in the Winter
 
 The command will list all packages, as well as the directory for the asset and the configuration file that has been defined during registration.
 
-<a name="mix-compile"></a>
 ### Compile a Mix packages
 
 ```bash
@@ -209,7 +181,6 @@ The command will generate a report of all compiled files and their final size on
 
 If you wish to pass extra options to the Webpack CLI, for special cases of compilation, you can add `--` to the end of the command, followed by [any parameters](https://webpack.js.org/api/cli/) as per the Webpack CLI options.
 
-<a name="mix-watch"></a>
 ### Watch a Mix package
 
 ```bash
