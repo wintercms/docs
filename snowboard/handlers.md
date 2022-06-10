@@ -2,11 +2,11 @@
 
 ## Introduction
 
-AJAX event handlers are PHP functions that can be defined in the page or layout [PHP section](../cms/themes#php-section) or inside [components](../cms/components) and are used to execute the server-side functionality of an AJAX request made by the [Request API](../snowboard/request) or [Data Attributes API](../snowboard/data-attributes).
+AJAX event handlers are PHP functions that can be defined in the page or layout [PHP section](../cms/themes.md#php-section) or inside [components](../cms/components.md) and are used to execute the server-side functionality of an AJAX request made by the [Request API](../snowboard/request.md) or [Data Attributes API](../snowboard/data-attributes.md).
 
 Handler method names should be specified with the `on` prefix, followed by the event name in PascalCase - for example, `onMyHandler` or `onCreatePost`.
 
-All handlers support the use of [updating partials](#updating-partials) as part of the AJAX response. This behavior can also be controlled via the `update` option in the [Request API](../snowboard/request) or the `data-request-update` attribute in the [Data Attributes API](../snowboard/data-attributes).
+All handlers support the use of [updating partials](#updating-partials) as part of the AJAX response. This behavior can also be controlled via the `update` option in the [Request API](../snowboard/request.md) or the `data-request-update` attribute in the [Data Attributes API](../snowboard/data-attributes.md).
 
 ```php
 function onSubmitContactForm()
@@ -15,7 +15,7 @@ function onSubmitContactForm()
 }
 ```
 
-If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](../cms/components) have the lowest priority.
+If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](../cms/components.md) have the lowest priority.
 
 ### Calling a handler
 
@@ -31,13 +31,13 @@ Every AJAX request should specify a handler name. When the request is made, the 
 </script>
 ```
 
-If two components register the same handler name, it is advised to prefix the handler with the [component short name or alias](../cms/components#aliases). If a component uses an alias of **mycomponent** the handler can be targeted with `mycomponent::onName`.
+If two components register the same handler name, it is advised to prefix the handler with the [component short name or alias](../cms/components.md#aliases). If a component uses an alias of **mycomponent** the handler can be targeted with `mycomponent::onName`.
 
 ```html
 <button data-request="mycomponent::onSubmitContactForm">Go</button>
 ```
 
-You should use the [`__SELF__`](../plugin/components#referencing-self) variable instead of the hard coded alias in order to support multiple instances of your component existing on the same page.
+You should use the [`__SELF__`](../plugin/components.md#referencing-self) variable instead of the hard coded alias in order to support multiple instances of your component existing on the same page.
 
 ```twig
 <form data-request="{{ __SELF__ }}::onCalculate" data-request-update="'{{ __SELF__ }}::calcresult': '#result'">
@@ -103,13 +103,13 @@ Snowboard.request(this, 'onHandleForm', {
 });
 ```
 
-Data returned in this fashion **cannot** be accessed through the [Data Attributes API](../snowboard/data-attributes).
+Data returned in this fashion **cannot** be accessed through the [Data Attributes API](../snowboard/data-attributes.md).
 
-You may also retrieve the data in [several events](../snowboard/request#global-events) that fire as part of the Request lifecycle.
+You may also retrieve the data in [several events](../snowboard/request.md#global-events) that fire as part of the Request lifecycle.
 
 ## Throwing an AJAX exception
 
-You may throw an [AJAX exception](../services/error-log#ajax-exception) using the `AjaxException` class to treat the response as an error while retaining the ability to send response contents as normal. Simply pass the response contents as the first argument of the exception.
+You may throw an [AJAX exception](../services/error-log.md#ajax-exception) using the `AjaxException` class to treat the response as an error while retaining the ability to send response contents as normal. Simply pass the response contents as the first argument of the exception.
 
 ```php
 throw new AjaxException([
@@ -118,11 +118,11 @@ throw new AjaxException([
 ]);
 ```
 
-> **NOTE**: When throwing this exception type, [partials will be updated](../ajax/update-partials) as normal.
+> **NOTE**: When throwing this exception type, [partials will be updated](../ajax/update-partials.md) as normal.
 
 ## Running code before handlers
 
-Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts#dynamic-pages) allows code to run before every AJAX handler.
+Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts.md#dynamic-pages) allows code to run before every AJAX handler.
 
 ```php
 function onInit()
@@ -131,7 +131,7 @@ function onInit()
 }
 ```
 
-You may define an `init` method inside a [component class](../plugin/components#page-cycle-init) or [backend widget class](../backend/widgets).
+You may define an `init` method inside a [component class](../plugin/components.md#page-cycle-init) or [backend widget class](../backend/widgets.md).
 
 ```php
 function init()

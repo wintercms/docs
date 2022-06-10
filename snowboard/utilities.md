@@ -213,7 +213,7 @@ class CookieEncryptor extends Singleton
 
 ## JSON Parser
 
-The JSON Parser utility is used to safely parse JSON-like (JS-object strings) data that does not strictly meet the JSON specifications. It is especially useful for parsing the values provided in the `data-request-data` attribute used by the [Data Attributes](data-attributes) functionality.
+The JSON Parser utility is used to safely parse JSON-like (JS-object strings) data that does not strictly meet the JSON specifications. It is especially useful for parsing the values provided in the `data-request-data` attribute used by the [Data Attributes](data-attributes.md) functionality.
 
 This is somewhat similar to [JSON5](https://json5.org/) or [RJSON](http://www.relaxedjson.org/), but not exactly. The key aspect is that it allows for data represented as a JavaScript Object in string form as if it was actively running JS to be parsed without the use of `eval()` which could cause issues with Content Security Policies that block the use of `eval()`.
 

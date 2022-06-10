@@ -2,7 +2,7 @@
 
 ## Introduction
 
-While care has been given to ensure that the Snowboard framework covers the entire scope of functionality that the original [AJAX framework](../ajax/introduction) provided, there are subtle differences between the two frameworks. Please take the time to read through this document to ensure that you are across the changes, especially if you intend to upgrade an existing project to use this new framework.
+While care has been given to ensure that the Snowboard framework covers the entire scope of functionality that the original [AJAX framework](../ajax/introduction.md) provided, there are subtle differences between the two frameworks. Please take the time to read through this document to ensure that you are across the changes, especially if you intend to upgrade an existing project to use this new framework.
 
 ## Breaking changes
 
@@ -17,7 +17,7 @@ Our build script is set up to consider the following browsers as compatible with
 - The browser must NOT be Internet Explorer.
 - The browser must NOT be discontinued by the developer.
 
-For people who wish to support older browsers such as Internet Explorer, you may continue to use the original [AJAX framework](../ajax/introduction), which is still supported by the Winter maintainer team, but will likely not be receiving any new features going forward.
+For people who wish to support older browsers such as Internet Explorer, you may continue to use the original [AJAX framework](../ajax/introduction.md), which is still supported by the Winter maintainer team, but will likely not be receiving any new features going forward.
 
 ### jQuery is no longer required
 
@@ -25,11 +25,11 @@ We have removed the hard dependency with jQuery, which also means that no jQuery
 
 ### JavaScript in the HTML data attribute framework is deprecated
 
-The original [AJAX framework](../ajax/attributes-api#data-attributes) allowed for arbitrary JavaScript code to be specified within the callback data attributes, for example, `data-request-success`, `data-request-error` and `data-request-complete`, as a way of allowing JavaScript to run additional tasks depending on the success or failure of an AJAX request made through the HTML data attributes.
+The original [AJAX framework](../ajax/attributes-api.md#data-attributes) allowed for arbitrary JavaScript code to be specified within the callback data attributes, for example, `data-request-success`, `data-request-error` and `data-request-complete`, as a way of allowing JavaScript to run additional tasks depending on the success or failure of an AJAX request made through the HTML data attributes.
 
 We have dropped support of this feature due to its use of the `eval()` method in JavaScript to execute this JavaScript, which has security implications (especially on front-facing code) and prevents people from using content security policies on their sites without the use of the `unsafe-eval` [CSP rule](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src).
 
-If you wish to use JavaScript with the AJAX functionality, you must either use the [JavaScript Request functionality](../snowboard/request), or use the original [AJAX framework](../ajax/introduction) which retains this feature.
+If you wish to use JavaScript with the AJAX functionality, you must either use the [JavaScript Request functionality](../snowboard/request.md), or use the original [AJAX framework](../ajax/introduction.md) which retains this feature.
 
 ### AJAX events are triggered as DOM events
 
@@ -55,7 +55,7 @@ $('#element').on('ajaxAlways', function (event) {
 });
 ```
 
-Please review the [JavaScript Request](../snowboard/request) documentation for information on what properties are available for DOM events.
+Please review the [JavaScript Request](../snowboard/request.md) documentation for information on what properties are available for DOM events.
 
 ## Other changes
 

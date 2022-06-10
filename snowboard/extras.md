@@ -10,7 +10,7 @@ When using the Snowboard framework, you have the option to specify the `extras` 
 
 ## Loading indicator
 
-The loading indicator is a loading bar that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../snowboard/request#global-events) used by the Snowboard framework.
+The loading indicator is a loading bar that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../snowboard/request.md#global-events) used by the Snowboard framework.
 
 When an AJAX request starts, the `ajaxPromise` event is fired. This displays the loading indicator at the top of the page. When this promise is resolved, the loading bar is removed.
 
@@ -54,7 +54,7 @@ function onSuccess()
 }
 ```
 
-When using AJAX Flash messages you should also ensure that your theme supports [standard flash messages](../markup/tag-flash) by placing the following code in your page or layout in order to render Flash messages that haven't been displayed yet when the page loads.
+When using AJAX Flash messages you should also ensure that your theme supports [standard flash messages](../markup/tag-flash.md) by placing the following code in your page or layout in order to render Flash messages that haven't been displayed yet when the page loads.
 
 ```twig
 {% flash %}
@@ -92,7 +92,7 @@ You may specify the `data-request-validate` attribute on a form to enable server
 
 ### Throwing a validation error
 
-In the server side AJAX handler, you may throw a [validation exception](../services/error-log#validation-exception) using the `ValidationException` class to make a field invalid. The exception should be provided an array, which states the field names for the keys, and the error messages for the values.
+In the server side AJAX handler, you may throw a [validation exception](../services/error-log.md#validation-exception) using the `ValidationException` class to make a field invalid. The exception should be provided an array, which states the field names for the keys, and the error messages for the values.
 
 ```php
 function onSubmit()
@@ -101,7 +101,7 @@ function onSubmit()
 }
 ```
 
-> **NOTE**: You can also pass a [Validator](../services/validation) instance as the first argument of the exception instead, to use the in-built validation service.
+> **NOTE**: You can also pass a [Validator](../services/validation.md) instance as the first argument of the exception instead, to use the in-built validation service.
 
 ### Displaying error messages
 
@@ -119,7 +119,7 @@ To display multiple error messages, include an element with the `data-message` a
 </div>
 ```
 
-The `handleValidationErrors` callback, and the `ajaxValidationErrors` global event, that are available with the [Request API](../snowboard/request#global-events) allow you to fully customise the client-side validation handling. The `handleValidationErrors` callback can be used to control validation per request, while the `ajaxValidationErrors` global event can be used by [Snowboard plugins](../snowboard/plugin-development) to augment the client-side validation in a global fashion.
+The `handleValidationErrors` callback, and the `ajaxValidationErrors` global event, that are available with the [Request API](../snowboard/request.md#global-events) allow you to fully customise the client-side validation handling. The `handleValidationErrors` callback can be used to control validation per request, while the `ajaxValidationErrors` global event can be used by [Snowboard plugins](../snowboard/plugin-development.md) to augment the client-side validation in a global fashion.
 
 ### Displaying errors with fields
 

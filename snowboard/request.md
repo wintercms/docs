@@ -78,7 +78,7 @@ Option | Parameters | Description
 
 ## Global events
 
-The `Request` class fires several global events which can be used by plugins to augment or override the functionality of the `Request` class. [Snowboard plugins](../snowboard/plugin-development) can be configured to listen to, and act upon, these events by using the `listen()` method to direct the event to a method with the plugin class.
+The `Request` class fires several global events which can be used by plugins to augment or override the functionality of the `Request` class. [Snowboard plugins](../snowboard/plugin-development.md) can be configured to listen to, and act upon, these events by using the `listen()` method to direct the event to a method with the plugin class.
 
 ```js
 class HandleFlash extends Snowboard.Singleton
@@ -320,4 +320,4 @@ Snowboard.addPlugin('axios', AxiosRequest);
 Snowboard.axios('#my-element', 'onSubmit');
 ```
 
-For more information on the best practices with setting up a Snowboard plugin, view the [Plugin Development](../snowboard/plugin-development) documentation.
+For more information on the best practices with setting up a Snowboard plugin, view the [Plugin Development](../snowboard/plugin-development.md) documentation.

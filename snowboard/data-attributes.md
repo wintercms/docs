@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Data Attributes API is the simpler way of embedding AJAX functionality in your themes and plugins, and removes the need to be experienced with JavaScript. While the [JavaScript API](../snowboard/request) has had numerous changes from the original [AJAX framework](../ajax/introduction), the Data Attributes API has remain largely unchanged, despite being powered by the new Snowboard framework under the hood.
+The Data Attributes API is the simpler way of embedding AJAX functionality in your themes and plugins, and removes the need to be experienced with JavaScript. While the [JavaScript API](../snowboard/request.md) has had numerous changes from the original [AJAX framework](../ajax/introduction.md), the Data Attributes API has remain largely unchanged, despite being powered by the new Snowboard framework under the hood.
 
 It can be loaded by adding the following tag into your CMS Theme's page or layout:
 
@@ -10,7 +10,7 @@ It can be loaded by adding the following tag into your CMS Theme's page or layou
 {% snowboard request attr %}
 ```
 
-> **NOTE:** As per the [Migration Guide](../snowboard/migration-guide), arbitrary JavaScript is no longer allowed through the Data Attributes API. Thus, the `data-request-before-update`, `data-request-success`, `data-request-error` and `data-request-complete` attributes are no longer supported. Please use the [JavaScript API](../snowboard/request) if you require this functionality.
+> **NOTE:** As per the [Migration Guide](../snowboard/migration-guide.md), arbitrary JavaScript is no longer allowed through the Data Attributes API. Thus, the `data-request-before-update`, `data-request-success`, `data-request-error` and `data-request-complete` attributes are no longer supported. Please use the [JavaScript API](../snowboard/request.md) if you require this functionality.
 
 ## Available Data Attributes
 
@@ -77,7 +77,7 @@ Send a POST parameter `id` with value `7` across multiple elements:
 </div>
 ```
 
-Including [file uploads](../services/request-input#files) with a request:
+Including [file uploads](../services/request-input.md#files) with a request:
 
 ```html
 <form data-request="onSubmit" data-request-files>
