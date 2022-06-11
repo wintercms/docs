@@ -70,8 +70,8 @@ There are some things you may need to set up after the installation is complete.
 If you have used the [Wizard installer](#wizard-installation), for security reasons you should verify the installation files have been deleted. The Winter installer attempts to cleanup after itself, but you should always verify that they have been successfullly removed:
 
 ```treeview
-MyWinterFolder\
-|-- install\       # Installation directory
+MyWinterFolder/
+|-- install/       # Installation directory
 `-- install.html   # Installation script
 ```
 
