@@ -2,7 +2,7 @@
 
 ## Meet Winter CMS
 
-Winter is a Content Management System (CMS) whose sole purpose is to make your development workflow simple again. Winter is built on the [Laravel framework](https://laravel.com/), leveraging the [Long Term Support (LTS)](https://laravel.com/docs/8.x/releases#support-policy) releases to ensure stability for your projects.
+Winter is a Content Management System (CMS) whose sole purpose is to make your development workflow simple again. Winter is built on the [Laravel framework](https://laravel.com/), providing a robust base to springboard any type of project, from small brochure websites to large commercial and enterprise applications.
 
 > Everything should be made as simple as possible, but not simpler <br>[(Albert Einstein, paraphrased)](https://quoteinvestigator.com/2011/05/13/einstein-simple/)
 
@@ -12,22 +12,21 @@ The code for your Winter CMS projects can generally exist as one of three differ
 
 ### Directory Structure
 
-```
-📂 MyWinterProject
- ┣ 📂 bootstrap         <-- Code used to bootstrap the application
- ┣ 📂 config            <-- Configuration files for the application
- ┣ 📂 modules           <-- Modules
- ┣ 📂 plugins           <-- Plugins
- ┣ 📂 storage           <-- Local storage directory
- ┣ 📂 tests             <-- Automated tests
- ┣ 📂 themes            <-- Themes
- ┣ 📂 vendor            <-- Vendor files managed by Composer
- ┣ 📜 artisan           <-- CLI entrypoint
- ┣ 📜 composer.json     <-- Composer project file (managing dependencies)
- ┣ 📜 composer.lock     <-- Composer lock file (info on currently installed packages)
- ┣ 📜 index.php         <-- Web request entrypoint
- ┣ 📜 phpunit.xml       <-- PHPUnit configuration for unit test
- ┗ 📜 server.php        <-- Embedded server for ease of development
+```treeview
+MyWinterProject/
+|-- bootstrap/         # Code used to bootstrap the application
+|-- config/            # Configuration files for the application
+|-- modules/           # Modules
+|-- plugins/           # Plugins
+|-- storage/           # Local storage directory
+|-- tests/             # Automated tests
+|-- themes/            # Themes
+|-- vendor/            # Vendor files managed by Composer
+|-- artisan            # CLI entrypoint
+|-- composer.json      # Composer project file (managing dependencies)
+|-- composer.lock      # Composer lock file (info on currently installed packages)
+|-- index.php          # Web request entrypoint
+|-- phpunit.xml        # PHPUnit configuration for unit test
  ```
 
 ### Themes
@@ -40,7 +39,7 @@ Themes are flat file based, but can also exist in the database through the [data
 
 Themes are managed by the CMS module, the default frontend experience in Winter CMS. It is not a required module however, so it is entirely possible to not include the CMS module in your projects if desired and instead use custom plugins to have Winter act as a headless CMS, or not provide a frontend at all and use Winter solely for its backend functionality (for more complex, data focused applications like internal tools or SaaS offerings).
 
-**Languages Used:**
+#### Languages Used
 
 - [INI](https://en.wikipedia.org/wiki/INI_file) is used for [template configuration](../cms/themes#configuration-section)
 - PHP is used to add more complex logic through the [PHP code sections](../cms/themes#php-section)
@@ -96,9 +95,13 @@ Themes can [override a component’s partial](../cms/components#customizing-defa
 
 ### Asset Compiler
 
-Winter CMS includes a server-side [Asset Compiler](../services/asset-compilation) that makes use of the [Assetic Framework](https://github.com/assetic-php/assetic) to compile and combine assets like CSS and JavaScript serverside, through PHP, negating the need for complex build workflows. The Asset Compiler provides on-the-fly server-side compilation of SASS and LESS stylesheets as well as [run-once manual compilation of assets](../services/asset-compilation#compiler-bundles) without requiring additional workflow tools like Node or NPM. It is also able to combine and minify CSS and JS files.
+Winter CMS includes two types of asset compilation to assist developers with quickly implementing frontend styling and functionality.
+
+The server-side [Asset Compiler](../services/asset-compilation) makes use of the [Assetic Framework](https://github.com/assetic-php/assetic) to compile and combine assets like CSS and JavaScript serverside, through PHP, negating the need for complex build workflows. The Asset Compiler provides on-the-fly server-side compilation of SASS and LESS stylesheets as well as [run-once manual compilation of assets](../services/asset-compilation#compiler-bundles) without requiring additional workflow tools like Node or NPM. It is also able to combine and minify CSS and JS files.
 
 Additionally, you can [define variables in the theme.yaml file](../themes/development#combiner-vars) that can be modified in the Theme Settings area of the backend which are then injected into the compiled files, creating flexibility for theming and branding.
+
+For more advanced workflows, or for taking advantage of the vast Node ecosystem, we also include command-line based compilation of assets through [Mix commands](../console/asset-compilation.md), which is powered by the [Laravel Mix](https://laravel-mix.com/) library. These commands take a lot of the headache out of managing, using and compiling Node-based systems and give you the full flexibility to build the frontend the way you want to.
 
 ### Image Resizing
 
@@ -175,13 +178,17 @@ As Winter is a project designed to serve the needs of developers all over the wo
 
 ### Why Laravel?
 
-The [Laravel documentation](https://laravel.com/docs/8.x#meet-laravel) has an excellent section on why it should be used; but basically it all boils down to the fact that it is the most developer-friendly PHP framework available, not to mention the largest PHP framework with the largest collection of third party packages available for it.
+The [Laravel documentation](https://laravel.com/docs/9.x#meet-laravel) has an excellent section on why it should be used, but basically it all boils down to the fact that it is the most developer-friendly PHP framework available, not to mention the largest PHP framework with the largest collection of third party packages available for it.
 
 ### Why Laravel LTS?
 
-Winter is based of off [Laravel LTS releases](https://laravel.com/docs/8.x/releases#support-policy) to ensure the stability of the platform as a whole for all of our users. Laravel has, in the past, sometimes introduced breaking changes during their intermediary major releases between LTS versions. While this is great for the development of the framework, Winter CMS prides itself on its stability and reliability. This means that whenever the core version of Laravel that Winter CMS targets is upgraded, the Winter CMS development team invests a significant amount of time smoothing over the breaking changes as much as possible as well as putting together detailed, highly targeted migration guides that make the update process a breeze.
+Traditionally, Winter has been based off the [Laravel LTS (long-term support) releases](https://laravel.com/docs/9.x/releases#support-policy) to ensure the stability of the platform as a whole for our users.
 
-As such, to keep maintenance burdens low on both the core Winter CMS develoment team as well as our end users, Winter CMS targets only LTS releases of Laravel. This is usually not a problem as all first-party Laravel packages support LTS releases as well as most of the third party package ecosystem.
+Previously, Laravel had sometimes introduced breaking changes during their intermediary major releases between LTS versions which, while great for the development of the framework, hampered Winter's main goals of stability and reliability. As the Winter CMS development team invests a significant amount of time smoothing over the breaking changes as much as possible as well as putting together detailed, highly targeted migration guides that make the update process a breeze, this meant that it was only feasible for us to follow LTS releases.
+
+Starting with [Laravel 8 and 9](https://laravel.com/docs/9.x/releases#laravel-9), the Laravel framework now follows a yearly schedule for releasing major versions and no longer ship LTS releases, with their goal to make drive innovation forward for the framework whilst challenging their core maintainers to ship amazing features without introducing breaking changes. The hope is that upgrading between major versions of Laravel will cause less friction.
+
+As such, the Winter team will investigate this further and determine our future course with following versions. We will update this answer once we have a plan forward.
 
 ### Why Twig & not Blade?
 
