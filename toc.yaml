@@ -1,9 +1,4 @@
 rootPage: setup/installation
-ignoredPaths:
-    - LICENSE.md
-    - README.md
-    - config
-    - markup
 sections:
     "Getting Started":
         pages:
@@ -13,9 +8,9 @@ sections:
     "Architecture Concepts":
         pages:
             architecture/introduction: "Introduction"
-            help/unit-testing: "Unit Testing"
-            help/using-composer: "Using Composer"
-            help/developer/guide: "Developer Guide"
+            architecture/unit-testing: "Unit Testing"
+            architecture/using-composer: "Using Composer"
+            architecture/developer-guide: "Developer Guide"
             architecture/maintainer-guide: "Maintainer Guide"
 
     "Backend (Admin)":
@@ -30,7 +25,7 @@ sections:
             backend/import-export: "Importing & Exporting"
             backend/users: "Users & Permissions"
             backend/controls: "UI Elements"
-            ui: "User Interface Guide@"
+            "/ui/": "User Interface Guide"
 
     "Frontend":
         pages:
@@ -42,8 +37,8 @@ sections:
             cms/content: "Content Blocks"
             cms/components: "Components"
             cms/mediamanager: "Media Manager"
-            markup: "Markup Guide@"
-            "https://twig.symfony.com/doc/2.x/": "Twig Docs@"
+            "/markup/": "Markup Guide"
+            "https://twig.symfony.com/doc/2.x/": "Twig Docs"
 
     "Plugins":
         pages:
@@ -126,6 +121,5 @@ sections:
 
     "Further Reading":
         pages:
-            api: "API Docs@"
-            "https://laravel.com/docs/6.x": "Laravel Docs@"
-            "https://www.php.net/manual/en/intro-whatis.php": "PHP Docs@"
+            "https://laravel.com/docs/9.x": "Laravel Docs"
+            "https://www.php.net/manual/en/intro-whatis.php": "PHP Docs"
