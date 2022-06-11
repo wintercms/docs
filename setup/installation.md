@@ -10,14 +10,14 @@ There are two ways you can install Winter, either using the [Web-based installer
 
 Winter CMS has some server requirements for web hosting:
 
-- PHP version 7.2 or higher
-- PDO PHP Extension (and relevant driver for the database you want to connect to)
-- cURL PHP Extension
-- OpenSSL PHP Extension
-- Mbstring PHP Extension
-- ZipArchive PHP Extension
-- GD PHP Extension
-- SimpleXML PHP Extension
+- PHP version 8.0 or above.
+- The following PHP extensions installed and enabled:
+    - cURL
+    - OpenSSL
+    - Mbstring
+    - ZipArchive
+    - GD
+    - SimpleXML
 
 Some OS distributions may require you to manually install some of the required PHP extensions.
 
@@ -43,7 +43,7 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 5. In your web browser, navigate to the URL pointing to that folder, and include `/install.html` at the end of the URL.
 6. Follow the instructions given in the installer.
 
-![Winter CMS Installer](https://github.com/wintercms/docs/blob/main/images/web-installer.jpg?raw=true) {.img-responsive .frame}
+![Winter CMS Installer](https://github.com/wintercms/docs/blob/main/images/web-installer.jpg?raw=true)
 
 ### Troubleshooting a web-based installation
 
@@ -59,7 +59,7 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 
 ## Command-line installation
 
-If you feel more comfortable with a command-line or want to use Composer, there is a CLI install process on the [Using Composer page](../help/using-composer)
+If you feel more comfortable with a command-line or want to use Composer, there is a CLI install process on the [Using Composer page](../help/using-composer).
 
 ## Post-installation steps
 
@@ -69,9 +69,10 @@ There are some things you may need to set up after the installation is complete.
 
 If you have used the [Wizard installer](#wizard-installation), for security reasons you should verify the installation files have been deleted. The Winter installer attempts to cleanup after itself, but you should always verify that they have been successfullly removed:
 
-```css
- ┣ 📂 install       <== Installation directory
- ┣ 📜 install.html  <== Installation script
+```treeview
+MyWinterFolder\
+|-- install\       # Installation directory
+`-- install.html   # Installation script
 ```
 
 ### Review configuration
@@ -86,11 +87,13 @@ While most configuration is optional, we strongly recommend disabling [debug mod
 
 For scheduled tasks to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
 
-    * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
+```
+* * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
+```
 
-Be sure to replace `/path/to/artisan` with the absolute path to the `artisan` file in the root directory of Winter. This cron will call the command scheduler every minute, in which Winter will evaluate any scheduled tasks and run the tasks that are due.
+Be sure to replace `/path/to/artisan` with the absolute path to the `artisan` file in the root directory of your Winter installation. This cron will call the command scheduler every minute, in which Winter will evaluate any scheduled tasks and run the tasks that are due.
 
-> **NOTE**: If you are adding this to `/etc/cron.d`, you'll need to specify a user immediately after `* * * * *`.
+> **NOTE**: If you are adding this to `/etc/cron.d`, you'll need to specify a user immediately after the final `*` in the example above.
 
 ### Setting up queue workers
 
