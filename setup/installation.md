@@ -13,20 +13,14 @@ Winter CMS has some server requirements for web hosting:
 - PHP version 8.0 or above.
 - The following PHP extensions installed and enabled:
     - cURL
-    - OpenSSL
-    - Mbstring
-    - ZipArchive
     - GD
+    - Mbstring
+    - OpenSSL
+    - PDO (including the drivers of your database server)
     - SimpleXML
+    - ZipArchive
 
-Some OS distributions may require you to manually install some of the required PHP extensions.
-
-When using Ubuntu, the following command can be run to install all required extensions:
-
-```bash
-sudo apt-get update &&
-sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json php-mbstring php-mysql php-sqlite3 php-zip
-```
+We also recommend the installation of the PDO SQLite extension, regardless of your database type, as some functions in Winter CMS may benefit from being able to use temporary SQLite databases.
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
 
@@ -37,7 +31,7 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 > **NOTE:** If you are a developer, we recommend that you [install via Composer instead](../help/using-composer)
 
 1. Prepare an empty directory on the web server that will host your Winter CMS installation. It can be a main domain, sub-domain or subfolder.
-2. [Download the "install.zip" file](https://github.com/wintercms/web-installer/releases/latest) from the latest release of the Winter CMS Web Installer into this folder.
+2. [Download the "install.zip" file](https://github.com/wintercms/web-installer/releases/latest/download/install.zip) from the latest release of the Winter CMS Web Installer into this folder.
 3. Unzip the downloaded ZIP file.
 4. Grant write permissions to all files and folders that were extracted.
 5. In your web browser, navigate to the URL pointing to that folder, and include `/install.html` at the end of the URL.
@@ -63,11 +57,13 @@ If you feel more comfortable with a command-line or want to use Composer, there 
 
 ## Post-installation steps
 
-There are some things you may need to set up after the installation is complete.
+Once your Winter CMS installation is complete, there are a couple of post-installation steps that we recommend that you review before proceeding.
 
 ### Delete installation files
 
-If you have used the [Wizard installer](#wizard-installation), for security reasons you should verify the installation files have been deleted. The Winter installer attempts to cleanup after itself, but you should always verify that they have been successfullly removed:
+If you have used the [Web-based installation](#web-based-installation) method, you should verify that the installation files have been deleted. The installer will attempt to cleanup after itself, but in rare circumstances, it may be unable to do so.
+
+Please ensure that the following directory and files have been removed:
 
 ```treeview
 MyWinterFolder/
@@ -77,26 +73,26 @@ MyWinterFolder/
 
 ### Review configuration
 
-Configuration files are stored in the `config` directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) available for your circumstances.
+Configuration files are stored in the `config` directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) to ensure that they are suitable for your circumstances.
 
-For example, in production environments you may want to enable [CSRF protection](../setup/configuration#csrf-protection). While in development environments, you may want to enable [bleeding edge updates](../setup/configuration#edge-updates).
+For example, in production environments you may wish to enable [CSRF protection](../setup/configuration#csrf-protection), while in development environments, you may want to enable [bleeding edge updates](../setup/configuration#edge-updates).
 
-While most configuration is optional, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments. You may also want to use a [public folder](../setup/configuration#public-folder) for additional security.
+In particular, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments. You may also want to use a [public folder](../setup/configuration#public-folder) for additional security.
 
 ### Setting up the scheduler
 
-For scheduled tasks to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
+If you intend to use scheduled tasks, or install plugins that use scheduled tasks to function, you should add the following cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e` in the command-line interface of your server.
 
 ```
 * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
 ```
 
-Be sure to replace `/path/to/artisan` with the absolute path to the `artisan` file in the root directory of your Winter installation. This cron will call the command scheduler every minute, in which Winter will evaluate any scheduled tasks and run the tasks that are due.
+Be sure to replace `/path/to/artisan` with the absolute path to the `artisan` file in the root directory of your Winter installation. This cron task will call the command scheduler every minute, to which Winter will evaluate any scheduled tasks and run the tasks that are due for execution.
 
 > **NOTE**: If you are adding this to `/etc/cron.d`, you'll need to specify a user immediately after the final `*` in the example above.
 
 ### Setting up queue workers
 
-You may optionally set up an external queue for processing queued jobs. By default, these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
+You may optionally set up an external queue for processing queued jobs. By default, Winter will run queued jobs asynchronously, which may cause slower performance and response times for users if the jobs are large. This behavior can be changed by setting the `default` parameter in the `config/queue.php`. Please review the [Queue service](../services/queues.md) documentation for more information on setting up a queue runner.
 
-If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue.
+If you decide to use the `database` queue driver, it is a good idea to add a crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue.

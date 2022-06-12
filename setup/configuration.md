@@ -1,19 +1,19 @@
 # App Configuration
 
-All of the configuration files for Winter are stored in the `config/` directory. Options are usually documented in the configuration files directly, so it is recommended to look through the files to become familiar with the available options.
+All of the configuration files for Winter are stored in the `config` directory. Options are usually documented in the configuration files directly, so it is recommended to look through the files to become familiar with the available options.
 
 ## Web server configuration
 
-Winter has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
+Winter has basic configuration that should be applied to your webserver. Common webservers and their configurations can be found below.
 
 ### Apache configuration
 
-If your webserver is running Apache there are some extra system requirements:
+If your webserver is running Apache, there are some extra configuration requirements.
 
-1. `mod_rewrite` should be installed
-1. `AllowOverride` option should be switched on
+1. `mod_rewrite` should be enabled.
+1. `AllowOverride` option should be set to `All`.
 
-In some cases you may need to uncomment this line in the `.htaccess` file:
+In some cases you may need to uncomment this line in the `.htaccess` file of your Winter installation.
 
 ```apacheconf
 ##
@@ -33,9 +33,7 @@ RewriteBase /mysubdirectory/
 
 There are small changes required to configure your site in Nginx.
 
-`nano /etc/nginx/sites-available/default`
-
-Use the following code in **server** section. If you have installed Winter into a subdirectory, replace the first `/` in location directives with the directory Winter was installed under:
+Use the following code in the `server` section. If you have installed Winter into a subdirectory, replace the first `/` in location directives with the directory Winter was installed under.
 
 ```nginx
 location / {
@@ -97,11 +95,9 @@ location ~ ^/themes/.*/resources { try_files $uri 404; }
 
 If your webserver is running Lighttpd you can use the following configuration to run Winter CMS. Open your site configuration file with your favorite editor.
 
-`nano /etc/lighttpd/conf-enabled/sites.conf`
+Paste the following code in the editor and change the **host address** and  `server.document-root` value to match your project.
 
-Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
-
-```
+```bnf
 $HTTP["host"] =~ "domain.example.com" {
     server.document-root = "/var/www/example/"
 
@@ -120,7 +116,7 @@ $HTTP["host"] =~ "domain.example.com" {
 
 ### IIS configuration
 
-If your webserver is running Internet Information Services (IIS) you can use the following in your **web.config** configuration file to run Winter CMS.
+If your webserver is running Internet Information Services (IIS) you can use the following in your `web.config` configuration file to run Winter CMS.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -155,16 +151,16 @@ If your webserver is running Internet Information Services (IIS) you can use the
 
 The debug setting is found in the `config/app.php` configuration file with the `debug` parameter and is enabled by default.
 
-When enabled, this setting will show detailed error messages when they occur along with other debugging features. While useful during development, debug mode should always be disabled when used in a live production site. This prevents potentially sensitive information from being displayed to the end-user.
+When enabled, this setting will show detailed error messages when they occur, along with other debugging features. While useful during development, debug mode should always be disabled when used in a live production site. This prevents potentially sensitive information from being displayed to the end-user.
 
-The debug mode uses the following features when enabled:
+The following features are enabled when debug mode is enabled:
 
 1. [Detailed error pages](../cms/pages#error-page) are displayed.
 1. Failed user authentication provides a specific reason.
 1. [Combined assets](../markup/filter-theme) are not minified by default.
 1. [Safe mode](#safe-mode) is disabled by default.
 
-> **Important**: Always set the `app.debug` setting to `false` for production environments.
+> **IMPORTANT**: Always set the `app.debug` setting to `false` for production environments.
 
 ### Safe mode
 
@@ -174,9 +170,9 @@ If safe mode is enabled, the PHP code section is disabled in CMS templates for s
 
 ### CSRF protection
 
-Winter provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
+Winter provides an easy method of protecting your application from [cross-site request forgeries](https://en.wikipedia.org/wiki/Cross-site_request_forgery). When enabled, a random token is created in your user sessions, that is then included when the [opening form tag is used](../services/html#form-tokens) or when an [AJAX request](../ajax/introduction.md) is made. This token is then validated server-side to ensure that the request is made by the correct user.
 
-While CSRF protection is enabled by default, you can disable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
+While CSRF protection is enabled by default, you can disable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file. This is **not recommended.**
 
 ### Bleeding edge updates
 
@@ -199,9 +195,9 @@ You can instruct the platform to prefer test builds from the marketplace by chan
 'edgeUpdates' => false,
 ```
 
-> **NOTE:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
+> **NOTE:** For plugin developers, we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
 
-> **NOTE:** If using [Composer](../help/using-composer) to manage updates, then replace the default Winter CMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch.
+> **TIP:** If you are using [Composer](../help/using-composer) to manage updates, you may replace the default Winter CMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch. This is more or less the same as enabling edge updates.
 
 ```json
 "winter/storm": "dev-develop as 1.0",
@@ -213,21 +209,25 @@ You can instruct the platform to prefer test builds from the marketplace by chan
 
 ### Using a public folder
 
-For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `winter:mirror` command.
+A good security practice in production environments is to configure your web server to use a public folder to ensure only public files can be accessed. Winter is able to create and mirror the public files in a public folder with the `winter:mirror` command.
 
 ```bash
 php artisan winter:mirror public/
 ```
 
-This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
+This will create a new directory called `public` in the project's root directory. From here, you should modify the webserver configuration to use this new path as the home or "web root" directory.
 
-> **NOTE**: The above command may need to be performed with System Administrator or *sudo* privileges. It should also be performed after each system update or when a new plugin is installed.
+To ensure that all necessary public files are available, you will need to run this command after each Winter CMS update, or when a plugin is installed, updated or removed.
+
+> **NOTE**: The above command may need to be performed with System Administrator or *sudo* privileges. The resulting public folder and all contents within should also be owned by the user that your webserver runs as. This is normally the `www-data` or `nobody` user, but may be different in your production environment.
 
 ### Using a shared hosting provider
 
-If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
+It is good practice that if you share a server with other users through a shared hosting setup or provider, you should act as if your neighbor's site may be compromised.
 
-You can setup this protection in the file location `config/cms.php` in the section titled **Default permission mask**.
+Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to `0600` (read and write only to the owner, with no access to anyone else) is a good idea.
+
+You can setup this protection in the file location `config/cms.php` in the section titled `Default permission mask`.
 
 ```php
 /*
@@ -242,11 +242,11 @@ You can setup this protection in the file location `config/cms.php` in the secti
 'defaultMask' => ['file' => '644', 'folder' => '755'],
 ```
 
-> **NOTE**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your cPanel and set them.
+> **NOTE**: Don't forget to manually check to see if the files are already set to `0644` permissions. Depending on your environment, Winter may not be able to automatically set the requested permissions.
 
 ### Backend-only Mode
 
-Winter CMS can be configured to run with only the backend module installed, therefore allowing Winter CMS to be used for self-contained applications. This may be useful for managing API data or administrating a headless CMS.
+Winter CMS can be configured to run with only the Backend module installed, allowing Winter CMS to be used for self-contained applications. This may be useful for managing API data or administrating a headless CMS.
 
 You can disable the CMS module from running by making the following changes to your `config/cms.php` file in your Winter CMS installation.
 
@@ -258,7 +258,7 @@ You can disable the CMS module from running by making the following changes to y
 
 This allows the root domain or subdomain that hosts your Winter CMS install to load up the backend immediately when accessing the URL in your browser.
 
-After making these changes, you may delete the `modules/cms` folder from your project, as they will no longer be required.
+After making these changes, you may delete the `modules/cms` folder from your project, as the module will no longer be required.
 
 If you have installed Winter CMS [via Composer](../help/using-composer), you can remove the `winter/wn-cms-module` line in the `require` block within the `composer.json` file in the root folder of your Winter CMS install, and this will prevent Composer from installing or updating the CMS module.
 
@@ -304,7 +304,7 @@ The `trustedProxyHeaders` value specifies which headers will be allowed to defin
 
 ```php
 // To trust all headers
-'trustedProxyHeaders' => Illuminate\Http\Request::HEADER_X_FORWARDED_ALL,
+'trustedProxyHeaders' => 'HEADER_X_FORWARDED_ALL',
 
 // To trust only the hostname
 'trustedProxyHeaders' => Illuminate\Http\Request::HEADER_X_FORWARDED_HOST,
@@ -325,21 +325,25 @@ The `trustedProxyHeaders` value specifies which headers will be allowed to defin
 
 ### Defining a base environment
 
-It is often helpful to have different configuration values based on the environment the application is running in. You can do this by setting the `APP_ENV` environment variable which by default it is set to **production**. There are two common ways to change this value:
+It is often helpful to have different configuration values based on the environment the application is running in. You can do this by setting the `APP_ENV` environment variable which by default it is set to `production`. There are two common ways to change this value:
 
 1. Set `APP_ENV` value directly with your webserver.
 
-    For example, in Apache this line can be added to the `.htaccess` or `httpd.config` file:
+For example, in Apache this line can be added to the `.htaccess` or `httpd.config` file:
 
-        SetEnv APP_ENV "dev"
+```apacheconf
+SetEnv APP_ENV "dev"
+```
 
-2. Create a **.env** file in the root directory with the following content:
+2. Create a `.env` file in the root directory with the following content:
 
-        APP_ENV=dev
+```ini
+APP_ENV=dev
+```
 
-In both of the above examples, the environment is set to the new value `dev`. Configuration files can now be created in the path **config/dev** and will override the application's base configuration.
+In both of the above examples, the environment is set to the new value `dev`. Configuration files can now be created in the path `config/dev` and will override the application's base configuration.
 
-For example, to use a different MySQL database for the `dev` environment only, create a file called **config/dev/database.php** using this content:
+For example, to use a different MySQL database for the `dev` environment only, create a file called `config/dev/database.php` using this content:
 
 ```php
 <?php
@@ -359,9 +363,9 @@ return [
 
 ### Domain driven environment
 
-Winter supports using an environment detected by a specific hostname. You may place these hostnames in an environment configuration file, for example, **config/environment.php**.
+Winter supports using an environment detected by a specific hostname. You may place these hostnames in an environment configuration file, for example, `config/environment.php`.
 
-Using this file contents below, when the application is accessed via **global.website.tld** the environment will be set to `global` and likewise for the others.
+Using this file contents below, when the application is accessed via `global.website.tld`, the environment will be set to `global` and likewise for the others.
 
 ```php
 <?php
@@ -376,18 +380,18 @@ return [
 
 ### Converting to DotEnv configuration
 
-As an alternative to the [base environment configuration](#base-environment) you may place common values in the environment instead of using configuration files. The config is then accessed using [DotEnv](https://github.com/vlucas/phpdotenv) syntax. Run the `winter:env` command to move common config values to the environment:
+As an alternative to the [base environment configuration](#base-environment), you may place common values in the environment instead of using configuration files. The config is then accessed using [DotEnv](https://github.com/vlucas/phpdotenv) syntax. Run the `winter:env` command to move common config values to the environment:
 
 ```bash
 php artisan winter:env
 ```
 
-This will create an **.env** file in project root directory and modify configuration files to use `env` helper function. The first argument contains the key name found in the environment, the second argument contains an optional default value.
+This will create an `.env` file in project root directory and modify configuration files to use `env` helper function. The first argument contains the key name found in the environment, the second argument contains an optional default value.
 
 ```php
 'debug' => env('APP_DEBUG', true),
 ```
 
-Your `.env` file should not be committed to your application's source control, since each developer or server using your application could require a different environment configuration.
-
 It is also important that your `.env` file is not accessible to the public in production. To accomplish this, you should consider using a [public folder](#public-folder).
+
+> **TIP:** Your `.env` file should not be committed to your application's source control, since each developer or server using your application could require a different environment configuration.
