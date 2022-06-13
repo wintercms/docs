@@ -85,7 +85,7 @@ The following callbacks may also be specified in the `options` parameter. All ca
 Callback | Description
 -------- | -----------
 `beforeUpdate` | Executes before page elements are updated with the response data. The function receives one parameter: the response data from the AJAX response as an object.
-`success` | Execures when the AJAX request is successfully responded to. The function receives two parameters: the response data from the AJAX response as an object, and the `Request` instance.
+`success` | Executes when the AJAX request is successfully responded to. The function receives two parameters: the response data from the AJAX response as an object, and the `Request` instance.
 `error` | Executes when the AJAX request fails due to a server-side error or validation error. The function receives two parameters: the response data from the AJAX response as an object, and the `Request` instance.
 `complete` | Executes when the AJAX request is complete, regardless of success or failure. The function receives two parameters: the response data from the AJAX response as an object, and the `Request` instance.
 
