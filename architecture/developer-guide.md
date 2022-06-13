@@ -1,29 +1,18 @@
 # Developer Guide
 
-## Writing documentation
+The following details outline our standards and guidelines to producing high-quality code and documentation for Winter. While you are free to choose your own standards and guidelines for your own projects, the maintainer team of Winter recommends that you follow these standards for contributions either to the Marketplace, or to the [core Winter CMS repositories](https://github.com/wintercms).
 
-Your contributions to the Winter documentation are very welcome. Please follow the Winter CMS documentation guidelines if you would like  to contribute:
+## PHP coding standards
 
-1. Each page that has at least one H2 header should have a TOC list. The TOC list should be the first element after the H1 header. The TOC should have links to all H2 headers on the page.
-1. There should be an introductory text below the TOC, even if there is the Introduction section. You may want to get rid of the Introduction section if it's not really needed. Don't leave the TOC alone.
-1. Try to use only H2 and H3 headers.
-1. Each H2 and H3 header should have a link defined as `<a name="page-cycle-handlers"></a>`
-1. Only use UL tags for TOC lists.
-1. Avoid short, 1 sentence, paragraphs. Merge short paragraphs and try to be a bit more verbose.
-1. Avoid short hanging paragraphs below code sections. Merge such paragraphs with the text above the code blocks.
-1. Use the inline `code` tags for everything related to code - variable names, function names, syntax examples, etc.
-1. Use code blocks (three backticks followed by the language of the block at the start of the codeblock and three backticks at the end) for code examples that are longer than a single line.
-1. Use the **strong** tag for everything else.
-1. Cross links to other documentation articles is highly encouraged. Adding links to the same article in the same paragraph is not necessary.
-1. See the [cms-pages.md](https://github.com/wintercms/docs/blob/main/cms-pages.md) or [cms-themes.md](https://github.com/wintercms/docs/blob/main/cms-themes.md) files for your reference.
+Winter follows the [PSR-2 Coding Style Guide](https://www.php-fig.org/psr/psr-2/) as set forth by the [PHP Framework Interop Group](https://www.php-fig.org/). This guide provides a great starting point for creating code that is easily understandable and familiar to developers. We intend to stick closely to the [PSR-12 Extended Coding Style Guide](https://www.php-fig.org/psr/psr-12/) in the future as well, but this is not a hard requirement at the present time.
 
-## Exceptions to PSR standards
+### Exceptions to the standard
 
-There are some exceptions to the PSR standard used by Winter.
+Due to historical choices and technical limitations, we have some exceptions to these guidelines in Winter.
 
-### Controller methods can have a single underscore
+#### Controller methods can have a single underscore
 
-PSR-2 states that methods must be in **camelCase**. However, in backend controllers Winter will prefix AJAX handlers with the action name to define a controlled context. For example:
+The PSR-2 guidelines state that methods must be in **camelCase** format. However, in [Backend controllers](../backend/controllers-ajax.md) in Winter, AJAX handlers can be created using a suffix notation if they are connected to a "main" action. For example:
 
 ```php
 public function index()
@@ -42,11 +31,11 @@ public function onDoSomethingElse()
 }
 ```
 
-An exception must be granted for these scenarios.
+An exception must be granted for this scenario. In other scenarios, underscores should be avoided in method names.
 
-### Subsequent expressions on same line as closing curly brace
+#### Curly braces for condition blocks
 
-PSR-2 does not explicitly state that subsequent expressions should be on the same line as the closing curly brace.
+Historical code in Winter has previously used a format where all closing curly braces are on their own line, such as with the following:
 
 ```php
 if ($expr1) {
@@ -60,9 +49,10 @@ else {
 }
 ```
 
-While some sections of the Winter CMS codebase may be using the above style, it is not recommended and should be changed to the below when encountered.
+The PSR-2 and PSR-12 guidelines do not have any specific requirement for the placement of curly braces for condition blocks, but most examples on these guidelines, along with examples in other software and framework, try to keep the curly braces in the same line as the condition statement (unless it is multi-line).
 
 ```php
+// SINGLE LINE CONDITION STATEMENTS
 if ($expr1) {
     // if body
 } elseif ($expr2) {
@@ -70,11 +60,8 @@ if ($expr1) {
 } else {
     // else body;
 }
-```
 
-It is entirely acceptable to place multiple conditions on new lines for readability however:
-
-```php
+// MULTI LINE CONDITION STATEMENTS
 if (
     $expr1 &&
     $longExpression &&
@@ -92,16 +79,14 @@ if (
 }
 ```
 
-This is an acceptable preference based on a technicality, PSR-1 and PSR-2 are not explicit when using SHOULD, MUST, etc. in this case.
-
-Additionally, `if` statements with no curly braces due to only being one line of code are highly discouraged:
+We intend to follow this format going forward. In addition, some historical code opted to not use curly braces at all for single line condition blocks.
 
 ```php
 if ($condition)
     doSomething();
 ```
 
-You should always use full curly braces on your expressions:
+We do not recommend this format, and instead recommend all condition blocks use curly braces, even if they are single line.
 
 ```php
 if ($condition) {
@@ -109,9 +94,9 @@ if ($condition) {
 }
 ```
 
-### Use of trailing commas
+#### Use of trailing commas
 
-Although not specified one way or another in [PSR-2](https://www.php-fig.org/psr/psr-2/), Winter CMS highly recommends the use of trailing commas in multi-line arrays, especially for localization files. Trailing commas make it easier to perform maintenance on multiline array items without causing unnecessary visual clutter in diffs or version control history.
+Although not specified one way or another in the PSR-2 and PSR-12 guidelines, Winter CMS highly recommends the use of trailing commas in multi-line arrays, especially for localization files. Trailing commas make it easier to perform maintenance on multiline array items without causing unnecessary visual clutter in diffs or version control history.
 
 **Recommended:**
 
@@ -123,7 +108,7 @@ $items = [
 ];
 ```
 
-**NOT** recommended:
+**Not recommended**:
 
 ```php
 $items = [
@@ -134,8 +119,6 @@ $items = [
 ```
 
 ## Developer standards and patterns
-
-This section describes some standards that we highly recommend to follow for everybody, especially if you are going to publish your products on the Marketplace.
 
 ### Vendor naming
 
@@ -437,3 +420,72 @@ These points are to be considered in a relaxed fashion:
 1. In classes, properties and methods should be declared as `protected` in favor of `private` so that all classes can be used as base classes. Similarily, `static::someMethodOrConstantOrProperty` is preferred to `self::someMethodOrConstantOrProperty`, again to make it easier to extend classes.
 1. If a property contains a single value (not an array), make the property `public` instead of a get/set approach.
 1. If a property contains a collection (is an array), make the property `protected` with get `getProperties`, `getProperty` and `setProperty`.
+
+## Writing documentation
+
+Your contributions to the Winter documentation are very welcome. We ask that you follow these guidelines when committing or proposing changes to the documentation.
+
+### Grammar & language
+
+The Winter documentation is written in [GitHub Flavored Markdown](https://github.github.com/gfm/) and should adhere to this specification.
+
+At the moment, the Winter documentation only supports the English language. Documentation should be provided in US English. Where possible, you should strive to use natural language that would sound like a person verbally speaking to you, however, the maintainer team are more than happy to assist you with suggestions to this.
+
+A number of our users use translation tools such as Google Translate to read our documentation, so where possible, you should avoid using too much jargon that may not be easily translateable.
+
+### Headings
+
+Each page should have a single `# Title` (`<h1>`) at the top of the page that provides the title for the entire page. For all other headings, you should follow a logical heading structure, with main sections using a `## Secondary Heading` (`<h2>`) title and sub-sections using a `### Tertiary Heading` (`<h3>`) title.
+
+You do not need to provide anchors for the headings, as these will be automatically generated.
+
+```md
+# The main title
+
+This is some introductory content for the page itself.
+
+## Section heading
+
+The section may have some introductory content here.
+
+### Sub-section heading
+
+This is the content of the first sub-section.
+
+### Sub-section 2 heading
+
+This is the content of the second sub-section.
+
+## Next section heading
+```
+
+### Table of contents
+
+The Winter documentation site automatically generates a table of contents based on the heading structure of the page. You do not need to manually provide a table of contents. The table of contents is generated from the section and sub-section headings (`<h2>` and `<h3>`).
+
+### Emphasis
+
+You may use **bold** (`**bold**`) and *italicised* (`*italicised*`) emphasis as required, but you should strive to use it sparingly. Avoid using either emphasis type for variable or path names and opt to use inline code blocks instead, as this will prevent these names from being translated by translation services such as Google Translate and ensure that people who use these tools will still be able to find these paths or variables.
+
+### Code
+
+We recommend the use of `inline code` code blocks for all path, variable and single line code references in the documentation. This provides a visual clue that the reference relates to code or the Winter files, and as stated above, will prevent the references from being translated. Inline code blocks can be created by wrapping the reference with a single backtick (`) at the start and end of the reference.
+
+For larger, multiple line code blocks, we recommend the use of the code block format, by adding three backticks (<code>```</code>) to the start and end of the code block. You may also specify the language of the code immediately after the first set of backticks to enable the code highlighting feature of code blocks.
+
+<pre><code>```md
+This is a code block for the Markdown language.
+
+**It should highlight parts of the language.**
+```</code></pre>
+
+Will be converted into
+```md
+This is a code block for the Markdown language.
+
+**It should highlight parts of the language.**
+```
+
+### Linking
+
+It is encouraged to use linking as much as possible throughout the documentation, in order to provide users the most context possible during browsing the documentation. However, we recommend that you do not add links to the same article twice in the same section or sub-section, unless it is to another anchor point on the page. External links are encouraged, but please confirm that the external resource is useful and operational. External links will always be opened up in a new tab.
