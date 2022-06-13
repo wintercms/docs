@@ -550,9 +550,9 @@ This feature also supports the output of the `tree` command-line utility which i
 # ├── index.htm
 # ├── subfolder1/
 # ├── subfolder2/
-# │   ├── document.pdf
-# │   ├── image.jpeg
-# │   └── photo.png
+# │   ├── document.pdf
+# │   ├── image.jpeg
+# │   └── photo.png
 # └── subfolder3/
 #     └── sub2folder/
 #         └── sub3file
@@ -564,12 +564,14 @@ Which can then be converted to the following:
 folder/
 ├── subfolder1/
 ├── subfolder2/
-│   ├── document.pdf
-│   ├── image.jpeg
-│   └── photo.png
+│   ├── document.pdf
+│   ├── image.jpeg
+│   └── photo.png
 ├── subfolder3/
-│   └── sub2folder/
-│       └── sub3file
+│   └── sub2folder/
+│       └── sub3file
 ├── .hidden_file
 └── index.htm
 ```
+
+> **NOTE:** The `tree` command may print out indented lines using a character that looks to be a space character, but is not. If this is the case, you may need to add the `--charset=ascii` option to the command, which will print a diagram similar to the first example.
