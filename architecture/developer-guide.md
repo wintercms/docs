@@ -543,7 +543,7 @@ To break down this structure:
 This feature also supports the output of the `tree` command-line utility which is available on most OS systems, allowing you to create the file structure in your OS and print a similar diagram to the one above. Use `tree -Fa --dirsfirst <path>` to print the friendly path for item, include hidden files and list directories first.
 
 ```bash
-> tree -Fa folder/
+> tree -Fa --dirsfirst folder/
 
 # folder/
 # ├── .hidden_file
