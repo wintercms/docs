@@ -17,112 +17,88 @@ Plugins are the foundation for adding new features or extending the base functio
 
 ## Directory structure
 
-Plugins reside in the **/plugins** subdirectory of the application directory. Plugins can range from extremely simple to very complex depending on the requirements. The most simple plugin only requires a `Plugin.php` file, but they can accomodate all the way up to entire application structures as required.
+Plugins reside in the `plugins` directory of your Winter CMS installation. The most simple plugin only requires two files, but they can accomodate all the way up to entire application structures as required by your plugin complexity.
 
 ### Simple plugin structure
 
-The simplest plugins only require the **Plugin.php** file described below.
+The simplest plugins only require a `Plugin.php` file and an `updates/version.yaml` described below.
 
-```css
-📂 plugins
- ┗ 📂 myauthor          /* Author name */
-   ┗ 📂 myplugin        /* Plugin name */
-     ┗ 📜 Plugin.php    /* Plugin registration file, required */
+```treeview
+plugins/
+`-- myauthor/                 # Author name
+    `-- myplugin/             # Plugin name
+        |-- updates/          # Updates and migrations folder
+        |   `-- version.yaml  # Change log, required
+        `-- Plugin.php        # Plugin registration file, required
 ```
 
 ### Typical plugin structure
 
 The following is an example of what most plugins would end up looking like when interacting with the most commonly used Winter CMS functionality.
 
-> **NOTE:** if you are developing a plugin for the [Marketplace](/marketplace), the [updates/version.yaml](updates) file is required.
-
-```css
-📂 plugins
- ┗ 📂 myauthor              /* Author name */
-   ┗ 📂 myplugin            /* Plugin name */
-     ┣ 📂 assets            /* CSS, JavaScript and image assets for pages and components */
-     ┣ 📂 components        /* Frontend components */
-     ┣ 📂 controllers       /* Backend controllers */
-     ┣ 📂 lang              /* Localization files */
-     ┃ ┗ 📂 en              /* Specific locale folder */
-     ┃   ┗ 📜 lang.php      /* Translations */
-     ┣ 📂 models            /* Models */
-     ┣ 📂 updates           /* Database migrations */
-     ┃ ┗ 📜 version.yaml    /* Changelog */
-     ┣ 📂 views             /* Custom view files */
-     ┃ ┗ 📂 mail            /* Custom mail templates */
-     ┣ 📜 README.md         /* Documentation describing the purpose of the plugin */
-     ┗ 📜 Plugin.php        /* Plugin registration class */
+```treeview
+plugins/
+`-- myauthor/                  # Author name
+    `-- myplugin/              # Plugin name
+        |-- assets/            # CSS, JavaScript and image assets for pages and components
+        |-- components/        # Frontend components
+        |-- controllers/       # Backend controllers and views
+        |-- lang/              # Localization files
+        |   `-- en/            # Specific locale folder
+        |       `-- lang.php   # Translations
+        |-- models/            # Database models
+        |-- updates/           # Updates and migrations folder
+        |   `-- version.yaml   # Change log
+        |-- views/             # Custom view files
+        |   `-- mail/          # Custom mail templates
+        |-- Plugin.php         # Plugin registration file
+        `-- README.md          # Documentation describing the plugin, its requirements and its purpose
 ```
 
-### Complex plugin structure
+### Comprehensive plugin structure
 
-The following is an example of what a complex plugin could look like when using a significant number of the features provided by Winter CMS as well as providing some of its own.
+The following is an example of what a comprehensive plugin that uses or provides a signficant number of features in Winter CMS could look like.
 
-```css
-📂 plugins
- ┗ 📂 myauthor                              /* Author name */
-   ┗ 📂 myplugin                            /* Plugin name */
-     ┣ 📂 assets                            /* CSS, JavaScript and image assets for pages and components */
-     ┃ ┣ 📂 css
-     ┃ ┣ 📂 favicons
-     ┃ ┣ 📂 images
-     ┃ ┣ 📂 js
-     ┃ ┗ 📂 scss
-     ┣ 📂 behaviors                         /* Any custom behaviors provided by the plugin */
-     ┣ 📂 classes                           /* Any custom classes provided by the plugin */
-     ┣ 📂 components                        /* Components frontend */
-     ┃ ┣ 📂 record                          /* Folder for the Record component's partials */
-     ┃ ┃ ┗ 📜 default.htm                   /* The default partial that's rendered by the component */
-     ┃ ┣ 📂 partials                        /* Any partials shared by more than one component in the plugin */
-     ┃ ┗ 📜 Record.php                      /* Record Component that probably handles retrieving and displaying a single record */
-     ┣ 📂 config                            /* Configuration files */
-     ┃ ┗ 📜 config.php
-     ┣ 📂 console                           /* Any custom CLI commands provided by the plugin */
-     ┣ 📂 controllers                       /* Backend controllers */
-     ┃ ┣ 📂 records                         /* Directory for the view and configuration files for the given controller */
-     ┃ ┃ ┣ 📜 _list_toolbar.htm             /* List toolbar partial file */
-     ┃ ┃ ┣ 📜 config_filter.yaml            /* Configuration for the Filter widget present on the controller lists */
-     ┃ ┃ ┣ 📜 config_form.yaml              /* Configuration for the Form widget present on the controller */
-     ┃ ┃ ┣ 📜 config_importexport.yaml      /* Configuration for the Import/Export behavior */
-     ┃ ┃ ┣ 📜 config_list.yaml              /* Configuration for the Lists widget present on the controller */
-     ┃ ┃ ┣ 📜 config_relation.yaml          /* Configuration for the RelationController behavior */
-     ┃ ┃ ┣ 📜 create.htm                    /* View file for the create action */
-     ┃ ┃ ┣ 📜 index.htm                     /* View file for the index action */
-     ┃ ┃ ┣ 📜 preview.htm                   /* View file for the preview action */
-     ┃ ┃ ┗ 📜 update.htm                    /* View file for the update action */
-     ┃ ┗ 📜 Records.php                     /* Backend controller for the Record model */
-     ┣ 📂 docs                              /* Any plugin-specific documentation should live here */
-     ┣ 📂 formwidgets                       /* Any custom FormWidgets provided by the plugin */
-     ┣ 📂 lang                              /* Localization files */
-     ┃ ┗ 📂 en                              /* Specific locale folder */
-     ┃   ┗ 📜 lang.php                      /* Translations for that locale */
-     ┣ 📂 layouts                           /* Any custom backend layouts used by the plugin */
-     ┣ 📂 models                            /* Models provided by the plugin */
-     ┃ ┣ 📂 record                          /* Directory containing configuration files specific to that model */
-     ┃ ┃ ┣ 📜 columns.yaml                  /* Configuration file used for the Lists widget */
-     ┃ ┃ ┗ 📜 fields.yaml                   /* Configuration file used for the Form widget */
-     ┃ ┗ 📜 Record.php                      /* Model class for the Record model */
-     ┣ 📂 partials                          /* Any custom partials used by the plugin */
-     ┣ 📂 reportwidgets                     /* Any custom ReportWidgets provided by the plugin */
-     ┣ 📂 tests                             /* Test suite for the plugin */
-     ┣ 📂 traits                            /* Any custom Traits provided by the plugin */
-     ┣ 📂 updates                           /* Database migrations */
-     ┃ ┃ ┗ 📂 v1.0.0                        /* Migrations for a specific version of the plugin */
-     ┃ ┃   ┗ 📜 create_records_table.php    /* Database migration file, referenced in version.yaml */
-     ┃ ┗ 📜 version.yaml                    /* Changelog */
-     ┣ 📂 views                             /* Custom view files */
-     ┃ ┗ 📂 mail                            /* Custom mail templates provided by the plugin */
-     ┣ 📂 widgets                           /* Any custom Widgets provided by the plugin */
-     ┣ 📜 LICENSE                           /* License file */
-     ┣ 📜 README.md                         /* Documentation describing the purpose of the plugin */
-     ┣ 📜 Plugin.php                        /* Plugin registration file */
-     ┣ 📜 composer.json                     /* Composer file to manage dependencies for the plugin */
-     ┣ 📜 helpers.php                       /* Global helpers provided by the plugin loaded via composer.json */
-     ┣ 📜 phpunit.xml                       /* Unit testing configuration */
-     ┣ 📜 plugin.yaml                       /* Simplified plugin registration configuration YAML file, used by Builder plugin */
-     ┗ 📜 routes.php                        /* Any custom routes provided by the plugin */
- ```
+```treeview
+plugins/
+`-- myauthor/                  # Author name
+    `-- myplugin/              # Plugin name
+        |-- assets/            # CSS, JavaScript and image assets for pages and components
+        |   |-- css/
+        |   |-- favicons/
+        |   |-- images/
+        |   |-- js/
+        |   |-- less/
+        |   `-- scss/
+        |-- behaviors/         # Custom behaviors provided by the plugin
+        |-- classes/           # Custom classes and functionality that are outside the structure of Winter CMS
+        |-- components/        # Frontend components
+        |-- config/            # Plugin-provided configuration
+        |   `-- config.php
+        |-- controllers/       # Backend controllers and views
+        |-- docs/              # Plugin documentation
+        |-- formwidgets/       # Custom form widgets
+        |-- lang/              # Localization files
+        |   `-- en/            # Specific locale folder
+        |       `-- lang.php   # Translations
+        |-- layouts/           # Custom backend layouts
+        |-- models/            # Database models
+        |-- partials/          # Custom partials used within the plugin
+        |-- reportwidgets/     # Custom report widgets
+        |-- tests/             # Unit tests
+        |-- traits/            # Custom traits
+        |-- updates/           # Updates and migrations folder
+        |   `-- version.yaml   # Change log
+        |-- views/             # Custom view files
+        |   `-- mail/          # Custom mail templates
+        |-- composer.json      # Composer file to identify the plugin and define dependencies
+        |-- helpers.php        # Custom helper methods provided by the plugin.
+        |-- LICENSE            # License file
+        |-- phpunit.xml        # Unit testing configuration
+        |-- Plugin.php         # Plugin registration file, required
+        |-- README.md          # Documentation describing the plugin, its requirements and its purpose
+        `-- routes.php         # Custom routing
+```
 
 ## Plugin namespaces
 
