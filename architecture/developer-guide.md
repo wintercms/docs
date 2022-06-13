@@ -507,10 +507,11 @@ folder/
 |   |-- photo.png
 |   `-- document.pdf
 |-- subfolder3/
-|   `-- sub2folder/
-|       `-- sub3file
+|   |-- sub2folder/
+|   |    `-- sub3file    # A comment about this file
+|   `-- sub2folder2/
 |-- index.htm
-`-- .hidden_file
+`-- .hidden_file        # This file is hidden and should be slightly transparent
 ```</code></pre>
 
 Which is then converted to the following code block:
@@ -523,8 +524,52 @@ folder/
 |   |-- photo.png
 |   `-- document.pdf
 |-- subfolder3/
-|   `-- sub2folder/
-|       `-- sub3file
+|   |-- sub2folder/
+|   |    `-- sub3file    # A comment about this file
+|   `-- sub2folder2/
 |-- index.htm
-`-- .hidden_file
+`-- .hidden_file        # This file is hidden and should be slightly transparent
+```
+
+To break down this structure:
+
+- A **folder** is a name followed by a `/` character.
+- A **file** is a name with no `/` character suffixed.
+- A `|-- ` tag indicates a child item of the item above. The pipe symbol (`|`) should align with the first character of the parent item. A space should always proceed the tag.
+- A <code>`-- </code> tag is the same as the <code>|-- </code> tag but indicates the *last* child of the item.
+- A `|   ` (pipe with 3 spaces) should be use for parent folders that are still "open" while their child folders and files are being traversed.
+- A `# comment` can be left at the end of any line. It cannot be used within the tree structure.
+
+This feature also supports the output of the `tree` command-line utility which is available on most OS systems, allowing you to create the file structure in your OS and a similar diagram to the one above. Use `tree -Fa` to print the friendly path and include hidden files.
+
+```bash
+> tree -Fa folder/
+
+# folder/
+# ├── .hidden_file
+# ├── index.htm
+# ├── subfolder1/
+# ├── subfolder2/
+# │   ├── document.pdf
+# │   ├── image.jpeg
+# │   └── photo.png
+# └── subfolder3/
+#     └── sub2folder/
+#         └── sub3file
+```
+
+Which can then be converted to the following:
+
+```treeview
+folder/
+├── .hidden_file
+├── index.htm
+├── subfolder1/
+├── subfolder2/
+│   ├── document.pdf
+│   ├── image.jpeg
+│   └── photo.png
+└── subfolder3/
+    └── sub2folder/
+        └── sub3file
 ```
