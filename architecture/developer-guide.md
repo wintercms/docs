@@ -467,9 +467,15 @@ The Winter documentation site automatically generates a table of contents based 
 
 You may use **bold** (`**bold**`) and *italicised* (`*italicised*`) emphasis as required, but you should strive to use it sparingly. Avoid using either emphasis type for variable or path names and opt to use inline code blocks instead, as this will prevent these names from being translated by translation services such as Google Translate and ensure that people who use these tools will still be able to find these paths or variables.
 
+### Linking
+
+It is encouraged to use linking as much as possible throughout the documentation, in order to provide users the most context possible during browsing the documentation. However, we recommend that you do not add links to the same article twice in the same section or sub-section, unless it is to another anchor point on the page.
+
+External links are encouraged, but please confirm that the external resource is useful and operational. External links will always be opened up in a new tab.
+
 ### Code
 
-We recommend the use of `inline code` code blocks for all path, variable and single line code references in the documentation. This provides a visual clue that the reference relates to code or the Winter files, and as stated above, will prevent the references from being translated. Inline code blocks can be created by wrapping the reference with a single backtick (`) at the start and end of the reference.
+We recommend the use of `inline code` code blocks for all path, variable and single line code references in the documentation. This provides a visual clue that the reference relates to code or the Winter files, and as stated above, will prevent the references from being translated. Inline code blocks can be created by wrapping the reference with a single backtick (<code>`</code>) at the start and end of the reference.
 
 For larger, multiple line code blocks, we recommend the use of the code block format, by adding three backticks (<code>```</code>) to the start and end of the code block. You may also specify the language of the code immediately after the first set of backticks to enable the code highlighting feature of code blocks.
 
@@ -479,13 +485,46 @@ This is a code block for the Markdown language.
 **It should highlight parts of the language.**
 ```</code></pre>
 
-Will be converted into
+Will be converted into:
+
 ```md
 This is a code block for the Markdown language.
 
 **It should highlight parts of the language.**
 ```
 
-### Linking
+### File structures
 
-It is encouraged to use linking as much as possible throughout the documentation, in order to provide users the most context possible during browsing the documentation. However, we recommend that you do not add links to the same article twice in the same section or sub-section, unless it is to another anchor point on the page. External links are encouraged, but please confirm that the external resource is useful and operational. External links will always be opened up in a new tab.
+File structures can be demonstrated in Winter documentation with the `treeview` language inside a code block. The tree view language is a special language which uses a tree diagram to traverse the file and folder hierarchy.
+
+A sample of a file structure can be found below:
+
+<pre><code>```treeview
+folder/
+|-- subfolder1/
+|-- subfolder2/
+|   |-- image.jpeg
+|   |-- photo.png
+|   `-- document.pdf
+|-- subfolder3/
+|   `-- sub2folder/
+|       `-- sub3file
+|-- index.htm
+`-- .hidden_file
+```</code></pre>
+
+Which is then converted to the following code block:
+
+```treeview
+folder/
+|-- subfolder1/
+|-- subfolder2/
+|   |-- image.jpeg
+|   |-- photo.png
+|   `-- document.pdf
+|-- subfolder3/
+|   `-- sub2folder/
+|       `-- sub3file
+|-- index.htm
+`-- .hidden_file
+```
