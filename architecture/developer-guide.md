@@ -540,7 +540,7 @@ To break down this structure:
 - A `|   ` (pipe with 3 spaces) should be use for parent folders that are still "open" while their child folders and files are being traversed.
 - A `# comment` can be left at the end of any line. It cannot be used within the tree structure.
 
-This feature also supports the output of the `tree` command-line utility which is available on most OS systems, allowing you to create the file structure in your OS and a similar diagram to the one above. Use `tree -Fa` to print the friendly path and include hidden files.
+This feature also supports the output of the `tree` command-line utility which is available on most OS systems, allowing you to create the file structure in your OS and print a similar diagram to the one above. Use `tree -Fa --dirsfirst <path>` to print the friendly path for item, include hidden files and list directories first.
 
 ```bash
 > tree -Fa folder/
@@ -562,14 +562,14 @@ Which can then be converted to the following:
 
 ```treeview
 folder/
-├── .hidden_file
-├── index.htm
 ├── subfolder1/
 ├── subfolder2/
 │   ├── document.pdf
 │   ├── image.jpeg
 │   └── photo.png
-└── subfolder3/
-    └── sub2folder/
-        └── sub3file
+├── subfolder3/
+│   └── sub2folder/
+│       └── sub3file
+├── .hidden_file
+└── index.htm
 ```
