@@ -1,0 +1,52 @@
+rootPage: templating/templating
+sections:
+    Templating:
+        pages:
+            templating/templating: "Templating"
+            "https://twig.symfony.com/doc/2.x/": "Twig Docs"
+
+    Variables:
+        pages:
+            this/page: "this.page"
+            this/layout: "this.layout"
+            this/theme: "this.theme"
+            this/param: "this.param"
+            this/controller: "this.controller"
+            this/environment: "this.environment"
+            this/session: "this.session"
+
+    Tags:
+        pages:
+            tags/page: "{% page %}"
+            tags/partial: "{% partial %}"
+            tags/content: "{% content %}"
+            tags/component: "{% component %}"
+            tags/placeholder: "{% placeholder %}"
+            tags/scripts: "{% scripts %}"
+            tags/styles: "{% styles %}"
+            tags/flash: "{% flash %}"
+            tags/verbatim: "{% verbatim %}"
+            tags/macro: "{% macro %}"
+            tags/for: "{% for %}"
+            tags/if: "{% if %}"
+
+    Filters:
+        pages:
+            filters/app: "| app"
+            filters/asset: "| asset"
+            filters/default: "| default"
+            filters/image-width: "| imageWidth"
+            filters/image-height: "| imageHeight"
+            filters/md: "| md[_line|_safe]"
+            filters/media: "| media"
+            filters/page: "| page"
+            filters/raw: "| raw"
+            filters/resize: "| resize"
+            filters/theme: "| theme"
+
+    Functions:
+        pages:
+            functions/str: "str_*()"
+            functions/form: "form_*()"
+            functions/html: "html()"
+            functions/dump: "dump()"
