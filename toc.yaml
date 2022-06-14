@@ -25,7 +25,7 @@ sections:
             backend/import-export: "Importing & Exporting"
             backend/users: "Users & Permissions"
             backend/controls: "UI Elements"
-            "/ui/": "User Interface Guide"
+            "/v1.2/ui/": "User Interface Guide"
 
     "Frontend":
         pages:
@@ -37,7 +37,7 @@ sections:
             cms/content: "Content Blocks"
             cms/components: "Components"
             cms/mediamanager: "Media Manager"
-            "/markup/": "Markup Guide"
+            "/v1.2/markup/": "Markup Guide"
             "https://twig.symfony.com/doc/2.x/": "Twig Docs"
 
     "Plugins":
