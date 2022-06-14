@@ -1,0 +1,43 @@
+rootPage: controls/form
+sections:
+    Controls:
+        pages:
+            controls/form: "Form"
+            controls/list: "List"
+            controls/button: "Button"
+            controls/checkbox: "Checkbox"
+            controls/datepicker: "Date Picker"
+            controls/select: "Select"
+            controls/callout: "Callout"
+            controls/chart: "Chart"
+            controls/scoreboard: "Scoreboard"
+            controls/dropdown: "Dropdown"
+            controls/inspector: "Inspector"
+            controls/flashmessage: "Flash Message"
+            controls/filter: "Filter"
+            controls/loader: "Loader"
+            controls/tooltip: "Tooltip"
+            controls/toolbar: "Toolbar"
+            controls/popover: "Popover"
+            controls/popup: "Popup"
+            controls/tab: "Tab"
+
+    Style:
+        pages:
+            style/utilities: "Utilities"
+            style/flag: "Flag"
+            style/icon: "Icon"
+            style/breadcrumb: "Breadcrumb"
+            style/pagination: "Pagination"
+            style/progressbar: "Progress Bar"
+
+    Script:
+        pages:
+            script/foundation: "Foundation"
+            script/drag-value: "Drag.Value"
+            script/drag-scroll: "Drag.Scroll"
+            script/drag-sort: "Drag.Sort"
+            script/input-hotkey: "Input.Hotkey"
+            script/input-preset: "Input.Preset"
+            script/input-trigger: "Input.Trigger"
+            script/input-monitor: "Input.Monitor"
