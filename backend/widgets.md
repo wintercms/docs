@@ -8,17 +8,20 @@ Widgets are the backend equivalent of frontend [Components](../cms/components). 
 
 Widget classes reside inside the **widgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example widget directory structure looks like this:
 
-```css
-📂 widgets
- ┣ 📂 form
- ┃ ┣ 📂 partials
- ┃ ┃ ┗ 📜 _form.htm     <=== Widget partial file
- ┃ ┗ 📂 assets
- ┃   ┣ 📂 js
- ┃   ┃ ┗ 📜 form.js     <=== Widget JavaScript file
- ┃   ┗ 📂 css
- ┃     ┗ 📜 form.css    <=== Widget StyleSheet file
- ┗ 📜 Form.php          <=== Widget class
+```treeview
+plugins/
+`-- acme/
+    `-- blog/
+        `-- widgets/
+            |-- form/
+            |   |-- partials/
+            |   |   `-- _form.htm      # Widget partial file
+            |   `-- assets/
+            |       |-- js/
+            |       |   `-- form.js    # Widget JavaScript file
+            |       `-- css/
+            |           `-- form.css   # Widget stylesheet
+            `-- Form.php               # Widget class
 ```
 
 ### Class definition
