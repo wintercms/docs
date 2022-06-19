@@ -416,7 +416,7 @@ class User extends Model
 
     public $customMessages = [
         'links.*.url.required'    => 'The url is required',
-        'links.*.url.*'           => 'The url needs to be a valid url'
+        'links.*.url.*'           => 'The url needs to be a valid url',
         'links.*.anchor.required' => 'The anchor text is required',
     ];
 }
