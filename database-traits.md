@@ -328,7 +328,7 @@ const NEST_DEPTH = 'my_depth_column';
 - `$query->getNested();` - Returns an eager loaded collection of results.
 - `$query->listsNested();` - Returns an indented array of key and value columns.
 
- ### Flat result access methods:
+### Flat result access methods:
  
 - `$model->getAll();` - Returns everything in correct order.
 - `$model->getAllRoot();` - Returns all root nodes.
