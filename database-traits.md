@@ -291,7 +291,7 @@ class Category extends Model
 }
 ```
 
-You can change the column names used by declaring:
+You can change the column names used by defining the following constants on the model:
 
 ```php
 const PARENT_ID = 'my_parent_column';
