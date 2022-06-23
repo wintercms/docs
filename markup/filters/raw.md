@@ -1,11 +1,24 @@
-# | raw
+---
+title: "Filters: raw"
+description: "Documentation on the 'raw' Twig filter."
+---
+# raw
 
-Output variables in Winter are automatically escaped, the `| raw` filter marks the value as being "safe" and will not be escaped if `raw` is the last filter applied.
+## Usage
+
+Variables and methods outputted in Twig templates in Winter are automatically escaped by default for security reasons. If you wish to display the raw data without any escaping, use the `| raw` filter.
 
 ```twig
-{# This variable won't be escaped #}
-{{ variable | raw }}
+{% set html = "<strong>Hi</strong>" %}
+
+{{ html }}
+{# Outputs as "&lt;strong%gt;Hi&lt;/strong%gt;" #}
+
+{{ html | raw }}
+{# Outputs as "<strong>Hi</strong>" #}
 ```
+
+> **NOTE:** Exercise extreme caution when using this filter with user-inputted data.
 
 Be careful when using the `raw` filter inside expressions:
 
