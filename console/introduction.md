@@ -175,7 +175,6 @@ Options for definining input:
 - [Input autocompletion / suggested values](#providing-suggested-values)
 - [Plugin names as an argument](#plugin-names-as-argument)
 
-<a name="providing-suggested-values">
 #### Providing suggested values
 
 The `Winter\Storm\Console\Command` base class provides a default implementation of the `complete()` method required to interact with the shell input autocompletion feature provided by Symfony. This simplifies the implementation work required in custom commands using an interface similar to the accessors in Eloquent.
@@ -264,7 +263,6 @@ Available input methods:
 - [Multiple choice questions](https://laravel.com/docs/9.x/artisan#multiple-choice-questions)
 - [Handling process signals](#handling-process-signals)
 
-<a name="confirmation-via-input">
 #### Confirmation via input
 
 In addition to the [extra input options that Laravel provides](https://laravel.com/docs/9.x/artisan#prompting-for-input), the `confirmsWithInput($message, $requiredInput)` method can be used to display a warning message and a prompt that will ask the user to input the specified string in order to confirm a potentially destructive action.
@@ -301,12 +299,10 @@ This will display the following:
 
 If your command defines a `--force` option in its signature, then that option can be used to bypass the confirmation step and production alert.
 
-<a name="handling-process-signals">
 ### Handling process signals
 
 See the [Symfony documentation](https://symfony.com/blog/new-in-symfony-5-2-console-signals) for more information.
 
-<a name="processes-query">
 ### Processing Records
 
 Winter provides the `Winter\Storm\Console\ProcessesQuery` trait for use in console commands that have to process a large number of records sourced from a database query. An example use of the trait is provided below:
