@@ -113,6 +113,8 @@ form:
 });
 ```
 
+> **NOTE:** When using a `fileupload` field in your theme, Winter will automatically add the field to an `attachOne` relationship. If you want to use multiple file uploads for a field, add the `multiple: true` option to the field definition. This will instead add the field to an `attachMany` relationship.
+
 The value can then be accessed inside any of the Theme templates using the [default page variable](../markup#default-variables) called `this.theme`.
 
 ```twig

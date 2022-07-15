@@ -211,6 +211,15 @@ Mail::raw([
 });
 ```
 
+This also applies to usage of `Mail::rawTo()`
+
+```php
+Mail::rawTo('name@example.com', [
+    'text' => 'This is plain text',
+    'html' => '<strong>This is HTML</strong>'
+]);
+```
+
 <a name="attachments"></a>
 ### Attachments
 

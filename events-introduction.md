@@ -97,6 +97,8 @@ Event::listen('auth.login', function () { ... }, 10);
 Event::listen('auth.login', function () { ... }, 5);
 ```
 
+> **NOTE**: Wildcard listeners do not support priority.
+
 <a name="subscribing-halting"></a>
 ### Halting events
 

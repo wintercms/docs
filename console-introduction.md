@@ -1,12 +1,14 @@
 # Command Line Interface
 
 - [Introduction](#introduction)
+- [Autocompletion](#autocompletion)
 - [List of available commands](#command-list)
 - [Building a command](#building-a-command)
-    - [Defining arguments](#defining-arguments)
-    - [Defining options](#defining-options)
-    - [Writing output](#writing-output)
+    - [Defining input expectations](#defining-input-expectations)
     - [Retrieving input](#retrieving-input)
+    - [Handling process signals](#handling-process-signals)
+    - [Processing Records](#processes-query)
+    - [Writing output](#writing-output)
 - [Registering commands](#registering-commands)
 - [Calling other commands](#calling-other-commands)
 
@@ -32,6 +34,19 @@ If you require help or a list of available arguments and options for each comman
 ```bash
 php artisan [command] --help
 ```
+
+<a name="autocompletion"></a>
+## Autocompletion / suggested input values
+
+With the upgrade to Laravel 9 / Symfony 6, [support was added](https://symfony.com/blog/new-in-symfony-5-4-console-autocompletion) for commands to be able to provide tab-autocomplete results to the shell for an improved user experience. Most Winter commands provide support for autocompletion of input values out of the box and it is easy to [add support in your own custom commands](#providing-suggested-values) when extending the `Winter\Storm\Console\Command` base class.
+
+This feature requires that you run a command in your shell once in order to enable it for all Laravel / Winter console commands:
+
+```bash
+artisan completion --help
+```
+
+Running just `artisan completion` will generate the shell script required to be imported into your shell in order to enable support for autocompletion of Winter / Laravel commands; passing the `--help` flag will provide detailed instructions on how to install the generated script.
 
 <a name="command-list"></a>
 ## List of available commands
@@ -80,10 +95,37 @@ Command | Description
 [`create:reportwidget`](../console/scaffolding#create-reportwidget) | Create a report widget in a plugin.
 [`create:command`](../console/scaffolding#create-command) | Create a console command in a plugin.
 **Utilities** |
-[`cache:clear`](../console/utilities#cache-clear) | Clear the application cache.
 [`winter:test`](../console/utilities#winter-test) | Run unit tests on Winter and plugins.
 [`winter:util`](../console/utilities#winter-util) | A collection of utilities for Winter development.
-
+**Laravel Provided Commands** |
+[`cache:clear`](../console/laravel#cache-clear) | Clear the application cache.
+`cache:forget` | Remove an item from the cache
+`clear-compiled` | Remove the compiled class file
+`config:cache` | Create a cache file for faster configuration loading
+`config:clear` | Remove the configuration cache file
+`down` | Put the application into maintenance / demo mode
+`env` | Display the current framework environment
+`key:generate` | Set the application key
+`optimize` | Cache the framework bootstrap files
+`package:discover` | Rebuild the cached package manifest
+`queue:failed` | List all of the failed queue jobs
+`queue:flush` | Flush all of the failed queue jobs
+`queue:forget` | Delete a failed queue job
+`queue:listen` | Listen to a given queue
+`queue:monitor` | Monitor the size of the specified queues
+`queue:prune-batches` | Prune stale entries from the batches database
+`queue:prune-failed` | Prune stale entries from the failed jobs table
+`queue:restart` | Restart queue worker daemons after their current job
+`queue:retry` | Retry a failed queue job
+`queue:retry-batch` | Retry the failed jobs for a batch
+`queue:work` | Start processing jobs on the queue as a daemon
+`route:cache` | Create a route cache file for faster route registration
+`route:clear` | Remove the route cache file
+`route:list` | List all registered routes
+`schedule:finish` | Handle the completion of a scheduled command
+`schedule:run` | Run the scheduled commands
+`up` | Bring the application out of maintenance mode
+`view:clear` | Clear all compiled view files
 
 <a name="building-a-command"></a>
 ## Building a command
@@ -95,213 +137,303 @@ If you wanted to create a console command called `myauthor:mycommand`, you can r
 ```php
 <?php namespace MyAuthor\MyPlugin\Console;
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
+use Winter\Storm\Console\Command;
 
 class MyCommand extends Command
 {
     /**
-     * @var string The console command name.
+     * @var string|null The default command name for lazy loading.
      */
-    protected $name = 'myauthor:mycommand';
+    protected static $defaultName = 'myauthor:mycommand';
+
+    /**
+     * @var string The name and signature of this command.
+     */
+    protected $signature = 'myauthor:mycommand
+        {myArgument : Command argument avaible through $this->argument("myArgument")}
+        {--myOptionFlag : Defines a custom path to the "npm" binary}';
 
     /**
      * @var string The console command description.
      */
-    protected $description = 'Does something cool.';
+    protected $description = 'Install Node.js dependencies required for mixed assets';
 
     /**
      * Execute the console command.
-     * @return void
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $this->output->writeln('Hello world!');
-    }
 
-    /**
-     * Get the console command arguments.
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [];
-    }
-
-    /**
-     * Get the console command options.
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [];
+        return 0; // return 1 if an error occurs
     }
 }
 ```
 
-Once your class is created you should fill out the `name` and `description` properties of the class, which will be used when displaying your command on the command `list` screen.
+Once your class is created you should fill out the `defaultName`, `signature`, and `description` properties of the class, which will be used when displaying your command on the command `list` screen.
 
 The `handle` method will be called when your command is executed. You may place any command logic in this method.
 
 <a name="defining-arguments"></a>
-### Defining arguments
-
-Arguments are defined by returning an array value from the `getArguments` method are where you may define any arguments your command receives. For example:
-
-```php
-/**
- * Get the console command arguments.
- * @return array
- */
-protected function getArguments()
-{
-    return [
-        ['example', InputArgument::REQUIRED, 'An example argument.'],
-    ];
-}
-```
-
-When defining `arguments`, the array definition values represent the following:
-
-```php
-array($name, $mode, $description, $defaultValue)
-```
-
-The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `InputArgument::OPTIONAL`.
-
 <a name="defining-options"></a>
-### Defining options
+<a name="defining-input-expectations"></a>
+### Defining input expectations
 
-Options are defined by returning an array value from the `getOptions` method. Like arguments this method should return an array of commands, which are described by a list of array options. For example:
+See the [Laravel documentation](https://laravel.com/docs/9.x/artisan#defining-input-expectations) for how to define the input expectations (arguments & options) that your command has.
+
+Options for definining input:
+
+- [Input description](https://laravel.com/docs/9.x/artisan#input-descriptions)
+- [Arguments](https://laravel.com/docs/9.x/artisan#arguments)
+- [Options](https://laravel.com/docs/9.x/artisan#options)
+- [Options with values](https://laravel.com/docs/9.x/artisan#options-with-values)
+- [Option shortcuts](https://laravel.com/docs/9.x/artisan#option-shortcuts)
+- [Input arrays](https://laravel.com/docs/9.x/artisan#input-arrays)
+- [Option arrays](https://laravel.com/docs/9.x/artisan#option-arrays)
+- [Input autocompletion / suggested values](#providing-suggested-values)
+- [Plugin names as an argument](#plugin-names-as-argument)
+
+<a name="providing-suggested-values">
+#### Providing suggested values
+
+The `Winter\Storm\Console\Command` base class provides a default implementation of the `complete()` method required to interact with the shell input autocompletion feature provided by Symfony. This simplifies the implementation work required in custom commands using an interface similar to the accessors in Eloquent.
+
+In order to provide input suggestions for a given argument or option, all you have to do is add a method to your command class that is named in the following format: `suggest{$inputName}[Values|Options](string $currentValue, array $currentInput): array`.
+
+Methods providing values for arguments should end in `Values` and methods providing values for options should end in `Options`. See below for a couple of example implementations:
 
 ```php
-/**
- * Get the console command options.
- * @return array
- */
-protected function getOptions()
+// ...
+
+    /**
+     * Example implementation of a suggestion method for the "myArgument" argument
+     */
+    public function suggestMyArgumentValues(string $value = null, array $allInput): array
+    {
+        if ($allInput['arguments']['dependent'] === 'matches') {
+            return ['some', 'suggested', 'values'];
+        }
+        return ['all', 'values'];
+    }
+
+    /**
+     * Example implementation of a suggestion method for the "package" option
+     */
+    public function suggestPackageOptions(string $value = null, array $allInput): array
+    {
+        return Package::all()->pluck('name')->all();
+    }
+
+// ...
+```
+
+See the [Symfony documentation](https://symfony.com/blog/new-in-symfony-5-4-console-autocompletion) for more information.
+
+<a name="plugin-argument"></a>
+#### Plugin names as an argument
+
+If your command requires a plugin identifier as one of its arguments in order to scope the actions taken to that specific plugin, then you may use the `System\Console\Traits\HasPluginArgument` trait in order to provide automatic validation and normalization of the provided input as well as built in support for the [input autocompletion](#providing-suggested-values) feature.
+
+Simply include the trait in your class and define `plugin` as an argument in your command's signature:
+
+```php
+use Winter\Storm\Console\Command;
+use System\Console\Traits\HasPluginArgument;
+
+class MyCommand extends Command
 {
-    return [
-        ['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
-    ];
+    use HasPluginArgument;
+
+    // ...
+
+    /**
+     * @var string The name and signature of this command.
+     */
+    protected $signature = 'myauthor:mycommand
+        {plugin : The plugin to interact with. <info>(eg: Winter.Blog)</info>}';
+
+    // ...
+
+    /**
+     * @var string What type of plugins to suggest in the CLI autocompletion. Valid values: "enabled", "disabled", "all"
+     */
+    protected $hasPluginsFilter = 'enabled';
+
+    public function handle()
+    {
+        // helper method that validates and normalizes the user provided input
+        $pluginName = $this->getPluginIdentifier();
+
+        // Do things with $pluginName
+    }
 }
-```
-
-When defining `options`, the array definition values represent the following:
-
-```php
-array($name, $shortcut, $mode, $description, $defaultValue)
-```
-
-For options, the argument `mode` may be: `InputOption::VALUE_REQUIRED`, `InputOption::VALUE_OPTIONAL`, `InputOption::VALUE_IS_ARRAY`, `InputOption::VALUE_NONE`.
-
-The `VALUE_IS_ARRAY` mode indicates that the switch may be used multiple times when calling the command:
-
-```bash
-php artisan foo --option=bar --option=baz
-```
-
-The `VALUE_NONE` option indicates that the option is simply used as a "switch":
-
-```bash
-php artisan foo --option
 ```
 
 <a name="retrieving-input"></a>
 ### Retrieving input
 
-While your command is executing, you will obviously need to access the values for the arguments and options accepted by your application. To do so, you may use the `argument` and `option` methods:
+See the [Laravel documentation](https://laravel.com/docs/9.x/artisan#retrieving-input) for how to retrieve input.
 
-#### Retrieving the value of a command argument
+Available input methods:
+
+- [Retrieve input (arguments & options)](https://laravel.com/docs/9.x/artisan#retrieving-input)
+- [Prompt for input](https://laravel.com/docs/9.x/artisan#prompting-for-input)
+- [Ask for confirmation (y/n)](https://laravel.com/docs/9.x/artisan#asking-for-confirmation)
+- [Ask for confirmation (required input string)](#confirmation-via-input)
+- [Autocompletion / suggested answers](https://laravel.com/docs/9.x/artisan#auto-completion)
+- [Multiple choice questions](https://laravel.com/docs/9.x/artisan#multiple-choice-questions)
+- [Handling process signals](#handling-process-signals)
+
+<a name="confirmation-via-input">
+#### Confirmation via input
+
+In addition to the [extra input options that Laravel provides](https://laravel.com/docs/9.x/artisan#prompting-for-input), the `confirmsWithInput($message, $requiredInput)` method can be used to display a warning message and a prompt that will ask the user to input the specified string in order to confirm a potentially destructive action.
+
+This feature requires that your command includes the `\Winter\Storm\Console\Traits\ConfirmsWithInput` trait.
 
 ```php
-$value = $this->argument('name');
+use Winter\Storm\Console\Command;
+use Winter\Storm\Console\Traits\ConfirmsWithInput;
+
+class MyCommand extends Command
+{
+    use ConfirmsWithInput;
+
+    public function handle()
+    {
+        $pluginName = $this->argument('plugin');
+
+        if (!$this->confirmWithInput(
+            "This will remove the database tables and files for the \"$pluginName\" plugin.",
+            $pluginName
+        )) {
+            return 1;
+        }
+
+        // Do dangerous things with $pluginName
+    }
+}
 ```
 
-#### Retrieving all arguments
+This will display the following:
+
+![image](https://github.com/wintercms/docs/blob/main/images/console-confim-with-input.png?raw=true) {.img-responsive .frame}
+
+If your command defines a `--force` option in its signature, then that option can be used to bypass the confirmation step and production alert.
+
+<a name="handling-process-signals">
+### Handling process signals
+
+See the [Symfony documentation](https://symfony.com/blog/new-in-symfony-5-2-console-signals) for more information.
+
+<a name="processes-query">
+### Processing Records
+
+Winter provides the `Winter\Storm\Console\ProcessesQuery` trait for use in console commands that have to process a large number of records sourced from a database query. An example use of the trait is provided below:
 
 ```php
-$arguments = $this->argument();
-```
+<?php namespace MyAuthor\MyPlugin\Console;
 
-#### Retrieving the value of a command option
+use Winter\Storm\Console\Command;
+use MyAuthor\MyPlugin\Models\MyModel;
 
-```php
-$value = $this->option('name');
-```
+class ProcessRecords extends Command
+{
+    use \Winter\Storm\Console\Traits\ProcessesQuery;
+    use \Winter\Storm\Console\Traits\ConfirmsWithInput;
 
-#### Retrieving all options
+    /**
+     * @var string The console command name.
+     */
+    protected static $defaultName = 'myplugin:processrecords';
 
-```php
-$options = $this->option();
+    /**
+     * @var string The name and signature of this command.
+     */
+    protected $signature = 'myplugin:processrecords
+        {--limit=0 : The maximum number of records to process. Defaults to all.}
+        {--chunk=100 : The number of records to process at once.}
+        {--f|force : Force the operation to run and ignore production warnings and confirmation questions.}
+    ';
+
+    /**
+     * @var string The console command description.
+     */
+    protected $description = 'Processes the selected records';
+
+    /**
+     * Execute the console command.
+     */
+    public function handle(): int
+    {
+        // Build the query that will retrieve all the records to be processed
+        $query = MyModel::query()->withTrashed();
+
+        // Get the total number of records to be processed for the alert message
+        $totalRecords = $query->count();
+
+        // Ask the user to confirm the processing action by entering the number
+        // of records to be affected
+        if (!$this->confirmWithInput(
+            sprintf(
+                'This will process all selected records, a total of %s.',
+                number_format($totalRecords)
+            ),
+            $totalRecords
+        )) {
+            return 1;
+        }
+
+        // Process the records
+        $this->processQuery(
+            $query,
+            function ($record) {
+                $record->myCustomAction();
+            },
+            $this->option('chunk'),
+            $this->option('limit')
+        );
+
+        return 0;
+    }
+}
 ```
 
 <a name="writing-output"></a>
 ### Writing output
 
-To send output to the console, you may use the `info`, `comment`, `question` and `error` methods. Each of these methods will use the appropriate ANSI colors for their purpose.
+See the [Laravel documentation](https://laravel.com/docs/9.x/artisan#writing-output) for how to send output to the console.
 
-#### Sending information
+Available output methods:
 
-```php
-$this->info('Display this on the screen');
-```
+- [Information message (green text)](https://laravel.com/docs/9.x/artisan#writing-output)
+- [Error message (red text)](https://laravel.com/docs/9.x/artisan#writing-output)
+- [Plain text](https://laravel.com/docs/9.x/artisan#writing-output)
+- [New Lines](https://laravel.com/docs/9.x/artisan#writing-output)
+- [Tables](https://laravel.com/docs/9.x/artisan#tables)
+- [Progress Bars](https://laravel.com/docs/9.x/artisan#progress-bars)
+- [Alerts](#output-alerts)
 
-#### Sending an error message
+<a name="output-alerts"></a>
+#### Alerts
 
-```php
-$this->error('Something went wrong!');
-```
+The `alert($message)` method makes it easy to render an "alert box" with the provided message in order to draw more attention to an important notice.
 
-#### Asking the user for input
-
-You may also use the `ask` and `confirm` methods to prompt the user for input:
-
-```php
-$name = $this->ask('What is your name?');
-```
-
-#### Asking the user for secret input
+This method is also provided by Laravel (currently undocumented), however Winter's implementation also includes support for automatically wrapping the alert box size to the standard 80 characters of width to prevent long messages from breaking the formatting of the alert box.
 
 ```php
-$password = $this->secret('What is the password?');
+$this->alert('This will remove the database tables and files for the "Winter.Builder" plugin.');
 ```
 
-#### Asking the user for confirmation
+Will output
 
-```php
-if ($this->confirm('Do you wish to continue? [yes|no]'))
-{
-    //
-}
+```none
+*************************************************************
+*  This will remove the database tables and files for the   *
+*                 "Winter.Builder" plugin.                  *
+*************************************************************
 ```
-
-You may also specify a default value to the `confirm` method, which should be `true` or `false`:
-
-```php
-$this->confirm($question, true);
-```
-
-#### Progress Bars
-
-For long running tasks, it could be helpful to show a progress indicator. Using the output object, we can start, advance and stop the Progress Bar. First, define the total number of steps the process will iterate through. Then, advance the Progress Bar after processing each item:
-
-```php
-$users = App\User::all();
-
-$bar = $this->output->createProgressBar(count($users));
-
-foreach ($users as $user) {
-    $this->performTask($user);
-
-    $bar->advance();
-}
-
-$bar->finish();
-```
-
-For more advanced options, check out the [Symfony Progress Bar component documentation](https://symfony.com/doc/2.7/components/console/helpers/progressbar.html).
 
 <a name="registering-commands"></a>
 ## Registering commands
@@ -313,11 +445,6 @@ Once your command class is finished, you need to register it so it will be avail
 ```php
 class MyPlugin extends PluginBase
 {
-    public function pluginDetails()
-    {
-        [...]
-    }
-
     public function register()
     {
         $this->registerConsoleCommand('myauthor.mycommand', \MyAuthor\MyPlugin\Console\MyCommand::class);
@@ -357,20 +484,4 @@ public function boot()
 <a name="calling-other-commands"></a>
 ## Calling other commands
 
-Sometimes you may wish to call other commands from your command. You may do so using the `call` method:
-
-```php
-$this->call('winter:up');
-```
-
-You can also pass arguments as an array:
-
-```php
-$this->call('plugin:refresh', ['name' => 'Winter.Demo']);
-```
-
-As well as options:
-
-```php
-$this->call('winter:update', ['--force' => true]);
-```
+See the [Laravel documentation](https://laravel.com/docs/9.x/artisan#programmatically-executing-commands) for how to call commands programmatically.

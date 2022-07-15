@@ -341,9 +341,14 @@ There are various native field types that can be used for the **type** setting. 
 
 <style>
     .collection-method-list {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
+        column-count: 2; -moz-column-count: 2; -webkit-column-count: 2;
         column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
     }
+@media (min-width: 576px) {
+    .collection-method-list {
+        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
+    }
+}
 
     .collection-method-list a {
         display: block;
@@ -468,9 +473,9 @@ status_type:
     type: dropdown
     default: published
     options:
-        draft
-        published
-        archived
+        - draft
+        - published
+        - archived
 ```
 
 (key / value):

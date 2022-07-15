@@ -11,6 +11,22 @@
     - [View mode](#syntax-view-mode)
     - [Editor mode](#syntax-editor-mode)
     - [Supported tags](#syntax-supported-tags)
+- [Data File Parser: Array](#file-parser-array)
+    - [Load `ArrayFile`](#array-file-load)
+    - [Set values](#array-file-set-values)
+        - [Multidimensional arrays](#array-file-multidimensional-arrays)
+        - [Default values for `env()` helper](#array-file-env-defaults)
+        - [Function values](#array-file-function-values)
+        - [Constant values](#array-file-constant-values)
+    - [Key sorting](#array-file-key-sorting)
+    - [Write `ArrayFile`](#array-file-write)
+    - [Render contents](#array-file-render)
+- [Data File Parser: `.env`](#file-parser-env)
+    - [Set values](#env-file-set-values)
+        - [Empty lines](#env-file-empty-lines)
+    - [Write `EnvFile`](#env-file-write)
+    - [Render contents](#env-file-render)
+    - [Get variables](#env-file-get-variables)
 
 <a name="introduction"></a>
 ## Introduction
@@ -453,3 +469,328 @@ Multiple line input for larger blocks of text.
     {textarea name="websiteDescription" label="Website Description"}
         This is our vision for things to come
     {/textarea}
+
+<a name="file-parser-array"></a>
+## Data File Parser: Array
+
+Winter CMS uses PHP array files (PHP files that do nothing except return a single array) for managing [configuration](../plugin/settings#file-configuration) and [translation data files](../plugin/localization#file-structure). In order to simplify working with these files programatically, Winter provides the `Winter\Storm\Parse\PHP\ArrayFile` parser in the core.
+
+<a name="array-file-load"></a>
+### Load `ArrayFile`
+
+The `ArrayFile` class can be used to modify a PHP array file. The `ArrayFile::open()` method will initialize the `ArrayFile` parser with the contents of the provided path (if the path does not exist it will be created on a call to `$arrayFile->write()`).
+
+```php
+use Winter\Storm\Parse\PHP\ArrayFile;
+
+$arrayFile = ArrayFile::open('/path/to/file.php');
+$arrayFile->set('foo', 'bar');
+$arrayFile->write();
+```
+
+The `ArrayFile::open()` method accepts a second argument `$throwIfMissing` that defaults to `false`. If `true`, a `\InvalidArgumentException` will be thrown if the provided `$filePath` does not point to an existing file.
+
+<a name="array-file-set-values"></a>
+### Set values
+
+Setting values can be chained or multiple values can be set by passing an array
+
+```php
+ArrayFile::open('/path/to/file.php')
+    ->set('foo', 'bar')
+    ->set('bar', 'foo')
+    ->write();
+
+// or
+
+ArrayFile::open('/path/to/file.php')->set([
+    'foo' => 'bar',
+    'bar' => 'foo'
+])->write();
+```
+
+<a name="array-file-multidimensional-arrays"></a>
+#### Multidimensional arrays
+
+Multidimensional arrays can be set via dot notation, or by passing an array.
+
+```php
+ArrayFile::open('/path/to/file.php')->set([
+    'foo.bar.a' => 'bar',
+    'foo.bar.b' => 'foo'
+])->write();
+
+// or
+
+ArrayFile::open('/path/to/file.php')->set([
+    'foo' => [
+        'bar' => [
+            'a' => 'bar',
+            'b' => 'foo'
+        ]
+    ]
+])->write();
+```
+
+Will output:
+
+```php
+<?php
+
+return [
+    'foo' => [
+        'bar' => [
+            'a' => 'bar',
+            'b' => 'foo',
+        ]
+    ]
+];
+```
+
+<a name="array-file-env-defaults"></a>
+#### Default values for `env()` helper
+
+If an array file has a `env()` function call for a given key, setting the value of that key will set the default argument for the call to `env()` rather than replacing the `env()` call altogether.
+
+For example, if the array file looks like:
+
+```php
+<?php
+
+return [
+    'foo' => [
+        'bar' => env('EXAMPLE_KEY'),
+    ]
+];
+```
+
+And then the following code is used to set the `foo.bar` property:
+
+```php
+ArrayFile::open('/path/to/file.php')->set([
+    'foo.bar' => 'Winter CMS',
+])->write();
+```
+
+Will result in:
+
+```php
+<?php
+
+return [
+    'foo' => [
+        'bar' => env('EXAMPLE_KEY', 'Winter CMS'),
+    ]
+];
+```
+
+<a name="array-file-function-values"></a>
+#### Function values
+
+Function calls can be added to your config either via the `PHPFunction` class or using the `function()` helper method
+on the `ArrayFile` object.
+
+```php
+use Winter\Storm\Parse\PHP\ArrayFile;
+use Winter\Storm\Parse\PHP\PHPFunction;
+
+ArrayFile::open('/path/to/file.php')->set([
+    'foo.bar' => new PHPFunction('env', ['argument1', 'argument1']),
+])->write();
+
+// or
+
+$arrayFile = ArrayFile::open('/path/to/file.php');
+$arrayFile->set([
+    'foo.bar' => $arrayFile->function('env', ['argument1', 'argument1']),
+]);
+$arrayFile->write();
+```
+
+<a name="array-file-constant-values"></a>
+#### Constant values
+
+Constants can be added to your config either via the `PHPConstant` class or using the `constant()` helper method
+on the `ArrayFile` object.
+
+```php
+use Winter\Storm\Parse\PHP\ArrayFile;
+use Winter\Storm\Parse\PHP\PHPConstant;
+
+ArrayFile::open('/path/to/file.php')->set([
+    'foo.bar' => new PHPConstant('PHP_OS'),
+])->write();
+
+// or
+
+$arrayFile = ArrayFile::open('/path/to/file.php');
+$arrayFile->set([
+    'foo.bar' => $arrayFile->constant('\Path\To\Class::VALUE'),
+]);
+$arrayFile->write();
+```
+
+<a name="array-file-key-sorting"></a>
+### Key sorting
+
+The `ArrayFile` object supports sorting the keys used in the file before rendering.
+
+```php
+$arrayFile = ArrayFile::open('/path/to/file.php');
+$arrayFile->set([
+    'b' => 'is awesome'
+    'a.b' => 'CMS',
+    'a.a' => 'Winter',
+]);
+$arrayFile->sort(ArrayFile::SORT_ASC);
+$arrayFile->write();
+```
+
+Will write out:
+
+```php
+<?php
+
+return [
+    'a' => [
+        'a' => 'Winter',
+        'b' => 'CMS',
+    ],
+    'b' => 'is awesome',
+];
+```
+
+The sort method supports the following options:
+
+- `ArrayFile::SORT_ASC`
+- `ArrayFile::SORT_DESC`
+- a callable function
+
+By default, `sort()` will use `ArrayFile::SORT_ASC`.
+
+<a name="array-file-write"></a>
+### Write `ArrayFile`
+
+By default, calling `$arrayFile->write()` will write the current state of the `ArrayFile` to the path provided when it was initialized with `ArrayFile::open($path)`.
+
+If desired, you can specify a different path to write to as the first argument provided to the `write($path)` method:
+
+```php
+ArrayFile::open('/path/to/file.php')->set([
+    'foo.bar' => 'Winter CMS',
+])->write('/path/to/another.file.php');
+```
+
+<a name="array-file-render"></a>
+### Render contents
+
+If you require the PHP `ArrayFile` contents as a string instead of writing directly to a file with `write()`, the `render()` method can be used.
+
+```php
+$phpConfigString = ArrayFile::open('/path/to/file.php')->set([
+    'foo.bar' => 'Winter CMS',
+])->render();
+```
+
+<a name="file-parser-env"></a>
+## Data File Parser: `.env`
+
+Winter supports the use of [DotEnv](https://github.com/vlucas/phpdotenv) files (`.env`) to manage environment specific variables.
+
+Getting these values is as easy as using the [`env()` helper function](https://wintercms.com/docs/services/helpers#method-env). Winter also provides a way to programmatically set the values in the `.env` file through the use of the `Winter\Storm\Parse\EnvFile` parser in the core.
+
+<a name="env-file-load"></a>
+## Load `EnvFile`
+
+The `EnvFile` class can be used to modify a PHP array file. The `EnvFile::open()` method will initialize the `EnvFile` parser with the contents of the provided path (if the path does not exist it will be created on a call to `$envFile->write()`).
+
+By default, the `.env` file interacted with will be `base_path('.env')`, this can be changed if required by passing the path to the `open()` method.
+
+<a name="env-file-set-values"></a>
+## Set values
+
+Values can be set either one at a time or by passing an array of values to set.
+
+```php
+$env = EnvFile::open();
+$env->set('FOO', 'bar');
+$env->set('BAR', 'foo');
+$env->write();
+
+// or
+
+EnvFile::open()->set([
+    'FOO' => 'bar'
+    'BAR' => 'foo'
+])->write();
+```
+
+> NOTE: Array dot notation and nested arrays are not supported by `EnvFile`
+
+```php
+use Winter\Storm\Config\EnvFile;
+
+$env = EnvFile::open();
+$env->set('FOO', 'bar');
+$env->write();
+```
+
+> NOTE: Values are set in the order they are provided, automatic sorting is not currently supported because comments and empty lines make that a lot more complex.
+
+<a name="env-file-empty-lines"></a>
+#### Empty lines
+
+It is also possible to add empty lines into the env file, usually for organizational purposes:
+
+```php
+$env = EnvFile::open();
+$env->set('FOO', 'bar');
+$env->addEmptyLine();
+$env->set('BAR', 'foo');
+$env->write();
+```
+
+Will output:
+
+```dotenv
+FOO="bar"
+
+BAR="foo"
+```
+
+<a name="env-file-write"></a>
+### Write `EnvFile`
+
+By default, calling `$envFile->write()` will write the current state of the `EnvFile` to the path provided when it was initialized with `EnvFile::open($path)`. (defaulting to `base_path('.env')` when no `$path` is provided).
+
+If desired, you can specify a different path to write to as the first argument provided to the `write($path)` method:
+
+```php
+EnvFile::open()->set([
+    'FOO' => 'bar',
+])->write('/path/to/.env.alternative');
+```
+
+<a name="env-file-render"></a>
+### Render contents
+
+If you require the `EnvFile` contents as a string; instead of writing directly to a file with `write()`, the `render()` method can be used.
+
+```php
+$envFileString = EnvFile::open()->set([
+    'APP_NAME' => 'Winter CMS',
+])->render();
+```
+
+<a name="env-file-get-variables"></a>
+### Get variables
+
+The `EnvFile` parser provides a `getVariables()` method that can be used to get an associative array of the current variables excluding any comments or empty lines.
+
+```php
+$envVariables = EnvFile::open()->set([
+    'APP_NAME' => 'Winter CMS',
+])->getVariables();
+
+echo $envVariables['APP_NAME']; // echos "Winter CMS"
+```
