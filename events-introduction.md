@@ -124,7 +124,7 @@ Event::listen('foo.*', function ($event, $params) {
 ```
 
 `$event` provides the event name that was fired.
-`$params` is the event payload; it's an array of the fired event's arguments.
+`$params` is the event payload. This will be an array of arguments passed from the fired event.
 
 Given the following event:
 ```php
