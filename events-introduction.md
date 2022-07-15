@@ -322,7 +322,7 @@ $manager->bindEvent('user.beforeRegister', function ($user) {
 });
 ```
 
-> **NOTE**: wildcard listeners are currently not supported for this trait.
+> **NOTE**: Wildcard listeners are currently not supported for this trait.
 
 The `fireEvent` method is used to fire events.
 
