@@ -683,7 +683,6 @@ class Product extends Model
 
 Add this trait to your model in order to allow its relations to be sorted/reordered.
 
-
 ```php
 class MyModel extends model
 {
