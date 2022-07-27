@@ -11,6 +11,7 @@
 - [Validation](#validation)
 - [Soft deleting](#soft-deleting)
 - [Nullable](#nullable)
+- [HasSortableRelations](#hassortablerelations)
 
 Model traits are used to implement common functionality.
 
@@ -676,3 +677,21 @@ class Product extends Model
     protected $nullable = ['sku'];
 }
 ```
+
+<a name="hassortablerelations"></a>
+## HasSortableRelations
+
+Add this trait to your model in order to allow its relations to be sorted/reordered.
+
+
+```php
+class MyModel extends model
+{
+    use \Winter\Storm\Database\Traits\HasSortableRelations;
+
+    /**
+     * @var array Relations that can be sorted/reordered and the column name to use for sorting/reordering.
+     */
+    public $sortableRelations = ['relation_name' => 'sort_order_column'];
+...
+}
