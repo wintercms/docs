@@ -1,6 +1,6 @@
 # Snowboard.js - Winter JavaScript Framework
 
-![image](https://github.com/wintercms/docs/blob/main/images/header-snowboard.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/wintercms/docs/blob/main/images/header-snowboard.png?raw=true)
 
 ## Introduction
 

@@ -295,7 +295,7 @@ class MyCommand extends Command
 
 This will display the following:
 
-![image](https://github.com/wintercms/docs/blob/main/images/console-confim-with-input.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/wintercms/docs/blob/main/images/console-confim-with-input.png?raw=true)
 
 If your command defines a `--force` option in its signature, then that option can be used to bypass the confirmation step and production alert.
 
