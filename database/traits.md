@@ -252,7 +252,16 @@ In order to render all levels of items and their children, you can use recursive
 
 ## Nested Tree
 
-The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To use a nested set model, apply the `Winter\Storm\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
+The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns.
+
+```php
+$table->integer('parent_id')->nullable();
+$table->integer('nest_left')->nullable();
+$table->integer('nest_right')->nullable();
+$table->integer('nest_depth')->nullable();
+```
+
+To use a nested set model, apply the `Winter\Storm\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
 
 ```php
 class Category extends Model
@@ -260,6 +269,55 @@ class Category extends Model
     use \Winter\Storm\Database\Traits\NestedTree;
 }
 ```
+
+You can change the column names used by defining the following constants on the model:
+
+```php
+const PARENT_ID = 'my_parent_column';
+const NEST_LEFT = 'my_left_column';
+const NEST_RIGHT = 'my_right_column';
+const NEST_DEPTH = 'my_depth_column';
+```
+
+### General access methods:
+
+- `$model->getRoot();` - Returns the highest parent of a node.
+- `$model->getRootList();` - Returns an indented array of key and value columns from root.
+- `$model->getParent();` - The direct parent node.
+- `$model->getParents();` - Returns all parents up the tree.
+- `$model->getParentsAndSelf();` - Returns all parents up the tree and self.
+- `$model->getChildren();` - Set of all direct child nodes.
+- `$model->getSiblings();` - Return all siblings (parent's children).
+- `$model->getSiblingsAndSelf();` - Return all siblings and self.
+- `$model->getLeaves();` - Returns all final nodes without children.
+- `$model->getDepth();` - Returns the depth of a current node.
+- `$model->getChildCount();` - Returns number of all children.
+
+### Query builder methods:
+
+- `$query->withoutNode();` - Filters a specific node from the results.
+- `$query->withoutSelf();` - Filters current node from the results.
+- `$query->withoutRoot();` - Filters root from the results.
+- `$query->children();` - Filters as direct children down the tree.
+- `$query->allChildren();` - Filters as all children down the tree.
+- `$query->parent();` - Filters as direct parent up the tree.
+- `$query->parents();` - Filters as all parents up the tree.
+- `$query->siblings();` - Filters as all siblings (parent's children).
+- `$query->leaves();` - Filters as all final nodes without children.
+- `$query->getNested();` - Returns an eager loaded collection of results.
+- `$query->listsNested();` - Returns an indented array of key and value columns.
+
+### Flat result access methods:
+ 
+- `$model->getAll();` - Returns everything in correct order.
+- `$model->getAllRoot();` - Returns all root nodes.
+- `$model->getAllChildren();` - Returns all children down the tree.
+- `$model->getAllChildrenAndSelf();` - Returns all children and self.
+
+### Eager loaded access methods:
+
+- `$model->getEagerRoot();` - Returns a list of all root nodes, with ->children eager loaded.
+- `$model->getEagerChildren();` - Returns direct child nodes, with ->children eager loaded.
 
 ### Creating a root node
 
