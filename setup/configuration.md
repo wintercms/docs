@@ -49,6 +49,10 @@ location ~ ^/index.php {
 
 }
 
+# This may be needed to allow error codes to be handled correctly through Winter CMS.
+# This will also pass any error codes sent from PHP-FPM.
+error_page 404 = /index.php;
+
 # Whitelist
 ## Let Winter handle if static file not exists
 location ~ ^/favicon\.ico { try_files $uri /index.php; }
