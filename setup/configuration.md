@@ -1,3 +1,7 @@
+---
+title: "Getting Started: Configuration"
+description: "Learn how to configure your Winter CMS installation."
+---
 # App Configuration
 
 All of the configuration files for Winter are stored in the `config` directory. Options are usually documented in the configuration files directly, so it is recommended to look through the files to become familiar with the available options.

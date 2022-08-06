@@ -1,8 +1,8 @@
+---
+title: "Getting Started: Installation"
+description: "Documentation on the different ways to install Winter CMS for your next project."
+---
 # Installation
-
-<div class="og-description">
-    Documentation on the different ways to install Winter CMS for your next project.
-</div>
 
 There are two ways you can install Winter, either using the [Web-based installer](#web-based-installation) or [Composer installation](../help/using-composer) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
 
