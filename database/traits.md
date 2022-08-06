@@ -4,7 +4,7 @@ Model traits are used to implement common functionality.
 
 ## Hashable
 
-Hashed attributes are hashed immediately when the attribute is first set on the model. To hash attributes in your model, apply the `Winter\Storm\Database\Traits\Hashable` trait and declare a `$hashable` property with an array containing the attributes to hash.
+Hashed attributes are hashed immediately when the attribute is first set on the model. To hash attributes in your model, apply the `Winter\Storm\Database\Traits\Hashable` trait and declare a protected `$hashable` property with an array containing the attributes to hash.
 
 ```php
 class User extends Model
@@ -20,7 +20,7 @@ class User extends Model
 
 ## Purgeable
 
-Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `Winter\Storm\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to purge.
+Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `Winter\Storm\Database\Traits\Purgeable` trait and declare a protected `$purgeable` property with an array containing the attributes to purge.
 
 ```php
 class User extends Model
@@ -42,7 +42,7 @@ return $user->getOriginalPurgeValue('password_confirmation');
 
 ## Encryptable
 
-Similar to the [hashable trait](#hashable), encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `Winter\Storm\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
+Similar to the [hashable trait](#hashable), encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `Winter\Storm\Database\Traits\Encryptable` trait and declare a protected `$encryptable` property with an array containing the attributes to encrypt.
 
 ```php
 class User extends Model
@@ -60,7 +60,7 @@ class User extends Model
 
 ## Sluggable
 
-Slugs are meaningful codes that are commonly used in page URLs. To automatically generate a unique slug for your model, apply the `Winter\Storm\Database\Traits\Sluggable` trait and declare a `$slugs` property.
+Slugs are meaningful codes that are commonly used in page URLs. To automatically generate a unique slug for your model, apply the `Winter\Storm\Database\Traits\Sluggable` trait and declare a protected `$slugs` property.
 
 ```php
 class User extends Model
@@ -102,7 +102,7 @@ $user->slugAttributes();
 $user->save();
 ```
 
-### Sluggable with SoftDelete trait
+### Sluggable with the SoftDelete trait
 
 By default, soft deleted models are ignored when the slug is generated.
 You might want to prevent slug duplication when recovering soft deleted models.
@@ -115,7 +115,7 @@ protected $allowTrashedSlugs = true;
 
 ## Revisionable
 
-Winter models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `Winter\Storm\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](relations) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.
+Winter models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `Winter\Storm\Database\Traits\Revisionable` trait and declare a protected `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](relations) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable` - this is where the revision history data is stored.
 
 ```php
 class User extends Model
@@ -308,7 +308,7 @@ const NEST_DEPTH = 'my_depth_column';
 - `$query->listsNested();` - Returns an indented array of key and value columns.
 
 ### Flat result access methods:
- 
+
 - `$model->getAll();` - Returns everything in correct order.
 - `$model->getAllRoot();` - Returns all root nodes.
 - `$model->getAllChildren();` - Returns all children down the tree.
@@ -385,7 +385,7 @@ There are several methods for moving nodes around:
 
 ## Validation
 
-Winter models uses the built-in [Validator class](../services/validation). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `Winter\Storm\Database\Traits\Validation`:
+Winter models uses the built-in [Validator class](../services/validation). The validation rules are defined in the model class as a public property named `$rules` and the class must use the trait `Winter\Storm\Database\Traits\Validation`:
 
 ```php
 class User extends Model
@@ -641,5 +641,116 @@ class Product extends Model
      * @var array Nullable attributes.
      */
     protected $nullable = ['sku'];
+}
+```
+
+## Array Source
+
+> **NOTE:** This functionality requires the PDO SQLite extension to be enabled on your server, even if you intend to use a different database type for your other models.
+
+The Array Source trait allows you to create temporary models that do not rely on database tables, but still provide all the functionality and flexibility of a real database-driven model. This can be useful for custom datasets that you may not wish to store in the database, such as API-provided data or indexable data, but still would like the ability to display this data in widgets that require models, or to use the Eloquent query builder to filter the data.
+
+This functionality works by creating a temporary SQLite database either in memory, or optionally, cached to the filesystem. This SQLite database will be populated with the records that you require automatically, and then all subsequent database queries for this model will be run on this database.
+
+To use this feature, you need to apply the `Winter\Storm\Database\Traits\ArraySource` trait. You will also need to do some configuration in order to define either the records that you intend to populate, or the schema that you wish to use for the temporary database.
+
+```php
+class ApiData extends Model
+{
+    use \Winter\Storm\Database\Traits\ArraySource;
+
+    // ...
+}
+```
+
+### Configuration
+
+#### Defining the default records
+
+To define a static set of records to populate the database with, you can add a public `$records` property to your model that contains an array set. Each array should contain column names as the key, and column values as the value.
+
+```php
+class ApiData extends Model
+{
+    use \Winter\Storm\Database\Traits\ArraySource;
+
+    public $records = [
+        [
+            'id' => 1,
+            'name' => 'Bugs',
+            'animal' => 'Bunny',
+            'is_loony_tune' => true,
+        ],
+        [
+            'id' => 2,
+            'name' => 'Donald',
+            'animal' => 'Duck',
+            'is_loony_tune' => false,
+        ],
+    ];
+}
+```
+
+If you want to populate records dynamically, you can instead override the `getRecords` method with your own functionality, as long as it returns an array in the same format as the one above.
+
+```php
+class ApiData extends Model
+{
+    use \Winter\Storm\Database\Traits\ArraySource;
+
+    public function getRecords(): array
+    {
+        $pluginManager = \System\Classes\PluginManager::instance();
+        $records = [];
+
+        foreach ($pluginManager->getPlugins() as $code => $plugin) {
+            $details = $plugin->pluginDetails();
+
+            $records[] = [
+                'code' => $code,
+                'name' => $details['name'],
+                'description' => $details['description'],
+            ];
+        }
+
+        return $records;
+    }
+}
+```
+
+You may also opt to not provide either of the above, which effectively creates an empty database, however, you must provide the schema for the table in this instance.
+
+#### Defining the schema
+
+By default, when populating the temporary database with records using the methods above, the schema of the table will be automatically generated based on the data provided. This may not always be accurate, so you may define the schema manually if you would like to control the column types in your temporary database, or if you don't provide any initial records to the model.
+
+To do this, define a public `$recordSchema` property on the model as an array, with the column names as the key and the data type (matching the `$casts` property) as the value.
+
+```php
+class ApiData extends Model
+{
+    use \Winter\Storm\Database\Traits\ArraySource;
+
+    public $records = [
+        [
+            'id' => 1,
+            'name' => 'Bugs',
+            'animal' => 'Bunny',
+            'is_loony_tune' => true,
+        ],
+        [
+            'id' => 2,
+            'name' => 'Donald',
+            'animal' => 'Duck',
+            'is_loony_tune' => false,
+        ],
+    ];
+
+    public $recordSchema = [
+        'id' => 'integer',
+        'name' => 'string',
+        'animal' => 'string',
+        'is_loony_tune' => 'boolean',
+    ];
 }
 ```
