@@ -1,27 +1,63 @@
-### Basic example
+---
+title: "Controls: List"
+---
+# List
 
-    <div class="control-list">
-        <table class="table data">
-            <thead>
-                <tr>
-                    <th class="sort-desc"><a href="/">Title</a></th>
-                    <th class="active sort-asc"><a href="/">Created</a></th>
-                    <th><span>Categories</span></th>
-                    <th><span>Updated</span></th>
-                    <th class="list-setup"><a href="/" title="List options"></a></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Welcome to Winter</td>
-                    <td>Oct 01, 2013</td>
-                    <td>News</td>
-                    <td>Oct 01, 2013</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+The list element is the base element of data viewing in Winter CMS. A list is made up of rows of data, similar to spreadsheet software like Excel, and contains columns of data. In general, the form is generally created by the [List Widget](/v1.2/docs/backend/lists), but can also be manually created for custom uses.
+
+## The basics
+
+A list should be a standard `<table>` element with the classes of `table` and `data`. The table should contain a `<thead>` element with a single row that states the list column headings. The table itself should be wrapped with a `<div class="control-list">` element.
+
+```html
+<div class="control-list">
+    <table class="table data">
+        <thead>
+            <tr>
+                <th class="sort-desc"><a>Title</a></th>
+                <th class="active sort-asc"><a>Created</a></th>
+                <th><span>Categories</span></th>
+                <th><span>Updated</span></th>
+                <th class="list-setup"><a title="List options"></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Welcome to Winter</td>
+                <td>Oct 01, 2013</td>
+                <td>News</td>
+                <td>Oct 01, 2013</td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+```
+
+```backend
+<div class="control-list">
+    <table class="table data">
+        <thead>
+            <tr>
+                <th class="sort-desc"><a>Title</a></th>
+                <th class="active sort-asc"><a>Created</a></th>
+                <th><span>Categories</span></th>
+                <th><span>Updated</span></th>
+                <th class="list-setup"><a title="List options"></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Welcome to Winter</td>
+                <td>Oct 01, 2013</td>
+                <td>News</td>
+                <td>Oct 01, 2013</td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+```
 
 ### Complete example
 
