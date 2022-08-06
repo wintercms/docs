@@ -8,7 +8,6 @@ sections:
     "Architecture Concepts":
         pages:
             architecture/introduction: "Introduction"
-            architecture/unit-testing: "Unit Testing"
             architecture/using-composer: "Using Composer"
             architecture/developer-guide: "Developer Guide"
             architecture/maintainer-guide: "Maintainer Guide"
@@ -50,6 +49,7 @@ sections:
             plugin/scheduling: "Task Scheduling"
             plugin/extending: "Extending Plugins"
             plugin/replacement: "Replacement & Forking"
+            plugin/unit-testing: "Unit Testing"
 
     "AJAX Framework":
         pages:
