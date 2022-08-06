@@ -32,25 +32,6 @@ Define the popover content as a template and reference it with `data-content-fro
 </script>
 ```
 
-<div style="display:none" id="myPopoverContent">
-    <div class="popover-head">
-        <h3>Popover</h3>
-        <button type="button" class="close" data-dismiss="popover">&times;</button>
-    </div>
-    <div class="popover-body">
-        I am a popover
-    </div>
-</div>
-
-    <a
-        href="javascript:;"
-        class="btn btn-primary"
-        data-control="popover"
-        data-width="200"
-        data-content-from="#myPopoverContent">
-        Template popover
-    </a>
-
 ### Event specified content
 
 ```js
