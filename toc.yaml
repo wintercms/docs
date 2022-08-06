@@ -4,6 +4,7 @@ sections:
         pages:
             setup/installation: "Installation"
             setup/configuration: "Configuration"
+            setup/upgrade-guide: "Upgrade Guide"
 
     "Architecture Concepts":
         pages:
