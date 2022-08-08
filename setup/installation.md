@@ -22,8 +22,6 @@ Winter CMS has some server requirements for web hosting:
 
 We also recommend the installation of the PDO SQLite extension, regardless of your database type, as some functions in Winter CMS may benefit from being able to use temporary SQLite databases.
 
-When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
-
 ## Web-based installation
 
 The [Web Installer](https://github.com/wintercms/web-installer) is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
