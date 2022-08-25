@@ -230,7 +230,7 @@ Option | Description
 <a name="custom-value-selection"></a>
 ### Custom value selection
 
-It is possible to change the source and display values for each column. If you want to source the column value from another column, do so with the `valueFrom` option.
+It is possible to change the source and display values for each column. If you want to source the column value that is actually displayed from another model attribute (or even a relationship's attribute) you can do so with the `valueFrom` option.
 
 ```yaml
 other_name:
