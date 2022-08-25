@@ -240,7 +240,7 @@ other_name:
 <a id="nested-column-selection"></a>
 ### Nested column selection
 
-In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations.md) column or a [jsonable array](../database/model.md#standard-properties). The only drawback of doing this is the column cannot be marked as searchable or sortable as those options require the column to actually exist in the database table.
+In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations) column or a [jsonable array](../database/model#standard-properties). The only drawback of doing this is the column cannot be marked as searchable or sortable as those options require the column to actually exist in the database table.
 
 ```yaml
 content[title]:
