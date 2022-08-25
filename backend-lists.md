@@ -248,7 +248,7 @@ content[title]:
     sortable: false
 ```
 
-The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#events).
+The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. If you need to make the column searchable or sortable, you could use [model events](../database/model#events) to locally replicate the nested value onto a real database table column whenever it changes.
 
 <a name="column-types"></a>
 ## Available column types
