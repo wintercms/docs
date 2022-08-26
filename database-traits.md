@@ -6,12 +6,12 @@
 - [Sluggable](#sluggable)
 - [Revisionable](#revisionable)
 - [Sortable](#sortable)
+- [HasSortableRelations](#has-sortable-relations)
 - [Simple Tree](#simple-tree)
 - [Nested Tree](#nested-tree)
 - [Validation](#validation)
 - [Soft deleting](#soft-deleting)
 - [Nullable](#nullable)
-- [HasSortableRelations](#hassortablerelations)
 
 Model traits are used to implement common functionality.
 
