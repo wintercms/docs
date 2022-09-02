@@ -358,6 +358,7 @@ There are various native field types that can be used for the **type** setting. 
 <div class="content-list collection-method-list" markdown="1">
 - [Text](#field-text)
 - [Number](#field-number)
+- [Range](#field-range)
 - [Password](#field-password)
 - [Email](#field-email)
 - [Textarea](#field-textarea)
@@ -410,6 +411,20 @@ public $rules = [
 ```
 
 For more information on model validation, please visit [the documentation page](../services/validation#rule-numeric).
+
+<a name="field-range"></a>
+### Range
+
+`range` - renders a slider that takes numbers only.
+
+```yaml
+your_age:
+    label: Progress
+    type: range
+    step: 1  # defaults to 1
+    min: 0   # defaults to 0
+    max: 100 # defaults to 100
+```
 
 <a name="field-password"></a>
 ### Password
