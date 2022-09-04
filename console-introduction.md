@@ -329,14 +329,14 @@ If your command defines a `--force` option in its signature, then that option ca
     
 The `Winter\Storm\Console\Traits\HandlesCleanup` trait provides a default implementation of the `getSubscribedSignals()` & `handleSignal()` methods required to interact with process signals forwarded by Symfony. This simplifies the implementation work required in custom commands for the common requirement of performing cleanup tasks when the command is terminated by the user in a cross-platform friendly manner.
     
->**NOTE:** This trait is implemented by default in the `Winter\Storm\Console\Command` base class.
+>**NOTE:** This trait is implemented by default in the `Winter\Storm\Console\Command` base class. If you want to add it to a class that does not extend this base class you will also need to implement the `Symfony\Component\Console\Command\SignalableCommandInterface` interface on your class.
     
 To take advantage of this trait, either extend the base `Winter\Storm\Console\Command` class or add the `Winter\Storm\Console\Traits\HandlesCleanup` trait to your class and then implement the `handleCleanup()` method as shown below:
     
 ```php
 use Winter\Storm\Console\Command as BaseCommand;
 
-class MyCommand extends BaseCommand
+class MyCommand extends BaseCommand // implements \Symfony\Component\Console\Command\SignalableCommandInterface
 {
     // Uncomment if not extending the BaseCommand class
     // use \Winter\Storm\Console\Traits\HandlesCleanup;
