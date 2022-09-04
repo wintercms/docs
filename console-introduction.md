@@ -322,12 +322,12 @@ This will display the following:
 
 If your command defines a `--force` option in its signature, then that option can be used to bypass the confirmation step and production alert.
 
-<a name="handling-process-signals">
+<a name="handling-process-signals"></a>
 ### Handling process signals
 
 See the [Symfony documentation](https://symfony.com/blog/new-in-symfony-5-2-console-signals) for more information.
 
-<a name="processes-query">
+<a name="processes-query"></a>
 ### Processing Records
 
 Winter provides the `Winter\Storm\Console\ProcessesQuery` trait for use in console commands that have to process a large number of records sourced from a database query. An example use of the trait is provided below:
