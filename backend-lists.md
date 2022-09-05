@@ -765,6 +765,7 @@ To use default value for Date and Date Range
 ```php
 myController::extendListFilterScopes(function($filter)
 {
+    $filter->addScopes([
         'Date Test' => [
             'label' => 'Date Test',
             'type' => 'daterange',
