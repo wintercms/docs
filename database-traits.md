@@ -319,6 +319,7 @@ const NEST_DEPTH = 'my_depth_column';
 - `$query->withoutNode();` - Filters a specific node from the results.
 - `$query->withoutSelf();` - Filters current node from the results.
 - `$query->withoutRoot();` - Filters root from the results.
+- `$query->withoutChildren();`- Filters all children down the tree from the results.
 - `$query->children();` - Filters as direct children down the tree.
 - `$query->allChildren();` - Filters as all children down the tree.
 - `$query->parent();` - Filters as direct parent up the tree.
