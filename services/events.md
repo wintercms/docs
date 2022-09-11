@@ -83,7 +83,7 @@ Event::listen('auth.login', function () { ... }, 5);
 
 ### Halting events
 
-Sometimes you may wish to stop the propagation of an event to other listeners. You may do so using by returning `false` from your listener:
+Sometimes you may wish to stop the propagation of an event to other listeners. You may do so by returning `false` from your listener:
 
 ```php
 Event::listen('auth.login', function ($event) {
