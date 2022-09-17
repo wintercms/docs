@@ -230,7 +230,7 @@ php artisan mix:run <package> <script> [-f|--production] [-- <extra script args>
 
 The `mix:run` command allows you to quickly run scripts defined in the `package.json` file of a Mix package.
 
-```json
+```js
 // package.json
 {
     // ...
