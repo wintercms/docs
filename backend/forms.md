@@ -270,6 +270,7 @@ There are various native field types that can be used for the **type** setting. 
 
 - [Text](#field-text)
 - [Number](#field-number)
+- [Range](#field-range)
 - [Password](#field-password)
 - [Email](#field-email)
 - [Textarea](#field-textarea)
@@ -322,6 +323,21 @@ public $rules = [
 
 For more information on model validation, please visit [the documentation page](../services/validation#rule-numeric).
 
+<a name="field-range"></a>
+### Range
+
+`range` - renders a slider that takes numbers only.
+
+```yaml
+your_age:
+    label: Progress
+    type: range
+    step: 1  # defaults to 1
+    min: 0   # defaults to 0
+    max: 100 # defaults to 100
+```
+
+<a name="field-password"></a>
 ### Password
 
 `password ` - renders a single line password field.
@@ -1074,7 +1090,7 @@ Option | Description
 ------------- | -------------
 `form` | a reference to form field definition file, see [backend form fields](#form-fields). Inline fields can also be used.
 `prompt` | text to display for the create button. Default: `Add new item`.
-`titleFrom` | name of field within items to use as the title for the collapsed item.
+`titleFrom` | the name of the field to use as the title for an item. This will show the value of the field as a title when an item is collapsed in a repeater. Please note that only text fields and dropdown fields are supported.
 `minItems` | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
 `maxItems` | maximum number of items to allow within the repeater.
 `groups` | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.

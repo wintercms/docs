@@ -172,6 +172,31 @@ Option | Description
 `align` | specifies the column alignment. Possible values are `left`, `right` and `center`.
 `permissions` | the [permissions](users#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
+
+<a name="custom-value-selection"></a>
+### Custom value selection
+
+It is possible to change the source and display values for each column. If you want to source the column value that is actually displayed from another model attribute (or even a relationship's attribute) you can do so with the `valueFrom` option.
+
+```yaml
+other_name:
+    label: Something Great
+    valueFrom: name
+```
+<a id="nested-column-selection"></a>
+### Nested column selection
+
+In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations) column or a [jsonable array](../database/model#standard-properties). The only drawback of doing this is the column cannot be marked as searchable or sortable as those options require the column to actually exist in the database table.
+
+```yaml
+content[title]:
+    name: Title
+    sortable: false
+```
+
+The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. If you need to make the column searchable or sortable, you could use [model events](../database/model#events) to locally replicate the nested value onto a real database table column whenever it changes.
+
+<a name="column-types"></a>
 ## Available column types
 
 There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
@@ -640,6 +665,7 @@ To use default value for Date and Date Range
 ```php
 myController::extendListFilterScopes(function($filter)
 {
+    $filter->addScopes([
         'Date Test' => [
             'label' => 'Date Test',
             'type' => 'daterange',

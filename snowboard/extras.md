@@ -339,12 +339,13 @@ Following this structure, you have full-stack control over the experience of you
 
 The Data configuration functionality is registered within Snowboard as the `dataConfig` plugin and can be initialised with `this.snowboard.dataConfig()`.
 
-Initialising a data configuration requires two parameters, the Snowboard plugin that you wish to make the config available to, and a HTML element to extract the data configuration from.
+Initialising a data configuration requires two parameters, the Snowboard plugin that you wish to make the config available to, and a HTML element to extract the data configuration from. A third parameter is also available to assign locally-defined configuration overrides from the JavaScript side.
 
 ```js
 this.config = this.snowboard.dataConfig(
     this, // Add the config to the current instance
     element, // HTML element to get the config values from
+    localConfig, // (optional) Locally-defined JavaScript config overrides
 );
 ```
 
@@ -391,6 +392,30 @@ class Gallery extends Snowboard.PluginBase {
 }
 ```
 
+The third parameter of the data config construction allows you to define config value overrides using JavaScript. This can be useful if you have another mechanism for configuration that you wish to include in determining the final configuration for a component. For example, the same Gallery example above might allow people to show more or less images from a user settings page.
+
+```js
+class Gallery extends Snowboard.PluginBase {
+
+    constructor(snowboard, this, element, userNumImages) {
+        super(snowboard);
+
+        this.element = element;
+        this.acceptAllDataConfigs = true;
+        const localConfig = {
+            numImages: userNumImages
+        };
+        this.config = this.snowboard.dataConfig(this, element, localConfig);
+    }
+
+    // ...
+
+}
+```
+
+In the example above, even if the gallery element defines a `data-num-images` data attribute, this will be overriden by the `userNumImages` parameter that is used in constructing the gallery. This `userNumImages` parameter could be populated by a user configuration source.
+
+<a name="data-config-methods"></a>
 ### Methods
 
 The configuration instance that is returned by `this.snowboard.config(bindTo, elementFrom)` provides the following methods:
@@ -405,9 +430,11 @@ this.config.get(); // Returns an object of all configuration options and their v
 
 #### `get(configName: string)`
 
-Gets the configuration value for the given configuration name. This will be retrieved from the data attribute of the element providing the configuration, or from the the defaults if not specified on the element.
+Gets the configuration value for the given configuration name. This will be retrieved from the local configuration first, then the data attribute of the element providing the configuration then finally from the the defaults if not specified on the element.
 
-This will return `undefined` if there is no configuration value in the element's data attributes or the defaults.
+If the configuration has been provided a local configuration value for the config name, it will be returned over all other sources.
+
+This will return `undefined` if there is no configuration value in the element's data attributes, the local configuration or the defaults.
 
 ```js
 this.config.get('configKey'); // Returns the value of one configuration option.
@@ -426,7 +453,7 @@ this.config.get('configKey'); // Returns "new value".
 
 #### `refresh()`
 
-Refreshes the entire configuration. This will repopulate the configuration with the data attribute configuration or default values once more. This can be useful if you allow the data attributes of the element to be modified externally.
+Refreshes the entire configuration. This will repopulate the configuration with the data attribute configuration, local configuration or default values once more. This can be useful if you allow the data attributes of the element to be modified externally.
 
 ```js
 // Assuming that "data-config-key" on the element is set to "old"
@@ -459,6 +486,8 @@ Configuration values provided by a data attribute or through the `set()` method 
 - A string numeric will be converted to a JavaScript number.
 - The strings will be finally be run through a JSON parser - if the parser succeeds, this value will be used.
 - If all above fails, the string value is kept as a string.
+
+Local configuration values, being defined in JavaScript already, are not coerced.
 
 #### Data attributes without a value
 

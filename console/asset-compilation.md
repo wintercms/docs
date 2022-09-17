@@ -190,3 +190,29 @@ php artisan mix:watch <package> [-f|--production] [-- <extra build options>]
 The `mix:watch` command is similar to the the `mix:compile` command, except that it remains active and watches for any changes made to files that would be affected by your compilation. When any changes are made, a compile is automatically executed. This is useful for development in allowing you to quickly make changes and review them in your browser.
 
 With this command, only one package can be provided and watched at any one time.
+
+<a name="mix-run"></a>
+### Run a package script
+
+```bash
+php artisan mix:run <package> <script> [-f|--production] [-- <extra script args>]
+```
+
+The `mix:run` command allows you to quickly run scripts defined in the `package.json` file of a Mix package.
+
+```js
+// package.json
+{
+    // ...
+    "scripts": {
+        "scriptName": "script to execute"
+    }
+    // ...
+}
+```
+
+This can be useful for running arbitrary scripts that augment the capabilities of your plugin or theme, such as executing unit tests, making customised builds and much more. Note that scripts will run with the working directory set to the root folder of the package, not the root folder of the entire project that the `artisan` command normally executes within.
+
+By default, all package scripts are run in "development" mode. If you wish to run a script in "production" mode, add the `-f` or `--production` flag to the command.
+
+If you wish to pass extra arguments or options to your script, you can add `--` to the end of the command. Any arguments or options added after the `--` argument are interpreted as arguments and options to be sent to the script itself.

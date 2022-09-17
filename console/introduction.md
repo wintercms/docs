@@ -69,6 +69,7 @@ Command | Description
 [`mix:list`](../console/asset-compilation#mix-list) | Lists all registered Mix packages.
 [`mix:compile`](../console/asset-compilation#mix-compile) | Compiles one or more Mix packages.
 [`mix:watch`](../console/asset-compilation#mix-watch) | Watches changes within a Mix package and automatically compiles the package on any change.
+[`mix:run`](../console/asset-compilation#mix-run) | Runs a script within a given package.
 **Scaffolding** |
 [`create:theme`](../console/scaffolding#create-theme) | Create a theme.
 [`create:plugin`](../console/scaffolding#create-plugin) | Create a plugin.
@@ -177,7 +178,9 @@ Options for definining input:
 
 #### Providing suggested values
 
-The `Winter\Storm\Console\Command` base class provides a default implementation of the `complete()` method required to interact with the shell input autocompletion feature provided by Symfony. This simplifies the implementation work required in custom commands using an interface similar to the accessors in Eloquent.
+The `Winter\Storm\Console\Traits\ProvidesAutocompletion` trait provides a default implementation of the `complete()` method required to interact with the shell input autocompletion feature provided by Symfony. This simplifies the implementation work required in custom commands using an interface similar to the accessors in Eloquent.
+
+>**NOTE:** This trait is implemented by default in the `Winter\Storm\Console\Command` base class.
 
 In order to provide input suggestions for a given argument or option, all you have to do is add a method to your command class that is named in the following format: `suggest{$inputName}[Values|Options](string $currentValue, array $currentInput): array`.
 
@@ -299,10 +302,41 @@ This will display the following:
 
 If your command defines a `--force` option in its signature, then that option can be used to bypass the confirmation step and production alert.
 
+<a name="handling-process-signals"></a>
 ### Handling process signals
+
+The `Winter\Storm\Console\Traits\HandlesCleanup` trait provides a default implementation of the `getSubscribedSignals()` & `handleSignal()` methods required to interact with process signals forwarded by Symfony. This simplifies the implementation work required in custom commands for the common requirement of performing cleanup tasks when the command is terminated by the user in a cross-platform friendly manner.
+
+>**NOTE:** This trait is implemented by default in the `Winter\Storm\Console\Command` base class. If you want to add it to a class that does not extend this base class you will also need to implement the `Symfony\Component\Console\Command\SignalableCommandInterface` interface on your class.
+
+To take advantage of this trait, either extend the base `Winter\Storm\Console\Command` class or add the `Winter\Storm\Console\Traits\HandlesCleanup` trait to your class and then implement the `handleCleanup()` method as shown below:
+
+```php
+use Winter\Storm\Console\Command as BaseCommand;
+
+class MyCommand extends BaseCommand // implements \Symfony\Component\Console\Command\SignalableCommandInterface
+{
+    // Uncomment if not extending the BaseCommand class
+    // use \Winter\Storm\Console\Traits\HandlesCleanup;
+
+    // ...
+
+    /**
+     * Handle the cleanup of this command if a termination signal is received
+     */
+    public function handleCleanup(): void
+    {
+        $this->newLine();
+        $workingPath = storage_path('tmp/my-working-file.json');
+        $this->info('Cleaning up: ' . $workingPath);
+        unlink($workingPath);
+    }
+}
+```
 
 See the [Symfony documentation](https://symfony.com/blog/new-in-symfony-5-2-console-signals) for more information.
 
+<a name="processes-query"></a>
 ### Processing Records
 
 Winter provides the `Winter\Storm\Console\ProcessesQuery` trait for use in console commands that have to process a large number of records sourced from a database query. An example use of the trait is provided below:

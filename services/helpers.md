@@ -72,6 +72,12 @@ Winter includes a variety of "helper" PHP functions. Many of these functions are
 
 </div>
 
+### SVG
+
+<div class="collection-method-list">
+[extract](#method-svg-extract)
+</div>
+
 ### Miscellaneous
 
 <div class="collection-method-list">
@@ -700,6 +706,29 @@ The `trans_choice` function translates the given language line with inflection:
 $value = trans_choice('foo.bar', $count);
 ```
 
+<a name="svg-utility"></a>
+## SVG
+
+Winter includes a simple SVG utility that allows you to extract sanitized SVG markup from a given path. This can be
+useful for sanitization, or for using SVG markup directly in your themes.
+
+<a name="#method-svg-extract"></a>
+#### `Svg::extract()` {#collection-method}
+
+The `extract` method allows you to extract the sanitized SVG markup in a given path. Sanitization prevents the use of
+JavaScript, remote sources and CSS imports, stopping common attack vectors within SVG code.
+
+```php
+$svg = Svg::extract('/path/to/image.svg');
+```
+
+By default, the output SVG markup is minified. The second parameter allows you to disable this by setting it to `false`.
+
+```php
+$minifiedSvg = Svg::extract('/path/to/image.svg', false);
+```
+
+<a name="miscellaneous"></a>
 ## Miscellaneous
 
 #### `asset()` {#collection-method}
