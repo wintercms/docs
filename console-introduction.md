@@ -84,6 +84,7 @@ Command | Description
 [`mix:list`](../console/asset-compilation#mix-list) | Lists all registered Mix packages.
 [`mix:compile`](../console/asset-compilation#mix-compile) | Compiles one or more Mix packages.
 [`mix:watch`](../console/asset-compilation#mix-watch) | Watches changes within a Mix package and automatically compiles the package on any change.
+[`mix:run`](../console/asset-compilation#mix-run) | Runs a script within a given package.
 **Scaffolding** |
 [`create:theme`](../console/scaffolding#create-theme) | Create a theme.
 [`create:plugin`](../console/scaffolding#create-plugin) | Create a plugin.
