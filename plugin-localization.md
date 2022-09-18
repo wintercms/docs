@@ -57,6 +57,20 @@ The localization strings can be loaded with the `Lang` class. The parameter it a
 echo Lang::get('acme.blog::lang.app.name');
 ```
 
+You can pass an array as the second parameter:
+
+```php
+echo Lang::get('acme.blog::lang.app.test', ['key1' => $value_1, 'key2' => $value_2]);
+```
+
+The key will be found in the localization string and replaced with its value. An example localization string for such cases:
+
+```php
+'app' => [
+    'test' => 'Text text text :key1 text text :key2 text.',
+],
+```
+
 <a name="overriding"></a>
 ## Overriding localization strings
 
