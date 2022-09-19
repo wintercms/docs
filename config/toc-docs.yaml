@@ -132,6 +132,7 @@ Console:
 Events:
   pages:
     events/introduction: "Introduction"
+    events/timeline: "Frontend Events Timeline"
 
 "Further Reading":
   pages:
