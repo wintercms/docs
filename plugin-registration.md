@@ -440,6 +440,7 @@ Key | Description
 `counterLabel` | a string value to describe the numeric reference in counter, optional.
 `badge` | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
 `attributes` | an associative array of attributes and values to apply to the menu item, optional.
+`anchorAttributes` | an associative array of attributes and values to apply to the menu item anchor, optional.
 `permissions` | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.
 `code` | a string value that acts as an unique identifier for that menu option. **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
 `owner` | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin". **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
