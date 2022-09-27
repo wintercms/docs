@@ -4,6 +4,7 @@
 - [Database settings](#database-settings)
     - [Writing to a settings model](#writing-settings)
     - [Reading from a settings model](#reading-settings)
+    - [Initializing default values](#initializing-default-values)
 - [Backend settings pages](#backend-pages)
     - [Settings link registration](#link-registration)
     - [Setting the page navigation context](#settings-page-context)
@@ -90,6 +91,21 @@ echo Settings::get('api_key');
 
 // Get a value and return a default value if it doesn't exist
 echo Settings::get('is_activated', true);
+```
+
+<a name="initializing-default-values"></a>
+### Initializing default values
+
+The settings model has the `initSettingsData` method to initialize default values. This method will be called to fulfill default values if you never submitted the [settings configuration form](#backend-pages):
+```php
+class Settings extends Model
+{
+    public function initSettingsData()
+    {
+        $this->files_per_post = 5;
+        $this->file_extensions = 'jpg, jpeg, png, gif, webp';
+    }
+}
 ```
 
 <a name="backend-pages"></a>
