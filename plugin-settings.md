@@ -97,6 +97,7 @@ echo Settings::get('is_activated', true);
 ### Initializing default values
 
 In order to provide default values for settings just implement the `initSettingsData()` method; which will be called when instantiating the Settings model instance. These default values will be used when there are no values in the database for the settings. See below for an example implementation:
+
 ```php
 class Settings extends Model
 {
