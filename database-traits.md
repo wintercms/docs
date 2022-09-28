@@ -100,6 +100,14 @@ protected $slugs = [
 ];
 ```
 
+The source value also supports using dot notation to generate a slug from a relation's attribute:
+
+```php
+protected $slugs = [
+    'slug' => ['first_name', 'family.last_name']
+];
+```
+
 Slugs are only generated when a model first created. To override or disable this functionality, simply set the slug attribute manually:
 
 ```php
