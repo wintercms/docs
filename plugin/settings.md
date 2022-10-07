@@ -79,6 +79,21 @@ echo Settings::get('api_key');
 echo Settings::get('is_activated', true);
 ```
 
+### Initializing default values
+
+In order to provide default values for settings just implement the `initSettingsData()` method; which will be called when instantiating the Settings model instance. These default values will be used when there are no values in the database for the settings. See below for an example implementation:
+
+```php
+class Settings extends Model
+{
+    public function initSettingsData()
+    {
+        $this->files_per_post = 5;
+        $this->file_extensions = 'jpg, jpeg, png, gif, webp';
+    }
+}
+```
+
 ## Backend settings pages
 
 The backend contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.

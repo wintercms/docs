@@ -378,6 +378,32 @@ group:
     select: name
 ```
 
+It is possible the apply conditions to filter the returned results of the relation using the `conditions` property. Given the following structure:
+
+```
+Entries:
+- id
+- created_at
+
+EntryData:
+- entry_id
+- key
+- value
+```
+You can display the individual EntryData records as separate columns in the list widget by using the following configuration:
+
+```yaml
+id:
+    label: ID
+created_at:
+    label: Created at
+_entry_field_email:
+    label: Email
+    relation: entry_data
+    select: value
+    conditions: "`key` = 'email'"
+```
+
 To display a column that shows the number of related records, use the `useRelationCount` option.
 
 ```yaml
