@@ -675,7 +675,7 @@ Since models are [equipped to use behaviors](../services/behaviors), they can be
 Inside the closure you can add relations to the model. Here we extend the `Backend\Models\User` model to include a profile (has one) relationship referencing the `Acme\Demo\Models\Profile` model.
 
 ```php
-\Backend\Models\User::extend(function($model) {
+\Backend\Models\User::extend(function ($model) {
     $model->hasOne['profile'] = ['Acme\Demo\Models\Profile', 'key' => 'user_id'];
 });
 ```
@@ -683,11 +683,24 @@ Inside the closure you can add relations to the model. Here we extend the `Backe
 This approach can also be used to bind to [local events](#events), the following code listens for the `model.beforeSave` event.
 
 ```php
-\Backend\Models\User::extend(function($model) {
+\Backend\Models\User::extend(function ($model) {
     $model->bindEvent('model.beforeSave', function() use ($model) {
         // ...
     });
 });
+```
+
+It is also possible to have the provided callback execute after the model Behaviors have been loaded:
+
+```php
+\System\Models\MailSetting::extend(function ($model) {
+    if ($model->methodExists('getSettingsRecord')) {
+        // the SettingsModel behavior's getSettingsRecord() method is only available after the behavior has been loaded.
+    }
+    if ($model->getTable() === 'system_settings') {
+        // the model table changes from 'mail_settings' to 'system_settings' after the behavior has loaded
+    }
+}, after: true);
 ```
 
 > **NOTE:** Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.
@@ -695,7 +708,7 @@ This approach can also be used to bind to [local events](#events), the following
 Additionally, a few methods exist to extend protected model properties.
 
 ```php
-\Backend\Models\User::extend(function($model) {
+\Backend\Models\User::extend(function ($model) {
     // add cast attributes
     $model->addCasts([
         'some_extended_field' => 'int',
