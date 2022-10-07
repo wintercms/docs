@@ -120,6 +120,11 @@ sections:
             console/scaffolding: "Scaffolding"
             console/utilities: "Utilities"
 
+    "Events":
+        pages:
+            events/introduction: "Introduction"
+            events/timeline: "Frontend Events Timeline"
+
     "Further Reading":
         pages:
             "https://laravel.com/docs/9.x": "Laravel Docs"
