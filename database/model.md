@@ -710,3 +710,35 @@ Additionally, a few methods exist to extend protected model properties.
     $model->addJsonable('some_data');
 });
 ```
+
+The following methods are provided by the [HasRelationship](https://github.com/wintercms/storm/blob/develop/src/Database/Concerns/HasRelationships.php) trait:
+
+```php
+public function addHasOneRelation($name, $config)
+public function addHasManyRelation($name, $config)
+
+public function addBelongsToRelation($name, $config)
+public function addBelongsToManyRelation($name, $config)
+
+public function addMorphToRelation($name, $config)
+public function addMorphOneRelation($name, $config)
+public function addMorphManyRelation($name, $config)
+public function addMorphToManyRelation($name, $config)
+public function addMorphedByManyRelation($name, $config)
+
+public function addAttachOneRelation($name, $config)
+public function addAttachManyRelation($name, $config)
+
+public function addHasOneThroughRelation($name, $config)
+public function addHasManyThroughRelation($name, $config)
+```
+
+It is strongly suggested to use the above methods to add relations when extending a model since they will merge the existing relations and make sure the relation is valid and does not already exit.
+
+Example usage:
+
+```php
+\Backend\Models\User::extend(function($model) {
+    $model->addHasOne('profile', ['Acme\Demo\Models\Profile', 'key' => 'user_id']);
+});
+```
