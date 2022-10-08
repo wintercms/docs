@@ -692,6 +692,8 @@ This approach can also be used to bind to [local events](#events), the following
 
 > **NOTE:** Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.
 
+### Property methods
+
 Additionally, a few methods exist to extend protected model properties.
 
 ```php
@@ -710,6 +712,8 @@ Additionally, a few methods exist to extend protected model properties.
     $model->addJsonable('some_data');
 });
 ```
+
+### Relationships methods
 
 The following methods are provided by the [HasRelationship](https://github.com/wintercms/storm/blob/develop/src/Database/Concerns/HasRelationships.php) trait:
 
