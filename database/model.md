@@ -690,6 +690,8 @@ This approach can also be used to bind to [local events](#events), the following
 });
 ```
 
+### Extend after behaviors are loaded
+
 It is also possible to have the provided callback execute after the model Behaviors have been loaded:
 
 ```php
