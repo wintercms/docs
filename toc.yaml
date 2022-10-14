@@ -25,7 +25,7 @@ sections:
             backend/import-export: "Importing & Exporting"
             backend/users: "Users & Permissions"
             backend/controls: "UI Elements"
-            "/v1.2/ui/": "User Interface Guide"
+            "/docs/v1.2/ui/": "User Interface Guide"
 
     "Frontend":
         pages:
@@ -37,7 +37,7 @@ sections:
             cms/content: "Content Blocks"
             cms/components: "Components"
             cms/mediamanager: "Media Manager"
-            "/v1.2/markup/": "Markup Guide"
+            "/docs/v1.2/markup/": "Markup Guide"
             "https://twig.symfony.com/doc/2.x/": "Twig Docs"
 
     "Plugins":
@@ -94,7 +94,6 @@ sections:
             services/cache: "Cache"
             services/collections: "Collections"
             services/error-log: "Errors & Logging"
-            services/events: "Events"
             services/filesystem-cdn: "Filesystem / CDN"
             services/html: "Forms & Html"
             services/hashing-encryption: "Hashing & Encryption"
@@ -124,6 +123,7 @@ sections:
         pages:
             events/introduction: "Introduction"
             events/timeline: "Frontend Events Timeline"
+            "/docs/v1.2/api/events/backend/ajax/beforeRunHandler": "Available Events"
 
     "Further Reading":
         pages:
