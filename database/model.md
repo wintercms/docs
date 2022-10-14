@@ -155,7 +155,7 @@ class Post extends Model
 
 ## Retrieving models
 
-When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [Winter\Storm\Database\Builder](https://wintercms.com/docs/api/develop/Winter/Storm/Database/Builder.html).
+When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [Winter\Storm\Database\Builder](/docs/v1.2/api/Winter/Storm/Database/Builder).
 
 > **NOTE**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. While the cache should automatically invalidate itself most of the time, sometimes you will need to use the `$model->reload()` method to flush the cache for more complex use cases.
 
@@ -659,7 +659,7 @@ public function afterUpdate()
 }
 ```
 
-You can externally bind to [local events](../services/events) for a single instance of a model using the `bindEvent` method. The event name should be the same as the method override name, prefixed with `model.`.
+You can externally bind to [local events](../events/introduction) for a single instance of a model using the `bindEvent` method. The event name should be the same as the method override name, prefixed with `model.`.
 
 ```php
 $flight = new Flight;

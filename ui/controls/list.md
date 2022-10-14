@@ -3,7 +3,7 @@ title: "Controls: List"
 ---
 # List
 
-The list element is the base element of data viewing in Winter CMS. A list is made up of rows of data, similar to spreadsheet software like Excel, and contains columns of data. In general, the form is generally created by the [List Widget](/v1.2/docs/backend/lists), but can also be manually created for custom uses.
+The list element is the base element of data viewing in Winter CMS. A list is made up of rows of data, similar to spreadsheet software like Excel, and contains columns of data. In general, the form is generally created by the [List Widget](/docs/v1.2/docs/backend/lists), but can also be manually created for custom uses.
 
 ## The basics
 

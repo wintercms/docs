@@ -1132,7 +1132,7 @@ You can defer any number of **slave** models against a **master** model using a 
 
 ### Generating a session key
 
-The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that both [backend forms](../backend/forms) and the [frontend `form()` function](../markup/function-form) generates a hidden field containing the session key automatically.
+The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that both [backend forms](../backend/forms) and the [frontend `form()` function](/docs/v1.2/markup/functions/form) generates a hidden field containing the session key automatically.
 
 ```php
 $sessionKey = uniqid('session_key', true);

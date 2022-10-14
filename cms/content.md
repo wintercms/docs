@@ -39,7 +39,7 @@ Inside the content block, variables can be accessed using singular *curly bracke
 <h1>This is a demo for {name}</h1>
 ```
 
-More information can be found [in the Markup guide](../markup/tag-content).
+More information can be found [in the Markup guide](/docs/v1.2/markup/tags/content).
 
 ### Global variables
 

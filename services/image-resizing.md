@@ -24,9 +24,9 @@ The Image Resizer can be access through a number of different methods:
 
 - [`image` backend list columns](../backend/lists#column-image)
 - [`getThumb()` on `Winter\Storm\Database\Attach\File` models](../database/attachments#viewing-attachments)
-- the [`| resize` filter](../markup/filter-resize)
-- Passing a supported `$image` source to [`System\Classes\ImageResizer::filterGetUrl()`](https://wintercms.com/docs/api/develop/System/Classes/ImageResizer.html#method_filterGetUrl)
-- Instantiating an instance of the [`System\Classes\ImageResizer` class](https://wintercms.com/docs/api/develop/System/Classes/ImageResizer.html#method___construct) and using that as desired
+- the [`| resize` filter](/docs/v1.2/markup/filters/resize)
+- Passing a supported `$image` source to [`System\Classes\ImageResizer::filterGetUrl()`](/docs/v1.2/api/System/Classes/ImageResizer#method-filtergeturl)
+- Instantiating an instance of the [`System\Classes\ImageResizer` class](/docs/v1.2/api/System/Classes/ImageResizer#method-construct) and using that as desired
 
 ## Available Parameters
 

@@ -8,7 +8,7 @@ Winter is a Content Management System (CMS) whose sole purpose is to make your d
 
 ## Project Structure
 
-The code for your Winter CMS projects can generally exist as one of three different types of extension; as a [Theme](#code-structure-themes), [Plugin](#code-structure-plugins), or [Module](#code-structure-modules). Code can also be included in the form of external dependencies managed by [Composer](../help/using-composer).
+The code for your Winter CMS projects can generally exist as one of three different types of extension; as a [Theme](#code-structure-themes), [Plugin](#code-structure-plugins), or [Module](#code-structure-modules). Code can also be included in the form of external dependencies managed by [Composer](../architecture/using-composer).
 
 ### Directory Structure
 
@@ -62,7 +62,7 @@ Plugins are the foundation for adding new features to Winter CMS by extending it
 1. Define [user permissions](../backend/users).
 1. Add [settings pages](../plugin/settings#backend-pages), [menu items](../plugin/registration#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
 1. Create [database table structures and seed data](../plugin/updates).
-1. Alter [functionality of the core or other plugins](../services/events).
+1. Alter [functionality of the core or other plugins](../events/introduction).
 1. Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
 
 Check out the [Plugins page](../plugin/registration#directory-structure) to see an example of the directory structure.

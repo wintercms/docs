@@ -231,7 +231,7 @@ Embedding inline images into your e-mails is typically cumbersome; however, ther
 </body>
 ```
 
-If you are planning to use queued emails make sure that the path of the file is absolute. To achieve that you can simply use the [app filter](../markup/filter-app):
+If you are planning to use queued emails make sure that the path of the file is absolute. To achieve that you can simply use the [app filter](/docs/v1.2/markup/filters/app):
 
 ```twig
 <body>

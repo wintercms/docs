@@ -12,7 +12,7 @@ Winter provides various helpful functions with the `Html` facade, useful for dea
 {{ form_open(...) }}
 ```
 
-As you can see above, in Twig all functions prefixed with `form_` will bind directly to the `Form` facade and provide access to the methods using *snake_case*. See the [markup guide for more information](../markup/function-form) on using the form helper in the frontend.
+As you can see above, in Twig all functions prefixed with `form_` will bind directly to the `Form` facade and provide access to the methods using *snake_case*. See the [markup guide for more information](/docs/v1.2/markup/functions/form) on using the form helper in the frontend.
 
 ## Opening a form
 

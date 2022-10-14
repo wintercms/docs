@@ -213,13 +213,13 @@ function onEnd()
 }
 ```
 
-They can also be accessed in the markup using the [`this.page` variable](../markup/this-page). For example, to return the title of a page:
+They can also be accessed in the markup using the [`this.page` variable](/docs/v1.2/markup/this/page). For example, to return the title of a page:
 
 ```twig
 <p>The title of this page is: {{ this.page.title }}</p>
 ```
 
-More information can be found at [`this.page` in the Markup guide](../markup/this-page).
+More information can be found at [`this.page` in the Markup guide](/docs/v1.2/markup/this/page).
 
 ## Injecting page assets programmatically
 

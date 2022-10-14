@@ -362,7 +362,7 @@ public function relationExtendViewWidget($widget, $field, $model)
 ```
 
 #### How to remove a column
-Since the widget has not completed initializing at this point of the runtime cycle you can't call $widget->removeColumn(). The addColumns() method as described in the [ListController documentation](/docs/backend/lists#extend-list-columns) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the relationExtendViewWidget() method. The following example shows how to remove a column:
+Since the widget has not completed initializing at this point of the runtime cycle you can't call $widget->removeColumn(). The addColumns() method as described in the [ListController documentation](lists#extend-list-columns) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the relationExtendViewWidget() method. The following example shows how to remove a column:
 
 ```php
 public function relationExtendViewWidget($widget, $field, $model)
@@ -427,7 +427,7 @@ public function relationExtendManageFilterWidget($widget, $field, $model)
 }
 ```
 
-Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [backend list documentation](/docs/backend/lists#extend-filter-scopes).
+Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [backend list documentation](lists#extend-filter-scopes).
 
 ### Extending the refresh results
 

@@ -123,7 +123,7 @@ fields:
 
 ### Asset Compiler Variables
 
-Assets combined using the [Asset Compiler](../services/asset-compilation) (usually through thh `| theme` [filter](../markup/filter-theme)) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+Assets combined using the [Asset Compiler](../services/asset-compilation) (usually through thh `| theme` [filter](/docs/v1.2/markup/filters/theme)) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
 
 ```yaml
 form:

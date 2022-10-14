@@ -114,7 +114,7 @@ The same alias can be used for JavaScript or CSS, for example `@framework.extras
 
 ### Rendering Injected Assets
 
-In order to output the injected assets on the frontend you need to use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags.
+In order to output the injected assets on the frontend you need to use the [{% styles %}](/docs/v1.2/markup/tags/styles) and [{% scripts %}](/docs/v1.2/markup/tags/scripts) tags.
 
 Example:
 
@@ -135,7 +135,7 @@ If you are wanting to render the injected assets in any other context, you can c
 
 ## Compiler Bundles
 
-While the majority of the time dynamic asset compilation through `addJs()`, `addCss()`, or the [`| theme` filter](../markup/filter-theme) should be sufficient for your needs, you may occassionally have a complex asset compilation that you would like to just generate a static file on command instead of dynamically.
+While the majority of the time dynamic asset compilation through `addJs()`, `addCss()`, or the [`| theme` filter](/docs/v1.2/markup/filters/theme) should be sufficient for your needs, you may occassionally have a complex asset compilation that you would like to just generate a static file on command instead of dynamically.
 
 The Winter CMS core registers several such bundles for internal usage that are compiled whenever the [`artisan winter:util compile assets` command](../console/utilities#winter-util-compile-assets) is run.
 

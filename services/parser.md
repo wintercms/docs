@@ -23,7 +23,7 @@ Use the `Markdown::parse` method to render Markdown to HTML:
 $html = Markdown::parse($markdown);
 ```
 
-You may also use the `|md` filter for [parsing Markdown in your frontend markup](../markup/filter-md).
+You may also use the `|md` filter for [parsing Markdown in your frontend markup](/docs/v1.2/markup/filters/md).
 
 ```twig
 {{ '**Text** is bold.' | md }}
@@ -647,7 +647,7 @@ $phpConfigString = ArrayFile::open('/path/to/file.php')->set([
 
 Winter supports the use of [DotEnv](https://github.com/vlucas/phpdotenv) files (`.env`) to manage environment specific variables.
 
-Getting these values is as easy as using the [`env()` helper function](https://wintercms.com/docs/services/helpers#method-env). Winter also provides a way to programmatically set the values in the `.env` file through the use of the `Winter\Storm\Parse\EnvFile` parser in the core.
+Getting these values is as easy as using the [`env()` helper function](../services/helpers#method-env). Winter also provides a way to programmatically set the values in the `.env` file through the use of the `Winter\Storm\Parse\EnvFile` parser in the core.
 
 ## Load `EnvFile`
 

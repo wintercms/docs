@@ -72,7 +72,7 @@ layout = "default"
 <p>The page content goes here.</p>
 ```
 
-More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder).
+More information on placeholders can be found [in the Markup guide](/docs/v1.2/markup/tags/placeholder).
 
 ## Dynamic layouts
 

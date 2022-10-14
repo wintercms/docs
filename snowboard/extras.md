@@ -54,7 +54,7 @@ function onSuccess()
 }
 ```
 
-When using AJAX Flash messages you should also ensure that your theme supports [standard flash messages](../markup/tag-flash.md) by placing the following code in your page or layout in order to render Flash messages that haven't been displayed yet when the page loads.
+When using AJAX Flash messages you should also ensure that your theme supports [standard flash messages](/docs/v1.2/markup/tags/flash.md) by placing the following code in your page or layout in order to render Flash messages that haven't been displayed yet when the page loads.
 
 ```twig
 {% flash %}

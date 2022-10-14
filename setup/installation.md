@@ -4,7 +4,7 @@ description: "Documentation on the different ways to install Winter CMS for your
 ---
 # Installation
 
-There are two ways you can install Winter, either using the [Web-based installer](#web-based-installation) or [Composer installation](../help/using-composer) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
+There are two ways you can install Winter, either using the [Web-based installer](#web-based-installation) or [Composer installation](../architecture/using-composer) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
 
 ## Minimum system requirements
 
@@ -26,7 +26,7 @@ We also recommend the installation of the PDO SQLite extension, regardless of yo
 
 The [Web Installer](https://github.com/wintercms/web-installer) is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
 
-> **NOTE:** If you are a developer, we recommend that you [install via Composer instead](../help/using-composer)
+> **NOTE:** If you are a developer, we recommend that you [install via Composer instead](../architecture/using-composer)
 
 1. Prepare an empty directory on the web server that will host your Winter CMS installation. It can be a main domain, sub-domain or subfolder.
 2. [Download the "install.zip" file](https://github.com/wintercms/web-installer/releases/latest/download/install.zip) from the latest release of the Winter CMS Web Installer into this folder.
@@ -51,7 +51,7 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 
 ## Command-line installation
 
-If you feel more comfortable with a command-line or want to use Composer, there is a CLI install process on the [Using Composer page](../help/using-composer).
+If you feel more comfortable with a command-line or want to use Composer, there is a CLI install process on the [Using Composer page](../architecture/using-composer).
 
 ## Post-installation steps
 

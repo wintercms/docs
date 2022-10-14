@@ -22,7 +22,7 @@ php artisan winter:update
 
 The `winter:update` command will request updates from the Winter gateway. It will update the core application and plugin files, then perform a database migration.
 
-> **IMPORTANT**: If you are using [using Composer](../help/using-composer), do **NOT** run this command without first making sure that `cms.disableCoreUpdates` is set to `true`. Doing so will cause conflicts between the marketplace version of Winter and the version available through Composer. In order to update the core Winter installation when using Composer, run `composer update` instead.
+> **IMPORTANT**: If you are using [using Composer](../architecture/using-composer), do **NOT** run this command without first making sure that `cms.disableCoreUpdates` is set to `true`. Doing so will cause conflicts between the marketplace version of Winter and the version available through Composer. In order to update the core Winter installation when using Composer, run `composer update` instead.
 
 ## Run database migrations
 

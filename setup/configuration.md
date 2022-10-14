@@ -165,7 +165,7 @@ The following features are enabled when debug mode is enabled:
 
 1. [Detailed error pages](../cms/pages#error-page) are displayed.
 1. Failed user authentication provides a specific reason.
-1. [Combined assets](../markup/filter-theme) are not minified by default.
+1. [Combined assets](/docs/v1.2/markup/filters/theme) are not minified by default.
 1. [Safe mode](#safe-mode) is disabled by default.
 
 > **IMPORTANT**: Always set the `app.debug` setting to `false` for production environments.
@@ -205,7 +205,7 @@ You can instruct the platform to prefer test builds from the marketplace by chan
 
 > **NOTE:** For plugin developers, we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
 
-> **TIP:** If you are using [Composer](../help/using-composer) to manage updates, you may replace the default Winter CMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch. This is more or less the same as enabling edge updates.
+> **TIP:** If you are using [Composer](../architecture/using-composer) to manage updates, you may replace the default Winter CMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch. This is more or less the same as enabling edge updates.
 
 ```json
 "winter/storm": "dev-develop as 1.0",
@@ -268,7 +268,7 @@ This allows the root domain or subdomain that hosts your Winter CMS install to l
 
 After making these changes, you may delete the `modules/cms` folder from your project, as the module will no longer be required.
 
-If you have installed Winter CMS [via Composer](../help/using-composer), you can remove the `winter/wn-cms-module` line in the `require` block within the `composer.json` file in the root folder of your Winter CMS install, and this will prevent Composer from installing or updating the CMS module.
+If you have installed Winter CMS [via Composer](../architecture/using-composer), you can remove the `winter/wn-cms-module` line in the `require` block within the `composer.json` file in the root folder of your Winter CMS install, and this will prevent Composer from installing or updating the CMS module.
 
 > **NOTE:** Some plugins may make references to classes within the CMS module. If this is the case, you will need to keep the CMS module files available in your install.
 

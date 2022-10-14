@@ -12,7 +12,7 @@ Plugins are the foundation for adding new features or extending the base functio
 - Define [user permissions](../backend/users).
 - Add [settings pages](../plugin/settings#backend-pages), [menu items](../plugin/registration#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
 - Create [database table structures and seed data](../plugin/updates).
-- Alter [functionality of the core or other plugins](../services/events).
+- Alter [functionality of the core or other plugins](../events/introduction).
 - Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
 
 ## Directory structure

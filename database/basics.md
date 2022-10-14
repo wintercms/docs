@@ -158,7 +158,7 @@ Db::listen(function($sql, $bindings, $time) {
 });
 ```
 
-Just like [event registration](../services/events#event-registration), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
+Just like [event registration](../events/introduction#event-registration), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
 
 ### Query logging
 
