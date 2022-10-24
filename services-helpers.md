@@ -16,7 +16,7 @@ Winter includes a variety of "helper" PHP functions. Many of these functions are
 ### Arrays
 
 <div class="collection-method-list" markdown="1">
-[Laravel `Arr::*()` Helpers](https://laravel.com/docs/6.x/helpers#available-methods)
+[Laravel `Arr::*()` Helpers](https://laravel.com/docs/9.x/helpers#arrays-and-objects-method-list)
 [array_add](#method-array-add)
 [array_divide](#method-array-divide)
 [array_dot](#method-array-dot)
@@ -57,7 +57,7 @@ Winter includes a variety of "helper" PHP functions. Many of these functions are
 ### Strings
 
 <div class="collection-method-list" markdown="1">
-[Laravel `Str::*()` Helpers](https://laravel.com/docs/6.x/helpers#available-methods)
+[Laravel `Str::*()` Helpers](https://laravel.com/docs/9.x/helpers#strings-method-list)
 [camel_case](#method-camel-case)
 [class_basename](#method-class-basename)
 [e](#method-e)
