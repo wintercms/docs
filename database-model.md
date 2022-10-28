@@ -546,6 +546,33 @@ class AncientScope implements Scope
 }
 ```
 
+For the Winter 1.1.x version use this code instead:
+
+```php
+<?php
+
+namespace MyAuthor\MyPlugin\Scopes;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Scope;
+
+class AncientScope implements Scope
+{
+    /**
+     * Apply the scope to a given Eloquent query builder.
+     *
+     * @param  Illuminate\Database\Eloquent\Builder  $builder
+     * @param  Illuminate\Database\Eloquent\Model  $model
+     * @return void
+     */
+    public function apply(Builder $builder, Model $model)
+    {
+        $builder->where('created_at', '<', now()->subYears(2000));
+    }
+}
+```
+
 > **NOTE:** If your global scope is adding columns to the select clause of the query, you should use the addSelect method instead of select. This will prevent the unintentional replacement of the query's existing select clause.
 
 #### Applying Global Scopes
@@ -573,6 +600,31 @@ class User extends Model
     }
 }
 ```
+For the Winter 1.1.x version use this code instead:
+
+```php
+<?php
+
+namespace MyAuthor\MyPlugin\Models;
+
+use MyAuthor\MyPlugin\Scopes\AncientScope;
+use Winter\Storm\Database\Model;
+
+class User extends Model
+{
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new AncientScope);
+    }
+}
+```
+
 
 After adding the scope in the example above to the `MyAuthor\MyPlugin\Models\User` model, a call to the `User::all()` method will execute the following SQL query:
 
@@ -607,6 +659,33 @@ class User extends Model
     }
 }
 ```
+For the Winter 1.1.x version use this code instead:
+
+```php
+<?php
+
+namespace MyAuthor\MyPlugin\Models;
+
+use Illuminate\Database\Eloquent\Builder;
+use Winter\Storm\Database\Model;
+
+class User extends Model
+{
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('ancient', function (Builder $builder) {
+            $builder->where('created_at', '<', now()->subYears(2000));
+        });
+    }
+}
+```
+
 
 #### Removing Global Scopes
 
