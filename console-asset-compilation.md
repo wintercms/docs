@@ -149,6 +149,65 @@ In the example above, we have a base CSS file that contains the Tailwind styling
 
 Your theme will now be ready for Tailwind CSS development.
 
+### Vue in a backend controller
+
+If you want to use Vue 3 in your plugin for backend controllers, you can follow these steps.
+
+```bash
+# Inside the project root folder
+npm install --save vue@latest && npm install --save-dev vue-loader@latest
+```
+
+Then, add a `winter.mix.js` configuration file to your plugin directory:
+
+```js
+const mix = require('laravel-mix');
+mix
+    // compile javascript assets for plugin
+    .js('src/app.js', 'assets/js').vue({ version: 3 })
+```
+
+Next you can create your Vue source files in your plugin's src/ directory:
+
+```js
+// src/app.js
+
+import { createApp } from 'vue'
+import Welcome from './components/Welcome'
+
+const app = createApp({})
+
+app.component('welcome', Welcome)
+
+app.mount('#app')
+```
+
+```js
+// src/components/Welcome.vue
+
+<template>
+    <h1>{{ title }}</h1>
+</template>
+<script>
+export default {
+    setup: () => ({
+        title: 'Vue 3 in Laravel'
+    })
+}
+</script>
+```
+Now if you comple your assets in the project root with `mix:compile` then mix will create the file in your plugin under assets/js/app.js which includes Vue and all other packages that you use in your components.
+
+Next in the your controller's template file (eg. controllers/myvuecontroller/index.php) you can inclue this generated app.js, and render the content in the div#app:
+
+```
+<div id="app">
+  <welcome/>
+</div>
+
+<script src="/plugins/foo/bar/assets/js/app.js"></script>
+```
+
 <a name="commands"></a>
 ## Commands
 
