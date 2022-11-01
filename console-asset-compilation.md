@@ -164,13 +164,13 @@ Then, add a `winter.mix.js` configuration file to your plugin directory:
 const mix = require('laravel-mix');
 mix
     // compile javascript assets for plugin
-    .js('src/app.js', 'assets/js').vue({ version: 3 })
+    .js('assets/src/js/app.js', 'assets/js').vue({ version: 3 })
 ```
 
-Next you can create your Vue source files in your plugin's src/ directory:
+Next you can create your Vue source files in your plugin's assets/src/js/ directory:
 
 ```js
-// src/app.js
+// assets/src/js/app.js
 
 import { createApp } from 'vue'
 import Welcome from './components/Welcome'
@@ -183,7 +183,7 @@ app.mount('#app')
 ```
 
 ```js
-// src/components/Welcome.vue
+// assets/src/js/components/Welcome.vue
 
 <template>
     <h1>{{ title }}</h1>
