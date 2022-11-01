@@ -8,6 +8,8 @@
     - [Registering theme packages](#registering-themes)
 - [Mix configuration](#mix-configuration)
 - [Examples](#examples)
+    - [Tailwind CSS](#examples-tailwind)
+    - [Vue JS](#examples-vue)
 - [Commands](#commands)
     - [Install Node dependencies](#mix-install)
     - [Update Node dependencies](#mix-update)
@@ -118,6 +120,7 @@ When the `winter.mix.js` file is evaluated, regardless of where you ran `mix:com
 
 Here are some examples of installing common frontend libraries for use with the asset compilation.
 
+<a name="examples-tailwind"></a>
 ### Tailwind CSS
 
 For themes that wish to use Tailwind CSS, include the `tailwindcss`, `postcss` and `autoprefixer` dependencies in your `package.json` file.
@@ -149,6 +152,7 @@ In the example above, we have a base CSS file that contains the Tailwind styling
 
 Your theme will now be ready for Tailwind CSS development.
 
+<a name="examples-vue"></a>
 ### Vue in a backend controller
 
 If you want to use Vue 3 in your plugin for backend controllers, you can follow these steps.
