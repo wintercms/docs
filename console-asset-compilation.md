@@ -157,9 +157,12 @@ Your theme will now be ready for Tailwind CSS development.
 
 If you want to use Vue 3 in your plugin for backend controllers, you can follow these steps.
 
-```bash
-# Inside the project root folder
-npm install --save vue@latest && npm install --save-dev vue-loader@latest
+First, define Vue as a dependency in your plugin's `package.json`:
+
+```
+    "dependencies": {
+        "vue": "^3.2.41"
+    }
 ```
 
 Then, add a `winter.mix.js` configuration file to your plugin directory:
@@ -200,6 +203,8 @@ export default {
 }
 </script>
 ```
+Then install the NodeJS packages needed for your plugin in your plugin directory with the command `php artisan mix:install -p <my plugin>`.
+
 Now if you comple your assets in the project root with `mix:compile` then mix will create the file in your plugin under assets/js/app.js which includes Vue and all other packages that you use in your components.
 
 Next in the your controller's template file (eg. controllers/myvuecontroller/index.php) you can inclue this generated app.js, and render the content in the div#app:
