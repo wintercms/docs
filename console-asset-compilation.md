@@ -205,7 +205,7 @@ export default {
 ```
 Then install the NodeJS packages needed for your plugin in your plugin directory with the command `php artisan mix:install -p <my plugin>`.
 
-Now if you comple your assets in the project root with `mix:compile` then mix will create the file in your plugin under assets/js/app.js which includes Vue and all other packages that you use in your components.
+Now if you comple your assets in the project root with `mix:compile` then mix will create the file in your plugin under `assets/dist/js/app.js` which includes Vue and all other packages that you use in your components.
 
 Next in the your controller's template file (eg. controllers/myvuecontroller/index.php) you can inclue this generated app.js, and render the content in the div#app:
 
