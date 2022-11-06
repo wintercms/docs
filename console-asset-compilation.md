@@ -214,11 +214,11 @@ Now if you comple your assets in the project root with `mix:compile` then mix wi
 Next in the your controller's template file (eg. controllers/myvuecontroller/index.php) you can include the generated `myplugin.js` file, and render the content in the div with the `data-vue-app="myPlugin"` attribute:
 
 ```
-<div id="app">
+<div data-vue-app="myPlugin">
   <welcome/>
 </div>
 
-<script src="/plugins/foo/bar/assets/dist/js/app.js"></script>
+<script src="/plugins/foo/bar/assets/dist/js/myplugin.js"></script>
 ```
 
 <a name="commands"></a>
