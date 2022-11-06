@@ -160,6 +160,9 @@ If you want to use Vue 3 in your plugin for backend controllers, you can follow 
 First, define Vue as a dependency in your plugin's `package.json`:
 
 ```
+    "name": "myauthor-myplugin",
+    "private": true,
+    "version": "1.0.0",
     "dependencies": {
         "vue": "^3.2.41"
     }
@@ -169,6 +172,7 @@ Then, add a `winter.mix.js` configuration file to your plugin directory:
 
 ```js
 const mix = require('laravel-mix');
+mix.setPublicPath(__dirname);
 mix
     // compile javascript assets for plugin
     .js('assets/src/js/myplugin.js', 'assets/dist/js').vue({ version: 3 })
@@ -177,16 +181,16 @@ mix
 Next you can create your Vue source files in your plugin's assets/src/js/ directory:
 
 ```js
-// assets/src/js/app.js
+// assets/src/js/myplugin.js
 
 import { createApp } from 'vue'
 import Welcome from './components/Welcome'
 
-const app = createApp({})
+const myPlugin = createApp({})
 
-app.component('welcome', Welcome)
+myPlugin.component('welcome', Welcome)
 
-app.mount('#app')
+myPlugin.mount('[data-vue-app="myPlugin"]')
 ```
 
 ```js
@@ -214,7 +218,7 @@ Next in the your controller's template file (eg. controllers/myvuecontroller/ind
   <welcome/>
 </div>
 
-<script src="/plugins/foo/bar/assets/js/app.js"></script>
+<script src="/plugins/foo/bar/assets/dist/js/app.js"></script>
 ```
 
 <a name="commands"></a>
