@@ -103,16 +103,16 @@ The following is an example of what a complex plugin could look like when using 
      ┣ 📂 console                           /* Any custom CLI commands provided by the plugin */
      ┣ 📂 controllers                       /* Backend controllers */
      ┃ ┣ 📂 records                         /* Directory for the view and configuration files for the given controller */
-     ┃ ┃ ┣ 📜 _list_toolbar.htm             /* List toolbar partial file */
+     ┃ ┃ ┣ 📜 _list_toolbar.php             /* List toolbar partial file */
      ┃ ┃ ┣ 📜 config_filter.yaml            /* Configuration for the Filter widget present on the controller lists */
      ┃ ┃ ┣ 📜 config_form.yaml              /* Configuration for the Form widget present on the controller */
      ┃ ┃ ┣ 📜 config_importexport.yaml      /* Configuration for the Import/Export behavior */
      ┃ ┃ ┣ 📜 config_list.yaml              /* Configuration for the Lists widget present on the controller */
      ┃ ┃ ┣ 📜 config_relation.yaml          /* Configuration for the RelationController behavior */
-     ┃ ┃ ┣ 📜 create.htm                    /* View file for the create action */
-     ┃ ┃ ┣ 📜 index.htm                     /* View file for the index action */
-     ┃ ┃ ┣ 📜 preview.htm                   /* View file for the preview action */
-     ┃ ┃ ┗ 📜 update.htm                    /* View file for the update action */
+     ┃ ┃ ┣ 📜 create.php                    /* View file for the create action */
+     ┃ ┃ ┣ 📜 index.php                     /* View file for the index action */
+     ┃ ┃ ┣ 📜 preview.php                   /* View file for the preview action */
+     ┃ ┃ ┗ 📜 update.php                    /* View file for the update action */
      ┃ ┗ 📜 Records.php                     /* Backend controller for the Record model */
      ┣ 📂 docs                              /* Any plugin-specific documentation should live here */
      ┣ 📂 formwidgets                       /* Any custom FormWidgets provided by the plugin */
