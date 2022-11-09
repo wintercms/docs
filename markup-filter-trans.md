@@ -16,13 +16,6 @@ Replacing parameters in translation strings is possible by passing an array as t
 {{ ':name loves Winter CMS.'|trans({ name: 'Samuel' }) }}
 ```
 
-
-The `trans` filter returns the value of the language variable for the active frontend language.
-
-```twig
-{{ "acme.demo::lang.string.example" | trans }}
-```
-
 ## Pluralization
 
 The `trans_choice` function is used to process pluralized values.
