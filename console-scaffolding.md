@@ -88,7 +88,7 @@ The `create:reportwidget` command generates a backend report widget, view and ba
 <a name="create-job"></a>
 ## Create a job
 
-The `create:job` command generates a job. The first argument specifies the plugin code of the plugin that this form widget will be added into, and the second parameter specifies the job class name, eg. `MyJob`.
+The `create:job` command generates a job. The first argument specifies the plugin code of the plugin that this job will be added into, and the second parameter specifies the job class name, eg. `MyJob`.
 
 ```bash
 php artisan create:job <plugin code> <job name>
