@@ -38,14 +38,17 @@ The `winter:update` command will request updates from the Winter gateway. It wil
 <a name="winter-up"></a>
 ## Run database migrations
 
-```bash
-php artisan winter:up
-php artisan winter:down
-```
-
 The `winter:up` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates). The migration command can be run multiple times - it will only execute a migration or seed script once, which means only new changes are applied.
 
+```bash
+php artisan winter:up
+```
+
 The inverse command `winter:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](../console/plugin-management#plugin-refresh) is a useful alternative for debugging a single plugin.
+
+```bash
+php artisan winter:down
+```
 
 <a name="winter-passwd"></a>
 ## Change an administrator's password
