@@ -1108,7 +1108,7 @@ Option | Description
 <a name="widget-nestedform"></a>
 ### Nested Form
 
-`nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained.
+`nestedform` - renders a nested form as the contents of this field and returns the form data as an array.
 
 > **NOTE:** In order to use this with a model, the field should be defined as a `jsonable` attribute, or as another attribute that can handle storing arrayed data.
 
@@ -1145,12 +1145,12 @@ content:
                 mode: image
 ```
 
-A nested form supports the same syntax as a form itself, including tabs and secondaryTabs. The jsonsable attribute, has the structure of your form definition. It's even possible to use nested forms inside a nested form.
+A nested form provides a way of collating reusable fields and making them available in multiple forms. A nested form supports the same syntax as a normal form, including tabs and secondary tabs, and outside fields. The given field name for the nested form will contain the entire structure and values of your nested form as a JSON array. It's even possible to use nested forms inside a nested form.
 
 Option | Description
 ------------- | -------------
-`form`  | same as in [form definition](#form-fields)
-`usePanelStyles` | defines if a panel like look is applied or not (defaults `true`)
+`form`  | contains the [form definition](#form-fields)
+`usePanelStyles` | defines if the nested form should be wrapped with a panel container (defaults `true`)
 
 <a name="widget-recordfinder"></a>
 ### Record finder
