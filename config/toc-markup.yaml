@@ -48,6 +48,7 @@ Filters:
     markup/filter-raw: "| raw"
     markup/filter-resize: "| resize"
     markup/filter-theme: "| theme"
+    markup/filter-trans: "| trans"
 
 Functions:
   icon: "icon-eraser"
