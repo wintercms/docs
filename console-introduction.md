@@ -195,7 +195,7 @@ Options for definining input:
 - [Input autocompletion / suggested values](#providing-suggested-values)
 - [Plugin names as an argument](#plugin-names-as-argument)
 
-<a name="providing-suggested-values">
+<a name="providing-suggested-values"></a>
 #### Providing suggested values
 
 The `Winter\Storm\Console\Traits\ProvidesAutocompletion` trait provides a default implementation of the `complete()` method required to interact with the shell input autocompletion feature provided by Symfony. This simplifies the implementation work required in custom commands using an interface similar to the accessors in Eloquent.
