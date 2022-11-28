@@ -8,6 +8,7 @@
 - [Create a backend controller](#create-controller)
 - [Create a form widget](#create-formwidget)
 - [Create a report widget](#create-reportwidget)
+- [Create a job](#create-job)
 - [Create a console command](#create-command)
 
 The following commands allow you to quickly scaffold additional code into your Winter project, speeding up development time.
@@ -83,6 +84,15 @@ php artisan create:reportwidget <plugin code> <widget name>
 ```
 
 The `create:reportwidget` command generates a backend report widget, view and basic asset files. The first argument specifies the plugin code of the plugin that this report widget will be added into, and the second parameter specifies the report widget class name, eg. `MyReportWidget`.
+
+<a name="create-job"></a>
+## Create a job
+
+The `create:job` command generates a job. The first argument specifies the plugin code of the plugin that this job will be added into, and the second parameter specifies the job class name, eg. `MyJob`.
+
+```bash
+php artisan create:job <plugin code> <job name>
+```
 
 <a name="create-command"></a>
 ## Create a console command
