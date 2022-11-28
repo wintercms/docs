@@ -66,11 +66,13 @@ Unlike in PHP there is no function to `break` or `continue` in a loop, however y
 
 ```twig
 <ul>
-    {% for user in users if user.active %}
+    {% for user in users | filter(user => user.active) %}
         <li>{{ user.username }}</li>
     {% endfor %}
 </ul>
 ```
+
+> **NOTE**: Twig 3 does not support `if` condition inside `for` loop
 
 ## The loop variable
 
