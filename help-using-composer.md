@@ -241,7 +241,7 @@ Now the package configuration has been included natively in Winter CMS and the v
 <a name="laravel-aliases-service-providers"></a>
 ### Aliases & service providers
 
-By default, Winter CMS disables the loading of discovered packages through [Laravel's package discovery service](https://laravel.com/docs/6.x/packages#package-discovery), in order to allow packages used by plugins to be disabled if the plugin itself is disabled. Please note that packages defined in `app.providers` will still be loaded even if discovery is disabled.
+By default, Winter CMS disables the loading of discovered packages through [Laravel's package discovery service](https://laravel.com/docs/9.x/packages#package-discovery), in order to allow packages used by plugins to be disabled if the plugin itself is disabled. Please note that packages defined in `app.providers` will still be loaded even if discovery is disabled.
 
 > **NOTE:** It is possible to set `app.loadDiscoveredPackages` to `true` in the project configuration to enable automatic loading of these packages. This will result in packages being loaded, even if the plugin using them is disabled. This is **NOT RECOMMENDED.**
 
