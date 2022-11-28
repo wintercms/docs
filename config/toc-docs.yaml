@@ -42,7 +42,7 @@ Frontend:
     cms/components: "Components"
     cms/mediamanager: "Media Manager"
     markup: "Markup Guide@"
-    "https://twig.symfony.com/doc/2.x/": "Twig Docs@"
+    "https://twig.symfony.com/doc/3.x/": "Twig Docs@"
 
 Plugins:
   icon: "icon-puzzle-piece"
@@ -137,5 +137,5 @@ Events:
 "Further Reading":
   pages:
     api: "API Docs@"
-    "https://laravel.com/docs/6.x": "Laravel Docs@"
+    "https://laravel.com/docs/9.x": "Laravel Docs@"
     "https://www.php.net/manual/en/intro-whatis.php": "PHP Docs@"

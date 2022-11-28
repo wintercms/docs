@@ -2,7 +2,7 @@ Markup:
   icon: "icon-code"
   pages:
     markup/templating: "Templating"
-    "https://twig.symfony.com/doc/2.x/": "Twig Docs@"
+    "https://twig.symfony.com/doc/3.x/": "Twig Docs@"
 
 Variables:
   icon: "icon-subscript"
