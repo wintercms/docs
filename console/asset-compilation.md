@@ -125,6 +125,76 @@ In the example above, we have a base CSS file that contains the Tailwind styling
 
 Your theme will now be ready for Tailwind CSS development.
 
+### Vue
+
+If you want to use [Vue 3](https://vuejs.org/) in your project, either in the backend or in a component or theme, you can follow these steps.
+
+First, define Vue as a dependency in your plugin's `package.json`:
+
+```
+    "name": "myauthor-myplugin",
+    "private": true,
+    "version": "1.0.0",
+    "dependencies": {
+        "vue": "^3.2.41"
+    }
+```
+
+Run `php artisan mix:install` to install Vue and the dependencies that Vue requires.
+
+Then, add a `winter.mix.js` configuration file to your plugin directory. This will build a specific entry point file, in this case `assets/src/js/myplugin.js` and create a built version of your Vue app as `assets/dist/js/myplugin.js`.
+
+```js
+const mix = require('laravel-mix');
+mix.setPublicPath(__dirname);
+mix
+    // compile javascript assets for plugin
+    .js('assets/src/js/myplugin.js', 'assets/dist/js').vue({ version: 3 })
+```
+
+Next you can create your Vue source files in your plugin's assets directory. Mix supports rendering of [single-file components](https://vuejs.org/guide/scaling-up/sfc.html), allowing you to define the template, scripting and styling all in one file.
+
+```js
+// assets/src/js/myplugin.js
+
+import { createApp } from 'vue'
+import Welcome from './components/Welcome'
+
+const myPlugin = createApp({})
+
+myPlugin.component('welcome', Welcome)
+
+myPlugin.mount('[data-vue-app="myPlugin"]')
+```
+
+```js
+// assets/src/js/components/Welcome.vue
+
+<template>
+    <h1>{{ title }}</h1>
+</template>
+
+<script>
+export default {
+    setup: () => ({
+        title: 'Vue 3 in Laravel'
+    })
+}
+</script>
+```
+
+Now if you comple your assets in the project root with `php artisan mix:compile`, Mix will create your compiled and built Vue component as a JS file.
+
+Next in the your controller's template file (eg. controllers/myvuecontroller/index.php) you can include the generated `myplugin.js` file, and render the content in the div with the `data-vue-app="myPlugin"` attribute:
+
+```html
+<div data-vue-app="myPlugin">
+  <welcome/>
+</div>
+
+<script src="/plugins/foo/bar/assets/dist/js/myplugin.js"></script>
+```
+
 ## Commands
 
 ### Install Node dependencies

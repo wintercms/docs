@@ -38,7 +38,7 @@ sections:
             cms/components: "Components"
             cms/mediamanager: "Media Manager"
             "/docs/v1.2/markup/": "Markup Guide"
-            "https://twig.symfony.com/doc/2.x/": "Twig Docs"
+            "https://twig.symfony.com/doc/3.x/": "Twig Docs"
 
     "Plugins":
         pages:

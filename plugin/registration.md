@@ -61,43 +61,61 @@ The following is an example of what a comprehensive plugin that uses or provides
 
 ```treeview
 plugins/
-`-- myauthor/                  # Author name
-    `-- myplugin/              # Plugin name
-        |-- assets/            # CSS, JavaScript and image assets for pages and components
+`-- myauthor/                           # Author name
+    `-- myplugin/                       # Plugin name
+        |-- assets/                     # CSS, JavaScript and image assets for pages and components
         |   |-- css/
         |   |-- favicons/
         |   |-- images/
         |   |-- js/
         |   |-- less/
         |   `-- scss/
-        |-- behaviors/         # Custom behaviors provided by the plugin
-        |-- classes/           # Custom classes and functionality that are outside the structure of Winter CMS
-        |-- components/        # Frontend components
-        |-- config/            # Plugin-provided configuration
+        |-- behaviors/                  # Custom behaviors provided by the plugin
+        |-- classes/                    # Custom classes and functionality that are outside the structure of Winter CMS
+        |-- components/                 # Frontend components
+        |   |-- record/
+        |   |   `-- default.htm         # A default partial to be used for the component in the Twig content
+        |   `-- Record.php              # The component definition class
+        |-- config/                     # Plugin-provided configuration
         |   `-- config.php
-        |-- controllers/       # Backend controllers and views
-        |-- docs/              # Plugin documentation
-        |-- formwidgets/       # Custom form widgets
-        |-- lang/              # Localization files
-        |   `-- en/            # Specific locale folder
-        |       `-- lang.php   # Translations
-        |-- layouts/           # Custom backend layouts
-        |-- models/            # Database models
-        |-- partials/          # Custom partials used within the plugin
-        |-- reportwidgets/     # Custom report widgets
-        |-- tests/             # Unit tests
-        |-- traits/            # Custom traits
-        |-- updates/           # Updates and migrations folder
-        |   `-- version.yaml   # Change log
-        |-- views/             # Custom view files
-        |   `-- mail/          # Custom mail templates
-        |-- composer.json      # Composer file to identify the plugin and define dependencies
-        |-- helpers.php        # Custom helper methods provided by the plugin.
-        |-- LICENSE            # License file
-        |-- phpunit.xml        # Unit testing configuration
-        |-- Plugin.php         # Plugin registration file, required
-        |-- README.md          # Documentation describing the plugin, its requirements and its purpose
-        `-- routes.php         # Custom routing
+        |-- controllers/                # Backend controllers and views
+        |   |-- records/                # A folder for a controller's assets, configuration, views and partials
+        |   |   |-- _list_toolbar.php   # A partial template that can be used in the controller views
+        |   |   |-- config_filter.yaml  # The filter widget configuration
+        |   |   |-- config_form.yaml    # The form controller configuration
+        |   |   |-- config_list.yaml    # The list controller configuration
+        |   |   |-- create.php          # The "create" view for the form controller
+        |   |   |-- index.php           # The "index" view for the list controller
+        |   |   |-- preview.php         # The "preview" view for the form controller
+        |   |   `-- update.php          # The "update" view for the form controller
+        |   `-- Records.php             # The controller class
+        |-- docs/                       # Plugin documentation
+        |-- formwidgets/                # Custom form widgets
+        |-- lang/                       # Localization files
+        |   `-- en/                     # Specific locale folder
+        |       `-- lang.php            # Translations
+        |-- layouts/                    # Custom backend layouts
+        |-- models/                     # Database models
+        |   |-- record/                 # A folder for a model's configuration and partials
+        |   |   |-- columns.yaml        # The column configuration for the model for lists
+        |   |   `-- fields.yaml         # The form configuration for the model for forms
+        |   `-- Record.php              # The model class
+        |-- partials/                   # Custom partials used within the plugin
+        |-- reportwidgets/              # Custom report widgets
+        |-- tests/                      # Unit tests
+        |-- traits/                     # Custom traits
+        |-- updates/                    # Updates and migrations folder
+        |   |-- create_tables.php       # A migration to be run during a version update
+        |   `-- version.yaml            # Change log
+        |-- views/                      # Custom view files
+        |   `-- mail/                   # Custom mail templates
+        |-- composer.json               # Composer file to identify the plugin and define dependencies
+        |-- helpers.php                 # Custom helper methods provided by the plugin.
+        |-- LICENSE                     # License file
+        |-- phpunit.xml                 # Unit testing configuration
+        |-- Plugin.php                  # Plugin registration file, required
+        |-- README.md                   # Documentation describing the plugin, its requirements and its purpose
+        `-- routes.php                  # Custom routing
 ```
 
 ## Plugin namespaces

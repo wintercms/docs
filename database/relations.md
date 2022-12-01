@@ -1218,9 +1218,9 @@ Winter\Storm\Database\Models\DeferredBinding::cleanUp(1);
 Sometimes you might need to disable deferred binding entirely for a given model, for instance if you are loading it from a separate database connection. In order to do that, you need to make sure that the model's `sessionKey` property is `null` before the pre and post deferred binding hooks in the internal save method are run. To do that, you can bind to the model's `model.saveInternal` event:
 
 ```php
-public function __construct()
+public function __construct(array $attributes = [])
 {
-    $result = parent::__construct(...func_get_args());
+    $result = parent::__construct($attributes);
     $this->bindEvent('model.saveInternal', function () {
         $this->sessionKey = null;
     });
