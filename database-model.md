@@ -526,8 +526,8 @@ The `Scope` interface requires you to implement one method: `apply`. The `apply`
 
 namespace MyAuthor\MyPlugin\Scopes;
 
-use Winter\Storm\Database\Builder;
-use Winter\Storm\Database\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 
 class AncientScope implements Scope
@@ -550,7 +550,7 @@ class AncientScope implements Scope
 
 #### Applying Global Scopes
 
-To assign a global scope to a model, you should override the model's `booted` method and invoke the model's `addGlobalScope` method. The `addGlobalScope` method accepts an instance of your scope as its only argument:
+To assign a global scope to a model, you should override the model's `boot` method and invoke the model's `addGlobalScope` method. The `addGlobalScope` method accepts an instance of your scope as its only argument:
 
 ```php
 <?php
@@ -567,8 +567,9 @@ class User extends Model
      *
      * @return void
      */
-    protected static function booted()
+    protected static function boot()
     {
+        parent::boot();
         static::addGlobalScope(new AncientScope);
     }
 }
@@ -589,7 +590,7 @@ Winter also allows you to define global scopes using closures, which is particul
 
 namespace MyAuthor\MyPlugin\Models;
 
-use Winter\Storm\Database\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Winter\Storm\Database\Model;
 
 class User extends Model
@@ -599,8 +600,9 @@ class User extends Model
      *
      * @return void
      */
-    protected static function booted()
+    protected static function boot()
     {
+        parent::boot();
         static::addGlobalScope('ancient', function (Builder $builder) {
             $builder->where('created_at', '<', now()->subYears(2000));
         });
