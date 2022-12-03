@@ -109,7 +109,7 @@ Add names of the cookies that should not be encrypted or decrypted to `unencrypt
 */
 
 'unencryptedCookies' => [
-    // 'my_cookie',
+    'my_cookie',
 ],
 ```
 
