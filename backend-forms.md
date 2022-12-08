@@ -1267,7 +1267,7 @@ Option | Description
 ------------- | -------------
 `form` | a reference to form field definition file, see [backend form fields](#form-fields). Inline fields can also be used.
 `prompt` | text to display for the create button. Default: `Add new item`.
-`titleFrom` | the name of the field to use as the title for an item. This will show the value of the field as a title when an item is collapsed in a repeater. Please note that only text fields and dropdown fields are supported.
+`titleFrom` | the name of the field to use as the title for an item. This will show the value of the field as a title when an item is collapsed in a repeater. Please note that only text fields and dropdown fields are supported. Does not work in group mode.
 `minItems` | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
 `maxItems` | maximum number of items to allow within the repeater.
 `groups` | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
