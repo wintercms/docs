@@ -785,6 +785,7 @@ There are various form widgets included as standard, although it is common for p
 - [Data table](#widget-datatable)
 - [Date picker](#widget-datepicker)
 - [File upload](#widget-fileupload)
+- [Icon picker](#widget-iconpicker)
 - [Markdown editor](#widget-markdowneditor)
 - [Media finder](#widget-mediafinder)
 - [Nested Form](#widget-nestedform)
@@ -1061,6 +1062,50 @@ Option | Description
 `attachOnUpload` | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
 
 > **NOTE:** Unlike the [Media Finder FormWidget](#widget-mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
+
+<a name="widget-iconpicker"></a>
+### Icon Picker
+
+`iconpicker` - renders an icon picker that is by default powered by the Font Awesome icons included by WinterCMS.
+
+```yaml
+icon:
+    label: 'Icon'
+    type: 'iconpicker'
+    default: 'far icon-address-book'
+    libraries: ~/modules/backend/formwidgets/iconpicker/meta/libraries.yaml
+```
+
+<style>
+    .attributes-table-precessor + table td:first-child,
+    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
+</style>
+<div class="attributes-table-precessor"></div>
+
+Option | Description
+------------- | -------------
+`default` | the default desired icon, e.g `far icon-address-book`, optional.
+`libraries` | the font libraries, in file or array format, optional. Default: `~/modules/backend/formwidgets/iconpicker/meta/libraries.yaml` which includes the Font Awesome icons.
+
+Alternatively, you may populate the `libraries` property with a user defined array of libraries (in the below example `far`) with specific icons.
+
+```yaml
+icon:
+    label: 'Icon'
+    type: 'iconpicker'
+    default: 'far icon-address-book'
+    libraries:
+        -
+            id: 'far'
+            title: "Font Awesome Regular"
+            prefix: "far icon-"
+            listicon: "far icon-circle"
+            icons:
+                - "far icon-address-book"
+                - "far icon-address-card"
+```
+
+> **NOTE:** If no `default` is provided, the input will remain empty, while the icon picker, once loaded, will focus on the first available icon.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown editor
