@@ -356,122 +356,73 @@ There are various native field types that can be used for the **type** setting. 
 </style>
 
 <div class="content-list collection-method-list" markdown="1">
-- [Text](#field-text)
-- [Number](#field-number)
-- [Range](#field-range)
-- [Password](#field-password)
-- [Email](#field-email)
-- [Textarea](#field-textarea)
-- [Dropdown](#field-dropdown)
-- [Radio List](#field-radio)
 - [Balloon Selector](#field-balloon)
 - [Checkbox](#field-checkbox)
 - [Checkbox List](#field-checkboxlist)
-- [Switch](#field-switch)
-- [Section](#field-section)
-- [Partial](#field-partial)
+- [Dropdown](#field-dropdown)
+- [Email](#field-email)
 - [Hint](#field-hint)
+- [Number](#field-number)
+- [Partial](#field-partial)
+- [Password](#field-password)
+- [Radio List](#field-radio)
+- [Range](#field-range)
+- [Section](#field-section)
+- [Switch](#field-switch)
+- [Text](#field-text)
+- [Textarea](#field-textarea)
 - [Widget](#field-widget)
 </div>
 
-<a name="field-text"></a>
-### Text
+<a name="field-balloon"></a>
+### Balloon Selector
 
-`text` - renders a single line text box. This is the default type used if none is specified.
-
-```yaml
-blog_title:
-    label: Blog Title
-    type: text
-```
-
-<a name="field-number"></a>
-### Number
-
-`number` - renders a single line text box that takes numbers only.
+`balloon-selector` - renders a list, where only one item can be selected at a time.
 
 ```yaml
-your_age:
-    label: Your Age
-    type: number
-    step: 1  # defaults to 'any'
-    min: 1   # defaults to not present
-    max: 100 # defaults to not present
+gender:
+    label: Gender
+    type: balloon-selector
+    default: female
+    options:
+        female: Female
+        male: Male
 ```
 
-If you would like to validate this field server-side on save to ensure that it is numeric, please use the `$rules` property on your model, like so:
+Balloon selectors support the same methods for defining the options as the [dropdown field type](#field-dropdown).
 
-```php
-/**
- * @var array Validation rules
- */
-public $rules = [
-    'your_age' => 'numeric',
-];
-```
+<a name="field-checkbox"></a>
+### Checkbox
 
-For more information on model validation, please visit [the documentation page](../services/validation#rule-numeric).
-
-<a name="field-range"></a>
-### Range
-
-`range` - renders a slider that takes numbers only.
+`checkbox` - renders a single checkbox.
 
 ```yaml
-your_age:
-    label: Progress
-    type: range
-    step: 1  # defaults to 1
-    min: 0   # defaults to 0
-    max: 100 # defaults to 100
+show_content:
+    label: Display content
+    type: checkbox
+    default: true
 ```
 
-<a name="field-password"></a>
-### Password
+<a name="field-checkboxlist"></a>
+### Checkbox List
 
-`password ` - renders a single line password field.
+`checkboxlist` - renders a list of checkboxes.
 
 ```yaml
-user_password:
-    label: Password
-    type: password
+permissions:
+    label: Permissions
+    type: checkboxlist
+    # set to true to explicitly enable the "Select All", "Select None" options
+    # on lists that have <=10 items (>10 automatically enables it)
+    quickselect: true
+    default: open_account
+    options:
+        open_account: Open account
+        close_account: Close account
+        modify_account: Modify account
 ```
 
-<a name="field-email"></a>
-### Email
-
-`email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
-
-```yaml
-user_email:
-    label: Email Address
-    type: email
-```
-
-If you would like to validate this field on save to ensure that it is a properly-formatted email address, please use the `$rules` property on your model, like so:
-
-```php
-/**
- * @var array Validation rules
- */
-public $rules = [
-    'user_email' => 'email',
-];
-```
-
-For more information on model validation, please visit [the documentation page](../services/validation#rule-email).
-
-<a name="field-textarea"></a>
-### Textarea
-
-`textarea` - renders a multiline text box. A size can also be specified with possible values: `tiny`, `small`, `large`, `huge`, `giant`.
-
-```yaml
-blog_contents:
-    label: Contents
-    type: textarea
-    size: large
-```
+Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
 <a name="field-dropdown"></a>
 ### Dropdown
@@ -633,6 +584,92 @@ status:
     showSearch: false
 ```
 
+<a name="field-email"></a>
+### Email
+
+`email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
+
+```yaml
+user_email:
+    label: Email Address
+    type: email
+```
+
+If you would like to validate this field on save to ensure that it is a properly-formatted email address, please use the `$rules` property on your model, like so:
+
+```php
+/**
+ * @var array Validation rules
+ */
+public $rules = [
+    'user_email' => 'email',
+];
+```
+
+For more information on model validation, please visit [the documentation page](../services/validation#rule-email).
+
+<a name="field-hint"></a>
+### Hint
+
+`hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
+
+```yaml
+content:
+    type: hint
+    path: content_field
+```
+
+<a name="field-number"></a>
+### Number
+
+`number` - renders a single line text box that takes numbers only.
+
+```yaml
+your_age:
+    label: Your Age
+    type: number
+    step: 1  # defaults to 'any'
+    min: 1   # defaults to not present
+    max: 100 # defaults to not present
+```
+
+If you would like to validate this field server-side on save to ensure that it is numeric, please use the `$rules` property on your model, like so:
+
+```php
+/**
+ * @var array Validation rules
+ */
+public $rules = [
+    'your_age' => 'numeric',
+];
+```
+
+For more information on model validation, please visit [the documentation page](../services/validation#rule-numeric).
+
+<a name="field-partial"></a>
+### Partial
+
+`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
+
+```yaml
+content:
+    type: partial
+    path: $/acme/blog/models/comments/_content_field.htm
+```
+
+>**NOTE:** If your partial field is meant only for display and will not be providing a value to the server to be stored then it is best practice to prefix the field name with an underscore (`_`) [to prevent the  FormController` behavior from attempting to process it](#prevent-field-submission)
+
+<a name="field-password"></a>
+### Password
+
+`password ` - renders a single line password field. See also [`sensitive`](#widget-sensitive), for sensitive data that should be able to be revealed on request.
+
+```yaml
+user_password:
+    label: Password
+    type: password
+```
+
 <a name="field-radio"></a>
 ### Radio List
 
@@ -663,55 +700,31 @@ security_level:
 
 Radio lists support the same methods for defining the options as the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
-<a name="field-balloon"></a>
-### Balloon Selector
+<a name="field-range"></a>
+### Range
 
-`balloon-selector` - renders a list, where only one item can be selected at a time.
-
-```yaml
-gender:
-    label: Gender
-    type: balloon-selector
-    default: female
-    options:
-        female: Female
-        male: Male
-```
-
-Balloon selectors support the same methods for defining the options as the [dropdown field type](#field-dropdown).
-
-<a name="field-checkbox"></a>
-### Checkbox
-
-`checkbox` - renders a single checkbox.
+`range` - renders a slider that takes numbers only.
 
 ```yaml
-show_content:
-    label: Display content
-    type: checkbox
-    default: true
+your_age:
+    label: Progress
+    type: range
+    step: 1  # defaults to 1
+    min: 0   # defaults to 0
+    max: 100 # defaults to 100
 ```
 
-<a name="field-checkboxlist"></a>
-### Checkbox List
+<a name="field-section"></a>
+### Section
 
-`checkboxlist` - renders a list of checkboxes.
+`section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
 
 ```yaml
-permissions:
-    label: Permissions
-    type: checkboxlist
-    # set to true to explicitly enable the "Select All", "Select None" options
-    # on lists that have <=10 items (>10 automatically enables it)
-    quickselect: true
-    default: open_account
-    options:
-        open_account: Open account
-        close_account: Close account
-        modify_account: Modify account
+user_details_section:
+    label: User details
+    type: section
+    comment: This section contains details about the user.
 ```
-
-Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
 <a name="field-switch"></a>
 ### Switch
@@ -727,40 +740,27 @@ show_content:
     off: myauthor.myplugin::lang.models.mymodel.show_content.off
 ```
 
-<a name="field-section"></a>
-### Section
+<a name="field-text"></a>
+### Text
 
-`section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
+`text` - renders a single line text box. This is the default type used if none is specified.
 
 ```yaml
-user_details_section:
-    label: User details
-    type: section
-    comment: This section contains details about the user.
+blog_title:
+    label: Blog Title
+    type: text
 ```
 
-<a name="field-partial"></a>
-### Partial
+<a name="field-textarea"></a>
+### Textarea
 
-`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
-
-```yaml
-content:
-    type: partial
-    path: $/acme/blog/models/comments/_content_field.htm
-```
-
->**NOTE:** If your partial field is meant only for display and will not be providing a value to the server to be stored then it is best practice to prefix the field name with an underscore (`_`) [to prevent the  FormController` behavior from attempting to process it](#prevent-field-submission)
-
-<a name="field-hint"></a>
-### Hint
-
-`hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
+`textarea` - renders a multiline text box. A size can also be specified with possible values: `tiny`, `small`, `large`, `huge`, `giant`.
 
 ```yaml
-content:
-    type: hint
-    path: content_field
+blog_contents:
+    label: Contents
+    type: textarea
+    size: large
 ```
 
 <a name="field-widget"></a>
