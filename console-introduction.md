@@ -43,7 +43,7 @@ With the upgrade to Laravel 9 / Symfony 6, [support was added](https://symfony.c
 This feature requires that you run a command in your shell once in order to enable it for all Laravel / Winter console commands:
 
 ```bash
-artisan completion --help
+php artisan completion --help
 ```
 
 Running just `artisan completion` will generate the shell script required to be imported into your shell in order to enable support for autocompletion of Winter / Laravel commands; passing the `--help` flag will provide detailed instructions on how to install the generated script.
