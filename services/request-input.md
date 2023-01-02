@@ -90,7 +90,7 @@ Add names of the cookies that should not be encrypted or decrypted to `unencrypt
 ```php
 /*
 |--------------------------------------------------------------------------
-| Cookies without encryption
+| Cookies that should not be encrypted
 |--------------------------------------------------------------------------
 |
 | Winter CMS encrypts/decrypts cookies by default. You can specify cookies

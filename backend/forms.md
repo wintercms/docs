@@ -279,62 +279,67 @@ There are various native field types that can be used for the **type** setting. 
 - [Balloon Selector](#field-balloon)
 - [Checkbox](#field-checkbox)
 - [Checkbox List](#field-checkboxlist)
-- [Switch](#field-switch)
-- [Section](#field-section)
-- [Partial](#field-partial)
+- [Dropdown](#field-dropdown)
+- [Email](#field-email)
 - [Hint](#field-hint)
+- [Number](#field-number)
+- [Partial](#field-partial)
+- [Password](#field-password)
+- [Radio List](#field-radio)
+- [Range](#field-range)
+- [Section](#field-section)
+- [Switch](#field-switch)
+- [Text](#field-text)
+- [Textarea](#field-textarea)
 - [Widget](#field-widget)
 
 </div>
 
 ### Text
 
-`text` - renders a single line text box. This is the default type used if none is specified.
+`balloon-selector` - renders a list, where only one item can be selected at a time.
 
 ```yaml
-blog_title:
-    label: Blog Title
-    type: text
+gender:
+    label: Gender
+    type: balloon-selector
+    default: female
+    options:
+        female: Female
+        male: Male
 ```
 
 ### Number
 
-`number` - renders a single line text box that takes numbers only.
+<a name="field-checkbox"></a>
+### Checkbox
+
+`checkbox` - renders a single checkbox.
 
 ```yaml
-your_age:
-    label: Your Age
-    type: number
-    step: 1  # defaults to 'any'
-    min: 1   # defaults to not present
-    max: 100 # defaults to not present
+show_content:
+    label: Display content
+    type: checkbox
+    default: true
 ```
 
-If you would like to validate this field server-side on save to ensure that it is numeric, please use the `$rules` property on your model, like so:
+<a name="field-checkboxlist"></a>
+### Checkbox List
 
-```php
-/**
- * @var array Validation rules
- */
-public $rules = [
-    'your_age' => 'numeric',
-];
-```
-
-For more information on model validation, please visit [the documentation page](../services/validation#rule-numeric).
-
-<a name="field-range"></a>
-### Range
-
-`range` - renders a slider that takes numbers only.
+`checkboxlist` - renders a list of checkboxes.
 
 ```yaml
-your_age:
-    label: Progress
-    type: range
-    step: 1  # defaults to 1
-    min: 0   # defaults to 0
-    max: 100 # defaults to 100
+permissions:
+    label: Permissions
+    type: checkboxlist
+    # set to true to explicitly enable the "Select All", "Select None" options
+    # on lists that have <=10 items (>10 automatically enables it)
+    quickselect: true
+    default: open_account
+    options:
+        open_account: Open account
+        close_account: Close account
+        modify_account: Modify account
 ```
 
 <a name="field-password"></a>
@@ -572,29 +577,29 @@ Radio lists support the same methods for defining the options as the [dropdown f
 
 ### Balloon Selector
 
-`balloon-selector` - renders a list, where only one item can be selected at a time.
+`range` - renders a slider that takes numbers only.
 
 ```yaml
-gender:
-    label: Gender
-    type: balloon-selector
-    default: female
-    options:
-        female: Female
-        male: Male
+your_age:
+    label: Progress
+    type: range
+    step: 1  # defaults to 1
+    min: 0   # defaults to 0
+    max: 100 # defaults to 100
 ```
 
-Balloon selectors support the same methods for defining the options as the [dropdown field type](#field-dropdown).
+<a name="field-section"></a>
+### Section
 
 ### Checkbox
 
 `checkbox` - renders a single checkbox.
 
 ```yaml
-show_content:
-    label: Display content
-    type: checkbox
-    default: true
+user_details_section:
+    label: User details
+    type: section
+    comment: This section contains details about the user.
 ```
 
 ### Checkbox List
@@ -632,18 +637,17 @@ show_content:
 
 ### Section
 
-`section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
+`text` - renders a single line text box. This is the default type used if none is specified.
 
 ```yaml
-user_details_section:
-    label: User details
-    type: section
-    comment: This section contains details about the user.
+blog_title:
+    label: Blog Title
+    type: text
 ```
 
 ### Partial
 
-`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
+`textarea` - renders a multiline text box. A size can also be specified with possible values: `tiny`, `small`, `large`, `huge`, `giant`.
 
 ```yaml
 content:
@@ -684,6 +688,7 @@ There are various form widgets included as standard, although it is common for p
 - [Data table](#widget-datatable)
 - [Date picker](#widget-datepicker)
 - [File upload](#widget-fileupload)
+- [Icon picker](#widget-iconpicker)
 - [Markdown editor](#widget-markdowneditor)
 - [Media finder](#widget-mediafinder)
 - [Nested Form](#widget-nestedform)
@@ -1090,7 +1095,7 @@ Option | Description
 ------------- | -------------
 `form` | a reference to form field definition file, see [backend form fields](#form-fields). Inline fields can also be used.
 `prompt` | text to display for the create button. Default: `Add new item`.
-`titleFrom` | the name of the field to use as the title for an item. This will show the value of the field as a title when an item is collapsed in a repeater. Please note that only text fields and dropdown fields are supported.
+`titleFrom` | the name of the field to use as the title for an item. This will show the value of the field as a title when an item is collapsed in a repeater. Please note that only text fields and dropdown fields are supported. Does not work in group mode.
 `minItems` | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
 `maxItems` | maximum number of items to allow within the repeater.
 `groups` | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
