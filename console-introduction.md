@@ -99,7 +99,7 @@ Command | Description
 [`winter:test`](../console/utilities#winter-test) | Run unit tests on Winter and plugins.
 [`winter:util`](../console/utilities#winter-util) | A collection of utilities for Winter development.
 **Laravel Provided Commands** |
-[`cache:clear`](../console/laravel#cache-clear) | Clear the application cache.
+`cache:clear` | Clear the application cache.
 `cache:forget` | Remove an item from the cache
 `clear-compiled` | Remove the compiled class file
 `config:cache` | Create a cache file for faster configuration loading
