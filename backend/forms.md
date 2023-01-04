@@ -926,12 +926,6 @@ icon:
     libraries: ~/modules/backend/formwidgets/iconpicker/meta/libraries.yaml
 ```
 
-<style>
-    .attributes-table-precessor + table td:first-child,
-    .attributes-table-precessor + table td:first-child > * { white-space: nowrap; }
-</style>
-<div class="attributes-table-precessor"></div>
-
 Option | Description
 ------------- | -------------
 `default` | the default desired icon, e.g `far icon-address-book`, optional.
