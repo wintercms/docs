@@ -2,6 +2,7 @@
 
 - [Generic Widgets](#generic-widgets)
     - [Class definition](#generic-class-definition)
+    - [Injecting page assets with widgets](#widgets-assets)
     - [AJAX handlers](#generic-ajax-handlers)
     - [Binding widgets to controllers](#generic-binding)
 - [Form Widgets](#form-widgets)
@@ -28,7 +29,7 @@ Widget classes reside inside the **widgets** directory of the plugin directory. 
 📂 widgets
  ┣ 📂 form
  ┃ ┣ 📂 partials
- ┃ ┃ ┗ 📜 _form.htm     <=== Widget partial file
+ ┃ ┃ ┗ 📜 _form.php     <=== Widget partial file
  ┃ ┗ 📂 assets
  ┃   ┣ 📂 js
  ┃   ┃ ┗ 📜 form.js     <=== Widget JavaScript file
@@ -87,6 +88,20 @@ public function render()
 }
 ```
 
+<a name="widgets-assets"></a>
+### Injecting page assets with widgets
+
+Widgets can inject assets (CSS and JavaScript files) to pages or layouts they're attached to by using the controller's addCss and addJs methods to add assets to the CMS controllers. This should be done in the widget's `loadAssets()` method. See the [Asset Compiler](../services/asset-compilation) docs for more information.
+
+```php
+protected function loadAssets()
+{
+    $this->addCss('css/form.css');
+    
+    $this->addJs('css/form.js', 'Acme.Test');
+}
+```
+
 <a name="generic-ajax-handlers"></a>
 ### AJAX handlers
 
@@ -138,7 +153,7 @@ Form Widget classes reside inside the **formwidgets** directory of the plugin di
 📂 formwidgets
  ┣ 📂 form
  ┃ ┣ 📂 partials
- ┃ ┃ ┗ 📜 _form.htm     <=== Widget partial file
+ ┃ ┃ ┗ 📜 _form.php     <=== Widget partial file
  ┃ ┗ 📂 assets
  ┃   ┣ 📂 js
  ┃   ┃ ┗ 📜 form.js     <=== Widget JavaScript file
@@ -312,7 +327,7 @@ The report widget classes should extend the `Backend\Classes\ReportWidgetBase` c
      ┗ 📂 reportwidgets           <=== Report widgets directory
        ┣ 📂 trafficsources        <=== Widget files directory
        ┃ ┗ 📂 partials
-       ┃   ┗ 📜 _widget.htm
+       ┃   ┗ 📜 _widget.php
        ┗ 📜 TrafficSources.php    <=== Widget class file
 ```
 
