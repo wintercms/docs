@@ -588,9 +588,6 @@ your_age:
     max: 100 # defaults to 100
 ```
 
-<a name="field-section"></a>
-### Section
-
 ### Checkbox
 
 `checkbox` - renders a single checkbox.
