@@ -24,7 +24,6 @@ sections:
             backend/reorder: "Sorting records"
             backend/import-export: "Importing & Exporting"
             backend/users: "Users & Permissions"
-            backend/controls: "UI Elements"
             "/docs/v1.2/ui/": "User Interface Guide"
 
     "Frontend":
