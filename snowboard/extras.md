@@ -415,7 +415,6 @@ class Gallery extends Snowboard.PluginBase {
 
 In the example above, even if the gallery element defines a `data-num-images` data attribute, this will be overriden by the `userNumImages` parameter that is used in constructing the gallery. This `userNumImages` parameter could be populated by a user configuration source.
 
-<a name="data-config-methods"></a>
 ### Methods
 
 The configuration instance that is returned by `this.snowboard.config(bindTo, elementFrom)` provides the following methods:

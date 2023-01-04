@@ -261,7 +261,6 @@ The `mix:watch` command is similar to the the `mix:compile` command, except that
 
 With this command, only one package can be provided and watched at any one time.
 
-<a name="mix-run"></a>
 ### Run a package script
 
 ```bash
