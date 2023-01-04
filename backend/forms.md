@@ -267,6 +267,7 @@ Option | Description
 There are various native field types that can be used for the **type** setting. For more advanced form fields, a [form widget](#form-widgets) can be used instead.
 
 <div class="content-list collection-method-list">
+
 - [Balloon Selector](#field-balloon)
 - [Checkbox](#field-checkbox)
 - [Checkbox List](#field-checkboxlist)
@@ -283,6 +284,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Text](#field-text)
 - [Textarea](#field-textarea)
 - [Widget](#field-widget)
+
 </div>
 
 ### Balloon Selector
@@ -674,6 +676,7 @@ blog_content:
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets#form-widgets) article.
 
 <div class="content-list collection-method-list">
+
 - [Code editor](#widget-codeeditor)
 - [Color picker](#widget-colorpicker)
 - [Data table](#widget-datatable)
@@ -689,6 +692,7 @@ There are various form widgets included as standard, although it is common for p
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Sensitive](#widget-sensitive)
 - [Tag list](#widget-taglist)
+
 </div>
 
 ### Code editor
