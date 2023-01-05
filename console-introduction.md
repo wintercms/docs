@@ -94,6 +94,7 @@ Command | Description
 [`create:controller`](../console/scaffolding#create-controller) | Create a controller in a plugin.
 [`create:formwidget`](../console/scaffolding#create-formwidget) | Create a form widget in a plugin.
 [`create:reportwidget`](../console/scaffolding#create-reportwidget) | Create a report widget in a plugin.
+[`create:job`](../console/scaffolding#create-job) | Create a job
 [`create:command`](../console/scaffolding#create-command) | Create a console command in a plugin.
 **Utilities** |
 [`winter:test`](../console/utilities#winter-test) | Run unit tests on Winter and plugins.
