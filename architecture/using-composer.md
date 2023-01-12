@@ -247,3 +247,73 @@ class Plugin extends PluginBase
 Laravel packages that interact with the database will often include their own database migrations and Eloquent models. Ideally you should duplicate these migrations and models to your plugin's directory and then rebase the provided Model classes to extend the base `\Winter\Storm\Database\Model` class instead of the base Laravel Eloquent model class to take advantage of the extended technology features found in Winter.
 
 You should also make an effort to rename the tables to prefix them with your plugin's author code and name. For example, a table with the name `posts` should be renamed to `winter_blog_posts`.
+
+## Merging plugin Composer dependencies
+
+By default, Winter CMS includes the [Composer Merge plugin](https://github.com/wikimedia/composer-merge-plugin) with its Composer dependencies. This is a special Composer plugin that allows developers to include a `composer.json` file in plugins that they are actively developing, or do not wish to publish, and have any dependencies specified in their plugin's `composer.json` file also be included when running `composer install` or `composer update` on their project.
+
+Originally, this was set to include any plugin's `composer.json` file, but this was prone to conflicts and errors, so beginning with Winter 1.2, you must explicitly provide a list of `composer.json` files that you wish to merge in with your main `composer.json` file.
+
+You can edit the `include` section of the following block of code in your **main** `composer.json` file:
+
+```json
+"extra": {
+    "merge-plugin": {
+        "include": [
+            "plugins/myauthor/*/composer.json"
+        ],
+        "recurse": true,
+        "replace": false,
+        "merge-dev": false
+    }
+},
+```
+
+For example, if you want to include a single plugin's `composer.json`, you can specify a direct path to that plugin's `composer.json`:
+
+```json
+"extra": {
+    "merge-plugin": {
+        "include": [
+            "plugins/acme/blog/composer.json"
+        ],
+        "recurse": true,
+        "replace": false,
+        "merge-dev": false
+    }
+},
+```
+
+Or if you have multiple plugins, you can specify multiple paths:
+
+```json
+"extra": {
+    "merge-plugin": {
+        "include": [
+            "plugins/acme/blog/composer.json",
+            "plugins/acme/forum/composer.json",
+            "plugins/acme/events/composer.json"
+        ],
+        "recurse": true,
+        "replace": false,
+        "merge-dev": false
+    }
+},
+```
+
+If you wish to include a whole directory of custom plugins, you can specify a wildcard:
+
+```json
+"extra": {
+    "merge-plugin": {
+        "include": [
+            "plugins/acme/*/composer.json"
+        ],
+        "recurse": true,
+        "replace": false,
+        "merge-dev": false
+    }
+},
+```
+
+To prevent conflicts, you must not include any plugins that are brought in as a dependency of the project in either the `require` or `require-dev` blocks of your project's `composer.json` file. For example, if you have previously used `composer require acme/blog` to add that plugin to your `require` block, you should not include it in the Merge plugin's `include` block, as this effectively includes the plugin twice and may cause Composer to see it as a conflict.

@@ -119,3 +119,31 @@ This value can then be accessed using Twig in the partial:
 <!-- Hello world! -->
 {{ result }}
 ```
+
+## Handling JavaScript in partials
+
+The AJAX framework writes partial updates by modifying the `innerHTML` property of the partial that is being updated. Due to the security measures implemented in most browsers, no `<script>` tags that are written in this manner will execute. This means that you cannot embed `<script>` tags in your partials.
+
+If you would like to allow JavaScript to manipulate your partial after being loaded, you should add an external JavaScript file loaded through your controller or widget through the [`addJs()`](../backend/widgets#widgets-assets) method and listen to the event that fires when AJAX requests complete.
+
+This will be slightly different depending on whether you are using the original [AJAX framework](../ajax/introduction) or using [Snowboard](../snowboard/introduction).
+
+### jQuery example
+
+```js
+(function ($) {
+    $(document).on('render', function () {
+        // ... Your code to manipulate the partial
+    });
+})(jQuery);
+```
+
+### Snowboard example
+
+```js
+Snowboard.on('ajaxDone', () => {
+    // ... Your code to manipulate the partial
+});
+```
+
+> **NOTE:** Both examples above will fire on *any* AJAX request being completed. You must refine your code to focus on the specific partial you wish to target by, for example, checking that a particular element with an ID or class exists. You can also use the [AJAX Framework JS API](../ajax/javascript-api) or [Snowboard JS API](../snowboard/request) to attach to a particular element.

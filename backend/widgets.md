@@ -73,6 +73,19 @@ public function render()
 }
 ```
 
+### Injecting page assets with widgets
+
+Widgets can inject assets (CSS and JavaScript files) to pages or layouts they're attached to by using the controller's addCss and addJs methods to add assets to the CMS controllers. This should be done in the widget's `loadAssets()` method. See the [Asset Compiler](../services/asset-compilation) docs for more information.
+
+```php
+protected function loadAssets()
+{
+    $this->addCss('css/form.css');
+
+    $this->addJs('css/form.js', 'Acme.Test');
+}
+```
+
 ### AJAX handlers
 
 Widgets implement the same AJAX approach as the [backend controllers](controllers-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
@@ -121,7 +134,7 @@ Form Widget classes reside inside the **formwidgets** directory of the plugin di
 📂 formwidgets
  ┣ 📂 form
  ┃ ┣ 📂 partials
- ┃ ┃ ┗ 📜 _form.htm     <=== Widget partial file
+ ┃ ┃ ┗ 📜 _form.php     <=== Widget partial file
  ┃ ┗ 📂 assets
  ┃   ┣ 📂 js
  ┃   ┃ ┗ 📜 form.js     <=== Widget JavaScript file
@@ -288,7 +301,7 @@ The report widget classes should extend the `Backend\Classes\ReportWidgetBase` c
      ┗ 📂 reportwidgets           <=== Report widgets directory
        ┣ 📂 trafficsources        <=== Widget files directory
        ┃ ┗ 📂 partials
-       ┃   ┗ 📜 _widget.htm
+       ┃   ┗ 📜 _widget.php
        ┗ 📜 TrafficSources.php    <=== Widget class file
 ```
 
@@ -370,6 +383,8 @@ Inside report widgets you can use any [charts or indicators](../ui/form), lists 
     </div>
 </div>
 ```
+
+> **NOTE:** Report widgets are loaded through an AJAX request on accessing the page - they are not available immediately on the page. This means that inline `<script>` tags will not work. See [Updating partials](../ajax/update-partials#javascript-in-partials) for more information on handling JavaScript in partials after an AJAX request.
 
 ### Report widget properties
 

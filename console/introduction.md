@@ -71,15 +71,16 @@ Command | Description
 [`mix:watch`](../console/asset-compilation#mix-watch) | Watches changes within a Mix package and automatically compiles the package on any change.
 [`mix:run`](../console/asset-compilation#mix-run) | Runs a script within a given package.
 **Scaffolding** |
-[`create:theme`](../console/scaffolding#create-theme) | Create a theme.
-[`create:plugin`](../console/scaffolding#create-plugin) | Create a plugin.
-[`create:component`](../console/scaffolding#create-component) | Create a component in a plugin.
-[`create:model`](../console/scaffolding#create-model) | Create a model in a plugin.
-[`create:settings`](../console/scaffolding#create-settings) | Create a settings model in a plugin.
-[`create:controller`](../console/scaffolding#create-controller) | Create a controller in a plugin.
-[`create:formwidget`](../console/scaffolding#create-formwidget) | Create a form widget in a plugin.
-[`create:reportwidget`](../console/scaffolding#create-reportwidget) | Create a report widget in a plugin.
-[`create:command`](../console/scaffolding#create-command) | Create a console command in a plugin.
+[`create:command`](../console/scaffolding#create-command) | Create a Console Command class in a plugin.
+[`create:component`](../console/scaffolding#create-component) | Create a front-end Component in a plugin.
+[`create:controller`](../console/scaffolding#create-controller) | Create a Controller in a plugin.
+[`create:formwidget`](../console/scaffolding#create-formwidget) | Create a FormWidget in a plugin.
+[`create:job`](../console/scaffolding#create-job) | Create a Job class in a plugin.
+[`create:model`](../console/scaffolding#create-model) | Create a Model in a plugin.
+[`create:plugin`](../console/scaffolding#create-plugin) | Create a Plugin.
+[`create:reportwidget`](../console/scaffolding#create-reportwidget) | Create a ReportWidget in a plugin.
+[`create:settings`](../console/scaffolding#create-settings) | Create a Settings model in a plugin.
+[`create:theme`](../console/scaffolding#create-theme) | Create a Theme.
 **Utilities** |
 [`winter:test`](../console/utilities#winter-test) | Run unit tests on Winter and plugins.
 [`winter:util`](../console/utilities#winter-util) | A collection of utilities for Winter development.
