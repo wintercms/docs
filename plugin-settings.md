@@ -36,6 +36,9 @@ class Settings extends Model
 
     // Reference to field configuration
     public $settingsFields = 'fields.yaml';
+    
+    // Optional - sets the TTL for the settings cache
+    public $settingsCacheTtl = 3600;
 }
 ```
 
@@ -52,6 +55,8 @@ The `$settingsFields` property is required if are going to build a backend setti
        ┃ ┗ 📜 fields.yaml    <=== Model form fields
        ┗ 📜 Settings.php     <=== Model script
 ```
+
+You may optionally add a `$settingsCacheTtl` property to your settings model if you wish to change the length of time that your settings will remain cached for. By default, settings in your settings model will remain cached for up to 24 minutes. To disable caching, you may set this to `0` or `false`.
 
 Settings models [can be registered](#backend-pages) to appear on the **backend Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 
