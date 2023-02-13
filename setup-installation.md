@@ -21,7 +21,7 @@ There are two ways you can install Winter, either using the [Web-based installer
 
 Winter CMS has some server requirements for web hosting:
 
-- PHP version 7.2 or higher
+- PHP version 8.0 or higher (recommended: 8.1)
 - PDO PHP Extension (and relevant driver for the database you want to connect to)
 - cURL PHP Extension
 - OpenSSL PHP Extension
@@ -38,6 +38,14 @@ When using Ubuntu, the following command can be run to install all required exte
 sudo apt-get update &&
 sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json php-mbstring php-mysql php-sqlite3 php-zip
 ```
+
+### Supported Databases:
+
+- MariaDB 10.2+ ([Version Policy](https://mariadb.org/about/#maintenance-policy))
+- MySQL 5.7+ ([Version Policy](https://en.wikipedia.org/wiki/MySQL#Release_history))
+- PostgreSQL 9.6+ ([Version Policy](https://www.postgresql.org/support/versioning/))
+- SQLite 3.8.8+
+- SQL Server 2017+ ([Version Policy](https://docs.microsoft.com/en-us/lifecycle/products/?products=sql-server))
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
 
