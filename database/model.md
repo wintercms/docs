@@ -718,23 +718,23 @@ Additionally, a few methods exist to extend protected model properties.
 The following methods are provided by the [HasRelationship](https://github.com/wintercms/storm/blob/develop/src/Database/Concerns/HasRelationships.php) trait:
 
 ```php
-public function addHasOneRelation($name, $config)
-public function addHasManyRelation($name, $config)
+public function addHasOneRelation(string $name, array $config)
+public function addHasManyRelation(string $name, array $config)
 
-public function addBelongsToRelation($name, $config)
-public function addBelongsToManyRelation($name, $config)
+public function addBelongsToRelation(string $name, array $config)
+public function addBelongsToManyRelation(string $name, array $config)
 
-public function addMorphToRelation($name, $config)
-public function addMorphOneRelation($name, $config)
-public function addMorphManyRelation($name, $config)
-public function addMorphToManyRelation($name, $config)
-public function addMorphedByManyRelation($name, $config)
+public function addMorphToRelation(string $name, array $config)
+public function addMorphOneRelation(string $name, array $config)
+public function addMorphManyRelation(string $name, array $config)
+public function addMorphToManyRelation(string $name, array $config)
+public function addMorphedByManyRelation(string $name, array $config)
 
-public function addAttachOneRelation($name, $config)
-public function addAttachManyRelation($name, $config)
+public function addAttachOneRelation(string $name, array $config)
+public function addAttachManyRelation(string $name, array $config)
 
-public function addHasOneThroughRelation($name, $config)
-public function addHasManyThroughRelation($name, $config)
+public function addHasOneThroughRelation(string $name, array $config)
+public function addHasManyThroughRelation(string $name, array $config)
 ```
 
 It is strongly suggested to use the above methods to add relations when extending a model since they will merge the existing relations and make sure the relation is valid and does not already exit.
