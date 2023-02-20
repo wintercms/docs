@@ -692,6 +692,8 @@ This approach can also be used to bind to [local events](#events), the following
 
 > **NOTE:** Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.
 
+### Property methods
+
 Additionally, a few methods exist to extend protected model properties.
 
 ```php
@@ -708,5 +710,39 @@ Additionally, a few methods exist to extend protected model properties.
     // these methods accept one or more strings, or an array of strings
     $model->addFillable('first_name');
     $model->addJsonable('some_data');
+});
+```
+
+### Relationships methods
+
+The following methods are provided by the [HasRelationship](https://github.com/wintercms/storm/blob/develop/src/Database/Concerns/HasRelationships.php) trait:
+
+```php
+public function addHasOneRelation(string $name, array $config)
+public function addHasManyRelation(string $name, array $config)
+
+public function addBelongsToRelation(string $name, array $config)
+public function addBelongsToManyRelation(string $name, array $config)
+
+public function addMorphToRelation(string $name, array $config)
+public function addMorphOneRelation(string $name, array $config)
+public function addMorphManyRelation(string $name, array $config)
+public function addMorphToManyRelation(string $name, array $config)
+public function addMorphedByManyRelation(string $name, array $config)
+
+public function addAttachOneRelation(string $name, array $config)
+public function addAttachManyRelation(string $name, array $config)
+
+public function addHasOneThroughRelation(string $name, array $config)
+public function addHasManyThroughRelation(string $name, array $config)
+```
+
+It is strongly suggested to use the above methods to add relations when extending a model since they will merge the existing relations and make sure the relation is valid and does not already exit.
+
+Example usage:
+
+```php
+\Backend\Models\User::extend(function($model) {
+    $model->addHasOne('profile', ['Acme\Demo\Models\Profile', 'key' => 'user_id']);
 });
 ```
