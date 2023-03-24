@@ -17,11 +17,11 @@ In order to use Composer with a Winter CMS instance that has been installed usin
 If you plan on submitting pull requests to the Winter CMS project via GitHub, or are actively developing a project based on Winter CMS and want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place. Doing this will allow you to catch any potential issues that may be introduced (as rare as they are) right when they happen and get them fixed while you're still actively working on your project instead of only discovering them several months down the road if they eventually make it into production.
 
 ```json
-"winter/storm": "dev-develop as 1.1.999",
-"winter/wn-system-module": "dev-develop as 1.1.999",
-"winter/wn-backend-module": "dev-develop as 1.1.999",
-"winter/wn-cms-module": "dev-develop as 1.1.999",
-"laravel/framework": "~6.0",
+"winter/storm": "dev-develop as 1.2.999",
+"winter/wn-system-module": "dev-develop as 1.2.999",
+"winter/wn-backend-module": "dev-develop as 1.2.999",
+"winter/wn-cms-module": "dev-develop as 1.2.999",
+"laravel/framework": "~9.0",
 ```
 
 > **NOTE:** Do not commit the changes to `composer.json`, as this file is handled by the Winter CMS maintainers.

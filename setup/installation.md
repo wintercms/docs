@@ -10,7 +10,7 @@ There are two ways you can install Winter, either using the [Web-based installer
 
 Winter CMS has some server requirements for web hosting:
 
-- PHP version 8.0 or above.
+- PHP version 8.0 or above. (we recommend at least PHP 8.1)
 - The following PHP extensions installed and enabled:
     - cURL
     - GD
@@ -22,6 +22,17 @@ Winter CMS has some server requirements for web hosting:
 
 We also recommend the installation of the PDO SQLite extension, regardless of your database type, as some functions in Winter CMS may benefit from being able to use temporary SQLite databases.
 
+### Supported Databases:
+
+- MariaDB 10.2+ ([Version Policy](https://mariadb.org/about/#maintenance-policy))
+- MySQL 5.7+ ([Version Policy](https://en.wikipedia.org/wiki/MySQL#Release_history))
+- PostgreSQL 9.6+ ([Version Policy](https://www.postgresql.org/support/versioning/))
+- SQLite 3.8.8+
+- SQL Server 2017+ ([Version Policy](https://docs.microsoft.com/en-us/lifecycle/products/?products=sql-server))
+
+When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
+
+<a name="web-based-installation"></a>
 ## Web-based installation
 
 The [Web Installer](https://github.com/wintercms/web-installer) is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
