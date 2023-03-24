@@ -32,7 +32,6 @@ We also recommend the installation of the PDO SQLite extension, regardless of yo
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
 
-<a name="web-based-installation"></a>
 ## Web-based installation
 
 The [Web Installer](https://github.com/wintercms/web-installer) is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
