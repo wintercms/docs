@@ -87,9 +87,15 @@ Since none of these approaches is inherently "correct", choose an approach you f
 <a name="subscribing-priority"></a>
 ### Subscribe using priority
 
-You may also specify a priority as the third argument when subscribing to events. Listeners with higher priority will be run first, while listeners that have the same priority will be run in order of subscription.
+You may also specify a priority as the third argument when subscribing to events. Listeners with higher priority will be run first, while listeners that have the same priority will be run in order of subscription. Listeners with no priority provided are assigned the default priority of `0`.
 
 ```php
+// Default Priority Event
+Event::listen('auth.login', function () { ... });
+
+// Run after the default priority listener
+Event::listen('auth.login', function () { ... }, 1);
+
 // Run first
 Event::listen('auth.login', function () { ... }, 10);
 
