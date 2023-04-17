@@ -9,6 +9,7 @@
 - [Mix configuration](#mix-configuration)
 - [Examples](#examples)
     - [Tailwind CSS](#examples-tailwind)
+    - [Alpine JS](#examples-alpine)
     - [Vue JS](#examples-vue)
 - [Commands](#commands)
     - [Install Node dependencies](#mix-install)
@@ -151,6 +152,43 @@ mix.postCss('assets/css/base.css', 'assets/css/theme.css', [
 In the example above, we have a base CSS file that contains the Tailwind styling - `assets/css/base.css` - that will compile to a final compiled CSS file in `assets/css/theme.css`.
 
 Your theme will now be ready for Tailwind CSS development.
+
+<a name="examples-alpine"></a>
+### Alpine JS
+
+For themes that wish to use Alpine JS, include `alpinejs` dependencie in your theme's `package.json` file.
+
+```bash
+# Inside the theme root folder
+npm install aplinejs
+```
+
+You may need to update your mix assets by running `php artisan mix:update` from the project root folder.
+
+Import Alpine into your theme script bundle and initialize it like so:
+
+```js
+import Alpine from 'alpinejs'
+window.Alpine = Alpine
+Alpine.start()
+```
+
+The `window.Alpine = Alpine` is optional, but is nice to have for freedom and flexibility. Like when tinkering with Alpine from the devtools for example.
+
+Then, update your `winter.mix.js` configuration file that will compile Alpine as needed:
+
+```js
+const mix = require('laravel-mix');
+mix.setPublicPath(__dirname);
+
+mix
+  // other mix commands
+  .js('assets/js/scripts.js', 'assets/js/app.js');
+```
+
+In the example above, we have a base javascript file that contains Alpine initialization - `assets/js/scripts.js` - that will compile to a final compiled JAVASCRIPT file in `assets/js/app.js`.
+
+Your theme will now be ready to use Alpine JS.
 
 <a name="examples-vue"></a>
 ### Vue
