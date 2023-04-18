@@ -9,6 +9,7 @@
 - [Mix configuration](#mix-configuration)
 - [Examples](#examples)
     - [Tailwind CSS](#examples-tailwind)
+    - [Alpine JS](#examples-alpine)
     - [Vue JS](#examples-vue)
 - [Commands](#commands)
     - [Install Node dependencies](#mix-install)
@@ -151,6 +152,47 @@ mix.postCss('assets/css/base.css', 'assets/css/theme.css', [
 In the example above, we have a base CSS file that contains the Tailwind styling - `assets/css/base.css` - that will compile to a final compiled CSS file in `assets/css/theme.css`.
 
 Your theme will now be ready for Tailwind CSS development.
+
+<a name="examples-alpine"></a>
+### Alpine JS
+
+For themes that wish to use Alpine JS, include the `alpinejs` dependency in your theme's `package.json` file.
+
+```bash
+# Inside the theme root folder
+npm install aplinejs
+```
+
+You will need to update your Mix assets by running `php artisan mix:update` from the project root folder after the installation is complete.
+
+Import Alpine into your theme script bundle (for example, stored at `theme/example/assets/js/scripts.js`), and initialize it like so:
+
+```js
+import Alpine from 'alpinejs'
+window.Alpine = Alpine
+Alpine.start()
+```
+
+The `window.Alpine = Alpine` is optional, but is nice to have for flexibility by making `Alpine` globally accessible via JavaScript, for situations like tinkering with Alpine from the devtools or using Alpine inline in your theme files.
+
+Then, update your `winter.mix.js` configuration file that will compile Alpine as needed:
+
+```js
+const mix = require('laravel-mix');
+mix.setPublicPath(__dirname);
+
+mix
+  // other mix commands
+  .js('assets/js/scripts.js', 'assets/js/app.js');
+```
+
+In the example above, we compile the theme script bundle that contains Alpine initialization - `assets/js/scripts.js` - into a final, compiled build at `assets/js/app.js`.
+
+Your theme will now be ready to use Alpine JS by simply including the build in your theme's HTML:
+
+```html
+<script src="{{ 'assets/js/app.js' | theme }}"></script>
+```
 
 <a name="examples-vue"></a>
 ### Vue
