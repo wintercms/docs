@@ -159,13 +159,13 @@ Your theme will now be ready for Tailwind CSS development.
 For themes that wish to use Alpine JS, include the `alpinejs` dependency in your theme's `package.json` file.
 
 ```bash
-# Inside the theme root folder
-npm install aplinejs
+# Run this inside the theme's directory (i.e. myproject/themes/mytheme)
+npm install alpinejs
 ```
 
 You will need to update your Mix assets by running `php artisan mix:update` from the project root folder after the installation is complete.
 
-Import Alpine into your theme script bundle (for example, stored at `theme/example/assets/js/scripts.js`), and initialize it like so:
+Import Alpine into your theme script bundle (for example, stored at `themes/mytheme/assets/src/js/scripts.js`), and initialize it like so:
 
 ```js
 import Alpine from 'alpinejs'
@@ -183,10 +183,10 @@ mix.setPublicPath(__dirname);
 
 mix
   // other mix commands
-  .js('assets/js/scripts.js', 'assets/js/app.js');
+  .js('assets/src/js/scripts.js', 'assets/dist/js/app.js');
 ```
 
-In the example above, we compile the theme script bundle that contains Alpine initialization - `assets/js/scripts.js` - into a final, compiled build at `assets/js/app.js`.
+In the example above, we compile the theme script bundle that contains Alpine initialization - `assets/src/js/scripts.js` - into a final, compiled build at `assets/dist/js/app.js`.
 
 Your theme will now be ready to use Alpine JS by simply including the build in your theme's HTML:
 
