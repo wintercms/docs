@@ -9,6 +9,7 @@
     - [Checking the Existence of a Method](#check-method-existence)
     - [List Available Methods](#list-available-methods)
     - [Dynamically Implementing Behaviors](#dynamically-implementing-behaviors)
+- [Local Extensions](#local-extensions)
 - [Usage Examples](#usage-example)
     - [Behavior / Extension Class](#behavior-extension-class)
     - [Extending a Class](#extending-class)
@@ -34,7 +35,7 @@ See below for a sample of what is possible with dynamic class extension:
 
 ```php
 // Dynamically extend a model that belongs to a third party plugin
-Post::extend(function($model) {
+Post::extend(function ($model) {
     // Bind to an event that's only fired locally
     $model->bindEvent('model.afterSave', function () use ($model) {
         if (!$model->isValid()) {
@@ -136,9 +137,50 @@ To summarize:
 Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend` method. The argument should pass a closure that will be called as part of the class constructor.
 
 ```php
-MyNamespace\Controller::extend(function($controller) {
+MyNamespace\Controller::extend(function ($controller) {
     //
 });
+```
+
+By default, extension closures used with the `extend` method will run in the scope of the current class. For example, if you are extending another class in your Plugin initialization class (`Plugin.php`), the closure's scope will be of that Plugin initialization class. This allows you to call methods and properties from your class.
+
+However, if you would like to scope the closure to the class that you are *extending*, you may pass `true` as the second parameter to change the scope of the closure. This changes the `$this` magic variable to be of the class you are extending, not of the current class.
+
+```php
+namespace Acme\Plugin;
+
+class Plugin extends PluginBase
+{
+    public function boot()
+    {
+        MyNamespace\Controller::extend(function ($controller) {
+            // Scoped to \Acme\Plugin\Plugin
+        });
+
+        MyNamespace\Controller::extend(function () {
+            // Scoped to \MyNamespace\Controller
+        }, true);
+    }
+}
+```
+
+This has the benefit of allowing you to reference private or protected methods and properties in the class that you are extending.
+
+Note that when this local scope is enabled, by default, no class is passed to the closure as the first parameter. You can, optionally, provide an "outer" scope to pass through to the first parameter of the closure by adding an object as the third parameter. This allows you to, for example, still use methods and properties from your Plugin class inside the locally-scoped closure.
+
+```php
+namespace Acme\Plugin;
+
+class Plugin extends PluginBase
+{
+    public function boot()
+    {
+        MyNamespace\Controller::extend(function ($outer) {
+            // Scoped to \MyNamespace\Controller
+            // $outer = \Acme\Plugin\Plugin
+        }, true, $this);
+    }
+}
 ```
 
 <a name="dynamically-declaring-properties"></a>
@@ -254,6 +296,42 @@ Winter\Users\Controllers\Users::extend(function($controller) {
     // Declare the relationConfig property dynamically for the RelationController behavior to use
     $controller->addDynamicProperty('relationConfig', '$/myvendor/myplugin/controllers/users/config_relation.yaml');
 });
+```
+
+<a name="local-extensions"></a>
+## Local Extensions
+
+Extendable classes can be provided local extensions by calling the `extend()` method directly on an instance of an extendable class. Compared to the statically-called `::extend()` method, this has the effect of extending just a single instance of a given model.
+
+For example, you may choose to add a callback method to a model only in certain circumstances, such as during a search.
+
+```php
+public function searchModel($query, $model)
+{
+    $model->extend(function ($model) use ($query) {
+        $model->addDynamicMethod('afterFetch', function () use ($query) {
+            $model->searchQuery = $query;
+        });
+    });
+
+    return $model->where('name', 'like', '%' . $query . '%')->get();
+}
+```
+
+As with constructor extensions, you may also run your extension closure as a local scope and provide an "outer" scope, by setting the second parameter to `true` and adding an "outer" scope object as the third parameter.
+
+```php
+public function searchModel($query, $model)
+{
+    $model->extend(function ($outerScope) use ($query) {
+        $this->addDynamicMethod('afterFetch', function () use ($query, $outerScope) {
+            $this->searchQuery = $query;
+            $this->searchClass = $outerScope;
+        }, true);
+    }, true, $this);
+
+    return $model->where('name', 'like', '%' . $query . '%')->get();
+}
 ```
 
 <a name="usage-example"></a>

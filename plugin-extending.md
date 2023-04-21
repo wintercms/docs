@@ -11,10 +11,6 @@
     - [Extending a component](#extending-component)
     - [Extending the backend menu](#extending-backend-menu)
 
-
-<!-- Behaviors: Mixin concept, dynamic implement, extend constructor -->
-<!-- IoC/Facades: Replacing objects -->
-
 <a name="extending-with-events"></a>
 ## Extending with events
 
@@ -44,8 +40,20 @@ User::extend(function ($model) {
 });
 ```
 
+If you need to access protected or private methods when extending the model's constructor, you may pass `true` as the second parameter for the `extend()` method to force your code to act in the scope of the model.
+
+```php
+User::extend(function ($model) {
+    if ($model->privateProperty === true) {
+        $model->bindEvent('user.register', function () use ($model) {
+            // Code to register $model->email to mailing list
+        });
+    }
+});
+```
+
 <a name="declaring-events"></a>
-### Declaring / Firing  events
+### Declaring / Firing events
 
 You can fire events globally (through the Event service) or locally.
 
