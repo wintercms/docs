@@ -49,7 +49,7 @@ User::extend(function ($model) {
             // Code to register $model->email to mailing list
         });
     }
-});
+}, true);
 ```
 
 <a name="declaring-events"></a>
