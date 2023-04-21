@@ -1143,7 +1143,7 @@ background_image:
 
 Option | Description
 ------------- | -------------
-`mode` | the expected file type, either file or image. Default: file.
+`mode` | the expected file type, supported types are: `file`, `image`, `document`, `audio`, `video`, `all`. Default: `all`.
 `prompt` | text to display when there is no item selected. The `%s` character represents the media manager icon.
 `imageWidth` | if using image type, the preview image will be displayed to this width, optional.
 `imageHeight` | if using image type, the preview image will be displayed to this height, optional.
