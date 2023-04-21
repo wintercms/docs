@@ -30,7 +30,7 @@ We also recommend the installation of the PDO SQLite extension, regardless of yo
 - SQLite 3.8.8+
 - SQL Server 2017+ ([Version Policy](https://docs.microsoft.com/en-us/lifecycle/products/?products=sql-server))
 
-When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
+When using the SQL Server database engine, you will need to install the [group concatenation](https://github.com/orlando-colamatteo/ms-sql-server-group-concat-sqlclr) user-defined aggregate.
 
 ## Web-based installation
 

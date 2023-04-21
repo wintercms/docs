@@ -389,8 +389,9 @@ These symbols are supported for creating dynamic paths:
 
 Symbol | Description
 ------------- | -------------
-`$` | Relative to the plugins directory
 `~` | Relative to the application directory
+`$` | Relative to the plugins directory
+`#` | Relative to the themes directory
 
 #### `app_path()` {#collection-method}
 

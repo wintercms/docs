@@ -1,8 +1,5 @@
 # Extending plugins
 
-<!-- Behaviors: Mixin concept, dynamic implement, extend constructor -->
-<!-- IoC/Facades: Replacing objects -->
-
 ## Extending with events
 
 The [Event service](../events/introduction) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event;` to the top of your PHP file (after the namespace statement) to import the Event facade.
@@ -30,7 +27,19 @@ User::extend(function ($model) {
 });
 ```
 
-### Declaring / Firing  events
+If you need to access protected or private methods when extending the model's constructor, you may pass `true` as the second parameter for the `extend()` method to force your code to act in the scope of the model.
+
+```php
+User::extend(function ($model) {
+    if ($model->privateProperty === true) {
+        $model->bindEvent('user.register', function () use ($model) {
+            // Code to register $model->email to mailing list
+        });
+    }
+});
+```
+
+### Declaring / Firing events
 
 You can fire events globally (through the Event service) or locally.
 

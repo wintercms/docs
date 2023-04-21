@@ -125,6 +125,46 @@ In the example above, we have a base CSS file that contains the Tailwind styling
 
 Your theme will now be ready for Tailwind CSS development.
 
+### Alpine JS
+
+For themes that wish to use Alpine JS, include the `alpinejs` dependency in your theme's `package.json` file.
+
+```bash
+# Run this inside the theme's directory (i.e. myproject/themes/mytheme)
+npm install alpinejs
+```
+
+You will need to update your Mix assets by running `php artisan mix:update` from the project root folder after the installation is complete.
+
+Import Alpine into your theme script bundle (for example, stored at `themes/mytheme/assets/src/js/scripts.js`), and initialize it like so:
+
+```js
+import Alpine from 'alpinejs'
+window.Alpine = Alpine
+Alpine.start()
+```
+
+The `window.Alpine = Alpine` is optional, but is nice to have for flexibility by making `Alpine` globally accessible via JavaScript, for situations like tinkering with Alpine from the devtools or using Alpine inline in your theme files.
+
+Then, update your `winter.mix.js` configuration file that will compile Alpine as needed:
+
+```js
+const mix = require('laravel-mix');
+mix.setPublicPath(__dirname);
+
+mix
+  // other mix commands
+  .js('assets/src/js/scripts.js', 'assets/dist/js/app.js');
+```
+
+In the example above, we compile the theme script bundle that contains Alpine initialization - `assets/src/js/scripts.js` - into a final, compiled build at `assets/dist/js/app.js`.
+
+Your theme will now be ready to use Alpine JS by simply including the build in your theme's HTML:
+
+```html
+<script src="{{ 'assets/js/app.js' | theme }}"></script>
+```
+
 ### Vue
 
 If you want to use [Vue 3](https://vuejs.org/) in your project, either in the backend or in a component or theme, you can follow these steps.

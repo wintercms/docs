@@ -84,8 +84,9 @@ The following symbols are supported for creating dynamic paths:
 
 Symbol | Description
 ------------- | -------------
-`$` | Relative to the plugins directory
 `~` | Relative to the application directory
+`$` | Relative to the plugins directory
+`#` | Relative to the themes directory
 
 ### Combiner Aliases
 
@@ -100,18 +101,6 @@ The asset combiner supports common aliases that substitute file paths, these wil
 ] | theme }}"></script>
 ```
 
-or example the [Snowboard framework assets](../snowboard/introduction) can be included in the combiner:
-
-```twig
-<script src="{{ [
-    '@snowboard.base',
-    '@snowboard.attr',
-    '@snowboard.request',
-    '@snowboard.extras',
-    'assets/javascript/app.js'
-] | theme }}"></script>
-```
-
 The following aliases are supported:
 
 Alias | Description
@@ -121,11 +110,6 @@ Alias | Description
 `@framework.extras` | AJAX framework extras, subsitute for `{% framework extras %}` tag. (JavaScript, CSS)
 `@framework.extras.js` | AJAX framework extras, (JavaScript)
 `@framework.extras.css` | AJAX framework extras, (CSS)
-`@snowboard.base` | Snowboard framework, subsitute for `{% snowboard %}` tag. (JavaScript)
-`@snowboard.attr` | The [HTML data attribute](../snowboard/data-attributes) request functionality
-`@snowboard.request` | The base [JavaScript AJAX](../snowboard/request) request functionality
-`@snowboard.extras` | Snowboard framework extras, (JavaScript)
-`@snowboard.extras.css` | Snowboard framework extras, (CSS)
 
 The same alias can be used for JavaScript or CSS, for example `@framework.extras`. At least one explicit reference with a file extension is needed in the array to determine which is used.
 

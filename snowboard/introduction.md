@@ -49,34 +49,3 @@ Or to include both the JavaScript AJAX and HTML data attribute request functiona
 ```twig
 {% snowboard request attr %}
 ```
-
-## Including the framework manually
-
-The following asset aliases have been created so that the framework can easily be included using the asset combiner:
-
-- @snowboard.base
-- @snowboard.attr
-- @snowboard.request
-- @snowboard.extras
-- @snowboard.extras.css
-
-You can use the asset combiner twig filter like this to include your stylesheets:
-
-```twig
-<link rel="stylesheet" href="{{ [
-    '@snowboard.extras.css',
-    [other assets here]
-] | theme }}">
-```
-
-You can use the asset combiner twig filter like this to include your scripts:
-
-```twig
-<script src="{{ [
-    '@snowboard.base',
-    '@snowboard.attr',
-    '@snowboard.request',
-    '@snowboard.extras',
-] | theme }}"></script>
-```
-
