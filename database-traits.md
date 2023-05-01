@@ -686,7 +686,7 @@ class Product extends Model
 }
 ```
 
-<a name="hassortablerelations"></a>
+<a name="has-sortable-relations"></a>
 ## HasSortableRelations
 
 Add this trait to your model in order to allow its relations to be sorted/reordered.
