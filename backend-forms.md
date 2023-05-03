@@ -1173,21 +1173,23 @@ content:
                 label: This the title
                 type: text
         tabs:
-            meta_title:
-                lable: Meta Title
-                tab: SEO
-            color:
-                label: Color
-                type: colorpicker
-                tab: Design
+            fields:
+                meta_title:
+                    lable: Meta Title
+                    tab: SEO
+                color:
+                    label: Color
+                    type: colorpicker
+                    tab: Design
         secondaryTabs:
-            is_active:
-                label: Active
-                type: checkbox
-            logo:
-                label: Logo
-                type: mediafinder
-                mode: image
+            fields:
+                is_active:
+                    label: Active
+                    type: checkbox
+                logo:
+                    label: Logo
+                    type: mediafinder
+                    mode: image
 ```
 
 A nested form provides a way of collating reusable fields and making them available in multiple forms. A nested form supports the same syntax as a normal form, including tabs and secondary tabs, and outside fields. The given field name for the nested form will contain the entire structure and values of your nested form as a JSON array. It's even possible to use nested forms inside a nested form.
