@@ -649,7 +649,7 @@ For more information on model validation, please visit [the documentation page](
 <a name="field-partial"></a>
 ### Partial
 
-`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
+`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field, `$field` is the configured class object `Backend\Classes\FormField` and `$previewMode` is the previewMode of the parent container (form, repeater or nestedform).
 
 ```yaml
 content:
