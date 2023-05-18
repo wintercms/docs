@@ -965,10 +965,10 @@ columns:
         title: Name
     enabled:
         type: checkbox
-	title: Enabled
+        title: Enabled
     virtual:
         type: checkbox
-	title: Virtual
+        title: Virtual
 
 default:
     - { id: 1, name: "first record", enabled: 0, virtual: 1 }
