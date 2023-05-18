@@ -907,6 +907,7 @@ data:
     btnAddRowBelowLabel: Add Row Below
     btnDeleteRowLabel: Delete Row
     columns: []
+    default: []
     deleting: true
     dynamicHeight: true
     fieldName: null
@@ -934,6 +935,7 @@ Option | Description
 `btnAddRowBelowLabel` | defines a custom label for the "Add Row Below" button.
 `btnDeleteRowLabel` | defines a custom label for the "Delete Row" button.
 `columns` | an array representing the column configuration of the data table. See the *Column configuration* section below.
+`default` | an array of records for the data table. See the *Column configuration* section below.
 `deleting` | allow records to be deleted from the data table. Default: `false`.
 `dynamicHeight` | if `true`, the data table's height will extend or shrink depending on the records added, up to the maximum size defined by the `height` configuration value. Default: `false`.
 `fieldName` | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
@@ -961,6 +963,17 @@ columns:
     name:
         type: string
         title: Name
+    enabled:
+        type: checkbox
+	title: Enabled
+    virtual:
+        type: checkbox
+	title: Virtual
+
+default:
+    - { id: 1, name: "first record", enabled: 0, virtual: 1 }
+    - { id: 2, name: "second record", enabled: 1, virtual: 0 }
+    - { id: 3, name: "third record", enabled: 0, virtual: 0 }
 ```
 
 <style>
