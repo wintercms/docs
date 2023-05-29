@@ -427,7 +427,7 @@ Checkbox lists support the same methods for defining the options as the [dropdow
 <a name="field-dropdown"></a>
 ### Dropdown
 
-`dropdown` - renders a dropdown with specified options. There are 6 ways to provide the drop-down options.
+`dropdown` - renders a dropdown with specified options. There are 7 ways to provide the drop-down options.
 
 The first method defines `options` directly in the YAML file(two variants):
 
@@ -540,6 +540,29 @@ public static function staticMethodOptions($formWidget, $formField)
 {
     return ['published' => 'Published', ...];
 }
+```
+
+The seventh method allows you to specify a localization string that returns an array (key/value or value only).
+
+Localization String:
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    default: published
+    options: author.plugin::lang.status_types
+```
+
+```php
+// lang.php
+return [
+    'status_types' => [
+        'draft' => 'Draft',
+        'published' => 'Published',
+        'archived' => 'Archived',
+    ],
+];
 ```
 
 ### Add icon to dropdown options
