@@ -116,7 +116,7 @@ For scheduled tasks to operate correctly, you should add the following Cron entr
 
 Be sure to replace `/path/to/artisan` with the absolute path to the `artisan` file in the root directory of Winter. This cron will call the command scheduler every minute, in which Winter will evaluate any scheduled tasks and run the tasks that are due.
 
-> **NOTE**: If you are adding this to `/etc/cron.d`, you'll need to specify a user immediately after `* * * * *`.
+> **NOTE**: If you are adding this to the system crontab (`/etc/cron.d`), you'll need to specify the user to run the command as immediately after `* * * * *`.
 
 <a name="queue-setup"></a>
 ### Setting up queue workers
