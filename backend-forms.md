@@ -9,6 +9,7 @@
     - [Tab options](#form-tab-options)
     - [Field options](#form-field-options)
 - [Available field types](#field-types)
+- [Methods of specifying dropdown types options](#specifying-options)
 - [Form widgets](#form-widgets)
 - [Form views](#form-views)
     - [Create view](#form-create-view)
@@ -389,7 +390,7 @@ gender:
         male: Male
 ```
 
-Balloon selectors support the same methods for defining the options as the [dropdown field type](#field-dropdown).
+See [Specifying options](#specifying-options) for the different methods to specify the options.
 
 <a name="field-checkbox"></a>
 ### Checkbox
@@ -422,162 +423,39 @@ permissions:
         modify_account: Modify account
 ```
 
-Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
+See [Specifying options](#specifying-options) for the different methods to specify the options.
+
+Checkbox lists support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
 <a name="field-dropdown"></a>
 ### Dropdown
 
-`dropdown` - renders a dropdown with specified options. There are 7 ways to provide the drop-down options.
-
-The first method defines `options` directly in the YAML file(two variants):
-
-(value only):
+`dropdown` - renders a dropdown with specified options.
 
 ```yaml
 status_type:
-    label: Blog Post Status
     type: dropdown
-    default: published
+    label: Blog Post Status
     options:
         - draft
         - published
         - archived
 ```
 
-(key / value):
-
-```yaml
-status_type:
-    label: Blog Post Status
-    type: dropdown
-    default: published
-    options:
-        draft: Draft
-        published: Published
-        archived: Archived
-```
-
-The second method defines options with a method declared in the model class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model. Using the example above, the model should have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
-
-```yaml
-status_type:
-    label: Blog Post Status
-    type: dropdown
-```
-
-Supplying the dropdown options in the model class:
-
-```php
-public function getStatusTypeOptions($value, $formData)
-{
-    return ['all' => 'All', ...];
-}
-```
-
-The third global method `getDropdownOptions` can also be defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, the second is the current value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
-
-```php
-public function getDropdownOptions($fieldName, $value, $formData)
-{
-    if ($fieldName == 'status') {
-        return ['all' => 'All', ...];
-    }
-    else {
-        return ['' => '-- none --'];
-    }
-}
-```
-
-The fourth method uses a specific method declared in the model class. In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
-
-```yaml
-status:
-    label: Blog Post Status
-    type: dropdown
-    options: listStatuses
-```
-
-Supplying the dropdown options to the model class:
-
-```php
-public function listStatuses($fieldName, $value, $formData)
-{
-    return ['published' => 'Published', ...];
-}
-```
-
-The fifth method allows you to specify a static method on a class to return the options:
-
-```yaml
-status:
-    label: Blog Post Status
-    type: dropdown
-    options: \MyAuthor\MyPlugin\Classes\FormHelper::staticMethodOptions
-```
-
-Supplying the dropdown options to the model class:
-
-```php
-public static function staticMethodOptions($formWidget, $formField)
-{
-    return ['published' => 'Published', ...];
-}
-```
-
-The sixth method allows you to specify a callable object via an array definition. If using PHP, you're able to provide an array with the first element being the object and the second element being the method you want to call on that object. If you're using YAML, you're limited to a static method defined as the second element and the namespaced reference to a class as the first element:
-
-```yaml
-status:
-    label: Blog Post Status
-    type: dropdown
-    options: [\MyAuthor\MyPlugin\Classes\FormHelper, staticMethodOptions]
-```
-
-Supplying the dropdown options to the model class:
-
-```php
-public static function staticMethodOptions($formWidget, $formField)
-{
-    return ['published' => 'Published', ...];
-}
-```
-
-The seventh method allows you to specify a localization string that returns an array (key/value or value only).
-
-Localization String:
-
-```yaml
-status_type:
-    label: Blog Post Status
-    type: dropdown
-    default: published
-    options: author.plugin::lang.status_types
-```
-
-```php
-// lang.php
-return [
-    'status_types' => [
-        'draft' => 'Draft',
-        'published' => 'Published',
-        'archived' => 'Archived',
-    ],
-];
-```
+See [Specifying options](#specifying-options) for the different methods to specify the options.
 
 ### Add icon to dropdown options
 
-In order to add an icon or an image for every option which will be rendered in the dropdown field the options have to be provided as a multidimensional array with the following format `'key' => ['label-text', 'icon-class'],`.
+In order to add an icon or an image for every option which will be rendered in the dropdown field the options have to be provided as a multidimensional array with the following format `'key' => ['label-text', 'icon-class'],` in php or `key: [label-text, icon-class]` in yaml.
 
-```php
-public function listStatuses($fieldName, $value, $formData)
-{
-    return [
-        'published' => ['Published', 'icon-check-circle'],
-        'unpublished' => ['Unpublished', 'icon-minus-circle'],
-        'draft' => ['Draft', 'icon-clock-o']
-    ];
-}
+```yaml
+status_type:
+    type: dropdown
+    label: Blog Post Status
+    options:
+        published: [Published, icon-check-circle]
+        unpublished: [Unpublished, icon-minus-circle]
+        draft: [Draft, icon-clock-o]
 ```
 
 To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
@@ -726,7 +604,9 @@ security_level:
         guests: [Guests only, Only guest users will be able to access this page.]
 ```
 
-Radio lists support the same methods for defining the options as the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
+See [Specifying options](#specifying-options) for the different methods to specify the options.
+
+For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
 <a name="field-range"></a>
 ### Range
@@ -800,6 +680,147 @@ blog_contents:
 blog_content:
     type: Backend\FormWidgets\RichEditor
     size: huge
+```
+
+<a name="specifying-options"></a>
+### Methods of specifying dropdown types (balloon-selector, checkboxlist, dropdown, radio & taglist) options
+
+There are 7 ways to provide the drop-down options.
+
+The first method defines `options` directly in the YAML file (two variants):
+
+(value only):
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    default: published
+    options:
+        - draft
+        - published
+        - archived
+```
+
+(key / value):
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    default: published
+    options:
+        draft: Draft
+        published: Published
+        archived: Archived
+```
+
+The second method allows you to specify a localization string that returns an array (key/value or value only).
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    default: published
+    options: author.plugin::lang.status_types
+```
+
+Supplying the options in a language file:
+
+```php
+// lang.php
+return [
+    'status_types' => [
+        'draft' => 'Draft',
+        'published' => 'Published',
+        'archived' => 'Archived',
+    ],
+];
+```
+
+The third method defines options with a method declared in the model class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model. Using the example above, the model should have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+```
+
+Supplying the dropdown options in the model class:
+
+```php
+public function getStatusTypeOptions($value, $formData)
+{
+    return ['all' => 'All', ...];
+}
+```
+
+The fourth method uses a global `getDropdownOptions` method defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, the second is the current value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
+
+```php
+public function getDropdownOptions($fieldName, $value, $formData)
+{
+    if ($fieldName == 'status') {
+        return ['all' => 'All', ...];
+    }
+    else {
+        return ['' => '-- none --'];
+    }
+}
+```
+
+The fifth method uses a specific method declared in the model class. In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    options: listStatuses
+```
+
+Supplying the dropdown options to the model class:
+
+```php
+public function listStatuses($fieldName, $value, $formData)
+{
+    return ['published' => 'Published', ...];
+}
+```
+
+The sixth method allows you to specify a static method on a class to return the options:
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    options: \MyAuthor\MyPlugin\Classes\FormHelper::staticMethodOptions
+```
+
+Supplying the dropdown options to the model class:
+
+```php
+public static function staticMethodOptions($formWidget, $formField)
+{
+    return ['published' => 'Published', ...];
+}
+```
+
+The seventh method allows you to specify a callable object via an array definition. If using PHP, you're able to provide an array with the first element being the object and the second element being the method you want to call on that object. If you're using YAML, you're limited to a static method defined as the second element and the namespaced reference to a class as the first element:
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    options: [\MyAuthor\MyPlugin\Classes\FormHelper, staticMethodOptions]
+```
+
+Supplying the dropdown options to the model class:
+
+```php
+public static function staticMethodOptions($formWidget, $formField)
+{
+    return ['published' => 'Published', ...];
+}
 ```
 
 <a name="form-widgets"></a>
@@ -1470,7 +1491,7 @@ tags:
     separator: space
 ```
 
-A tag list support the same methods for defining the options as the [dropdown field type](#field-dropdown).
+See [Specifying options](#specifying-options) for the different methods to specify the options.
 
 ```yaml
 tags:
