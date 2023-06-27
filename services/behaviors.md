@@ -154,7 +154,7 @@ class Plugin extends PluginBase
 {
     public function boot()
     {
-        MyNamespace\Controller::extend(function ($outer) {
+        \MyNamespace\Controller::extend(function ($outer) {
             // Scoped to \MyNamespace\Controller
             // $outer = \Acme\Plugin\Plugin
         }, true, $this);
@@ -273,16 +273,16 @@ Winter\Users\Controllers\Users::extend(function($controller) {
 
 ## Local Extensions
 
-Extendable classes can be provided local extensions by calling the `extend()` method directly on an instance of an extendable class. Compared to the statically-called `::extend()` method, this has the effect of extending just a single instance of a given model.
+Extendable classes can be provided local extensions by calling the `extend()` method directly on an instance of an extendable class. Compared to the statically-called `::extend()` method, this has the effect of extending just a single instance of a given model after constructions. This means that behaviors will be loaded and available.
 
 For example, you may choose to add a callback method to a model only in certain circumstances, such as during a search.
 
 ```php
 public function searchModel($query, $model)
 {
-    $model->extend(function ($model) use ($query) {
-        $model->addDynamicMethod('afterFetch', function () use ($query) {
-            $model->searchQuery = $query;
+    $model->extend(function () use ($query) {
+        $this->addDynamicMethod('afterFetch', function () use ($query) {
+            $this->searchQuery = $query;
         });
     });
 
@@ -290,17 +290,20 @@ public function searchModel($query, $model)
 }
 ```
 
-As with constructor extensions, you may also run your extension closure as a local scope and provide an "outer" scope, by setting the second parameter to `true` and adding an "outer" scope object as the third parameter.
+By design, all local extensions are scoped to the class that is being extended, which means that `$this` inside the callback method will call methods and properties within the class being extended. You may provide an "outer" scope as the second parameter of the `extend()` method to pass through to the first parameter of the closure.
 
 ```php
 public function searchModel($query, $model)
 {
     $model->extend(function ($outerScope) use ($query) {
+        // "$this" will be scoped to the $model class.
+        // "$outerScope" will be scoped to the outside class (ie. the one that defined the "searchModel" method)
+
         $this->addDynamicMethod('afterFetch', function () use ($query, $outerScope) {
             $this->searchQuery = $query;
             $this->searchClass = $outerScope;
         }, true);
-    }, true, $this);
+    }, $this);
 
     return $model->where('name', 'like', '%' . $query . '%')->get();
 }

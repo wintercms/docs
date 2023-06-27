@@ -36,7 +36,7 @@ User::extend(function ($model) {
             // Code to register $model->email to mailing list
         });
     }
-});
+}, true);
 ```
 
 ### Declaring / Firing events

@@ -62,7 +62,7 @@ Parameters in the middle of the URL cannot be optional. In the next example, the
 url = "/blog/:post_id?/comments"
 ```
 
-Optional parameters can have default values which are used as fallback values in case the real parameter value is not presented in the URL. Default values cannot contain any asterisks, pipe symbols, or question marks. The default value is specified after the **question mark**. In the next example, the `category_id` parameter would be `10` for the URL `/blog/category`.
+Optional parameters can have default values which are used as fallback values when a value isn't present in the URL. Default values cannot contain any asterisks, pipe symbols, or question marks. The default value is specified after the **question mark**. In the next example, the `category_id` parameter would be `10` for the URL `/blog/category`.
 
 ```ini
 url = "/blog/category/:category_id?10"

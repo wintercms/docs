@@ -763,7 +763,7 @@ class ApiData extends Model
 }
 ```
 
-## Add sortable relations
+## HasSortableRelations
 
 Add this trait to your model in order to allow its relations to be sorted/reordered.
 

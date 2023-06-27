@@ -97,7 +97,7 @@ If you intend to use scheduled tasks, or install plugins that use scheduled task
 
 Be sure to replace `/path/to/artisan` with the absolute path to the `artisan` file in the root directory of your Winter installation. This cron task will call the command scheduler every minute, to which Winter will evaluate any scheduled tasks and run the tasks that are due for execution.
 
-> **NOTE**: If you are adding this to `/etc/cron.d`, you'll need to specify a user immediately after the final `*` in the example above.
+> **NOTE**: If you are adding this to the system crontab (`/etc/cron.d`), you'll need to specify the user to run the command as immediately after `* * * * *`.
 
 ### Setting up queue workers
 

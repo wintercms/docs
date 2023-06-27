@@ -554,7 +554,12 @@ For more information on model validation, please visit [the documentation page](
 
 ### Partial
 
-`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
+`partial` - renders a backend partial. If `path` option is not set the field name is used as the partial name when attempting to locate the partial. The following variables are available to the partial being rendered:
+
+- `$formWidget`: The instance of the `Backend\Widgets\Form` class that this field belongs to
+- `$formModel` or `$model`: The instance of the `Model` attached to this form.
+- `$formField` or `$field`: The instance of `Backend\Classes\FormField` for this field.
+- `$formValue` or `$value`: The value of this field instance.
 
 ```yaml
 content:
@@ -785,6 +790,7 @@ data:
     btnAddRowBelowLabel: Add Row Below
     btnDeleteRowLabel: Delete Row
     columns: []
+    default: []
     deleting: true
     dynamicHeight: true
     fieldName: null
@@ -806,6 +812,7 @@ Option | Description
 `btnAddRowBelowLabel` | defines a custom label for the "Add Row Below" button.
 `btnDeleteRowLabel` | defines a custom label for the "Delete Row" button.
 `columns` | an array representing the column configuration of the data table. See the *Column configuration* section below.
+`default` | an array of records for the data table. See the *Column configuration* section below.
 `deleting` | allow records to be deleted from the data table. Default: `false`.
 `dynamicHeight` | if `true`, the data table's height will extend or shrink depending on the records added, up to the maximum size defined by the `height` configuration value. Default: `false`.
 `fieldName` | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
@@ -833,6 +840,17 @@ columns:
     name:
         type: string
         title: Name
+    enabled:
+        type: checkbox
+        title: Enabled
+    virtual:
+        type: checkbox
+        title: Virtual
+
+default:
+    - { id: 1, name: "first record", enabled: 0, virtual: 1 }
+    - { id: 2, name: "second record", enabled: 1, virtual: 0 }
+    - { id: 3, name: "third record", enabled: 0, virtual: 0 }
 ```
 
 Option | Description
@@ -979,7 +997,7 @@ background_image:
 
 Option | Description
 ------------- | -------------
-`mode` | the expected file type, either file or image. Default: file.
+`mode` | the expected file type, supported types are: `file`, `image`, `document`, `audio`, `video`, `all`. Default: `all`.
 `prompt` | text to display when there is no item selected. The `%s` character represents the media manager icon.
 `imageWidth` | if using image type, the preview image will be displayed to this width, optional.
 `imageHeight` | if using image type, the preview image will be displayed to this height, optional.
@@ -1008,21 +1026,23 @@ content:
                 label: This the title
                 type: text
         tabs:
-            meta_title:
-                lable: Meta Title
-                tab: SEO
-            color:
-                label: Color
-                type: colorpicker
-                tab: Design
+            fields:
+                meta_title:
+                    lable: Meta Title
+                    tab: SEO
+                color:
+                    label: Color
+                    type: colorpicker
+                    tab: Design
         secondaryTabs:
-            is_active:
-                label: Active
-                type: checkbox
-            logo:
-                label: Logo
-                type: mediafinder
-                mode: image
+            fields:
+                is_active:
+                    label: Active
+                    type: checkbox
+                logo:
+                    label: Logo
+                    type: mediafinder
+                    mode: image
 ```
 
 A nested form provides a way of collating reusable fields and making them available in multiple forms. A nested form supports the same syntax as a normal form, including tabs and secondary tabs, and outside fields. The given field name for the nested form will contain the entire structure and values of your nested form as a JSON array. It's even possible to use nested forms inside a nested form.
