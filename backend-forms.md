@@ -1337,7 +1337,10 @@ Option | Description
 `maxItems` | maximum number of items to allow within the repeater.
 `groups` | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
 `sortable` | whether or not items in the repeater can be reordered. Default: `true`.
-`style` | the behavior style to apply for repeater items. Can be one of the following: `default`, `collapsed` or `accordion`. See the **Repeater styles** section below for more information.
+`style` | the behavior style to apply for repeater items. Can be one of the following: `default`, `collapsed` or `accordion`. See the **Repeater styles** section below for more information. Ignored when in `grid` mode.
+`mode` | defines the repeater format. Can be either `list` (default, displays items in a vertical list) or `grid` (displays items in a horizontal grid).
+`columns` | defines the amount of columns to display in a `grid` mode repeater. Can be between 2 and 6. Defaults to `4`. Items which exceed the amount of columns in a row will be moved to the next row. Ignored when in `list` mode.
+`rowHeight` | defines the minimum height (in pixels) applied to each row in a `grid` mode repeater. This allows you to visualise the size of items in the repeater. If an item in a row is larger than this height, the rest of the row will scale to accommodate the full height. Default: `120`. Ignored when in `list` mode.
 
 The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
 
