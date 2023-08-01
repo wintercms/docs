@@ -4,7 +4,7 @@
 
 The **Form behavior** is a controller [behavior](../services/behaviors) used for easily adding form functionality to a backend page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
-The Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model). In order to use the Form behavior you should add the `\Backend\Behaviors\FormController::class` definition to the `$implement` property of the controller class.
+The Form behavior depends on form [field definitions](#defining-form-fields) and a [model class](../database/model). In order to use the Form behavior you should add the `\Backend\Behaviors\FormController::class` definition to the `$implement` property of the controller class.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -58,7 +58,7 @@ The following fields are required in the form configuration file:
 Field | Description
 ------------- | -------------
 `name` | the name of the object being managed by this form.
-`form` | a configuration array or reference to a form field definition file, see [form fields](#form-fields).
+`form` | a configuration array or reference to a form field definition file, see [form fields](#defining-form-fields).
 `modelClass` | a model class name, the form data is loaded and saved against this model.
 
 The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#form-create-page), [Update](#form-update-page) or [Preview](#form-preview-page) pages.
@@ -173,7 +173,7 @@ secondaryTabs:
         [...]
 ```
 
-Fields from related models can be rendered with the [Relation Widget](#widget-relation) or the [Relation Manager](relations#relationship-types). The exception is a OneToOne or morphOne related field, which must be defined as **relation[field]** and then can be specified as any other field of the model:
+Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations#relationship-types). The exception is a OneToOne or morphOne related field, which must be defined as **relation[field]** and then can be specified as any other field of the model:
 
 ```yaml
     user_name:
@@ -268,22 +268,22 @@ There are various native field types that can be used for the **type** setting. 
 
 <div class="columned-list">
 
-- [Balloon Selector](#field-balloon)
-- [Checkbox](#field-checkbox)
-- [Checkbox List](#field-checkboxlist)
-- [Dropdown](#field-dropdown)
-- [Email](#field-email)
-- [Hint](#field-hint)
-- [Number](#field-number)
-- [Partial](#field-partial)
-- [Password](#field-password)
-- [Radio List](#field-radio)
-- [Range](#field-range)
-- [Section](#field-section)
-- [Switch](#field-switch)
-- [Text](#field-text)
-- [Textarea](#field-textarea)
-- [Widget](#field-widget)
+- [Balloon Selector](#balloon-selector)
+- [Checkbox](#checkbox)
+- [Checkbox List](#checkbox-list)
+- [Dropdown](#dropdown)
+- [Email](#email)
+- [Hint](#hint)
+- [Number](#number)
+- [Partial](#partial)
+- [Password](#password)
+- [Radio List](#radio-list)
+- [Range](#range)
+- [Section](#section)
+- [Switch](#switch)
+- [Text](#text)
+- [Textarea](#textarea)
+- [Widget](#widget)
 
 </div>
 
@@ -301,7 +301,7 @@ gender:
         male: Male
 ```
 
-See [Specifying options](#specifying-options) for the different methods to specify the options.
+See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
 ### Checkbox
 
@@ -332,7 +332,7 @@ permissions:
         modify_account: Modify account
 ```
 
-See [Specifying options](#specifying-options) for the different methods to specify the options.
+See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
 Checkbox lists support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
@@ -350,7 +350,7 @@ status_type:
         - archived
 ```
 
-See [Specifying options](#specifying-options) for the different methods to specify the options.
+See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
 ### Add icon to dropdown options
 
@@ -471,7 +471,7 @@ content:
 
 ### Password
 
-`password ` - renders a single line password field. See also [`sensitive`](#widget-sensitive), for sensitive data that should be able to be revealed on request.
+`password ` - renders a single line password field. See also [`sensitive`](#sensitive), for sensitive data that should be able to be revealed on request.
 
 ```yaml
 user_password:
@@ -506,7 +506,7 @@ security_level:
         guests: [Guests only, Only guest users will be able to access this page.]
 ```
 
-See [Specifying options](#specifying-options) for the different methods to specify the options.
+See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
 For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
@@ -578,167 +578,27 @@ blog_content:
     size: huge
 ```
 
-### Methods of specifying dropdown types (balloon-selector, checkboxlist, dropdown, radio & taglist) options
-
-There are 7 ways to provide the drop-down options.
-
-The first method defines `options` directly in the YAML file (two variants):
-
-(value only):
-
-```yaml
-status_type:
-    label: Blog Post Status
-    type: dropdown
-    default: published
-    options:
-        - draft
-        - published
-        - archived
-```
-
-(key / value):
-
-```yaml
-status_type:
-    label: Blog Post Status
-    type: dropdown
-    default: published
-    options:
-        draft: Draft
-        published: Published
-        archived: Archived
-```
-
-The second method allows you to specify a localization string that returns an array (key/value or value only).
-
-```yaml
-status_type:
-    label: Blog Post Status
-    type: dropdown
-    default: published
-    options: author.plugin::lang.status_types
-```
-
-Supplying the options in a language file:
-
-```php
-// lang.php
-return [
-    'status_types' => [
-        'draft' => 'Draft',
-        'published' => 'Published',
-        'archived' => 'Archived',
-    ],
-];
-```
-
-The third method defines options with a method declared in the model class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model. Using the example above, the model should have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
-
-```yaml
-status_type:
-    label: Blog Post Status
-    type: dropdown
-```
-
-Supplying the dropdown options in the model class:
-
-```php
-public function getStatusTypeOptions($value, $formData)
-{
-    return ['all' => 'All', ...];
-}
-```
-
-The fourth method uses a global `getDropdownOptions` method defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, the second is the current value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
-
-```php
-public function getDropdownOptions($fieldName, $value, $formData)
-{
-    if ($fieldName == 'status') {
-        return ['all' => 'All', ...];
-    }
-    else {
-        return ['' => '-- none --'];
-    }
-}
-```
-
-The fifth method uses a specific method declared in the model class. In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
-
-```yaml
-status:
-    label: Blog Post Status
-    type: dropdown
-    options: listStatuses
-```
-
-Supplying the dropdown options to the model class:
-
-```php
-public function listStatuses($fieldName, $value, $formData)
-{
-    return ['published' => 'Published', ...];
-}
-```
-
-The sixth method allows you to specify a static method on a class to return the options:
-
-```yaml
-status:
-    label: Blog Post Status
-    type: dropdown
-    options: \MyAuthor\MyPlugin\Classes\FormHelper::staticMethodOptions
-```
-
-Supplying the dropdown options to the model class:
-
-```php
-public static function staticMethodOptions($formWidget, $formField)
-{
-    return ['published' => 'Published', ...];
-}
-```
-
-The seventh method allows you to specify a callable object via an array definition. If using PHP, you're able to provide an array with the first element being the object and the second element being the method you want to call on that object. If you're using YAML, you're limited to a static method defined as the second element and the namespaced reference to a class as the first element:
-
-```yaml
-status:
-    label: Blog Post Status
-    type: dropdown
-    options: [\MyAuthor\MyPlugin\Classes\FormHelper, staticMethodOptions]
-```
-
-Supplying the dropdown options to the model class:
-
-```php
-public static function staticMethodOptions($formWidget, $formField)
-{
-    return ['published' => 'Published', ...];
-}
-```
-
 ## Form widgets
 
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets#form-widgets) article.
 
 <div class="columned-list">
 
-- [Code editor](#widget-codeeditor)
-- [Color picker](#widget-colorpicker)
-- [Data table](#widget-datatable)
-- [Date picker](#widget-datepicker)
-- [File upload](#widget-fileupload)
-- [Icon picker](#widget-iconpicker)
-- [Markdown editor](#widget-markdowneditor)
-- [Media finder](#widget-mediafinder)
-- [Nested Form](#widget-nestedform)
-- [Record finder](#widget-recordfinder)
-- [Relation](#widget-relation)
-- [Repeater](#widget-repeater)
-- [Rich editor / WYSIWYG](#widget-richeditor)
-- [Sensitive](#widget-sensitive)
-- [Tag list](#widget-taglist)
+- [Code editor](#code-editor)
+- [Color picker](#color-picker)
+- [Data table](#data-table)
+- [Date picker](#date-picker)
+- [File upload](#file-upload)
+- [Icon picker](#icon-picker)
+- [Markdown editor](#markdown-editor)
+- [Media finder](#media-finder)
+- [Nested Form](#nested-form)
+- [Record finder](#record-finder)
+- [Relation](#relation)
+- [Repeater](#repeater)
+- [Rich editor / WYSIWYG](#rich-editor--wysiwyg)
+- [Sensitive](#sensitive)
+- [Tag list](#tag-list)
 
 </div>
 
@@ -972,7 +832,7 @@ Option | Description
 `thumbOptions` | options to pass to the thumbnail generating method for the file
 `attachOnUpload` | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
 
-> **NOTE:** Unlike the [Media Finder FormWidget](#widget-mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
+> **NOTE:** Unlike the [Media Finder FormWidget](#media-finder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
 
 ### Icon Picker
 
@@ -1044,7 +904,7 @@ Option | Description
 `imageWidth` | if using image type, the preview image will be displayed to this width, optional.
 `imageHeight` | if using image type, the preview image will be displayed to this height, optional.
 
-> **NOTE:** Unlike the [File Upload FormWidget](#widget-fileupload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
+> **NOTE:** Unlike the [File Upload FormWidget](#file-upload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
 
 ### Nested Form
 
@@ -1091,7 +951,7 @@ A nested form provides a way of collating reusable fields and making them availa
 
 Option | Description
 ------------- | -------------
-`form`  | contains the [form definition](#form-fields)
+`form`  | contains the [form definition](#defining-form-fields)
 `usePanelStyles` | defines if the nested form should be wrapped with a panel container (defaults `true`)
 
 ### Record finder
@@ -1186,7 +1046,7 @@ extra_information:
 
 Option | Description
 ------------- | -------------
-`form` | a reference to form field definition file, see [backend form fields](#form-fields). Inline fields can also be used.
+`form` | a reference to form field definition file, see [backend form fields](#defining-form-fields). Inline fields can also be used.
 `prompt` | text to display for the create button. Default: `Add new item`.
 `titleFrom` | the name of the field to use as the title for an item. This will show the value of the field as a title when an item is collapsed in a repeater. Please note that only text fields and dropdown fields are supported. Does not work in group mode.
 `minItems` | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
@@ -1246,7 +1106,7 @@ Option | Description
 `name` | the name of the group.
 `description` | a brief description of the group.
 `icon` | defines an icon for the group, optional.
-`fields` | form fields belonging to the group, see [backend form fields](#form-fields).
+`fields` | form fields belonging to the group, see [backend form fields](#defining-form-fields).
 
 > **NOTE**: The group key is stored along with the saved data as the `_group` attribute.
 
@@ -1310,7 +1170,7 @@ tags:
     separator: space
 ```
 
-See [Specifying options](#specifying-options) for the different methods to specify the options.
+See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
 ```yaml
 tags:
@@ -1337,6 +1197,160 @@ Option | Description
 `options` | specifies a method or array for predefined options. Set to true to use model `get*Field*Options` method. Optional.
 `nameFrom` | if relation mode is used, a model attribute name for displaying the tag name. Default: `name`
 `useKey` | use the key instead of value for saving and reading data. Default: `false`
+
+## Defining field options
+
+For fields and widgets that allow multiple options, we provide a multitude of ways of defining the available options that can be used depending on your needs.
+
+The following fields and widgets allow the setting of options:
+
+- [Balloon Selector](#balloon-selector)
+- [Checkbox List](#checkbox-list)
+- [Dropdown](#dropdown)
+- [Radio List](#radio-list)
+- [Tag list](#tag-list)
+
+### Value-only options
+
+You can define a simple list of values as an array directly in the form configuration. This will use each value as both the option's value and label.
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    default: published
+    options:
+        - draft
+        - published
+        - archived
+```
+
+### Key-value options
+
+If you wish to specify both the option's value and label separately, you can use a key-value object for the `options` definition. The key represents the option's value, and the value represents the option's label.
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    default: published
+    options:
+        draft: Draft
+        published: Published
+        archived: Archived
+```
+
+### Language definition
+
+If you intend to use multiple language, you can specify a language key string for `options`. This will allow you to define the options in your language file and change the label depending on the language used on the site. This follows the same rules as the [key-value options](#key-value-options).
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    default: published
+    options: author.plugin::lang.status_types
+```
+
+Supplying the options in a language file:
+
+```php
+// lang.php
+return [
+    'status_types' => [
+        'draft' => 'Draft',
+        'published' => 'Published',
+        'archived' => 'Archived',
+    ],
+];
+```
+
+### Model-derived options
+
+Winter also has the capability of deriving the available options directly from the model that the form is connected to. This allows you to provide options through an AJAX call, and provides flexibility with making options available depending on the entire context of the form - for example, limiting options based on other attributes in the model.
+
+If you do not specify an `options` configuration for a field or widget that requires options, this is the default way of retrieving the available options.
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+```
+
+By default, the AJAX call will look for a method in your model that begins with `get`, followed by the field name in PascalCase, ending with `Options`. For example, the above field name being `status_type` would look for a method called `getStatusTypeOptions`. The callback accepts two parameters, the first being the value of the current field, and the second being an array of the current form data.
+
+```php
+public function getStatusTypeOptions($value, $formData)
+{
+    return ['all' => 'All', ...];
+}
+```
+
+Optionally, you may also provide a "catch-all" method in your model called `getDropdownOptions`, which will be used if the AJAX call is unable to find an applicable field method demonstrated above. This callback accepts three parameters: the field name as it is in the config (ie. `status_type`), the value of the field and the array of the current form data.
+
+```php
+public function getDropdownOptions($fieldName, $value, $formData)
+{
+    if ($fieldName == 'status') {
+        return ['all' => 'All', ...];
+    }
+    else {
+        return ['' => '-- none --'];
+    }
+}
+```
+
+You can also override this behaviour by specifying a string for `options`. This will direct the AJAX call to look for a specific method in your model:
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    options: listStatuses
+```
+
+Supplying the dropdown options to the model class:
+
+```php
+public function listStatuses($fieldName, $value, $formData)
+{
+    return ['published' => 'Published', ...];
+}
+```
+
+### AJAX-derived options
+
+If you would like to retrieve the available options via AJAX but would like to provide the options from a specific class, you can also provide a "callback" function either as a string or as an array to a specific static function, using the same syntax that PHP accepts for [callable methods](https://www.php.net/manual/en/language.types.callable.php).
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    options: \MyAuthor\MyPlugin\Classes\FormHelper::staticMethodOptions
+```
+
+```php
+public static function staticMethodOptions($formWidget, $formField)
+{
+    return ['published' => 'Published', ...];
+}
+```
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    options: [\MyAuthor\MyPlugin\Classes\FormHelper, staticMethodOptions]
+```
+
+Supplying the dropdown options to the model class:
+
+```php
+public static function staticMethodOptions($formWidget, $formField)
+{
+    return ['published' => 'Published', ...];
+}
+```
 
 ## Form views
 
@@ -1429,7 +1443,7 @@ Sometimes you may want to manipulate the value or appearance of a form field und
 
 ### Input preset converter
 
-The input preset converter is defined with the `preset` [form field option](#form-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
+The input preset converter is defined with the `preset` [form field option](#field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
 
 In this example we will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) is empty and untouched.
 
@@ -1472,7 +1486,7 @@ Type | Description
 
 ### Trigger events
 
-Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
+Trigger events are defined with the `trigger` [form field option](#field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
 
 ```yaml
 is_delayed:
@@ -1496,12 +1510,12 @@ In the above example the `send_at` form field will only be shown if the `is_dela
 Option | Description
 ------------- | -------------
 `action` | defines the action applied to this field when the condition is met. Supported values: `show`, `hide`, `enable`, `disable`, `empty`.
-`field` | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#widget-repeater), only fields in that same [repeater widget](#widget-repeater) will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a [repeater widget](#widget-repeater) or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
+`field` | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#repeater), only fields in that same [repeater widget](#repeater) will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a [repeater widget](#repeater) or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
 `condition` | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: `checked`, `unchecked`, `value[somevalue]`. To match multiple values, the following syntax can be used: `value[somevalue][othervalue]`.
 
 ### Field dependencies
 
-Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field. Examples below:
+Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field. Examples below:
 
 ```yaml
 country:
@@ -1533,7 +1547,7 @@ public function getStateOptions()
 }
 ```
 
-This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering form fields](#filter-form-fields) section. An example is provided below:
+This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering form fields](#filtering-form-fields) section. An example is provided below:
 
 ```yaml
 dnsprovider:
@@ -1698,11 +1712,11 @@ Method | Description
 `addSecondaryTabFields` | adds new fields to the secondary tabbed area
 `removeField` | remove a field from any areas
 
-Each method takes an array of fields similar to the [form field configuration](#form-fields).
+Each method takes an array of fields similar to the [form field configuration](#defining-form-fields).
 
 ### Filtering form fields
 
-You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields) and **$context** represents the active form context.
+You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#defining-form-fields) and **$context** represents the active form context.
 
 ```php
 public function filterFields($fields, $context = null)
