@@ -55,8 +55,8 @@ The Winter CMS repositories use milestones to track which changes are to be rele
 
 In these examples `v1` reflects the fact that Winter strives to never introduce massive breaking changes, the second number is associated with the LTS version of Laravel supported by that branch, and the final number represents the release number for that branch. The current Winter CMS branches and their associated LTS release versions are as follows:
 
-- `v1.2` - Preparation for Laravel 9.x LTS
-- `v1.1` - Laravel 6.x LTS (Currently active branch)
+- `v1.2` - Laravel 9.x (Currently active branch)
+- `v1.1` - Laravel 6.x LTS
 - `v1.0` - Laravel 5.5 LTS (Only receives security updates from Winter, not recommend for active use)
 
 One milestone representing the *upcoming* build to be released will be present for all incoming code changes, as well as a milestone representing the *next* build to be released for issues / PRs that are slightly higher risk and are being delayed until the next release to avoid blocking the current one. Additionally, a build milestone for the first version of the next branch will be present to indicate that the issue / PR has potentially breaking changes that will be delayed until the next major branch introducing the next Laravel LTS release. For example, if the last build released was `v1.1.7`, there will be a milestone for `v1.1.8` and `v1.2.0`.

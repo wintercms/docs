@@ -43,6 +43,7 @@ title: Blog Posts
 list: ~/plugins/acme/blog/models/post/columns.yaml
 modelClass: Acme\Blog\Models\Post
 recordUrl: acme/blog/posts/update/:id
+recordsPerPage: 20
 ```
 
 The following fields are required in the list configuration file:
@@ -63,7 +64,7 @@ Option | Description
 `noRecordsMessage` | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
 `deleteMessage` | a message to display when records are bulk deleted, can refer to a [localization string](../plugin/localization).
 `noRecordsDeletedMessage` | a message to display when a bulk delete action is triggered, but no records were deleted, can refer to a [localization string](../plugin/localization).
-`recordsPerPage` | records to display per page, use 0 for no pages. Default: 0
+`recordsPerPage` | records to display per page, use 0 to disable the pagination. Default: 0
 `perPageOptions` | options to provide the user when selecting how many records to display per page. Default: `[20, 40, 80, 100, 120]`
 `showPageNumbers` | displays page numbers with pagination. Disable this to improve list performance when working with large tables. Default: `true`
 `toolbar` | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
