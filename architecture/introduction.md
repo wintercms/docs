@@ -8,7 +8,7 @@ Winter is a Content Management System (CMS) whose sole purpose is to make your d
 
 ## Project Structure
 
-The code for your Winter CMS projects can generally exist as one of three different types of extension; as a [Theme](#code-structure-themes), [Plugin](#code-structure-plugins), or [Module](#code-structure-modules). Code can also be included in the form of external dependencies managed by [Composer](../architecture/using-composer).
+The code for your Winter CMS projects can generally exist as one of three different types of extension; as a [Theme](#themes), [Plugin](#plugins), or [Module](#modules). Code can also be included in the form of external dependencies managed by [Composer](../architecture/using-composer).
 
 ### Directory Structure
 
@@ -50,8 +50,8 @@ Themes are managed by the CMS module, the default frontend experience in Winter 
 #### Languages Used
 
 - [INI](https://en.wikipedia.org/wiki/INI_file) is used for [template configuration](../cms/themes#configuration-section)
-- PHP is used to add more complex logic through the [PHP code sections](../cms/themes#php-section)
-- [Twig](https://twig.symfony.com/) is used for [templating functionality and conditionals](../cms/themes#twig-section).
+- PHP is used to add more complex logic through the [PHP code sections](../cms/themes#php-code-section)
+- [Twig](https://twig.symfony.com/) is used for [templating functionality and conditionals](../cms/themes#twig-markup-section).
 - HTML, CSS, JS, SCSS/SASS, LESS, etc; any other frontend language can be used in frontend themes as desired.
 
 ### Plugins
@@ -60,7 +60,7 @@ Plugins are the foundation for adding new features to Winter CMS by extending it
 
 1. Define [components](../plugin/components).
 1. Define [user permissions](../backend/users).
-1. Add [settings pages](../plugin/settings#backend-pages), [menu items](../plugin/registration#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
+1. Add [settings pages](../plugin/settings#backend-settings-pages), [menu items](../plugin/registration#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
 1. Create [database table structures and seed data](../plugin/updates).
 1. Alter [functionality of the core or other plugins](../events/introduction).
 1. Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
@@ -107,7 +107,7 @@ Winter CMS includes two types of asset compilation to assist developers with qui
 
 The server-side [Asset Compiler](../services/asset-compilation) makes use of the [Assetic Framework](https://github.com/assetic-php/assetic) to compile and combine assets like CSS and JavaScript serverside, through PHP, negating the need for complex build workflows. The Asset Compiler provides on-the-fly server-side compilation of SASS and LESS stylesheets as well as [run-once manual compilation of assets](../services/asset-compilation#compiler-bundles) without requiring additional workflow tools like Node or NPM. It is also able to combine and minify CSS and JS files.
 
-Additionally, you can [define variables in the theme.yaml file](../themes/development#combiner-vars) that can be modified in the Theme Settings area of the backend which are then injected into the compiled files, creating flexibility for theming and branding.
+Additionally, you can [define variables in the theme.yaml file](../themes/development#asset-compiler-variables) that can be modified in the Theme Settings area of the backend which are then injected into the compiled files, creating flexibility for theming and branding.
 
 For more advanced workflows, or for taking advantage of the vast Node ecosystem, we also include command-line based compilation of assets through [Mix commands](../console/asset-compilation.md), which is powered by the [Laravel Mix](https://laravel-mix.com/) library. These commands take a lot of the headache out of managing, using and compiling Node-based systems and give you the full flexibility to build the frontend the way you want to.
 

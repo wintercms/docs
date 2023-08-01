@@ -59,7 +59,7 @@ composer create-project wintercms/winter <your installation directory> "<version
 
 Using Composer to install plugins and themes in Winter CMS allows a degree of control over the versions of plugins in use, making it easy to synchronise and deploy Winter CMS to multiple environments.
 
-You may install a theme or plugin through Composer by [publishing the plugin or theme](#publishing-products) in [Packagist](https://packagist.org), the repository for Composer packages. Once the plugin or theme is published, you can include it in any Winter CMS project that has Composer enabled by running the following command within the root directory of the project:
+You may install a theme or plugin through Composer by [publishing the plugin or theme](#publishing-plugins-or-themes) in [Packagist](https://packagist.org), the repository for Composer packages. Once the plugin or theme is published, you can include it in any Winter CMS project that has Composer enabled by running the following command within the root directory of the project:
 
 ```bash
 composer require <your package name>
@@ -111,7 +111,7 @@ When publishing your plugins or themes to the marketplace, you may wish to also 
 }
 ```
 
-Be sure to start your package `name` with **wn-** and end it with **-plugin** or **-theme** respectively - this will help others find your package and is in  accordance with the [quality guidelines](../help/developer/guide#repository-naming).
+Be sure to start your package `name` with **wn-** and end it with **-plugin** or **-theme** respectively - this will help others find your package and is in accordance with the [quality guidelines](./developer-guide#repository-naming).
 
 The `type` field is a key definition for ensuring that your plugin or theme arrives at the correct location upon installation. Use the following types:
 
@@ -211,7 +211,7 @@ return [
 ];
 ```
 
-Now the package configuration has been included natively in Winter CMS and the values can be changed normally using the [standard configuration approach](../plugin/settings#file-configuration).
+Now the package configuration has been included natively in Winter CMS and the values can be changed normally using the [standard configuration approach](../plugin/settings#file-based-configuration).
 
 ### Aliases & service providers
 

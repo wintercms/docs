@@ -169,30 +169,30 @@ The following scenarios would determine which version number needs to change:
 
 Maintainers should make sure that a `minor` and a `point` milestone is available for first-party plugins at all times, and use their best determination of which is the appropriate milestone for all incoming PRs and issues.
 
-#### Reviewing Issues and Pull Requests
+#### Reviewing Issues and Pull Requests for Plugins
 
-Maintainers should use the [same processes for Winter CMS](#winter-cms-reviewing-issues-and-prs) when reviewing issues and PRs for first-party plugins.
+Maintainers should use the [same processes for Winter CMS](#reviewing-issues-and-pull-requests) when reviewing issues and PRs for first-party plugins.
 
 Pull requests should be made to the `main` branch at all times, unless it is a child feature branch that is to be merged into a parent feature branch.
 
 For pull requests that contain changes to the `updates/version.yaml` file, maintainers should request that contributors do not include these changes in their pull request. This file should only be modified as part of the [Release Process](#plugins-release-process).
 
-#### Merging Pull Requests
+#### Merging Pull Requests for Plugins
 
-As with reviewing issues and PRs, first-party plugins use the [same processes as Winter CMS](#winter-cms-merging-pull-requests) when merging pull requests.
+As with reviewing issues and PRs, first-party plugins use the [same processes as Winter CMS](#merging-pull-requests) when merging pull requests.
 
-#### Standard Workflow for Maintainers
+#### Standard Plugin Workflow for Maintainers
 
-The workflow for first-party plugins is the [same as Winter](#winter-cms-standard-workflow), except that maintainers may commit changes to the `main` branch instead of the `develop` branch on an as-needed basis. As with Winter CMS, the primary mechanism for implementing changes is still recommended to be pull requests.
+The workflow for first-party plugins is the [same as Winter](#standard-workflow-for-maintainers), except that maintainers may commit changes to the `main` branch instead of the `develop` branch on an as-needed basis. As with Winter CMS, the primary mechanism for implementing changes is still recommended to be pull requests.
 
-#### Release Process
+#### Plugins Release Process
 
 Before a new version is released, the maintainer should ensure that all tasks assigned to the new version's milestone are completed and merged into `main`. Once this is done, the maintainer should update the `updates/version.yaml` file with the new version, and a one-line summary of the changes. Some example of these one-line changes can be found below:
 
 - https://github.com/wintercms/wn-blog-plugin/blob/main/updates/version.yaml
 - https://github.com/wintercms/wn-pages-plugin/blob/main/updates/version.yaml
 
-If a migration is also included with this version, it should be appended as an array item below the update. See [the documentation](../plugin/updates#version-file) for examples of how the version update entries should be formatted.
+If a migration is also included with this version, it should be appended as an array item below the update. See [the documentation](../plugin/updates#plugin-version-file) for examples of how the version update entries should be formatted.
 
 
 Once this commit is done, the milestone for this version should be closed and a new Release should be created for plugin in GitHub. A release provides more detailed release notes for the version, and links back to the milestone and related PRs to give users of the plugin more context on changes to the plugin between version. The release also tags the repository with the version. The release name should be in the format `v<major>.<minor>.<point>` and the details of the release notes should contain the following, in order and if applicable:

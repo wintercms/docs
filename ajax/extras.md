@@ -8,7 +8,7 @@ When using the AJAX framework, you have the option to specify the **extras** suf
 
 ## Loading indicator
 
-The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../ajax/javascript-api#global-events) used by the AJAX framework.
+The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../ajax/javascript-api#global-ajax-events) used by the AJAX framework.
 
 When an AJAX request starts the `ajaxPromise` event is fired that displays the indicator and puts the mouse cursor in a loading state. The `ajaxFail` and `ajaxDone` events are used to detect when the request finishes, where the indicator is hidden again.
 
@@ -125,7 +125,7 @@ function onSuccess()
 }
 ```
 
-To remain consistent with AJAX based flash messages, you can render a [standard flash message](../markup/tag-flash) when the page loads by placing this code in your page or layout.
+To remain consistent with AJAX based flash messages, you can render a [standard flash message](/docs/v1.2/markup/tags/flash) when the page loads by placing this code in your page or layout.
 
 ```twig
 {% flash %}

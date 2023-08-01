@@ -2,7 +2,7 @@
 
 ## Testing plugins
 
-Individual plugin test cases can be run by running [the `winter:test` command](../console/utilities#winter-test) with the `--p|plugin=` option.
+Individual plugin test cases can be run by running [the `winter:test` command](../console/utilities#run-unit-tests) with the `--p|plugin=` option.
 
 ### Creating plugin tests
 
@@ -59,7 +59,7 @@ php artisan plugin:refresh Acme.Blog
 [php artisan plugin:refresh <dependency>, ...]
 ```
 
-> **NOTE:** If your plugin uses [configuration files](../plugin/settings#file-configuration), then you will need to run `System\Classes\PluginManager::instance()->registerAll(true);` in the `setUp` method of your tests. Below is an example of a base test case class that should be used if you need to test your plugin working with other plugins instead of in isolation.
+> **NOTE:** If your plugin uses [configuration files](../plugin/settings#file-based-configuration), then you will need to run `System\Classes\PluginManager::instance()->registerAll(true);` in the `setUp` method of your tests. Below is an example of a base test case class that should be used if you need to test your plugin working with other plugins instead of in isolation.
 
 ```php
 use System\Classes\PluginManager;
@@ -105,7 +105,7 @@ To perform unit testing on the core Winter files, you should download a developm
 
 ### Unit tests
 
-Unit tests can be performed by running [the `winter:test` command](../console/utilities#winter-test) with the `--o|-core` option.
+Unit tests can be performed by running [the `winter:test` command](../console/utilities#run-unit-tests) with the `--o|-core` option.
 
 ### Functional tests
 

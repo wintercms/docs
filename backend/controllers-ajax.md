@@ -21,7 +21,7 @@ plugins/
 
 ### Class definition
 
-Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The most basic representation of a Controller used inside a Plugin looks like this:
+Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). The most basic representation of a Controller used inside a Plugin looks like this:
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -53,7 +53,7 @@ Property | Description
 `$pageTitle` | sets the page title. Can be set in the action method.
 `$bodyClass` | body class property used for customizing the layout. Can be set in the controller constructor or action method.
 `$guarded` | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
-`$layout` | specify a custom layout for the controller views (see [layouts](#layouts) below).
+`$layout` | specify a custom layout for the controller views.
 
 ## Actions, views and routing
 
@@ -156,7 +156,7 @@ The AJAX request can be triggered with the data attributes API or the JavaScript
 </button>
 ```
 
-> **NOTE**: You can specifically target the AJAX handler of a widget using a prefix `widget::onName`. See the [widget AJAX handler article](../backend/widgets#generic-ajax-handlers) for more details.
+> **NOTE**: You can specifically target the AJAX handler of a widget using a prefix `widget::onName`. See the [widget AJAX handler article](../backend/widgets#ajax-handlers) for more details.
 
 ## Controller middleware
 

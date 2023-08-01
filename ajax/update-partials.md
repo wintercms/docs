@@ -96,9 +96,9 @@ function onRefreshTime()
 
 Depending on the execution context, an [AJAX event handler](../ajax/handlers) makes variables available to partials differently.
 
-- Use `$this[]` inside a page or layout [PHP section](../cms/themes#php-section).
+- Use `$this[]` inside a page or layout [PHP section](../cms/themes#php-code-section).
 - Use `$this->page[]` inside a [component class](../plugin/components#ajax-handlers).
-- Use `$this->vars[]` in the [backend area](../backend/controllers-ajax#ajax).
+- Use `$this->vars[]` in the [backend area](../backend/controllers-ajax#backend-ajax-handlers).
 
 These examples will provide the **result** variable to a partial for each context:
 
@@ -124,7 +124,7 @@ This value can then be accessed using Twig in the partial:
 
 The AJAX framework writes partial updates by modifying the `innerHTML` property of the partial that is being updated. Due to the security measures implemented in most browsers, no `<script>` tags that are written in this manner will execute. This means that you cannot embed `<script>` tags in your partials.
 
-If you would like to allow JavaScript to manipulate your partial after being loaded, you should add an external JavaScript file loaded through your controller or widget through the [`addJs()`](../backend/widgets#widgets-assets) method and listen to the event that fires when AJAX requests complete.
+If you would like to allow JavaScript to manipulate your partial after being loaded, you should add an external JavaScript file loaded through your controller or widget through the [`addJs()`](../backend/widgets#injecting-page-assets-with-widgets) method and listen to the event that fires when AJAX requests complete.
 
 This will be slightly different depending on whether you are using the original [AJAX framework](../ajax/introduction) or using [Snowboard](../snowboard/introduction).
 

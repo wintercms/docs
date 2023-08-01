@@ -2,7 +2,7 @@
 
 ## AJAX handlers
 
-AJAX event handlers are PHP functions that can be defined in the page or layout [PHP section](../cms/themes#php-section) or inside [components](../cms/components). Handler names should have the following pattern: `onName`. All handlers support the use of [updating partials](../ajax/update-partials) as part of the AJAX request.
+AJAX event handlers are PHP functions that can be defined in the page or layout [PHP section](../cms/themes#php-code-section) or inside [components](../cms/components). Handler names should have the following pattern: `onName`. All handlers support the use of [updating partials](../ajax/update-partials) as part of the AJAX request.
 
 ```php
 function onSubmitContactForm()
@@ -25,7 +25,7 @@ Every AJAX request should specify a handler name, either using the [data attribu
 <script> $.request('onSubmitContactForm') </script>
 ```
 
-If two components register the same handler name, it is advised to prefix the handler with the [component short name or alias](../cms/components#aliases). If a component uses an alias of **mycomponent** the handler can be targeted with `mycomponent::onName`.
+If two components register the same handler name, it is advised to prefix the handler with the [component short name or alias](../cms/components#components-aliases). If a component uses an alias of **mycomponent** the handler can be targeted with `mycomponent::onName`.
 
 ```html
 <button data-request="mycomponent::onSubmitContactForm">Go</button>
@@ -104,7 +104,7 @@ throw new AjaxException([
 
 ## Running code before handlers
 
-Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts#dynamic-pages) allows code to run before every AJAX handler.
+Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts#layout-execution-life-cycle) allows code to run before every AJAX handler.
 
 ```php
 function onInit()
@@ -113,7 +113,7 @@ function onInit()
 }
 ```
 
-You may define an `init` method inside a [component class](../plugin/components#page-cycle-init) or [backend widget class](../backend/widgets).
+You may define an `init` method inside a [component class](../plugin/components#component-initialization) or [backend widget class](../backend/widgets).
 
 ```php
 function init()

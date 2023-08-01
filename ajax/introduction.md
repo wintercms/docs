@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Winter includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in [CMS themes](../cms/themes) and anywhere in the [backend administration area](../backend/controllers-ajax#ajax).
+Winter includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in [CMS themes](../cms/themes) and anywhere in the [backend administration area](../backend/controllers-ajax#backend-ajax-handlers).
 
 The AJAX framework comes in two flavors, you may either use [the JavaScript API](../ajax/javascript-api) or [the data attributes API](../ajax/attributes-api). The data attributes API doesn't require any JavaScript knowledge to use AJAX with Winter.
 
@@ -63,7 +63,7 @@ The `mypartial` partial contains markup that reads the `result` variable.
 The result is {{ result }}
 ```
 
-The **onTest** handler method accessed the form data using the `input` [helper method](../services/helpers#method-input) and the result is passed to the `result` page variable.
+The **onTest** handler method accessed the form data using the `input` [helper method](../services/helpers#input) and the result is passed to the `result` page variable.
 
 ```php
 function onTest()
