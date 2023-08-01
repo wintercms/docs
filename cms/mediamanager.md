@@ -2,7 +2,7 @@
 
 By default Media Manager works with the storage/app/media subdirectory of the installation directory. In order to use Amazon S3 or Rackspace CDN, you should update the system configuration.
 
-> You need to install [Drivers plugin](https://github.com/wintercms/wn-drivers-plugin) before you can use Amazon S3 or Rackspace CDN features.
+> You need to install [Winter.DriverAWS plugin](https://github.com/wintercms/wn-driveraws-plugin) before you can use Amazon S3 or Rackspace CDN features.
 
 Please note that after you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
 
