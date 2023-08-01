@@ -199,7 +199,7 @@ The above example would look for the value in PHP equivalent of `$record->conten
 
 There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
 
-<div class="content-list collection-method-list">
+<div class="columned-list">
 
 - [Text](#column-text)
 - [Image](#column-image)
@@ -590,7 +590,7 @@ public function getCityOptions($scopes = null)
 
 These types can be used to determine how the filter scope should be displayed.
 
-<div class="content-list collection-method-list">
+<div class="columned-list">
 
 - [Group](#filter-group)
 - [Checkbox](#filter-checkbox)

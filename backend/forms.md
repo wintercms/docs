@@ -266,7 +266,7 @@ Option | Description
 
 There are various native field types that can be used for the **type** setting. For more advanced form fields, a [form widget](#form-widgets) can be used instead.
 
-<div class="content-list collection-method-list">
+<div class="columned-list">
 
 - [Balloon Selector](#field-balloon)
 - [Checkbox](#field-checkbox)
@@ -722,7 +722,7 @@ public static function staticMethodOptions($formWidget, $formField)
 
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets#form-widgets) article.
 
-<div class="content-list collection-method-list">
+<div class="columned-list">
 
 - [Code editor](#widget-codeeditor)
 - [Color picker](#widget-colorpicker)

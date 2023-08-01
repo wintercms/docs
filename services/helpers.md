@@ -4,101 +4,101 @@ Winter includes a variety of "helper" PHP functions. Many of these functions are
 
 ### Arrays
 
-<div class="collection-method-list">
+<div class="columned-list">
 
-[Laravel `Arr::*()` Helpers](https://laravel.com/docs/9.x/helpers#arrays-and-objects-method-list)
-[array_add](#method-array-add)
-[array_divide](#method-array-divide)
-[array_dot](#method-array-dot)
-[array_undot](#method-array-undot)
-[array_except](#method-array-except)
-[array_first](#method-array-first)
-[array_flatten](#method-array-flatten)
-[array_forget](#method-array-forget)
-[array_get](#method-array-get)
-[array_only](#method-array-only)
-[array_pluck](#method-array-pluck)
-[array_pull](#method-array-pull)
-[array_set](#method-array-set)
-[array_sort](#method-array-sort)
-[array_sort_recursive](#method-array-sort-recursive)
-[array_where](#method-array-where)
-[head](#method-head)
-[last](#method-last)
+- [Laravel `Arr::*()` Helpers](https://laravel.com/docs/9.x/helpers#arrays-and-objects-method-list)
+- [array_add](#method-array-add)
+- [array_divide](#method-array-divide)
+- [array_dot](#method-array-dot)
+- [array_undot](#method-array-undot)
+- [array_except](#method-array-except)
+- [array_first](#method-array-first)
+- [array_flatten](#method-array-flatten)
+- [array_forget](#method-array-forget)
+- [array_get](#method-array-get)
+- [array_only](#method-array-only)
+- [array_pluck](#method-array-pluck)
+- [array_pull](#method-array-pull)
+- [array_set](#method-array-set)
+- [array_sort](#method-array-sort)
+- [array_sort_recursive](#method-array-sort-recursive)
+- [array_where](#method-array-where)
+- [head](#method-head)
+- [last](#method-last)
 
 </div>
 
 ### Paths
 
-<div class="collection-method-list">
+<div class="columned-list">
 
-[Path Symbols](#path-symbols)
-[app_path](#method-app-path)
-[base_path](#method-base-path)
-[config_path](#method-config-path)
-[database_path](#method-database-path)
-[media_path](#method-media-path)
-[plugins_path](#method-plugins-path)
-[public_path](#method-public-path)
-[storage_path](#method-storage-path)
-[temp_path](#method-temp-path)
-[themes_path](#method-themes-path)
-[uploads_path](#method-uploads-path)
+- [Path Symbols](#path-symbols)
+- [app_path](#method-app-path)
+- [base_path](#method-base-path)
+- [config_path](#method-config-path)
+- [database_path](#method-database-path)
+- [media_path](#method-media-path)
+- [plugins_path](#method-plugins-path)
+- [public_path](#method-public-path)
+- [storage_path](#method-storage-path)
+- [temp_path](#method-temp-path)
+- [themes_path](#method-themes-path)
+- [uploads_path](#method-uploads-path)
 
 </div>
 
 ### Strings
 
-<div class="collection-method-list">
+<div class="columned-list">
 
-[Laravel `Str::*()` Helpers](https://laravel.com/docs/9.x/helpers#strings-method-list)
-[camel_case](#method-camel-case)
-[class_basename](#method-class-basename)
-[e](#method-e)
-[ends_with](#method-ends-with)
-[snake_case](#method-snake-case)
-[str_limit](#method-str-limit)
-[starts_with](#method-starts-with)
-[str_contains](#method-str-contains)
-[str_finish](#method-str-finish)
-[str_is](#method-str-is)
-[str_plural](#method-str-plural)
-[str_random](#method-str-random)
-[str_singular](#method-str-singular)
-[str_slug](#method-str-slug)
-[studly_case](#method-studly-case)
-[trans](#method-trans)
-[trans_choice](#method-trans-choice)
+- [Laravel `Str::*()` Helpers](https://laravel.com/docs/9.x/helpers#strings-method-list)
+- [camel_case](#method-camel-case)
+- [class_basename](#method-class-basename)
+- [e](#method-e)
+- [ends_with](#method-ends-with)
+- [snake_case](#method-snake-case)
+- [str_limit](#method-str-limit)
+- [starts_with](#method-starts-with)
+- [str_contains](#method-str-contains)
+- [str_finish](#method-str-finish)
+- [str_is](#method-str-is)
+- [str_plural](#method-str-plural)
+- [str_random](#method-str-random)
+- [str_singular](#method-str-singular)
+- [str_slug](#method-str-slug)
+- [studly_case](#method-studly-case)
+- [trans](#method-trans)
+- [trans_choice](#method-trans-choice)
 
 </div>
 
 ### SVG
 
-<div class="collection-method-list">
+<div class="columned-list">
 
-[extract](#method-svg-extract)
+- [extract](#method-svg-extract)
 
 </div>
 
 ### Miscellaneous
 
-<div class="collection-method-list">
+<div class="columned-list">
 
-[asset](#method-asset)
-[config](#method-config)
-[dd](#method-dd)
-[env](#method-env)
-[get](#method-get)
-[input](#method-input)
-[post](#method-post)
-[redirect](#method-redirect)
-[request](#method-request)
-[response](#method-response)
-[route](#method-route)
-[secure_asset](#method-secure-asset)
-[trace_log](#method-trace-log)
-[trace_sql](#method-trace-sql)
-[url](#method-url)
+- [asset](#method-asset)
+- [config](#method-config)
+- [dd](#method-dd)
+- [env](#method-env)
+- [get](#method-get)
+- [input](#method-input)
+- [post](#method-post)
+- [redirect](#method-redirect)
+- [request](#method-request)
+- [response](#method-response)
+- [route](#method-route)
+- [secure_asset](#method-secure-asset)
+- [trace_log](#method-trace-log)
+- [trace_sql](#method-trace-sql)
+- [url](#method-url)
 
 </div>
 
