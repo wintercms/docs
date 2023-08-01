@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Winter includes several command-line interface (CLI) commands and utilities that allow to install and manage Winter and its plugins and themes, perform site maintenance and speed up the development process. The console commands are executed through Laravel's [Artisan](http://laravel.com/docs/artisan) command-line tool.
+Winter includes several command-line interface (CLI) commands and utilities that allow to install and manage Winter and its plugins and themes, perform site maintenance and speed up the development process. The console commands are executed through Laravel's [Artisan](https://laravel.com/docs/9.x/artisan) command-line tool.
 
 Commands are executed by using your terminal or shell and running the following command in the root folder of your project:
 
@@ -41,49 +41,49 @@ The following commands are made available to every Winter installation. Click th
 Command | Description
 ------- | -----------
 **Setup & Maintenance** |
-[`winter:install`](../console/setup-maintenance#winter-install) | Install Winter via command line.
-[`winter:update`](../console/setup-maintenance#winter-update) | Update Winter and its plugins using the [Marketplace](https://wintercms.com/marketplace) via the command line.
-[`winter:up`](../console/setup-maintenance#winter-up) | Run database migrations.
-[`winter:passwd`](../console/setup-maintenance#winter-passwd) | Change the password of an administrator.
-[`winter:env`](../console/setup-maintenance#winter-env) | Use environment files and configuration for Winter.
-[`winter:version`](../console/setup-maintenance#winter-version) | Display the version of Winter in use.
-[`winter:fresh`](../console/setup-maintenance#winter-fresh) | Remove the demo plugin and theme.
-[`winter:mirror`](../console/setup-maintenance#winter-mirror) | Mirror publicly accessible files in another directory.
+[`winter:install`](../console/setup-maintenance#install-winter-via-command-line) | Install Winter via command line.
+[`winter:update`](../console/setup-maintenance#update-winter-and-its-plugins) | Update Winter and its plugins using the [Marketplace](https://wintercms.com/marketplace) via the command line.
+[`winter:up`](../console/setup-maintenance#run-database-migrations) | Run database migrations.
+[`winter:passwd`](../console/setup-maintenance#change-an-administrators-password) | Change the password of an administrator.
+[`winter:env`](../console/setup-maintenance#configure-winter-through-an-environment-file) | Use environment files and configuration for Winter.
+[`winter:version`](../console/setup-maintenance#get-the-installed-winter-version) | Display the version of Winter in use.
+[`winter:fresh`](../console/setup-maintenance#remove-the-demo-plugin-and-theme) | Remove the demo plugin and theme.
+[`winter:mirror`](../console/setup-maintenance#mirror-public-files) | Mirror publicly accessible files in another directory.
 **Plugin management** |
-[`plugin:install`](../console/plugin-management#plugin-install) | Download and install a plugin for Winter.
-[`plugin:list`](../console/plugin-management#plugin-list) | List installed plugins.
-[`plugin:rollback`](../console/plugin-management#plugin-rollback) | Rolls back a plugin and its database tables.
-[`plugin:refresh`](../console/plugin-management#plugin-refresh) | Rolls back a plugin and its database tables, and re-runs all updates.
-[`plugin:disable`](../console/plugin-management#plugin-disable) | Disables a plugin.
-[`plugin:enable`](../console/plugin-management#plugin-enable) | Enables a plugin.
-[`plugin:remove`](../console/plugin-management#plugin-install) | Removes a plugin.
+[`plugin:install`](../console/plugin-management#download-and-install-a-plugin-for-winter) | Download and install a plugin for Winter.
+[`plugin:list`](../console/plugin-management#list-installed-plugins) | List installed plugins.
+[`plugin:rollback`](../console/plugin-management#rollback-a-plugin) | Rolls back a plugin and its database tables.
+[`plugin:refresh`](../console/plugin-management#refresh-a-plugin) | Rolls back a plugin and its database tables, and re-runs all updates.
+[`plugin:disable`](../console/plugin-management#disable-a-plugin) | Disables a plugin.
+[`plugin:enable`](../console/plugin-management#enable-a-plugin) | Enables a plugin.
+[`plugin:remove`](../console/plugin-management#remove-a-plugin) | Removes a plugin.
 **Theme management** |
-[`theme:install`](../console/theme-management#theme-install) | Download and install a theme for Winter.
-[`theme:list`](../console/theme-management#theme-list) | List available themes.
-[`theme:use`](../console/theme-management#theme-use) | Switches Winter to the given theme.
-[`theme:remove`](../console/theme-management#theme-install) | Removes a theme.
-[`theme:sync`](../console/theme-management#theme-sync) | Synchronises a theme between the filesystem and the database, if you use the [Database Templates](../cms/themes#database-driven-themes) feature.
+[`theme:install`](../console/theme-management#download-and-install-a-theme-for-winter) | Download and install a theme for Winter.
+[`theme:list`](../console/theme-management#list-installed-themes) | List available themes.
+[`theme:use`](../console/theme-management#switch-theme) | Switches Winter to the given theme.
+[`theme:remove`](../console/theme-management#remove-a-theme) | Removes a theme.
+[`theme:sync`](../console/theme-management#synchronise-database-templates) | Synchronises a theme between the filesystem and the database, if you use the [Database Templates](../cms/themes#database-driven-themes) feature.
 **Asset compilation (Mix)** |
-[`mix:install`](../console/asset-compilation#mix-install) | Install Node dependencies for registered Mix packages.
-[`mix:update`](../console/asset-compilation#mix-update) | Update Node dependencies for registered Mix packages.
-[`mix:list`](../console/asset-compilation#mix-list) | Lists all registered Mix packages.
-[`mix:compile`](../console/asset-compilation#mix-compile) | Compiles one or more Mix packages.
-[`mix:watch`](../console/asset-compilation#mix-watch) | Watches changes within a Mix package and automatically compiles the package on any change.
-[`mix:run`](../console/asset-compilation#mix-run) | Runs a script within a given package.
+[`mix:install`](../console/asset-compilation#install-node-dependencies) | Install Node dependencies for registered Mix packages.
+[`mix:update`](../console/asset-compilation#update-node-dependencies) | Update Node dependencies for registered Mix packages.
+[`mix:list`](../console/asset-compilation#list-registered-mix-packages) | Lists all registered Mix packages.
+[`mix:compile`](../console/asset-compilation#compile-a-mix-packages) | Compiles one or more Mix packages.
+[`mix:watch`](../console/asset-compilation#watch-a-mix-package) | Watches changes within a Mix package and automatically compiles the package on any change.
+[`mix:run`](../console/asset-compilation#run-a-package-script) | Runs a script within a given package.
 **Scaffolding** |
-[`create:command`](../console/scaffolding#create-command) | Create a Console Command class in a plugin.
-[`create:component`](../console/scaffolding#create-component) | Create a front-end Component in a plugin.
-[`create:controller`](../console/scaffolding#create-controller) | Create a Controller in a plugin.
-[`create:formwidget`](../console/scaffolding#create-formwidget) | Create a FormWidget in a plugin.
-[`create:job`](../console/scaffolding#create-job) | Create a Job class in a plugin.
-[`create:model`](../console/scaffolding#create-model) | Create a Model in a plugin.
-[`create:plugin`](../console/scaffolding#create-plugin) | Create a Plugin.
-[`create:reportwidget`](../console/scaffolding#create-reportwidget) | Create a ReportWidget in a plugin.
-[`create:settings`](../console/scaffolding#create-settings) | Create a Settings model in a plugin.
-[`create:theme`](../console/scaffolding#create-theme) | Create a Theme.
+[`create:command`](../console/scaffolding#create-a-console-command) | Create a Console Command class in a plugin.
+[`create:component`](../console/scaffolding#create-a-component) | Create a front-end Component in a plugin.
+[`create:controller`](../console/scaffolding#create-a-backend-controller) | Create a Controller in a plugin.
+[`create:formwidget`](../console/scaffolding#create-a-form-widget) | Create a FormWidget in a plugin.
+[`create:job`](../console/scaffolding#create-a-job) | Create a Job class in a plugin.
+[`create:model`](../console/scaffolding#create-a-model) | Create a Model in a plugin.
+[`create:plugin`](../console/scaffolding#create-a-plugin) | Create a Plugin.
+[`create:reportwidget`](../console/scaffolding#create-a-report-widget) | Create a ReportWidget in a plugin.
+[`create:settings`](../console/scaffolding#create-a-settings-model) | Create a Settings model in a plugin.
+[`create:theme`](../console/scaffolding#create-a-theme) | Create a Theme.
 **Utilities** |
-[`winter:test`](../console/utilities#winter-test) | Run unit tests on Winter and plugins.
-[`winter:util`](../console/utilities#winter-util) | A collection of utilities for Winter development.
+[`winter:test`](../console/utilities#run-unit-tests) | Run unit tests on Winter and plugins.
+[`winter:util`](../console/utilities#utility-runner) | A collection of utilities for Winter development.
 **Laravel Provided Commands** |
 `cache:clear` | Clear the application cache.
 `cache:forget` | Remove an item from the cache
@@ -118,7 +118,7 @@ Command | Description
 
 Plugins can also provide additional commands to augment additional functionality to Winter.
 
-If you wanted to create a console command called `myauthor:mycommand`, you can run the `php artisan create:command MyAuthor.MyPlugin MyCommand` [scaffolding command](../console/scaffolding#create-command) which would create the  associated class for that command in a file called `plugins/myauthor/myplugin/console/MyCommand.php` with the following contents:
+If you wanted to create a console command called `myauthor:mycommand`, you can run the `php artisan create:command MyAuthor.MyPlugin MyCommand` [scaffolding command](../console/introduction#building-a-command) which would create the  associated class for that command in a file called `plugins/myauthor/myplugin/console/MyCommand.php` with the following contents:
 
 ```php
 <?php namespace MyAuthor\MyPlugin\Console;
