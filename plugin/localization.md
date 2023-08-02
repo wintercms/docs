@@ -11,12 +11,12 @@ Below is an example of the plugin's lang directory:
 ```treeview
 plugins/
 `-- acme/
-   `-- todo/                  # Plugin directory
-       `-- lang/              # Localization directory
-           |-- en/            # Language directory
-           |   `-- lang.php   # Localization file
-           `-- fr/
-               `-- lang.php
+    `-- todo/                  # Plugin directory
+        `-- lang/              # Localization directory
+            |-- en/            # Language directory
+            |   `-- lang.php   # Localization file
+            `-- fr/
+                `-- lang.php
 ```
 
 The **lang.php** file should define and return an array of any depth, for example:
@@ -70,11 +70,11 @@ The key will be found in the localization string and replaced with its value. An
 System users can override plugin localization strings without altering the plugins' files. This is done by adding localization files to the **lang** directory. For example, to override the lang.php file of the **acme/blog** plugin you should create the file in the following location:
 
 ```treeview
-lang/                 # App localization directory
-   `-- en/                # Language directory
-       `-- acme/            # Plugin / Module directory
-           `-- blog/          # ^
-               `-- lang.php    # Localization override file
+lang/                       # App localization directory
+`-- en/                     # Language directory
+    `-- acme/               # Plugin / Module directory
+        `-- blog/           # ^
+            `-- lang.php    # Localization override file
 ```
 
 The file could contain only strings you want to override, there is no need to replace the entire file. Example:
