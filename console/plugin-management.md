@@ -12,7 +12,7 @@ The `plugin:install` command downloads and installs the plugin by its plugin cod
 
 Note that your installation should be bound to a project in order to use this command. You can create projects on the Winter website, in the [Account / Projects](https://wintercms.com/account/project/dashboard) section.
 
-> **NOTE:** If you have already have the plugin files locally either through Composer or manually uploading them then you can just run [`winter:up`](#console-up-command) to run the plugin's pending migrations to "install" it. This command is mostly meant for instaling plugins sourced from the [Winter CMS Marketplace](https://wintercms.com/marketplace).
+> **NOTE:** If you have already have the plugin files locally either through Composer or manually uploading them, you can just run [`winter:up`](setup-maintenance#run-database-migrations) to run the plugin's pending migrations to "install" it. This command is mostly meant for installing plugins sourced from the [Winter CMS Marketplace](https://wintercms.com/marketplace).
 
 ## List installed plugins
 

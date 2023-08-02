@@ -235,7 +235,7 @@ There are several options that allow you to fine-tune the Media Manager. All of 
 
 Parameter | Value
 ------------- | -------------
-`ignore` | a list of file and directory names to ignore. Defaults to ['.svn', '.git', '.DS_Store'].
+`ignore` | a list of file and directory names to ignore. Defaults to `['.svn', '.git', '.DS_Store']`.
 `ttl` | specifies the cache time-to-live, in minutes. The default value is 10. The cache invalidates automatically when Library items are added, updated or deleted.
 `imageExtensions` | file extensions corresponding to the Image document type. The default value is `['gif', 'png', 'jpg', 'jpeg', 'bmp']`.
 `videoExtensions` | file extensions corresponding to the Video document type. The default value is `['mp4', 'avi', 'mov', 'mpg']`.

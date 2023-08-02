@@ -175,7 +175,7 @@ Options for definining input:
 - [Input arrays](https://laravel.com/docs/9.x/artisan#input-arrays)
 - [Option arrays](https://laravel.com/docs/9.x/artisan#option-arrays)
 - [Input autocompletion / suggested values](#providing-suggested-values)
-- [Plugin names as an argument](#plugin-names-as-argument)
+- [Plugin names as an argument](#plugin-names-as-an-argument)
 
 #### Providing suggested values
 
@@ -420,7 +420,7 @@ Available output methods:
 - [New Lines](https://laravel.com/docs/9.x/artisan#writing-output)
 - [Tables](https://laravel.com/docs/9.x/artisan#tables)
 - [Progress Bars](https://laravel.com/docs/9.x/artisan#progress-bars)
-- [Alerts](#output-alerts)
+- [Alerts](#alerts)
 
 #### Alerts
 
@@ -445,7 +445,7 @@ Will output
 
 #### Registering a console command
 
-Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [Plugin registration file](../plugin/registration#registration-methods) using  the `registerConsoleCommand` helper method.
+Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [Plugin registration file](../plugin/registration#supported-methods) using  the `registerConsoleCommand` helper method.
 
 ```php
 class MyPlugin extends PluginBase
@@ -465,7 +465,7 @@ Artisan::add(new MyAuthor\MyPlugin\Console\MyCommand);
 
 #### Registering a command in the application container
 
-If your command is registered in the [application container](../services/application#app-container), you may use the `Artisan::resolve` method to make it available to Artisan:
+If your command is registered in the [application container](../services/application#application-container), you may use the `Artisan::resolve` method to make it available to Artisan:
 
 ```php
 Artisan::resolve('myauthor.mycommand');
@@ -473,7 +473,7 @@ Artisan::resolve('myauthor.mycommand');
 
 #### Registering commands in a service provider
 
-If you need to register commands from within a [service provider](../services/application#service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](../services/application#app-container) binding for the command:
+If you need to register commands from within a [service provider](../services/application#service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](../services/application#application-container) binding for the command:
 
 ```php
 public function boot()

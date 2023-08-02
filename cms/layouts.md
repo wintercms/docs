@@ -80,7 +80,7 @@ Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pag
 
 ### Layout execution life cycle
 
-Inside the layout's [PHP section](themes#php-section) you can define the following functions for handling the page execution life cycle: `onInit`, `onStart`, `onBeforePageStart` and `onEnd`.
+Inside the layout's [PHP section](themes#php-code-section) you can define the following functions for handling the page execution life cycle: `onInit`, `onStart`, `onBeforePageStart` and `onEnd`.
 
 The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed in the beginning of the page processing. The `onBeforePageStart` function is executed after the layout [components](components) ran, but before the page's `onStart` function is executed. The `onEnd` function is executed after the page is rendered. The sequence the handlers are executed is following:
 

@@ -12,7 +12,7 @@ The `winter:install` command will guide you through the process of setting up Wi
 
 You also may wish to inspect **config/app.php** and **config/cms.php** to change any additional configuration.
 
-> **NOTE:** You cannot run `winter:install` after running [`winter:env`](#winter-env). The `winter:env` command takes the existing configuration values and puts them in the `.env` file while replacing the original values with calls to `env()` within the configuration files. `winter:install` cannot replace those calls to `env()` within the configuration files as that would be overly complex to manage.
+> **NOTE:** You cannot run `winter:install` after running [`winter:env`](#configure-winter-through-an-environment-file). The `winter:env` command takes the existing configuration values and puts them in the `.env` file while replacing the original values with calls to `env()` within the configuration files. `winter:install` cannot replace those calls to `env()` within the configuration files as that would be overly complex to manage.
 
 ## Update Winter and its plugins
 
@@ -32,7 +32,7 @@ The `winter:up` command will perform a database migration, creating database tab
 php artisan winter:up
 ```
 
-The inverse command `winter:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](../console/plugin-management#plugin-refresh) is a useful alternative for debugging a single plugin.
+The inverse command `winter:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](../console/plugin-management#refresh-a-plugin) is a useful alternative for debugging a single plugin.
 
 ```bash
 php artisan winter:down
@@ -86,7 +86,7 @@ The `winter:fresh` command will remove the demo plugin and theme that is include
 php artisan winter:mirror public [--relative]
 ```
 
-The `winter:mirror` command creates a mirrored copy of the public files needed to serve the application, using symbolic linking. This command is used when [setting up a public folder](../setup/configuration#public-folder) and is recommended for security purposes as it prevents direct access to system files.
+The `winter:mirror` command creates a mirrored copy of the public files needed to serve the application, using symbolic linking. This command is used when [setting up a public folder](../setup/configuration#using-a-public-folder) and is recommended for security purposes as it prevents direct access to system files.
 
 This command should be re-run whenever plugins and themes are installed or removed.
 

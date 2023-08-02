@@ -2,7 +2,7 @@
 
 ## Introduction
 
-All websites have pages. In Winter, frontend pages are rendered by page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages, but the [PHP section](themes#php-section) is optional. Below, you can see the simplest home page example:
+All websites have pages. In Winter, frontend pages are rendered by page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-markup-section) template sections are required for pages, but the [PHP section](themes#php-code-section) is optional. Below, you can see the simplest home page example:
 
 ```ini
 url = "/"
@@ -32,7 +32,7 @@ url = "/blog"
 
 > **NOTE:** The page URL is case-insensitive by default.
 
-URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by Winter components or from the page [PHP code](themes#php-section) section.
+URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by Winter components or from the page [PHP code](themes#php-code-section) section.
 
 ```ini
 url = "/blog/post/:post_id"
@@ -103,7 +103,7 @@ For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brow
 
 ## Dynamic pages
 
-Inside the [Twig section](themes#twig-section) of a page template, you can use any [functions, filters, and tags provided by Winter](../markup). Any dynamic page requires **variables**. In Winter, variables may be prepared by the page, layout [PHP section](themes#php-section), or by [Components](../cms/components). In this article, we describe how to prepare variables in the PHP section.
+Inside the [Twig section](themes#twig-markup-section) of a page template, you can use any [functions, filters, and tags provided by Winter](../markup). Any dynamic page requires **variables**. In Winter, variables may be prepared by the page, layout [PHP section](themes#php-code-section), or by [Components](../cms/components). In this article, we describe how to prepare variables in the PHP section.
 
 ### Page execution life cycle
 
@@ -165,7 +165,7 @@ public function onStart()
 
 ### Handling forms
 
-You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction) article). Use the [`form_open()`](../markup#standard-form) function to define a form that refers to an event handler. Example:
+You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-code-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction) article). Use the [`form_open()`](../markup#standard-form) function to define a form that refers to an event handler. Example:
 
 ```twig
 {{ form_open({ request: 'onHandleForm' }) }}
@@ -175,7 +175,7 @@ You can handle standard forms with handler methods defined in the page or layout
 <p>Last submitted value: {{ lastValue }}</p>
 ```
 
-The `onHandleForm` function can be defined in the page or layout [PHP section](themes#php-section), like so:
+The `onHandleForm` function can be defined in the page or layout [PHP section](themes#php-code-section), like so:
 
 ```php
 function onHandleForm()
@@ -204,7 +204,7 @@ By default, any errors will be shown with a detailed error page containing the f
 
 ## Page variables
 
-The properties of a page can be accessed in the [PHP code section](../cms/themes#php-section), or [Components](../cms/components) by referencing `$this->page`.
+The properties of a page can be accessed in the [PHP code section](../cms/themes#php-code-section), or [Components](../cms/components) by referencing `$this->page`.
 
 ```php
 function onEnd()
@@ -223,7 +223,7 @@ More information can be found at [`this.page` in the Markup guide](/docs/v1.2/ma
 
 ## Injecting page assets programmatically
 
-If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes#php-section) of a page or [layout](layouts) template. Example:
+If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes#php-code-section) of a page or [layout](layouts) template. Example:
 
 ```php
 function onStart()
