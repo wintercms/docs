@@ -24,7 +24,7 @@ class Categories extends \Backend\Classes\Controller
 
 ## Configuring the form behavior
 
-The form behaviour will load its configuration in the YAML format from a `config_form.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_form.yaml`) by default.
+The form behaviour will load its configuration in the YAML format from a `config_form.yaml` file located in the controller's [views directory](controllers-ajax#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_form.yaml`) by default.
 
 This can be changed by overriding the `$formConfig` property on your controller to reference a different filename or a full configuration array:
 
@@ -61,7 +61,7 @@ Field | Description
 `form` | a configuration array or reference to a form field definition file, see [form fields](#defining-form-fields).
 `modelClass` | a model class name, the form data is loaded and saved against this model.
 
-The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#form-create-page), [Update](#form-update-page) or [Preview](#form-preview-page) pages.
+The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#create-page), [Update](#update-page) or [Preview](#preview-page) pages.
 
 Option | Description
 ------------- | -------------
@@ -173,7 +173,7 @@ secondaryTabs:
         [...]
 ```
 
-Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations#relationship-types). The exception is a OneToOne or morphOne related field, which must be defined as **relation[field]** and then can be specified as any other field of the model:
+Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations#relationship-types). The exception is a OneToOne or morphOne related field, which must be defined as `relation[field]` and then can be specified as any other field of the model:
 
 ```yaml
     user_name:
@@ -238,7 +238,7 @@ For each field you can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 `label` | a name when displaying the form field to the user.
-`type` | defines how this field should be rendered (see [Available fields types](#field-types) below). Default: `text`.
+`type` | defines how this field should be rendered (see [Available fields types](#available-field-types) below). Default: `text`.
 `span` | aligns the form field to one side. Options: `auto`, `left`, `right`, `storm`, `full`. Default: `full`. The parameter `storm` allows you to display the form as a Bootstrap grid, using the `cssClass` property, for example, `cssClass: col-xs-4`.
 `size` | specifies a field size for fields that use it, for example, the textarea field. Options: `tiny`, `small`, `large`, `huge`, `giant`.
 `placeholder` | if the field supports a placeholder value.
@@ -255,8 +255,8 @@ Option | Description
 `stretch` | specifies if this field stretches to fit the parent height.
 `context` | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 `dependsOn` | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
-`trigger` | specify conditions for this field using [trigger events](#field-trigger-events).
-`preset` | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#field-input-preset).
+`trigger` | specify conditions for this field using [trigger events](#trigger-events).
+`preset` | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#input-preset-converter).
 `required` | places a red asterisk next to the field label to indicate it is required (make sure to setup validation on the model as this is not enforced by the form controller).
 `attributes` | specify custom HTML attributes to add to the form field element.
 `containerAttributes` | specify custom HTML attributes to add to the form field container.
@@ -334,7 +334,7 @@ permissions:
 
 See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
-Checkbox lists support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
+Checkbox lists support secondary descriptions, found in the [`radio` field type](#radio-list). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
 ### Dropdown
 
@@ -414,7 +414,7 @@ public $rules = [
 ];
 ```
 
-For more information on model validation, please visit [the documentation page](../services/validation#rule-email).
+For more information on model validation, please visit [the documentation page](../services/validation#email).
 
 ### Hint
 
@@ -450,7 +450,7 @@ public $rules = [
 ];
 ```
 
-For more information on model validation, please visit [the documentation page](../services/validation#rule-numeric).
+For more information on model validation, please visit [the documentation page](../services/validation#numeric).
 
 ### Partial
 
@@ -467,7 +467,7 @@ content:
     path: $/acme/blog/models/comments/_content_field.htm
 ```
 
->**NOTE:** If your partial field is meant only for display and will not be providing a value to the server to be stored then it is best practice to prefix the field name with an underscore (`_`) [to prevent the  FormController` behavior from attempting to process it](#prevent-field-submission)
+>**NOTE:** If your partial field is meant only for display and will not be providing a value to the server to be stored then it is best practice to prefix the field name with an underscore (`_`) [to prevent the  FormController` behavior from attempting to process it](#preventing-a-field-from-being-submitted)
 
 ### Password
 
@@ -508,7 +508,7 @@ security_level:
 
 See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
-For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
+For radio lists the method could return either the simple array: `key => value` or an array of arrays for providing the descriptions: `key => [label, description]`. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
 ### Range
 
@@ -984,13 +984,13 @@ Option | Description
 `descriptionFrom` | the column name to use in the relation used for displaying a description. Default: `description`.
 `title` | text to display in the title section of the popup.
 `prompt` | text to display when there is no record selected. The `%s` character represents the search icon.
-`list` | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
+`list` | a configuration array or reference to a list column definition file, see [list columns](lists#available-column-types).
 `recordsPerPage` | records to display per page, use 0 for no pages. Default: 10
 `conditions` | specifies a raw where query statement to apply to the list model query.
 `scope` | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
 `searchMode` | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: `all`.
 `searchScope` | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
-`useRelation` | Flag for using the name of the field as a relation name to interact with directly on the parent model. Default: `true`. Set to `false` in order to bypass the relationship logic and only store and retrieve the selected record using its primary key. Best suited for use in [`jsonable` attributes](../database/model#property-jsonable) or where the relationship is unabled to be loaded. **NOTE:** When this is disabled the field name **MUST** be the actual name of the field where the value will be stored / retrieved, it cannot be the name of a relationship.
+`useRelation` | Flag for using the name of the field as a relation name to interact with directly on the parent model. Default: `true`. Set to `false` in order to bypass the relationship logic and only store and retrieve the selected record using its primary key. Best suited for use in [`jsonable` attributes](../database/model#values-stored-as-json) or where the relationship is unabled to be loaded. **NOTE:** When this is disabled the field name **MUST** be the actual name of the field where the value will be stored / retrieved, it cannot be the name of a relationship.
 **modelClass** | Class of the model to use for listing records when useRelation = false
 
 ### Relation
@@ -1354,7 +1354,7 @@ public static function staticMethodOptions($formWidget, $formField)
 
 ## Form views
 
-For each page your form supports [Create](#form-create-page), [Update](#form-update-page) and [Preview](#form-preview-page) you should provide a [view file](#introduction) with the corresponding name - `create.htm`, `update.htm` and `preview.htm`.
+For each page your form supports [Create](#create-page), [Update](#update-page) and [Preview](#preview-page) you should provide a [view file](#introduction) with the corresponding name - `create.htm`, `update.htm` and `preview.htm`.
 
 The form behavior adds two methods to the controller class: `formRender` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
 

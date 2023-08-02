@@ -2,9 +2,9 @@
 
 ## Introduction
 
-The **Relation behavior** is a controller [behavior](../services/behaviors) used for easily managing complex [model](../database/model) relationships on a page. It is not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
+The **Relation behavior** is a controller [behavior](../services/behaviors) used for easily managing complex [model](../database/model) relationships on a page. It is not to be confused with [List relation columns](lists#available-column-types) or [Form relation fields](forms#relation) that only provide simple management.
 
-The Relation behavior depends on [relation definitions](#relation-definitions). In order to use the relation behavior you should add the `\Backend\Behaviors\RelationController::class` definition to the `$implement` property of the controller class.
+The Relation behavior depends on [relation definitions](#configuring-the-relation-behavior). In order to use the relation behavior you should add the `\Backend\Behaviors\RelationController::class` definition to the `$implement` property of the controller class.
 
 ```php
 namespace Acme\Projects\Controllers;
@@ -25,7 +25,7 @@ class Projects extends Controller
 
 ## Configuring the relation behavior
 
-The relation behaviour will load its configuration in the YAML format from a `config_relation.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_relation.yaml`) by default.
+The relation behaviour will load its configuration in the YAML format from a `config_relation.yaml` file located in the controller's [views directory](controllers-ajax#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_relation.yaml`) by default.
 
 This can be changed by overriding the `$relationConfig` property on your controller to reference a different filename or a full configuration array:
 
@@ -84,17 +84,17 @@ Option | Description
 `label` | a label for the relation, in the singular tense, required.
 `view` | configuration specific to the view container, see below.
 `manage` | configuration specific to the management popup, see below.
-`pivot` | a reference to form field definition file, used for [relations with pivot table data](#belongs-to-many-pivot).
+`pivot` | a reference to form field definition file, used for [relations with pivot table data](#belongs-to-many-with-pivot-data).
 `emptyMessage` | a message to display when the relationship is empty, optional.
 `readOnly` | disables the ability to add, update, delete or create relations. default: `false`
-`deferredBinding` | [defers all binding actions using a session key](../database/model#deferred-binding) when it is available. default: `false`
+`deferredBinding` | [defers all binding actions using a session key](../database/relations#deferred-binding) when it is available. default: `false`
 
 These configuration values can be specified for the **view** or **manage** options, where applicable to the render type of list, form or both.
 
 Option | Type | Description
 ------------- | ------------- | -------------
-`form` | Form | a reference to form field definition file, see [backend form fields](forms#form-fields).
-`list` | List | a reference to list column definition file, see [backend list columns](lists#list-columns).
+`form` | Form | a reference to form field definition file, see [backend form fields](forms#defining-form-fields).
+`list` | List | a reference to list column definition file, see [backend list columns](lists#defining-list-columns).
 `showSearch` | List | display an input for searching the records. Default: `false`
 `showSorting` | List | displays the sorting link on each column. Default: `true`
 `defaultSort` | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
@@ -102,7 +102,7 @@ Option | Type | Description
 `noRecordsMessage` | List | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
 `conditions` | List | specifies a raw where query statement to apply to the list model query.
 `scope` | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The model that this relationship will be attached to (i.e. the **parent model**) is passed to this scope method as the second parameter (`$query` is the first).
-**filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists#list-filters).
+**filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists#using-list-filters).
 
 These configuration values can be specified only for the **view** options.
 
@@ -128,7 +128,7 @@ How the relation manager is displayed depends on the relationship definition in 
 
 - [Has many](#has-many)
 - [Belongs to many](#belongs-to-many)
-- [Belongs to Many (with Pivot Data)](#belongs-to-many-pivot)
+- [Belongs to Many (with Pivot Data)](#belongs-to-many-with-pivot-data)
 - [Belongs to](#belongs-to)
 - [Has one](#has-one)
 
@@ -298,7 +298,7 @@ $this->initRelation($post);
 
 > **NOTE:** The [form behavior](../backend/forms) will automatically initialize the model on its create, update and preview actions.
 
-The relation manager can then be displayed for a specified relation definition by calling the `relationRender` method. For example, if you want to display the relation manager on the [Preview](forms#form-preview-view) page, the **preview.htm** view contents could look like this:
+The relation manager can then be displayed for a specified relation definition by calling the `relationRender` method. For example, if you want to display the relation manager on the [Preview](forms#preview-view) page, the **preview.htm** view contents could look like this:
 
 ```php
 <?= $this->formRenderPreview() ?>
@@ -316,12 +316,12 @@ You may instruct the relation manager to render in read only mode by passing the
 
 Sometimes you may wish to modify the default relation behavior and there are several ways you can do this.
 
-- [Extending relation configuration](#extend-relation-config)
-- [Extending the view widget](#extend-view-widget)
-- [Extending the manage widget](#extend-manage-widget)
-- [Extending the pivot widget](#extend-pivot-widget)
-- [Extending the filter widgets](#extend-filter-widgets)
-- [Extending refresh results](#extend-refresh-results)
+- [Extending relation configuration](#extending-relation-configuration)
+- [Extending the view widget](#extending-the-view-widget)
+- [Extending the manage widget](#extending-the-manage-widget)
+- [Extending the pivot widget](#extending-the-pivot-widget)
+- [Extending the filter widgets](#extending-the-filter-widgets)
+- [Extending the refresh results](#extending-the-refresh-results)
 
 ### Extending relation configuration
 
@@ -344,7 +344,7 @@ public function relationExtendConfig($config, $field, $model)
 ### Extending the view widget
 
 Provides an opportunity to manipulate the view widget.
-> **NOTE**: The view widget has not yet fully initialized, so not all public methods will work as expected! For more information read [How to remove a column](#remove-column).
+> **NOTE**: The view widget has not yet fully initialized, so not all public methods will work as expected! For more information read [How to remove a column](#how-to-remove-a-column).
 
 For example you might want to toggle showCheckboxes based on a property of your model.
 
@@ -362,7 +362,8 @@ public function relationExtendViewWidget($widget, $field, $model)
 ```
 
 #### How to remove a column
-Since the widget has not completed initializing at this point of the runtime cycle you can't call $widget->removeColumn(). The addColumns() method as described in the [ListController documentation](lists#extend-list-columns) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the relationExtendViewWidget() method. The following example shows how to remove a column:
+
+Since the widget has not completed initializing at this point of the runtime cycle you can't call $widget->removeColumn(). The addColumns() method as described in the [ListController documentation](lists#extending-column-definitions) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the relationExtendViewWidget() method. The following example shows how to remove a column:
 
 ```php
 public function relationExtendViewWidget($widget, $field, $model)
@@ -427,7 +428,7 @@ public function relationExtendManageFilterWidget($widget, $field, $model)
 }
 ```
 
-Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [backend list documentation](lists#extend-filter-scopes).
+Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [backend list documentation](lists#extending-filter-scopes).
 
 ### Extending the refresh results
 

@@ -7,7 +7,7 @@ The **Reorder behavior** is a controller [behavior](../services/behaviors) that 
 The behavior depends on a [model class](../database/model) which must implement one of the following [model traits](../database/traits):
 
 1. [`Winter\Storm\Database\Traits\Sortable`](../database/traits#sortable)
-1. [`Winter\Storm\Database\Traits\NestedTree`](../database/traits#nestedtree)
+1. [`Winter\Storm\Database\Traits\NestedTree`](../database/traits#nested-tree)
 
 > **NOTE**: If adding sorting to a previously unsorted model under the control of a third party is desired, you can use the [`Winter\Storm\Database\Behaviors\Sortable`](../database/behaviors#sortable) behavior, which can be dynamically implemented. However, you will need to ensure that the model table has a `sort_order` column present on it.
 
@@ -29,7 +29,7 @@ class Categories extends Controller
 
 ## Configuring the behavior
 
-The Reorder behaviour will load its configuration in the YAML format from a `config_reorder.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_reorder.yaml`) by default.
+The Reorder behaviour will load its configuration in the YAML format from a `config_reorder.yaml` file located in the controller's [views directory](controllers-ajax#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_reorder.yaml`) by default.
 
 This can be changed by overriding the `$reorderConfig` property on your controller to reference a different filename or a full configuration array:
 
@@ -70,7 +70,7 @@ Option | Description
 
 ## Displaying the reorder page
 
-You should provide a [view file](controllers-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
+You should provide a [view file](controllers-ajax#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
 
 ```php
 <?= $this->reorderRender() ?>

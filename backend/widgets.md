@@ -26,7 +26,7 @@ plugins/
 
 ### Class definition
 
-The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). Example widget controller class definition:
+The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). Example widget controller class definition:
 
 ```php
 <?php namespace Backend\Widgets;
@@ -88,7 +88,7 @@ protected function loadAssets()
 
 ### AJAX handlers
 
-Widgets implement the same AJAX approach as the [backend controllers](controllers-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
+Widgets implement the same AJAX approach as the [backend controllers](controllers-ajax#backend-ajax-handlers). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
 
 ```html
 <a
@@ -126,7 +126,7 @@ After binding the widget you can access it in the controller's view or partial b
 
 ## Form Widgets
 
-With form widgets you can add new control types to the backend [forms](../backend/forms). They provide features that are common to supplying data for models. Form widgets must be registered in the [Plugin registration file](../plugin/registration#registration-methods).
+With form widgets you can add new control types to the backend [forms](../backend/forms). They provide features that are common to supplying data for models. Form widgets must be registered in the [Plugin registration file](../plugin/registration#supported-methods).
 
 Form Widget classes reside inside the **formwidgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
 
@@ -145,7 +145,7 @@ Form Widget classes reside inside the **formwidgets** directory of the plugin di
 
 ### Class definition
 
-The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). A registered widget can be used in the backend [form field definition](../backend/forms#form-fields) file. Example form widget class definition:
+The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). A registered widget can be used in the backend [form field definition](../backend/forms#defining-form-fields) file. Example form widget class definition:
 
 ```php
 namespace Backend\Widgets;
@@ -165,7 +165,7 @@ class CodeEditor extends FormWidgetBase
 
 ### Form widget properties
 
-Form widgets may have properties that can be set using the [form field configuration](../backend/forms#form-fields). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
+Form widgets may have properties that can be set using the [form field configuration](../backend/forms#defining-form-fields). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
 
 ```php
 class DatePicker extends FormWidgetBase
@@ -216,7 +216,7 @@ class DatePicker extends FormWidgetBase
 }
 ```
 
-The property values then become available to set from the [form field definition](../backend/forms#form-fields) when using the widget.
+The property values then become available to set from the [form field definition](../backend/forms#defining-form-fields) when using the widget.
 
 ```yaml
 born_at:
@@ -241,7 +241,7 @@ public function registerFormWidgets()
 }
 ```
 
-The short code is optional and can be used when referencing the widget in the [Form field definitions](forms#field-widget), it should be a unique value to avoid conflicts with other form fields.
+The short code is optional and can be used when referencing the widget in the [Form field definitions](forms#widget), it should be a unique value to avoid conflicts with other form fields.
 
 ### Loading form data
 
@@ -286,13 +286,13 @@ public function getSaveValue($value)
 
 ## Report Widgets
 
-Report widgets can be used on the backend dashboard and in other backend report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration#widget-registration).
+Report widgets can be used on the backend dashboard and in other backend report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration#supported-methods).
 
-> You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding#scaffold-create-reportwidget) for more information.
+> You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding#create-a-report-widget) for more information.
 
 ### Report widget classes
 
-The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
+The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
 ```css
 📂 plugins
@@ -342,7 +342,7 @@ The widget partial could contain any HTML markup you want to display in the widg
 
 ![image](https://raw.githubusercontent.com/wintercms/docs/main/images/traffic-sources.png)
 
-Inside report widgets you can use any [charts or indicators](../ui/form), lists or any other markup you wish. Remember that the report widgets extend the generic backend widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
+Inside report widgets you can use any [charts or indicators](/docs/v1.2/ui/controls/form), lists or any other markup you wish. Remember that the report widgets extend the generic backend widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
 
 ```html
 <div class="report-widget">
@@ -384,7 +384,7 @@ Inside report widgets you can use any [charts or indicators](../ui/form), lists 
 </div>
 ```
 
-> **NOTE:** Report widgets are loaded through an AJAX request on accessing the page - they are not available immediately on the page. This means that inline `<script>` tags will not work. See [Updating partials](../ajax/update-partials#javascript-in-partials) for more information on handling JavaScript in partials after an AJAX request.
+> **NOTE:** Report widgets are loaded through an AJAX request on accessing the page - they are not available immediately on the page. This means that inline `<script>` tags will not work. See [Updating partials](../ajax/update-partials#handling-javascript-in-partials) for more information on handling JavaScript in partials after an AJAX request.
 
 ### Report widget properties
 

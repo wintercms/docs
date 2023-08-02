@@ -78,7 +78,7 @@ Things that maintainers should look at with issues should include:
 When reviewing pull requests, maintainers should strive to look at the following:
 
 - Does the pull request actually solve the issue it intends to resolve?
-- Does the pull request follow the [PSR-2 guidelines](https://www.php-fig.org/psr/psr-2/) and our own [Developer Guidelines](../help/developer/guide)?
+- Does the pull request follow the [PSR-2 guidelines](https://www.php-fig.org/psr/psr-2/) and our own [Developer Guidelines](./developer-guide)?
 - Does the pull request allow users of Winter CMS to continue to use the system as they have up until now, or provide adequate justification for the change in behaviour?
 
 Pull requests submitted by contributors must be made to the `develop` branch or to a feature or fix branch.

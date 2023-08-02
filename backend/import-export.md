@@ -20,7 +20,7 @@ class Products extends Controller
 
 ## Configuring the behavior
 
-The Import Export behaviour will load its configuration in the YAML format from a `config_import_export.yaml` file located in the controller's [views directory](controllers-ajax/#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_import_export.yaml`) by default.
+The Import Export behaviour will load its configuration in the YAML format from a `config_import_export.yaml` file located in the controller's [views directory](controllers-ajax#introduction) (`plugins/myauthor/myplugin/controllers/mycontroller/config_import_export.yaml`) by default.
 
 This can be changed by overriding the `$importExportConfig` property on your controller to reference a different filename or a full configuration array:
 
@@ -98,7 +98,7 @@ Option | Description
 `list` | defines the list columns available for exporting.
 `form` | provides additional fields used as import options, optional.
 `redirect` | redirection page when the export is complete, optional.
-`useList` | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
+`useList` | set to true or the value of a list definition to enable [integration with Lists](#integration-with-list-behavior), default: false.
 
 ### Format options
 
@@ -123,7 +123,7 @@ Option | Description
 
 ## Import and export views
 
-For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-ajax/#introduction) with the corresponding name - **import.htm** and **export.htm**.
+For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-ajax#introduction) with the corresponding name - **import.htm** and **export.htm**.
 
 The import/export behavior adds two methods to the controller class: `importRender` and `exportRender`. These methods render the importing and exporting sections as per the YAML configuration file described above.
 
