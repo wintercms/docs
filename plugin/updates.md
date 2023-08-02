@@ -6,16 +6,16 @@ It is good practice for plugins to maintain a change log that documents any chan
 
 The change log is stored in a YAML file called `version.yaml` inside the **/updates** directory of a plugin, which co-exists with migration and seed files. This example displays a typical plugin updates directory structure:
 
-```css
-📂 plugins
- ┗ 📂 myauthor                            <-- Author name
-   ┗ 📂 myplugin                          <-- Plugin name
-     ┗ 📂 updates                         <-- Database migrations
-       ┣ 📂 v1.0.0                        <-- Migrations for a specific version of the plugin
-       ┃ ┣ 📜 seed_the_database.php       <-- Database seed file, referenced in version.yaml
-       ┃ ┗ 📜 create_records_table.php    <-- Database migration file, referenced in version.yaml
-       ┗ 📜 version.yaml                  <-- Changelog
- ```
+```treeview
+plugins/
+`-- myauthor/                                 # Author name
+   `-- myplugin/                              # Plugin name
+       `-- updates/                           # Database migrations
+           |-- v1.0.0/                        # Migrations for a specific version of the plugin
+           |   |-- seed_the_database.php      # Database seed file, referenced in version.yaml
+           |   `-- create_records_table.php   # Database migration file, referenced in version.yaml
+           `-- version.yaml                   # Changelog
+```
 
 ## Update process
 
