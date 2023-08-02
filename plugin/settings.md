@@ -37,11 +37,11 @@ The `$settingsFields` property is required if are going to build a backend setti
 ```treeview
 plugins/
 `-- acme/
-   `-- demo/
-       `-- models/
-           |-- settings/        # Model files directory
-           |   `-- fields.yaml  # Model form fields
-           `-- Settings.php     # Model script
+    `-- demo/
+        `-- models/
+            |-- settings/        # Model files directory
+            |   `-- fields.yaml  # Model form fields
+            `-- Settings.php     # Model script
 ```
 
 You may optionally add a `$settingsCacheTtl` property to your settings model if you wish to change the length of time that your settings will remain cached for. By default, settings in your settings model will remain cached for up to 24 minutes. To disable caching, you may set this to `0` or `false`.
