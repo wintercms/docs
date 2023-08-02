@@ -75,7 +75,7 @@ themes/
     |       `-- category-list.htm
     `-- content/
        |-- footer-contacts.txt
-       `-- home                    # Subdirectory
+       `-- home/                   # Subdirectory
            `-- intro.htm
 ```
 
