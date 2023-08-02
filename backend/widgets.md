@@ -302,7 +302,7 @@ plugins/
                |-- trafficsources/      # Widget files directory
                |   `-- partials/
                |       `-- _widget.php
-               `--TrafficSources.php    # Widget class file
+               `-- TrafficSources.php   # Widget class file
 ```
 
 Example report widget class definition:
