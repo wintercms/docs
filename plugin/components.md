@@ -8,13 +8,13 @@ Components files and directories reside in the **/components** subdirectory of a
 plugins/
 `-- acme/
     `-- myplugin/
-       |-- components/
-       |   |-- componentname/      # Component partials directory
-       |   |   `-- default.htm     # Component default markup (optional)
-       |   |-- partials/           # Any partials shared by more than one component in the plugin
-       |   |   `-- partialname.htm
-       |   `-- ComponentName.php   # Component class file
-       `-- Plugin.php
+        |-- components/
+        |   |-- componentname/      # Component partials directory
+        |   |   `-- default.htm     # Component default markup (optional)
+        |   |-- partials/           # Any partials shared by more than one component in the plugin
+        |   |   `-- partialname.htm
+        |   `-- ComponentName.php   # Component class file
+        `-- Plugin.php
 ```
 
 Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents` method.
