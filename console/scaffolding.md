@@ -80,4 +80,4 @@ php artisan create:job <plugin code> <job name>
 php artisan create:command <plugin code> <command name>
 ```
 
-The `create:command` command generates a [new console command](../console/development). The first argument specifies the plugin code of the plugin that this console command will be added into, and the second parameter specifies the command name.
+The `create:command` command generates a [new console command](../console/introduction#building-a-command). The first argument specifies the plugin code of the plugin that this console command will be added into, and the second parameter specifies the command name.
