@@ -33,6 +33,7 @@ Sometimes you may need to pass variables to a content block from the external co
 ```twig
 {% content 'welcome.htm' name='John' %}
 ```
+
 Inside the content block, variables can be accessed using singular *curly brackets*:
 
 ```twig

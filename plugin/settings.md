@@ -24,7 +24,7 @@ class Settings extends Model
 
     // Reference to field configuration
     public $settingsFields = 'fields.yaml';
-    
+
     // Optional - sets the TTL for the settings cache
     public $settingsCacheTtl = 3600;
 }
@@ -46,7 +46,7 @@ plugins/
 
 You may optionally add a `$settingsCacheTtl` property to your settings model if you wish to change the length of time that your settings will remain cached for. By default, settings in your settings model will remain cached for up to 24 minutes. To disable caching, you may set this to `0` or `false`.
 
-Settings models [can be registered](#backend-pages) to appear on the **backend Settings page**, but it is not a requirement - you can set and read settings values like any other model.
+Settings models [can be registered](#backend-settings-pages) to appear on the **backend Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 
 ### Writing to a settings model
 
@@ -124,7 +124,7 @@ public function registerSettings()
 }
 ```
 
-> **NOTE:** Backend settings pages should [set the settings context](#settings-page-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
+> **NOTE:** Backend settings pages should [set the settings context](#setting-the-page-navigation-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
 
 The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#database-settings) section.
 
@@ -150,7 +150,7 @@ The optional `keywords` parameter is used by the settings search feature. If key
 
 ### Setting the page navigation context
 
-Just like [setting navigation context in the controller](../backend/controllers-ajax#navigation-context), Backend settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
+Just like [setting navigation context in the controller](../backend/controllers-ajax#setting-the-navigation-context), Backend settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
 
 ```php
 public function __construct()
@@ -164,7 +164,7 @@ public function __construct()
 }
 ```
 
-The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the backend settings page](#link-registration).
+The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the backend settings page](#settings-link-registration).
 
 ## File-based configuration
 

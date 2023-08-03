@@ -23,9 +23,9 @@ During an update the system will notify the user about recent changes to plugins
 
 1. When an administrator signs in to the backend.
 1. When the system is updated using the update feature in the backend area.
-1. When the [console command](../console/setup-maintenance#winter-up) `php artisan winter:up` is called in the command line from the application directory.
+1. When the [console command](../console/setup-maintenance#run-database-migrations) `php artisan winter:up` is called in the command line from the application directory.
 
-> **NOTE:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
+> **NOTE:** The plugin [initialization process](../plugin/registration#routing-and-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
 
 ### Plugin dependencies
 

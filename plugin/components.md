@@ -111,7 +111,7 @@ Key | Description
 `required` | optional, forces field to be filled. Uses validationMessage when left empty.
 `placeholder` | optional placeholder for string and dropdown properties.
 `options` | optional array of options for dropdown properties.
-`depends` | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-properties) below.
+`depends` | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-and-set-properties) below.
 `group` | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 `showExternalParam` | specifies visibility of the External Parameter editor for the property in the Inspector. Default value: `true`.
 
@@ -270,7 +270,7 @@ url = "/blog/hard-coded-page"
 id = "2"
 ```
 
-Alternatively the value can be referenced dynamically from the page URL using an [external property value](../cms/components#external-property-values):
+Alternatively the value can be referenced dynamically from the page URL using an [external property value](../cms/components#using-external-property-values):
 
 ```ini
 url = "/blog/:my_custom_parameter"
@@ -307,7 +307,7 @@ public function onRun()
 
 ### Page execution life cycle handlers
 
-When a page loads, Winter executes handler functions that could be defined in the layout and page [PHP section](../cms/themes#php-section) and component classes. The sequence the handlers are executed is following:
+When a page loads, Winter executes handler functions that could be defined in the layout and page [PHP section](../cms/themes#php-code-section) and component classes. The sequence the handlers are executed is following:
 
 1. Layout `onInit()` function.
 1. Page `onInit()` function.
@@ -332,7 +332,7 @@ public function init()
 
 ### Halting with a response
 
-Like all methods in the [page execution life cycle](../cms/layouts#layout-life-cycle), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
+Like all methods in the [page execution life cycle](../cms/layouts#layout-execution-life-cycle), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
 
 ```php
 public function onRun()
@@ -368,7 +368,7 @@ public function onAddItem()
 }
 ```
 
-If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers#calling-handlers) article for details about using AJAX with components.
+If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers#calling-a-handler) article for details about using AJAX with components.
 
 ## Default markup
 
@@ -424,7 +424,7 @@ Multiple components can share partials by placing the partial file in a director
 
 ### Referencing "self"
 
-Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components#aliases).
+Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components#component-aliases).
 
 ```twig
 <form data-request="{{__SELF__}}::onEventHandler">
@@ -485,7 +485,7 @@ function onGetTemplate()
 }
 ```
 
-Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#page-cycle). This code will specifically return an XML response using the `Response` facade:
+Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#page-execution-life-cycle-handlers). This code will specifically return an XML response using the `Response` facade:
 
 ```php
 public function onRun()

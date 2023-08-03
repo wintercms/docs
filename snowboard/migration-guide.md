@@ -25,7 +25,7 @@ We have removed the hard dependency with jQuery, which also means that no jQuery
 
 ### JavaScript in the HTML data attribute framework is deprecated
 
-The original [AJAX framework](../ajax/attributes-api.md#data-attributes) allowed for arbitrary JavaScript code to be specified within the callback data attributes, for example, `data-request-success`, `data-request-error` and `data-request-complete`, as a way of allowing JavaScript to run additional tasks depending on the success or failure of an AJAX request made through the HTML data attributes.
+The original [AJAX framework](../ajax/attributes-api.md#available-data-attributes) allowed for arbitrary JavaScript code to be specified within the callback data attributes, for example, `data-request-success`, `data-request-error` and `data-request-complete`, as a way of allowing JavaScript to run additional tasks depending on the success or failure of an AJAX request made through the HTML data attributes.
 
 We have dropped support of this feature due to its use of the `eval()` method in JavaScript to execute this JavaScript, which has security implications (especially on front-facing code) and prevents people from using content security policies on their sites without the use of the `unsafe-eval` [CSP rule](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src).
 

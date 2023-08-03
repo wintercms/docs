@@ -36,9 +36,9 @@ AJAX requests made through the `Request` class go through the following process:
 - The data provided to the Request, along with any form data if applicable, will be compiled.
 - The AJAX request is sent to the Backend context using the [given handler](../snowboard/handlers).
 - A response is received from the Backend context and processed, from here, one of three things happen:
-  - If the response is successful, then any partials that are instructed to be updated will be updated at this point.
-  - If the response is unsuccessful due to a validation error, then a validation message will be shown and the failing fields will be highlighted.
-  - If the response is unsuccessful due to any other error, then an error message will be shown.
+    - If the response is successful, then any partials that are instructed to be updated will be updated at this point.
+    - If the response is unsuccessful due to a validation error, then a validation message will be shown and the failing fields will be highlighted.
+    - If the response is unsuccessful due to any other error, then an error message will be shown.
 - The request is then complete.
 
 ## Available options

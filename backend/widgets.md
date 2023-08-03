@@ -24,7 +24,7 @@ plugins/
             `-- Form.php               # Widget class
 ```
 
-### Class definition
+### Widget definition
 
 The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). Example widget controller class definition:
 
@@ -143,7 +143,7 @@ formwidgets/
 `-- Form.php               # Widget class
 ```
 
-### Class definition
+### Form widget definition
 
 The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). A registered widget can be used in the backend [form field definition](../backend/forms#defining-form-fields) file. Example form widget class definition:
 
@@ -290,7 +290,7 @@ Report widgets can be used on the backend dashboard and in other backend report 
 
 > You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding#create-a-report-widget) for more information.
 
-### Report widget classes
+### Report widget definition
 
 The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 

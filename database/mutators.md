@@ -8,7 +8,7 @@ In addition to custom accessors and mutators, you can also automatically cast da
 
 ## Accessors & mutators
 
-#### Defining an accessor
+### Defining an accessor
 
 To define an accessor, create a `getFooAttribute` method on your model where `Foo` is the "camel" cased name of the column you wish to access. In this example, we'll define an accessor for the `first_name` attribute. The accessor will automatically be called when attempting to retrieve the value of `first_name`:
 
@@ -40,7 +40,7 @@ $user = User::find(1);
 $firstName = $user->first_name;
 ```
 
-#### Defining a mutator
+### Defining a mutator
 
 To define a mutator, define a `setFooAttribute` method on your model where `Foo` is the "camel" cased name of the column you wish to access. In this example, let's define a mutator for the `first_name` attribute. This mutator will be automatically called when we attempt to set the value of the `first_name` attribute on the model:
 
@@ -154,7 +154,7 @@ if ($user->is_admin) {
 }
 ```
 
-#### Array casting
+### Array casting
 
 The `array` cast type is particularly useful when working with columns that are stored as serialized JSON. For example, if your database has a `TEXT` field type that contains serialized JSON, adding the `array` cast to that attribute will automatically deserialize the attribute to a PHP array when you access it on your Eloquent model:
 

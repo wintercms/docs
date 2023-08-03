@@ -1,54 +1,38 @@
-## Timeline map of the events fired in the CMS (frontend)
+# Timeline
 
-1. [cms.page.beforeDisplay](../events/event/cms.page.beforeDisplay)
+The following is a timeline map of the events fired in the CMS (frontend).
 
-1. [cms.page.initComponents](../events/event/cms.page.initComponents)
+1. [cms.page.beforeDisplay](/docs/v1.2/api/events/cms/page/beforeDisplay)
+1. [cms.page.initComponents](/docs/v1.2/api/events/cms/page/initComponents)
+    - `layout::onInit()`
+    - `page::onInit()`
+1. [cms.page.init](/docs/v1.2/api/events/cms/page/init)
+1. [cms.ajax.beforeRunHandler](/docs/v1.2/api/events/cms/ajax/beforeRunHandler)
+1. [cms.component.beforeRunAjaxHandler](/docs/v1.2/api/events/cms/component/beforeRunAjaxHandler)
+1. [cms.component.runAjaxHandler](/docs/v1.2/api/events/cms/component/runAjaxHandler)
+1. [cms.page.start](/docs/v1.2/api/events/cms/page/start) -- *start of page lifecycle*
+    - `layout::onStart()`
+    - `layout::runComponents()`
+        - **component.beforeRun**
+        - `component::onRun()`
+        - **component.run**
+    - `layout::onBeforePageStart()`
+    - `page::onStart()`
+    - `page::runComponents()`
+        - **component.beforeRun**
+        - `component::onRun()`
+        - **component.run**
+    - `page::onEnd()`
+    - `layout::onEnd()`
+1. [cms.page.end](/docs/v1.2/api/events/cms/page/end) -- *end of page lifecycle*
+1. [cms.page.beforeRenderPage](/docs/v1.2/api/events/cms/page/beforeRenderPage)
+    - [cms.page.beforeRenderPartial](/docs/v1.2/api/events/cms/page/beforeRenderPartial)
+    - [cms.page.renderPartial](/docs/v1.2/api/events/cms/page/renderPartial)
+1. [cms.page.render](/docs/v1.2/api/events/cms/page/render)
+1. [cms.page.postprocess](/docs/v1.2/api/events/cms/page/postprocess)
+1. [cms.page.display](/docs/v1.2/api/events/cms/page/display)
 
-  `layout::onInit()`<br>
-  `page::onInit()`
-   
-1. [cms.page.init](../events/event/cms.page.init)
-
-1. [cms.ajax.beforeRunHandler](../events/event/cms.ajax.beforeRunHandler)
-
-1. [cms.component.beforeRunAjaxHandler](../events/event/cms.component.beforeRunAjaxHandler)
-
-1. [cms.component.runAjaxHandler](../events/event/cms.component.runAjaxHandler)
-
-1. [cms.page.start](../events/event/cms.page.start) -- *start of page lifecycle*
-
-  `layout::onStart()`
-
-  `layout::runComponents()`
-    *  **component.beforeRun**<br>
-      `component::onRun()`
-    *  **component.run**
-
-  `layout::onBeforePageStart()`
-  
-  `page::onStart()`
-  `page::runComponents()`
-    * **component.beforeRun**<br>
-      `component::onRun()`
-    * **component.run**
-  `page::onEnd()`
-
-  `layout::onEnd()`
-
-1. [cms.page.end](../events/event/cms.page.end) -- *end of page lifecycle*
-
-1. [cms.page.beforeRenderPage](../events/event/cms.page.beforeRenderPage)
-
-	+ [cms.page.beforeRenderPartial](../events/event/cms.page.beforeRenderPartial)
-	+ [cms.page.renderPartial](../events/event/cms.page.renderPartial)
-
-1. [cms.page.render](../events/event/cms.page.render)
-
-1. [cms.page.postprocess](../events/event/cms.page.postprocess)
-
-1. [cms.page.display](../events/event/cms.page.display)
-
-> *Note:* Adding the following code in your Plugin's `boot()` method will dump the CMS page event stack to your `system.log` file:
+> *NOTE:* Adding the following code in your Plugin's `boot()` method will dump the CMS page event stack to your `system.log` file:
 
 ```
 $events_history = [];

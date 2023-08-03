@@ -34,11 +34,11 @@ The Snowboard class provides the following public API for use in managing plugin
 
 Method | Parameters | Description
 ------ | ---------- | -----------
-`addPlugin` | name(`String`)<br>instance(`PluginBase`) | Adds a plugin to the Snowboard framework. The name should be a unique name, unless you intend to replace a pre-defined plugin. The instance should be either a [PluginBase or Singleton](#plugin-base-singleton) instance that represents the "entry" point to your plugin.
+`addPlugin` | name(`String`)<br>instance(`PluginBase`) | Adds a plugin to the Snowboard framework. The name should be a unique name, unless you intend to replace a pre-defined plugin. The instance should be either a [PluginBase or Singleton](#the-pluginbase-and-singleton-abstracts) instance that represents the "entry" point to your plugin.
 `removePlugin` | name(`String`) | Removes a plugin, if it exists. When a plugin is removed, all active instances of the plugin will be destroyed.
 `hasPlugin` | name(`String`) | Returns `true` if a plugin with the given name has been added.
-`getPlugin` | name(`String`) | Returns the [PluginLoader](#plugin-loader-class) instance for the given plugin, if it exists. If it does not exist, an error will be thrown.
-`getPlugins` | | Returns an object of added plugins as [PluginLoader](#plugin-loader-class) instances, keyed by the name of the plugin.
+`getPlugin` | name(`String`) | Returns the [PluginLoader](#the-pluginloader-class) instance for the given plugin, if it exists. If it does not exist, an error will be thrown.
+`getPlugins` | | Returns an object of added plugins as [PluginLoader](#the-pluginloader-class) instances, keyed by the name of the plugin.
 `getPluginNames` | | Returns all added plugins by name as an array of strings.
 `listensToEvent` | eventName(`String`) | Returns an array of plugin names as strings for all plugins that listen to the given event name. This works for both Promise and non-Promise [global events](#global-events).
 `globalEvent` | eventName(`String`)<br>*...parameters* | Calls a non-Promise [global event](#global-events). This will trigger event callbacks for all plugins listening to the given event. This method can be provided additional parameters that will be forwarded through to the event callbacks. This method returns `false` if the event was cancelled by a plugin.
@@ -67,7 +67,7 @@ In general, you would use the first parameter of the `debug` method to state the
 
 ### The PluginLoader class
 
-The PluginLoader class is the conduit between your application (ie. the [Snowboard class](#snowboard-class)) and the plugins. It acts similar to a "factory", providing and managing instances of the plugins and allowing the Snowboard application to communicate to those instances. It also provides a basic level of mocking, to allow for testing or overwriting individual methods of the plugin dynamically.
+The PluginLoader class is the conduit between your application (ie. the [Snowboard class](#the-snowboard-class)) and the plugins. It acts similar to a "factory", providing and managing instances of the plugins and allowing the Snowboard application to communicate to those instances. It also provides a basic level of mocking, to allow for testing or overwriting individual methods of the plugin dynamically.
 
 Each PluginLoader instance will be representative of one plugin.
 
@@ -99,13 +99,13 @@ The reason for the separation is to provide better definition on how your plugin
 Here are some examples of when you would use one or the other:
 
 - `PluginBase`
-  - Single-use AJAX requests
-  - Flash messages
-  - Widget instances with their own data
+    - Single-use AJAX requests
+    - Flash messages
+    - Widget instances with their own data
 - `Singleton`
-  - Event listeners
-  - Global utilities
-  - Base user-interface handlers
+    - Event listeners
+    - Global utilities
+    - Base user-interface handlers
 
 ### Global events
 
@@ -218,3 +218,5 @@ class MySingleton extends Singleton {
   }
 }
 ```
+
+### Mocking

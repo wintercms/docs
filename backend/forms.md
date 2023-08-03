@@ -471,7 +471,7 @@ content:
 
 ### Password
 
-`password ` - renders a single line password field. See also [`sensitive`](#sensitive), for sensitive data that should be able to be revealed on request.
+`password` - renders a single line password field. See also [`sensitive`](#sensitive), for sensitive data that should be able to be revealed on request.
 
 ```yaml
 user_password:
@@ -633,6 +633,7 @@ Option | Description
 `wrapWords` | breaks long lines on to a new line. Default `true`.
 
 ### Color picker
+
 `colorpicker` - renders controls to select a color value.
 
 ```yaml
@@ -1505,7 +1506,6 @@ send_at:
 ```
 
 In the above example the `send_at` form field will only be shown if the `is_delayed` field is checked. In other words, the field will show (action) if the other form input (field) is checked (condition). The `trigger` definition specifies these options:
-
 
 Option | Description
 ------------- | -------------

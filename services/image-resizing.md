@@ -22,7 +22,7 @@ The functionality of this class is controlled by these config items:
 
 The Image Resizer can be access through a number of different methods:
 
-- [`image` backend list columns](../backend/lists#column-image)
+- [`image` backend list columns](../backend/lists#image)
 - [`getThumb()` on `Winter\Storm\Database\Attach\File` models](../database/attachments#viewing-attachments)
 - the [`| resize` filter](/docs/v1.2/markup/filters/resize)
 - Passing a supported `$image` source to [`System\Classes\ImageResizer::filterGetUrl()`](/docs/v1.2/api/System/Classes/ImageResizer#method-filtergeturl)
@@ -39,7 +39,7 @@ The following elements are supported in the options array are supported:
 Key | Description | Default | Options
 --- | --- | --- | ---
 `mode` | How the image should be fitted to dimensions | `auto` | `exact`, `portrait`, `landscape`, `auto`, `fit`, or `crop`
-`offset` | Offset the crop of the resized image | `[0,0]` | [left, top]
+`offset` | Offset the crop of the resized image | `[0,0]` | `[left, top]`
 `quality` | Quality of the resized image | `90` | `0-100`
 `sharpen` | Amount to sharpen the image | `0` | `0-100`
 
@@ -66,4 +66,4 @@ The available sources that images can be resized from are as follows:
 - Uploads Directory
 - Models that extend the `\Winter\Storm\Database\Attach\File` model
 
-Available sources can be extended by listening to the [`system.resizer.getAvailableSources` event](../events/event/system.resizer.getAvailableSources)
+Available sources can be extended by listening to the [`system.resizer.getAvailableSources` event](/docs/v1.2/api/events/system/resizer/getAvailableSources)

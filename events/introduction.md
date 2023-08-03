@@ -25,7 +25,7 @@ The `Event::listen` method is primarily used to subscribe to events and can be d
 Event::listen('acme.blog.myevent', ...);
 ```
 
-The second argument can be a closure that specifies what should happen when the event is fired. The closure can accept optional some arguments, provided by [the firing event](#events-firing).
+The second argument can be a closure that specifies what should happen when the event is fired. The closure can accept optional some arguments, provided by [the firing event](#firing-events).
 
 ```php
 Event::listen('acme.blog.myevent', function ($arg1, $arg2) {
@@ -43,7 +43,7 @@ Event::listen('auth.login', [$this, 'LoginHandler']);
 
 ### Where to register listeners
 
-The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
+The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#supported-methods).
 
 ```php
 class Plugin extends PluginBase
@@ -115,6 +115,7 @@ Event::listen('foo.*', function ($event, $params) {
 `$params` is the event payload. This will be an array of arguments passed from the fired event.
 
 Given the following event:
+
 ```php
 Event::fire('foo.event', function ($arg1, $arg2) {
    // ...
@@ -122,6 +123,7 @@ Event::fire('foo.event', function ($arg1, $arg2) {
 ```
 
 When using a wildcard listener, this would map to the following:
+
 ```php
 Event::listen('foo.*', function ($event, $params) {
     $arg1 = $params[0];
@@ -143,13 +145,13 @@ It is always a good idea to prefix event names with your plugin namespace code, 
 Event::fire('acme.blog.myevent');
 ```
 
-The second argument is an array of values that will be passed as arguments to [the event listener](#events-subscribing) subscribing to it.
+The second argument is an array of values that will be passed as arguments to [the event listener](#subscribing-to-events) subscribing to it.
 
 ```php
 Event::fire('acme.blog.myevent', [$arg1, $arg2]);
 ```
 
-The third argument specifies whether the event should be a [halting event](#subscribing-halting), meaning it should halt if a "non null" value is returned. This argument is set to false by default.
+The third argument specifies whether the event should be a [halting event](#halting-events), meaning it should halt if a "non null" value is returned. This argument is set to false by default.
 
 ```php
 Event::fire('acme.blog.myevent', [...], true);
@@ -313,4 +315,3 @@ $manager->fireEvent('user.beforeRegister', [$user]);
 ```
 
 These events will only occur on the local object as opposed to globally.
-

@@ -38,7 +38,7 @@ We make every effort to document all new requirements and breaking changes, howe
 
 ## Composer updates
 
-**Impacts: All users**
+> **Impacts:** All users.
 
 If you installed your project via Composer, you must make the following changes to the `composer.json` file in the root directory of your project.
 
@@ -82,19 +82,19 @@ Once done, run `composer update` to install all the required dependencies and up
 
 ## Tests folder
 
-**Impacts: All users.**
+> **Impacts:** All users.
 
 The `tests` folder in the root folder of your project is no longer required, as all Winter CMS tests are now stored in the modules that those tests relate to. You may remove the entire folder, unless you are using the folder to store your own application tests.
 
 ## Server script
 
-**Impacts: All users.**
+> **Impacts:** All users.
 
 The `server.php` file located in your project root folder is no longer required for `php artisan serve` to function. You may remove this if you wish, however, there is no harm to your project if you leave it there.
 
 ## Configuration file changes
 
-**Impacts: Most users.**
+> **Impacts:** Most users.
 
 There have been signifcant changes to the default configuration files, mainly in those that are based on the Laravel framework's configuration files. You should review the changes to the [default configuration files](https://github.com/wintercms/winter/tree/wip/1.2/config) and implement any changes as desired.
 
@@ -120,7 +120,7 @@ The following items have the highest likelihood of having an impact on your proj
 
 ## Third-party email delivery providers
 
-**Impacts: Users of third-party email providers, plugin developers.**
+> **Impacts:** Users of third-party email providers, plugin developers.
 
 - Built-in support for SES, Postmark, Mailgun, Mandrill, SendGrid, & SparkPost mail drivers has been removed. Use the applicable first-party driver plugins as needed:
     - [Winter.DriverAWS](https://github.com/wintercms/wn-driveraws-plugin)
@@ -133,7 +133,7 @@ The following items have the highest likelihood of having an impact on your proj
 
 ## Storage & files
 
-**Impacts: Rackspace storage users, plugin developers.**
+> **Impacts:** Rackspace storage users, plugin developers.
 
 - The Rackspace Flysystem driver / adapter is no longer supported.
 - `Symfony\Component\HttpFoundation\File\UploadedFile->getClientSize()` has been removed. Use `getSize()` instead.
@@ -141,13 +141,14 @@ The following items have the highest likelihood of having an impact on your proj
 
 ## Localization changes
 
-**Impacts: Plugin developers.**
+> **Impacts:** Plugin developers.
 
 The `translator.beforeResolve` event has been removed for performance reasons. `Lang::set($key, $value, $locale)` can be used as a replacement.
 
 ### Overriding a specific key
 
-**Winter < v1.2**
+Before Winter v1.2:
+
 ```php
  Event::listen('translator.beforeResolve', function ($key, $replaces, $locale) {
     if ($key === 'validation.reserved') {
@@ -155,7 +156,9 @@ The `translator.beforeResolve` event has been removed for performance reasons. `
     }
 });
 ```
-**Winter >= v1.2**
+
+From Winter v1.2:
+
 ```php
 Lang::set('validation.reserved', Lang::get('winter.builder::lang.validation.reserved'));
 ```
@@ -170,20 +173,20 @@ Lang::set('winter.builder::lang', require __DIR__ . '/lang/en-ca/lang.php', 'en-
 
 ## Facades
 
-**Impacts: Plugin developers.**
+> **Impacts:** Plugin developers.
 
 - Facades must return string keys rather than objects (See https://github.com/laravel/framework/pull/38017).
 - `Winter\Storm\Support\Facades\Str` facade has been removed. Use `Winter\Storm\Support\Str` directly instead. The `Str` alias now points to `Winter\Storm\Support\Str` instead.
 
 ## Laravel packages
 
-**Impacts: Plugin developers.**
+> **Impacts:** Plugin developers.
 
 The version of Laravel has been changed from 6.x LTS to 9.x. If you are using packages made for Laravel, you may have to go through and update them to a version compatible with Laravel 9.x.
 
 ## Unit testing
 
-**Impacts: Plugin developers that use test cases.**
+> **Impacts:** Plugin developers that use test cases.
 
 Unit testing should now be conducted using the `php artisan winter:test` command, as opposed to running unit tests directly on `phpunit`. This ensures that the correct bootstrap is used, as well as the necessary environment configuration is created.
 
@@ -208,7 +211,7 @@ class MyTestCase extends BaseTestCase
 
 ## Storm library internals
 
-**Impacts: Some users, plugin developers.**
+> **Impacts:** Some users and plugin developers.
 
 Version 1.2 of Winter includes a large code refactoring and documentation cleanup for the Storm library, to ensure that our base functionality is fully documented and works in a consistent and expected way. In addition, this brings our Storm library closer to the base Laravel functionality, which should make upgrades quicker and less painful in the future.
 
@@ -275,7 +278,7 @@ While we have ensured that the potential for breaking changes is low, there may 
 
 ## Upgrade guides for dependencies
 
-**Impacts: Informational only.**
+> **Impacts:** Informational only.
 
 - [PHP 8.0](https://www.php.net/manual/en/migration80.php)
 - [PHP 8.1](https://www.php.net/manual/en/migration81.php)

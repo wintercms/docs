@@ -2,35 +2,20 @@
 
 ## Introduction
 
-Winter provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the backend interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
+Winter provides drivers for SMTP, Mailgun, Mandrill, SparkPost, Postmark, Twilio Sendgrid, Amazon SES, PHP's `mail` function, and `sendmail` - allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the backend interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
 
-### Driver prerequisites
+## Driver prerequisites
 
-Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](https://wintercms.com/plugin/winter-drivers).
+Before using some third-party mail services, you will need to install the applicable driver plugin:
 
-#### Mailgun driver
+- Amazon SES: [Winter.DriverAws](https://github.com/wintercms/wn-driveraws-plugin)
+- Mailgun: [Winter.DriverMailgun](https://github.com/wintercms/wn-drivermailgun-plugin)
+- Mandrill: [Winter.DriverMandrill](https://github.com/wintercms/wn-drivermandrill-plugin)
+- Postmark: [Winter.DriverPostmark](https://github.com/wintercms/wn-driverpostmark-plugin)
+- Sendgrid: [Winter.DriverSendgrid](https://github.com/wintercms/wn-driversendgrid-plugin)
+- Sparkpost: [Winter.DriverSparkpost](https://github.com/wintercms/wn-driversparkpost-plugin)
 
-To use the Mailgun driver, set the `driver` option in your `config/mail.php` configuration file to `mailgun`. Next, verify that your `config/services.php` configuration file contains the following options:
-
-```php
-'mailgun' => [
-    'domain' => 'your-mailgun-domain',
-    'secret' => 'your-mailgun-key',
-    'endpoint' => 'api.mailgun.net', // api.eu.mailgun.net for EU
-],
-```
-
-#### SparkPost driver
-
-To use the SparkPost driver set the `driver` option in your `config/mail.php` configuration file to `sparkpost`. Next, verify that your `config/services.php` configuration file contains the following options:
-
-```php
-'sparkpost' => [
-    'secret' => 'your-sparkpost-key',
-],
-```
-
-#### SES driver
+### Amazon SES driver
 
 To use the Amazon SES driver set the `driver` option in your `config/mail.php` configuration file to `ses`. Then, verify that your `config/services.php` configuration file contains the following options:
 
@@ -42,9 +27,31 @@ To use the Amazon SES driver set the `driver` option in your `config/mail.php` c
 ],
 ```
 
+### Mailgun driver
+
+To use the Mailgun driver, set the `driver` option in your `config/mail.php` configuration file to `mailgun`. Next, verify that your `config/services.php` configuration file contains the following options:
+
+```php
+'mailgun' => [
+    'domain' => 'your-mailgun-domain',
+    'secret' => 'your-mailgun-key',
+    'endpoint' => 'api.mailgun.net', // api.eu.mailgun.net for EU
+],
+```
+
+### SparkPost driver
+
+To use the SparkPost driver set the `driver` option in your `config/mail.php` configuration file to `sparkpost`. Next, verify that your `config/services.php` configuration file contains the following options:
+
+```php
+'sparkpost' => [
+    'secret' => 'your-sparkpost-key',
+],
+```
+
 ## Sending mail
 
-To send a message, use the `send` method on the `Mail` facade which accepts three arguments. The first argument is a unique *mail code* used to locate either the [mail view](#mail-views) or [mail template](#mail-templates). The second argument is an array of data you wish to pass to the view. The third argument is a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:
+To send a message, use the `send` method on the `Mail` facade which accepts three arguments. The first argument is a unique *mail code* used to locate either the [mail view](#mail-views) or [mail template](#using-mail-templates). The second argument is an array of data you wish to pass to the view. The third argument is a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:
 
 ```php
 // These variables are available inside the message as Twig
@@ -66,7 +73,7 @@ Since we are passing an array containing the `name` key in the example above, we
 
 > **NOTE:** You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#attachments).
 
-#### Quick sending
+### Quick sending
 
 Winter also includes an alternative method called `sendTo` that can simplify sending mail:
 
@@ -110,7 +117,7 @@ The following custom sending `$options` are supported
 - **queue** specifies whether to queue the message or send it directly (optional, defaults to false).
 - **bcc** specifies whether to add recipients as Bcc or regular To addresses (defaults to false).
 
-#### Building the message
+### Building the message
 
 As previously mentioned, the third argument given to the `send` method is a `Closure` allowing you to specify various options on the e-mail message itself. Using this Closure you may specify other attributes of the message, such as carbon copies, blind carbon copies, etc:
 
@@ -145,7 +152,7 @@ $message->getSwiftMessage();
 
 > **NOTE:** The message instance passed to a `Mail::send` Closure extends the [SwiftMailer](http://swiftmailer.org) message class, allowing you to call any method on that class to build your e-mail messages.
 
-#### Mailing plain text
+### Mailing plain text
 
 By default, the view given to the `send` method is assumed to contain HTML. However, by passing an array as the first argument to the `send` method, you may specify a plain text view to send in addition to the HTML view:
 
@@ -159,7 +166,7 @@ Or, if you only need to send a plain text e-mail, you may specify this using the
 Mail::send(['text' => 'acme.blog::mail.text'], $data, $callback);
 ```
 
-#### Mailing parsed raw strings
+### Mailing parsed raw strings
 
 You may use the `raw` method if you wish to e-mail a raw string directly. This content will be parsed by Markdown.
 
@@ -177,7 +184,7 @@ Mail::send(['raw' => 'Text to email'], $vars, function ($message) {
 });
 ```
 
-#### Mailing raw strings
+### Mailing raw strings
 
 If you pass an array containing either `text` or `html` keys, this will be an explicit request to send mail. No layout or markdown parsing is used.
 
@@ -217,9 +224,7 @@ When attaching files to a message, you may also specify the display name and / o
 $message->attach($pathToFile, ['as' => $display, 'mime' => $mime]);
 ```
 
-### Inline attachments
-
-#### Embedding an image in mail content
+### Embedding an image in mail content
 
 Embedding inline images into your e-mails is typically cumbersome; however, there is a convenient way to attach images to your e-mails and retrieving the appropriate CID. To embed an inline image, use the `embed` method on the `message` variable within your e-mail view. Remember, the `message` variable is available to all of your mail views:
 
@@ -241,7 +246,7 @@ If you are planning to use queued emails make sure that the path of the file is 
 </body>
 ```
 
-#### Embedding raw data in mail content
+### Embedding raw data in mail content
 
 If you already have a raw data string you wish to embed into an e-mail message, you may use the `embedData` method on the `message` variable:
 
@@ -253,9 +258,9 @@ If you already have a raw data string you wish to embed into an e-mail message, 
 </body>
 ```
 
-### Queueing mail
+## Queueing mail
 
-#### Queueing a mail message
+### Queueing a mail message
 
 Since sending mail messages can drastically lengthen the response time of your application, many developers choose to queue messages for background sending. This is easy using the built-in [unified queue API](../services/queues). To queue a mail message, use the `queue` method on the `Mail` facade:
 
@@ -267,7 +272,7 @@ Mail::queue('acme.blog::mail.welcome', $data, function ($message) {
 
 This method will automatically take care of pushing a job onto the queue to send the mail message in the background. Of course, you will need to [configure your queues](../services/queues) before using this feature.
 
-#### Delayed message queueing
+### Delayed message queueing
 
 If you wish to delay the delivery of a queued e-mail message, you may use the `later` method. To get started, simply pass the number of seconds by which you wish to delay the sending of the message as the first argument to the method:
 
@@ -277,7 +282,7 @@ Mail::later(5, 'acme.blog::mail.welcome', $data, function ($message) {
 });
 ```
 
-#### Pushing to specific queues
+### Pushing to specific queues
 
 If you wish to specify a specific queue on which to push the message, you may do so using the `queueOn` and `laterOn` methods:
 
@@ -295,7 +300,7 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 
 Mail messages can be sent in Winter using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the backend interface via *System > Mail templates*. All mail messages support using Twig for markup.
 
-Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the backend interface.
+Optionally, mail views can be [registered in the Plugin registration file](#registering-mail-layouts-templates-and-partials) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the backend interface.
 
 ### Mail views
 
@@ -345,14 +350,14 @@ subject = "Your product has been added to Winter CMS project"
 <p>Sorry about that!</p>
 ```
 
-#### Configuration section
+### Configuration section
 
 The configuration section sets the mail view parameters. The following configuration parameters are supported:
 
 Parameter | Description
 ------------- | -------------
 `subject` | the mail message subject, required.
-`layout` | the [mail layout](#mail-layouts) code, optional. Default value is `default`.
+`layout` | the [mail layout](#using-mail-layouts) code, optional. Default value is `default`.
 
 ### Using mail templates
 
@@ -369,9 +374,9 @@ Mail::send('this.is.my.email', $data, function($message) use ($user)
 
 > **NOTE:** If the mail template does not exist in the system, this code will attempt to find a mail view with the same code.
 
-#### Automatically generated templates
+### Automatically generated templates
 
-Mail templates can also be generated automatically by [mail views that have been registered](#mail-template-registration). The **code** value will be the same as the mail view path (eg: author.plugin:mail.message). If the mail view has a **layout** parameter defined, this will be used to give the template a layout.
+Mail templates can also be generated automatically by [mail views that have been registered](#registering-mail-layouts-templates-and-partials). The **code** value will be the same as the mail view path (eg: author.plugin:mail.message). If the mail view has a **layout** parameter defined, this will be used to give the template a layout.
 
 When a generated template is saved for the first time, the customized content will be used when sending mail for the assigned code. In this context, the mail view can be considered a *default view*.
 
@@ -386,7 +391,7 @@ Layout | Code | Description
 Default | `default` | Used for public facing, frontend mail
 System | `system` | Used for internal, backend mail
 
-### Registering mail layouts, templates & partials
+### Registering mail layouts, templates and partials
 
 Mail views can be registered as templates that are automatically generated in the backend ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration#registration-file).
 
@@ -438,11 +443,11 @@ This code could be called inside the register or boot method of a [plugin regist
 
 When developing an application that sends e-mail, you probably don't want to actually send e-mails to live e-mail addresses. There are several ways to "disable" the actual sending of e-mail messages.
 
-#### Log driver
+### Log driver
 
 One solution is to use the `log` mail driver during local development. This driver will write all e-mail messages to your log files for inspection. For more information on configuring your application per environment, check out the [configuration documentation](../setup/configuration).
 
-#### Universal to
+### Universal to
 
 Another solution is to set a universal recipient of all e-mails sent by the framework. This way, all the emails generated by your application will be sent to a specific address, instead of the address actually specified when sending the message. This can be done via the `to` option in your `config/mail.php` configuration file:
 
@@ -453,7 +458,7 @@ Another solution is to set a universal recipient of all e-mails sent by the fram
 ],
 ```
 
-#### Pretend mail mode
+### Pretend mail mode
 
 You can dynamically disable sending mail using the `Mail::pretend` method. When the mailer is in pretend mode, messages will be written to your application's log files instead of being sent to the recipient.
 

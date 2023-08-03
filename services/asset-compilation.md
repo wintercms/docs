@@ -1,14 +1,14 @@
+---
+title: "Services: Asset Compilation"
+description: "Learn more about the Asset Compilation features included with Winter CMS."
+---
 # Asset Compilation
-
-<div class="og-description">
-    Learn more about the Asset Compilation features included with Winter CMS.
-</div>
 
 ## Introduction
 
 Winter CMS includes a server-side Asset Compiler that makes use of the [Assetic Framework](https://github.com/assetic-php/assetic) to compile and combine assets like CSS and JavaScript serverside, through PHP, negating the need for complex build workflows. The Asset Compiler provides on-the-fly server-side compilation of SASS and LESS stylesheets as well as [run-once manual compilation of assets](#compiler-bundles) without requiring additional workflow tools like Node or NPM. It is also able to combine and minify CSS and JS files.
 
-Additionally, you can [define variables in the theme.yaml file](../themes/development#combiner-vars) that can be modified in the Theme Settings area of the backend which are then injected into the compiled files, creating flexibility for theming and branding.
+Additionally, you can [define variables in the theme.yaml file](../themes/development#asset-compiler-variables) that can be modified in the Theme Settings area of the backend which are then injected into the compiled files, creating flexibility for theming and branding.
 
 > **NOTE:** Looking for a way to compile or build Node-based assets in your project? Check out the [Winter Mix](../console/asset-compilation) functionality which can handle this for you.
 
@@ -49,7 +49,7 @@ You may also use a string as the second argument, which then defaults to using t
 $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js', 'Acme.Test');
 ```
 
-### Asset Compilation
+### Triggering Asset Compilation
 
 In order to trigger asset compilation or combination, asset paths must be passed as an array of paths to the above methods, even if there is just a single asset file to compile that itself loads other files. Asset Compilation is currently supported for JS files using the `=require path/to/other.js` syntax as well as LESS and SASS/SCSS files.
 
@@ -90,7 +90,7 @@ Symbol | Description
 
 ### Combiner Aliases
 
-The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](../ajax/introduction#framework-script) can be included in the combiner:
+The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](../ajax/introduction#including-the-framework) can be included in the combiner:
 
 ```twig
 <script src="{{ [
@@ -138,11 +138,11 @@ If you are wanting to render the injected assets in any other context, you can c
 
 While the majority of the time dynamic asset compilation through `addJs()`, `addCss()`, or the [`| theme` filter](/docs/v1.2/markup/filters/theme) should be sufficient for your needs, you may occassionally have a complex asset compilation that you would like to just generate a static file on command instead of dynamically.
 
-The Winter CMS core registers several such bundles for internal usage that are compiled whenever the [`artisan winter:util compile assets` command](../console/utilities#winter-util-compile-assets) is run.
+The Winter CMS core registers several such bundles for internal usage that are compiled whenever the [`artisan winter:util compile assets` command](../console/utilities#compile-winter-assets) is run.
 
 ## Extending the Asset Compiler
 
-The `System\Classes\AssetCombiner` class provides the `registerCallback(callable $callback)` static method to extend it's default behaviour. Additionally, the [`system.assets.beforeAddAsset` event](../events/event/system.assets.beforeAddAsset) is available for extending any calls to `addJs()` or `addCss()`
+The `System\Classes\AssetCombiner` class provides the `registerCallback(callable $callback)` static method to extend it's default behaviour. Additionally, the [`system.assets.beforeAddAsset` event](/docs/v1.2/api/events/system/assets/beforeAddAsset) is available for extending any calls to `addJs()` or `addCss()`
 
 ### Register Custom Aliases
 

@@ -2,9 +2,9 @@
 
 ## Basic responses
 
-A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts#layout-life-cycle) and [AJAX handler definitions](../ajax/handlers).
+A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts#layout-execution-life-cycle) and [AJAX handler definitions](../ajax/handlers).
 
-#### Returning strings from a CMS method
+### Returning strings from a CMS method
 
 Returning a string from a CMS page, layout or component method will halt the process at this point and override the default behavior, so here it will display the "Hello World" string instead of displaying the page.
 
@@ -15,7 +15,7 @@ public function onStart()
 }
 ```
 
-#### Returning strings from AJAX handlers
+### Returning strings from AJAX handlers
 
 Returning a string from an AJAX handler will add the string to the response collection using the default key of `result`. Requested partials will still be included in the response.
 
@@ -27,7 +27,7 @@ public function onDoSomething()
 }
 ```
 
-#### Returning strings from routes
+### Returning strings from routes
 
 Returning a string from a [route definition](../services/router) will act the same as a CMS method and display the string as the response.
 
@@ -37,7 +37,7 @@ Route::get('/', function() {
 });
 ```
 
-#### Creating custom responses
+### Creating custom responses
 
 For a more robust solution, returning a `Response` object providing a variety of methods for building HTTP responses. We will explore this topic further in this article.
 
@@ -171,7 +171,7 @@ The `macro` function accepts a name as its first argument, and a Closure as its 
 return Response::caps('foo');
 ```
 
-You may define your macros in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
+You may define your macros in the `boot` method of a [Plugin registration file](../plugin/registration#supported-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
 
 ## Views
 
@@ -211,7 +211,7 @@ The first argument is a "path hint" that contains the plugin name, separated by 
 
 > **NOTE**: The path hint is case sensitive and the plugin name should always be in lowercase.
 
-#### Passing data to views
+### Passing data to views
 
 ```php
 // Using conventional approach
@@ -233,7 +233,7 @@ It is also possible to share a piece of data across all views:
 View::share('name', 'Steve');
 ```
 
-#### Passing a sub-view to a view
+### Passing a sub-view to a view
 
 Sometimes you may wish to pass a view into another view. For example, given a sub-view stored at `plugins/acme/blog/views/child/view.php`, we could pass it to another view like so:
 
@@ -254,7 +254,7 @@ The sub-view can then be rendered from the parent view:
 </html>
 ```
 
-#### Determining if a view exists
+### Determining if a view exists
 
 If you need to check if a view exists, use the `View::exists` method:
 

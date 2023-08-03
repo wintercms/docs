@@ -10,7 +10,7 @@ Validation can be used to cross-examine data and produce error messages against 
 
 The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class.
 
-#### Basic Validation Example
+### Basic Validation Example
 
 ```php
 $validator = Validator::make(
@@ -21,7 +21,7 @@ $validator = Validator::make(
 
 The first argument passed to the `make` method is the data under validation. The second argument is the validation rules that should be applied to the data.
 
-#### Using arrays to specify rules
+### Using arrays to specify rules
 
 Multiple rules may be delimited using either a "pipe" character, or as separate elements of an array.
 
@@ -32,7 +32,7 @@ $validator = Validator::make(
 );
 ```
 
-#### Validating multiple fields
+### Validating multiple fields
 
 ```php
 $validator = Validator::make(
@@ -69,7 +69,7 @@ You may also access an array of the failed validation rules, without messages. T
 $failed = $validator->failed();
 ```
 
-#### Validating files
+### Validating files
 
 The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
 
@@ -77,13 +77,13 @@ The `Validator` class provides several rules for validating files, such as `size
 
 After calling the `messages` method on a `Validator` instance, you will receive a `Illuminate\Support\MessageBag` instance, which has a variety of convenient methods for working with error messages.
 
-#### Retrieving the first error message for a field
+### Retrieving the first error message for a field
 
 ```php
 echo $messages->first('email');
 ```
 
-#### Retrieving all error messages for a field
+### Retrieving all error messages for a field
 
 ```php
 foreach ($messages->get('email') as $message) {
@@ -91,7 +91,7 @@ foreach ($messages->get('email') as $message) {
 }
 ```
 
-#### Retrieving all error messages for all fields
+### Retrieving all error messages for all fields
 
 ```php
 foreach ($messages->all() as $message) {
@@ -99,7 +99,7 @@ foreach ($messages->all() as $message) {
 }
 ```
 
-#### Determining if messages exist for a field
+### Determining if messages exist for a field
 
 ```php
 if ($messages->has('email')) {
@@ -107,7 +107,7 @@ if ($messages->has('email')) {
 }
 ```
 
-#### Retrieving an error message with a format
+### Retrieving an error message with a format
 
 ```php
 echo $messages->first('email', '<p>:message</p>');
@@ -115,7 +115,7 @@ echo $messages->first('email', '<p>:message</p>');
 
 > **NOTE:** By default, messages are formatted using Bootstrap compatible syntax.
 
-#### Retrieving all error messages with a format
+### Retrieving all error messages with a format
 
 ```php
 foreach ($messages->all('<li>:message</li>') as $message) {
@@ -170,129 +170,131 @@ Below is a list of all available validation rules and their function:
 
 <div class="columned-list">
 
-- [Accepted](#rule-accepted)
-- [Active URL](#rule-active-url)
-- [After (Date)](#rule-after)
-- [Alpha](#rule-alpha)
-- [Alpha Dash](#rule-alpha-dash)
-- [Alpha Numeric](#rule-alpha-num)
-- [Array](#rule-array)
-- [Before (Date)](#rule-before)
-- [Between](#rule-between)
-- [Boolean](#rule-boolean)
-- [Confirmed](#rule-confirmed)
-- [Date](#rule-date)
-- [Date Format](#rule-date-format)
-- [Different](#rule-different)
-- [Digits](#rule-digits)
-- [Digits Between](#rule-digits-between)
-- [E-Mail](#rule-email)
-- [Exists (Database)](#rule-exists)
-- [Image (File)](#rule-image)
-- [In](#rule-in)
-- [Integer](#rule-integer)
-- [IP Address](#rule-ip)
-- [Max](#rule-max)
-- [MIME Types](#rule-mimes)
-- [Min](#rule-min)
-- [Not In](#rule-not-in)
-- [Nullable](#rule-nullable)
-- [Numeric](#rule-numeric)
-- [Regular Expression](#rule-regex)
-- [Required](#rule-required)
-- [Required If](#rule-required-if)
-- [Required With](#rule-required-with)
-- [Required With All](#rule-required-with-all)
-- [Required Without](#rule-required-without)
-- [Required Without All](#rule-required-without-all)
-- [Same](#rule-same)
-- [Size](#rule-size)
-- [String](#rule-string)
-- [Timezone](#rule-timezone)
-- [Unique (Database)](#rule-unique)
-- [URL](#rule-url)
+- [Accepted](#accepted)
+- [Active URL](#active_url)
+- [After (Date)](#after_date_)
+- [Alpha](#alpha)
+- [Alpha Dash](#alpha_dash)
+- [Alpha Numeric](#alpha_num)
+- [Array](#array)
+- [Before (Date)](#before_date_)
+- [Between](#between_min__max_)
+- [Boolean](#boolean)
+- [Confirmed](#confirmed)
+- [Date](#date)
+- [Date Format](#date_format_format_)
+- [Different](#different_field_)
+- [Digits](#digits_value_)
+- [Digits Between](#digits_between_min__max_)
+- [E-Mail](#email)
+- [Exists (Database)](#exists_table__column_)
+- [Image (File)](#image)
+- [In](#in_foo__bar_)
+- [Integer](#integer)
+- [IP Address](#ip)
+- [Max](#max_value_)
+- [MIME Types](#mimes_foo__bar_)
+- [Min](#min_value_)
+- [Not In](#not_in_foo__bar_)
+- [Nullable](#nullable)
+- [Numeric](#numeric)
+- [Regular Expression](#regex_pattern_)
+- [Required](#required)
+- [Required If](#required_if_field__value_)
+- [Required With](#required_with_foo__bar_)
+- [Required With All](#required_with_all_foo__bar_)
+- [Required Without](#required_without_foo__bar_)
+- [Required Without All](#required_without_foo__bar_)
+- [Same](#same_field_)
+- [Size](#size_value_)
+- [String](#string_value_)
+- [Timezone](#timezone)
+- [Unique (Database)](#unique_table__column__except__idcolumn_)
+- [URL](#url)
 
 </div>
 
-#### accepted
+### Validation rules list
+
+#### `accepted`
 
 The field under validation must be _yes_, _on_, or _1_. This is useful for validating "Terms of Service" acceptance.
 
-#### active_url
+#### `active_url`
 
 The field under validation must be a valid URL according to the `checkdnsrr` PHP function.
 
-#### after:_date_
+#### `after:_date_`
 
 The field under validation must be a value after a given date. The dates will be passed into the PHP `strtotime` function.
 
-#### alpha
+#### `alpha`
 
 The field under validation must be entirely alphabetic characters.
 
-#### alpha_dash
+#### `alpha_dash`
 
 The field under validation may have alpha-numeric characters, as well as dashes and underscores.
 
-#### alpha_num
+#### `alpha_num`
 
 The field under validation must be entirely alpha-numeric characters.
 
-#### array
+#### `array`
 
 The field under validation must be of type array.
 
-#### before:_date_
+#### `before:_date_`
 
 The field under validation must be a value preceding the given date. The dates will be passed into the PHP `strtotime` function.
 
-#### between:_min_,_max_
+#### `between:_min_,_max_`
 
 The field under validation must have a size between the given _min_ and _max_. Strings, numerics, and files are evaluated in the same fashion as the `size` rule.
 
-#### boolean
+#### `boolean`
 
 The field under validation must be able to be cast as a boolean. Accepted input are `true`, `false`, `1`, `0`, `"1"` and `"0"`.
 
-#### confirmed
+#### `confirmed`
 
 The field under validation must have a matching field of `foo_confirmation`. For example, if the field under validation is `password`, a matching `password_confirmation` field must be present in the input.
 
-#### date
+#### `date`
 
 The field under validation must be a valid date according to the `strtotime` PHP function.
 
-#### date_format:_format_
+#### `date_format:_format_`
 
 The field under validation must match the _format_ defined according to the `date_parse_from_format` PHP function.
 
-#### different:_field_
+#### `different:_field_`
 
 The given _field_ must be different than the field under validation.
 
-#### digits:_value_
+#### `digits:_value_`
 
 The field under validation must be _numeric_ and must have an exact length of _value_.
 
-#### digits_between:_min_,_max_
+#### `digits_between:_min_,_max_`
 
 The field under validation must have a length between the given _min_ and _max_.
 
-#### email
+#### `email`
 
 The field under validation must be formatted as an e-mail address.
 
-#### exists:_table_,_column_
+#### `exists:_table_,_column_`
 
 The field under validation must exist on a given database table.
 
-#### Basic usage of exists rule
+#### `Basic usage of exists rule`
 
 ```php
 'state' => 'exists:states'
 ```
 
-#### Specifying a custom column name
+#### `Specifying a custom column name`
 
 ```php
 'state' => 'exists:states,abbreviation'
@@ -310,99 +312,99 @@ Passing `NULL` as a "where" clause value will add a check for a `NULL` database 
 'email' => 'exists:staff,email,deleted_at,NULL'
 ```
 
-#### image
+#### `image`
 
 The file under validation must be an image (jpeg, png, bmp, or gif)
 
-#### in:_foo_,_bar_,...
+#### `in:_foo_,_bar_,...`
 
 The field under validation must be included in the given list of values.
 
-#### integer
+#### `integer`
 
 The field under validation must have an integer value.
 
-#### ip
+#### `ip`
 
 The field under validation must be formatted as an IP address.
 
-#### max:_value_
+#### `max:_value_`
 
-The field under validation must be less than or equal to a maximum _value_. Strings, numerics, and files are evaluated in the same fashion as the [`size`](#rule-size) rule.
+The field under validation must be less than or equal to a maximum _value_. Strings, numerics, and files are evaluated in the same fashion as the [`size`](#size_value_) rule.
 
-#### mimes:_foo_,_bar_,...
+#### `mimes:_foo_,_bar_,...`
 
 The file under validation must have a MIME type corresponding to one of the listed extensions.
 
-#### Basic usage of MIME rule
+#### `Basic usage of MIME rule`
 
 ```php
 'photo' => 'mimes:jpeg,bmp,png'
 ```
 
-#### min:_value_
+#### `min:_value_`
 
-The field under validation must have a minimum _value_. Strings, numerics, and files are evaluated in the same fashion as the [`size`](#rule-size) rule.
+The field under validation must have a minimum _value_. Strings, numerics, and files are evaluated in the same fashion as the [`size`](#size_value_) rule.
 
-#### not_in:_foo_,_bar_,...
+#### `not_in:_foo_,_bar_,...`
 
 The field under validation must not be included in the given list of values.
 
-#### nullable
+#### `nullable`
 
 The field under validation may be `null`. This is particularly useful when validating primitive such as strings and integers that can contain `null` values.
 
-#### numeric
+#### `numeric`
 
 The field under validation must have a numeric value.
 
-#### regex:_pattern_
+#### `regex:_pattern_`
 
 The field under validation must match the given regular expression.
 
 **Note:** When using the `regex` pattern, it may be necessary to specify rules in an array instead of using pipe delimiters, especially if the regular expression contains a pipe character.
 
-#### required
+#### `required`
 
 The field under validation must be present in the input data.
 
-#### required_if:_field_,_value_,...
+#### `required_if:_field_,_value_,...`
 
 The field under validation must be present if the _field_ field is equal to any _value_.
 
-#### required_with:_foo_,_bar_,...
+#### `required_with:_foo_,_bar_,...`
 
 The field under validation must be present _only if_ any of the other specified fields are present.
 
-#### required_with_all:_foo_,_bar_,...
+#### `required_with_all:_foo_,_bar_,...`
 
 The field under validation must be present _only if_ all of the other specified fields are present.
 
-#### required_without:_foo_,_bar_,...
+#### `required_without:_foo_,_bar_,...`
 
 The field under validation must be present _only when_ any of the other specified fields are not present.
 
-#### required_without_all:_foo_,_bar_,...
+#### `required_without_all:_foo_,_bar_,...`
 
 The field under validation must be present _only when_ the all of the other specified fields are not present.
 
-#### same:_field_
+#### `same:_field_`
 
 The specified _field_ value must match the field's value under validation.
 
-#### size:_value_
+#### `size:_value_`
 
 The field under validation must have a size matching the given _value_. For string data, _value_ corresponds to the number of characters. For numeric data, _value_ corresponds to a given integer value. For files, _size_ corresponds to the file size in kilobytes.
 
-#### string:_value_
+#### `string:_value_`
 
 The field under validation must be a string type.
 
-#### timezone
+#### `timezone`
 
 The field under validation must be a valid timezone identifier according to the `timezone_identifiers_list` PHP function.
 
-#### unique:_table_,_column_,_except_,_idColumn_
+#### `unique:_table_,_column_,_except_,_idColumn_`
 
 The field under validation must be unique on a given database table. If the `column` option is not specified, the field name will be used.
 
@@ -452,7 +454,7 @@ $v = Validator::make($data, [
 
 In the example above, the `email` field will only be validated if it is present in the `$data` array.
 
-#### Complex conditional validation
+### Complex conditional validation
 
 Sometimes you may wish to require a given field only if another field has a greater value than 100. Or you may need two fields to have a given value only when another field is present. Adding these validation rules doesn't have to be a pain. First, create a `Validator` instance with your _static rules_ that never change:
 
@@ -523,7 +525,7 @@ $validator = Validator::make(Input::all(), [
 
 If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages.
 
-#### Passing custom messages into validator
+### Passing custom messages into validator
 
 ```php
 $messages = [
@@ -533,9 +535,9 @@ $messages = [
 $validator = Validator::make($input, $rules, $messages);
 ```
 
-> *Note:* The `:attribute` place-holder will be replaced by the actual name of the field under validation. You may also utilize other place-holders in validation messages.
+> **NOTE:** The `:attribute` place-holder will be replaced by the actual name of the field under validation. You may also utilize other place-holders in validation messages.
 
-#### Other validation placeholders
+### Other validation placeholders
 
 ```php
 $messages = [
@@ -546,7 +548,7 @@ $messages = [
 ];
 ```
 
-#### Specifying a custom message for a given attribute
+### Specifying a custom message for a given attribute
 
 Sometimes you may wish to specify a custom error messages only for a specific field:
 
@@ -556,7 +558,7 @@ $messages = [
 ];
 ```
 
-#### Specifying custom messages in language files
+### Specifying custom messages in language files
 
 In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to an array in the `lang/xx/validation.php` language file for your plugin.
 
@@ -575,11 +577,11 @@ Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 
 ## Custom validation rules
 
-#### Registering a custom validation rule
+### Registering a custom validation rule
 
 There are a variety of helpful validation rules; however, you may wish to specify some of your own.
 
-The easiest way to register custom validation rules is by adding the `registerValidationRules() : array` method in the [`Plugin.php` registration file](../plugin/registration#registration-methods) for your plugin. This method should return an array where the key is the validator rule name and the value is either a class that extends `Winter\Storm\Validation\Rule` or a callable function. The callable function receives four arguments, the name of the `$attribute` being validated, the `$value` of the attribute and an array of `$parameters` passed to the rule, and the `$validator` instance.
+The easiest way to register custom validation rules is by adding the `registerValidationRules() : array` method in the [`Plugin.php` registration file](../plugin/registration#supported-methods) for your plugin. This method should return an array where the key is the validator rule name and the value is either a class that extends `Winter\Storm\Validation\Rule` or a callable function. The callable function receives four arguments, the name of the `$attribute` being validated, the `$value` of the attribute and an array of `$parameters` passed to the rule, and the `$validator` instance.
 
 ```php
 public function registerValidationRules()
@@ -597,7 +599,7 @@ Another way to register custom validation rules is by extending the Validator in
 
 You can extend the Validator instance with your custom validation rule as a `Closure`, or as a `Rule` object.
 
-#### Using Closures
+### Using Closures
 
 If you only need the functionality of a custom rule specified once throughout your plugin or application, you may use a Closure to define the rule. The first parameter defines the name of your rule, and the second parameter provides your Closure.
 
@@ -628,7 +630,7 @@ public $rules = [
 ];
 ```
 
-#### Using Rule objects
+### Using Rule objects
 
 A `Rule` object represents a single reusable validation rule for your models that implements the `Illuminate\Contracts\Validation\Rule` contract. Each rule object must provide three methods: a `passes` method which determines if a given value passes validation and a `message` method which defines the default fallback error message. `Rule` objects should extend the `Winter\Storm\Validation\Rule` abstract.
 
@@ -670,7 +672,7 @@ Validator::extend('uppercase', Uppercase::class);
 
 `Rule` objects should be stored in the **/rules** subdirectory inside your plugin directory.
 
-#### Defining the Error Message
+### Defining the Error Message
 
 You will also need to define an error message for your custom rule.
 
@@ -698,7 +700,7 @@ public function boot()
 }
 ```
 
-#### Registering a custom validator resolver
+### Registering a custom validator resolver
 
 If you wish to provide a large number of custom rules to your application, you can also define a validator resolver. Note that only one resolver may be defined per Validation instance, so it is not recommended to define a resolver in plugins unless you are using your own Validation instance and not the global Validator facade.
 

@@ -18,7 +18,7 @@ $user->save();
 
 Alternatively, models can implement the [Hashable trait](../database/traits#hashable) to automatically hash attributes.
 
-#### Verifying a password against a hash
+### Verifying a password against a hash
 
 The `check` method allows you to verify that a given plain-text string corresponds to a given hash.
 
@@ -28,7 +28,7 @@ if (Hash::check('plain-text', $hashedPassword)) {
 }
 ```
 
-#### Checking if a password needs to be rehashed
+### Checking if a password needs to be rehashed
 
 The `needsRehash` function allows you to determine if the work factor used by the hasher has changed since the password was hashed:
 
@@ -50,7 +50,7 @@ $user->secret = Crypt::encrypt('shhh no telling');
 $user->save();
 ```
 
-#### Decrypting a value
+### Decrypting a value
 
 Of course, you may decrypt values using the `decrypt` method on the `Crypt` facade. If the value can not be properly decrypted, such as when the MAC is invalid, an `Illuminate\Contracts\Encryption\DecryptException` exception will be thrown:
 

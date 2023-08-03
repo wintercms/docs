@@ -6,7 +6,7 @@ When building JSON APIs, you will often need to convert your models and relation
 
 ## Basic usage
 
-#### Converting a model to an array
+### Converting a model to an array
 
 To convert a model and its loaded [relationships](relations) to an array, you may use the `toArray` method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:
 
@@ -24,7 +24,7 @@ $users = User::all();
 return $users->toArray();
 ```
 
-#### Converting a model to JSON
+### Converting a model to JSON
 
 To convert a model to JSON, you may use the `toJson` method. Like `toArray`, the `toJson` method is recursive, so all attributes and relations will be converted to JSON:
 

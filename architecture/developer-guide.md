@@ -124,32 +124,42 @@ $items = [
 
 The vendor or author code in a namespace must begin with an uppercase character and should not contain underscores or dashes. These are examples of valid names:
 
-    Acme.Blog
-    WinterStorm.User
-    Happygilmore.Golf
+```
+Acme.Blog
+WinterStorm.User
+Happygilmore.Golf
+```
 
 These are examples of names that are **not** valid:
 
-    acme.blog
-    winterStorm.user
-    Happy_gilmore.Golf
+```
+acme.blog
+winterStorm.user
+Happy_gilmore.Golf
+```
 
 ### Repository naming
 
 When publishing work to a repository, such as Git, use the following naming as a convention. Plugins should be named with a `-plugin` suffix and optional `wn-` prefix.
 
-    blog-plugin
-    wn-blog-plugin
+```
+blog-plugin
+wn-blog-plugin
+```
 
 Themes should be named with the `-theme` suffix and optional `wn-` prefix.
 
-    happy-theme
-    wn-happy-theme
+```
+happy-theme
+wn-happy-theme
+```
 
 Projects can be named with a `wn-` prefix and suffix indicating the project type (i.e. `-site`, `-app`, etc), although this is just a suggested convention and isn't enforced anywhere.
 
-    wn-wintercms.com-site
-    wn-api.wintercms.com-app
+```
+wn-wintercms.com-site
+wn-api.wintercms.com-app
+```
 
 ### PHP Variable naming
 
@@ -217,10 +227,12 @@ Element classes names should use hyphen-case (dashes)
 
 Partial views should begin with an underscore character. Whereas Controller and Layout views do not begin with an underscore character. Since views are often found in a single folder, the underscore (_) and dash (-) characters can be used to organise the files. A dash is used as a substitute for a space character. An underscore is used as a substitute for a slash character (folder or namespace).
 
-    index_fancy-layout.htm       <== Index\Fancy layout
-    form-with-sidebar.htm        <== Form with sidebar
-    _field-container.htm         <== Field container (partial)
-    _field_baloon-selector.htm   <== Field\Baloon Selector (partial)
+```
+index_fancy-layout.htm       <== Index\Fancy layout
+form-with-sidebar.htm        <== Form with sidebar
+_field-container.htm         <== Field container (partial)
+_field_baloon-selector.htm   <== Field\Baloon Selector (partial)
+```
 
 View files must end with the `.htm` file extension.
 
@@ -295,22 +307,30 @@ $eventResults = array_merge(
 
 Tables names should be prefixed with the author and plugin name.
 
-    acme_blog_xxx
+```
+acme_blog_xxx
+```
 
 Boolean column names should be prefixed with `is_`
 
-    is_activated
-    is_visible
+```
+is_activated
+is_visible
+```
 
 This is because the model attributes can conflict, for example, `public $visible;` in the Model class conflicts with a database column with the same name. Some column names are exceptions, for example `notify_user`.
 
 If your plugin extends tables belonging to other plugins, the added column names should be prefixed with the author and plugin name:
 
-    acme_blog_category_id
+```
+acme_blog_category_id
+```
 
 The author and plugin name acronym is also acceptable as a prefix:
 
-    ab_category_id
+```
+ab_category_id
+```
 
 ### Component naming
 
@@ -318,39 +338,49 @@ Component classes are commonly place in the `components` directory. The name of 
 
 To display a list of records, use the `List` suffix, eg:
 
-    ProductList
-    ProductReviewList
-    CategoryList
+```
+ProductList
+ProductReviewList
+CategoryList
+```
 
 To display a single record, use the `Details` suffix, eg:
 
-    ProductDetails
-    CategoryDetails
+```
+ProductDetails
+CategoryDetails
+```
 
 Using the suffix helps avoid conflicts with controller and model names. Alternatively you can name components without the suffix, for cases when the name is descriptive and does not conflict:
 
-    ProductReviews
-    CustomerCheckout
-    SeoDirectory
-    UserProfile
+```
+ProductReviews
+CustomerCheckout
+SeoDirectory
+UserProfile
+```
 
 ### Controller naming
 
 Controllers are commonly are placed in `controllers` directory, for backend controllers. The name of a controller should be in plural form, for example:
 
-    People
-    Products
-    Categories
-    ProductCategories
+```
+People
+Products
+Categories
+ProductCategories
+```
 
 ### Model naming
 
 Models are commonly are placed in `models` directory. The name of a model should be in singular form, for example:
 
-    Person
-    Product
-    Category
-    ProductCategory
+```
+Person
+Product
+Category
+ProductCategory
+```
 
 When dynamically extending other plugin's models, you should prefix the field with at least the plugin name. This helps to avoid potential future conflicts if that plugin is updated to add new relationships that could conflict with your dynamic relationships.
 
@@ -407,11 +437,11 @@ $model->applyUser($user);
 
 Whilst `apply` is the ideal prefix name for those situations, here are some other prefixes we recommended for chained scopes:
 
-    - is
-    - for
-    - with
-    - without
-    - filter
+- `is`
+- `for`
+- `with`
+- `without`
+- `filter`
 
 ### Class guidance
 
@@ -535,9 +565,9 @@ To break down this structure:
 
 - A **folder** is a name followed by a `/` character.
 - A **file** is a name with no `/` character suffixed.
-- A `|-- ` tag indicates a child item of the item above. The pipe symbol (`|`) should align with the first character of the parent item. A space should always proceed the tag.
+- A `|--` tag indicates a child item of the item above. The pipe symbol (`|`) should align with the first character of the parent item. A space should always proceed the tag.
 - A <code>`-- </code> tag is the same as the <code>|-- </code> tag but indicates the *last* child of the item.
-- A `|   ` (pipe with 3 spaces) should be use for parent folders that are still "open" while their child folders and files are being traversed.
+- A `|` (pipe) should be use for parent folders that are still "open" while their child folders and files are being traversed. You must proceed a pipe with 3 spaces if there is any content to follow.
 - A `# comment` can be left at the end of any line. It cannot be used within the tree structure.
 
 This feature also supports the output of the `tree` command-line utility which is available on most OS systems, allowing you to create the file structure in your OS and print a similar diagram to the one above. Use `tree -Fa --dirsfirst <path>` to print the friendly path for item, include hidden files and list directories first.

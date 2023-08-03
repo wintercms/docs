@@ -18,13 +18,13 @@ The session configuration is stored in `config/session.php`. Be sure to review t
 
 > **NOTE:** The array driver is typically used for running unit tests to prevent session data from persisting.
 
-#### Reserved keys
+### Reserved keys
 
 Winter uses the `flash` session key internally, so you should not add an item to the session by that name.
 
 ## Session usage
 
-#### Storing data in the session
+### Storing data in the session
 
 Using the `Session` facade you may call a variety of functions to interact with the underlying data. For example, the `put` method stores a new piece of data in the session:
 
@@ -32,7 +32,7 @@ Using the `Session` facade you may call a variety of functions to interact with 
 Session::put('key', 'value');
 ```
 
-#### Pushing to array session values
+### Pushing to array session values
 
 The `push` method may be used to push a new value onto a session value that is an array. For example, if the `user.teams` key contains an array of team names, you may push a new value onto the array like so:
 
@@ -40,7 +40,7 @@ The `push` method may be used to push a new value onto a session value that is a
 Session::push('user.teams', 'developers');
 ```
 
-#### Retrieving data from the session
+### Retrieving data from the session
 
 When you retrieve a value from the session, you may also pass a default value as the second argument to the `get` method. This default value will be returned if the specified key does not exist in the session. If you pass a `Closure` as the default value to the `get` method, the `Closure` will be executed and its result returned:
 
@@ -52,7 +52,7 @@ $value = Session::get('key', 'default');
 $value = Session::get('key', function() { return 'default'; });
 ```
 
-#### Retrieving all data from the session
+### Retrieving all data from the session
 
 If you would like to retrieve all data from the session, you may use the `all` method:
 
@@ -60,7 +60,7 @@ If you would like to retrieve all data from the session, you may use the `all` m
 $data = Session::all();
 ```
 
-#### Retrieving data and forgetting it
+### Retrieving data and forgetting it
 
 The `pull` method will retrieve and delete an item from the session:
 
@@ -68,7 +68,7 @@ The `pull` method will retrieve and delete an item from the session:
 $value = Session::pull('key', 'default');
 ```
 
-#### Determining if an item exists in the session
+### Determining if an item exists in the session
 
 The `has` method may be used to check if an item exists in the session. This method will return `true` if the item exists:
 
@@ -78,7 +78,7 @@ if (Session::has('users')) {
 }
 ```
 
-#### Deleting data from the session
+### Deleting data from the session
 
 The `forget` method will remove a piece of data from the session. If you would like to remove all data from the session, you may use the `flush` method:
 
@@ -88,7 +88,7 @@ Session::forget('key');
 Session::flush();
 ```
 
-#### Regenerating the session ID
+### Regenerating the session ID
 
 If you need to regenerate the session ID, you may use the `regenerate` method:
 

@@ -29,6 +29,29 @@ $collection = new Winter\Storm\Support\Collection([1, 2, 3]);
 
 By default, collections of [database models](../database/model) are always returned as `Collection` instances; however, feel free to use the `Collection` class wherever it is convenient for your application.
 
+## Extending Collections
+
+Collections are "macroable", which allows you to add additional methods to the `Collection` class at run time. The `Winter\Storm\Support\Collection` class' `macro` method accepts a closure that will be executed when your macro is called. The macro closure may access the collection's other methods via `$this`, just as if it were a real method of the collection class. For example, the following code adds a `toUpper` method to the `Collection` class:
+
+```php
+use Winter\Storm\Support\Collection;
+use Winter\Storm\Support\Str;
+
+Collection::macro('toUpper', function () {
+    return $this->map(function ($value) {
+        return Str::upper($value);
+    });
+});
+
+$collection = collect(['first', 'second']);
+
+$upper = $collection->toUpper();
+
+// ['FIRST', 'SECOND']
+```
+
+Typically, you should declare collection macros in the `boot` method of a [Plugin registration file](../plugin/registration#supported-methods).
+
 ## Available methods
 
 For the remainder of this documentation, we'll discuss each method available on the `Collection` class. Remember, all of these methods may be chained for fluently manipulating the underlying array. Furthermore, almost every method returns a new `Collection` instance, allowing you to preserve the original copy of the collection when necessary.
@@ -37,123 +60,149 @@ You may select any method from this table to see an example of its usage:
 
 <div class="columned-list">
 
-- [all](#method-all)
-- [average](#method-average)
-- [avg](#method-avg)
-- [chunk](#method-chunk)
-- [collapse](#method-collapse)
-- [collect](#method-collect)
-- [combine](#method-combine)
-- [concat](#method-concat)
-- [contains](#method-contains)
-- [containsStrict](#method-containsstrict)
-- [count](#method-count)
-- [countBy](#method-countBy)
-- [crossJoin](#method-crossjoin)
-- [dd](#method-dd)
-- [diff](#method-diff)
-- [diffAssoc](#method-diffassoc)
-- [diffKeys](#method-diffkeys)
-- [dump](#method-dump)
-- [duplicates](#method-duplicates)
-- [duplicatesStrict](#method-duplicatesstrict)
-- [each](#method-each)
-- [filter](#method-filter)
-- [first](#method-first)
-- [firstWhere](#method-first-where)
-- [flatMap](#method-flatmap)
-- [flatten](#method-flatten)
-- [flip](#method-flip)
-- [forget](#method-forget)
-- [forPage](#method-forpage)
-- [get](#method-get)
-- [groupBy](#method-groupby)
-- [has](#method-has)
-- [implode](#method-implode)
-- [intersect](#method-intersect)
-- [intersectByKeys](#method-intersectbykeys)
-- [isEmpty](#method-isempty)
-- [isNotEmpty](#method-isnotempty)
-- [join](#method-join)
-- [keyBy](#method-keyby)
-- [keys](#method-keys)
-- [last](#method-last)
-- [map](#method-map)
-- [mapInto](#method-mapinto)
-- [mapSpread](#method-mapspread)
-- [mapToGroups](#method-maptogroups)
-- [mapWithKeys](#method-mapwithkeys)
-- [max](#method-max)
-- [median](#method-median)
-- [merge](#method-merge)
-- [mergeRecursive](#method-mergerecursive)
-- [min](#method-min)
-- [mode](#method-mode)
-- [nth](#method-nth)
-- [only](#method-only)
-- [pad](#method-pad)
-- [partition](#method-partition)
-- [pipe](#method-pipe)
-- [pluck](#method-pluck)
-- [pop](#method-pop)
-- [prepend](#method-prepend)
-- [pull](#method-pull)
-- [push](#method-push)
-- [put](#method-put)
-- [random](#method-random)
-- [reduce](#method-reduce)
-- [reject](#method-reject)
-- [replace](#method-replace)
-- [replaceRecursive](#method-replacerecursive)
-- [reverse](#method-reverse)
-- [search](#method-search)
-- [shift](#method-shift)
-- [shuffle](#method-shuffle)
-- [skip](#method-skip)
-- [slice](#method-slice)
-- [some](#method-some)
-- [sort](#method-sort)
-- [sortBy](#method-sortby)
-- [sortByDesc](#method-sortbydesc)
-- [sortKeys](#method-sortkeys)
-- [sortKeysDesc](#method-sortkeysdesc)
-- [splice](#method-splice)
-- [split](#method-split)
-- [sum](#method-sum)
-- [take](#method-take)
-- [tap](#method-tap)
-- [times](#method-times)
-- [toArray](#method-toarray)
-- [toJson](#method-tojson)
-- [transform](#method-transform)
-- [union](#method-union)
-- [unique](#method-unique)
-- [uniqueStrict](#method-uniquestrict)
-- [unless](#method-unless)
-- [unlessEmpty](#method-unlessempty)
-- [unlessNotEmpty](#method-unlessnotempty)
-- [unwrap](#method-unwrap)
-- [values](#method-values)
-- [when](#method-when)
-- [whenEmpty](#method-whenempty)
-- [whenNotEmpty](#method-whennotempty)
-- [where](#method-where)
-- [whereStrict](#method-wherestrict)
-- [whereBetween](#method-wherebetween)
-- [whereIn](#method-wherein)
-- [whereInStrict](#method-whereinstrict)
-- [whereInstanceOf](#method-whereinstanceof)
-- [whereNotBetween](#method-wherenotbetween)
-- [whereNotIn](#method-wherenotin)
-- [whereNotInStrict](#method-wherenotinstrict)
-- [whereNotNull](#method-wherenotnull)
-- [whereNull](#method-wherenull)
-- [wrap](#method-wrap)
-- [zip](#method-zip)
+- [all](#all)
+- [average](#average)
+- [avg](#avg)
+- [chunk](#chunk)
+- [chunkWhile](#chunkwhile)
+- [collapse](#collapse)
+- [collect](#collect)
+- [combine](#combine)
+- [concat](#concat)
+- [contains](#contains)
+- [containsOneItem](#containsoneitem)
+- [containsStrict](#containsstrict)
+- [count](#count)
+- [countBy](#countby)
+- [crossJoin](#crossjoin)
+- [dd](#dd)
+- [diff](#diff)
+- [diffAssoc](#diffassoc)
+- [diffKeys](#diffkeys)
+- [doesntContain](#doesntcontain)
+- [dump](#dump)
+- [duplicates](#duplicates)
+- [duplicatesStrict](#duplicatesstrict)
+- [each](#each)
+- [eachSpread](#eachspread)
+- [every](#every)
+- [except](#except)
+- [filter](#filter)
+- [first](#first)
+- [firstOrFail](#firstorfail)
+- [firstWhere](#firstwhere)
+- [flatMap](#flatmap)
+- [flatten](#flatten)
+- [flip](#flip)
+- [forget](#forget)
+- [forPage](#forpage)
+- [get](#get)
+- [groupBy](#groupby)
+- [has](#has)
+- [hasAny](#hasany)
+- [implode](#implode)
+- [intersect](#intersect)
+- [intersectByKeys](#intersectbykeys)
+- [isEmpty](#isempty)
+- [isNotEmpty](#isnotempty)
+- [join](#join)
+- [keyBy](#keyby)
+- [keys](#keys)
+- [last](#last)
+- [lazy](#lazy)
+- [macro](#macro)
+- [make](#make)
+- [map](#map)
+- [mapInto](#mapinto)
+- [mapSpread](#mapspread)
+- [mapToGroups](#maptogroups)
+- [mapWithKeys](#mapwithkeys)
+- [max](#max)
+- [median](#median)
+- [merge](#merge)
+- [mergeRecursive](#mergerecursive)
+- [min](#min)
+- [mode](#mode)
+- [nth](#nth)
+- [only](#only)
+- [pad](#pad)
+- [partition](#partition)
+- [pipe](#pipe)
+- [pipeInto](#pipeinto)
+- [pipeThrough](#pipethrough)
+- [pluck](#pluck)
+- [pop](#pop)
+- [prepend](#prepend)
+- [pull](#pull)
+- [push](#push)
+- [put](#put)
+- [random](#random)
+- [range](#range)
+- [reduce](#reduce)
+- [reduceSpread](#reducespread)
+- [reject](#reject)
+- [replace](#replace)
+- [replaceRecursive](#replacerecursive)
+- [reverse](#reverse)
+- [search](#search)
+- [shift](#shift)
+- [shuffle](#shuffle)
+- [skip](#skip)
+- [skipUntil](#skipuntil)
+- [skipWhile](#skipwhile)
+- [slice](#slice)
+- [sliding](#sliding)
+- [sole](#sole)
+- [some](#some)
+- [sort](#sort)
+- [sortBy](#sortby)
+- [sortByDesc](#sortbydesc)
+- [sortDesc](#sortdesc)
+- [sortKeys](#sortkeys)
+- [sortKeysDesc](#sortkeysdesc)
+- [sortKeysUsing](#sortkeysusing)
+- [splice](#splice)
+- [split](#split)
+- [splitIn](#splitin)
+- [sum](#sum)
+- [take](#take)
+- [takeUntil](#takeuntil)
+- [takeWhile](#takewhile)
+- [tap](#tap)
+- [times](#times)
+- [toArray](#toarray)
+- [toJson](#tojson)
+- [transform](#transform)
+- [undot](#undot)
+- [union](#union)
+- [unique](#unique)
+- [uniqueStrict](#uniquestrict)
+- [unless](#unless)
+- [unlessEmpty](#unlessempty)
+- [unlessNotEmpty](#unlessnotempty)
+- [unwrap](#unwrap)
+- [value](#value)
+- [values](#values)
+- [when](#when)
+- [whenEmpty](#whenempty)
+- [whenNotEmpty](#whennotempty)
+- [where](#where)
+- [whereStrict](#wherestrict)
+- [whereBetween](#wherebetween)
+- [whereIn](#wherein)
+- [whereInStrict](#whereinstrict)
+- [whereInstanceOf](#whereinstanceof)
+- [whereNotBetween](#wherenotbetween)
+- [whereNotIn](#wherenotin)
+- [whereNotInStrict](#wherenotinstrict)
+- [whereNotNull](#wherenotnull)
+- [whereNull](#wherenull)
+- [wrap](#wrap)
+- [zip](#zip)
 
 </div>
 
-## Method Listing
+### Method Listing
 
 #### `all()`
 
@@ -169,7 +218,7 @@ $collection->all();
 
 #### `average()`
 
-Alias for the [`avg`](#method-avg) method.
+Alias for the [`avg`](#avg) method.
 
 #### `avg()`
 
@@ -209,6 +258,22 @@ This method is especially useful in [CMS pages](../cms/pages) when working with 
         {% endfor %}
     </div>
 {% endfor %}
+```
+
+#### `chunkWhile()`
+
+The `chunkWhile` method breaks the collection into multiple, smaller collections based on the evaluation of the given callback. The `$chunk` variable passed to the closure may be used to inspect the previous element:
+
+```php
+$collection = collect(str_split('AABBCCCD'));
+
+$chunks = $collection->chunkWhile(function ($value, $key, $chunk) {
+    return $value === $chunk->last();
+});
+
+$chunks->all();
+
+// [['A', 'A'], ['B', 'B'], ['C', 'C', 'C'], ['D']]
 ```
 
 #### `collapse()`
@@ -330,11 +395,29 @@ $collection->contains(function ($value, $key) {
 // false
 ```
 
-The `contains` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`containsStrict`](#method-containsstrict) method to filter using "strict" comparisons.
+The `contains` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`containsStrict`](#containsstrict) method to filter using "strict" comparisons.
+
+#### `containsOneItem()`
+
+The `containsOneItem` method determines whether the collection contains a single item:
+
+```php
+collect([])->containsOneItem();
+
+// false
+
+collect(['1'])->containsOneItem();
+
+// true
+
+collect(['1', '2'])->containsOneItem();
+
+// false
+```
 
 #### `containsStrict()`
 
-This method has the same signature as the [`contains`](#method-contains) method; however, all values are compared using "strict" comparisons.
+This method has the same signature as the [`contains`](#contains) method; however, all values are compared using "strict" comparisons.
 
 #### `count()`
 
@@ -435,7 +518,7 @@ $collection->dd();
 */
 ```
 
-If you do not want to stop executing the script, use the [`dump`](#method-dump) method instead.
+If you do not want to stop executing the script, use the [`dump`](#dump) method instead.
 
 #### `diff()`
 
@@ -499,6 +582,49 @@ $diff->all();
 // ['one' => 10, 'three' => 30, 'five' => 50]
 ```
 
+#### `doesntContain()`
+
+The `doesntContain` method determines whether the collection does not contain a given item. You may pass a closure to the `doesntContain` method to determine if an element does not exist in the collection matching a given truth test:
+
+```php
+$collection = collect([1, 2, 3, 4, 5]);
+
+$collection->doesntContain(function ($value, $key) {
+    return $value < 5;
+});
+
+// false
+```
+
+Alternatively, you may pass a string to the `doesntContain` method to determine whether the collection does not contain a given item value:
+
+```php
+$collection = collect(['name' => 'Desk', 'price' => 100]);
+
+$collection->doesntContain('Table');
+
+// true
+
+$collection->doesntContain('Desk');
+
+// false
+```
+
+You may also pass a key / value pair to the `doesntContain` method, which will determine if the given pair does not exist in the collection:
+
+```php
+$collection = collect([
+    ['product' => 'Desk', 'price' => 200],
+    ['product' => 'Chair', 'price' => 100],
+]);
+
+$collection->doesntContain('product', 'Bookcase');
+
+// true
+```
+
+The `doesntContain` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value.
+
 #### `dump()`
 
 The `dump` method dumps the collection's items:
@@ -518,7 +644,7 @@ $collection->dump();
 */
 ```
 
-If you want to stop executing the script after dumping the collection, use the [`dd`](#method-dd) method instead.
+If you want to stop executing the script after dumping the collection, use the [`dd`](#dd) method instead.
 
 #### `duplicates()`
 
@@ -548,7 +674,7 @@ $employees->duplicates('position');
 
 #### `duplicatesStrict()`
 
-This method has the same signature as the [`duplicates`](#method-duplicates) method; however, all values are compared using "strict" comparisons.
+This method has the same signature as the [`duplicates`](#duplicates) method; however, all values are compared using "strict" comparisons.
 
 #### `each()`
 
@@ -567,6 +693,26 @@ $collection->each(function ($item, $key) {
     if (/* some condition */) {
         return false;
     }
+});
+```
+
+#### `eachSpread()`
+
+The `eachSpread` method iterates over the collection's items, passing each nested item value into the given callback:
+
+```php
+$collection = collect([['John Doe', 35], ['Jane Doe', 33]]);
+
+$collection->eachSpread(function ($name, $age) {
+    //
+});
+```
+
+You may stop iterating through the items by returning `false` from the callback:
+
+```php
+$collection->eachSpread(function ($name, $age) {
+    return false;
 });
 ```
 
@@ -590,6 +736,24 @@ $collection->every(4, 1);
 // ['b', 'f']
 ```
 
+#### `except()`
+
+The `except` method returns all items in the collection except for those with the specified keys:
+
+```php
+$collection = collect(['product_id' => 1, 'price' => 100, 'discount' => false]);
+
+$filtered = $collection->except(['price', 'discount']);
+
+$filtered->all();
+
+// ['product_id' => 1]
+```
+
+For the inverse of `except`, see the [only](#only) method.
+
+> **NOTE**  This method's behavior is modified when using [Model Collections](../database/collection#available-methods).
+
 #### `filter()`
 
 The `filter` method filters the collection by a given callback, keeping only those items that pass a given truth test:
@@ -606,7 +770,7 @@ $filtered->all();
 // [3, 4]
 ```
 
-For the inverse of `filter`, see the [reject](#method-reject) method.
+For the inverse of `filter`, see the [reject](#reject) method.
 
 #### `first()`
 
@@ -626,6 +790,26 @@ You may also call the `first` method with no arguments to get the first element 
 new Collection([1, 2, 3, 4])->first();
 
 // 1
+```
+
+#### `firstOrFail()`
+
+The `firstOrFail` method is identical to the `first` method; however, if no result is found, an `Illuminate\Support\ItemNotFoundException` exception will be thrown:
+
+```php
+collect([1, 2, 3, 4])->firstOrFail(function ($value, $key) {
+    return $value > 5;
+});
+
+// Throws ItemNotFoundException...
+```
+
+You may also call the `firstOrFail` method with no arguments to get the first element in the collection. If the collection is empty, an `Illuminate\Support\ItemNotFoundException` exception will be thrown:
+
+```php
+collect([])->firstOrFail();
+
+// Throws ItemNotFoundException...
 ```
 
 #### `firstWhere()`
@@ -653,7 +837,7 @@ $collection->firstWhere('age', '>=', 18);
 // ['name' => 'Diego', 'age' => 23]
 ```
 
-Like the [where](#method-where) method, you may pass one argument to the `firstWhere` method. In this scenario, the `firstWhere` method will return the first item where the given item key's value is "truthy":
+Like the [where](#where) method, you may pass one argument to the `firstWhere` method. In this scenario, the `firstWhere` method will return the first item where the given item key's value is "truthy":
 
 ```php
 $collection->firstWhere('age');
@@ -833,6 +1017,22 @@ $collection->has('email');
 // false
 ```
 
+#### `hasAny()`
+
+The `hasAny` method determines whether any of the given keys exist in the collection:
+
+```php
+$collection = collect(['account_id' => 1, 'product' => 'Desk', 'amount' => 5]);
+
+$collection->hasAny(['product', 'price']);
+
+// true
+
+$collection->hasAny(['name', 'price']);
+
+// false
+```
+
 #### `implode()`
 
 The `implode` method joins the items in a collection. Its arguments depend on the type of items in the collection.
@@ -1002,6 +1202,42 @@ new Collection([1, 2, 3, 4])->last();
 // 4
 ```
 
+#### `lazy()`
+
+The `lazy` method returns a new [`LazyCollection`](#lazy-collections) instance from the underlying array of items:
+
+```php
+$lazyCollection = collect([1, 2, 3, 4])->lazy();
+
+get_class($lazyCollection);
+
+// Illuminate\Support\LazyCollection
+
+$lazyCollection->all();
+
+// [1, 2, 3, 4]
+```
+
+This is especially useful when you need to perform transformations on a huge `Collection` that contains many items:
+
+```php
+$count = $hugeCollection
+    ->lazy()
+    ->where('country', 'FR')
+    ->where('balance', '>', '100')
+    ->count();
+```
+
+By converting the collection to a `LazyCollection`, we avoid having to allocate a ton of additional memory. Though the original collection still keeps _its_ values in memory, the subsequent filters will not. Therefore, virtually no additional memory will be allocated when filtering the collection's results.
+
+#### `macro()`
+
+The static `macro` method allows you to add methods to the `Collection` class at run time. Refer to the documentation on [extending collections](#extending-collections) for more information.
+
+#### `make()`
+
+The static `make` method creates a new collection instance. See the [Creating Collections](#creating-collections) section.
+
 #### `map()`
 
 The `map` method iterates through the collection and passes each value to the given callback. The callback is free to modify the item and return it, thus forming a new collection of modified items:
@@ -1018,7 +1254,7 @@ $multiplied->all();
 // [2, 4, 6, 8, 10]
 ```
 
-> **NOTE:** Like most other collection methods, `map` returns a new collection instance; it does not modify the collection it is called on. If you want to transform the original collection, use the [`transform`](#method-transform) method.
+> **NOTE:** Like most other collection methods, `map` returns a new collection instance; it does not modify the collection it is called on. If you want to transform the original collection, use the [`transform`](#transform) method.
 
 #### `mapInto()`
 
@@ -1266,7 +1502,7 @@ $filtered->all();
 // ['product_id' => 1, 'name' => 'Desk']
 ```
 
-For the inverse of `only`, see the [except](#method-except) method.
+For the inverse of `only`, see the [except](#except) method.
 
 #### `pad()`
 
@@ -1322,6 +1558,58 @@ $piped = $collection->pipe(function ($collection) {
 });
 
 // 6
+```
+
+#### `pipeInto()`
+
+The `pipeInto` method creates a new instance of the given class and passes the collection into the constructor:
+
+```php
+class ResourceCollection
+{
+    /**
+        * The Collection instance.
+        */
+    public $collection;
+
+    /**
+        * Create a new ResourceCollection instance.
+        *
+        * @param  Collection  $collection
+        * @return void
+        */
+    public function __construct(Collection $collection)
+    {
+        $this->collection = $collection;
+    }
+}
+
+$collection = collect([1, 2, 3]);
+
+$resource = $collection->pipeInto(ResourceCollection::class);
+
+$resource->collection->all();
+
+// [1, 2, 3]
+```
+
+#### `pipeThrough()`
+
+The `pipeThrough` method passes the collection to the given array of closures and returns the result of the executed closures:
+
+```php
+$collection = collect([1, 2, 3]);
+
+$result = $collection->pipeThrough([
+    function ($collection) {
+        return $collection->merge([4, 5]);
+    },
+    function ($collection) {
+        return $collection->sum();
+    },
+]);
+
+// 15
 ```
 
 #### `pluck()`
@@ -1447,6 +1735,18 @@ $random->all();
 // [2, 4, 5] - (retrieved randomly)
 ```
 
+#### `range()`
+
+The `range` method returns a collection containing integers between the specified range:
+
+```php
+$collection = collect()->range(3, 6);
+
+$collection->all();
+
+// [3, 4, 5, 6]
+```
+
 #### `reduce()`
 
 The `reduce` method reduces the collection to a single value, passing the result of each iteration into the subsequent iteration:
@@ -1471,6 +1771,24 @@ $collection->reduce(function ($carry, $item) {
 // 10
 ```
 
+#### `reduceSpread()`
+
+The `reduceSpread` method reduces the collection to an array of values, passing the results of each iteration into the subsequent iteration. This method is similar to the `reduce` method; however, it can accept multiple initial values:
+
+```php
+[$creditsRemaining, $batch] = Image::where('status', 'unprocessed')
+    ->get()
+    ->reduceSpread(function ($creditsRemaining, $batch, $image) {
+        if ($creditsRemaining >= $image->creditsRequired()) {
+            $batch->push($image);
+
+            $creditsRemaining -= $image->creditsRequired();
+        }
+
+        return [$creditsRemaining, $batch];
+    }, $creditsAvailable, collect());
+```
+
 #### `reject()`
 
 The `reject` method filters the collection using the given callback. The callback should return `true` for any items it wishes to remove from the resulting collection:
@@ -1487,7 +1805,7 @@ $filtered->all();
 // [1, 2]
 ```
 
-For the inverse of the `reject` method, see the [`filter`](#method-filter) method.
+For the inverse of the `reject` method, see the [`filter`](#filter) method.
 
 #### `replace()`
 
@@ -1605,6 +1923,52 @@ $collection->all();
 // [5, 6, 7, 8, 9, 10]
 ```
 
+#### `skipUntil()`
+
+The `skipUntil` method skips over items from the collection until the given callback returns `true` and then returns the remaining items in the collection as a new collection instance:
+
+```php
+$collection = collect([1, 2, 3, 4]);
+
+$subset = $collection->skipUntil(function ($item) {
+    return $item >= 3;
+});
+
+$subset->all();
+
+// [3, 4]
+```
+
+You may also pass a simple value to the `skipUntil` method to skip all items until the given value is found:
+
+```php
+$collection = collect([1, 2, 3, 4]);
+
+$subset = $collection->skipUntil(3);
+
+$subset->all();
+
+// [3, 4]
+```
+
+> **WARNING:**  If the given value is not found or the callback never returns `true`, the `skipUntil` method will return an empty collection.
+
+#### `skipWhile()`
+
+The `skipWhile` method skips over items from the collection while the given callback returns `true` and then returns the remaining items in the collection as a new collection:
+
+```php
+$collection = collect([1, 2, 3, 4]);
+
+$subset = $collection->skipWhile(function ($item) {
+    return $item <= 3;
+});
+
+$subset->all();
+
+// [4]
+```
+
 #### `slice()`
 
 The `slice` method returns a slice of the collection starting at the given index:
@@ -1629,11 +1993,84 @@ $slice->all();
 // [5, 6]
 ```
 
-The returned slice will preserve keys by default. If you do not wish to preserve the original keys, you can use the [`values`](#method-values) method to reindex them.
+The returned slice will preserve keys by default. If you do not wish to preserve the original keys, you can use the [`values`](#values) method to reindex them.
+
+#### `sliding()`
+
+The `sliding` method returns a new collection of chunks representing a "sliding window" view of the items in the collection:
+
+```php
+$collection = collect([1, 2, 3, 4, 5]);
+
+$chunks = $collection->sliding(2);
+
+$chunks->toArray();
+
+// [[1, 2], [2, 3], [3, 4], [4, 5]]
+```
+
+This is especially useful in conjunction with the [`eachSpread`](#eachspread) method:
+
+```php
+$transactions->sliding(2)->eachSpread(function ($previous, $current) {
+    $current->total = $previous->total + $current->amount;
+});
+```
+
+You may optionally pass a second "step" value, which determines the distance between the first item of every chunk:
+
+```php
+$collection = collect([1, 2, 3, 4, 5]);
+
+$chunks = $collection->sliding(3, step: 2);
+
+$chunks->toArray();
+
+// [[1, 2, 3], [3, 4, 5]]
+```
+
+#### `sole()`
+
+The `sole` method returns the first element in the collection that passes a given truth test, but only if the truth test matches exactly one element:
+
+```php
+collect([1, 2, 3, 4])->sole(function ($value, $key) {
+    return $value === 2;
+});
+
+// 2
+```
+
+You may also pass a key / value pair to the `sole` method, which will return the first element in the collection that matches the given pair, but only if it exactly one element matches:
+
+```php
+$collection = collect([
+    ['product' => 'Desk', 'price' => 200],
+    ['product' => 'Chair', 'price' => 100],
+]);
+
+$collection->sole('product', 'Chair');
+
+// ['product' => 'Chair', 'price' => 100]
+```
+
+Alternatively, you may also call the `sole` method with no argument to get the first element in the collection if there is only one element:
+
+```php
+$collection = collect([
+    ['product' => 'Desk', 'price' => 200],
+]);
+
+$collection->sole();
+
+// ['product' => 'Desk', 'price' => 200]
+```
+
+If there are no elements in the collection that should be returned by the `sole` method, an `\Illuminate\Collections\ItemNotFoundException` exception will be thrown. If there is more than one element that should be returned, an `\Illuminate\Collections\MultipleItemsFoundException` will be thrown.
 
 #### `some()`
 
-Alias for the [`contains`](#method-contains) method.
+Alias for the [`contains`](#contains) method.
 
 #### `sort()`
 
@@ -1649,9 +2086,9 @@ $sorted->values()->all();
 // [1, 2, 3, 4, 5]
 ```
 
-The sorted collection keeps the original array keys. In this example we used the [`values`](#method-values) method to reset the keys to consecutively numbered indexes.
+The sorted collection keeps the original array keys. In this example we used the [`values`](#values) method to reset the keys to consecutively numbered indexes.
 
-For sorting a collection of nested arrays or objects, see the [`sortBy`](#method-sortby) and [`sortByDesc`](#method-sortbydesc) methods.
+For sorting a collection of nested arrays or objects, see the [`sortBy`](#sortby) and [`sortByDesc`](#sortbydesc) methods.
 
 If your sorting needs are more advanced, you may pass a callback to `sort` with your own algorithm. Refer to the PHP documentation on [`usort`](http://php.net/manual/en/function.usort.php#refsect1-function.usort-parameters), which is what the collection's `sort` method calls under the hood.
 
@@ -1679,7 +2116,7 @@ $sorted->values()->all();
 */
 ```
 
-The sorted collection keeps the original array keys. In this example we used the [`values`](#method-values) method to reset the keys to consecutively numbered indexes.
+The sorted collection keeps the original array keys. In this example we used the [`values`](#values) method to reset the keys to consecutively numbered indexes.
 
 You can also pass your own callback to determine how to sort the collection values:
 
@@ -1707,7 +2144,23 @@ $sorted->values()->all();
 
 #### `sortByDesc()`
 
-This method has the same signature as the [`sortBy`](#method-sortby) method, but will sort the collection in the opposite order.
+This method has the same signature as the [`sortBy`](#sortby) method, but will sort the collection in the opposite order.
+
+#### `sortDesc()`
+
+This method will sort the collection in the opposite order as the [`sort`](#sort) method:
+
+```php
+$collection = collect([5, 3, 1, 2, 4]);
+
+$sorted = $collection->sortDesc();
+
+$sorted->values()->all();
+
+// [5, 4, 3, 2, 1]
+```
+
+Unlike `sort`, you may not pass a closure to `sortDesc`. Instead, you should use the [`sort`](#sort) method and invert your comparison.
 
 #### `sortKeys()`
 
@@ -1735,7 +2188,33 @@ $sorted->all();
 
 #### `sortKeysDesc()`
 
-This method has the same signature as the [`sortKeys`](#method-sortkeys) method, but will sort the collection in the opposite order.
+This method has the same signature as the [`sortKeys`](#sortkeys) method, but will sort the collection in the opposite order.
+
+#### `sortKeysUsing()`
+
+The `sortKeysUsing` method sorts the collection by the keys of the underlying associative array using a callback:
+
+```php
+$collection = collect([
+    'ID' => 22345,
+    'first' => 'John',
+    'last' => 'Doe',
+]);
+
+$sorted = $collection->sortKeysUsing('strnatcasecmp');
+
+$sorted->all();
+
+/*
+    [
+        'first' => 'John',
+        'ID' => 22345,
+        'last' => 'Doe',
+    ]
+*/
+```
+
+The callback must be a comparison function that returns an integer less than, equal to, or greater than zero. For more information, refer to the PHP documentation on [`uksort`](https://www.php.net/manual/en/function.uksort.php#refsect1-function.uksort-parameters), which is the PHP function that `sortKeysUsing` method utilizes internally.
 
 #### `splice()`
 
@@ -1775,56 +2254,6 @@ In addition, you can pass a third argument containing the new items to replace t
 
 ```php
 $collection = collect([1, 2, 3, 4, 5]);
-
-$chunk = $collection->splice(2, 1, [10, 11]);
-
-$chunk->all();
-
-// [3]
-
-$collection->all();
-
-// [1, 2, 10, 11, 4, 5]
-```
-
-#### `splice()`
-
-The `splice` method removes and returns a slice of items starting at the specified index:
-
-```php
-$collection = new Collection([1, 2, 3, 4, 5]);
-
-$chunk = $collection->splice(2);
-
-$chunk->all();
-
-// [3, 4, 5]
-
-$collection->all();
-
-// [1, 2]
-```
-
-You may pass a second argument to limit the size of the resulting chunk:
-
-```php
-$collection = new Collection([1, 2, 3, 4, 5]);
-
-$chunk = $collection->splice(2, 1);
-
-$chunk->all();
-
-// [3]
-
-$collection->all();
-
-// [1, 2, 4, 5]
-```
-
-In addition, you can pass a third argument containing the new items to replace the items removed from the collection:
-
-```php
-$collection = new Collection([1, 2, 3, 4, 5]);
 
 $chunk = $collection->splice(2, 1, [10, 11]);
 
@@ -1849,6 +2278,20 @@ $groups = $collection->split(3);
 $groups->toArray();
 
 // [[1, 2], [3, 4], [5]]
+```
+
+#### `splitIn()`
+
+The `splitIn` method breaks a collection into the given number of groups, filling non-terminal groups completely before allocating the remainder to the final group:
+
+```php
+$collection = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+$groups = $collection->splitIn(3);
+
+$groups->all();
+
+// [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]
 ```
 
 #### `sum()`
@@ -1916,6 +2359,54 @@ $chunk->all();
 // [4, 5]
 ```
 
+#### `takeUntil()`
+
+The `takeUntil` method returns items in the collection until the given callback returns `true`:
+
+```php
+$collection = collect([1, 2, 3, 4]);
+
+$subset = $collection->takeUntil(function ($item) {
+    return $item >= 3;
+});
+
+$subset->all();
+
+// [1, 2]
+```
+
+You may also pass a simple value to the `takeUntil` method to get the items until the given value is found:
+
+```php
+$collection = collect([1, 2, 3, 4]);
+
+$subset = $collection->takeUntil(3);
+
+$subset->all();
+
+// [1, 2]
+```
+
+> **WARNING:** If the given value is not found or the callback never returns `true`, the `takeUntil` method will return all items in the collection.
+
+#### `takeWhile()`
+
+The `takeWhile` method returns items in the collection until the given callback returns `false`:
+
+```php
+$collection = collect([1, 2, 3, 4]);
+
+$subset = $collection->takeWhile(function ($item) {
+    return $item < 3;
+});
+
+$subset->all();
+
+// [1, 2]
+```
+
+> **WARNING:** If the callback never returns `false`, the `takeWhile` method will return all items in the collection.
+
 #### `tap()`
 
 The `tap` method passes the collection to the given callback, allowing you to "tap" into the collection at a specific point and do something with the items while not affecting the collection itself:
@@ -1979,7 +2470,7 @@ $collection->toArray();
 */
 ```
 
-> **NOTE:** `toArray` also converts all of its nested objects to an array. If you want to get the underlying array as is, use the [`all`](#method-all) method instead.
+> **NOTE:** `toArray` also converts all of its nested objects to an array. If you want to get the underlying array as is, use the [`all`](#all) method instead.
 
 #### `toJson()`
 
@@ -2009,7 +2500,43 @@ $collection->all();
 // [2, 4, 6, 8, 10]
 ```
 
-> **NOTE:** Unlike most other collection methods, `transform` modifies the collection itself. If you wish to create a new collection instead, use the [`map`](#method-map) method.
+> **NOTE:** Unlike most other collection methods, `transform` modifies the collection itself. If you wish to create a new collection instead, use the [`map`](#map) method.
+
+#### `undot()`
+
+The `undot` method expands a single-dimensional collection that uses "dot" notation into a multi-dimensional collection:
+
+```php
+$person = collect([
+    'name.first_name' => 'Marie',
+    'name.last_name' => 'Valentine',
+    'address.line_1' => '2992 Eagle Drive',
+    'address.line_2' => '',
+    'address.suburb' => 'Detroit',
+    'address.state' => 'MI',
+    'address.postcode' => '48219'
+]);
+
+$person = $person->undot();
+
+$person->toArray();
+
+/*
+    [
+        "name" => [
+            "first_name" => "Marie",
+            "last_name" => "Valentine",
+        ],
+        "address" => [
+            "line_1" => "2992 Eagle Drive",
+            "line_2" => "",
+            "suburb" => "Detroit",
+            "state" => "MI",
+            "postcode" => "48219",
+        ],
+    ]
+*/
+```
 
 #### `union()`
 
@@ -2027,7 +2554,7 @@ $union->all();
 
 #### `unique()`
 
-The `unique` method returns all of the unique items in the collection. The returned collection keeps the original array keys, so in this example we'll use the [`values`](#method-values) method to reset the keys to consecutively numbered indexes:
+The `unique` method returns all of the unique items in the collection. The returned collection keeps the original array keys, so in this example we'll use the [`values`](#values) method to reset the keys to consecutively numbered indexes:
 
 ```php
 $collection = collect([1, 1, 2, 2, 3, 4, 2]);
@@ -2081,11 +2608,11 @@ $unique->values()->all();
 */
 ```
 
-The `unique` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`uniqueStrict`](#method-uniquestrict) method to filter using "strict" comparisons.
+The `unique` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`uniqueStrict`](#uniquestrict) method to filter using "strict" comparisons.
 
 #### `uniqueStrict()`
 
-This method has the same signature as the [`unique`](#method-unique) method; however, all values are compared using "strict" comparisons.
+This method has the same signature as the [`unique`](#unique) method; however, all values are compared using "strict" comparisons.
 
 #### `unless()`
 
@@ -2107,15 +2634,15 @@ $collection->all();
 // [1, 2, 3, 5]
 ```
 
-For the inverse of `unless`, see the [`when`](#method-when) method.
+For the inverse of `unless`, see the [`when`](#when) method.
 
 #### `unlessEmpty()`
 
-Alias for the [`whenNotEmpty`](#method-whennotempty) method.
+Alias for the [`whenNotEmpty`](#whennotempty) method.
 
 #### `unlessNotEmpty()`
 
-Alias for the [`whenEmpty`](#method-whenempty) method.
+Alias for the [`whenEmpty`](#whenempty) method.
 
 #### `unwrap()`
 
@@ -2133,6 +2660,21 @@ Collection::unwrap(['John Doe']);
 Collection::unwrap('John Doe');
 
 // 'John Doe'
+```
+
+#### `value()`
+
+The `value` method retrieves a given value from the first element of the collection:
+
+```php
+$collection = collect([
+    ['product' => 'Desk', 'price' => 200],
+    ['product' => 'Speaker', 'price' => 400],
+]);
+
+$value = $collection->value('price');
+
+// 200
 ```
 
 #### `values()`
@@ -2177,7 +2719,7 @@ $collection->all();
 // [1, 2, 3, 4]
 ```
 
-For the inverse of `when`, see the [`unless`](#method-unless) method.
+For the inverse of `when`, see the [`unless`](#unless) method.
 
 #### `whenEmpty()`
 
@@ -2219,7 +2761,7 @@ $collection->all();
 // ['michael', 'tom', 'taylor']
 ```
 
-For the inverse of `whenEmpty`, see the [`whenNotEmpty`](#method-whennotempty) method.
+For the inverse of `whenEmpty`, see the [`whenNotEmpty`](#whennotempty) method.
 
 #### `whenNotEmpty()`
 
@@ -2261,7 +2803,7 @@ $collection->all();
 // ['taylor']
 ```
 
-For the inverse of `whenNotEmpty`, see the [`whenEmpty`](#method-whenempty) method.
+For the inverse of `whenNotEmpty`, see the [`whenEmpty`](#whenempty) method.
 
 #### `where()`
 
@@ -2287,7 +2829,7 @@ $filtered->all();
 */
 ```
 
-The `where` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereStrict`](#method-wherestrict) method to filter using "strict" comparisons.
+The `where` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereStrict`](#wherestrict) method to filter using "strict" comparisons.
 
 Optionally, you may pass a comparison operator as the second parameter.
 
@@ -2312,7 +2854,7 @@ $filtered->all();
 
 #### `whereStrict()`
 
-This method has the same signature as the [`where`](#method-where) method; however, all values are compared using "strict" comparisons.
+This method has the same signature as the [`where`](#where) method; however, all values are compared using "strict" comparisons.
 
 #### `whereBetween()`
 
@@ -2364,11 +2906,11 @@ $filtered->all();
 */
 ```
 
-The `whereIn` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereInStrict`](#method-whereinstrict) method to filter using "strict" comparisons.
+The `whereIn` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereInStrict`](#whereinstrict) method to filter using "strict" comparisons.
 
 #### `whereInStrict()`
 
-This method has the same signature as the [`whereIn`](#method-wherein) method; however, all values are compared using "strict" comparisons.
+This method has the same signature as the [`whereIn`](#wherein) method; however, all values are compared using "strict" comparisons.
 
 #### `whereInstanceOf()`
 
@@ -2440,11 +2982,11 @@ $filtered->all();
 */
 ```
 
-The `whereNotIn` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereNotInStrict`](#method-wherenotinstrict) method to filter using "strict" comparisons.
+The `whereNotIn` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereNotInStrict`](#wherenotinstrict) method to filter using "strict" comparisons.
 
 #### `whereNotInStrict()`
 
-This method has the same signature as the [`whereNotIn`](#method-wherenotin) method; however, all values are compared using "strict" comparisons.
+This method has the same signature as the [`whereNotIn`](#wherenotin) method; however, all values are compared using "strict" comparisons.
 
 #### `whereNotNull()`
 
@@ -2531,7 +3073,7 @@ $zipped->all();
 
 ## Higher Order Messages
 
-Collections also provide support for "higher order messages", which are short-cuts for performing common actions on collections. The collection methods that provide higher order messages are: [`average`](#method-average), [`avg`](#method-avg), [`contains`](#method-contains), [`each`](#method-each), [`every`](#method-every), [`filter`](#method-filter), [`first`](#method-first), [`flatMap`](#method-flatmap), [`groupBy`](#method-groupby), [`keyBy`](#method-keyby), [`map`](#method-map), [`max`](#method-max), [`min`](#method-min), [`partition`](#method-partition), [`reject`](#method-reject), [`some`](#method-some), [`sortBy`](#method-sortby), [`sortByDesc`](#method-sortbydesc), [`sum`](#method-sum), and [`unique`](#method-unique).
+Collections also provide support for "higher order messages", which are short-cuts for performing common actions on collections. The collection methods that provide higher order messages are: [`average`](#average), [`avg`](#avg), [`contains`](#contains), [`each`](#each), [`every`](#every), [`filter`](#filter), [`first`](#first), [`flatMap`](#flatmap), [`groupBy`](#groupby), [`keyBy`](#keyby), [`map`](#map), [`max`](#max), [`min`](#min), [`partition`](#partition), [`reject`](#reject), [`some`](#some), [`sortBy`](#sortby), [`sortByDesc`](#sortbydesc), [`sum`](#sum), and [`unique`](#unique).
 
 Each higher order message can be accessed as a dynamic property on a collection instance. For instance, let's use the `each` higher order message to call a method on each object within a collection:
 
@@ -2550,8 +3092,6 @@ return $users->sum->votes;
 ```
 
 ## Lazy Collections
-
-### Introduction
 
 > **NOTE:** Before learning more about Winter's lazy collections, take some time to familiarize yourself with [PHP generators](https://www.php.net/manual/en/language.generators.overview.php).
 
@@ -2618,113 +3158,116 @@ Almost all methods available on the `Collection` class are also available on the
 
 <div class="columned-list">
 
-- [all](#method-all)
-- [average](#method-average)
-- [avg](#method-avg)
-- [chunk](#method-chunk)
-- [collapse](#method-collapse)
-- [collect](#method-collect)
-- [combine](#method-combine)
-- [concat](#method-concat)
-- [contains](#method-contains)
-- [containsStrict](#method-containsstrict)
-- [count](#method-count)
-- [countBy](#method-countBy)
-- [crossJoin](#method-crossjoin)
-- [dd](#method-dd)
-- [diff](#method-diff)
-- [diffAssoc](#method-diffassoc)
-- [diffKeys](#method-diffkeys)
-- [dump](#method-dump)
-- [duplicates](#method-duplicates)
-- [duplicatesStrict](#method-duplicatesstrict)
-- [each](#method-each)
-- [eachSpread](#method-eachspread)
-- [every](#method-every)
-- [except](#method-except)
-- [filter](#method-filter)
-- [first](#method-first)
-- [firstWhere](#method-first-where)
-- [flatMap](#method-flatmap)
-- [flatten](#method-flatten)
-- [flip](#method-flip)
-- [forPage](#method-forpage)
-- [get](#method-get)
-- [groupBy](#method-groupby)
-- [has](#method-has)
-- [implode](#method-implode)
-- [intersect](#method-intersect)
-- [intersectByKeys](#method-intersectbykeys)
-- [isEmpty](#method-isempty)
-- [isNotEmpty](#method-isnotempty)
-- [join](#method-join)
-- [keyBy](#method-keyby)
-- [keys](#method-keys)
-- [last](#method-last)
-- [macro](#method-macro)
-- [make](#method-make)
-- [map](#method-map)
-- [mapInto](#method-mapinto)
-- [mapSpread](#method-mapspread)
-- [mapToGroups](#method-maptogroups)
-- [mapWithKeys](#method-mapwithkeys)
-- [max](#method-max)
-- [median](#method-median)
-- [merge](#method-merge)
-- [mergeRecursive](#method-mergerecursive)
-- [min](#method-min)
-- [mode](#method-mode)
-- [nth](#method-nth)
-- [only](#method-only)
-- [pad](#method-pad)
-- [partition](#method-partition)
-- [pipe](#method-pipe)
-- [pluck](#method-pluck)
-- [random](#method-random)
-- [reduce](#method-reduce)
-- [reject](#method-reject)
-- [replace](#method-replace)
-- [replaceRecursive](#method-replacerecursive)
-- [reverse](#method-reverse)
-- [search](#method-search)
-- [shuffle](#method-shuffle)
-- [skip](#method-skip)
-- [slice](#method-slice)
-- [some](#method-some)
-- [sort](#method-sort)
-- [sortBy](#method-sortby)
-- [sortByDesc](#method-sortbydesc)
-- [sortKeys](#method-sortkeys)
-- [sortKeysDesc](#method-sortkeysdesc)
-- [split](#method-split)
-- [sum](#method-sum)
-- [take](#method-take)
-- [tap](#method-tap)
-- [times](#method-times)
-- [toArray](#method-toarray)
-- [toJson](#method-tojson)
-- [union](#method-union)
-- [unique](#method-unique)
-- [uniqueStrict](#method-uniquestrict)
-- [unless](#method-unless)
-- [unlessEmpty](#method-unlessempty)
-- [unlessNotEmpty](#method-unlessnotempty)
-- [unwrap](#method-unwrap)
-- [values](#method-values)
-- [when](#method-when)
-- [whenEmpty](#method-whenempty)
-- [whenNotEmpty](#method-whennotempty)
-- [where](#method-where)
-- [whereStrict](#method-wherestrict)
-- [whereBetween](#method-wherebetween)
-- [whereIn](#method-wherein)
-- [whereInStrict](#method-whereinstrict)
-- [whereInstanceOf](#method-whereinstanceof)
-- [whereNotBetween](#method-wherenotbetween)
-- [whereNotIn](#method-wherenotin)
-- [whereNotInStrict](#method-wherenotinstrict)
-- [wrap](#method-wrap)
-- [zip](#method-zip)
+- [all](#all)
+- [average](#average)
+- [avg](#avg)
+- [chunk](#chunk)
+- [chunkWhile](#chunkwhile)
+- [collapse](#collapse)
+- [collect](#collect)
+- [combine](#combine)
+- [concat](#concat)
+- [contains](#contains)
+- [containsStrict](#containsstrict)
+- [count](#count)
+- [countBy](#countby)
+- [crossJoin](#crossjoin)
+- [dd](#dd)
+- [diff](#diff)
+- [diffAssoc](#diffassoc)
+- [diffKeys](#diffkeys)
+- [dump](#dump)
+- [duplicates](#duplicates)
+- [duplicatesStrict](#duplicatesstrict)
+- [each](#each)
+- [eachSpread](#eachspread)
+- [every](#every)
+- [except](#except)
+- [filter](#filter)
+- [first](#first)
+- [firstOrFail](#firstorfail)
+- [firstWhere](#firstwhere)
+- [flatMap](#flatmap)
+- [flatten](#flatten)
+- [flip](#flip)
+- [forPage](#forpage)
+- [get](#get)
+- [groupBy](#groupby)
+- [has](#has)
+- [implode](#implode)
+- [intersect](#intersect)
+- [intersectByKeys](#intersectbykeys)
+- [isEmpty](#isempty)
+- [isNotEmpty](#isnotempty)
+- [join](#join)
+- [keyBy](#keyby)
+- [keys](#keys)
+- [last](#last)
+- [macro](#macro)
+- [make](#make)
+- [map](#map)
+- [mapInto](#mapinto)
+- [mapSpread](#mapspread)
+- [mapToGroups](#maptogroups)
+- [mapWithKeys](#mapwithkeys)
+- [max](#max)
+- [median](#median)
+- [merge](#merge)
+- [mergeRecursive](#mergerecursive)
+- [min](#min)
+- [mode](#mode)
+- [nth](#nth)
+- [only](#only)
+- [pad](#pad)
+- [partition](#partition)
+- [pipe](#pipe)
+- [pluck](#pluck)
+- [random](#random)
+- [reduce](#reduce)
+- [reject](#reject)
+- [replace](#replace)
+- [replaceRecursive](#replacerecursive)
+- [reverse](#reverse)
+- [search](#search)
+- [shuffle](#shuffle)
+- [skip](#skip)
+- [slice](#slice)
+- [sole](#sole)
+- [some](#some)
+- [sort](#sort)
+- [sortBy](#sortby)
+- [sortByDesc](#sortbydesc)
+- [sortKeys](#sortkeys)
+- [sortKeysDesc](#sortkeysdesc)
+- [split](#split)
+- [sum](#sum)
+- [take](#take)
+- [tap](#tap)
+- [times](#times)
+- [toArray](#toarray)
+- [toJson](#tojson)
+- [union](#union)
+- [unique](#unique)
+- [uniqueStrict](#uniquestrict)
+- [unless](#unless)
+- [unlessEmpty](#unlessempty)
+- [unlessNotEmpty](#unlessnotempty)
+- [unwrap](#unwrap)
+- [values](#values)
+- [when](#when)
+- [whenEmpty](#whenempty)
+- [whenNotEmpty](#whennotempty)
+- [where](#where)
+- [whereStrict](#wherestrict)
+- [whereBetween](#wherebetween)
+- [whereIn](#wherein)
+- [whereInStrict](#whereinstrict)
+- [whereInstanceOf](#whereinstanceof)
+- [whereNotBetween](#wherenotbetween)
+- [whereNotIn](#wherenotin)
+- [whereNotInStrict](#wherenotinstrict)
+- [wrap](#wrap)
+- [zip](#zip)
 
 </div>
 

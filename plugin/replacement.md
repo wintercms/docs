@@ -51,7 +51,7 @@ This will allow, for example, plugins that use the original plugin functionality
 
 Configuration supports 2 different types of aliasing: `registerNamespaceAlias` & `registerPackageFallback`.
 
-##### registerNamespaceAlias
+#### registerNamespaceAlias
 
 This method allows for redirection of the alias to the namespace while accessing config values.
 
@@ -75,7 +75,7 @@ The config will be accessible via the alias registered:
 config('winter.original::foo'); // returns bar
 ```
 
-##### registerPackageFallback
+#### registerPackageFallback
 
 This method allows falling back to an aliased global config (a config specified in `/config/acme/plugin/config.php`).
 

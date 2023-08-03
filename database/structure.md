@@ -236,6 +236,7 @@ You may even pass an array of columns to an index method to create a compound in
 ```php
 $table->index(['account_id', 'created_at']);
 ```
+
 In most cases you should specify a name for the index manually as the second argument, to avoid the system automatically generating one that is too long:
 
 ```php

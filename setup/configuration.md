@@ -203,8 +203,6 @@ You can instruct the platform to prefer test builds from the marketplace by chan
 'edgeUpdates' => false,
 ```
 
-> **NOTE:** For plugin developers, we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
-
 > **TIP:** If you are using [Composer](../architecture/using-composer) to manage updates, you may replace the default Winter CMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch. This is more or less the same as enabling edge updates.
 
 ```json
@@ -335,19 +333,17 @@ The `trustedProxyHeaders` value specifies which headers will be allowed to defin
 
 It is often helpful to have different configuration values based on the environment the application is running in. You can do this by setting the `APP_ENV` environment variable which by default it is set to `production`. There are two common ways to change this value:
 
-1. Set `APP_ENV` value directly with your webserver.
+1. Set `APP_ENV` value directly with your webserver. For example, in Apache this line can be added to the `.htaccess` or `httpd.config` file:
 
-For example, in Apache this line can be added to the `.htaccess` or `httpd.config` file:
-
-```apacheconf
-SetEnv APP_ENV "dev"
-```
+    ```apacheconf
+    SetEnv APP_ENV "dev"
+    ```
 
 2. Create a `.env` file in the root directory with the following content:
 
-```ini
-APP_ENV=dev
-```
+    ```ini
+    APP_ENV=dev
+    ```
 
 In both of the above examples, the environment is set to the new value `dev`. Configuration files can now be created in the path `config/dev` and will override the application's base configuration.
 
@@ -388,7 +384,7 @@ return [
 
 ### Converting to DotEnv configuration
 
-As an alternative to the [base environment configuration](#base-environment), you may place common values in the environment instead of using configuration files. The config is then accessed using [DotEnv](https://github.com/vlucas/phpdotenv) syntax. Run the `winter:env` command to move common config values to the environment:
+As an alternative to the [base environment configuration](#defining-a-base-environment), you may place common values in the environment instead of using configuration files. The config is then accessed using [DotEnv](https://github.com/vlucas/phpdotenv) syntax. Run the `winter:env` command to move common config values to the environment:
 
 ```bash
 php artisan winter:env
@@ -400,6 +396,6 @@ This will create an `.env` file in project root directory and modify configurati
 'debug' => env('APP_DEBUG', true),
 ```
 
-It is also important that your `.env` file is not accessible to the public in production. To accomplish this, you should consider using a [public folder](#public-folder).
+It is also important that your `.env` file is not accessible to the public in production. To accomplish this, you should consider using a [public folder](#using-a-public-folder).
 
 > **TIP:** Your `.env` file should not be committed to your application's source control, since each developer or server using your application could require a different environment configuration.

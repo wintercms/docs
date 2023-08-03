@@ -42,7 +42,7 @@ We only need to place items in the `read` and `write` arrays if we wish to overr
 
 Once you have configured your database connection, you may run queries using the `Db` facade. The `Db` facade provides methods for each type of query: `select`, `update`, `insert`, `delete`, and `statement`.
 
-#### Running a select query
+### Running a select query
 
 To run a basic query, we can use the `select` method on the `Db` facade:
 
@@ -60,7 +60,7 @@ foreach ($users as $user) {
 }
 ```
 
-#### Using named bindings
+### Using named bindings
 
 Instead of using `?` to represent your parameter bindings, you may execute a query using named bindings:
 
@@ -68,7 +68,7 @@ Instead of using `?` to represent your parameter bindings, you may execute a que
 $results = Db::select('select * from users where id = :id', ['id' => 1]);
 ```
 
-#### Running an insert statement
+### Running an insert statement
 
 To execute an `insert` statement, you may use the `insert` method on the `Db` facade. Like `select`, this method takes the raw SQL query as its first argument and bindings as the second argument:
 
@@ -76,7 +76,7 @@ To execute an `insert` statement, you may use the `insert` method on the `Db` fa
 Db::insert('insert into users (id, name) values (?, ?)', [1, 'Joe']);
 ```
 
-#### Running an update statement
+### Running an update statement
 
 The `update` method should be used to update existing records in the database. The number of rows affected by the statement will be returned by the method:
 
@@ -84,7 +84,7 @@ The `update` method should be used to update existing records in the database. T
 $affected = Db::update('update users set votes = 100 where name = ?', ['John']);
 ```
 
-#### Running a delete statement
+### Running a delete statement
 
 The `delete` method should be used to delete records from the database. Like `update`, the number of rows deleted will be returned:
 
@@ -92,7 +92,7 @@ The `delete` method should be used to delete records from the database. Like `up
 $deleted = Db::delete('delete from users');
 ```
 
-#### Running a general statement
+### Running a general statement
 
 Some database statements should not return any value. For these types of operations, you may use the `statement` method on the `Db` facade:
 
@@ -126,7 +126,7 @@ Db::transaction(function () {
 });
 ```
 
-#### Manually using transactions
+### Manually using transactions
 
 If you would like to begin a transaction manually and have complete control over rollbacks and commits, you may use the `beginTransaction` method on the `Db` facade:
 
@@ -158,7 +158,7 @@ Db::listen(function($sql, $bindings, $time) {
 });
 ```
 
-Just like [event registration](../events/introduction#event-registration), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
+Just like [event registration](../events/introduction#where-to-register-listeners), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration#supported-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
 
 ### Query logging
 
@@ -180,4 +180,4 @@ However, in some cases, such as when inserting a large number of rows, this can 
 Db::connection()->disableQueryLog();
 ```
 
-> **NOTE**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log#helpers) instead.
+> **NOTE**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log#helper-functions) instead.

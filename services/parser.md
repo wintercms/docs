@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Winter uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes) use the [Twig](#twig-parser) and [INI format](#ini-parser) in their template structure. Each parser is described in more detail below.
+Winter uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes) use the [Twig](#twig-template-parser) and [INI format](#initialization-ini-configuration-parser) in their template structure. Each parser is described in more detail below.
 
 ## Markdown parser
 
@@ -49,7 +49,7 @@ The Twig parser can be extended to register custom features via [the plugin regi
 
 ## Bracket parser
 
-Winter also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content#content-variables). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `Winter\Storm\Parse\Bracket` class should be used with the `parse` method.
+Winter also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content#passing-variables-to-content-blocks). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `Winter\Storm\Parse\Bracket` class should be used with the `parse` method.
 
 ```php
 use Winter\Storm\Parse\Bracket;
@@ -59,7 +59,9 @@ $html = Bracket::parse($content, ['foo' => 'bar']);
 
 The syntax uses singular *curly brackets* for rendering variables:
 
-    <p>Hello there, {foo}</p>
+```
+<p>Hello there, {foo}</p>
+```
 
 You may also pass an array of objects to parse as a variable.
 
@@ -83,7 +85,7 @@ The array can be iterated using the following syntax:
 
 ## YAML configuration parser
 
-YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the backend development of Winter, such as [form field](../backend/forms#form-fields) and [list column](../backend/lists##list-columns) definitions. An example of some YAML:
+YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the backend development of Winter, such as [form field](../backend/forms#defining-form-fields) and [list column](../backend/lists#defining-list-columns) definitions. An example of some YAML:
 
 ```yaml
 receipt: Acme Purchase Invoice
@@ -171,7 +173,9 @@ level2Object[level3Object][level4Object][level5Value] = "Yay!"
 
 Dynamic Syntax is a templating engine unique to Winter that fundamentally supports two modes of rendering. Parsing a template will produce two results, either a **view** or **editor** mode. Take this template text as an example, the inner part of the `{text}...{/text}` tags represents the default text for the **view** mode, while the inner attributes, `name` and `label`, are used as properties for the **editor** mode.
 
-    <h1>{text name="websiteName" label="Website Name"}Our wonderful website{/text}</h1>
+```
+<h1>{text name="websiteName" label="Website Name"}Our wonderful website{/text}</h1>
+```
 
 There is no facade for this parser so the fully qualified `Winter\Storm\Parse\Syntax\Parser` class should be used with the `parse` method. The first argument of the `parse` method takes the template content as a string and returns a `Parser` object.
 
@@ -197,7 +201,7 @@ echo $syntax->render(['websiteName' => 'Winter CMS']);
 // <h1>Winter CMS</h1>
 ```
 
-As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#twig-parser).
+As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#twig-template-parser).
 
 ```php
 echo $syntax->toTwig();
@@ -219,7 +223,7 @@ $array = $syntax->toEditor();
 // ]
 ```
 
-You may notice the properties closely resemble the options found in [form field definitions](../backend/forms#form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
+You may notice the properties closely resemble the options found in [form field definitions](../backend/forms#defining-form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
 
 ```php
 $form = [
@@ -231,73 +235,61 @@ File::put('fields.yaml', Yaml::render($form));
 
 ### Supported tags
 
-There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms#field-types).
+There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms#available-field-types).
 
 > **NOTE**: Every tag except for the `{variable}` tag will render its value when in view mode. If you just want to store the value to be used elsewhere on your page in view mode, then it's recommended to use the `{variable}` tag instead.
-
-<hr>
 
 #### Variable
 
 Renders the form field type exactly as defined in the `type` attribute. This tag will simply set a variable and will render in view mode as an empty string.
 
-    {variable type="text" name="name" label="Name"}John{/variable}
-
-<hr>
-
-<!--
-#### Checkbox
-
-Renders conditional content inside (still under development)
-
-    {checkbox name="showHeader" label="Show heading" default="true"}
-        <p>This content will be shown if the checkbox is ticked</p>
-    {/checkbox}
-
-Renders in Twig as
-
-    {% if checkbox %}
-        {{ showHeader }}
-    {% endif %}
--->
+```
+{variable type="text" name="name" label="Name"}John{/variable}
+```
 
 #### Color picker
 
 Color picker widget for color selection. This tag will contain the selected hexadecimal value. You may optionally provide an `availableColors` attribute to define the available colours for selection.
 
-    {colorpicker name="bg_color" label="Background colour" allowEmpty="true" availableColors="#ffffff|#000000"}{/colorpicker}
-
-<hr>
+```
+{colorpicker name="bg_color" label="Background colour" allowEmpty="true" availableColors="#ffffff|#000000"}{/colorpicker}
+```
 
 #### Dropdown
 
 Renders a dropdown form field.
 
-    {dropdown name="dropdown" label="Pick one" options="One|Two"}{/dropdown}
+```
+{dropdown name="dropdown" label="Pick one" options="One|Two"}{/dropdown}
+```
 
 Renders a dropdown form field with independent values and labels.
 
-    {dropdown name="dropdown" label="Pick one" options="one:One|two:Two"}{/dropdown}
+```
+{dropdown name="dropdown" label="Pick one" options="one:One|two:Two"}{/dropdown}
+```
 
 Renders a dropdown form field with an array returned by a static class method (the class must be a fully namespaced class).
 
-    {dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
-
-<hr>
+```
+{dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
+```
 
 #### File upload
 
 File uploader input for files. This tag value will contain the full path to the file.
 
-    {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
-
-<hr>
+```
+{fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
+```
 
 #### Markdown
 
 Text input for Markdown content.
 
-    {markdown name="content" label="Markdown content"}Default text{/markdown}
+```
+{markdown name="content" label="Markdown content"}Default text{/markdown}
+```
 
 Renders in Twig as
 
@@ -305,13 +297,13 @@ Renders in Twig as
 {{ content | md }}
 ```
 
-<hr>
-
 #### Media finder
 
 File selector for media library items. This tag value will contain the relative path to the file.
 
-    {mediafinder name="logo" label="Logo"}defaultlogo.png{/mediafinder}
+```
+{mediafinder name="logo" label="Logo"}defaultlogo.png{/mediafinder}
+```
 
 Renders in Twig as
 
@@ -319,24 +311,24 @@ Renders in Twig as
 {{ logo | media }}
 ```
 
-<hr>
-
 #### Radio
 
 Renders a radio form field.
 
-    {radio name="radio" label="Thoughts?" options="y:Yes|n:No|m:Maybe"}{/radio}
-
-<hr>
+```
+{radio name="radio" label="Thoughts?" options="y:Yes|n:No|m:Maybe"}{/radio}
+```
 
 #### Repeater
 
 Renders a repeating section with other fields inside.
 
-    {repeater name="content_sections" prompt="Add another content section"}
-        <h2>{text name="title" label="Title"}Title{/text}</h2>
-        <p>{textarea name="content" label="Content"}Content{/textarea}</p>
-    {/repeater}
+```
+{repeater name="content_sections" prompt="Add another content section"}
+    <h2>{text name="title" label="Title"}Title{/text}</h2>
+    <p>{textarea name="content" label="Content"}Content{/textarea}</p>
+{/repeater}
+```
 
 Renders in Twig as
 
@@ -372,8 +364,10 @@ Calling `$syntax->toEditor` will return a different array for a repeater field:
 
 The repeater field also supports group mode, to be used with the dynamic syntax parser as follows:
 
-    {variable name="sections" type="repeater" prompt="Add another section" tab="Sections"
-        groups="$/author/plugin/repeater_fields.yaml"}{/variable}
+```
+{variable name="sections" type="repeater" prompt="Add another section" tab="Sections"
+    groups="$/author/plugin/repeater_fields.yaml"}{/variable}
+```
 
 This is an example of the repeater_fields.yaml group configuration file:
 
@@ -397,15 +391,15 @@ quote:
             type: textarea
 ```
 
-For more information about the repeater group mode see [Repeater Widget](../backend/forms#widget-repeater).
-
-<hr>
+For more information about the repeater group mode see [Repeater Widget](../backend/forms#repeater).
 
 #### Rich editor
 
 Text input for rich content (WYSIWYG).
 
-    {richeditor name="content" label="Main content"}Default text{/richeditor}
+```
+{richeditor name="content" label="Main content"}Default text{/richeditor}
+```
 
 Renders in Twig as
 
@@ -413,27 +407,27 @@ Renders in Twig as
 {{ content | raw }}
 ```
 
-<hr>
-
 #### Text
 
 Single line input for smaller blocks of text.
 
-    {text name="websiteName" label="Website Name"}Our wonderful website{/text}
-
-<hr>
+```
+{text name="websiteName" label="Website Name"}Our wonderful website{/text}
+```
 
 #### Textarea
 
 Multiple line input for larger blocks of text.
 
-    {textarea name="websiteDescription" label="Website Description"}
-        This is our vision for things to come
-    {/textarea}
+```
+{textarea name="websiteDescription" label="Website Description"}
+    This is our vision for things to come
+{/textarea}
+```
 
 ## Data File Parser: Array
 
-Winter CMS uses PHP array files (PHP files that do nothing except return a single array) for managing [configuration](../plugin/settings#file-configuration) and [translation data files](../plugin/localization#file-structure). In order to simplify working with these files programatically, Winter provides the `Winter\Storm\Parse\PHP\ArrayFile` parser in the core.
+Winter CMS uses PHP array files (PHP files that do nothing except return a single array) for managing [configuration](../plugin/settings#file-based-configuration) and [translation data files](../plugin/localization#localization-directory-and-file-structure). In order to simplify working with these files programatically, Winter provides the `Winter\Storm\Parse\PHP\ArrayFile` parser in the core.
 
 ### Load `ArrayFile`
 
@@ -449,7 +443,7 @@ $arrayFile->write();
 
 The `ArrayFile::open()` method accepts a second argument `$throwIfMissing` that defaults to `false`. If `true`, a `\InvalidArgumentException` will be thrown if the provided `$filePath` does not point to an existing file.
 
-### Set values
+### Set Array File values
 
 Setting values can be chained or multiple values can be set by passing an array
 
@@ -467,7 +461,7 @@ ArrayFile::open('/path/to/file.php')->set([
 ])->write();
 ```
 
-#### Multidimensional arrays
+### Multidimensional arrays
 
 Multidimensional arrays can be set via dot notation, or by passing an array.
 
@@ -504,7 +498,7 @@ return [
 ];
 ```
 
-#### Default values for `env()` helper
+### Default values for `env()` helper
 
 If an array file has a `env()` function call for a given key, setting the value of that key will set the default argument for the call to `env()` rather than replacing the `env()` call altogether.
 
@@ -540,7 +534,7 @@ return [
 ];
 ```
 
-#### Function values
+### Function values
 
 Function calls can be added to your config either via the `PHPFunction` class or using the `function()` helper method
 on the `ArrayFile` object.
@@ -562,7 +556,7 @@ $arrayFile->set([
 $arrayFile->write();
 ```
 
-#### Constant values
+### Constant values
 
 Constants can be added to your config either via the `PHPConstant` class or using the `constant()` helper method
 on the `ArrayFile` object.
@@ -647,15 +641,15 @@ $phpConfigString = ArrayFile::open('/path/to/file.php')->set([
 
 Winter supports the use of [DotEnv](https://github.com/vlucas/phpdotenv) files (`.env`) to manage environment specific variables.
 
-Getting these values is as easy as using the [`env()` helper function](../services/helpers#method-env). Winter also provides a way to programmatically set the values in the `.env` file through the use of the `Winter\Storm\Parse\EnvFile` parser in the core.
+Getting these values is as easy as using the [`env()` helper function](../services/helpers#env). Winter also provides a way to programmatically set the values in the `.env` file through the use of the `Winter\Storm\Parse\EnvFile` parser in the core.
 
-## Load `EnvFile`
+### Load `EnvFile`
 
 The `EnvFile` class can be used to modify a PHP array file. The `EnvFile::open()` method will initialize the `EnvFile` parser with the contents of the provided path (if the path does not exist it will be created on a call to `$envFile->write()`).
 
 By default, the `.env` file interacted with will be `base_path('.env')`, this can be changed if required by passing the path to the `open()` method.
 
-## Set values
+### Set values in Env file
 
 Values can be set either one at a time or by passing an array of values to set.
 
@@ -717,7 +711,7 @@ EnvFile::open()->set([
 ])->write('/path/to/.env.alternative');
 ```
 
-### Render contents
+### Render `EnvFile` contents
 
 If you require the `EnvFile` contents as a string; instead of writing directly to a file with `write()`, the `render()` method can be used.
 

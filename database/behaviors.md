@@ -38,8 +38,7 @@ Winter\User\Models\User::extend(function($model) {
 });
 ```
 
-The defined attributes will be purged when the model is saved, before the [model events](#model-events)
-are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
+The defined attributes will be purged when the model is saved, before the [model events](model#events) are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
 
 ```php
 return $user->getOriginalPurgeValue($propertyName);

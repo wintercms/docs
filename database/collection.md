@@ -35,7 +35,7 @@ All model collections extend the base collection object; therefore, they inherit
 
 In addition, the `Illuminate\Database\Eloquent\Collection` class provides a superset of methods to aid with managing your model collections. Most methods return `Illuminate\Database\Eloquent\Collection` instances; however, some methods return a base `Illuminate\Support\Collection` instance.
 
-**contains($key, $operator = null, $value = null)**
+### `contains($key, $operator = null, $value = null)`
 
 The `contains` method may be used to determine if a given model instance is contained by the collection. This method accepts a primary key or a model instance:
 
@@ -45,7 +45,7 @@ $users->contains(1);
 $users->contains(User::find(1));
 ```
 
-**diff($items)**
+### `diff($items)`
 
 The `diff` method returns all of the models that are not present in the given collection:
 
@@ -55,7 +55,7 @@ use App\User;
 $users = $users->diff(User::whereIn('id', [1, 2, 3])->get());
 ```
 
-**except($keys)**
+### `except($keys)`
 
 The `except` method returns all of the models that do not have the given primary keys:
 
@@ -63,7 +63,7 @@ The `except` method returns all of the models that do not have the given primary
 $users = $users->except([1, 2, 3]);
 ```
 
-**find($key)**
+### `find($key)`
 
 The `find` method finds a model that has a given primary key. If `$key` is a model instance, `find` will attempt to return a model matching the primary key. If `$key` is an array of keys, find will return all models which match the `$keys` using `whereIn()`:
 
@@ -73,7 +73,7 @@ $users = User::all();
 $user = $users->find(1);
 ```
 
-**fresh($with = [])**
+### `fresh($with = [])`
 
 The `fresh` method retrieves a fresh instance of each model in the collection from the database. In addition, any specified relationships will be eager loaded:
 
@@ -83,7 +83,7 @@ $users = $users->fresh();
 $users = $users->fresh('comments');
 ```
 
-**intersect($items)**
+### `intersect($items)`
 
 The `intersect` method returns all of the models that are also present in the given collection:
 
@@ -93,7 +93,7 @@ use App\User;
 $users = $users->intersect(User::whereIn('id', [1, 2, 3])->get());
 ```
 
-**load($relations)**
+### `load($relations)`
 
 The `load` method eager loads the given relationships for all models in the collection:
 
@@ -103,7 +103,7 @@ $users->load('comments', 'posts');
 $users->load('comments.author');
 ```
 
-**loadMissing($relations)**
+### `loadMissing($relations)`
 
 The `loadMissing` method eager loads the given relationships for all models in the collection if the relationships are not already loaded:
 
@@ -113,7 +113,7 @@ $users->loadMissing('comments', 'posts');
 $users->loadMissing('comments.author');
 ```
 
-**modelKeys()**
+### `modelKeys()`
 
 The `modelKeys` method returns the primary keys for all models in the collection:
 
@@ -123,7 +123,7 @@ $users->modelKeys();
 // [1, 2, 3, 4, 5]
 ```
 
-**makeVisible($attributes)**
+### `makeVisible($attributes)`
 
 The `makeVisible` method makes attributes visible that are typically "hidden" on each model in the collection:
 
@@ -131,7 +131,7 @@ The `makeVisible` method makes attributes visible that are typically "hidden" on
 $users = $users->makeVisible(['address', 'phone_number']);
 ```
 
-**makeHidden($attributes)**
+### `makeHidden($attributes)`
 
 The `makeHidden` method hides attributes that are typically "visible" on each model in the collection:
 
@@ -139,7 +139,7 @@ The `makeHidden` method hides attributes that are typically "visible" on each mo
 $users = $users->makeHidden(['address', 'phone_number']);
 ```
 
-**only($keys)**
+### `only($keys)`
 
 The `only` method returns all of the models that have the given primary keys:
 
@@ -147,7 +147,7 @@ The `only` method returns all of the models that have the given primary keys:
 $users = $users->only([1, 2, 3]);
 ```
 
-**unique($key = null, $strict = false)**
+### `unique($key = null, $strict = false)`
 
 The `unique` method returns all of the unique models in the collection. Any models of the same type with the same primary key as another model in the collection are removed.
 

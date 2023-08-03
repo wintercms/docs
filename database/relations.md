@@ -107,7 +107,7 @@ The following relations types are available:
 - [Many To Many](#many-to-many)
 - [Has Many Through](#has-many-through)
 - [Polymorphic relations](#polymorphic-relations)
-- [Many To Many Polymorphic relations](#many-to-many-polymorphic-relations)
+- [Many To Many Polymorphic relations](#many-to-many-polymorphic)
 
 ### One To One
 
@@ -148,7 +148,7 @@ public $hasOne = [
 ];
 ```
 
-#### Defining the inverse of the relation
+#### Defining the inverse of a One To One relation
 
 Now that we can access the `Phone` model from our `User`. Let's do the opposite and define a relationship on the `Phone` model that will let us access the `User` that owns the phone. We can define the inverse of a `hasOne` relationship using the `$belongsTo` property:
 
@@ -237,7 +237,7 @@ public $hasMany = [
 ];
 ```
 
-#### Defining the inverse of the relation
+#### Defining the inverse of a One To Many relation
 
 Now that we can access all of a post's comments, let's define a relationship to allow a comment to access its parent post. To define the inverse of a `hasMany` relationship, define the `$belongsTo` property on the child model:
 
@@ -278,7 +278,7 @@ public $belongsTo = [
 
 Many-to-many relations are slightly more complicated than `hasOne` and `hasMany` relationships. An example of such a relationship is a user with many roles, where the roles are also shared by other users. For example, many users may have the role of "Admin". To define this relationship, three database tables are needed: `users`, `roles`, and `role_user`. The `role_user` table is derived from the alphabetical order of the related model names, and contains the `user_id` and `role_id` columns.
 
-Below is an example that shows the [database table structure](../plugin/updates#migration-files) used to create the join table.
+Below is an example that shows the [database table structure](../plugin/updates#migration-and-seed-files) used to create the join table.
 
 ```php
 Schema::create('role_user', function($table)
@@ -402,19 +402,21 @@ Argument | Description
 
 The has-many-through relationship provides a convenient short-cut for accessing distant relations via an intermediate relation. For example, a `Country` model might have many `Post` models through an intermediate `User` model. In this example, you could easily gather all blog posts for a given country. Let's look at the tables required to define this relationship:
 
-    countries
-        id - integer
-        name - string
+```
+countries
+    id - integer
+    name - string
 
-    users
-        id - integer
-        country_id - integer
-        name - string
+users
+    id - integer
+    country_id - integer
+    name - string
 
-    posts
-        id - integer
-        user_id - integer
-        title - string
+posts
+    id - integer
+    user_id - integer
+    title - string
+```
 
 Though `posts` does not contain a `country_id` column, the `hasManyThrough` relation provides access to a country's posts via `$country->posts`. To perform this query, the model inspects the `country_id` on the intermediate `users` table. After finding the matching user IDs, they are used to query the `posts` table.
 
@@ -452,16 +454,18 @@ public $hasManyThrough = [
 
 The has-one-through relationship links models through a single intermediate relation. For example, if each supplier has one user, and each user is associated with one user history record, then the supplier model may access the user's history through the user. Let's look at the database tables necessary to define this relationship:
 
-    users
-        id - integer
-        supplier_id - integer
+```
+users
+    id - integer
+    supplier_id - integer
 
-    suppliers
-        id - integer
+suppliers
+    id - integer
 
-    history
-        id - integer
-        user_id - integer
+history
+    id - integer
+    user_id - integer
+```
 
 Though the `history` table does not contain a `supplier_id` column, the `hasOneThrough` relation can provide access to the user's history to the supplier model. Now that we have examined the table structure for the relationship, let's define it on the `Supplier` model:
 
@@ -497,29 +501,27 @@ public $hasOneThrough = [
 
 Polymorphic relations allow a model to belong to more than one other model on a single association.
 
-### One To One
-
-#### Table structure
+### One To One (Polymorphic)
 
 A one-to-one polymorphic relation is similar to a simple one-to-one relation; however, the target model can belong to more than one type of model on a single association. For example, imagine you want to store photos for your staff members and for your products. Using polymorphic relationships, you can use a single `photos` table for both of these scenarios. First, let's examine the table structure required to build this relationship:
 
-    staff
-        id - integer
-        name - string
+```
+staff
+    id - integer
+    name - string
 
-    products
-        id - integer
-        price - integer
+products
+    id - integer
+    price - integer
 
-    photos
-        id - integer
-        path - string
-        imageable_id - integer
-        imageable_type - string
+photos
+    id - integer
+    path - string
+    imageable_id - integer
+    imageable_type - string
+```
 
 Two important columns to note are the `imageable_id` and `imageable_type` columns on the `photos` table. The `imageable_id` column will contain the ID value of the owning staff or product, while the `imageable_type` column will contain the class name of the owning model. The `imageable_type` column is how the ORM determines which "type" of owning model to return when accessing the `imageable` relation.
-
-#### Model structure
 
 Next, let's examine the model definitions needed to build this relationship:
 
@@ -566,29 +568,27 @@ $imageable = $photo->imageable;
 
 The `imageable` relation on the `Photo` model will return either a `Staff` or `Product` instance, depending on which type of model owns the photo.
 
-### One To Many
-
-#### Table Structure
+### One To Many (Polymorphic)
 
 A one-to-many polymorphic relation is similar to a simple one-to-many relation; however, the target model can belong to more than one type of model on a single association. For example, imagine users of your application can "comment" on both posts and videos. Using polymorphic relationships, you may use a single `comments` table for both of these scenarios. First, let's examine the table structure required to build this relationship:
 
-    posts
-        id - integer
-        title - string
-        body - text
+```
+posts
+    id - integer
+    title - string
+    body - text
 
-    videos
-        id - integer
-        title - string
-        url - string
+videos
+    id - integer
+    title - string
+    url - string
 
-    comments
-        id - integer
-        body - text
-        commentable_id - integer
-        commentable_type - string
-
-#### Model Structure
+comments
+    id - integer
+    body - text
+    commentable_id - integer
+    commentable_type - string
+```
 
 Next, let's examine the model definitions needed to build this relationship:
 
@@ -647,30 +647,28 @@ $comment->commentable = $video;
 $comment->save();
 ```
 
-### Many To Many
-
-#### Table structure
+### Many To Many (Polymorphic)
 
 In addition to "one-to-one" and "one-to-many" relations, you may also define "many-to-many" polymorphic relations. For example, a blog `Post` and `Video` model could share a polymorphic relation to a `Tag` model. Using a many-to-many polymorphic relation allows you to have a single list of unique tags that are shared across blog posts and videos. First, let's examine the table structure:
 
-    posts
-        id - integer
-        name - string
+```
+posts
+    id - integer
+    name - string
 
-    videos
-        id - integer
-        name - string
+videos
+    id - integer
+    name - string
 
-    tags
-        id - integer
-        name - string
+tags
+    id - integer
+    name - string
 
-    taggables
-        tag_id - integer
-        taggable_id - integer
-        taggable_type - string
-
-#### Model structure
+taggables
+    tag_id - integer
+    taggable_id - integer
+    taggable_type - string
+```
 
 Next, we're ready to define the relationships on the model. The `Post` and `Video` models will both have a `tags` relation defined in the `$morphToMany` property on the base model class:
 
@@ -683,7 +681,7 @@ class Post extends Model
 }
 ```
 
-#### Defining the inverse of the relationship
+#### Defining the inverse of a Many To Many (Polymorphic) relationship
 
 Next, on the `Tag` model, you should define a relation for each of its related models. So, for this example, we will define a `posts` relation and a `videos` relation:
 
@@ -734,7 +732,7 @@ Relation::morphMap([
 ]);
 ```
 
-The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
+The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration#supported-methods).
 
 ## Querying relations
 
@@ -852,7 +850,7 @@ select * from books
 select * from authors where id in (1, 2, 3, 4, 5, ...)
 ```
 
-#### Eager loading multiple relationships
+### Eager loading multiple relationships
 
 Sometimes you may need to eager load several different relationships in a single operation. To do so, just pass additional arguments to the `with` method:
 
@@ -860,7 +858,7 @@ Sometimes you may need to eager load several different relationships in a single
 $books = Book::with('author', 'publisher')->get();
 ```
 
-#### Nested eager loading
+### Nested eager loading
 
 To eager load nested relationships, you may use "dot" syntax. For example, let's eager load all of the book's authors and all of the author's personal contacts in one statement:
 
@@ -955,7 +953,9 @@ $post->comments()->remove($comment);
 
 In the case of many-to-many relations, the record is removed from the relationship's collection instead.
 
-    $post->categories()->remove($category);
+```php
+$post->categories()->remove($category);
+```
 
 In the case of a "belongs to" relationship, you may use the `dissociate` method, which doesn't require the related model passed to it.
 

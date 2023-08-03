@@ -7,13 +7,13 @@ When you first start using Winter CMS, error and exception handling is already c
 1. The event log can be viewed in the file system by opening the file `storage/logs/system.log`.
 1. Alternatively it can be viewed via the Administration area by navigating to *System > Logs > Event Log*.
 
-Log entries are always created when an error page is shown and for certain [exception types](#exception-types).
+Log entries are always created when an error page is shown and for certain [exception types](#available-exceptions).
 
 > **NOTE**: Some server errors are too low level to be handled by Winter, and thus are only visible in the relevant logs for where the error occurred. These are typically issues with the server's configuration, and you should look for those logs wherever the server software that you are using keeps its logs.
 
 ## Configuration
 
-#### Error detail
+### Error detail
 
 The amount of error detail your application displays through the browser is controlled by the `debug` configuration option in your `config/app.php` configuration file. By default detailed error reporting is turned *on* so it is helpful to see detailed error information which can be useful for debugging and troubleshooting issues. When this feature is turned off, when there is a problem in a page, a generic error message will be displayed.
 
@@ -34,7 +34,7 @@ For local development, you should set the `debug` value to `true`. In your produ
 'debug' => false,
 ```
 
-#### Log file modes
+### Log file modes
 
 Winter supports `single`, `daily`, `syslog` and `errorlog` logging modes. For example, if you wish to use daily log files instead of a single file, you should simply set the `log` value in your `config/app.php` configuration file:
 
@@ -128,7 +128,7 @@ If you have several exception handlers, they should be defined from most generic
 
 ### Where to place error handlers
 
-Error handler registrations, like [event handlers](events), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
+Error handler registrations, like [event handlers](../events/introduction), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#supported-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
 
 ## HTTP exceptions
 
@@ -172,7 +172,7 @@ Log::info($error);
 Log::debug($error);
 ```
 
-#### Contextual information
+### Contextual information
 
 An array of contextual data may also be passed to the log methods. This contextual data will be formatted and displayed with the log message:
 

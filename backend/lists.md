@@ -96,7 +96,6 @@ Option | Description
 
 The search configuration supports the following options:
 
-
 Option | Description
 ------------- | -------------
 `prompt` | a placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
@@ -388,6 +387,7 @@ EntryData:
 - key
 - value
 ```
+
 You can display the individual EntryData records as separate columns in the list widget by using the following configuration:
 
 ```yaml

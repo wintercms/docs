@@ -22,8 +22,8 @@ Field | Description
 `description` | the theme description, required.
 `previewImage` | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
 `code` | the theme code, optional. The value is used on the Winter CMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
-`form` | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
-`require` | an array of plugin names used for [theme dependencies](#dependencies), optional.
+`form` | a configuration array or reference to a form field definition file, used for [theme customization](#theme-customization), optional.
+`require` | an array of plugin names used for [theme dependencies](#theme-dependencies), optional.
 `mix` | an object that defines Mix packages contained in your theme for [asset compilation](../console/asset-compilation).
 
 Example of the theme information file:
@@ -70,7 +70,7 @@ The image width should be at least 600px. The ideal aspect ratio is 1.5, for exa
 
 ## Theme customization
 
-Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms#form-fields) for more information.
+Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms#defining-form-fields) for more information.
 
 The following is an example of how to define a website name configuration field called **site_name**:
 
@@ -150,7 +150,7 @@ a { color: @link-color }
 
 ## Theme dependencies
 
-A theme can depend on plugins by defining a `require` option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
+A theme can depend on plugins by defining a `require` option in the [Theme information file](#theme-information-file), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
 
 ```yaml
 name: "Winter CMS Demo"
@@ -194,4 +194,3 @@ The **lang.php** file should define and return an array of any depth, for exampl
 ```
 
 You are then able to reference the keys using `themes.theme-code::lang.key`. In the above example, the full language key you would use to reference the "website_name" localization key would be `themes.acme::lang.options.website_name`
-

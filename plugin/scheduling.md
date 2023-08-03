@@ -4,7 +4,7 @@
 
 In the past, developers have generated a Cron entry for each task they need to schedule. However, this can sometimes be a headache. Your task schedule is no longer in source control, and you must SSH into your server to add the Cron entries. The command scheduler allows you to fluently and expressively define your command schedule within the application itself, and only a single Cron entry is needed on your server.
 
-> **NOTE**: See the [installation guide](../setup/installation#crontab-setup) for instructions on how to set up the scheduler task.
+> **NOTE**: See the [installation guide](../setup/installation#setting-up-the-scheduler) for instructions on how to set up the scheduler task.
 
 ## Defining schedules
 
@@ -134,7 +134,7 @@ $schedule->command('emails:send')
     });
 ```
 
-#### Pinging URLs
+### Pinging URLs
 
 Using the `pingBefore` and `thenPing` methods, the scheduler can automatically ping a given URL before or after a task is complete. This method is useful for notifying an external service that your scheduled task is commencing or complete:
 

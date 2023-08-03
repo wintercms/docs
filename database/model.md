@@ -18,7 +18,7 @@ Model classes reside in the **models** subdirectory of a plugin directory. An ex
      ┗ 📜 Plugin.php
 ```
 
-The model configuration directory could contain the model's [list column](../backend/lists#list-columns) and [form field](../backend/forms#form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
+The model configuration directory could contain the model's [list column](../backend/lists#defining-list-columns) and [form field](../backend/forms#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
 
 ## Defining models
 
@@ -75,7 +75,7 @@ Property | Description
 `$guarded` | values are fields guarded from [mass assignment](#mass-assignment).
 `$visible` | values are fields made visible when [serializing the model data](../database/serialization).
 `$hidden` | values are fields made hidden when [serializing the model data](../database/serialization).
-`$connection` | string that contains the [connection name](../database/basics#accessing-connections) that's utilised by the model by default.
+`$connection` | string that contains the [connection name](../database/basics#multiple-database-connections) that's utilised by the model by default.
 
 #### Primary key
 
@@ -155,7 +155,7 @@ class Post extends Model
 
 ## Retrieving models
 
-When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [Winter\Storm\Database\Builder](/docs/v1.2/api/Winter/Storm/Database/Builder).
+When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-a-single-model) respectively. Queries that derive from a Model return an instance of [Winter\Storm\Database\Builder](/docs/v1.2/api/Winter/Storm/Database/Builder).
 
 > **NOTE**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. While the cache should automatically invalidate itself most of the time, sometimes you will need to use the `$model->reload()` method to flush the cache for more complex use cases.
 
@@ -382,7 +382,7 @@ $flight = Flight::find(1);
 $flight->delete();
 ```
 
-#### Deleting an existing model by key
+### Deleting an existing model by key
 
 In the example above, we are retrieving the model from the database before calling the `delete` method. However, if you know the primary key of the model, you may delete the model without retrieving it. To do so, call the `destroy` method:
 
@@ -394,7 +394,7 @@ Flight::destroy([1, 2, 3]);
 Flight::destroy(1, 2, 3);
 ```
 
-#### Deleting models by query
+### Deleting models by query
 
 You may also run a delete query on a set of models. In this example, we will delete all flights that are marked as inactive:
 
@@ -402,11 +402,11 @@ You may also run a delete query on a set of models. In this example, we will del
 $deletedRows = Flight::where('active', 0)->delete();
 ```
 
-> **NOTE**: It is important to mention that [model events](#model-events) will not fire when deleting records directly from a query.
+> **NOTE**: It is important to mention that [model events](model#events) will not fire when deleting records directly from a query.
 
 ## Query scopes
 
-#### Local scopes
+### Local scopes
 
 Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`:
 
@@ -431,7 +431,7 @@ class User extends Model
 }
 ```
 
-#### Utilizing a query scope
+### Utilizing a query scope
 
 Once the scope has been defined, you may call the scope methods when querying the model. However, you do not need to include the `scope` prefix when calling the method. You can even chain calls to various scopes, for example:
 
@@ -439,7 +439,7 @@ Once the scope has been defined, you may call the scope methods when querying th
 $users = User::popular()->active()->orderBy('created_at')->get();
 ```
 
-#### Dynamic scopes
+### Dynamic scopes
 
 Sometimes you may wish to define a scope that accepts parameters. To get started, just add your additional parameters to your scope. Scope parameters should be defined after the `$query` argument:
 
@@ -462,10 +462,9 @@ Now you may pass the parameters when calling the scope:
 $users = User::applyType('admin')->get();
 ```
 
-#### Global scopes
+### Global scopes
 
 Global scopes allow you to add constraints to all queries for a given model. Winters own soft delete functionality utilizes global scopes to only retrieve "non-deleted" models from the database. Writing your own global scopes can provide a convenient, easy way to make sure every query for a given model receives certain constraints.
-
 
 #### Writing Global Scopes
 

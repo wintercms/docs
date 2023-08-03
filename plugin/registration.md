@@ -10,7 +10,7 @@ Plugins are the foundation for adding new features or extending the base functio
 
 - Define [components](../plugin/components).
 - Define [user permissions](../backend/users).
-- Add [settings pages](../plugin/settings#backend-pages), [menu items](../plugin/registration#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
+- Add [settings pages](../plugin/settings#backend-settings-pages), [menu items](../plugin/registration#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
 - Create [database table structures and seed data](../plugin/updates).
 - Alter [functionality of the core or other plugins](../events/introduction).
 - Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
@@ -173,15 +173,15 @@ Method | Description
 `registerComponents()` | registers any [frontend components](components#component-registration) used by this plugin.
 `registerFormWidgets()` | registers any [backend form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 `registerListColumnTypes()` | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
-`registerMailLayouts()` | registers any [mail view layouts](../services/mail#mail-template-registration) supplied by this plugin.
-`registerMailPartials()` | registers any [mail view partials](../services/mail#mail-template-registration) supplied by this plugin.
-`registerMailTemplates()` | registers any [mail view templates](../services/mail#mail-template-registration) supplied by this plugin.
+`registerMailLayouts()` | registers any [mail view layouts](../services/mail#registering-mail-layouts-templates-and-partials) supplied by this plugin.
+`registerMailPartials()` | registers any [mail view partials](../services/mail#registering-mail-layouts-templates-and-partials) supplied by this plugin.
+`registerMailTemplates()` | registers any [mail view templates](../services/mail#registering-mail-layouts-templates-and-partials) supplied by this plugin.
 `registerMarkupTags()` | registers [additional markup tags](#extending-twig) that can be used in the CMS.
 `registerNavigation()` | registers [backend navigation menu items](#navigation-menus) for this plugin.
-`registerPermissions()` | registers any [backend permissions](../backend/users#permission-registration) used by this plugin.
+`registerPermissions()` | registers any [backend permissions](../backend/users#registering-permissions) used by this plugin.
 `registerReportWidgets()` | registers any [backend report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
 `registerSchedule()` | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
-`registerSettings()` | registers any [backend configuration links](settings#link-registration) used by this plugin.
+`registerSettings()` | registers any [backend configuration links](settings#settings-link-registration) used by this plugin.
 `registerValidationRules()` | registers any [custom validators](../services/validation#custom-validation-rules) supplied by this plugin.
 
 ### Basic plugin information
@@ -193,7 +193,7 @@ Key | Description
 `name` | the plugin name, required.
 `description` | the plugin description, required.
 `author` | the plugin author name, required.
-`icon` | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**. This key is required if `iconSvg` is not set.
+`icon` | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](/docs/v1.2/ui/style/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**. This key is required if `iconSvg` is not set.
 `iconSvg` | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors. This key is required if `icon` is not set.
 `homepage` | a link to the author's website address, optional.
 
@@ -225,7 +225,7 @@ public function boot()
 }
 ```
 
-The `boot` and `register` methods are not called during the update process, or within some critical Backend sections and command-line tools, to protect the system from critical errors. To overcome this limitation, use [elevated permissions](#elevated-plugin).
+The `boot` and `register` methods are not called during the update process, or within some critical Backend sections and command-line tools, to protect the system from critical errors. To overcome this limitation, use [elevated permissions](#elevated-permissions).
 
 Plugins can also supply a file named **routes.php** that may contain custom routing logic, as defined in the [router service](../services/router). For example:
 
@@ -318,7 +318,6 @@ The following Twig custom options are available:
 | `deprecated` | boolean | `false` | if true marks the current filter as being deprecated (usually used with `alternative` to provide an alternative option |
 | `alternative` | string | `''` | if `deprecated` is true, provides a recommended alternative filter to use instead. |
 
-
 ## Navigation menus
 
 Plugins can extend the backend navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the backend navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
@@ -366,12 +365,12 @@ public function registerNavigation()
 
 When you register the backend navigation you can use [localization strings](localization) for the `label` values. Backend navigation can also be controlled by the `permissions` values and correspond to defined [backend user permissions](../backend/users). The order in which the backend navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
 
-To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the backend controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
+To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#setting-the-navigation-context) in the backend controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
 Key | Description
 ------------- | -------------
 `label` | specifies the menu label localization string key, required.
-`icon` | an icon name from the [Winter CMS icon collection](../ui/icon), optional.
+`icon` | an icon name from the [Winter CMS icon collection](/docs/v1.2/ui/style/icon), optional.
 `iconSvg` | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
 `url` | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
 `counter` | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
@@ -412,7 +411,7 @@ public function boot()
 
 ## Elevated permissions
 
-By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the backend. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
+By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the backend. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-and-initialization) for the plugin will not fire.
 
 Request | Description
 ------------- | -------------

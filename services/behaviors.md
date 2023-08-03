@@ -106,10 +106,11 @@ class UtilityFunctions extends \Winter\Storm\Extension\ExtensionBase
 The extended object is always passed as the first parameter to the Behavior's constructor.
 
 To summarize:
+
 - Extend \Winter\Storm\Extension\ExtensionBase to declare your class as a Behaviour
 - The class wanting to -implement- the Behaviour needs to extend \Winter\Storm\Extension\Extendable
 
-> **NOTE**: See [Using traits instead of base classes](#using-traits)
+> **NOTE**: See [Using traits instead of base classes](#using-traits-instead-of-base-classes)
 
 ## Extending Constructors
 
@@ -185,7 +186,7 @@ So retrieving all dynamic properties would look like this:
 $model->getDynamicProperties();
 ```
 
-This will return an associative array [key => value], with the key being the dynamic property name
+This will return an associative array `[key => value]`, with the key being the dynamic property name
 and the value being the property value.
 
 If we know what property we want we can simply append the key (property name) to the function:
@@ -553,5 +554,6 @@ I've got an AI!
 ```
 
 Remember:
+
 - When using the `ExtensionTrait` the methods from `ExtensionBase` should be applied to the class.
 - When using the `ExtendableTrait` the methods from `Extendable` should be applied to the class.

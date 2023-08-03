@@ -127,7 +127,7 @@ Event | Description
 `ajaxDone` | triggered finally if the AJAX request was successful.
 `ajaxAlways` | triggered regardless if the AJAX request fails or was successful.
 
-## Usage examples
+## Event usage examples
 
 Executes JavaScript code when the `ajaxUpdate` event is triggered on an element.
 

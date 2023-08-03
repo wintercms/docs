@@ -10,14 +10,15 @@ The filesystem configuration file is located at `config/filesystems.php`. Within
 
 Of course, you may configure as many disks as you like, and may even have multiple disks that use the same driver.
 
-#### The local driver
+### The local driver
 
 When using the `local` driver, note that all file operations are relative to the `root` directory defined in your configuration file. By default, this value is set to the `storage/app` directory. Therefore, the following method would store a file in `storage/app/file.txt`:
 
 ```php
 Storage::disk('local')->put('file.txt', 'Contents');
 ```
-#### Other driver prerequisites
+
+### Other driver prerequisites
 
 Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](https://github.com/wintercms/wn-drivers-plugin).
 
@@ -35,6 +36,7 @@ Storage::put(
     file_get_contents(Request::file('avatar')->getRealPath())
 );
 ```
+
 When using multiple disks, you may access a particular disk using the `disk` method on the `Storage` facade. Of course, you may continue to chain methods to execute methods on the disk:
 
 ```php
@@ -57,7 +59,7 @@ The `exists` method may be used to determine if a given file exists on the disk:
 $exists = Storage::disk('s3')->exists('file.jpg');
 ```
 
-#### File meta information
+### File meta information
 
 The `size` method may be used to get the size of the file in bytes:
 
@@ -93,7 +95,7 @@ The `move` method may be used to move an existing file to a new location:
 Storage::move('old/file1.jpg', 'new/file1.jpg');
 ```
 
-#### Prepending / appending to files
+### Prepending / appending to files
 
 The `prepend` and `append` methods allow you to easily insert content at the beginning or end of a file:
 
@@ -113,9 +115,7 @@ Storage::delete('file.jpg');
 Storage::delete(['file1.jpg', 'file2.jpg']);
 ```
 
-### Directories
-
-#### Get all files within a directory
+### Get all files within a directory
 
 The `files` method returns an array of all of the files in a given directory. If you would like to retrieve a list of all files within a given directory including all sub-directories, you may use the `allFiles` method:
 
@@ -125,7 +125,7 @@ $files = Storage::files($directory);
 $files = Storage::allFiles($directory);
 ```
 
-#### Get all directories within a directory
+### Get all directories within a directory
 
 The `directories` method returns an array of all the directories within a given directory. Additionally, you may use the `allDirectories` method to get a list of all directories within a given directory and all of its sub-directories:
 
@@ -136,7 +136,7 @@ $directories = Storage::directories($directory);
 $directories = Storage::allDirectories($directory);
 ```
 
-#### Create a directory
+### Create a directory
 
 The `makeDirectory` method will create the given directory, including any needed sub-directories:
 
@@ -144,7 +144,7 @@ The `makeDirectory` method will create the given directory, including any needed
 Storage::makeDirectory($directory);
 ```
 
-#### Delete a directory
+### Delete a directory
 
 Finally, the `deleteDirectory` may be used to remove a directory, including all of its files, from the disk:
 

@@ -149,11 +149,11 @@ The following steps are undertaken by the maintainers for release:
 
 The following protocols are in place for all first-party plugins published in the Winter CMS organisation. Note that a lot of the processes are the same as for Winter CMS, so this section defines any *differences* in the processes to be used.
 
-#### Main Branches
+#### Main Branches for plugins
 
 All first-party plugin repositories contain a `main` branch which is the combined efforts of all contributions to the plugin. Maintainers may commit changes to the `main` branch on an as-needed basis, but as with the Winter CMS repositories, it is still preferred that substantial changes or new or changed features be done in pull requests.
 
-#### Milestones
+#### Plugin Milestones
 
 First-party plugins, like the Winter CMS repositories, use milestones to track which changes are implemented with which version of the plugin. Milestones in the first-party plugins use a more "semantic" versioning and so have major, minor and point releases in the format of `major.minor.point`. For example:
 
@@ -193,7 +193,6 @@ Before a new version is released, the maintainer should ensure that all tasks as
 - https://github.com/wintercms/wn-pages-plugin/blob/main/updates/version.yaml
 
 If a migration is also included with this version, it should be appended as an array item below the update. See [the documentation](../plugin/updates#plugin-version-file) for examples of how the version update entries should be formatted.
-
 
 Once this commit is done, the milestone for this version should be closed and a new Release should be created for plugin in GitHub. A release provides more detailed release notes for the version, and links back to the milestone and related PRs to give users of the plugin more context on changes to the plugin between version. The release also tags the repository with the version. The release name should be in the format `v<major>.<minor>.<point>` and the details of the release notes should contain the following, in order and if applicable:
 

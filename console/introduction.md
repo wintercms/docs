@@ -443,7 +443,7 @@ Will output
 
 ## Registering commands
 
-#### Registering a console command
+### Registering a console command
 
 Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [Plugin registration file](../plugin/registration#supported-methods) using  the `registerConsoleCommand` helper method.
 
@@ -463,7 +463,7 @@ Alternatively, plugins can supply a file named **init.php** in the plugin direct
 Artisan::add(new MyAuthor\MyPlugin\Console\MyCommand);
 ```
 
-#### Registering a command in the application container
+### Registering a command in the application container
 
 If your command is registered in the [application container](../services/application#application-container), you may use the `Artisan::resolve` method to make it available to Artisan:
 
@@ -471,7 +471,7 @@ If your command is registered in the [application container](../services/applica
 Artisan::resolve('myauthor.mycommand');
 ```
 
-#### Registering commands in a service provider
+### Registering commands in a service provider
 
 If you need to register commands from within a [service provider](../services/application#service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](../services/application#application-container) binding for the command:
 

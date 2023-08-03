@@ -16,7 +16,7 @@ $users = Db::table('users')->paginate(15);
 
 > **NOTE:** Currently, pagination operations that use a `groupBy` statement cannot be executed efficiently. If you need to use a `groupBy` with a paginated result set, it is recommended that you query the database and create a paginator manually.
 
-#### Simple pagination
+### Simple pagination
 
 If you only need to display simple "Next" and "Previous" links in your pagination view, you have the option of using the `simplePaginate` method to perform a more efficient query. This is very useful for large datasets if you do not need to display a link for each page number when rendering your view:
 
@@ -80,7 +80,7 @@ The `render` method will render the links to the rest of the pages in the result
 
 > **NOTE:** When calling the `render` method from a Twig template, be sure to use the `|raw` filter so the HTML links are not escaped.
 
-#### Customizing the paginator URI
+### Customizing the paginator URI
 
 The `setPath` method allows you to customize the URI used by the paginator when generating links. For example, if you want the paginator to generate links like `https://example.com/custom/url?page=N`, you should pass `custom/url` to the `setPath` method:
 
@@ -89,7 +89,7 @@ $users = User::paginate(15);
 $users->setPath('custom/url');
 ```
 
-#### Appending to pagination links
+### Appending to pagination links
 
 You may add to the query string of pagination links using the `appends` method. For example, to append `&sort=votes` to each pagination link, you should make the following call to `appends`:
 
@@ -103,7 +103,7 @@ If you wish to append a "hash fragment" to the paginator's URLs, you may use the
 {{ users.fragment('foo').render|raw }}
 ```
 
-#### Additional helper methods
+### Additional helper methods
 
 You may also access additional pagination information via the following methods on paginator instances:
 
@@ -130,8 +130,6 @@ Route::get('users', function () {
 ```
 
 The JSON from the paginator will include meta information such as `total`, `current_page`, `last_page`, and more. The actual result objects will be available via the `data` key in the JSON array. Here is an example of the JSON created by returning a paginator instance from a route:
-
-#### Example Paginator JSON
 
 ```json
 {

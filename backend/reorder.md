@@ -88,7 +88,6 @@ in
 1. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_container.htm`
 2. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_records.htm`
 
-
 ## Extending the model query
 
 The lookup query for the list [database model](../database/model) can be extended by overriding the `reorderExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:

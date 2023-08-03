@@ -30,7 +30,6 @@ Attribute | Description
 `data-browser-validate` | Specifies if the in-built browser validation will be triggered. If present, the request will be cancelled if the browser validation fails.
 `data-track-input` | Specifies if an input will trigger an AJAX request anytime the input changes. An optional number can be specified in this attribute, which represents the amount of milliseconds between any change and the AJAX request triggering.
 
-
 When the `data-request` attribute is specified for an element, the element triggers an AJAX request when a user interacts with it. Depending on the type of element, the request is triggered on the following events:
 
 Element | Event

@@ -1,16 +1,5 @@
 # Queue Service
 
-- [Configuration](#configuration)
-- [Basic usage](#basic-usage)
-- [Queueing closures](#queueing-closures)
-- [Running the queue worker](#running-the-queue-worker)
-- [Daemon queue worker](#daemon-queue-worker)
-- [Using a system daemon](#using-a-system-daemon)
-  - [Systemd](#systemd-daemon)
-  - [Supervisor](#supervisor-daemon)
-- [Push queues](#push-queues)
-- [Failed jobs](#failed-jobs)
-
 ## Configuration
 
 Queues allow you to defer the processing of a time consuming task, such as sending an e-mail, until a later time, thus drastically speeding up the web requests to your application.
@@ -163,7 +152,7 @@ Queue::push(function () use ($id, $jobId) {
 
 > **NOTE:** Instead of making objects available to queued Closures via the `use` directive, consider passing primary keys and re-pulling the associated models from within your queue job. This often avoids unexpected serialization behavior.
 
-When using Iron.io [push queues](#push-queues), you should take extra precaution queueing Closures. The end-point that receives your queue messages should check for a token to verify that the request is actually from Iron.io. For example, your push queue end-point should be something like: `https://example.com/queue/receive?token=SecretToken`. You may then check the value of the secret token in your application before marshalling the queue request.
+When using Iron.io [push queues](#pushing-a-job-onto-the-queue), you should take extra precaution queueing Closures. The end-point that receives your queue messages should check for a token to verify that the request is actually from Iron.io. For example, your push queue end-point should be something like: `https://example.com/queue/receive?token=SecretToken`. You may then check the value of the secret token in your application before marshalling the queue request.
 
 ## Running the queue worker
 
@@ -175,7 +164,7 @@ To process new jobs as they are pushed onto the queue, run the `queue:work` comm
 php artisan queue:work
 ```
 
-Once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](#supervisor-configuration) to ensure that the queue worker does not stop running.
+Once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](#configuring-supervisor) to ensure that the queue worker does not stop running.
 
 Queue worker processes store the booted application state in memory. They will not recognize changes in your code after they have been started. When deploying changes, restart queue workers.
 

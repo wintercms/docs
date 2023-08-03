@@ -34,7 +34,7 @@ class User extends Model
 }
 ```
 
-The defined attributes will be purged when the model is saved, before the [model events](#model-events) are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
+The defined attributes will be purged when the model is saved, before the [model events](model#events) are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
 
 ```php
 return $user->getOriginalPurgeValue('password_confirmation');
@@ -56,7 +56,7 @@ class User extends Model
 }
 ```
 
-> **NOTE:** Encrypted attributes will be serialized and unserialized as a part of the encryption / decryption process. Do not make an attribute that is `encryptable` also [`jsonable`](model#standard-properties) at the same time as the `jsonable` process will attempt to decode a value that has already been unserialized by the encryptor.
+> **NOTE:** Encrypted attributes will be serialized and unserialized as a part of the encryption / decryption process. Do not make an attribute that is `encryptable` also [`jsonable`](model#supported-properties) at the same time as the `jsonable` process will attempt to decode a value that has already been unserialized by the encryptor.
 
 ## Sluggable
 
@@ -287,7 +287,7 @@ const NEST_RIGHT = 'my_right_column';
 const NEST_DEPTH = 'my_depth_column';
 ```
 
-### General access methods:
+### General access methods
 
 - `$model->getRoot();` - Returns the highest parent of a node.
 - `$model->getRootList();` - Returns an indented array of key and value columns from root.
@@ -301,7 +301,7 @@ const NEST_DEPTH = 'my_depth_column';
 - `$model->getDepth();` - Returns the depth of a current node.
 - `$model->getChildCount();` - Returns number of all children.
 
-### Query builder methods:
+### Query builder methods
 
 - `$query->withoutNode();` - Filters a specific node from the results.
 - `$query->withoutSelf();` - Filters current node from the results.
@@ -315,14 +315,14 @@ const NEST_DEPTH = 'my_depth_column';
 - `$query->getNested();` - Returns an eager loaded collection of results.
 - `$query->listsNested();` - Returns an indented array of key and value columns.
 
-### Flat result access methods:
+### Flat result access methods
 
 - `$model->getAll();` - Returns everything in correct order.
 - `$model->getAllRoot();` - Returns all root nodes.
 - `$model->getAllChildren();` - Returns all children down the tree.
 - `$model->getAllChildrenAndSelf();` - Returns all children and self.
 
-### Eager loaded access methods:
+### Eager loaded access methods
 
 - `$model->getEagerRoot();` - Returns a list of all root nodes, with ->children eager loaded.
 - `$model->getEagerChildren();` - Returns direct child nodes, with ->children eager loaded.
@@ -365,7 +365,7 @@ $child2->makeChildOf($root);
 
 ### Deleting nodes
 
-When a node is deleted with the `delete` method, all descendants of the node will also be deleted. Note that the delete [model events](../database/model#model-events) will not be fired for the child models.
+When a node is deleted with the `delete` method, all descendants of the node will also be deleted. Note that the delete [model events](model#events) will not be fired for the child models.
 
 ```php
 $child1->delete();
@@ -609,7 +609,7 @@ $user->posts()->forceDelete();
 
 ### Soft deleting relations
 
-When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](relations#detailed-definitions). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
 
 ```php
 class User extends Model
@@ -634,7 +634,7 @@ $user->restore();
 ### Soft Delete with Sluggable trait
 
 By default, Sluggable trait will ignore soft deleted models when the slug is generated.
-In order to make the model restoration less painful [checkout the Sluggable section](#sluggable-with-softdelete-trait).
+In order to make the model restoration less painful [checkout the Sluggable section](#sluggable-with-the-softdelete-trait).
 
 ## Nullable
 

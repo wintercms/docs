@@ -30,7 +30,7 @@ When you refer a component, it automatically creates a page variable that matche
 
 > **NOTE:** If two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
 
-## Components aliases
+## Component aliases
 
 If there are two plugins that register components with the same name, you can attach a component by using its fully qualified class name and assigning it an *alias*:
 
@@ -103,6 +103,7 @@ The page, the component belongs to, should have a corresponding [URL parameter](
 ```ini
 url = "/todo/:maxItems"
 ```
+
 In the Winter backend you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
 
 ## Passing variables to components

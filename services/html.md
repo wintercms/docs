@@ -50,7 +50,7 @@ You may also open forms that point to handler methods in your page or components
 Form::open(['request' => 'onSave'])
 ```
 
-#### AJAX enabled forms
+### AJAX enabled forms
 
 Likewise, AJAX enabled forms can be opened using the `Form::ajax` method where the first argument is the handler method name:
 
@@ -78,7 +78,7 @@ Form::ajax('onSave', ['update' => [
 
 ## Form tokens
 
-#### CSRF protection
+### CSRF protection
 
 If you have [protection enabled](../setup/configuration#csrf-protection), using the `Form::open` method with `POST`, `PUT` or `DELETE` will automatically add a CSRF token to your forms as a hidden field. Alternatively, if you wish to generate the HTML for the hidden CSRF field, you may use the `token` method:
 
@@ -86,7 +86,7 @@ If you have [protection enabled](../setup/configuration#csrf-protection), using 
 <?= Form::token() ?>
 ```
 
-#### Deferred binding session key
+### Deferred binding session key
 
 A session key used for [deferred binding](../database/relations#deferred-binding) will be added to every form as a hidden field. If you want to generate this field manually, you may use the `sessionKey` method:
 
@@ -96,7 +96,7 @@ A session key used for [deferred binding](../database/relations#deferred-binding
 
 ## Form model binding
 
-#### Opening a model form
+### Opening a model form
 
 You may want to populate a form based on the contents of a model. To do so, use the `Form::model` method:
 
@@ -127,13 +127,13 @@ You may pass a default value as the second argument:
 
 ## Labels
 
-#### Generating a label element
+### Generating a label element
 
 ```php
 <?= Form::label('email', 'E-Mail Address') ?>
 ```
 
-#### Specifying extra HTML attributes
+### Specifying extra HTML attributes
 
 ```php
 <?= Form::label('email', 'E-Mail Address', ['class' => 'awesome']) ?>
@@ -143,13 +143,13 @@ You may pass a default value as the second argument:
 
 ## Text fields
 
-#### Generating A Text Input
+### Generating A Text Input
 
 ```php
 <?= Form::text('username') ?>
 ```
 
-#### Specifying a default value
+### Specifying a default value
 
 ```php
 <?= Form::text('email', 'emailaddress@example.com') ?>
@@ -157,13 +157,13 @@ You may pass a default value as the second argument:
 
 > **NOTE:** The *hidden* and *textarea* methods have the same signature as the *text* method.
 
-#### Generating a password input
+### Generating a password input
 
 ```php
 <?= Form::password('password') ?>
 ```
 
-#### Generating other inputs
+### Generating other inputs
 
 ```php
 <?= Form::email($name, $value = null, $attributes = []) ?>
@@ -172,7 +172,7 @@ You may pass a default value as the second argument:
 
 ## Checkboxes and radio buttons
 
-#### Generating a checkbox or radio input
+### Generating a checkbox or radio input
 
 ```php
 <?= Form::checkbox('name', 'value') ?>
@@ -180,7 +180,7 @@ You may pass a default value as the second argument:
 <?= Form::radio('name', 'value') ?>
 ```
 
-#### Generating a checkbox or radio input that is checked
+### Generating a checkbox or radio input that is checked
 
 ```php
 <?= Form::checkbox('name', 'value', true) ?>
@@ -190,7 +190,7 @@ You may pass a default value as the second argument:
 
 ## Number
 
-#### Generating a number input
+### Generating a number input
 
 ```php
 <?= Form::number('name', 'value') ?>
@@ -198,7 +198,7 @@ You may pass a default value as the second argument:
 
 ## File input
 
-#### Generating a file input
+### Generating a file input
 
 ```php
 <?= Form::file('image') ?>
@@ -208,19 +208,19 @@ You may pass a default value as the second argument:
 
 ## Drop-down lists
 
-#### Generating a drop-down list
+### Generating a drop-down list
 
 ```php
 <?= Form::select('size', ['L' => 'Large', 'S' => 'Small']) ?>
 ```
 
-#### Generating a drop-down list with selected default
+### Generating a drop-down list with selected default
 
 ```php
 <?= Form::select('size', ['L' => 'Large', 'S' => 'Small'], 'S') ?>
 ```
 
-#### Generating a grouped list
+### Generating a grouped list
 
 ```php
 <?= Form::select('animal', [
@@ -229,25 +229,25 @@ You may pass a default value as the second argument:
 ]) ?>
 ```
 
-#### Generating a drop-down list with a range
+### Generating a drop-down list with a range
 
 ```php
 <?= Form::selectRange('number', 10, 20) ?>
 ```
 
-#### Generating a drop-down list with a range, selected value and blank option
+### Generating a drop-down list with a range, selected value and blank option
 
 ```php
 <?= Form::selectRange('number', 10, 20, 2, ['emptyOption' => 'Choose...']) ?>
 ```
 
-#### Generating a list with month names
+### Generating a list with month names
 
 ```php
 <?= Form::selectMonth('month') ?>
 ```
 
-#### Generating a list with month names, selected value and blank option
+### Generating a list with month names, selected value and blank option
 
 ```php
 <?= Form::selectMonth('month', 2, ['emptyOption' => 'Choose month...']) ?>
@@ -255,7 +255,7 @@ You may pass a default value as the second argument:
 
 ## Buttons
 
-#### Generating a submit button
+### Generating a submit button
 
 ```php
 <?= Form::submit('Click Me!') ?>
@@ -265,7 +265,7 @@ You may pass a default value as the second argument:
 
 ## Custom macros
 
-#### Registering a form macro
+### Registering a form macro
 
 It's easy to define your own custom Form class helpers called "macros". Here's how it works. First, simply register the macro with a given name and a Closure:
 
@@ -277,7 +277,7 @@ Form::macro('myField', function() {
 
 Now you can call your macro using its name:
 
-#### Calling A Custom Form Macro
+### Calling A Custom Form Macro
 
 ```php
 <?= Form::myField() ?>

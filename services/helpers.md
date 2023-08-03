@@ -82,7 +82,7 @@ SVG
 
 <div class="columned-list">
 
-- [extract](#svg::extract)
+- [extract](#svgextract)
 
 </div>
 
@@ -111,7 +111,7 @@ Miscellaneous
 
 ## Arrays
 
-#### `array_add()`
+### `array_add()`
 
 The `array_add` function adds a given key / value pair to the array if the given key doesn't already exist in the array:
 
@@ -121,7 +121,7 @@ $array = array_add(['name' => 'Desk'], 'price', 100);
 // ['name' => 'Desk', 'price' => 100]
 ```
 
-#### `array_divide()`
+### `array_divide()`
 
 The `array_divide` function returns two arrays, one containing the keys, and the other containing the values of the original array:
 
@@ -133,7 +133,7 @@ list($keys, $values) = array_divide(['name' => 'Desk']);
 // $values: ['Desk']
 ```
 
-#### `array_dot()`
+### `array_dot()`
 
 The `array_dot` function flattens a multi-dimensional array into a single level array that uses "dot" notation to indicate depth:
 
@@ -143,7 +143,7 @@ $array = array_dot(['foo' => ['bar' => 'baz']]);
 // ['foo.bar' => 'baz'];
 ```
 
-#### `array_undot()`
+### `array_undot()`
 
 The `array_undot` function is the counter-part to the `array_dot` method. It will convert a dot-notated array into a standard associative array:
 
@@ -159,7 +159,7 @@ $array = array_undot([
 // ]
 ```
 
-#### `array_except()`
+### `array_except()`
 
 The `array_except` method removes the given key / value pairs from the array:
 
@@ -171,7 +171,7 @@ $array = array_except($array, ['price']);
 // ['name' => 'Desk']
 ```
 
-#### `array_first()`
+### `array_first()`
 
 The `array_first` method returns the first element of an array passing a given truth test:
 
@@ -191,7 +191,7 @@ A default value may also be passed as the third parameter to the method. This va
 $value = array_first($array, $callback, $default);
 ```
 
-#### `array_flatten()`
+### `array_flatten()`
 
 The `array_flatten` method will flatten a multi-dimensional array into a single level.
 
@@ -203,7 +203,7 @@ $array = array_flatten($array);
 // ['Joe', 'PHP', 'Ruby'];
 ```
 
-#### `array_forget()`
+### `array_forget()`
 
 The `array_forget` method removes a given key / value pair from a deeply nested array using "dot" notation:
 
@@ -215,7 +215,7 @@ array_forget($array, 'products.desk');
 // ['products' => []]
 ```
 
-#### `array_get()`
+### `array_get()`
 
 The `array_get` method retrieves a value from a deeply nested array using "dot" notation:
 
@@ -233,7 +233,7 @@ The `array_get` function also accepts a default value, which will be returned if
 $value = array_get($array, 'names.john', 'default');
 ```
 
-#### `array_only()`
+### `array_only()`
 
 The `array_only` method will return only the specified key / value pairs from the given array:
 
@@ -245,7 +245,7 @@ $array = array_only($array, ['name', 'price']);
 // ['name' => 'Desk', 'price' => 100]
 ```
 
-#### `array_pluck()`
+### `array_pluck()`
 
 The `array_pluck` method will pluck a list of the given key / value pairs from the array:
 
@@ -260,7 +260,7 @@ $array = array_pluck($array, 'developer.name');
 // ['Brian', 'Stewie'];
 ```
 
-#### `array_pull()`
+### `array_pull()`
 
 The `array_pull` method returns and removes a key / value pair from the array:
 
@@ -274,7 +274,7 @@ $name = array_pull($array, 'name');
 // $array: ['price' => 100]
 ```
 
-#### `array_set()`
+### `array_set()`
 
 The `array_set` method sets a value within a deeply nested array using "dot" notation:
 
@@ -286,7 +286,7 @@ array_set($array, 'products.desk.price', 200);
 // ['products' => ['desk' => ['price' => 200]]]
 ```
 
-#### `array_sort()`
+### `array_sort()`
 
 The `array_sort` method sorts the array by the results of the given Closure:
 
@@ -308,7 +308,7 @@ $array = array_values(array_sort($array, function ($value) {
 */
 ```
 
-#### `array_sort_recursive()`
+### `array_sort_recursive()`
 
 The `array_sort_recursive` function recursively sorts the array using the `sort` function:
 
@@ -344,7 +344,7 @@ $array = array_sort_recursive($array);
 */
 ```
 
-#### `array_where()`
+### `array_where()`
 
 The `array_where` function filters the array using the given Closure:
 
@@ -358,7 +358,7 @@ $array = array_where($array, function ($value, $key) {
 // [1 => 200, 3 => 400]
 ```
 
-#### `head()`
+### `head()`
 
 The `head` function simply returns the first element in the given array:
 
@@ -370,7 +370,7 @@ $first = head($array);
 // 100
 ```
 
-#### `last()`
+### `last()`
 
 The `last` function returns the last element in the given array:
 
@@ -384,7 +384,7 @@ $last = last($array);
 
 ## Paths
 
-#### Path Symbols
+### Path Symbols
 
 Path prefix symbols can be used to create a dynamic path. For example, a path beginning with `~/` will create a path relative to the application:
 
@@ -400,7 +400,7 @@ Symbol | Description
 `$` | Relative to the plugins directory
 `#` | Relative to the themes directory
 
-#### `app_path()`
+### `app_path()`
 
 The `app_path` function returns the fully qualified path to the `app` directory:
 
@@ -414,7 +414,7 @@ You may also use the `app_path` function to generate a fully qualified path to a
 $path = app_path('Http/Controllers/Controller.php');
 ```
 
-#### `base_path()`
+### `base_path()`
 
 The `base_path` function returns the fully qualified path to the project root:
 
@@ -428,7 +428,7 @@ You may also use the `base_path` function to generate a fully qualified path to 
 $path = base_path('vendor/bin');
 ```
 
-#### `config_path()`
+### `config_path()`
 
 The `config_path` function returns the fully qualified path to the application configuration directory:
 
@@ -442,7 +442,7 @@ You may also use the `config_path` function to generate a fully qualified path t
 $path = config_path('dev/cms.php');
 ```
 
-#### `database_path()`
+### `database_path()`
 
 The `database_path` function returns the fully qualified path to the application's database directory:
 
@@ -450,7 +450,7 @@ The `database_path` function returns the fully qualified path to the application
 $path = database_path();
 ```
 
-#### `media_path()`
+### `media_path()`
 
 The `media_path` function returns the fully qualified path to the application media directory:
 
@@ -464,7 +464,7 @@ You may also use the `media_path` function to generate a fully qualified path to
 $path = media_path('images/myimage.png');
 ```
 
-#### `plugins_path()`
+### `plugins_path()`
 
 The `plugins_path` function returns the fully qualified path to the application plugin directory:
 
@@ -478,7 +478,7 @@ You may also use the `plugins_path` function to generate a fully qualified path 
 $path = plugins_path('author/plugin/routes.php');
 ```
 
-#### `public_path()`
+### `public_path()`
 
 The `public_path` function returns the fully qualified path to the `public` directory:
 
@@ -486,7 +486,7 @@ The `public_path` function returns the fully qualified path to the `public` dire
 $path = public_path();
 ```
 
-#### `storage_path()`
+### `storage_path()`
 
 The `storage_path` function returns the fully qualified path to the `storage` directory:
 
@@ -500,7 +500,7 @@ You may also use the `storage_path` function to generate a fully qualified path 
 $path = storage_path('app/file.txt');
 ```
 
-#### `temp_path()`
+### `temp_path()`
 
 The `temp_path` function returns the fully qualified path to a writable directory for temporary files:
 
@@ -514,7 +514,7 @@ You may also use the `temp_path` function to generate a fully qualified path to 
 $path = temp_path('app/file.txt');
 ```
 
-#### `themes_path()`
+### `themes_path()`
 
 The `themes_path` function returns the fully qualified path to the `themes` directory:
 
@@ -528,7 +528,7 @@ You may also use the `themes_path` function to generate a fully qualified path t
 $path = themes_path('mytheme/file.txt');
 ```
 
-#### `uploads_path()`
+### `uploads_path()`
 
 The `uploads_path` function returns the fully qualified path to the application uploads directory:
 
@@ -544,7 +544,7 @@ $path = uploads_path('public/file.txt');
 
 ## Strings
 
-#### `camel_case()`
+### `camel_case()`
 
 The `camel_case` function converts the given string to `camelCase`:
 
@@ -554,7 +554,7 @@ $camel = camel_case('foo_bar');
 // fooBar
 ```
 
-#### `class_basename()`
+### `class_basename()`
 
 The `class_basename` returns the class name of the given class with the class' namespace removed:
 
@@ -564,7 +564,7 @@ $class = class_basename('Foo\Bar\Baz');
 // Baz
 ```
 
-#### `e()`
+### `e()`
 
 The `e` function runs `htmlentities` over the given string:
 
@@ -574,7 +574,7 @@ echo e('<html>foo</html>');
 // &lt;html&gt;foo&lt;/html&gt;
 ```
 
-#### `ends_with()`
+### `ends_with()`
 
 The `ends_with` function determines if the given string ends with the given value:
 
@@ -584,7 +584,7 @@ $value = ends_with('This is my name', 'name');
 // true
 ```
 
-#### `snake_case()`
+### `snake_case()`
 
 The `snake_case` function converts the given string to `snake_case`:
 
@@ -594,7 +594,7 @@ $snake = snake_case('fooBar');
 // foo_bar
 ```
 
-#### `str_limit()`
+### `str_limit()`
 
 The `str_limit` function limits the number of characters in a string. The function accepts a string as its first argument and the maximum number of resulting characters as its second argument:
 
@@ -604,7 +604,7 @@ $value = str_limit('The CMS platform that gets back to basics.', 6);
 // The CMS...
 ```
 
-#### `starts_with()`
+### `starts_with()`
 
 The `starts_with` function determines if the given string begins with the given value:
 
@@ -614,7 +614,7 @@ $value = starts_with('The cow goes moo', 'The');
 // true
 ```
 
-#### `str_contains()`
+### `str_contains()`
 
 The `str_contains` function determines if the given string contains the given value:
 
@@ -624,7 +624,7 @@ $value = str_contains('The bird goes tweet', 'bird');
 // true
 ```
 
-#### `str_finish()`
+### `str_finish()`
 
 The `str_finish` function adds a single instance of the given value to a string:
 
@@ -634,7 +634,7 @@ $string = str_finish('this/string', '/');
 // this/string/
 ```
 
-#### `str_is()`
+### `str_is()`
 
 The `str_is` function determines if a given string matches a given pattern. Asterisks may be used to indicate wildcards:
 
@@ -648,7 +648,7 @@ $value = str_is('baz*', 'foobar');
 // false
 ```
 
-#### `str_plural()`
+### `str_plural()`
 
 The `str_plural` function converts a string to its plural form. This function currently only supports the English language:
 
@@ -662,7 +662,7 @@ $plural = str_plural('child');
 // children
 ```
 
-#### `str_random()`
+### `str_random()`
 
 The `str_random` function generates a random string of the specified length:
 
@@ -670,7 +670,7 @@ The `str_random` function generates a random string of the specified length:
 $string = str_random(40);
 ```
 
-#### `str_singular()`
+### `str_singular()`
 
 The `str_singular` function converts a string to its singular form. This function currently only supports the English language:
 
@@ -680,7 +680,7 @@ $singular = str_singular('cars');
 // car
 ```
 
-#### `str_slug()`
+### `str_slug()`
 
 The `str_slug` function generates a URL friendly "slug" from the given string:
 
@@ -690,7 +690,7 @@ $title = str_slug("Winter CMS", "-");
 // winter-cms
 ```
 
-#### `studly_case()`
+### `studly_case()`
 
 The `studly_case` function converts the given string to `StudlyCase`:
 
@@ -700,7 +700,7 @@ $value = studly_case('foo_bar');
 // FooBar
 ```
 
-#### `trans()`
+### `trans()`
 
 The `trans` function translates the given language line using your [localization files](../plugin/localization):
 
@@ -708,7 +708,7 @@ The `trans` function translates the given language line using your [localization
 echo trans('validation.required'):
 ```
 
-#### `trans_choice()`
+### `trans_choice()`
 
 The `trans_choice` function translates the given language line with inflection:
 
@@ -721,7 +721,7 @@ $value = trans_choice('foo.bar', $count);
 Winter includes a simple SVG utility that allows you to extract sanitized SVG markup from a given path. This can be
 useful for sanitization, or for using SVG markup directly in your themes.
 
-#### `Svg::extract()`
+### `Svg::extract()`
 
 The `extract` method allows you to extract the sanitized SVG markup in a given path. Sanitization prevents the use of
 JavaScript, remote sources and CSS imports, stopping common attack vectors within SVG code.
@@ -738,7 +738,7 @@ $unminifiedSvg = Svg::extract('/path/to/image.svg', false);
 
 ## Miscellaneous
 
-#### `asset()`
+### `asset()`
 
 Generate a URL for an asset using the current scheme of the request (HTTP or HTTPS):
 
@@ -754,7 +754,7 @@ You can configure the asset URL host by setting the `ASSET_URL` variable in your
 $url = asset('img/photo.jpg'); // http://example.com/assets/img/photo.jpg
 ```
 
-#### `config()`
+### `config()`
 
 The `config` function gets the value of a configuration variable. The configuration values may be accessed using "dot" syntax, which includes the name of the file and the option you wish to access. A default value may be specified and is returned if the configuration option does not exist:
 
@@ -770,7 +770,7 @@ The `config` helper may also be used to set configuration variables at runtime b
 config(['app.debug' => true]);
 ```
 
-#### `dd()`
+### `dd()`
 
 The `dd` function dumps the given variable and ends execution of the script:
 
@@ -778,7 +778,7 @@ The `dd` function dumps the given variable and ends execution of the script:
 dd($value);
 ```
 
-#### `env()`
+### `env()`
 
 The `env` function gets the value of an environment variable or returns a default value:
 
@@ -789,7 +789,7 @@ $env = env('APP_ENV');
 $env = env('APP_ENV', 'production');
 ```
 
-#### `get()`
+### `get()`
 
 The `get` function obtains an input item from the request, restricted to GET variables only:
 
@@ -797,7 +797,7 @@ The `get` function obtains an input item from the request, restricted to GET var
 $value = get('key', $default = null)
 ```
 
-#### `input()`
+### `input()`
 
 The `input` function obtains an input item from the request:
 
@@ -805,7 +805,7 @@ The `input` function obtains an input item from the request:
 $value = input('key', $default = null)
 ```
 
-#### `post()`
+### `post()`
 
 The `post` function obtains an input item from the request, restricted to POST variables only:
 
@@ -813,7 +813,7 @@ The `post` function obtains an input item from the request, restricted to POST v
 $value = post('key', $default = null)
 ```
 
-#### `redirect()`
+### `redirect()`
 
 The `redirect` function return an instance of the redirector to do [redirect responses](../services/response-view#redirects):
 
@@ -821,7 +821,7 @@ The `redirect` function return an instance of the redirector to do [redirect res
 return redirect('/home');
 ```
 
-#### `request()`
+### `request()`
 
 The `request` function returns the current [request instance](../services/request-input):
 
@@ -829,7 +829,7 @@ The `request` function returns the current [request instance](../services/reques
 $referer = request()->header('referer');
 ```
 
-#### `response()`
+### `response()`
 
 The `response` function creates a [response](../services/response-view) instance or obtains an instance of the response factory:
 
@@ -839,7 +839,7 @@ return response('Hello World', 200, $headers);
 return response()->json(['foo' => 'bar'], 200, $headers);
 ```
 
-#### `route()`
+### `route()`
 
 The `route` function generates a URL for the given [named route](../services/router):
 
@@ -853,7 +853,7 @@ If the route accepts parameters, you may pass them as the second argument to the
 $url = route('routeName', ['id' => 1]);
 ```
 
-#### `secure_asset()`
+### `secure_asset()`
 
 Generate a URL for an asset using HTTPS:
 
@@ -861,7 +861,7 @@ Generate a URL for an asset using HTTPS:
 echo secure_asset('foo/bar.zip', $title, $attributes = []);
 ```
 
-#### `trace_log()`
+### `trace_log()`
 
 The `trace_log` function writes a trace message to the log file.
 
@@ -885,7 +885,7 @@ You may also pass multiple arguments to trace multiple messages:
 trace_log($value1, $value2, $exception, '...');
 ```
 
-#### `trace_sql()`
+### `trace_sql()`
 
 The `trace_sql` function enables database logging and begins to monitor all SQL output.
 
@@ -897,7 +897,7 @@ Db::table('users')->count();
 // select count(*) as aggregate from users
 ```
 
-#### `url()`
+### `url()`
 
 The `url` function generates a fully qualified URL to the given path:
 

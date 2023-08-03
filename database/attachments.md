@@ -118,7 +118,7 @@ To output the file contents directly, use the `output` method, this will include
 echo $model->avatar->output();
 ```
 
-You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter. Read more about these parameters on the [Image Resizing](../services/image-resizing#resize-parameters) page.
+You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter. Read more about these parameters on the [Image Resizing](../services/image-resizing#available-parameters) page.
 
 ### Usage example
 

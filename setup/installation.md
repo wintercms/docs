@@ -22,7 +22,7 @@ Winter CMS has some server requirements for web hosting:
 
 We also recommend the installation of the PDO SQLite extension, regardless of your database type, as some functions in Winter CMS may benefit from being able to use temporary SQLite databases.
 
-### Supported Databases:
+### Supported Databases
 
 - MariaDB 10.2+ ([Version Policy](https://mariadb.org/about/#maintenance-policy))
 - MySQL 5.7+ ([Version Policy](https://en.wikipedia.org/wiki/MySQL#Release_history))
@@ -83,9 +83,9 @@ MyWinterFolder/
 
 Configuration files are stored in the `config` directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) to ensure that they are suitable for your circumstances.
 
-For example, in production environments you may wish to enable [CSRF protection](../setup/configuration#csrf-protection), while in development environments, you may want to enable [bleeding edge updates](../setup/configuration#edge-updates).
+For example, in production environments you may wish to enable [CSRF protection](../setup/configuration#csrf-protection), while in development environments, you may want to enable [bleeding edge updates](../setup/configuration#bleeding-edge-updates).
 
-In particular, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments. You may also want to use a [public folder](../setup/configuration#public-folder) for additional security.
+In particular, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments. You may also want to use a [public folder](../setup/configuration#using-a-public-folder) for additional security.
 
 ### Setting up the scheduler
 
