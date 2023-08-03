@@ -11,8 +11,8 @@ The branches of the docs follow the same branching structure that the [Winter CM
 Branch | Version
 ------ | -------
 [`1.2`](https://github.com/wintercms/docs/tree/1.2) | Winter v1.2.x
-[`1.1`](https://github.com/wintercms/docs/tree/1.2) | Winter v1.1.x
-[`1.0`](https://github.com/wintercms/docs/tree/1.2) | Winter v1.0.x
+[`1.1`](https://github.com/wintercms/docs/tree/1.1) | Winter v1.1.x
+[`1.0`](https://github.com/wintercms/docs/tree/1.0) | Winter v1.0.x
 
 ## Contributing to the docs
 
