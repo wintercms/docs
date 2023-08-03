@@ -146,6 +146,7 @@ plugins/
 ```
 
 Fields can be placed in three areas, the **outside area**, **primary tabs** or **secondary tabs**. The next example shows the typical contents of a form fields definition file.
+
 ```yaml
 # ===================================
 #  Form Field Definitions
