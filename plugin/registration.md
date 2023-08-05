@@ -411,7 +411,7 @@ public function boot()
 
 ## Elevated permissions
 
-By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the backend. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-and-initialization) for the plugin will not fire.
+By default plugins are restricted from running when operating in certain areas of the system. This is to prevent critical errors that may lock an administrator out from the backend. When these areas are accessed, the `boot` and `register` [initialization methods](#routing-and-initialization) will not fire for plugins that are not elevated.
 
 Request | Description
 ------------- | -------------
@@ -423,6 +423,8 @@ Request | Description
 `winter:update` | the CLI command that triggers the update process
 `winter:env` | the CLI command that converts configuration files to environment variables in a `.env` file
 `winter:version` | the CLI command that detects the version of Winter CMS that is installed
+
+When running any commands from the CLI while your application has a database connection configured but the `migrations` table is not yet present on it, the application will also be considered in a protected state.
 
 Define the `$elevated` property to grant elevated permissions for your plugin.
 
