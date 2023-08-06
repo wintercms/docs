@@ -340,7 +340,7 @@ The widget partial could contain any HTML markup you want to display in the widg
 </div>
 ```
 
-![image](https://raw.githubusercontent.com/wintercms/docs/main/images/traffic-sources.png)
+![image](https://raw.githubusercontent.com/wintercms/docs/develop/images/traffic-sources.png)
 
 Inside report widgets you can use any [charts or indicators](/docs/v1.2/ui/controls/form), lists or any other markup you wish. Remember that the report widgets extend the generic backend widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
 
@@ -390,7 +390,7 @@ Inside report widgets you can use any [charts or indicators](/docs/v1.2/ui/contr
 
 Report widgets may have properties that users can manage with the Inspector:
 
-![image](https://raw.githubusercontent.com/wintercms/docs/main/images/report-widget-inspector.png)
+![image](https://raw.githubusercontent.com/wintercms/docs/develop/images/report-widget-inspector.png)
 
 The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components#component-properties). Example:
 

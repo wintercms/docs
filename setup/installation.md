@@ -45,7 +45,7 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 5. In your web browser, navigate to the URL pointing to that folder, and include `/install.html` at the end of the URL.
 6. Follow the instructions given in the installer.
 
-![Winter CMS Installer](https://raw.githubusercontent.com/wintercms/docs/main/images/web-installer.jpg)
+![Winter CMS Installer](https://raw.githubusercontent.com/wintercms/docs/develop/images/web-installer.jpg)
 
 ### Troubleshooting a web-based installation
 
