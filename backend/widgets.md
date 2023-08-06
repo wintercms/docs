@@ -390,7 +390,7 @@ Inside report widgets you can use any [charts or indicators](/docs/v1.2/ui/contr
 
 Report widgets may have properties that users can manage with the Inspector:
 
-![image](https://github.com/wintercms/docs/blob/main/images/report-widget-inspector.png?raw=true)
+![image](https://raw.githubusercontent.com/wintercms/docs/main/images/report-widget-inspector.png)
 
 The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components#component-properties). Example:
 
