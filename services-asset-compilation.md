@@ -122,7 +122,7 @@ The following aliases are supported:
 
 Alias | Description
 ------------- | -------------
-`@jquery` | Reference to the jQuery library (v3.6.0) used in the backend. (JavaScript)
+`@jquery` | Reference to the jQuery library (v3.7.0) used in the backend. (JavaScript)
 `@framework` | AJAX framework extras, subsitute for `{% framework %}` tag. (JavaScript)
 `@framework.extras` | AJAX framework extras, subsitute for `{% framework extras %}` tag. (JavaScript, CSS)
 `@framework.extras.js` | AJAX framework extras, (JavaScript)
