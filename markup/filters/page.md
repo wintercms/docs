@@ -18,7 +18,7 @@ If your page resides in a subdirectory, you should also specify the subdirectory
 <a href="{{ 'about/contact-us' | page }}">Contact us</a>
 ```
 
-> **NOTE**: The [Themes documentation](/v1.2/docs/cms/themes#subdirectories) has more details on subdirectory usage.
+> **NOTE**: The [Themes documentation](../../docs/cms/themes#subdirectories) has more details on subdirectory usage.
 
 To access the link to a certain page from the PHP section, you can use `$this->pageUrl('page-name-without-extension')`:
 

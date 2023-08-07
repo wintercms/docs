@@ -16,4 +16,4 @@ The `| asset` filter generates a URL for an asset using the current scheme of th
 {{ asset('img/photo.jpg') }}
 ```
 
-See the [Asset helper method](/v1.2/docs/services/helpers#method-asset) for more information.
+See the [Asset helper method](../../docs/services/helpers#asset) for more information.

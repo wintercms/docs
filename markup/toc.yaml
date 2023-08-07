@@ -43,6 +43,7 @@ sections:
             filters/raw: "| raw"
             filters/resize: "| resize"
             filters/theme: "| theme"
+            filters/trans: "| trans"
 
     Functions:
         pages:

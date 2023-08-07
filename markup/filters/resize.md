@@ -20,8 +20,8 @@ This means that the actual work of resizing the image is delayed until the brows
 
 The filter accepts three parameters: `| resize(int $width [, int $height , array $options])`.
 
-See the [image resizing docs](/v1.2/docs/services/image-resizing#resize-parameters) for more information on the parameters.
+See the [image resizing docs](../../docs/services/image-resizing#available-parameters) for more information on the parameters.
 
-- [List of locations images can be resized from](/v1.2/docs/services/image-resizing#resize-sources)
+- [List of locations images can be resized from](../../docs/services/image-resizing#available-sources)
 
 > **NOTE:** The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.

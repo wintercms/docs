@@ -14,6 +14,6 @@ is the PHP equivalent of the following:
 
 > **NOTE**: Methods in *camelCase* should be converted to *snake_case*.
 
-See [Helpers#helpers-string](../services/helpers#helpers-strings) for a list of all available `str_*` helpers.
+See [Helpers#helpers-string](../../docs/services/helpers#strings) for a list of all available `str_*` helpers.
 
 See [Laravel Helpers](https://laravel.com/docs/9.x/helpers#strings-method-list) for a list of all available `str_*` helpers that come from Laravel. Any helper that matches `Str::$camelCase` is available in Twig as `str_$snake_case` with the same parameters

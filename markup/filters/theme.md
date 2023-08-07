@@ -18,7 +18,7 @@ If the website address is `https://wintercms.com` and the active theme is called
 <script type="text/javascript" src="https://https://wintercms.com/themes/website/assets/js/menu.js"></script>
 ```
 
-The filter can also be used to interact with the [Asset Compiler](/v1.2/docs/services/asset-compilation) by passing an array of files which can be used for asset compilation or combination.
+The filter can also be used to interact with the [Asset Compiler](../../docs/services/asset-compilation) by passing an array of files which can be used for asset compilation or combination.
 
 ```twig
 <link href="{{ [

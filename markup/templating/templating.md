@@ -1,6 +1,6 @@
 # Templating
 
-Winter extends the [Twig template language](https://twig.symfony.com/doc/2.x/) with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
+Winter extends the [Twig template language](https://twig.symfony.com/doc/3.x/) with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
 
 ## Variables
 
@@ -105,5 +105,5 @@ There are some features offered by Twig that are not supported by Winter. They a
 
 Tag | Equivalent
 ------------- | -------------
-`{% extend %}` | Use [Layouts](../cms/layouts) or `{% placeholder %}`
+`{% extend %}` | Use [Layouts](../../docs/cms/layouts) or `{% placeholder %}`
 `{% include %}` | Use `{% partial %}` or `{% content %}`

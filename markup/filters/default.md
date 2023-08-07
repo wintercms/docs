@@ -21,4 +21,6 @@ The `| default` filter returns the value passed as the argument if the filtered 
 
 You may also use this filter for method calls:
 
+```twig
 {{ object.getName(variable | default('Unknown')) }}
+```
