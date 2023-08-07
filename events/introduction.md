@@ -75,13 +75,13 @@ You may also specify a priority as the third argument when subscribing to events
 // Default Priority Event
 Event::listen('auth.login', function () { ... });
 
-// Run after the default priority listener
-Event::listen('auth.login', function () { ... }, 1);
+// Runs after the default priority listener above (same priority, registered second)
+Event::listen('auth.login', function () { ... }, 0);
 
-// Run first
+// Runs first
 Event::listen('auth.login', function () { ... }, 10);
 
-// Run second
+// Runs second
 Event::listen('auth.login', function () { ... }, 5);
 ```
 
