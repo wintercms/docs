@@ -10,7 +10,7 @@ The `| trans` and `| trans_choice` filters translate the value passed in using t
 {{ 'I love Winter CMS.' | trans }};
 ```
 
-or an example using a [language variable](../plugin/localization):
+or an example using a [language variable](../../docs/plugin/localization):
 
 ```twig
 {{ "acme.demo::lang.string.example" | trans }}

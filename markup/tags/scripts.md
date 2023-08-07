@@ -13,9 +13,9 @@ The `{% scripts %}` tag inserts JavaScript file references to scripts injected b
 
 ## Injecting scripts
 
-Links to JavaScript files can be programmatically injected in PHP by anything implementing the `System\Traits\AssetMaker` trait, see the [Asset Compiler](../services/asset-compilation#injecting-page-assets) docs for more information.
+Links to JavaScript files can be programmatically injected in PHP by anything implementing the `System\Traits\AssetMaker` trait, see the [Asset Compiler](../../docs/services/asset-compilation#injecting-page-assets) docs for more information.
 
-You can also inject raw markup to the `{% scripts %}` tag by using the **scripts**  anonymous [placeholder](../cms/layouts#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
+You can also inject raw markup to the `{% scripts %}` tag by using the **scripts**  anonymous [placeholder](../../docs/cms/layouts#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
 
 ```twig
 {% put scripts %}

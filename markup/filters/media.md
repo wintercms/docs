@@ -6,7 +6,7 @@ description: "Documentation on the 'media' Twig filter."
 
 ## Usage
 
-The `| media` filter returns an address relative to the public URL of the [Media Manager library](/v1.2/docs/cms/mediamanager). The result is a URL to the media file specified before the filter.
+The `| media` filter returns an address relative to the public URL of the [Media Manager library](../../docs/cms/mediamanager). The result is a URL to the media file specified before the filter.
 
 ```twig
 <img src="{{ 'banner.jpg' | media }}" />
