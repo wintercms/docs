@@ -165,6 +165,7 @@ Option | Description
 `select` | defines a custom SQL select statement to use for the value.
 `valueFrom` | defines a model attribute to use for the value.
 `relation` | defines a model relationship column.
+`limit` | defines the limit to be applied to a relation SQL query. Default: `false`, i.e. no limits applied. If a `limit` of 1 is specified then the `group_concat` will be disabled.
 `useRelationCount` | use the count of the defined `relation` as the value for this column. Default: `false`
 `cssClass` | assigns a CSS class to the column container (see [Asset Compilation](../services/asset-compilation#injecting-page-assets) for injecting custom CSS files into the backend).
 `headCssClass` | assigns a CSS class to the column header container.
