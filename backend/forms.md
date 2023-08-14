@@ -624,6 +624,7 @@ Option | Description
 `highlightActiveLine` | highlights the active line where the text cursor is. Default: `true`.
 `language` | code language, for example, php, css, javascript, html. Default: `php`.
 `margin` | sets the editor margin size. Default: `0`.
+`scrollPastEnd` | Number of screen heights to allow scrolling past the end of the document, can be a decimal. Default: `0`.
 `showGutter` | shows a gutter with line numbers. Default: `true`.
 `showInvisibles` | shows invisible characters like spaces, tabs and line breaks. Default: `false`.
 `showPrintMargin` | shows the print margin. Default: `false`.
