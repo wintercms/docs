@@ -92,6 +92,7 @@ Event::listen('auth.login', function () { ... }, 5);
 Event listeners can halt the progation of a global event to subsequent listeners through one of two methods:
 
 1. Returning false
+
 ```php
 Event::listen('auth.login', function ($event) {
     // Handle the event
@@ -99,7 +100,9 @@ Event::listen('auth.login', function ($event) {
     return false;
 });
 ```
+
 2. Returning any non-null value when the event is fired with the `halt` parameter set to true:
+
 ```php
 Event::listen('whos.the.captain', fn ($ship) => 'Kirk');
 Event::listen('whos.the.captain', fn ($ship) => 'I am', 10);
