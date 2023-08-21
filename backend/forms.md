@@ -458,6 +458,7 @@ For more information on model validation, please visit [the documentation page](
 
 - `$formWidget`: The instance of the `Backend\Widgets\Form` class that this field belongs to
 - `$formModel` or `$model`: The instance of the `Model` attached to this form.
+- `$record`: The record related to this field.
 - `$formField` or `$field`: The instance of `Backend\Classes\FormField` for this field.
 - `$formValue` or `$value`: The value of this field instance.
 
