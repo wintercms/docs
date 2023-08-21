@@ -765,7 +765,7 @@ You may enable or disable the duplicate cache with either the `enableDuplicateCa
 Db::table('users')->enableDuplicateCache()->get();
 ```
 
-If a query is stored in the cache, it will automatically be cleared when an insert, update, delete, or truncate statement is used. However you may clear the cache manually using the `flushDuplicateCache` method.
+If a query is stored in the cache, it will automatically be cleared when an insert, update, delete, upsert, or truncate statement is used. However you may clear the cache manually using the `flushDuplicateCache` method.
 
 ```php
 Db::flushDuplicateCache();
