@@ -664,9 +664,9 @@ approved:
 public function scopeIsApproved($query, $state)
 {
     return match ($state) {
-        "0" => $query,
-        "1" => $query->where('is_approved', false),
-        "2" => $query->where('is_approved', true),
+        '0' => $query,
+        '1' => $query->where('is_approved', false),
+        '2' => $query->where('is_approved', true),
     }
 }
 ```
