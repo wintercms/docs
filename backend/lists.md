@@ -638,6 +638,8 @@ published:
 
 `switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
 
+Using conditions:
+
 ```yaml
 approved:
     label: Approved
@@ -646,6 +648,27 @@ approved:
     conditions:
         - is_approved <> true
         - is_approved = true
+```
+
+Using a scope method:
+
+```yaml
+approved:
+    label: Approved
+    type: switch
+    default: 0
+    scope: isApproved
+```
+
+```php
+public function scopeIsApproved($query, $state)
+{
+    return match ($state) {
+        '0' => $query,
+        '1' => $query->where('is_approved', false),
+        '2' => $query->where('is_approved', true),
+    }
+}
 ```
 
 ### Date scope
