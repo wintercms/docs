@@ -481,7 +481,7 @@ Each definition can then be displayed by passing the definition name as the firs
 
 ## Using list filters
 
-Lists can be filtered by [adding a filter definition](#scope-options) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
+Lists can be filtered by [adding a filter definition](#filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
 
 ```yaml
 # ===================================
