@@ -236,6 +236,8 @@ _field_baloon-selector.php   <== Field\Baloon Selector (partial)
 
 View files must end with the `.php` file extension.
 
+> **NOTE:** `.htm` legacy file extension is still supported.
+
 ### Class naming
 
 Classes commonly are placed in the `classes` directory. There is a number of class suffixes and prefixes that we recommend to use.
