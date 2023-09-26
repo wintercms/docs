@@ -236,7 +236,7 @@ _field_baloon-selector.php   <== Field\Baloon Selector (partial)
 
 View files must end with the `.php` file extension.
 
-> **NOTE:** `.htm` legacy file extension is still supported.
+> **NOTE:** For backwards compatibilty, we still support the `.htm` legacy file extension. It is recommended to use `.php` for any new files.
 
 ### Class naming
 
