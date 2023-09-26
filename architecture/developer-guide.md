@@ -228,13 +228,15 @@ Element classes names should use hyphen-case (dashes)
 Partial views should begin with an underscore character. Whereas Controller and Layout views do not begin with an underscore character. Since views are often found in a single folder, the underscore (_) and dash (-) characters can be used to organise the files. A dash is used as a substitute for a space character. An underscore is used as a substitute for a slash character (folder or namespace).
 
 ```
-index_fancy-layout.htm       <== Index\Fancy layout
-form-with-sidebar.htm        <== Form with sidebar
-_field-container.htm         <== Field container (partial)
-_field_baloon-selector.htm   <== Field\Baloon Selector (partial)
+index_fancy-layout.php       <== Index\Fancy layout
+form-with-sidebar.php        <== Form with sidebar
+_field-container.php         <== Field container (partial)
+_field_baloon-selector.php   <== Field\Baloon Selector (partial)
 ```
 
-View files must end with the `.htm` file extension.
+View files must end with the `.php` file extension.
+
+> **NOTE:** For backwards compatibilty, we still support the `.htm` legacy file extension. It is recommended to use `.php` for any new files.
 
 ### Class naming
 
@@ -540,7 +542,7 @@ folder/
 |   |-- sub2folder/
 |   |    `-- sub3file    # A comment about this file
 |   `-- sub2folder2/
-|-- index.htm
+|-- index.php
 `-- .hidden_file        # This file is hidden and should be slightly transparent
 ```</code></pre>
 
@@ -557,7 +559,7 @@ folder/
 |   |-- sub2folder/
 |   |    `-- sub3file    # A comment about this file
 |   `-- sub2folder2/
-|-- index.htm
+|-- index.php
 `-- .hidden_file        # This file is hidden and should be slightly transparent
 ```
 
@@ -577,7 +579,7 @@ This feature also supports the output of the `tree` command-line utility which i
 
 # folder/
 # ├── .hidden_file
-# ├── index.htm
+# ├── index.php
 # ├── subfolder1/
 # ├── subfolder2/
 # │   ├── document.pdf
@@ -601,7 +603,7 @@ folder/
 │   └── sub2folder/
 │       └── sub3file
 ├── .hidden_file
-└── index.htm
+└── index.php
 ```
 
 > **NOTE:** The `tree` command may print out indented lines using a character that looks to be a space character, but is not. If this is the case, you may need to add the `--charset=ascii` option to the command, which will print a diagram similar to the first example.

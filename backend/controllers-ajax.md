@@ -4,7 +4,7 @@
 
 The Winter CMS backend implements the MVC pattern. Controllers manage backend pages and implement various features like forms and lists. This article describes how to develop backend controllers and how to configure controller behaviors.
 
-Each controller consists of a PHP file which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are `.htm` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
+Each controller consists of a PHP file which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are `.php` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
 
 ```treeview
 plugins/
@@ -12,9 +12,9 @@ plugins/
     `-- blog/
         |-- controllers/
         |   |-- users/                 # Controller view directory
-        |   |   |-- _partial.htm       # Controller partial file
+        |   |   |-- _partial.php       # Controller partial file
         |   |   |-- config_form.yaml   # Controller config file
-        |   |   `-- index.htm          # Controller view file
+        |   |   `-- index.php          # Controller view file
         |   `-- Users.php              # Controller class
         `-- Plugin.php
 ```
@@ -57,7 +57,7 @@ Property | Description
 
 ## Actions, views and routing
 
-Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
+Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.php** view file contents, corresponding to the **index** action method:
 
 ```html
 <h1>Hello World</h1>
