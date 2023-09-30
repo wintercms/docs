@@ -622,6 +622,8 @@ class User extends Model
 }
 ```
 
+> **NOTE:** If the soft deleting relation is using a pivot table, you can set the `deletedAtColumn` flag on the relation definition to change the column that will hold the soft deletion date in the pivot table, otherwise, it defaults to `deleted_at`.
+
 > **NOTE:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
 
 Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.
