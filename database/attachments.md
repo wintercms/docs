@@ -60,8 +60,14 @@ $file = (new System\Models\File)->fromData('Some content', 'sometext.txt');
 
 For multiple attach relations (`$attachMany`), you may use the `create` method on the relationship instead, notice the file object is associated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
 
+```html
+<input type='file' name='file_input[]' multiple>
+```
 ```php
-$model->avatar()->create(['data' => Input::file('file_input')]);
+$files = Input::file('file_input');
+foreach($files as $file) {
+    $model->avatar()->create(['data' => $file]);
+}
 ```
 
 Alternatively, you can prepare a File model before hand, then manually associate the relationship later. Notice the `is_public` attribute must be set explicitly using this approach.
