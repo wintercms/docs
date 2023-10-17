@@ -791,7 +791,7 @@ There are various form widgets included as standard, although it is common for p
 - [Nested Form](#widget-nestedform)
 - [Record finder](#widget-recordfinder)
 - [Relation](#widget-relation)
-- [Relation manager](#widget-relationmanager)
+- [Relation Manager](#widget-relationmanager)
 - [Repeater](#widget-repeater)
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Sensitive](#widget-sensitive)
