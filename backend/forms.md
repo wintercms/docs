@@ -595,7 +595,7 @@ There are various form widgets included as standard, although it is common for p
 - [Nested Form](#nested-form)
 - [Record finder](#record-finder)
 - [Relation](#relation)
-- [Relation Manager](#widget-relationmanager)
+- [Relation Manager](#relation-manager)
 - [Repeater](#repeater)
 - [Rich editor / WYSIWYG](#rich-editor--wysiwyg)
 - [Sensitive](#sensitive)
@@ -1026,7 +1026,6 @@ Option | Description
 `emptyOption` | text to display when there is no available selections.
 `scope` | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
 
-<a name="widget-relationmanager"></a>
 ### Relation Manager
 
 `relationmanager` - Renders the [relation controller](../relations) for this relation. This is the equivalent of using a `partial` field that renders the output of the `relationRender()` method from the controller.
@@ -1046,7 +1045,6 @@ Option | Description
 `recordOnClick` | custom Javascript code to execute when a record is clicked.
 `relation` | relation name if different from the field name.
 
-<a name="widget-repeater"></a>
 ### Repeater
 
 `repeater` - renders a repeating set of form fields defined within.
