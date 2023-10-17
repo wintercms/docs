@@ -1286,7 +1286,7 @@ Option | Description
 <a name="widget-relationmanager"></a>
 ### Relation Manager
 
-`relationmanager` - Renders the relation controller for this relation. This is the equivalent of using a partial field type pointing to a partial file that will call the relationRender() method on the controller.
+`relationmanager` - Renders the [relation controller](../relations) for this relation. This is the equivalent of using a `partial` field that renders the output of the `relationRender()` method from the controller.
 
 ```yaml
 records:
