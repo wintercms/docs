@@ -1,0 +1,41 @@
+# {% page %}
+
+The `{% page %}` tag renders the contents of a [page](../../docs/cms/pages) into a layout template.
+
+See [layouts](../../docs/cms/layouts#introduction) for a basic example.
+
+The `{% page %}` tag parses the raw markup from a page template. A page template may inject content both into placeholder(s) as well as define raw markup.
+
+```twig
+description="example layout"
+==
+<html>
+    <head>
+        {% placeholder head %}
+    </head>
+    <body>
+        {% page %}
+        ...
+```
+
+```twig
+description="example page"
+==
+{% put head %}
+    <meta name="foo" content="bar">
+{% endput %}
+
+<p>My content.</p>
+```
+
+The page rendered with the template would result in:
+
+```html
+<html>
+    <head>
+        <meta name="foo" content="bar">
+    </head>
+    <body>
+        <p>My content.</p>
+        ...
+```
