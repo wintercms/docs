@@ -88,7 +88,7 @@ $schedule->call(function () {
 })->timezone('Europe/Paris')->at('13:00');
 ```
 
-If you are repeatedly assigning the same timezone to all of your scheduled tasks, you may wish to define it globaly in your plugin boot method to match the `cms.backendTimezone` config: 
+If you are repeatedly assigning the same timezone to all of your scheduled tasks, you may wish to define it globaly in your plugin boot method to match the `cms.backendTimezone` config:
 
 ```php
 use Config;
