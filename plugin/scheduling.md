@@ -78,6 +78,29 @@ Method  | Description
 `->saturdays();`  |  Limit the task to Saturday
 `->when(Closure);`  |  Limit the task based on a truth test
 
+#### Timezones
+
+Using the `timezone` method, you may specify that a scheduled task's time should be interpreted within a given timezone:
+
+```php
+$schedule->call(function () {
+    // Runs every day at 13:00 Paris time...
+})->timezone('Europe/Paris')->at('13:00');
+```
+
+If you are repeatedly assigning the same timezone to all of your scheduled tasks, you may wish to define it globaly in your plugin boot method to match the `cms.backendTimezone` config: 
+
+```php
+use Config;
+
+...
+
+public function boot()
+{
+    Config::set('app.schedule_timezone', config('cms.backendTimezone'));
+}
+```
+
 #### Truth test constraints
 
 The `when` method may be used to limit the execution of a task based on the result of a given truth test. In other words, if the given `Closure` return `true`, the task will execute as long as no other constraining conditions prevent the task from running:
