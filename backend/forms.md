@@ -595,6 +595,7 @@ There are various form widgets included as standard, although it is common for p
 - [Nested Form](#nested-form)
 - [Record finder](#record-finder)
 - [Relation](#relation)
+- [Relation Manager](#relation-manager)
 - [Repeater](#repeater)
 - [Rich editor / WYSIWYG](#rich-editor--wysiwyg)
 - [Sensitive](#sensitive)
@@ -1024,6 +1025,25 @@ Option | Description
 `order` | an order clause to sort options by. Example: `name desc`.
 `emptyOption` | text to display when there is no available selections.
 `scope` | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
+
+### Relation Manager
+
+`relationmanager` - Renders the [relation controller](../relations) for this relation. This is the equivalent of using a `partial` field that renders the output of the `relationRender()` method from the controller.
+
+```yaml
+records:
+    label: Records
+    type: relationmanager
+```
+
+<div class="attributes-table-precessor"></div>
+
+Option | Description
+------------- | -------------
+`readOnly` | forces the relation controller in readOnly mode. (defaults to parent previewMode)
+`recordUrl` | path to controller action to open a record (e.g. `author/plugin/controller/update/:id`). `:id` will get replaced with the record id.
+`recordOnClick` | custom Javascript code to execute when a record is clicked.
+`relation` | relation name if different from the field name.
 
 ### Repeater
 
