@@ -26,6 +26,26 @@ php artisan create:component <plugin code> <component name>
 
 The `create:component` command creates a new component class and the default component view. The first argument specifies the plugin code of the plugin that this component will be added into, and the second parameter specifies the component class name, eg. `MyComponent`.
 
+## Create a migration
+
+The `create:migration` command generates the migration file needed for a model database. The first argument specifies the plugin code of the plugin that this migration will be added into. Without any options, a bare migration file gets generated.
+
+```bash
+php artisan create:migration <plugin code>
+```
+
+In order to create a migration that auto-populates columns for your model, use the `--create` and `--model` options:
+
+```bash
+php artisan create:migration <plugin code> --create --model YourModel
+```
+
+In order to create an "update" migration, use the `--update` and `--model` options:
+
+```bash
+php artisan create:migration <plugin code> --update --model YourModel
+```
+
 ## Create a model
 
 ```bash

@@ -76,6 +76,7 @@ Command | Description
 [`create:controller`](../console/scaffolding#create-a-backend-controller) | Create a Controller in a plugin.
 [`create:formwidget`](../console/scaffolding#create-a-form-widget) | Create a FormWidget in a plugin.
 [`create:job`](../console/scaffolding#create-a-job) | Create a Job class in a plugin.
+[`create:migration`](../console/scaffolding#create-a-migration) | Create a Migration in a plugin.
 [`create:model`](../console/scaffolding#create-a-model) | Create a Model in a plugin.
 [`create:plugin`](../console/scaffolding#create-a-plugin) | Create a Plugin.
 [`create:reportwidget`](../console/scaffolding#create-a-report-widget) | Create a ReportWidget in a plugin.
