@@ -29,6 +29,8 @@ You may also use the `|md` filter for [parsing Markdown in your frontend markup]
 {{ '**Text** is bold.' | md }}
 ```
 
+> **Note:** Since Winter CMS v1.2.2, the Markdown parser is using the [CommonMark library](https://github.com/thephpleague/commonmark) to parse content, which follows the [CommonMark spec](https://spec.commonmark.org/current/). If you have Markdown content that is no longer parsing correctly, you may install the [Parsedown plugin](https://github.com/wintercms/wn-parsedown-plugin) to restore the Parsedown library that was used prior to Winter CMS v1.2.2.
+
 ## Twig template parser
 
 Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the frontend markup](../markup), [view content](../services/response-view#views) and [mail message content](../services/mail#message-content).
