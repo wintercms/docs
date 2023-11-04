@@ -20,7 +20,13 @@ This means that the actual work of resizing the image is delayed until the brows
 
 The filter accepts three parameters: `| resize(int $width [, int $height , array $options])`.
 
-See the [image resizing docs](../../docs/services/image-resizing#available-parameters) for more information on the parameters.
+One of the options available in the $options array is extension. This allows converting images from one file type to another.
+
+```twig
+<img src="{{ 'banner.jpg' | media | resize(1920, 1080, , {'extension' : 'png'}) }}" />
+```
+
+See the [image resizing docs](../../docs/services/image-resizing#available-parameters) for more information on other parameters.
 
 - [List of locations images can be resized from](../../docs/services/image-resizing#available-sources)
 
