@@ -95,6 +95,7 @@ Option | Type | Description
 ------------- | ------------- | -------------
 `form` | Form | a reference to form field definition file, see [backend form fields](forms#defining-form-fields).
 `list` | List | a reference to list column definition file, see [backend list columns](lists#defining-list-columns).
+`showSetup` | List | displays the list column set up button.
 `showSearch` | List | display an input for searching the records. Default: `false`
 `showSorting` | List | displays the sorting link on each column. Default: `true`
 `defaultSort` | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
