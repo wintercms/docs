@@ -751,7 +751,6 @@ By default, the output SVG markup is minified. The second parameter allows you t
 $unminifiedSvg = Svg::sanitize($untrustedSvgContent, false);
 ```
 
-
 ## Miscellaneous
 
 ### `asset()`
