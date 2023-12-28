@@ -93,6 +93,9 @@ Command | Description
 `config:cache` | Create a cache file for faster configuration loading
 `config:clear` | Remove the configuration cache file
 `down` | Put the application into maintenance / demo mode
+`event:cache` | Discover and cache the application's events and listeners
+`event:clear` | Clear all cached events and listeners
+`event:list` | List the application's events and listeners
 `env` | Display the current framework environment
 `key:generate` | Set the application key
 `optimize` | Cache the framework bootstrap files
