@@ -81,6 +81,7 @@ Command | Description
 [`create:plugin`](../console/scaffolding#create-a-plugin) | Create a Plugin.
 [`create:reportwidget`](../console/scaffolding#create-a-report-widget) | Create a ReportWidget in a plugin.
 [`create:settings`](../console/scaffolding#create-a-settings-model) | Create a Settings model in a plugin.
+[`create:test`](../console/scaffolding#create-a-test) | Create a Test case in a plugin.
 [`create:theme`](../console/scaffolding#create-a-theme) | Create a Theme.
 **Utilities** |
 [`winter:test`](../console/utilities#run-unit-tests) | Run unit tests on Winter and plugins.
