@@ -20,6 +20,8 @@ class User extends Model
 
 ## Purgeable
 
+>**NOTE:** The Purgeable trait is applied to all models extending the base `Winter\Storm\Database\Model` class by default.
+
 Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `Winter\Storm\Database\Traits\Purgeable` trait and declare a protected `$purgeable` property with an array containing the attributes to purge.
 
 ```php
