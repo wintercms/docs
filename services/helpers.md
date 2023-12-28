@@ -736,6 +736,21 @@ By default, the output SVG markup is minified. The second parameter allows you t
 $unminifiedSvg = Svg::extract('/path/to/image.svg', false);
 ```
 
+### `Svg::sanitize()`
+
+The `sanitize` method allows you to sanitize the provided SVG markup. Sanitization prevents the use of
+JavaScript, remote sources and CSS imports, stopping common attack vectors within SVG code.
+
+```php
+$svg = Svg::sanitize($untrustedSvgContent);
+```
+
+By default, the output SVG markup is minified. The second parameter allows you to disable this by setting it to `false`.
+
+```php
+$unminifiedSvg = Svg::sanitize($untrustedSvgContent, false);
+```
+
 ## Miscellaneous
 
 ### `asset()`

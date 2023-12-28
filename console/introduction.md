@@ -76,10 +76,12 @@ Command | Description
 [`create:controller`](../console/scaffolding#create-a-backend-controller) | Create a Controller in a plugin.
 [`create:formwidget`](../console/scaffolding#create-a-form-widget) | Create a FormWidget in a plugin.
 [`create:job`](../console/scaffolding#create-a-job) | Create a Job class in a plugin.
+[`create:migration`](../console/scaffolding#create-a-migration) | Create a Migration in a plugin.
 [`create:model`](../console/scaffolding#create-a-model) | Create a Model in a plugin.
 [`create:plugin`](../console/scaffolding#create-a-plugin) | Create a Plugin.
 [`create:reportwidget`](../console/scaffolding#create-a-report-widget) | Create a ReportWidget in a plugin.
 [`create:settings`](../console/scaffolding#create-a-settings-model) | Create a Settings model in a plugin.
+[`create:test`](../console/scaffolding#create-a-test) | Create a Test case in a plugin.
 [`create:theme`](../console/scaffolding#create-a-theme) | Create a Theme.
 **Utilities** |
 [`winter:test`](../console/utilities#run-unit-tests) | Run unit tests on Winter and plugins.
@@ -91,6 +93,9 @@ Command | Description
 `config:cache` | Create a cache file for faster configuration loading
 `config:clear` | Remove the configuration cache file
 `down` | Put the application into maintenance / demo mode
+`event:cache` | Discover and cache the application's events and listeners
+`event:clear` | Clear all cached events and listeners
+`event:list` | List the application's events and listeners
 `env` | Display the current framework environment
 `key:generate` | Set the application key
 `optimize` | Cache the framework bootstrap files

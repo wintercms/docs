@@ -92,28 +92,30 @@ Event::listen('auth.login', function () { ... }, 5);
 Event listeners can halt the progation of a global event to subsequent listeners through one of two methods:
 
 1. Returning false
-```php
-Event::listen('auth.login', function ($event) {
-    // Handle the event
 
-    return false;
-});
-```
+    ```php
+    Event::listen('auth.login', function ($event) {
+        // Handle the event
+    
+        return false;
+    });
+    ```
+
 2. Returning any non-null value when the event is fired with the `halt` parameter set to true:
-```php
-Event::listen('whos.the.captain', fn ($ship) => 'Kirk');
-Event::listen('whos.the.captain', fn ($ship) => 'I am', 10);
-Event::listen('whos.the.captain', fn ($ship) => null, 20);
 
-// Returns array of results ([null, 'I am', 'Kirk'])
-Event::fire('whos.the.captain', payload: ['USS Enterprise']);
-
-// Returns first non-null result ('I am')
-Event::fire('whos.the.captain', payload: ['USS Enterprise'], halt: true);
-```
+    ```php
+    Event::listen('whos.the.captain', fn ($ship) => 'Kirk');
+    Event::listen('whos.the.captain', fn ($ship) => 'I am', 10);
+    Event::listen('whos.the.captain', fn ($ship) => null, 20);
+    
+    // Returns array of results ([null, 'I am', 'Kirk'])
+    Event::fire('whos.the.captain', payload: ['USS Enterprise']);
+    
+    // Returns first non-null result ('I am')
+    Event::fire('whos.the.captain', payload: ['USS Enterprise'], halt: true);
+    ```
 
 >**NOTE:** [Local events](#event-emitter-trait) currently only support the second method, where the call to dispatch the event must set the `halt` parameter to true in order to allow for event halting by listeners.
-
 
 ### Wildcard listeners
 

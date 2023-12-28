@@ -20,6 +20,8 @@ class User extends Model
 
 ## Purgeable
 
+>**NOTE:** The Purgeable trait is applied to all models extending the base `Winter\Storm\Database\Model` class by default.
+
 Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `Winter\Storm\Database\Traits\Purgeable` trait and declare a protected `$purgeable` property with an array containing the attributes to purge.
 
 ```php
@@ -622,6 +624,7 @@ class User extends Model
 }
 ```
 
+> **NOTE:** If the soft deleting relation is using a pivot table, you can set the `deletedAtColumn` option on the relation definition to change the column that will hold the soft deletion date in the pivot table, otherwise, it defaults to `deleted_at`.
 > **NOTE:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
 
 Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.

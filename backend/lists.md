@@ -481,7 +481,7 @@ Each definition can then be displayed by passing the definition name as the firs
 
 ## Using list filters
 
-Lists can be filtered by [adding a filter definition](#scope-options) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
+Lists can be filtered by [adding a filter definition](#filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
 
 ```yaml
 # ===================================
@@ -638,6 +638,8 @@ published:
 
 `switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
 
+Using conditions:
+
 ```yaml
 approved:
     label: Approved
@@ -646,6 +648,27 @@ approved:
     conditions:
         - is_approved <> true
         - is_approved = true
+```
+
+Using a scope method:
+
+```yaml
+approved:
+    label: Approved
+    type: switch
+    default: 0
+    scope: isApproved
+```
+
+```php
+public function scopeIsApproved($query, $state)
+{
+    return match ($state) {
+        '0' => $query,
+        '1' => $query->where('is_approved', false),
+        '2' => $query->where('is_approved', true),
+    }
+}
 ```
 
 ### Date scope

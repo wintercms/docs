@@ -595,6 +595,7 @@ There are various form widgets included as standard, although it is common for p
 - [Nested Form](#nested-form)
 - [Record finder](#record-finder)
 - [Relation](#relation)
+- [Relation Manager](#relation-manager)
 - [Repeater](#repeater)
 - [Rich editor / WYSIWYG](#rich-editor--wysiwyg)
 - [Sensitive](#sensitive)
@@ -831,7 +832,7 @@ Option | Description
 `maxFilesize` | file size in Mb that are accepted by the uploader, optional. Default: from "upload_max_filesize" param value
 `useCaption` | allows a title and description to be set for the file. Default: true
 `prompt` | text to display for the upload button, applies to files only, optional.
-`thumbOptions` | options to pass to the thumbnail generating method for the file
+`thumbOptions` | options to pass to the thumbnail generating method for the file. See [Image Resizing](../services/image-resizing#available-parameters)
 `attachOnUpload` | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
 
 > **NOTE:** Unlike the [Media Finder FormWidget](#media-finder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
@@ -1024,6 +1025,25 @@ Option | Description
 `order` | an order clause to sort options by. Example: `name desc`.
 `emptyOption` | text to display when there is no available selections.
 `scope` | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
+
+### Relation Manager
+
+`relationmanager` - Renders the [relation controller](../relations) for this relation. This is the equivalent of using a `partial` field that renders the output of the `relationRender()` method from the controller.
+
+```yaml
+records:
+    label: Records
+    type: relationmanager
+```
+
+<div class="attributes-table-precessor"></div>
+
+Option | Description
+------------- | -------------
+`readOnly` | forces the relation controller in readOnly mode. (defaults to parent previewMode)
+`recordUrl` | path to controller action to open a record (e.g. `author/plugin/controller/update/:id`). `:id` will get replaced with the record id.
+`recordOnClick` | custom Javascript code to execute when a record is clicked.
+`relation` | relation name if different from the field name.
 
 ### Repeater
 

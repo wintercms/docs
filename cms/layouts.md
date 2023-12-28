@@ -56,6 +56,10 @@ Placeholders allow pages to inject content to the layout. Placeholders are defin
     <head>
         {% placeholder head %}
     </head>
+    <body>
+        {% placeholder nav default %}
+            {% partial "nav" %}
+        {% endplaceholder %}
     ...
 ```
 
