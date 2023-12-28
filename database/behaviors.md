@@ -2,47 +2,38 @@
 
 Model behaviors are used to implement common functionality. Unlike [Traits](traits) these can be implemented either directly in a class or by extending the class. You can read more about behaviors [here](../services/behaviors).
 
-## Purgeable
+## Encryptable
 
-Purged attributes will not be saved to the database when a model is created or updated. To purge
-attributes in your model, implement the `Winter.Storm.Database.Behaviors.Purgeable` behavior and declare
-a `$purgeable` property with an array containing the attributes to purge.
+Similar to the [hashable trait](traits#hashable), encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, implement the `Winter\Storm\Database\Behaviors\Encryptable` behavior and declare a protected `$encryptable` property with an array containing the attributes to encrypt.
 
 ```php
 class User extends Model
 {
     public $implement = [
-        'Winter.Storm.Database.Behaviors.Purgeable'
+        'Winter.Storm.Database.Behaviors.Encryptable',
     ];
 
     /**
-     * @var array List of attributes to purge.
+     * @var array List of attributes to encrypt.
      */
-    public $purgeable = [];
+    protected $encryptable = ['api_key', 'api_secret'];
 }
 ```
 
-You can also dynamically implement this behavior in a class.
+You can also dynamically implement this behavior on third party models outside of your control:
 
 ```php
 /**
- * Extend the Winter.User user model to implement the purgeable behavior.
+ * Extend the Winter.User user model to implement the encryptable behavior.
  */
 Winter\User\Models\User::extend(function($model) {
-
-    // Implement the purgeable behavior dynamically
-    $model->implement[] = 'Winter.Storm.Database.Behaviors.Purgeable';
-
-    // Declare the purgeable property dynamically for the purgeable behavior to use
-    $model->addDynamicProperty('purgeable', []);
+    // Implement the sortable behavior dynamically
+    $model->implement[] = 'Winter.Storm.Database.Behaviors.Encryptable';
+    $model->addDynamicProperty('encryptable', ['encrypted_metadata']);
 });
 ```
 
-The defined attributes will be purged when the model is saved, before the [model events](model#events) are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
-
-```php
-return $user->getOriginalPurgeValue($propertyName);
-```
+> **NOTE:** Encrypted attributes will be serialized and unserialized as a part of the encryption / decryption process. Do not make an attribute that is `encryptable` also [`jsonable`](model#supported-properties) at the same time as the `jsonable` process will attempt to decode a value that has already been unserialized by the encryptor.
 
 ## Sortable
 
@@ -52,19 +43,18 @@ Sorted models will store a number value in `sort_order` which maintains the sort
 class User extends Model
 {
     public $implement = [
-        'Winter.Storm.Database.Behaviors.Sortable'
+        'Winter.Storm.Database.Behaviors.Sortable',
     ];
 }
 ```
 
-You can also dynamically implement this behavior in a class.
+You can also dynamically implement this behavior on third party models outside of your control:
 
 ```php
 /**
  * Extend the Winter.User user model to implement the sortable behavior.
  */
 Winter\User\Models\User::extend(function($model) {
-
     // Implement the sortable behavior dynamically
     $model->implement[] = 'Winter.Storm.Database.Behaviors.Sortable';
 });
