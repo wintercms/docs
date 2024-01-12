@@ -206,11 +206,11 @@ You can instruct the platform to prefer test builds from the marketplace by chan
 > **TIP:** If you are using [Composer](../architecture/using-composer) to manage updates, you may replace the default Winter CMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch. This is more or less the same as enabling edge updates.
 
 ```json
-"winter/storm": "dev-develop as 1.0",
-"winter/wn-system-module": "dev-develop",
-"winter/wn-backend-module": "dev-develop",
-"winter/wn-cms-module": "dev-develop",
-"laravel/framework": "~6.0",
+"winter/storm": "dev-develop as 1.2.999",
+"winter/wn-system-module": "dev-develop as 1.2.999",
+"winter/wn-backend-module": "dev-develop as 1.2.999",
+"winter/wn-cms-module": "dev-develop as 1.2.999",
+"laravel/framework": "~9.0",
 ```
 
 ### Using a public folder
