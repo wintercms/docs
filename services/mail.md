@@ -458,10 +458,25 @@ Another solution is to set a universal recipient of all e-mails sent by the fram
 ],
 ```
 
-### Pretend mail mode
+### Mail Fake (Testing)
 
-You can dynamically disable sending mail using the `Mail::pretend` method. When the mailer is in pretend mode, messages will be written to your application's log files instead of being sent to the recipient.
+You may use the `Mail` facade's `fake` method to prevent mail from being sent during testing.
 
 ```php
-Mail::pretend();
+Mail::fake();
 ```
+
+If you are sending a template you can, for example, validate that template was sent:
+
+```php
+Mail::fake();
+
+// ... Run code that sends email 'this.is.my.email' template.
+
+// Check that the email was sent
+Mail::assertSent('this.is.my.email', function ($mail) {
+    return $mail->hasTo('test@example.com');
+});
+```
+
+Laravel has [additional information regarding Mail::fake](https://laravel.com/docs/9.x/mocking#mail-fake).
