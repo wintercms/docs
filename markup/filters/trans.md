@@ -27,11 +27,11 @@ Replacing parameters in translation strings is possible by passing an array as t
 The `trans_choice` function is used to process pluralized values.
 
 ```twig
-{{ 'There is one snowflake|There are many snowflakes' | trans_choice(7) }}
+{{ 'There is one snowflake|There are many snowflakes' | transchoice(7) }}
 ```
 
 The second argument can contain the parameters.
 
 ```twig
-{{ '{1} :value minute ago|[2,*] :value minutes ago' | trans_choice(5, { value: 5 }) }}
+{{ '{1} :value minute ago|[2,*] :value minutes ago' | transchoice(5, { value: 5 }) }}
 ```
