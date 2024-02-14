@@ -7,7 +7,7 @@ description: "Documentation on the 'trans' Twig filter."
 The `| trans` and `| transchoice` filters translate the value passed in using the applications localization configuration. The localization strings can be loaded by passing the default translation of your string.
 
 ```twig
-{{ 'I love Winter CMS.' | trans }};
+{{ 'I love Winter CMS.' | trans }}
 ```
 
 or an example using a [language variable](../../docs/plugin/localization):
