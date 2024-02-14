@@ -4,7 +4,7 @@ description: "Documentation on the 'trans' Twig filter."
 ---
 # trans
 
-The `| trans` and `| trans_choice` filters translate the value passed in using the applications localization configuration. The localization strings can be loaded by passing the default translation of your string.
+The `| trans` and `| transchoice` filters translate the value passed in using the applications localization configuration. The localization strings can be loaded by passing the default translation of your string.
 
 ```twig
 {{ 'I love Winter CMS.' | trans }};
@@ -24,7 +24,7 @@ Replacing parameters in translation strings is possible by passing an array as t
 
 ## Pluralization
 
-The `trans_choice` function is used to process pluralized values.
+The `transchoice` function is used to process pluralized values.
 
 ```twig
 {{ 'There is one snowflake|There are many snowflakes' | transchoice(7) }}
