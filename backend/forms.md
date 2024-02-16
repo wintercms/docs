@@ -395,10 +395,12 @@ status:
 
 Dropdowns can also allow users to provide a new value. This can be activated by setting the `allowCustom` option to `true`.
 
-    status:
-        label: Blog Post Status
-        type: dropdown
-        allowCustom: true
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    allowCustom: true
+```
 
 The `allowCustom` option can be useful to provide a preset list of options without preventing the user from adding a new or custom value. 
 
