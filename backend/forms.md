@@ -402,7 +402,7 @@ status:
     allowCustom: true
 ```
 
-The `allowCustom` option can be useful to provide a preset list of options without preventing the user from adding a new or custom value. 
+The `allowCustom` option can be useful to provide a preset list of options without preventing the user from adding a new or custom value.
 
 When using the `get*Options` method for defining options, you would be able to take into consideration any custom options present in the data:
 
