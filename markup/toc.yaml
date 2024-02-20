@@ -43,6 +43,7 @@ sections:
             filters/raw: "| raw"
             filters/resize: "| resize"
             filters/theme: "| theme"
+            filters/time: "| time_[since|tense]"
             filters/trans: "| trans"
 
     Functions:
