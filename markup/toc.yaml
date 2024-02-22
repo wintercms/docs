@@ -42,6 +42,7 @@ sections:
             filters/page: "| page"
             filters/raw: "| raw"
             filters/resize: "| resize"
+            filters/str: "| str*"
             filters/theme: "| theme"
             filters/time: "| time_[since|tense]"
             filters/trans: "| trans"
