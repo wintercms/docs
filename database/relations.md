@@ -4,36 +4,52 @@
 
 Database tables are often related to one another. For example, a blog post may have many comments, or an order could be related to the user who placed it. Winter makes managing and working with these relationships easy and supports several different types of relationships.
 
-> **NOTE:** If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, Winter cannot connect the relations.
-
 ## Defining relationships
 
-Model relationships are defined as properties on your model classes. An example of defining relationships:
+Winter provides two methods of defining model relationships. Both provide the same level of functionality - which one you use is entirely up to your own preferences.
+
+- Property-based array configuration in the model class, available in all versions of Winter CMS (Property style)
+- Relation methods defined in the model class, synonymous with Laravel, available since Winter CMS v1.2.5 (Method style)
+
+### Property style relationship definition
+
+Model relationships can be defined as properties on your model classes. An example of defining relationships:
 
 ```php
 class User extends Model
 {
+    public $hasOne = [
+        'profile' => 'Acme\Blog\Models\Profile',
+    ];
+
     public $hasMany = [
-        'posts' => 'Acme\Blog\Models\Post'
-    ]
+        'posts' => 'Acme\Blog\Models\Post',
+    ];
 }
 ```
 
-Relationships like models themselves, also serve as powerful [query builders](query), accessing relationships as functions provides powerful method chaining and querying capabilities. For example:
+Winter CMS automatically converts relations defined in this way into method endpoints on the model. For example, the above `posts` relation can be accessed by calling the `posts()` method on an instance of the `User` model.
+
+```php
+$user->posts()
+```
+
+Relationships, like the models themselves, also serve as powerful [query builders](query) to allow accessing relationships as functions provides powerful method chaining and querying capabilities. For example:
 
 ```php
 $user->posts()->where('is_active', true)->get();
 ```
 
-Accessing a relationship as a property is also possible:
+Accessing a relationship as a property is also possible. Retrieving the relation as a property will give you the "value" of the relation. This means that a single-record relation (ie. `hasOne`) will provide you with the related model directly. In the case of a multiple-record relation (ie. `hasMany`), a collection is usually returned that contains all related records.
 
 ```php
-$user->posts;
+$user->profile; // The "Acme\Blog\Models\Profile" record attached to this user
+$user->posts; // A collection containing every "Acme\Blog\Models\Post" record attached to this user
 ```
 
 > **NOTE**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. The `load($relation)` method won't force cache to flush. To reload the memory cache use the `reloadRelations()` or the `reload()` methods on the model object.
 
-### Detailed definitions
+### Detailed property style definitions
 
 Each definition can be an array where the key is the relation name and the value is a detail array. The detail array's first value is always the related model class name and all other values are parameters that must have a key name.
 
@@ -96,6 +112,98 @@ public $belongsToMany = [
     'users' => ['Backend\Models\User'],
     'users_count' => ['Backend\Models\User', 'count' => true]
 ];
+```
+
+### Method style relation definition
+
+> **Note:** Method style relation definition is available from Winter v1.2.5.
+
+Model relations can also be defined as methods in a model class, similar to the base Laravel framework.
+
+```php
+class User extends Model
+{
+    public function profile(): HasOne
+    {
+        return $this->hasOne('Acme\Blog\Models\Profile');
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany('Acme\Blog\Models\Post');
+    }
+}
+```
+
+This way provides a more familiar syntax for Laravel users, and allows for code editors and IDEs to provide syntax support for relations.
+
+One key difference between property style definitions and method style definitions is that a relation method must *explicitly* be defined as a relation method in order for it to be picked up in certain circumstances, for example, when determining all available relations for cascading deletions.
+
+In order to define a relation method, the method must have a single return type that matches one of the `Winter\Storm\Database\Relations` classes:
+
+```php
+use Winter\Storm\Database\Relations\HasMany;
+
+public function posts(): HasMany
+{
+    return $this->hasMany('Acme\Blog\Models\Post');
+}
+```
+
+Alternatively, you may also use the `Relation` attribute on the method to define it is as a relation method:
+
+```php
+use Winter\Storm\Database\Attributes\Relation;
+
+#[Relation]
+public function posts()
+{
+    return $this->hasMany('Acme\Blog\Models\Post');
+}
+```
+
+Since the relation method is already a method, you may call the method to retrieve the relation, similar to the property style relations. This returns a [query builder](query) for the relation and allows powerful chaining capabilities.
+
+```php
+$user->posts()->where('is_active', true)->get();
+```
+
+As with the property style relations, you can also call the relation as a property of the model, which returns the relation "value". This means that a single-record relation (ie. `hasOne`) will provide you with the related model directly. In the case of a multiple-record relation (ie. `hasMany`), a collection is usually returned that contains all related records.
+
+```php
+$user->profile; // The "Acme\Blog\Models\Profile" record attached to this user
+$user->posts; // A collection containing every "Acme\Blog\Models\Post" record attached to this user
+```
+
+### Detailed relation methods
+
+Another key difference between property style and method style relation definitions lies in the additional parameters that may be applied to the relation. With the property style, you can configure the relation by providing additional keys and values in the relation configuration array. With the method style, you define these parameters by using chained methods, for example:
+
+```php
+public function posts(): HasMany
+{
+    return $this->hasMany('Acme\Blog\Models\Post')->dependent()->pushable();
+}
+```
+
+The following chained methods are available to define additional parameters about the relation:
+
+Method | Description
+------ | -----------
+`->dependent()` | Makes this relation "dependent" on the primary model. The related model records will be deleted when the primary model is deleted. This is only available for the following relation types: `attachOne`, `attachMany`, `hasOne`, `hasMany`, `morphOne` and `morphMany`.
+`->notDependent()` | Makes this relation independent of the primary model. The related model records will not be deleted when the primary model is deleted. This is the default behavior.
+`->detachable()` | Makes this relation detach from the primary model if the primary model is deleted or the relationship is broken. This is the default behavior, and is only available, for the following relation types: `belongsToMany`, `morphToMany` and `morphedByMany`.
+`->notDetachable()` | Prevents the relation from detaching from the primary model when the primary model is deleted or the relationship is broken.
+`->pushable()` | Sets this relation to save when `push()` is run on the primary model. This is the default behavior.
+`->notPushable()` | Sets this relation to not be saved when `push()` is run on the primary model.
+
+You might have noticed that there are no chain methods for handling "constraint" options like the `order`, `conditions` and `scope` options available in the property style relations. That is because relations defined in this format are already [query builders](query) - you can simply add the constraints directly to the relation!
+
+```php
+public function posts(): HasMany
+{
+    return $this->hasMany('Acme\Blog\Models\Post')->dependent()->published()->where('free_article', true);
+}
 ```
 
 ## Relationship types
