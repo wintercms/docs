@@ -228,9 +228,16 @@ use Model;
 
 class User extends Model
 {
+    // Property style
     public $hasOne = [
         'phone' => 'Acme\Blog\Models\Phone'
     ];
+
+    // Method style
+    public function phone(): HasOne
+    {
+        return $this->hasOne('Acme\Blog\Models\Phone');
+    }
 }
 ```
 
@@ -243,17 +250,31 @@ $phone = User::find(1)->phone;
 The model assumes the foreign key of the relationship based on the model name. In this case, the `Phone` model is automatically assumed to have a `user_id` foreign key. If you wish to override this convention, you may pass the `key` parameter to the definition:
 
 ```php
+// Property style
 public $hasOne = [
     'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id']
 ];
+
+// Method style
+public function phone(): HasOne
+{
+    return $this->hasOne('Acme\Blog\Models\Phone', 'my_user_id');
+}
 ```
 
 Additionally, the model assumes that the foreign key should have a value matching the `id` column of the parent. In other words, it will look for the value of the user's `id` column in the `user_id` column of the `Phone` record. If you would like the relationship to use a value other than `id`, you may pass the `otherKey` parameter to the definition:
 
 ```php
+// Property style
 public $hasOne = [
     'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id', 'otherKey' => 'my_id']
 ];
+
+// Method style
+public function phone(): HasOne
+{
+    return $this->hasOne('Acme\Blog\Models\Phone', 'my_user_id', 'my_id');
+}
 ```
 
 #### Defining the inverse of a One To One relation
@@ -263,26 +284,47 @@ Now that we can access the `Phone` model from our `User`. Let's do the opposite 
 ```php
 class Phone extends Model
 {
+    // Property style
     public $belongsTo = [
         'user' => 'Acme\Blog\Models\User'
     ];
+
+    // Method style
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo('Acme\Blog\Models\User');
+    }
 }
 ```
 
 In the example above, the model will try to match the `user_id` from the `Phone` model to an `id` on the `User` model. It determines the default foreign key name by examining the name of the relationship definition and suffixing the name with `_id`. However, if the foreign key on the `Phone` model is not `user_id`, you may pass a custom key name using the `key` parameter on the definition:
 
 ```php
+// Property style
 public $belongsTo = [
     'user' => ['Acme\Blog\Models\User', 'key' => 'my_user_id']
 ];
+
+// Method style
+public function user(): BelongsTo
+{
+    return $this->belongsTo('Acme\Blog\Models\User', 'my_user_id');
+}
 ```
 
 If your parent model does not use `id` as its primary key, or you wish to join the child model to a different column, you may pass the `otherKey` parameter to the definition specifying your parent table's custom key:
 
 ```php
+// Property style
 public $belongsTo = [
     'user' => ['Acme\Blog\Models\User', 'key' => 'my_user_id', 'otherKey' => 'my_id']
 ];
+
+// Method style
+public function user(): BelongsTo
+{
+    return $this->belongsTo('Acme\Blog\Models\User', 'my_user_id', 'my_id');
+}
 ```
 
 #### Default models
@@ -313,9 +355,16 @@ A one-to-many relationship is used to define relationships where a single model 
 ```php
 class Post extends Model
 {
+    // Property style
     public $hasMany = [
         'comments' => 'Acme\Blog\Models\Comment'
     ];
+
+    // Method style
+    public function comments(): HasMany
+    {
+        return $this->hasMany('Acme\Blog\Models\Comment');
+    }
 }
 ```
 
@@ -340,9 +389,16 @@ $comments = Post::find(1)->comments()->where('title', 'foo')->first();
 Like the `hasOne` relation, you may also override the foreign and local keys by passing the `key` and `otherKey` parameters on the definition respectively:
 
 ```php
+// Property style
 public $hasMany = [
     'comments' => ['Acme\Blog\Models\Comment', 'key' => 'my_post_id', 'otherKey' => 'my_id']
 ];
+
+// Method style
+public function comments(): HasMany
+{
+    return $this->hasMany('Acme\Blog\Models\Comment', 'my_post_id', 'my_id');
+}
 ```
 
 #### Defining the inverse of a One To Many relation
@@ -352,9 +408,16 @@ Now that we can access all of a post's comments, let's define a relationship to 
 ```php
 class Comment extends Model
 {
+    // Property style
     public $belongsTo = [
         'post' => 'Acme\Blog\Models\Post'
     ];
+
+    // Method style
+    public function post(): BelongsTo
+    {
+        return $this->belongsTo('Acme\Blog\Models\Post');
+    }
 }
 ```
 
@@ -369,17 +432,31 @@ echo $comment->post->title;
 In the example above, the model will try to match the `post_id` from the `Comment` model to an `id` on the `Post` model. It determines the default foreign key name by examining the name of the relationship  and suffixing it with `_id`. However, if the foreign key on the `Comment` model is not `post_id`, you may pass a custom key name using the `key` parameter:
 
 ```php
+// Property style
 public $belongsTo = [
     'post' => ['Acme\Blog\Models\Post', 'key' => 'my_post_id']
 ];
+
+// Method style
+public function post(): BelongsTo
+{
+    return $this->belongsTo('Acme\Blog\Models\Post', 'my_post_id');
+}
 ```
 
 If your parent model does not use `id` as its primary key, or you wish to join the child model to a different column, you may pass the `otherKey` parameter to the definition specifying your parent table's custom key:
 
 ```php
+// Property style
 public $belongsTo = [
     'post' => ['Acme\Blog\Models\Post', 'key' => 'my_post_id', 'otherKey' => 'my_id']
 ];
+
+// Method style
+public function post(): BelongsTo
+{
+    return $this->belongsTo('Acme\Blog\Models\Post', 'my_post_id', 'my_id');
+}
 ```
 
 ### Many To Many
@@ -402,9 +479,16 @@ Many-to-many relationships are defined adding an entry to the `$belongsToMany` p
 ```php
 class User extends Model
 {
+    // Property style
     public $belongsToMany = [
         'roles' => 'Acme\Blog\Models\Role'
     ];
+
+    // Method style
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany('Acme\Blog\Models\Role');
+    }
 }
 ```
 
@@ -427,14 +511,22 @@ $roles = User::find(1)->roles()->orderBy('name')->get();
 As mentioned previously, to determine the table name of the relationship's joining table, the model will join the two related model names in alphabetical order. However, you are free to override this convention. You may do so by passing the `table` parameter to the `belongsToMany` definition:
 
 ```php
+// Property style
 public $belongsToMany = [
     'roles' => ['Acme\Blog\Models\Role', 'table' => 'acme_blog_role_user']
 ];
+
+// Method style
+public function roles(): BelongsToMany
+{
+    return $this->belongsToMany('Acme\Blog\Models\Role', 'acme_blog_role_user');
+}
 ```
 
 In addition to customizing the name of the joining table, you may also customize the column names of the keys on the table by passing additional parameters to the `belongsToMany` definition. The `key` parameter is the foreign key name of the model on which you are defining the relationship, while the `otherKey` parameter is the foreign key name of the model that you are joining to:
 
 ```php
+// Property style
 public $belongsToMany = [
     'roles' => [
         'Acme\Blog\Models\Role',
@@ -443,6 +535,12 @@ public $belongsToMany = [
         'otherKey' => 'my_role_id'
     ]
 ];
+
+// Method style
+public function roles(): BelongsToMany
+{
+    return $this->belongsToMany('Acme\Blog\Models\Role', 'acme_blog_role_user', 'my_user_id', 'my_role_id');
+}
 ```
 
 #### Defining the inverse of the relationship
@@ -452,9 +550,16 @@ To define the inverse of a many-to-many relationship, you simply place another `
 ```php
 class Role extends Model
 {
+    // Property style
     public $belongsToMany = [
         'users' => 'Acme\Blog\Models\User'
     ];
+
+    // Method style
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany('Acme\Blog\Models\User');
+    }
 }
 ```
 
@@ -477,20 +582,34 @@ Notice that each `Role` model we retrieve is automatically assigned a `pivot` at
 By default, only the model keys will be present on the `pivot` object. If your pivot table contains extra attributes, you must specify them when defining the relationship:
 
 ```php
+// Property style
 public $belongsToMany = [
-    'roles' => [
-        'Acme\Blog\Models\Role',
+    'users' => [
+        'Acme\Blog\Models\User',
         'pivot' => ['column1', 'column2']
     ]
 ];
+
+// Method style
+public function users(): BelongsToMany
+{
+    return $this->belongsToMany('Acme\Blog\Models\User')->withPivot('column1', 'column2');
+}
 ```
 
 If you want your pivot table to have automatically maintained `created_at` and `updated_at` timestamps, use the `timestamps` parameter on the relationship definition:
 
 ```php
+// Property style
 public $belongsToMany = [
-    'roles' => ['Acme\Blog\Models\Role', 'timestamps' => true]
+    'users' => ['Acme\Blog\Models\User', 'timestamps' => true]
 ];
+
+// Method style
+public function users(): BelongsToMany
+{
+    return $this->belongsToMany('Acme\Blog\Models\User')->withTimestamps();
+}
 ```
 
 These are the parameters supported for `belongsToMany` relations:
@@ -533,12 +652,19 @@ Now that we have examined the table structure for the relationship, let's define
 ```php
 class Country extends Model
 {
+    // Property style
     public $hasManyThrough = [
         'posts' => [
             'Acme\Blog\Models\Post',
             'through' => 'Acme\Blog\Models\User'
         ],
     ];
+
+    // Method style
+    public function posts(): HasManyThrough
+    {
+        return $this->hasManyThrough('Acme\Blog\Models\Post', 'Acme\Blog\Models\User');
+    }
 }
 ```
 
@@ -547,6 +673,7 @@ The first argument passed to the `$hasManyThrough` relation is the name of the f
 Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key`, `otherKey` and `throughKey` parameters to the `$hasManyThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, the `throughKey` parameter is the name of the foreign key on the final model, while the `otherKey` is the local key.
 
 ```php
+// Property style
 public $hasManyThrough = [
     'posts' => [
         'Acme\Blog\Models\Post',
@@ -556,6 +683,12 @@ public $hasManyThrough = [
         'otherKey'   => 'my_id'
     ],
 ];
+
+// Method style
+public function posts(): HasManyThrough
+{
+    return $this->hasManyThrough('Acme\Blog\Models\Post', 'Acme\Blog\Models\User', 'my_country_id', 'my_user_id', 'my_id');
+}
 ```
 
 ### Has One Through
@@ -580,12 +713,19 @@ Though the `history` table does not contain a `supplier_id` column, the `hasOneT
 ```php
 class Supplier extends Model
 {
+    // Property style
     public $hasOneThrough = [
         'userHistory' => [
             'Acme\Supplies\Model\History',
             'through' => 'Acme\Supplies\Model\User'
         ],
     ];
+
+    // Method style
+    public function userHistory(): HasOneThrough
+    {
+        return $this->hasOneThrough('Acme\Supplies\Model\History', 'Acme\Supplies\Model\User');
+    }
 }
 ```
 
@@ -594,6 +734,7 @@ The first array parameter passed to the `$hasOneThrough` property is the name of
 Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key`, `otherKey` and `throughKey` parameters to the `$hasManyThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, the `throughKey` parameter is the name of the foreign key on the final model, while the `otherKey` is the local key.
 
 ```php
+// Property style
 public $hasOneThrough = [
     'userHistory' => [
         'Acme\Supplies\Model\History',
@@ -603,6 +744,12 @@ public $hasOneThrough = [
         'otherKey'   => 'id'
     ],
 ];
+
+// Method style
+public function userHistory(): HasOneThrough
+{
+    return $this->hasOneThrough('Acme\Supplies\Model\History', 'Acme\Supplies\Model\User', 'supplier_id', 'user_id', 'id');
+}
 ```
 
 ### Polymorphic relations
@@ -636,23 +783,44 @@ Next, let's examine the model definitions needed to build this relationship:
 ```php
 class Photo extends Model
 {
+    // Property style
     public $morphTo = [
         'imageable' => []
     ];
+
+    // Method style
+    public function imageable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }
 
 class Staff extends Model
 {
+    // Property style
     public $morphOne = [
         'photo' => ['Acme\Blog\Models\Photo', 'name' => 'imageable']
     ];
+
+    // Method style
+    public function photo(): MorphOne
+    {
+        return $this->morphOne('Acme\Blog\Models\Photo', 'imageable');
+    }
 }
 
 class Product extends Model
 {
+    // Property style
     public $morphOne = [
         'photo' => ['Acme\Blog\Models\Photo', 'name' => 'imageable']
     ];
+
+    // Method style
+    public function photo(): MorphOne
+    {
+        return $this->morphOne('Acme\Blog\Models\Photo', 'imageable');
+    }
 }
 ```
 
@@ -703,23 +871,44 @@ Next, let's examine the model definitions needed to build this relationship:
 ```php
 class Comment extends Model
 {
+    // Property style
     public $morphTo = [
         'commentable' => []
     ];
+
+    // Method style
+    public function commentable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }
 
 class Post extends Model
 {
+    // Property style
     public $morphMany = [
         'comments' => ['Acme\Blog\Models\Comment', 'name' => 'commentable']
     ];
+
+    // Method style
+    public function comments(): MorphMany
+    {
+        return $this->morphMany('Acme\Blog\Models\Comment', 'commentable');
+    }
 }
 
 class Product extends Model
 {
+    // Property style
     public $morphMany = [
         'comments' => ['Acme\Blog\Models\Comment', 'name' => 'commentable']
     ];
+
+    // Method style
+    public function comments(): MorphMany
+    {
+        return $this->morphMany('Acme\Blog\Models\Comment', 'commentable');
+    }
 }
 ```
 
@@ -783,9 +972,16 @@ Next, we're ready to define the relationships on the model. The `Post` and `Vide
 ```php
 class Post extends Model
 {
+    // Property style
     public $morphToMany = [
         'tags' => ['Acme\Blog\Models\Tag', 'name' => 'taggable']
     ];
+
+    // Method style
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany('Acme\Blog\Models\Tag', 'taggable');
+    }
 }
 ```
 
@@ -796,10 +992,21 @@ Next, on the `Tag` model, you should define a relation for each of its related m
 ```php
 class Tag extends Model
 {
+    // Property style
     public $morphedByMany = [
         'posts'  => ['Acme\Blog\Models\Post', 'name' => 'taggable'],
         'videos' => ['Acme\Blog\Models\Video', 'name' => 'taggable']
     ];
+
+    // Method style
+    public function posts(): MorphedByMany
+    {
+        return $this->morphedByMany('Acme\Blog\Models\Post', 'taggable');
+    }
+    public function videos(): MorphedByMany
+    {
+        return $this->morphedByMany('Acme\Blog\Models\Video', 'taggable');
+    }
 }
 ```
 
