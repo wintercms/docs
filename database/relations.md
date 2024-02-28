@@ -150,7 +150,7 @@ public function posts(): HasMany
 }
 ```
 
-Alternatively, you may also use the `Relation` attribute on the method to define it is as a relation method:
+Alternatively, you may also use the `Relation` attribute on the method to define it as a relation method:
 
 ```php
 use Winter\Storm\Database\Attributes\Relation;
