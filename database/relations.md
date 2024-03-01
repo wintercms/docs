@@ -200,11 +200,14 @@ Method | Description
 You might have noticed that there are no chain methods for handling "constraint" options like the `order`, `conditions` and `scope` options available in the property style relations. That is because relations defined in this format are already [query builders](query) - you can simply add the constraints directly to the relation!
 
 ```php
-public function posts(): HasMany
+#[Relation]
+public function posts()
 {
     return $this->hasMany('Acme\Blog\Models\Post')->dependent()->published()->where('free_article', true);
 }
 ```
+
+> **Note:** If your relation is constrained in this fashion, the object returned will be a query builder, not the original relation class. You will need to use the `Relation` attribute to mark methods that return query builders as a relation method.
 
 ## Relationship types
 
