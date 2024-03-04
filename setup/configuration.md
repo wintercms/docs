@@ -332,6 +332,7 @@ The `trustedProxyHeaders` value specifies which headers will be allowed to defin
 Winter CMS is preset to allow only certain file types in the media manager and file upload form widgets (see: `WinterStorm\Filesystem\Definitions`), but you can configure them to suit your needs by adding a `fileDefinitions` configuration value to your `config/cms.php` file.
 
 File types are grouped into five categories:
+
 - defaultExtensions: Extensions that are particularly benign.
 - assetExtensions: Extensions seen as public assets.
 - imageExtensions: Extensions typically used as images.
