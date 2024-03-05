@@ -241,6 +241,11 @@ Parameter | Value
 `videoExtensions` | file extensions corresponding to the Video document type. The default value is `['mp4', 'avi', 'mov', 'mpg']`.
 `audioExtensions` | file extensions corresponding to the Audio document type. The default value is `['mp3', 'wav', 'wma', 'm4a']`.
 
+### Allowing more specific file extensions
+
+By default, the Media Manager only allows a limited set of file extensions. You can extend this list by adding a `fileDefinitions` config in `config/cms.php` file.  
+See [Allowed file types](../setup/configuration#allowed-file-types) for more information.
+
 ## Events
 
 The Media Manager provides a few [events](../events/introduction) that you can listen for in order to improve extensibility.
