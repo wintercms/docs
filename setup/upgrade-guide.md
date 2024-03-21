@@ -96,7 +96,7 @@ The `server.php` file located in your project root folder is no longer required 
 
 > **Impacts:** Most users.
 
-There have been signifcant changes to the default configuration files, mainly in those that are based on the Laravel framework's configuration files. You should review the changes to the [default configuration files](https://github.com/wintercms/winter/tree/wip/1.2/config) and implement any changes as desired.
+There have been signifcant changes to the default configuration files, mainly in those that are based on the Laravel framework's configuration files. You should review the changes to the [default configuration files](https://github.com/wintercms/winter/tree/1.2/config) and implement any changes as desired.
 
 The following items have the highest likelihood of having an impact on your projects:
 
