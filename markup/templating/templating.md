@@ -107,3 +107,7 @@ Tag | Equivalent
 ------------- | -------------
 `{% extend %}` | Use [Layouts](../../docs/cms/layouts) or `{% placeholder %}`
 `{% include %}` | Use `{% partial %}` or `{% content %}`
+
+## Custom Twig filters and functions
+
+Custom Twig filters and functions can be registered with the `registerMarkupTags` method of the plugin registration class. For detailed documentation see [Extending Twig](../../docs/plugin/registration#extending-twig).
