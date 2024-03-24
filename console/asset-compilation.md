@@ -268,12 +268,14 @@ Please see the `mix:install` documentation for the available arguments and optio
 ### List registered Mix packages
 
 ```bash
-php artisan mix:list
+php artisan mix:list [--json]
 ```
 
 The `mix:list` command will list all registered Mix packages found in the Winter installation. This is useful for determining if your plugin or theme is correctly registered.
 
 The command will list all packages, as well as the directory for the asset and the configuration file that has been defined during registration.
+
+A json formatted list of packages can be printed by specifying the `--json` flag, 
 
 ### Compile a Mix packages
 
@@ -284,6 +286,8 @@ php artisan mix:compile [-p <package name>] [-f|--production] [-- <extra build o
 The `mix:compile` command compiles all registered Mix packages, running each package through Laravel Mix for compilation.
 
 By specifying the `-p` flag, you can compile one or more selected packages. To define multiple packages, simply add more `-p` flags to the end of the command.
+
+The `--no-progress` flag can be added in order to suppress the mix progress output. Useful if you want to only view the webpack output.
 
 By default, all packages are built in "development" mode. If you wish to compile in "production" mode, which may include more optimisations for production sites, add the `-f` or `--production` flag to the command.
 
