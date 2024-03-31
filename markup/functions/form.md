@@ -110,6 +110,20 @@ The above example would output as the following:
 </form>
 ```
 
+## form_token()
+
+Outputs a `_token` hidden fields for CSRF protection.
+
+```twig
+{{ form_token() }}
+```
+
+The above example would output as the following:
+
+```html
+<input name="_token" type="hidden" value="...">
+```
+
 ## form_submit()
 
 Outputs an `input` element of type `submit`. This tag is generally available to provide consistency in usage.
