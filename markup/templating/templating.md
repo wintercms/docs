@@ -64,10 +64,10 @@ Filters can take arguments like a function.
 {{ price | currency('USD') }}
 ```
 
-Filters can be applied in succession.
+Filters can be applied in succession. Filters are applied from left to right, with the result of the first filter being passed as the input to the second filter, and so on.
 
 ```twig
-{{ 'Winter Glory' | upper | replace({'Winter': 'Morning'}) }}
+{{ 'Winter Rain' | upper | replace({'Rain': 'Storm'}) }}
 ```
 
 Filters are listed under the **Filters** section.
