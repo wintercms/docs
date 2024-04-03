@@ -110,6 +110,34 @@ The above example would output as the following:
 </form>
 ```
 
+## form_token()
+
+Outputs a `_token` hidden fields for CSRF protection.
+
+```twig
+{{ form_token() }}
+```
+
+The above example would output as the following:
+
+```html
+<input name="_token" type="hidden" value="...">
+```
+
+## form_submit()
+
+Outputs an `input` element of type `submit`. This tag is generally available to provide consistency in usage.
+
+```twig
+{{ form_submit() }}
+```
+
+The above example would output as the following:
+
+```html
+<input type="submit">
+```
+
 ## Passing attributes to the generated element
 
 You can pass additional attributes to the `Form::open()` method by passing an array of attribute names and values to be rendered on the final generated `<form>` element.
