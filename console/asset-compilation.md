@@ -275,7 +275,7 @@ The `mix:list` command will list all registered Mix packages found in the Winter
 
 The command will list all packages, as well as the directory for the asset and the configuration file that has been defined during registration.
 
-A json formatted list of packages can be printed by specifying the `--json` flag, 
+A json formatted list of packages can be printed by specifying the `--json` flag.
 
 ### Compile a Mix packages
 
