@@ -791,6 +791,8 @@ You may also specify an operator and count to further customize the query:
 $posts = Post::has('comments', '>=', 3)->get();
 ```
 
+> **NOTE**: MySQL strict mode can sometimes complain when using a `GROUP` column without a `GROUP BY` clause (in the above case, `COUNT()`). You can set the `strict` option to `false` in your database's connection configuration (i.e. `database.connections.mysql.strict`) to ignore this warning message.
+
 Nested `has` statements may also be constructed using "dot" notation. For example, you may retrieve all posts that have at least one comment and vote:
 
 ```php
