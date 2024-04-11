@@ -21,7 +21,7 @@ You can specify a variable as a function parameter:
 In function parameters you can use concatenation:
 
 ```twig
-{{ url('blog/post/'  ~ post.id) }}
+{{ url('blog/post/' ~ post.id) }}
 
 {#  https://site.com/blog/post/123 #}
 ```
