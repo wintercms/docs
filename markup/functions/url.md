@@ -2,12 +2,20 @@
 
 ## url()
 
-The `url()` function generates a fully qualified URL to the given path
+The `url()` function generates a fully qualified URL to the given path.
 
 ```twig
 {{ url('blog') }}
 
 {#  https://site.com/blog #}
+```
+
+You can specify a variable as a function parameter:
+
+```twig
+{{ url(category.slug) }}
+
+{#  https://site.com/slug-value #}
 ```
 
 In function parameters you can use concatenation:
