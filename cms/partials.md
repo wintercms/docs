@@ -56,7 +56,7 @@ Inside the partial, variables can be accessed like any other markup variable:
 
 ## Dynamic partials
 
-Partials, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details.
+Partials, like pages, can use any PHP features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details.
 
 ### Partial execution life cycle
 
