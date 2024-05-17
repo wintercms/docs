@@ -736,7 +736,7 @@ public function addHasOneThroughRelation(string $name, array $config)
 public function addHasManyThroughRelation(string $name, array $config)
 ```
 
-It is strongly suggested to use the above methods to add relations when extending a model since they will merge the existing relations and make sure the relation is valid and does not already exit.
+It is strongly suggested to use the above methods to add relations when extending a model since they will merge the existing relations and make sure the relation is valid and does not already exist.
 
 Example usage:
 
