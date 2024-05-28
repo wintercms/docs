@@ -55,24 +55,125 @@ plugins/
     `-- blog/
         |-- tests/                             # The tests folder
         |   |-- cases/                         # The test cases folder
-        |   |   |-- BlogCategoryTestCase.php   # An example test case
-        |   |   `-- BlogPostTestCase.php       # Another example test case
+        |   |   |-- BlogCategoryTest.php         # An example test case
+        |   |   `-- BlogPostTest.php             # Another example test case
         |   `-- fixtures/                      # The test fixtures folder
-        |       |-- first-blog.md              # An example fixture
-        |       `-- second-blog.md             # Another example fixture
+        |       |-- first-blog.md                # An example fixture
+        |       `-- second-blog.md               # Another example fixture
         |-- Plugin.php
         `-- phpunit.xml
 ```
 
 A unit test within a plugin should extend the `System\Tests\Bootstrap\TestCase` class. This base test case class includes several features for properly testing plugins, including running migrations for the plugins and ensuring that the environment is set up to properly test plugins.
 
+In order to be picked up by PHPUnit, test cases must match the following conventions:
+
+- Test cases must be defined within a class ended with the `Test` suffix - generally, the test case should match the path and class name being tested, however only the suffix is required. For example, if you are testing a `Post` model, stored in the `models/Post.php` file in your plugin, it is best to define the test cases for this model within a class called `PostTest` and stored in the `tests/cases/models/PostTest.php` path.
+- The test case class must extend the `System\Tests\Bootstrap\TestCase` class.
+- Test case methods must be public and must be prefixed with the `test` prefix in the method name. Alternatively, the method must have a docblock that defines the `@test` annotation.
+- Test cases must make at least one assertion.
+
+An example test case class is below:
+
 ```php
-<?php namespace Acme\Blog\Tests\Cases;
+<?php
+
+namespace Acme\Blog\Tests\Cases\Models;
 
 use System\Tests\Bootstrap\TestCase;
 
-class BlogCategoryTestCase extends TestCase
+class BlogTest extends TestCase
 {
-    // ...
+    // Test adding a post
+    public function testAddPost()
+    {
+        // ...
+    }
+
+    /**
+     * This is still a test case, as it contains the following annotation.
+     * @test
+     */
+    public function itCanDeleteAPost()
+    {
+        // ...
+    }
+
+    // This is NOT a test case, as the method is protected.
+    protected function testNeverRuns()
+    {
+        // ...
+    }
 }
 ```
+
+## Running unit tests
+
+To run unit tests, it is strongly recommended to use the [`winter:test`](../console/utilities#run-unit-tests) Artisan command as opposed to PHPUnit directly, as this will ensure that the necessary bootstrapping of Winter CMS functionality takes place.
+
+```
+php artisan winter:test -p Your.PluginCode
+```
+
+This command will run all defined test cases that match the conventions above.
+
+## Automating unit tests
+
+If you wish to use continuous integration tools to run unit tests automatically, such as GitHub Actions or GitLab CI, you will need to ensure that a Winter CMS environment is set up by your continuous integration system *before* running the unit tests.
+
+In general, your automation should do the following:
+
+- Set up an environment with the PHP version you wish to test against, as well as [all required extensions](../setup/installation#minimum-system-requirements).
+- Download the Winter CMS version you wish to test against.
+- Install all Composer dependencies.
+- Run the [`winter:test`](../console/utilities#run-unit-tests) Artisan command for your plugin.
+
+### Example GitHub Actions configuration
+
+This is an example of a configuration that you can use for GitHub Actions to test a Winter plugin whenever a new commit is added to your repository. Feel free to use this and adjust as necessary for your specific requirements.
+
+```yaml
+name: Tests
+
+on:
+  push:
+
+jobs:
+  unitTests:
+    runs-on: ubuntu-latest
+    name: Unit Tests
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: my-plugin
+
+      - name: Setup PHP and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: mbstring, intl, gd, xml, sqlite
+          tools: composer:v2
+
+      - name: Install Winter
+        run: |
+          wget https://github.com/wintercms/winter/archive/develop.zip
+          unzip develop.zip
+          rm develop.zip
+
+          # Move Winter CMS into place
+          shopt -s dotglob
+          mv winter-develop/* ./
+          rmdir winter-develop
+          shopt -u dotglob
+          mv config/cms.php config/testing/cms.php
+
+          # Move plugin into place (note that the paths below should be changed to match your plugin path)
+          mkdir -p plugins/myauthor
+          mv my-plugin plugins/myauthor/myplugin
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress
+
+      - name: Run unit tests
+        run: php artisan winter:test -p MyAuthor.MyPlugin
