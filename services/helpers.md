@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD051 -->
 # Helpers
 
 Winter includes a variety of "helper" PHP functions. Many of these functions are used internally by Winter itself, however, you are free to use them in your own plugins and applications if you find them useful.
@@ -9,22 +10,22 @@ For more useful methods, you should also review the [Laravel `Arr::*()` helpers]
 
 <div class="columned-list">
 
-- [array_add](#array_add)
-- [array_divide](#array_divide)
-- [array_dot](#array_dot)
-- [array_undot](#array_undot)
-- [array_except](#array_except)
-- [array_first](#array_first)
-- [array_flatten](#array_flatten)
-- [array_forget](#array_forget)
-- [array_get](#array_get)
-- [array_only](#array_only)
-- [array_pluck](#array_pluck)
-- [array_pull](#array_pull)
-- [array_set](#array_set)
-- [array_sort](#array_sort)
-- [array_sort_recursive](#array_sort_recursive)
-- [array_where](#array_where)
+- [array_add](#arrayadd)
+- [array_divide](#arraydivide)
+- [array_dot](#arraydot)
+- [array_undot](#arrayundot)
+- [array_except](#arrayexcept)
+- [array_first](#arrayfirst)
+- [array_flatten](#arrayflatten)
+- [array_forget](#arrayforget)
+- [array_get](#arrayget)
+- [array_only](#arrayonly)
+- [array_pluck](#arraypluck)
+- [array_pull](#arraypull)
+- [array_set](#arrayset)
+- [array_sort](#arraysort)
+- [array_sort_recursive](#arraysortrecursive)
+- [array_where](#arraywhere)
 - [head](#head)
 - [last](#last)
 
@@ -36,17 +37,17 @@ Paths
 <div class="columned-list">
 
 - [Path Symbols](#path-symbols)
-- [app_path](#app_path)
-- [base_path](#base_path)
-- [config_path](#config_path)
-- [database_path](#database_path)
-- [media_path](#media_path)
-- [plugins_path](#plugins_path)
-- [public_path](#public_path)
-- [storage_path](#storage_path)
-- [temp_path](#temp_path)
-- [themes_path](#themes_path)
-- [uploads_path](#uploads_path)
+- [app_path](#apppath)
+- [base_path](#basepath)
+- [config_path](#configpath)
+- [database_path](#databasepath)
+- [media_path](#mediapath)
+- [plugins_path](#pluginspath)
+- [public_path](#publicpath)
+- [storage_path](#storagepath)
+- [temp_path](#temppath)
+- [themes_path](#themespath)
+- [uploads_path](#uploadspath)
 
 </div>
 
@@ -57,23 +58,23 @@ For more useful methods, you should also review the [Laravel `Str::*()` helpers]
 
 <div class="columned-list">
 
-- [camel_case](#camel_case)
-- [class_basename](#class_basename)
+- [camel_case](#camelcase)
+- [class_basename](#classbasename)
 - [e](#e)
-- [ends_with](#ends_with)
-- [snake_case](#snake_case)
-- [str_limit](#str_limit)
-- [starts_with](#starts_with)
-- [str_contains](#str_contains)
-- [str_finish](#str_finish)
-- [str_is](#str_is)
-- [str_plural](#str_plural)
-- [str_random](#str_random)
-- [str_singular](#str_singular)
-- [str_slug](#str_slug)
-- [studly_case](#studly_case)
+- [ends_with](#endswith)
+- [snake_case](#snakecase)
+- [str_limit](#strlimit)
+- [starts_with](#startswith)
+- [str_contains](#strcontains)
+- [str_finish](#strfinish)
+- [str_is](#stris)
+- [str_plural](#strplural)
+- [str_random](#strrandom)
+- [str_singular](#strsingular)
+- [str_slug](#strslug)
+- [studly_case](#studlycase)
 - [trans](#trans)
-- [trans_choice](#trans_choice)
+- [trans_choice](#transchoice)
 
 </div>
 
@@ -102,9 +103,9 @@ Miscellaneous
 - [request](#request)
 - [response](#response)
 - [route](#route)
-- [secure_asset](#secure_asset)
-- [trace_log](#trace_log)
-- [trace_sql](#trace_sql)
+- [secure_asset](#secureasset)
+- [trace_log](#tracelog)
+- [trace_sql](#tracesql)
 - [url](#url)
 
 </div>
