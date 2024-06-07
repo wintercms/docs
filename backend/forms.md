@@ -393,6 +393,45 @@ status:
     showSearch: false
 ```
 
+Dropdowns can also allow users to provide a new value. This can be activated by setting the `allowCustom` option to `true`.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    allowCustom: true
+```
+
+The `allowCustom` option can be useful to provide a preset list of options without preventing the user from adding a new or custom value.
+
+When using the `get*Options` method for defining options, you would be able to take into consideration any custom options present in the data:
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    allowCustom: true
+```
+
+```php
+public function getStatusOptions($value, $formData)
+{
+    // Prefill the dropdown with the already used statuses: [['status' => 'draft'], ['status' => 'published']]
+    $statuses = self::distinct('status')->get();
+
+    // Insert the actual form's model value to avoid it to vanish
+    // on eventual AJAX call that would refresh the field partial like dependsOn
+    if ($this->status) {
+
+        // The actual form's status could be a custom like ['status' => 'need review']
+        $statuses->add(['status' => $this->status]);
+    }
+
+    // Return a list of statuses: [['status' => 'draft'], ['status' => 'published'], ['status' => 'need review']]
+    return $statuses->pluck('status', 'status');
+}
+```
+
 ### Email
 
 `email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
@@ -836,6 +875,9 @@ Option | Description
 `attachOnUpload` | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
 
 > **NOTE:** Unlike the [Media Finder FormWidget](#media-finder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
+
+By default, the File Upload FormWidget only allows a limited set of file extensions. You can extend this list by adding a `fileDefinitions` config in `config/cms.php` file.  
+See [Allowed file types](../setup/configuration#allowed-file-types) for more information.
 
 ### Icon Picker
 

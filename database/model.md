@@ -4,18 +4,18 @@
 
 Winter provides a beautiful and simple Active Record implementation for working with your database, based on [Eloquent by Laravel](http://laravel.com/docs/eloquent). Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records into the table.
 
-Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
+Model classes reside in the `models` subdirectory of a plugin directory. An example of a model directory structure:
 
-```css
-📂 plugins
- ┗ 📂 acme
-   ┗ 📂 blog
-     ┣ 📂 models
-     ┃ ┣ 📂 user              <=== Model config directory
-     ┃ ┃ ┣ 📜 columns.yaml    <=== Model config files
-     ┃ ┃ ┗ 📜 fields.yaml     <==^
-     ┃ ┗ 📜 User.php          <=== Model class
-     ┗ 📜 Plugin.php
+```treeview
+plugins/
+`-- acme/
+    `-- blog/
+       |-- models/                 # Plugin models directory
+       |   |-- user/               # Model configuration directory
+       |   |   |-- columns.yaml    # Model list columns config file
+       |   |   `-- fields.yaml     # Model form fields config file
+       |   `-- User.php            # Model class
+       `-- Plugin.php
 ```
 
 The model configuration directory could contain the model's [list column](../backend/lists#defining-list-columns) and [form field](../backend/forms#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
