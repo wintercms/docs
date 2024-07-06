@@ -118,6 +118,26 @@ $items = [
 ];
 ```
 
+#### Use of single / double quotes
+
+Winter CMS highly recommends the use of single quotes around strings instead of double quotes. If such a string contains itself a single quote, we recommend escaping that single quote within the string.
+
+**Recommended:**
+
+```php
+$translations = [
+    'key1' => 'key1\'s value',
+];
+```
+
+**Not recommended**:
+
+```php
+$translations = [
+    'key1' => "key1's value",
+];
+```
+
 ## Developer standards and patterns
 
 ### Vendor naming
