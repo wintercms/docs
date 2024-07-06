@@ -238,6 +238,45 @@ class SubscriberExport extends \Backend\Models\ExportModel
 
 The class must define a method called `exportData` used for returning the export data. The first parameter `$columns` is an array of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
 
+>**NOTE:** The above example uses [PHP Generators](https://www.php.net/manual/en/language.generators.overview.php) to minimize the memory usage of the export process. Note however that Laravel is unable to eager load relationships when using this approach, so you may have to either switch to loading all the records at once with `Subscriber::get()`, or get a bit fancy with your query in order to select the necessary data for your export. An example of the query approach is provided below:
+
+```php
+use Illuminate\Support\Facades\DB;
+
+class PostExport extends \Backend\Models\ExportModel
+{
+    public function exportData($columns, $sessionKey = null)
+    {
+        $post = new Post();
+
+        // Get the related table names using the relationships
+        $postTable = $post->getTable();
+        $authorPostTable = $post->authors()->getTable();
+        $authorTable = $post->authors()->getRelated()->getTable();
+        $postTagTable = $post->tags()->getTable();
+        $tagTable = $post->tags()->getRelated()->getTable();
+
+        $records = Post::query()
+            ->leftJoin("{$authorPostTable}", "{$postTable}.id", '=', "{$authorPostTable}.post_id")
+            ->leftJoin("{$authorTable}", "{$authorPostTable}.author_id", '=', "{$authorTable}.id")
+            ->leftJoin("{$postTagTable}", "{$postTable}.id", '=', "{$postTagTable}.post_id")
+            ->leftJoin("{$tagTable}", "{$postTagTable}.tag_id", '=', "{$tagTable}.id")
+            ->select(
+                "{$postTable}.*",
+                DB::raw("GROUP_CONCAT(DISTINCT {$authorTable}.id) as author_ids"),
+                DB::raw("GROUP_CONCAT(DISTINCT {$tagTable}.id) as tag_ids")
+            )
+            ->groupBy("{$postTable}.id")
+            ->cursor();
+
+        foreach ($records as $record) {
+            $record->addVisible($columns);
+            yield $record->toArray();
+        }
+    }
+}
+```
+
 ## Custom options
 
 Both import and export forms support custom options that can be introduced using form fields, defined in the **form** option in the import or export configuration respectively. These values are then passed to the Import / Export model and are available during processing.
