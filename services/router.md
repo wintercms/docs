@@ -203,7 +203,7 @@ Route::group(['middleware' => 'Path\To\Your\Middleware'], function() {
 });
 ```
 
-And finally, if you want to assign a group of middleware to just one route you can it like this
+If you want to assign a group of middleware to just one route you can it like this
 
 ```php
 Route::middleware(['Path\To\Your\Middleware'])->group(function() {
@@ -211,7 +211,41 @@ Route::middleware(['Path\To\Your\Middleware'])->group(function() {
 });
 ```
 
+And finally, if you want to remove middleware from a route you can it like this
+
+```php
+Route::withoutMiddleware("Path\To\Removed\Middleware")
+    ->get('info', 'Acme\News@info');
+```
+
 You can of course add more than one middleware in a group, just one is used in the above examples for convenience.
+
+## Throttle middleware
+
+When using Winter's API middleware, you can remove the default 60 request per minute rate throttle applied to Winter's
+API middleware and replace it with your own. For example
+
+```php
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+
+RateLimiter::for("infoThrottle", function (Request $request) {
+    return Limit::perMinute(120);
+});
+
+Route::group(
+    [
+        "prefix" => "api",
+        "middleware" => ["api"],
+    ],
+    function () {
+        Route::withoutMiddleware("throttle:60,1")
+            ->middleware("throttle:infoThrottle")
+            ->get('info', 'Acme\News@info');
+    }
+);
+```
 
 ## Throwing 404 errors
 
