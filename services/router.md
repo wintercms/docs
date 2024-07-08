@@ -214,7 +214,7 @@ Route::middleware(['Path\To\Your\Middleware'])->group(function() {
 And finally, if you want to remove middleware from a route you can it like this
 
 ```php
-Route::withoutMiddleware("Path\To\Removed\Middleware")
+Route::withoutMiddleware(\Path\To\Removed\Middleware::class)
     ->get('info', 'Acme\News@info');
 ```
 
