@@ -71,7 +71,7 @@ You can even specify multiple Memcached servers for failover:
 
 ### Redis
 
-> If you wish to use the default **predis** driver, you will need to install the [Drivers plugin](http://github.com/wintercms/wn-driver-plugins).
+> If you wish to use the default **predis** driver, you will need to install the [Drivers plugin](http://github.com/wintercms/wn-drivers-plugin).
 
 The Redis configuration for your application is located in the `config/database.php` configuration file. Within this file, you will see a `redis` array containing the Redis servers used by your application:
 
