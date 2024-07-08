@@ -222,8 +222,7 @@ You can of course add more than one middleware in a group, just one is used in t
 
 ## Throttle middleware
 
-When using Winter's API middleware, you can remove the default 60 request per minute rate throttle applied to Winter's
-API middleware and replace it with your own. For example
+When using Winter's `api` middleware, you can remove the default rate limiting of 60 requests per minute and replace it with your own by using the below example:
 
 ```php
 use Illuminate\Cache\RateLimiting\Limit;
