@@ -203,7 +203,7 @@ Route::group(['middleware' => 'Path\To\Your\Middleware'], function() {
 });
 ```
 
-If you want to assign a group of middleware to just one route you can it like this
+If you want to assign a group of middleware to just one route you can do it like this:
 
 ```php
 Route::middleware(['Path\To\Your\Middleware'])->group(function() {
@@ -211,7 +211,7 @@ Route::middleware(['Path\To\Your\Middleware'])->group(function() {
 });
 ```
 
-And finally, if you want to remove middleware from a route you can it like this
+And finally, if you want to remove middleware from a route you can do it like this:
 
 ```php
 Route::withoutMiddleware(\Path\To\Removed\Middleware::class)
