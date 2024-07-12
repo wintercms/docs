@@ -99,6 +99,7 @@ Option | Description
 `form` | provides additional fields used as import options, optional.
 `redirect` | redirection page when the export is complete, optional.
 `useList` | set to true or the value of a list definition to enable [integration with Lists](#integration-with-list-behavior), default: false.
+`permissions` | user permissions needed to perform the operation, optional
 
 ### Format options
 
