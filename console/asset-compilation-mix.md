@@ -129,7 +129,6 @@ If the command is run with a `-p` or `--package` flag and the provided package n
 
 The `--npm` flag can also be provided if you have a custom path to the `npm` program. If this is not provided, the system will try to guess where `npm` is located.
 
-
 ### List registered Mix packages
 
 ```bash

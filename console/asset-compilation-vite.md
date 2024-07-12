@@ -138,14 +138,19 @@ Vite does not compile assets to a specific path like mix, instead you must use t
 The helper function takes 2 arguments, the first is a `array|string` of entry path(s). These entry paths must exist in the inputs of your `vite.config.js`. The second argument is the "package" you wish to load these entry points from, i.e. `theme-example` or `acme.plugin`.
 
 - In `twig` this helper can be called via:
+
     ```twig
     {{ vite(['assets/css/example.css', 'assets/js/example.js'], 'acme.plugin') }}
     ```
+
 - In `php` the `Vite` class offers a method for generating the imports:
+
     ```php
     \System\Classes\Vite::tags(['assets/css/example.css', 'assets/js/example.js'], 'acme.plugin')
     ```
+
 - With the `AssetMaker` trait (i.e. in backend controllers, forms, etc.):
+
     ```php
     $this->addVite(['assets/css/example.css'], 'acme.plugin');
     // The second param here is not required, Winter will attempt to guess the plugin based on the current namespace
@@ -169,7 +174,6 @@ You can optionally provide a `-p` or `--package` flag to install dependencies fo
 If the command is run with a `-p` or `--package` flag and the provided package name is not already registered and the name matches a valid module, plugin, or theme package name (modules are prefixed with `module-$moduleDirectory`, themes are prefixed with `theme-$themeDirectory`, and plugins are simply `Author.Plugin`) then a `vite.config.mjs` file will be automatically generated for that package and will be included in future runs of any vite commands through the [automatic registration](#automatic-registration) feature.
 
 The `--npm` flag can also be provided if you have a custom path to the `npm` program. If this is not provided, the system will try to guess where `npm` is located.
-
 
 ### List registered Vite packages
 
