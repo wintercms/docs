@@ -2,7 +2,7 @@
 
 ## Registration
 
-By default, any plugin or theme containing a `winter.mix.js` file at it's root will be automatically registered. Registered items can be viewed with the `mix:list` command.
+By default, any plugin or theme containing a `winter.mix.js` file at its root will be automatically registered. Registered items can be viewed with the `mix:list` command.
 
 The following sections document additional ways to configure a Mix package, these are only required if you need additional customization.
 
