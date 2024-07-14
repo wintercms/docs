@@ -11,7 +11,7 @@ The following sections document additional ways to configure a Mix package, thes
 To register frontend assets to be compiled through Mix in your plugin, simply return an array with the package names as the keys and the package paths relative to the plugin's directory as the values to register from your [`Plugin.php`](../plugin/registration) registration file's `registerMixPackages()` method. See below example.
 
 ```php
-public function registerMixPackages()
+public function registerMixPackages(): array
 {
     return [
         'custom-package-name' => 'assets/js/build.mix.js',
