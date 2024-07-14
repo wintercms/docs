@@ -89,7 +89,7 @@ php artisan vite:config acme.example --tailwind --stubs
 
 The Vite configuration file (`vite.config.mjs`) is a configuration file that manages the configuration of Laravel Vite itself. In conjunction with the `package.json` file that defines your dependencies, this file defines how Laravel Vite will compile your assets.
 
-You can [review examples](https://laravel-vite.com/docs/6.0/examples) or the [full Vite API](https://laravel-vite.com/docs/6.0/api) at the [Laravel Vite website](https://laravel-vite.com).
+For more information, you can review [the Laravel docs](https://laravel.com/docs/11.x/vite) or the [Vite docs](https://vitejs.dev/config/).
 
 Your `vite.config.mjs` file must include Vite as a requirement, and must also define the public path to the current directory, as follows:
 
