@@ -16,7 +16,7 @@ Registering for asset compilation through Mix is very easy. Automatic registrati
 
 ### Automatic registration
 
-By default, Winter will scan all available and enabled modules, plugins and themes for the presence of a config file under each extension's root folder (i.e. `modules/system/config_file.js`, `plugins/myauthor/myplugin/config_file.js`, or `themes/mytheme/config_file.js`).
+By default, Winter will scan all available and enabled modules, plugins and themes for the presence of a config file from a supported compiler under each extension's root folder (i.e. `modules/system/config_file.js`, `plugins/myauthor/myplugin/config_file.js`, or `themes/mytheme/config_file.js`).
 
 If the config file is found, it will be automatically registered as a package with an automatically generated package name, and will show up when running the Mix commands. Most of the time, this should be all you need to do in order to get started with one of the asset compilers in Winter CMS.
 
