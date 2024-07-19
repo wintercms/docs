@@ -77,13 +77,13 @@ By default, the `mix:config` command will only generate the basic `winter.mix.js
 - `--tailwind` will configure your package for [tailwindcss](https://tailwindcss.com/)
 - `--vue`  will configure your package for [vue.js](https://vuejs.org/)
 
-The `--stubs` flag will tell Winter to automatically pre-populate css/js files with a basic setup of your chosen libraries.
-
 For example, the following with configure the plugin `Acme.Example` with tailwind and create `plugins/acme/example/assets/src/acme-example.css` with a tailwind setup.
 
 ```bash
-php artisan mix:config acme.example --tailwind --stubs
+php artisan mix:config acme.example --tailwind
 ```
+
+> Winter will automatically pre-populate css/js files with a basic setup of your chosen libraries, if you wish to disable this feature then use the `--no-stubs` option.
 
 ## Manual Mix configuration
 
