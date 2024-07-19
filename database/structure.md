@@ -217,6 +217,23 @@ Schema::table('users', function ($table) {
 });
 ```
 
+You can also use the `dropColumnIfExists` method on the Schema builder for a slightly safer way of handling migrations:
+
+```php
+Schema::table('users', function ($table) {
+    $table->dropColumnIfExists('single_column');
+    // or
+    $table->dropColumnIfExists('one_column', 'two_column');
+    // or
+    $table->dropColumnIfExists([
+        'one_column',
+        'two_column',
+        'red_column',
+        'blue_column',
+    ]);
+}
+```
+
 ### Creating indexes
 
 The schema builder supports several types of indexes. First, let's look at an example that specifies a column's values should be unique. To create the index, we can simply chain the `unique` method onto the column definition:
