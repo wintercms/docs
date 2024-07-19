@@ -66,13 +66,13 @@ CompilableAssets::instance()->registerPackage(
 
 ## Automatic Vite configuration
 
-The command `vite:config` will allow you to automatically generate a basic Vite config which you can then build on top of.
+The command `vite:create` will allow you to automatically generate a basic Vite config which you can then build on top of.
 
 ```bash
-php artisan vite:config <package name> [--tailwind] [--vue] [--stubs]
+php artisan vite:config <package name> [--tailwind] [--vue]
 ```
 
-By default, the `vite:config` command will only generate the basic `vite.config.mjs` config file. If you would like Winter to pre-configure your package for a certain library, you can provide any of the following flags.
+By default, the `vite:create` command will only generate the basic `vite.config.mjs` config file. If you would like Winter to pre-configure your package for a certain library / asset bundle, you can provide any of the following flags.
 
 - `--tailwind` will configure your package for [tailwindcss](https://tailwindcss.com/)
 - `--vue`  will configure your package for [vue.js](https://vuejs.org/)
@@ -80,7 +80,7 @@ By default, the `vite:config` command will only generate the basic `vite.config.
 For example, the following with configure the plugin `Acme.Example` with tailwind and create `plugins/acme/example/assets/src/acme-example.css` with a tailwind setup.
 
 ```bash
-php artisan vite:config acme.example --tailwind
+php artisan vite:create acme.example --tailwind
 ```
 
 > **NOTE:** Winter will automatically pre-populate CSS/JS files with a basic setup of your chosen libraries. If you wish to only have the base configuration files generated then use the `--no-stubs` option.
