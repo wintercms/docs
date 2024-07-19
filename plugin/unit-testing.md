@@ -137,43 +137,34 @@ name: Tests
 
 on:
   push:
+  pull_request:
 
 jobs:
   unitTests:
     runs-on: ubuntu-latest
     name: Unit Tests
     steps:
+      - name: Checkout Winter CMS
+        uses: actions/checkout@v4
+        with:
+          repository: wintercms/winter
+          ref: develop   # change this to a different branch or tag name if you wish to test with a specific version of Winter CMS
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          path: my-plugin
+          path: plugins/my-author/my-plugin    # change this to the correct folder for your plugin
 
-      - name: Setup PHP and extensions
+      - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.3    # change this if you wish to test a different PHP version
           extensions: mbstring, intl, gd, xml, sqlite
           tools: composer:v2
 
-      - name: Install Winter
-        run: |
-          wget https://github.com/wintercms/winter/archive/develop.zip
-          unzip develop.zip
-          rm develop.zip
-
-          # Move Winter CMS into place
-          shopt -s dotglob
-          mv winter-develop/* ./
-          rmdir winter-develop
-          shopt -u dotglob
-          mv config/cms.php config/testing/cms.php
-
-          # Move plugin into place (note that the paths below should be changed to match your plugin path)
-          mkdir -p plugins/myauthor
-          mv my-plugin plugins/myauthor/myplugin
-
       - name: Install Composer dependencies
-        run: composer install --no-interaction --no-progress
+        run: composer install --no-interaction --no-progress --no-scripts
 
       - name: Run unit tests
-        run: php artisan winter:test -p MyAuthor.MyPlugin
+        run: php artisan winter:test -p MyAuthor.MyPlugin    # change this to the correct plugin code
+```

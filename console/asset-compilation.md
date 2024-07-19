@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Winter brings first-class support for handling Node-based compilation for frontend assets through the Mix commands. The comamnds use the [Laravel Mix](https://laravel-mix.com/) wrapper, a user-friendly and simple interface for setting up compilation of multiple types of frontend assets through Webpack and various libraries.
+Winter brings first-class support for handling Node-based compilation for frontend assets through the Mix commands. The commands use the [Laravel Mix](https://laravel-mix.com/) wrapper, a user-friendly and simple interface for setting up compilation of multiple types of frontend assets through Webpack and various libraries.
 
 ### Requirements
 
