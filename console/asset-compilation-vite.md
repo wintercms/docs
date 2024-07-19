@@ -83,7 +83,7 @@ For example, the following with configure the plugin `Acme.Example` with tailwin
 php artisan vite:config acme.example --tailwind
 ```
 
-> Winter will automatically pre-populate css/js files with a basic setup of your chosen libraries, if you wish to disable this feature then use the `--no-stubs` option.
+> **NOTE:** Winter will automatically pre-populate CSS/JS files with a basic setup of your chosen libraries. If you wish to only have the base configuration files generated then use the `--no-stubs` option.
 
 ## Manual Vite configuration
 
