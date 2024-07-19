@@ -66,13 +66,13 @@ CompilableAssets::instance()->registerPackage(
 
 ## Automatic Mix configuration
 
-The command `mix:config` will allow you to automatically generate a basic Mix config which you can then build on top of.
+The command `mix:create` will allow you to automatically generate a basic Mix config which you can then build on top of.
 
 ```bash
-php artisan mix:config <package name> [--tailwind] [--vue] [--stubs]
+php artisan mix:create <package name> [--tailwind] [--vue]
 ```
 
-By default, the `mix:config` command will only generate the basic `winter.mix.js` config file. If you would like Winter to pre-configure your package for a certain library, you can provide any of the following flags.
+By default, the `mix:create` command will only generate the basic `winter.mix.js` config file. If you would like Winter to pre-configure your package for a certain library / asset bundle, you can provide any of the following flags:
 
 - `--tailwind` will configure your package for [tailwindcss](https://tailwindcss.com/)
 - `--vue`  will configure your package for [vue.js](https://vuejs.org/)
@@ -80,7 +80,7 @@ By default, the `mix:config` command will only generate the basic `winter.mix.js
 For example, the following with configure the plugin `Acme.Example` with tailwind and create `plugins/acme/example/assets/src/acme-example.css` with a tailwind setup.
 
 ```bash
-php artisan mix:config acme.example --tailwind
+php artisan mix:create acme.example --tailwind
 ```
 
 > **NOTE:** Winter will automatically pre-populate CSS/JS files with a basic setup of your chosen libraries. If you wish to only have the base configuration files generated then use the `--no-stubs` option.
