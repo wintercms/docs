@@ -114,7 +114,9 @@ sections:
             console/setup-maintenance: "Setup & Maintenance"
             console/plugin-management: "Plugin Management"
             console/theme-management: "Theme Management"
-            console/asset-compilation: "Asset Compilation (Mix)"
+            console/asset-compilation: "Asset Compilation"
+            console/asset-compilation-mix: "Asset Compilation (Mix)"
+            console/asset-compilation-vite: "Asset Compilation (Vite)"
             console/scaffolding: "Scaffolding"
             console/utilities: "Utilities"
 
