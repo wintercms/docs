@@ -34,7 +34,7 @@ Winter CMS supports the following:
 
 For more information on these compilers, see the links above.
 
-### Supported Toolset
+### Supported Toolset (Bundles)
 
 When using Vite or Mix, Winter can automatically configure your plugin/theme via the `vite:create` or `mix:create` commands. These commands allow you to set up all config files, stub files and register any required npm packages.
 
