@@ -64,6 +64,8 @@ CompilableAssets::instance()->registerPackage(
 );
 ```
 
+<div id="automatic-configuration"></div>
+
 ## Automatic Mix configuration
 
 The command `mix:create` will allow you to automatically generate a basic Mix config which you can then build on top of.

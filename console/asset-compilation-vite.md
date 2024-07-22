@@ -64,6 +64,8 @@ CompilableAssets::instance()->registerPackage(
 );
 ```
 
+<div id="automatic-configuration"></div>
+
 ## Automatic Vite configuration
 
 The command `vite:create` will allow you to automatically generate a basic Vite config which you can then build on top of.
