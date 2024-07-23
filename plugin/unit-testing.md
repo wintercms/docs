@@ -163,7 +163,9 @@ jobs:
           tools: composer:v2
 
       - name: Install Composer dependencies
-        run: composer install --no-interaction --no-progress --no-scripts
+        run: |
+          sed -i 's|plugins/myauthor/\*/composer.json|plugins/*/*/composer.json|g' composer.json   # allows Composer dependencies in plugins to be downloaded
+          composer install --no-interaction --no-progress --no-scripts
 
       - name: Run unit tests
         run: php artisan winter:test -p MyAuthor.MyPlugin    # change this to the correct plugin code
