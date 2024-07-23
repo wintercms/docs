@@ -164,7 +164,7 @@ jobs:
 
       - name: Install Composer dependencies
         run: |
-          sed -i 's|plugins/myauthor/\*/composer.json|plugins/*/*/composer.json|g' composer.json   # allows Composer dependencies in plugins to be downloaded
+          sed -i 's|plugins/myauthor/\*/composer.json|plugins/*/*/composer.json|g' composer.json
           composer install --no-interaction --no-progress --no-scripts
 
       - name: Run unit tests
