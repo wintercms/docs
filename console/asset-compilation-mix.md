@@ -55,9 +55,9 @@ mix:
 You can configure a custom mix package that sits outside of plugins and themes.
 
 ```php
-use System\Classes\CompilableAssets;
+use System\Classes\Asset\PackageManager;
 
-CompilableAssets::instance()->registerPackage(
+PackageManager::instance()->registerPackage(
     name: 'my-custom-package',
     path: '/path/to/winter.mix.js',
     type: 'mix'

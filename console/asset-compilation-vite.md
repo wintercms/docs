@@ -55,9 +55,9 @@ vite:
 You can configure a custom vite package that sits outside of plugins and themes.
 
 ```php
-use System\Classes\CompilableAssets;
+use System\Classes\Asset\PackageManager;
 
-CompilableAssets::instance()->registerPackage(
+PackageManager::instance()->registerPackage(
     name: 'my-custom-package',
     path: '/path/to/vite.config.mjs',
     type: 'vite'
@@ -69,7 +69,7 @@ CompilableAssets::instance()->registerPackage(
 The command `vite:create` will allow you to automatically generate a basic Vite config which you can then build on top of.
 
 ```bash
-php artisan vite:config <package name> [--tailwind] [--vue]
+php artisan vite:create <package name> [--tailwind] [--vue]
 ```
 
 By default, the `vite:create` command will only generate the basic `vite.config.mjs` config file. If you would like Winter to pre-configure your package for a certain library / asset bundle, you can provide any of the following flags.
