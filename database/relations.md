@@ -207,7 +207,7 @@ public function posts()
 }
 ```
 
-> **Note:** If your relation is constrained in this fashion, the object returned will be a query builder, not the original relation class. You will need to use the `Relation` attribute to mark methods that return query builders as a relation method.
+> **NOTE:** If your relation is constrained in this fashion, the object returned will be a query builder, not the original relation class. You will need to use the `Relation` attribute to mark methods that return query builders as a relation method.
 
 ## Relationship types
 
