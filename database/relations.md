@@ -19,7 +19,7 @@ Model relationships can be defined as properties on your model classes. An examp
 class User extends Model
 {
     public $hasOne = [
-        'profile' => 'Acme\Blog\Models\Profile',
+        'profile' => \Acme\Blog\Models\Profile::class,
     ];
 
     public $hasMany = [
