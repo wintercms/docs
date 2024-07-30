@@ -8,8 +8,8 @@ Database tables are often related to one another. For example, a blog post may h
 
 Winter provides two methods of defining model relationships. Both provide the same level of functionality - which one you use is entirely up to your own preferences.
 
-- Property-based array configuration in the model class, available in all versions of Winter CMS (Property style)
-- Relation methods defined in the model class, synonymous with Laravel, available since Winter CMS v1.2.5 (Method style)
+- Property-based array configuration in the model class (Property style)
+- Relation methods defined in the model class, [synonymous with Laravel](https://laravel.com/docs/9.x/eloquent-relationships#defining-relationships) (Method style)
 
 ### Property style relationship definition
 
