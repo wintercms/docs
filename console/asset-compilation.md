@@ -38,7 +38,7 @@ For more information on these compilers, see the links above.
 
 When using Vite or Mix, Winter can automatically configure your plugin/theme via the `vite:create` or `mix:create` commands. These commands allow you to set up all config files, stub files and register any required npm packages.
 
-More information on the `[vite|mix]:create` classes can be found here: [Vite](./asset-compilation-vite.md#automatic-configuration), [Mix](./asset-compilation-mix.md#automatic-configuration).
+More information on the `[vite|mix]:create` classes can be found here: [Vite](asset-compilation-vite#automatic-configuration), [Mix](asset-compilation-mix#automatic-configuration).
 
 The toolsets offered by these commands can be dynamically registered or modified.
 
