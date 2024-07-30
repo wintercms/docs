@@ -61,6 +61,7 @@ BundleManager::instance()->registerCallback(function (BundleManager $manager) {
     ]);
 
     // Register a setup handler, this will allow you to generate any files your bundle may require during the config generation
+    // The handler will be run in the context of the `mix|vite:create` command, so `$this` allows access to any methods available on that command and parent classes.
     $manager->registerSetupHandler('winterjs', function (string $packagePath, string $packageType) {
         $this->writeFile(
             $packagePath . '/winterjs.config.js',
