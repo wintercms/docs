@@ -98,7 +98,6 @@ If you intend to use scheduled tasks, or install plugins that use scheduled task
 This cron task will call the command scheduler every minute, to which Winter will evaluate any scheduled tasks and run the tasks that are due for execution.
 
 > **NOTE**: If `php` is not on your PATH, then make sure you provide the absolute path to the version of PHP you wish to run the scheduler with. `/path/to/artisan` should also reflect the absolute path to the `artisan` file in the root directory of your Winter installation.
-
 > **NOTE**: If you are adding this to the system crontab (`/etc/cron.d`), you'll need to specify the user to run the command as immediately after `* * * * *`.
 
 ### Setting up queue workers
