@@ -332,7 +332,7 @@ public function user(): BelongsTo
 
 #### Default models
 
-The `belongsTo`, `hasOne`, `hasOneThrough` and `morphOne` relationships allow you to define a default model that will be returned if the given relationship is `null`. This pattern is often referred to as the [Null Object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) and can help remove conditional checks in your code. In the following example, the `user` relation will return an empty `Acme\Blog\Models\User` model if no `user` is attached to the post:
+The `belongsTo`, `hasOne`, `hasOneThrough`, and `morphOne` relationships allow you to define a default model that will be returned if the given relationship is `null`. This pattern is often referred to as the [Null Object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) and can help remove conditional checks in your code. In the following example, the `user` relation will return an empty `Acme\Blog\Models\User` model if no `user` is attached to the post:
 
 ```php
 public $belongsTo = [
