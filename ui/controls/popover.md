@@ -8,13 +8,15 @@ Renders a richer version of a tooltip, called a popover.
 
 You may add `data-control="popover"` to an anchor or button to activate a popover. Use the `data-content` attribute to specify the contents.
 
-    <a
-        href="javascript:;"
-        class="btn btn-primary"
-        data-control="popover"
-        data-content="I am a standard popover">
-        Basic popover
-    </a>
+```html
+<a
+    href="javascript:;"
+    class="btn btn-primary"
+    data-control="popover"
+    data-content="I am a standard popover">
+    Basic popover
+</a>
+```
 
 ### Template content
 
@@ -34,28 +36,24 @@ Define the popover content as a template and reference it with `data-content-fro
 
 ### Event specified content
 
-```js
-$('#btn1').on('showing.oc.popover', function(e, popover) {
-    popover.options.content = '<div class="popover-body">Some other content</div>'
-})
-```
-
-    <a
-        href="javascript:;"
-        class="btn btn-primary"
-        data-control="popover"
-        data-placement="right"
-        id="btn1">
-        Event content popover
-    </a>
+```html
+<a
+    href="javascript:;"
+    class="btn btn-primary"
+    data-control="popover"
+    data-placement="right"
+    id="btn1">
+    Event content popover
+</a>
 
 <script>
-$(document).ready(function() {
-    $('#btn1').on('showing.oc.popover', function(e, popover) {
-        popover.options.content = '<div class="popover-body">Some other content</div>'
+    $(document).ready(function() {
+        $('#btn1').on('showing.oc.popover', function(e, popover) {
+            popover.options.content = '<div class="popover-body">Some other content</div>'
+        })
     })
-})
 </script>
+```
 
 ## JavaScript API
 

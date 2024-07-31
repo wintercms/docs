@@ -6,69 +6,141 @@ Renders a date picker, time picker, or both. The input associated to each contro
 
 ### Date Picker
 
-    <div data-control="datepicker">
-        <!-- Date -->
-        <input
-            type="text"
-            class="form-control"
-            placeholder="Select a date"
-            data-datepicker />
+```html
+<div data-control="datepicker">
+    <!-- Date -->
+    <input
+        type="text"
+        class="form-control"
+        placeholder="Select a date"
+        data-datepicker />
 
-        <!-- Data locker -->
-        <input
-            type="hidden"
-            name="my_date"
-            data-datetime-value
-            />
-    </div>
+    <!-- Data locker -->
+    <input
+        type="hidden"
+        name="my_date"
+        data-datetime-value
+        />
+</div>
+```
+
+```backend
+<div data-control="datepicker">
+    <!-- Date -->
+    <input
+        type="text"
+        class="form-control"
+        placeholder="Select a date"
+        data-datepicker />
+
+    <!-- Data locker -->
+    <input
+        type="hidden"
+        name="my_date"
+        data-datetime-value
+        />
+</div>
+```
 
 ### Time Picker
 
-    <div data-control="datepicker">
-        <!-- Time -->
-        <input
-            type="text"
-            class="form-control"
-            placeholder="Select a time"
-            data-timepicker />
+```html
+<div data-control="datepicker">
+    <!-- Time -->
+    <input
+        type="text"
+        class="form-control"
+        placeholder="Select a time"
+        data-timepicker />
 
-        <!-- Data locker -->
-        <input
-            type="hidden"
-            name="my_date"
-            data-datetime-value
-            />
-    </div>
+    <!-- Data locker -->
+    <input
+        type="hidden"
+        name="my_date"
+        data-datetime-value
+        />
+</div>
+```
+
+```backend
+<div data-control="datepicker">
+    <!-- Time -->
+    <input
+        type="text"
+        class="form-control"
+        placeholder="Select a time"
+        data-timepicker />
+
+    <!-- Data locker -->
+    <input
+        type="hidden"
+        name="my_date"
+        data-datetime-value
+        />
+</div>
+```
 
 ### Date & Time Picker
 
-    <div data-control="datepicker">
-        <div class="row">
-            <div class="col-md-6">
-                <!-- Date -->
-                <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Select a date"
-                    data-datepicker />
-            </div>
-            <div class="col-md-6">
-                <!-- Time -->
-                <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Select a time"
-                    data-timepicker />
-            </div>
+```html
+<div data-control="datepicker">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Date -->
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Select a date"
+                data-datepicker />
         </div>
-
-        <!-- Data locker -->
-        <input
-            type="hidden"
-            name="my_date"
-            data-datetime-value
-            />
+        <div class="col-md-6">
+            <!-- Time -->
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Select a time"
+                data-timepicker />
+        </div>
     </div>
+
+    <!-- Data locker -->
+    <input
+        type="hidden"
+        name="my_date"
+        data-datetime-value
+        />
+</div>
+```
+
+```backend
+<div data-control="datepicker">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Date -->
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Select a date"
+                data-datepicker />
+        </div>
+        <div class="col-md-6">
+            <!-- Time -->
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Select a time"
+                data-timepicker />
+        </div>
+    </div>
+
+    <!-- Data locker -->
+    <input
+        type="hidden"
+        name="my_date"
+        data-datetime-value
+        />
+</div>
+```
 
 ## Locale and timezone handling
 
@@ -82,15 +154,15 @@ The date picker handles timezone and locale preferences automatically. Locale pr
 
 When a date is selected, it will be converted from the `backend-timezone` to the `app-timezone` for normalized storage.
 
-> **Note**: Locale values are supplied by the Moment.js library.
+> **NOTE**: Locale values are supplied by the Moment.js library.
 
 ## Supported data attributes
 
-- data-control="datepicker" - enables the plugin on an element
-- data-format="YYYY-MM-DD" - display format
-- data-min-date="value" - minimum date to allow
-- data-max-date="value" - maximum date to allow
-- data-year-range="10" - range of years to display
+- `data-control="datepicker"` - enables the plugin on an element
+- `data-format="YYYY-MM-DD"` - display format
+- `data-min-date="value"` - minimum date to allow
+- `data-max-date="value"` - maximum date to allow
+- `data-year-range="10"` - range of years to display
 
 ## JavaScript API
 
