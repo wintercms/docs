@@ -7,7 +7,7 @@ The foundation libraries are the core base of all scripts and controls. The goal
 - Unbind all event handlers.
 - Write high-performance code (in cases when it's needed).
 
-That's especially important on pages where users spend much time interacting with the page, like the CMS and Pages sections, but all back-end controls should follow these rules, because we never know when they are used.
+That's especially important on pages where users spend much time interacting with the page, like the CMS and Pages sections, but all backend controls should follow these rules, because we never know when they are used.
 
 ## Why it's important to release the memory, DOM references and event handlers
 

@@ -4,11 +4,23 @@
 
 Autocomplete control.
 
-    <input
-        class="form-control"
-        placeholder="Search for something or else"
-        data-control="autocomplete"
-        data-source="something: 'Something', else: 'Else'" />
+```html
+<input
+    class="form-control"
+    placeholder="Search for something or else"
+    data-control="autocomplete"
+    data-source="something: 'Something', else: 'Else'"
+/>
+```
+
+```backend
+<input
+    class="form-control"
+    placeholder="Search for something or else"
+    data-control="autocomplete"
+    data-source="something: 'Something', else: 'Else'"
+/>
+```
 
 ## JavaScript API
 

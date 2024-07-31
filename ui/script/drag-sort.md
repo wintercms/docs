@@ -6,27 +6,29 @@ Allows the dragging and sorting of lists.
 
 Sort the buttons
 
-    <ol id="sortExample">
-        <li><a class="btn btn-sm btn-default">First</a></li>
-        <li><a class="btn btn-sm btn-primary">Second</a></li>
-        <li><a class="btn btn-sm btn-success">Third</a></li>
-    </ol>
+```html
+<ol id="sortExample">
+    <li><a class="btn btn-sm btn-default">First</a></li>
+    <li><a class="btn btn-sm btn-primary">Second</a></li>
+    <li><a class="btn btn-sm btn-success">Third</a></li>
+</ol>
 
-    <script>
-        $('#sortExample').sortable()
-    </script>
+<script>
+    $('#sortExample').sortable()
+</script>
 
-    <style>
-        body.dragging, body.dragging * {
-            cursor: move !important
-        }
-        .dragged {
-            position: absolute; opacity: 0.5; z-index: 2000;
-        }
-        #sortExample li.placeholder {
-            position: relative;
-        }
-    </style>
+<style>
+    body.dragging, body.dragging * {
+        cursor: move !important
+    }
+    .dragged {
+        position: absolute; opacity: 0.5; z-index: 2000;
+    }
+    #sortExample li.placeholder {
+        position: relative;
+    }
+</style>
+```
 
 ## JavaScript API
 

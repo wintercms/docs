@@ -718,7 +718,7 @@ public function myColorList($fieldName, $value, $formData)
 }
 ```
 
-If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors. You can also define a custom set of default colors to be used in all color pickers that do not have the `availableColors` field specified. This can be managed in the **Customize back-end** area of the Settings.
+If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors. You can also define a custom set of default colors to be used in all color pickers that do not have the `availableColors` field specified. This can be managed in the **Customize backend** area of the Settings.
 
 ### Data table
 

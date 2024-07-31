@@ -4,31 +4,63 @@
 
 Custom select control.
 
-    <select class="form-control custom-select">
-        <option selected="selected" value="2">Approved</option>
-        <option value="3">Deleted</option>
-        <option value="1">New</option>
-    </select>
+```html
+<select class="form-control custom-select">
+    <option selected="selected" value="2">Approved</option>
+    <option value="3">Deleted</option>
+    <option value="1">New</option>
+</select>
+```
+
+```backend
+<select class="form-control custom-select">
+    <option selected="selected" value="2">Approved</option>
+    <option value="3">Deleted</option>
+    <option value="1">New</option>
+</select>
+```
 
 ## Sizes
 
 ### Small size
 
-    <div class="form-group form-group-sm">
-        <select class="form-control custom-select">
-            <option value="1" selected="selected">One</option>
-            <option value="2">Two</option>
-        </select>
-    </div>
+```html
+<div class="form-group form-group-sm">
+    <select class="form-control custom-select">
+        <option value="1" selected="selected">One</option>
+        <option value="2">Two</option>
+    </select>
+</div>
+```
+
+```backend
+<div class="form-group form-group-sm">
+    <select class="form-control custom-select">
+        <option value="1" selected="selected">One</option>
+        <option value="2">Two</option>
+    </select>
+</div>
+```
 
 ### Large size
 
-    <div class="form-group form-group-lg">
-        <select class="form-control custom-select">
-            <option value="1" selected="selected">One</option>
-            <option value="2">Two</option>
-        </select>
-    </div>
+```html
+<div class="form-group form-group-lg">
+    <select class="form-control custom-select">
+        <option value="1" selected="selected">One</option>
+        <option value="2">Two</option>
+    </select>
+</div>
+```
+
+```backend
+<div class="form-group form-group-lg">
+    <select class="form-control custom-select">
+        <option value="1" selected="selected">One</option>
+        <option value="2">Two</option>
+    </select>
+</div>
+```
 
 ## Options
 
@@ -36,35 +68,69 @@ Custom select control.
 
 Add the `select-no-search` CSS class to disable searching.
 
-    <div class="form-group">
-        <select class="form-control custom-select select-no-search">
-            <option value="1" selected="selected">One</option>
-            <option value="2" selected="selected">Two</option>
-        </select>
-    </div>
+```html
+<div class="form-group">
+    <select class="form-control custom-select select-no-search">
+        <option value="1" selected="selected">One</option>
+        <option value="2" selected="selected">Two</option>
+    </select>
+</div>
+```
+
+```backend
+<div class="form-group">
+    <select class="form-control custom-select select-no-search">
+        <option value="1" selected="selected">One</option>
+        <option value="2" selected="selected">Two</option>
+    </select>
+</div>
+```
 
 ### Dynamic option creation
 
 In addition to a pre-populated menu of options, Select widgets may dynamically create new options from textual input by the user in the search box. This feature is called "tagging". To enable tagging, set the `tags` option to `true`:
 
-    <select
-        class="form-control custom-select"
-        data-tags="true"
-    ></select>
+```html
+<select
+    class="form-control custom-select"
+    data-tags="true"
+></select>
+```
+
+```backend
+<select
+    class="form-control custom-select"
+    data-tags="true"
+></select>
+```
 
 ## Option groups
 
 Use the `optgroup` element to create option groups.
 
-    <select class="form-control custom-select">
-        <option value="1">Please select an option</option>
-        <option value="2">Ungrouped option</option>
-        <optgroup label="Option Group">
-            <option value="3">Grouped option</option>
-            <option value="4">Another option</option>
-            <option value="4">Third option</option>
-        </optgroup>
-    </select>
+```html
+<select class="form-control custom-select">
+    <option value="1">Please select an option</option>
+    <option value="2">Ungrouped option</option>
+    <optgroup label="Option Group">
+        <option value="3">Grouped option</option>
+        <option value="4">Another option</option>
+        <option value="4">Third option</option>
+    </optgroup>
+</select>
+```
+
+```backend
+<select class="form-control custom-select">
+    <option value="1">Please select an option</option>
+    <option value="2">Ungrouped option</option>
+    <optgroup label="Option Group">
+        <option value="3">Grouped option</option>
+        <option value="4">Another option</option>
+        <option value="4">Third option</option>
+    </optgroup>
+</select>
+```
 
 ## AJAX search
 
