@@ -104,4 +104,8 @@ This cron task will call the command scheduler every minute, to which Winter wil
 
 You may optionally set up an external queue for processing queued jobs. By default, Winter will run queued jobs asynchronously, which may cause slower performance and response times for users if the jobs are large. This behavior can be changed by setting the `default` parameter in the `config/queue.php`. Please review the [Queue service](../services/queues.md) documentation for more information on setting up a queue runner.
 
-If you decide to use the `database` queue driver, it is a good idea to add a crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue.
+If you decide to use the `database` queue driver, it is a good idea to add a crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue:
+
+```
+* * * * * php /path/to/artisan queue:work --once >> /dev/null 2>&1
+```
