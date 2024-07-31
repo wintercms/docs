@@ -120,4 +120,4 @@ Include the `no-icon` class to omit the icon.
 
 ### Events
 
-- close.oc.callout - triggered when the callout is closed
+- `close.oc.callout` - triggered when the callout is closed
