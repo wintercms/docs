@@ -6,9 +6,11 @@ Using [Composer](https://getcomposer.org/) as an alternative package manager to 
 
 Composer is the de-facto standard for package management in the PHP ecosystem, and can handle the downloading, installation and management of Winter CMS plugins and themes, as well as third-party Laravel packages and vendor libraries.
 
-### Converting from a basic installation
+### Missing `composer.json`?
 
-In order to use Composer with a Winter CMS instance that has been installed using the Wizard or simple CLI installation process, simply copy the latest [`tests/` directory](https://github.com/wintercms/winter/tree/develop/tests) and [`composer.json`](https://github.com/wintercms/winter/tree/develop/composer.json) file from [GitHub](https://github.com/wintercms/winter/tree/develop) into your Winter instance and then run `composer install` within the root directory of the project.
+If you have created your Winter CMS project recently, using either Composer or the Web Installer, then you should have a `composer.json` present in your proejct root.
+
+If you are missing your `composer.json` file, simply copy the latest [`composer.json`](https://github.com/wintercms/winter/tree/develop/composer.json) file from [GitHub](https://github.com/wintercms/winter/tree/develop) into your Winter instance and then run `composer install` within the root directory of the project.
 
 > **NOTE:** If you have made modifications to the files within the `modules` directory, these will be overwritten by Composer if an update to those modules is installed. It is recommended that you *do not* make modifications to the modules directly.
 
