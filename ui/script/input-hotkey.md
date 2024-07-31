@@ -2,7 +2,7 @@
 
 Allows keyboard shortcuts (hotkeys) to be bound to an element's click event.
 
-# Example
+## Example
 
     <button
         class="btn btn-default"

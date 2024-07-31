@@ -1,4 +1,4 @@
-# Date Pickers
+# Date Picker
 
 Renders a date picker, time picker, or both. The input associated to each control acts as a facade, the final value is stored in an underlying hidden input, called a data locker.
 

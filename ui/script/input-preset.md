@@ -2,7 +2,7 @@
 
 Scripts that manage user input events.
 
-# Example
+## Example
 
     <input type="text" id="presetExample1" placeholder="Type something" />
     <input type="text"

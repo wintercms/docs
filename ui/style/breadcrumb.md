@@ -1,6 +1,6 @@
 Display a breadcrumb on the page.
 
-# Example
+## Example
 
     <div style="padding: 20px">
         <div class="control-breadcrumb">

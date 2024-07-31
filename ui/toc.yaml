@@ -15,7 +15,7 @@ sections:
             controls/inspector: "Inspector"
             controls/flashmessage: "Flash Message"
             controls/filter: "Filter"
-            controls/loader: "Loader"
+            controls/loader: "Loading Indicator"
             controls/tooltip: "Tooltip"
             controls/toolbar: "Toolbar"
             controls/popover: "Popover"

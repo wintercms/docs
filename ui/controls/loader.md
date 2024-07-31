@@ -1,4 +1,4 @@
-# Loading indicators
+# Loading Indicators
 
 ## Container Loading Indicator
 
@@ -108,7 +108,7 @@ You may add some optional text:
 </div>
 ```
 
-# Example
+## Example
 
 ```html
 <div class="loading-indicator-container">

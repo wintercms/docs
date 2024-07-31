@@ -1,4 +1,4 @@
-## Flash message
+## Flash Message
 
 Displays a floating flash message on the screen.
 

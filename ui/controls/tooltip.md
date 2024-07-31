@@ -44,7 +44,7 @@ Tooltips can be automatically created when the mouse enters an element using the
 </a>
 ```
 
-# Example
+## Example
 
 ```html
 <div class="tooltip fade top in">

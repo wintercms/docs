@@ -72,7 +72,7 @@ Command | Description
 [`mix:run`](../console/asset-compilation#run-a-package-script) | Runs a script within a given package.
 **Scaffolding** |
 [`create:command`](../console/scaffolding#create-a-console-command) | Create a Console Command class in a plugin.
-[`create:component`](../console/scaffolding#create-a-component) | Create a front-end Component in a plugin.
+[`create:component`](../console/scaffolding#create-a-component) | Create a frontend Component in a plugin.
 [`create:controller`](../console/scaffolding#create-a-backend-controller) | Create a Controller in a plugin.
 [`create:formwidget`](../console/scaffolding#create-a-form-widget) | Create a FormWidget in a plugin.
 [`create:job`](../console/scaffolding#create-a-job) | Create a Job class in a plugin.

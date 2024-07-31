@@ -4,7 +4,7 @@
 
 - Popover
 
-# Example
+## Example
 
 ```html
 <div id="filterExample" class="control-filter" data-control="filterwidget">

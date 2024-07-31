@@ -104,7 +104,7 @@ The next example shows a bar chart markup. The **wrap-legend** class is optional
 
 ![image](https://raw.githubusercontent.com/wintercms/docs/develop/images/bar-chart.png)
 
-# Example
+## Example
 
 ```html
 <div
@@ -162,7 +162,7 @@ The next example shows a bar chart markup. The **wrap-legend** class is optional
 
 A list of statuses and values
 
-# Example
+## Example
 
 ```html
 <div class="control-status-list">

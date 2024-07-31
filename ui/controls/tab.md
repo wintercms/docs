@@ -1,4 +1,4 @@
-# Tab control
+# Tabs
 
 This plugin is a wrapper for the Twitter Bootstrap Tab component. It provides the following features:
 
@@ -104,7 +104,7 @@ These modifiers can be added in addition to the `control-tabs` class:
 </div>
 ```
 
-> **NOTE**: Primary tabs in the Winter back-end are inset by default and you should use `.tabs-no-inset` to disable this.
+> **NOTE**: Primary tabs in the Winter backend are inset by default and you should use `.tabs-no-inset` to disable this.
 
 ### Secondary tabs
 
