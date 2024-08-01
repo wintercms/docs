@@ -35,7 +35,7 @@ MyWinterProject/
 |-- composer.lock      # Composer lock file (info on currently installed packages)
 |-- index.php          # Web request entrypoint
 |-- package.json       # (optional) Node project file (managing frontend dependencies)
-|-- package.lock       # (optional) Node lock file (info on currently installed frontend packages)
+|-- package-lock.json  # (optional) Node lock file (info on currently installed frontend packages)
 `-- phpunit.xml        # (optional) PHPUnit configuration for running automated testing suites
 ```
 
