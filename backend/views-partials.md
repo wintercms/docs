@@ -41,6 +41,24 @@ If you're using hints, you may find it useful to check if the user has hidden th
 <?php endif ?>
 ```
 
+### Overriding partials
+
+The backend partial system makes use of the `System\Traits\ViewMaker` trait to function, which provides the `addViewPath()` method. This method allows you to add a view path to the list of paths that the system will look in when trying to locate a partial. This allows you to override any existing partial or even provide a new partial for a widget.
+
+You can call this method on a specific instance of any class that implements the `ViewMaker` trait, or you can make use of the dynamic class extension in Winter to add an override for a specific class globally. For example, if you wanted to override the partials for the `Backend\Widgets\Filter` widget, you could do the following:
+
+`plugins/myauthor/myplugin/controllers/Posts.php`:
+```php
+public function index()
+{
+    \Backend\Widgets\Filter::extend(function ($widget) {
+        $widget->addViewPath(__DIR__ . '../widgets/filter/partials');
+    });
+
+    // ...
+}
+```
+
 ## Layouts and child layouts
 
 Backend layouts reside in an optional **layouts/** directory of a plugin. A custom layout is set with the `$layout` property of the controller object. It defaults to the system layout called  `default`.

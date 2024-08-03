@@ -42,7 +42,7 @@ When using the SQL Server database engine, you will need to install the [group c
 
 The [Web Installer](https://github.com/wintercms/web-installer) is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
 
-> **NOTE:** If you are a developer, we recommend that you [install via Composer instead](../architecture/using-composer)
+> **NOTE:** If you are a developer, we recommend that you [install via Composer instead](../architecture/using-composer#installing-winter-via-composer)
 
 1. Prepare an empty directory on the web server that will host your Winter CMS installation. It can be a main domain, sub-domain or subfolder.
 2. [Download the "install.zip" file](https://github.com/wintercms/web-installer/releases/latest/download/install.zip) from the latest release of the Winter CMS Web Installer into this folder.
