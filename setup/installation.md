@@ -4,7 +4,13 @@ description: "Documentation on the different ways to install Winter CMS for your
 ---
 # Installation
 
-There are two ways you can install Winter, either using the [Web-based installer](#web-based-installation) or [Composer installation](../architecture/using-composer) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
+There are three ways you can install Winter:
+
+1. Using the [Composer package manager](../architecture/using-composer#installing-winter-via-composer) (if you are comfortable using the command line)
+2. The [Web-based installer](#web-based-installation) (most similar to the WordPress web installer)
+3. Using the [Softaculous installler](https://www.softaculous.com/apps/cms/WinterCMS) (if your hosting provider supports it).
+
+Before you proceed, check that your server meets the minimum system requirements:
 
 ## Minimum system requirements
 
