@@ -48,6 +48,7 @@ The backend partial system makes use of the `System\Traits\ViewMaker` trait to f
 You can call this method on a specific instance of any class that implements the `ViewMaker` trait, or you can make use of the dynamic class extension in Winter to add an override for a specific class globally. For example, if you wanted to override the partials for the `Backend\Widgets\Filter` widget, you could do the following:
 
 `plugins/myauthor/myplugin/controllers/Posts.php`:
+
 ```php
 public function index()
 {
