@@ -103,7 +103,7 @@ location ~ ^/themes/.*/resources { try_files $uri 404; }
 
 When using a custom nginx config (usually provided by managed server providers or infrastructure as a service platforms), the default configuration may included blocks for static assets to be served solely by nginx instead of passing requests where the files don't exist to the application for processing.
 
-This conflicts with the [Image Resizing](../services/image-resizing) functionality which dynamically resizes images on requests to the `/resizer/` URL with the original file extensions present. This usually presents as any images loaded from the `/resizer/` URL failing to load with a 404 in the browser. 
+This conflicts with the [Image Resizing](../services/image-resizing) functionality which dynamically resizes images on requests to the `/resizer/` URL with the original file extensions present. This usually presents as any images loaded from the `/resizer/` URL failing to load with a 404 in the browser.
 
 To fix this, add the following location block above any location blocks that reference image file extensions (`.png`, `.jpg`, etc):
 
