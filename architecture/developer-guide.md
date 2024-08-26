@@ -4,15 +4,19 @@ The following details outline our standards and guidelines to producing high-qua
 
 ## PHP coding standards
 
-Winter follows the [PSR-2 Coding Style Guide](https://www.php-fig.org/psr/psr-2/) as set forth by the [PHP Framework Interop Group](https://www.php-fig.org/). This guide provides a great starting point for creating code that is easily understandable and familiar to developers. We intend to stick closely to the [PSR-12 Extended Coding Style Guide](https://www.php-fig.org/psr/psr-12/) in the future as well, but this is not a hard requirement at the present time.
+Winter follows the [PSR-12 Extended Coding Style Guide](https://www.php-fig.org/psr/psr-12/) as set forth by the [PHP Framework Interop Group](https://www.php-fig.org/). This guide provides a great starting point for creating code that is easily understandable and familiar to developers, and ensures consistency with other PHP frameworks and projects.
 
-### Exceptions to the standard
+This coding style will be enforced on all contributions to Winter CMS and first-party plugins through automated code style checks. It is recommended that you use IDE tools to check your code style, such as installing the [phpcs extension](https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs) for Visual Studio Code or [enabled PHP_CodeSniffer support](https://www.jetbrains.com/help/phpstorm/using-php-code-sniffer.html) in PHPStorm. You will be required to correct any incorrectly formatted code before we can accept any contributions to the Winter CMS core or first-party plugins.
 
-Due to historical choices and technical limitations, we have some exceptions to these guidelines in Winter.
+You may also use the `php artisan winter:phpcs` command in your project to run the in-built PHP_CodeSniffer installation included with Winter, if you have installed the development dependencies of Winter through Composer.
+
+### Additions and exceptions to the standard
+
+We have included some additional rules and made some exemptions to the PSR-12 standard in Winter code for certain language features and syntax that are more open to interpretation in the PSR-12 standard, or where there is a historical choice or technical limitation that prevents us from following PSR-12 to the letter. We will outline these below.
 
 #### Controller methods can have a single underscore
 
-The PSR-2 guidelines state that methods must be in **camelCase** format. However, in [Backend controllers](../backend/controllers-ajax.md) in Winter, AJAX handlers can be created using a suffix notation if they are connected to a "main" action. For example:
+The PSR-12 guidelines state that methods must be in **camelCase** format. However, in [Backend controllers](../backend/controllers-ajax.md) in Winter, AJAX handlers can be created to be scoped to a particular action by defining a method for the action, and then adding an underscore followed by the AJAX handler name. For example:
 
 ```php
 public function index()
@@ -31,9 +35,9 @@ public function onDoSomethingElse()
 }
 ```
 
-An exception must be granted for this scenario. In other scenarios, underscores should be avoided in method names.
+While this should mostly be limited to controllers and components, due to historical usage in other areas (such as traits and behaviours), we have decided to grant an exemption from this rule. However, you should avoid underscores in method names unless explicitly required for the reason above.
 
-#### Curly braces for condition blocks
+#### Curly braces and indenting for condition blocks
 
 Historical code in Winter has previously used a format where all closing curly braces are on their own line, such as with the following:
 
@@ -49,7 +53,7 @@ else {
 }
 ```
 
-The PSR-2 and PSR-12 guidelines do not have any specific requirement for the placement of curly braces for condition blocks, but most examples on these guidelines, along with examples in other software and framework, try to keep the curly braces in the same line as the condition statement (unless it is multi-line).
+The PSR-12 guidelines have specific requirements for the placement of curly braces for condition blocks and control structures, as defined in [Section 5. Control Structures](https://www.php-fig.org/psr/psr-12/#5-control-structures). Thus, all new code must follow these requirements, for example:
 
 ```php
 // SINGLE LINE CONDITION STATEMENTS
@@ -79,14 +83,14 @@ if (
 }
 ```
 
-We intend to follow this format going forward. In addition, some historical code opted to not use curly braces at all for single line condition blocks.
+In addition, some historical code opted to not use curly braces at all for single line condition blocks.
 
 ```php
 if ($condition)
     doSomething();
 ```
 
-We do not recommend this format, and instead recommend all condition blocks use curly braces, even if they are single line.
+We no longer support this format, and instead require all condition blocks use curly braces, even if they are single line.
 
 ```php
 if ($condition) {
@@ -96,9 +100,11 @@ if ($condition) {
 
 #### Use of trailing commas
 
-Although not specified one way or another in the PSR-2 and PSR-12 guidelines, Winter CMS highly recommends the use of trailing commas in multi-line arrays, especially for localization files. Trailing commas make it easier to perform maintenance on multiline array items without causing unnecessary visual clutter in diffs or version control history.
+Although not specified one way or another in the PSR-12 guidelines, Winter CMS requires the use of a trailing comma for the last item in a multi-line array. Trailing commas make it easier to perform maintenance on multiline array items without causing unnecessary visual clutter in diffs or version control history should an item be added or removed from that array.
 
-**Recommended:**
+Single-line arrays do not require a trailing comma for the last item.
+
+**Valid:**
 
 ```php
 $items = [
@@ -106,9 +112,11 @@ $items = [
     'banana',
     'orange',
 ];
+
+$items = ['apple', 'banana', 'orange'];
 ```
 
-**Not recommended**:
+**Invalid**:
 
 ```php
 $items = [
@@ -116,7 +124,116 @@ $items = [
     'banana',
     'orange'
 ];
+
+$items = ['apple', 'banana', 'orange',];
 ```
+
+#### Imports (use cases)
+
+As some classes in Winter CMS can use a large number of imported classes and traits, we have extended our ruleset beyond PSR-12 to add the following additional requirements for importing classes through `use` definitions:
+
+##### - All `use` definitions must be alphabetically ordered, including the namespace
+
+**Valid:**
+
+```php
+use Cms\Classes\Theme;
+use Exception;
+use Illuminate\Support\Facades\Cache;
+use Winter\Storm\Database\Model;
+```
+
+**Invalid:**
+
+```php
+use Exception;
+use Illuminate\Support\Facades\Cache;
+use Cms\Classes\Theme;
+use Winter\Storm\Database\Model;
+```
+
+##### - We disallow the use of the [grouped `use` declarations](https://www.php.net/manual/en/language.namespaces.importing.php#language.namespaces.importing.group) as it creates additional cruft in diffs
+
+**Valid:**
+
+```php
+use Cms\Classes\Layout;
+use Cms\Classes\Partial;
+use Cms\Classes\Theme;
+```
+
+**Invalid:**
+
+```php
+use Cms\Classes\{
+    Layout,
+    Partial,
+    Theme,
+};
+```
+
+##### - We disallow using a `use` case for a class that exists in the same namespace as the current class
+
+**Valid:**
+
+```php
+namespace Acme\Blog\Classes;
+
+class Foo
+{
+    // ...
+    $bar = new Bar();
+    // ..
+}
+```
+
+**Invalid:**
+
+```php
+namespace Acme\Blog\Classes;
+
+use Acme\Blog\Classes\Bar;
+
+class Foo
+{
+    // ...
+    $bar = new Bar();
+    // ..
+}
+```
+
+##### - We disallow a starting backslash for `use` cases, unless it is for importing a trait
+
+**Valid:**
+
+```php
+namespace Acme\Blog\Classes;
+
+use Cms\Classes\Layout;
+use Cms\Classes\Partial;
+use Cms\Classes\Theme;
+
+class MyClass
+{
+    use \Acme\Blog\Traits\MyTrait;
+}
+```
+
+**Invalid:**
+
+```php
+namespace Acme\Blog\Classes;
+
+use \Cms\Classes\Layout;
+use \Cms\Classes\Partial;
+use \Cms\Classes\Theme;
+
+// ...
+```
+
+##### - We disallow `use` cases for classes that are unused
+
+You should strip out any `use` cases if the class does not get used throughout the code, as leaving it may mislead future developers as to the capabilities and requirements of that class.
 
 #### Use of single / double quotes
 
@@ -137,6 +254,17 @@ $translations = [
     'key1' => "key1's value",
 ];
 ```
+
+#### Templates
+
+Several of PSR-12's rules are relaxed for templates, including CMS templates, and partials, layouts and views in the Backend. Since coding style for mixed PHP/HTML files is not well defined by PSR-12, we have made some determinations on the best "style" for mixed files and have opted to relax the following rules:
+
+- There is no requirement for a space after the opening of a control block (`if`, `switch`, `when`) and a curly brace or colon, as we generally use the "template" PHP format for templates and it looks neater (ie. `<?php if ($something === true): ?>`)
+- Templates may finish with a closing `?>` PHP tag if it is required to close off a control block or output block.
+- The body of a `case` block within `switch` blocks does not need to be on the next line.
+- The `break` after a `case` block also does not need to be on the next line.
+- Spacing between "header" blocks (such as `use` cases) does not need to followed. You will still need to define each `use` case on its own line, but will no longer need a line before or after the block.
+- Array indentation is not strictly defined in templates, and can be reformatted to better fit the content shown.
 
 ## Developer standards and patterns
 
