@@ -1028,7 +1028,7 @@ Option | Description
 
 ### Relation Manager
 
-`relationmanager` - Renders the [relation controller](../backend/relations) for this relation. This is the equivalent of using a `partial` field that renders the output of the `relationRender()` method from the controller.
+`relationmanager` - Renders the [relation controller](relations) for this relation. This is the equivalent of using a `partial` field that renders the output of the `relationRender()` method from the controller.
 
 ```yaml
 records:
