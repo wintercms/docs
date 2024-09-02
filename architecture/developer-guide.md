@@ -8,7 +8,7 @@ Winter follows the [PSR-12 Extended Coding Style Guide](https://www.php-fig.org/
 
 This coding style will be enforced on all contributions to Winter CMS and first-party plugins through automated code style checks. It is recommended that you use IDE tools to check your code style, such as installing the [phpcs extension](https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs) for Visual Studio Code or [enabled PHP_CodeSniffer support](https://www.jetbrains.com/help/phpstorm/using-php-code-sniffer.html) in PHPStorm. You will be required to correct any incorrectly formatted code before we can accept any contributions to the Winter CMS core or first-party plugins.
 
-You may also use the `php artisan winter:phpcs` command in your project to run the in-built PHP_CodeSniffer installation included with Winter, if you have installed the development dependencies of Winter through Composer.
+You may also use the `php artisan winter:sniff` command in your project to run the in-built PHP_CodeSniffer installation included with Winter, if you have installed the development dependencies of Winter through Composer.
 
 ### Additions and exceptions to the standard
 

@@ -40,6 +40,40 @@ If using additional PHPUnit parameters / options, they must be included after th
 php artisan winter:test -p Acme.Demo --filter=FilteredTest --stop-on-failure
 ```
 
+## Code style check
+
+The `winter:sniff` command allows you to check source code against the [Winter CMS code style guidelines](../architecture/developer-guide#php-coding-standards) as set forth in the [Developer Guide](../architecture/developer-guide) to ensure consistent code formatting. It uses the [PHP_CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer/) library under the hood.
+
+```bash
+php artisan winter:sniff [--plugin=] [--configuration=]
+```
+
+By default, this code style check will run in all core files. To test a plugin, you may use the `-p` or `--plugin=` option and provide the plugin code:
+
+```bash
+php artisan winter:sniff -p Acme.Demo
+```
+
+If the plugin or core files do not contain a `phpcs.xml` configuration file for the code checker, you will be prompted to create one automatically.
+
+If you wish to use a custom configuration for PHP_CodeSniffer, you can specify the path with the `-c` or `--configuration=` option:
+
+```bash
+php artisan winter:sniff -c ./custom-path/phpcs.xml
+```
+
+By default, warnings and errors will both be shown if detected in any source code. You can suppress warnings by using the `-e` or `--no-warnings` option.
+
+```bash
+php artisan winter:sniff -e
+```
+
+If you wish to show only a summary (a list of files with a count of warnings and/or errors), you may use the `-s` or `--summary` option.
+
+```bash
+php artisan winter:sniff -s
+```
+
 ## Utility runner
 
 `winter:util` - a generic command to perform general utility tasks, such as cleaning up files or combining files. The arguments passed to this command will determine the task used.
