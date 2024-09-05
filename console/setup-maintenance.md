@@ -63,7 +63,7 @@ You are not restricted from providing environment variables through another meth
 ## Get the installed Winter version
 
 ```bash
-php artisan winter:version [--changes]
+php artisan winter:version [--changes] [--only-version]
 ```
 
 The `winter:version` command displays the installed version of Winter. This is determined by querying a [central build manifest](https://github.com/wintercms/meta/blob/master/manifest/builds.json) and verifying the integrity of each system file in Winter against each build in this manifest. This allows the command to determine if any modifications have been made to the system files.
@@ -71,6 +71,8 @@ The `winter:version` command displays the installed version of Winter. This is d
 If modifications are detected, this command will try and best-guess which version is installed, but will alert you that modifications have been made.
 
 If you wish to review the files that have been modified, you can add the `--changes` flag to be provided with a list of files that have been added, modified or removed from Winter.
+
+If you wish to retrieve just the build version - for example, for automated scripts - you may use the `-o` or `--only-version` option. Note that this will suppress all other output, including the missing database warning or changes list if you are also using the `--changes` flag.
 
 ## Remove the demo plugin and theme
 
