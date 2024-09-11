@@ -26,6 +26,7 @@ Attribute | Description
 `data-request-data` | Specifies additional data to send with the request to the server. The format is as follows: `'var': 'value', 'var2': 'new value'`. You may also specify this same attribute on any parent elements of the triggering element, and this data will be merged with the parent data (with the triggering data taking preference). It will also be merged with any form data, if this request triggers within a form.
 `data-request-form` | Specifies the form that the AJAX request will include its data from. If this is unspecified, the closest form will be used, or if the element itself is a form, then this will be used.
 `data-request-flash` | Specifies if flash messages will be accepted from the response.
+`data-request-stripe` | Specifies if the stripe loader at the top of the page will be visible. The value can be either 'true' or 'false'. If the data attribute is omitted, the stripe loader will be visible by default.
 `data-request-files` | Specifies if file data will be included in the request. This will allow any file inputs in the form to work.
 `data-browser-validate` | Specifies if the in-built browser validation will be triggered. If present, the request will be cancelled if the browser validation fails.
 `data-track-input` | Specifies if an input will trigger an AJAX request anytime the input changes. An optional number can be specified in this attribute, which represents the amount of milliseconds between any change and the AJAX request triggering.
