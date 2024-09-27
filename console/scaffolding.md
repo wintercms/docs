@@ -96,6 +96,17 @@ The `create:job` command generates a job. The first argument specifies the plugi
 php artisan create:job <plugin code> <job name>
 ```
 
+By default the created job will be queueable and managed by queue worker.
+
+The following options are supported:
+
+short | long | description
+----- | ---- | -----------
+`-b` | `--batchable` | Generates a batchable queue job.
+`-s` | `--sync` | Generates a non-queueable job.
+`-f` | `--force` | Overwrites existing files with generated files
+n/a | `--uninspiring` | Disables inspirational quotes
+
 ## Create a console command
 
 ```bash
