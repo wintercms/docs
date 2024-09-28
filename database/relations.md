@@ -23,7 +23,7 @@ class User extends Model
     ];
 
     public $hasMany = [
-        'posts' => 'Acme\Blog\Models\Post',
+        'posts' => \Acme\Blog\Models\Post::class,
     ];
 }
 ```
