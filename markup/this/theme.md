@@ -8,11 +8,13 @@ You can access the current theme object via `this.theme` and it returns the obje
 
 ### id
 
-Converts the theme directory name to a CSS friendly identifier.
+Converts the theme directory name to a CSS friendly identifier. If theme customization is being used, this will return the ThemeData record id.
 
 ```twig
 <body class="theme-{{ this.theme.id }}">
 ```
+
+`theme.getId()` can also be used to always get a CSS friendly identifier, whether or not theme customization is being used.
 
 If the theme directory was **website** this would generate a class name of `theme-website`.
 
