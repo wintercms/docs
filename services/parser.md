@@ -546,7 +546,7 @@ use Winter\Storm\Parse\PHP\ArrayFile;
 use Winter\Storm\Parse\PHP\PHPFunction;
 
 ArrayFile::open('/path/to/file.php')->set([
-    'foo.bar' => new PHPfunction('env', ['argument1', 'argument1']),
+    'foo.bar' => new PHPFunction('env', ['argument1', 'argument1']),
 ])->write();
 
 // or
