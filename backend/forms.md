@@ -1736,7 +1736,7 @@ class Categories extends \Backend\Classes\Controller
 Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. Since this has the potential to affect all forms used by this controller, it is a good idea to check the **$model** is of the correct type. Here is an example:
 
 ```php
-Categories::extendFormFields(function($form, $model, $context)
+Categories::extendFormFields(function ($form, $model, $context)
 {
     if (!$model instanceof MyModel) {
         return;

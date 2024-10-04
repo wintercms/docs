@@ -103,7 +103,7 @@ All exceptions are handled by the `Winter\Storm\Foundation\Exception\Handler` cl
 However, you may specify custom handlers if needed using the `App::error` method. Handlers are called based on the type-hint of the Exception they handle. For example, you may create a handler that only handles `RuntimeException` instances:
 
 ```php
-App::error(function(RuntimeException $exception) {
+App::error(function (RuntimeException $exception) {
     // Handle the exception...
 });
 ```
@@ -111,7 +111,7 @@ App::error(function(RuntimeException $exception) {
 If an exception handler returns a response, that response will be sent to the browser and no other error handlers will be called:
 
 ```php
-App::error(function(InvalidUserException $exception) {
+App::error(function (InvalidUserException $exception) {
     return 'Sorry! Something is wrong with this account!';
 });
 ```
@@ -119,7 +119,7 @@ App::error(function(InvalidUserException $exception) {
 To listen for PHP fatal errors, you may use the `App::fatal` method:
 
 ```php
-App::fatal(function($exception) {
+App::fatal(function ($exception) {
     //
 });
 ```

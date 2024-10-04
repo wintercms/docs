@@ -711,7 +711,7 @@ published_at:
 To use default value for Date and Date Range
 
 ```php
-myController::extendListFilterScopes(function($filter)
+myController::extendListFilterScopes(function ($filter)
 {
     $filter->addScopes([
         'Date Test' => [
@@ -887,7 +887,7 @@ class Categories extends \Backend\Classes\Controller
 Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
 
 ```php
-Categories::extendListColumns(function($list, $model)
+Categories::extendListColumns(function ($list, $model)
 {
     if (!$model instanceof MyModel) {
         return;
@@ -960,7 +960,7 @@ public function listInjectRowClass($record, $value)
 You can extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
 
 ```php
-Categories::extendListFilterScopes(function($filter) {
+Categories::extendListFilterScopes(function ($filter) {
     // Add custom CSS classes to the Filter widget itself
     $filter->cssClasses = array_merge($filter->cssClasses, ['my', 'array', 'of', 'classes']);
 
@@ -1060,7 +1060,7 @@ public function registerListColumnTypes()
         'uppercase' => [$this, 'evalUppercaseListColumn'],
 
         // Using an inline closure
-        'loveit' => function($value) { return 'I love '. $value; }
+        'loveit' => function ($value) { return 'I love '. $value; }
     ];
 }
 

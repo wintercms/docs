@@ -152,7 +152,7 @@ $value = Cache::get('key', 'default');
 You may even pass a `Closure` as the default value. The result of the `Closure` will be returned if the specified item does not exist in the cache. Passing a Closure allows you to defer the retrieval of default values from a database or other external service:
 
 ```php
-$value = Cache::get('key', function() {
+$value = Cache::get('key', function () {
     return Db::table(...)->get();
 });
 ```
@@ -186,7 +186,7 @@ Cache::decrement('key', $amount);
 Sometimes you may wish to retrieve an item from the cache, but also store a default value if the requested item doesn't exist. For example, you may wish to retrieve all users from the cache or, if they don't exist, retrieve them from the database and add them to the cache. You may do this using the `Cache::remember` method:
 
 ```php
-$value = Cache::remember('users', $seconds, function() {
+$value = Cache::remember('users', $seconds, function () {
     return Db::table('users')->get();
 });
 ```
@@ -196,7 +196,7 @@ If the item does not exist in the cache, the `Closure` passed to the `remember` 
 You may also combine the `remember` and `forever` methods:
 
 ```php
-$value = Cache::rememberForever('users', function() {
+$value = Cache::rememberForever('users', function () {
     return Db::table('users')->get();
 });
 ```

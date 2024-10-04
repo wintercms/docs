@@ -219,7 +219,7 @@ The `boot` method is called after all services are loaded and all plugins are re
 ```php
 public function boot()
 {
-    User::extend(function($model) {
+    User::extend(function ($model) {
         $model->hasOne['author'] = ['Acme\Blog\Models\Author'];
     });
 }
@@ -230,8 +230,8 @@ The `boot` and `register` methods are not called during the update process, or w
 Plugins can also supply a file named **routes.php** that may contain custom routing logic, as defined in the [router service](../services/router). For example:
 
 ```php
-Route::group(['prefix' => 'api_acme_blog'], function() {
-    Route::get('cleanup_posts', function(){ return Posts::cleanUp(); });
+Route::group(['prefix' => 'api_acme_blog'], function () {
+    Route::get('cleanup_posts', function (){ return Posts::cleanUp(); });
 });
 ```
 
@@ -288,7 +288,7 @@ public function registerMarkupTags()
             'form_open' => ['Winter\Storm\Html\Form', 'open'],
 
             // Using an inline closure
-            'helloWorld' => function() { return 'Hello World!'; },
+            'helloWorld' => function () { return 'Hello World!'; },
 
             // Any callable with custom options defined - named 'callable' method
             'goodbyeWorld' => [
@@ -388,7 +388,7 @@ To register a custom middleware, you can apply it directly to a backend controll
 ```php
 public function boot()
 {
-    \Cms\Classes\CmsController::extend(function($controller) {
+    \Cms\Classes\CmsController::extend(function ($controller) {
         $controller->middleware('Path\To\Custom\Middleware');
     });
 }

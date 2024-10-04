@@ -538,7 +538,7 @@ return [
 
 ### Function values
 
-Function calls can be added to your config either via the `PHPFunction` class or using the `function()` helper method
+Function calls can be added to your config either via the `PHPFunction` class or using the `function ()` helper method
 on the `ArrayFile` object.
 
 ```php
@@ -546,14 +546,14 @@ use Winter\Storm\Parse\PHP\ArrayFile;
 use Winter\Storm\Parse\PHP\PHPFunction;
 
 ArrayFile::open('/path/to/file.php')->set([
-    'foo.bar' => new PHPFunction('env', ['argument1', 'argument1']),
+    'foo.bar' => new PHPfunction ('env', ['argument1', 'argument1']),
 ])->write();
 
 // or
 
 $arrayFile = ArrayFile::open('/path/to/file.php');
 $arrayFile->set([
-    'foo.bar' => $arrayFile->function('env', ['argument1', 'argument1']),
+    'foo.bar' => $arrayFile->function ('env', ['argument1', 'argument1']),
 ]);
 $arrayFile->write();
 ```

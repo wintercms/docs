@@ -139,7 +139,7 @@ See below for a sample of what is possible with dynamic class extension:
 
 ```php
 // Dynamically extend a model that belongs to a third party plugin
-Post::extend(function($model) {
+Post::extend(function ($model) {
     // Bind to an event that's only fired locally
     $model->bindEvent('model.afterSave', function () use ($model) {
         if (!$model->isValid()) {
@@ -151,7 +151,7 @@ Post::extend(function($model) {
     $model->addDynamicProperty('tagsCache', null);
 
     // Add a new method to the class
-    $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
+    $model->addDynamicMethod('getTagsAttribute', function () use ($model) {
         if ($model->tagsCache) {
             return $model->tagsCache;
         } else {

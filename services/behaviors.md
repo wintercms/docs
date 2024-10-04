@@ -33,7 +33,7 @@ Post::extend(function ($model) {
     $model->addDynamicProperty('tagsCache', null);
 
     // Add a new method to the class
-    $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
+    $model->addDynamicMethod('getTagsAttribute', function () use ($model) {
         if ($model->tagsCache) {
             return $model->tagsCache;
         } else {
@@ -175,7 +175,7 @@ class Plugin extends PluginBase
 Properties can be declared on an extendable object by calling `addDynamicProperty` and passing a property name and value.
 
 ```php
-Post::extend(function($model) {
+Post::extend(function ($model) {
     $model->addDynamicProperty('tagsCache', null);
 });
 ```
@@ -207,10 +207,10 @@ $model->getDynamicProperties()[$key];
 Methods can be created to an extendable object by calling `addDynamicMethod` and passing a method name and callable object, like a `Closure`.
 
 ```php
-Post::extend(function($model) {
+Post::extend(function ($model) {
     $model->addDynamicProperty('tagsCache', null);
 
-    $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
+    $model->addDynamicMethod('getTagsAttribute', function () use ($model) {
         if ($model->tagsCache) {
             return $model->tagsCache;
         } else {
@@ -225,7 +225,7 @@ Post::extend(function($model) {
 You can check for the existence of a method in an `Extendable` class by using the `methodExists` method - similar to the PHP `method_exists()` function. This will detect both standard methods and dynamic methods that have been added through a `addDynamicMethod` call. `methodExists` accepts one parameter: a string of the method name to check the existence of.
 
 ```php
-Post::extend(function($model) {
+Post::extend(function ($model) {
     $model->addDynamicMethod('getTagsAttribute', function () use ($model) {
         return $model->tagsCache;
     });
@@ -242,7 +242,7 @@ $post->methodExists('missingMethod'); // false
 To retrieve a list of all available methods in an `Extendable` class, you can use the `getClassMethods` method. This method operates similar to the PHP `get_class_methods()` function in that it returns an array of available methods in a class, but in addition to defined methods in the class, it will also list any methods provided by an extension or through an `addDynamicMethod` call.
 
 ```php
-Post::extend(function($model) {
+Post::extend(function ($model) {
     $model->addDynamicMethod('getTagsAttribute', function () use ($model) {
         return $model->tagsCache;
     });
@@ -270,7 +270,7 @@ This unique ability to extend constructors allows behaviors to be implemented dy
 /**
  * Extend the Winter.Users Users controller to include the RelationController behavior too
  */
-Winter\Users\Controllers\Users::extend(function($controller) {
+Winter\Users\Controllers\Users::extend(function ($controller) {
     // Implement the list controller behavior dynamically
     $controller->implement[] = \Backend\Behaviors\RelationController::class;
 
@@ -400,7 +400,7 @@ $controller->isClassExtendedWith(\Backend\Behaviors\RelationController::class);
 Below is an example of dynamically extending a `UsersController` of a third-party plugin utilizing this method to avoid preventing other plugins from also extending the afore-mentioned third-party plugin.
 
 ```php
-UsersController::extend(function($controller) {
+UsersController::extend(function ($controller) {
     // Implement behavior if not already implemented
     if (!$controller->isClassExtendedWith(\Backend\Behaviors\RelationController::class)) {
         $controller->implement[] = \Backend\Behaviors\RelationController::class;
