@@ -38,7 +38,7 @@ OOP approach and prototypes should be used in all places. This approach automati
 
 ```js
 function ($) { "use strict";
-    var SomeClass = function () {
+    var SomeClass = function() {
         this.init()
     }
 
@@ -67,7 +67,7 @@ Example of a disposable class:
     var Base = $.wn.foundation.base,
         BaseProto = Base.prototype
 
-    var SomeDisposableClass = function (element) {
+    var SomeDisposableClass = function(element) {
         this.$el = $(element)
 
         Base.call(this)
@@ -101,7 +101,7 @@ When binding events, use this.proxy() to make references to event handlers. Alwa
     var Base = $.wn.foundation.base,
         BaseProto = Base.prototype
 
-    var SomeDisposableClass = function (element) {
+    var SomeDisposableClass = function(element) {
         this.$el = $(element)
 
         Base.call(this)
@@ -131,7 +131,7 @@ UI controls should support two ways of disposing - with calling their `dispose()
     var Base = $.wn.foundation.base,
         BaseProto = Base.prototype
 
-    var SomeDisposableControl = function (element) {
+    var SomeDisposableControl = function(element) {
         this.$el = $(element)
 
         $.wn.foundation.controlUtils.markDisposable(element)
@@ -176,12 +176,12 @@ We already have a boilerplate code for jQuery code. Disposable controls approach
     SomeDisposableControl.prototype = Object.create(BaseProto)
     SomeDisposableControl.prototype.constructor = SomeDisposableControl
 
-    SomeDisposableControl.prototype.init = function () {
+    SomeDisposableControl.prototype.init = function() {
         this.$el.on('click', this.proxy(this.onClick))
         this.$el.one('dispose-control', this.proxy(this.dispose))
     }
 
-    SomeDisposableControl.prototype.dispose = function () {
+    SomeDisposableControl.prototype.dispose = function() {
         this.$el.off('click', this.proxy(this.onClick))
         this.$el.off('dispose-control', this.proxy(this.dispose))
         this.$el.removeData('oc.someDisposableControl')
