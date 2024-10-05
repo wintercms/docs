@@ -198,7 +198,7 @@ Route::get('info', 'Acme\News@info')->middleware('Path\To\Your\Middleware');
 For route groups it could be done like this:
 
 ```php
-Route::group(['middleware' => 'Path\To\Your\Middleware'], function() {
+Route::group(['middleware' => 'Path\To\Your\Middleware'], function () {
     Route::get('info', 'Acme\News@info');
 });
 ```
@@ -206,7 +206,7 @@ Route::group(['middleware' => 'Path\To\Your\Middleware'], function() {
 If you want to assign a group of middleware to just one route you can do it like this:
 
 ```php
-Route::middleware(['Path\To\Your\Middleware'])->group(function() {
+Route::middleware(['Path\To\Your\Middleware'])->group(function () {
     Route::get('info', 'Acme\News@info');
 });
 ```

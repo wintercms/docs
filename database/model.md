@@ -662,7 +662,7 @@ You can externally bind to [local events](../events/introduction) for a single i
 
 ```php
 $flight = new Flight;
-$flight->bindEvent('model.beforeCreate', function() use ($model) {
+$flight->bindEvent('model.beforeCreate', function () use ($model) {
     $model->slug = Str::slug($model->name);
 })
 ```
@@ -674,7 +674,7 @@ Since models are [equipped to use behaviors](../services/behaviors), they can be
 Inside the closure you can add relations to the model. Here we extend the `Backend\Models\User` model to include a profile (has one) relationship referencing the `Acme\Demo\Models\Profile` model.
 
 ```php
-\Backend\Models\User::extend(function($model) {
+\Backend\Models\User::extend(function ($model) {
     $model->hasOne['profile'] = ['Acme\Demo\Models\Profile', 'key' => 'user_id'];
 });
 ```
@@ -682,8 +682,8 @@ Inside the closure you can add relations to the model. Here we extend the `Backe
 This approach can also be used to bind to [local events](#events), the following code listens for the `model.beforeSave` event.
 
 ```php
-\Backend\Models\User::extend(function($model) {
-    $model->bindEvent('model.beforeSave', function() use ($model) {
+\Backend\Models\User::extend(function ($model) {
+    $model->bindEvent('model.beforeSave', function () use ($model) {
         // ...
     });
 });
@@ -696,7 +696,7 @@ This approach can also be used to bind to [local events](#events), the following
 Additionally, a few methods exist to extend protected model properties.
 
 ```php
-\Backend\Models\User::extend(function($model) {
+\Backend\Models\User::extend(function ($model) {
     // add cast attributes
     $model->addCasts([
         'some_extended_field' => 'int',
@@ -741,7 +741,7 @@ It is strongly suggested to use the above methods to add relations when extendin
 Example usage:
 
 ```php
-\Backend\Models\User::extend(function($model) {
+\Backend\Models\User::extend(function ($model) {
     $model->addHasOne('profile', ['Acme\Demo\Models\Profile', 'key' => 'user_id']);
 });
 ```

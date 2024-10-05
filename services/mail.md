@@ -57,7 +57,7 @@ To send a message, use the `send` method on the `Mail` facade which accepts thre
 // These variables are available inside the message as Twig
 $vars = ['name' => 'Joe', 'user' => 'Mary'];
 
-Mail::send('acme.blog::mail.message', $vars, function($message) {
+Mail::send('acme.blog::mail.message', $vars, function ($message) {
 
     $message->to('admin@domain.tld', 'Admin Person');
     $message->subject('This is a reminder');
@@ -122,7 +122,7 @@ The following custom sending `$options` are supported
 As previously mentioned, the third argument given to the `send` method is a `Closure` allowing you to specify various options on the e-mail message itself. Using this Closure you may specify other attributes of the message, such as carbon copies, blind carbon copies, etc:
 
 ```php
-Mail::send('acme.blog::mail.welcome', $vars, function($message) {
+Mail::send('acme.blog::mail.welcome', $vars, function ($message) {
 
     $message->from('us@example.com', 'Winter');
     $message->to('foo@example.com')->cc('bar@example.com');
@@ -366,7 +366,7 @@ Mail templates reside in the database and can be created in the backend area via
 The process for sending these emails is the same. For example, if you create a template with code *this.is.my.email* you can send it using this PHP code:
 
 ```php
-Mail::send('this.is.my.email', $data, function($message) use ($user)
+Mail::send('this.is.my.email', $data, function ($message) use ($user)
 {
     [...]
 });

@@ -9,7 +9,7 @@ The inversion of control (IoC) container is a tool for managing class dependenci
 There are two ways the IoC container can resolve dependencies: via Closure callbacks or automatic resolution. First, we'll explore Closure callbacks. First, a "type" may be bound into the container:
 
 ```php
-App::bind('foo', function($app) {
+App::bind('foo', function ($app) {
     return new FooBar;
 });
 ```
@@ -27,7 +27,7 @@ When the `App::make` method is called, the Closure callback is executed and the 
 Sometimes you may wish to bind something into the container that should only be resolved once, and the same instance should be returned on subsequent calls into the container:
 
 ```php
-App::singleton('foo', function() {
+App::singleton('foo', function () {
     return new FooBar;
 });
 ```
@@ -80,7 +80,7 @@ class FooServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->bind('foo', function() {
+        $this->app->bind('foo', function () {
             return new Foo;
         });
     }

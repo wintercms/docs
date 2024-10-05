@@ -197,7 +197,7 @@ $feed = new Winter\Storm\Database\DataFeed;
 $feed->add('user', new User);
 $feed->add('post', Post::where('category_id', 7));
 
-$feed->add('comment', function() {
+$feed->add('comment', function () {
     $comment = new Comment;
     return $comment->where('approved', true);
 });

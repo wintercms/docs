@@ -468,7 +468,7 @@ $v = Validator::make($data, [
 Let's assume our web application is for game collectors. If a game collector registers with our application and they own more than 100 games, we want them to explain why they own so many games. For example, perhaps they run a game re-sell shop, or maybe they just enjoy collecting. To conditionally add this requirement, we can use the `sometimes` method on the `Validator` instance.
 
 ```php
-$v->sometimes('reason', 'required|max:500', function($input) {
+$v->sometimes('reason', 'required|max:500', function ($input) {
     return $input->games >= 100;
 });
 ```
@@ -476,7 +476,7 @@ $v->sometimes('reason', 'required|max:500', function($input) {
 The first argument passed to the `sometimes` method is the name of the field we are conditionally validating. The second argument is the rules we want to add. If the `Closure` passed as the third argument returns `true`, the rules will be added. This method makes it a breeze to build complex conditional validations. You may even add conditional validations for several fields at once:
 
 ```php
-$v->sometimes(['reason', 'cost'], 'required', function($input) {
+$v->sometimes(['reason', 'cost'], 'required', function ($input) {
     return $input->games >= 100;
 });
 ```
@@ -608,7 +608,7 @@ use Validator;
 
 public function boot()
 {
-    Validator::extend('foo', function($attribute, $value, $parameters) {
+    Validator::extend('foo', function ($attribute, $value, $parameters) {
         return $value == 'foo';
     });
 }
@@ -707,7 +707,7 @@ If you wish to provide a large number of custom rules to your application, you c
 To define a resolver, you may provide a Closure to the `resolver` method in the Validator facade.
 
 ```php
-Validator::resolver(function($translator, $data, $rules, $messages, $customAttributes) {
+Validator::resolver(function ($translator, $data, $rules, $messages, $customAttributes) {
     return new CustomValidator($translator, $data, $rules, $messages, $customAttributes);
 });
 ```

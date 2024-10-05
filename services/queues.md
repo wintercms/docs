@@ -386,7 +386,7 @@ php artisan queue:work connection-name --tries=3
 If you would like to register an event that will be called when a queue job fails, you may use the `Queue::failing` method. This event is a great opportunity to notify your team via e-mail or another third party service.
 
 ```php
-Queue::failing(function($connection, $job, $data) {
+Queue::failing(function ($connection, $job, $data) {
     //
 });
 ```

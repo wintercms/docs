@@ -26,7 +26,7 @@ You can also dynamically implement this behavior on third party models outside o
 /**
  * Extend the Winter.User user model to implement the encryptable behavior.
  */
-Winter\User\Models\User::extend(function($model) {
+Winter\User\Models\User::extend(function ($model) {
     // Implement the sortable behavior dynamically
     $model->implement[] = 'Winter.Storm.Database.Behaviors.Encryptable';
     $model->addDynamicProperty('encryptable', ['encrypted_metadata']);
@@ -54,7 +54,7 @@ You can also dynamically implement this behavior on third party models outside o
 /**
  * Extend the Winter.User user model to implement the sortable behavior.
  */
-Winter\User\Models\User::extend(function($model) {
+Winter\User\Models\User::extend(function ($model) {
     // Implement the sortable behavior dynamically
     $model->implement[] = 'Winter.Storm.Database.Behaviors.Sortable';
 });

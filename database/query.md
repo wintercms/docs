@@ -67,7 +67,7 @@ foreach ($roles as $name => $title) {
 If you need to work with thousands of database records, consider using the `chunk` method. This method retrieves a small "chunk" of the results at a time, and feeds each chunk into a `Closure` for processing. This method is very useful for writing [console commands](../console/introduction#building-a-command) that process thousands of records. For example, let's work with the entire `users` table in chunks of 100 records at a time:
 
 ```php
-Db::table('users')->chunk(100, function($users) {
+Db::table('users')->chunk(100, function ($users) {
     foreach ($users as $user) {
         //
     }
@@ -77,7 +77,7 @@ Db::table('users')->chunk(100, function($users) {
 You may stop further chunks from being processed by returning `false` from the `Closure`:
 
 ```php
-Db::table('users')->chunk(100, function($users) {
+Db::table('users')->chunk(100, function ($users) {
     // Process the records...
 
     return false;

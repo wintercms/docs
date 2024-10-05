@@ -407,7 +407,7 @@ ProductCategory
 When dynamically extending other plugin's models, you should prefix the field with at least the plugin name. This helps to avoid potential future conflicts if that plugin is updated to add new relationships that could conflict with your dynamic relationships.
 
 ```php
-User::extend(function($model) {
+User::extend(function ($model) {
     $model->hasOne['forum_member'] = ['Winter\Forum\Models\Member'];
 });
 ```

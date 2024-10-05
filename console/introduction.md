@@ -483,7 +483,7 @@ If you need to register commands from within a [service provider](../services/ap
 ```php
 public function boot()
 {
-    $this->app->singleton('myauthor.mycommand', function() {
+    $this->app->singleton('myauthor.mycommand', function () {
         return new \MyAuthor\MyCommand\Console\MyCommand;
     });
 

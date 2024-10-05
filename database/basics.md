@@ -153,7 +153,7 @@ Db::commit();
 If you would like to receive each SQL query executed by your application, you may use the `listen` method. This method is useful for logging queries or debugging.
 
 ```php
-Db::listen(function($sql, $bindings, $time) {
+Db::listen(function ($sql, $bindings, $time) {
     //
 });
 ```
