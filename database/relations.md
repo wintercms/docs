@@ -1465,9 +1465,9 @@ $comment->save();
 
 ## Dynamically defining a relation
 
-Using Winter's powerful [extension capabilities](../services/behaviors), you can dynamically add additional relations to models at run-time, in both the property style and the method style.
+Using Winter's powerful [extension capabilities](../services/behaviors), you can dynamically add additional relations to models at run-time, in both the property style and the method style, allowing you to extend the functionality of models in other plugins, or in the core of Winter CMS.
 
-Within a [plugin boot method](../plugin/registration#registration-file), you can extend a given model to add additional relations:
+Within a [plugin boot method](../plugin/registration#registration-file), you can extend a given model to add additional relations like the following:
 
 ```php
 <?php
@@ -1483,13 +1483,13 @@ class Plugin extends \System\Classes\PluginBase
     {
         \Acme\Blog\Post::extend(function ($model) {
             // Property-style
-            $model->hasMany['comments'] = [
-                \Acme\Blog\Comment::class,
-            ];
+            $model->addHasManyRelation(\Acme\Blog\Comment::class, [
+                'delete' => true,
+            ]);
 
             // Method-style
             $model->addDynamicMethod('comments', function (): HasMany {
-                return $model->hasMany(\Acme\Blog\Comment::class);
+                return $model->hasMany(\Acme\Blog\Comment::class)->dependent();
             });
         });
     }
@@ -1497,6 +1497,24 @@ class Plugin extends \System\Classes\PluginBase
 ```
 
 When using the method style of defining a dynamic relation, you must ensure that the callback function has a return type of one of the applicable relation classes in order for it to be identified as a relation method.
+
+Winter provides helper methods to dynamically add relations. The following methods can be used to create relations:
+
+- `addHasOneRelation()`
+- `addHasManyRelation()`
+- `addBelongsToRelation()`
+- `addBelongsToManyRelation()`
+- `addHasOneThroughRelation()`
+- `addHasManyThroughRelation()`
+- `addAttachOneRelation()`
+- `addAttachManyRelation()`
+- `addMorphOneRelation()`
+- `addMorphManyRelation()`
+- `addMorphToRelation()`
+- `addMorphToManyRelation()`
+- `addMorphedByManyRelation()`
+
+In all methods above, the first parameter defines the related class, as a class string, and the second parameter provides the relation config as an array. Please note that using these methods results in the relation being defined in the relation properties.
 
 ## Deferred binding
 
