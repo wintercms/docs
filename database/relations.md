@@ -1185,6 +1185,8 @@ select * from books
 select * from authors where id in (1, 2, 3, 4, 5, ...)
 ```
 
+> **NOTE:** If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, Winter cannot connect the relations.
+
 ### Eager loading multiple relationships
 
 Sometimes you may need to eager load several different relationships in a single operation. To do so, just pass additional arguments to the `with` method:
