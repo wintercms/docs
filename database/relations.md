@@ -175,6 +175,8 @@ $user->profile; // The "Acme\Blog\Models\Profile" record attached to this user
 $user->posts; // A collection containing every "Acme\Blog\Models\Post" record attached to this user
 ```
 
+> **WARNING:** If you define a relation in both the relation properties of a class, and define a method relation with the same name, an exception will be thrown. You must only use one style to define a single relation. You can, however, define multiple unique relations in both the property style and the method style.
+
 ### Detailed relation methods
 
 Another key difference between property style and method style relation definitions lies in the additional parameters that may be applied to the relation. With the property style, you can configure the relation by providing additional keys and values in the relation configuration array. With the method style, you define these parameters by using chained methods, for example:
