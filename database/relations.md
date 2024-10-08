@@ -150,12 +150,12 @@ public function posts(): HasMany
 }
 ```
 
-Alternatively, you may also use the `Relation` attribute on the method to define it as a relation method:
+Alternatively, you may also use the `Relation` attribute on the method to define it as a relation method, and include the relation type in the attribute:
 
 ```php
 use Winter\Storm\Database\Attributes\Relation;
 
-#[Relation]
+#[Relation('hasMany')]
 public function posts()
 {
     return $this->hasMany('Acme\Blog\Models\Post');
@@ -197,7 +197,7 @@ Method | Description
 You might have noticed that there are no chain methods for handling "constraint" options like the `order`, `conditions` and `scope` options available in the property style relations. That is because relations defined in this format are already [query builders](query) - you can simply add the constraints directly to the relation!
 
 ```php
-#[Relation]
+#[Relation('hasMany')]
 public function posts()
 {
     return $this->hasMany('Acme\Blog\Models\Post')->dependent()->published()->where('free_article', true);
