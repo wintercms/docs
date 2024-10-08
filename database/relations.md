@@ -1463,6 +1463,41 @@ $comment->text = 'Edit to this comment!';
 $comment->save();
 ```
 
+## Dynamically defining a relation
+
+Using Winter's powerful [extension capabilities](../services/behaviors), you can dynamically add additional relations to models at run-time, in both the property style and the method style.
+
+Within a [plugin boot method](../plugin/registration#registration-file), you can extend a given model to add additional relations:
+
+```php
+<?php
+
+namespace Acme\Blog;
+
+use Winter\Storm\Database\Relations\HasMany;
+
+class Plugin extends \System\Classes\PluginBase
+{
+    // ...
+    public function boot()
+    {
+        \Acme\Blog\Post::extend(function ($model) {
+            // Property-style
+            $model->hasMany['comments'] = [
+                \Acme\Blog\Comment::class,
+            ];
+
+            // Method-style
+            $model->addDynamicMethod('comments', function (): HasMany {
+                return $model->hasMany(\Acme\Blog\Comment::class);
+            });
+        });
+    }
+}
+```
+
+When using the method style of defining a dynamic relation, you must ensure that the callback function has a return type of one of the applicable relation classes in order for it to be identified as a relation method.
+
 ## Deferred binding
 
 Deferred bindings allows you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
