@@ -116,7 +116,7 @@ public $belongsToMany = [
 
 ### Method style relation definition
 
-> **Note:** Method style relation definition is available from Winter v1.2.5.
+> **NOTE:** Method style relation definition is available from Winter v1.2.7.
 
 Model relations can also be defined as methods in a model class, similar to the base Laravel framework.
 
