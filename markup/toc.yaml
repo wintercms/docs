@@ -53,3 +53,4 @@ sections:
             functions/form: "form_*()"
             functions/html: "html()"
             functions/dump: "dump()"
+            functions/url: "url_*()"

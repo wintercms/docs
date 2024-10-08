@@ -136,6 +136,8 @@ url = "blog/post"
 
 The output will be rendered from the plugin directory **components/blogpost/default.htm**. You can copy all the markup from this file and paste it directly in the page or to a new partial, called **blog-post.htm** for example.
 
+>**NOTE:** If you are using the CMS editor in the backend, you can automatically copy the contents of the default partial by holding down the modifier key (Ctrl on Windows, Cmd on MacOS) and double-clicking the `{% component 'myComponent' %}` tag in the code editor. You can also trigger the same behaviour by clicking on the "Fork" icon in the bottom right of the code editor when the component tag is selected.
+
 ```twig
 <h1>{{ __SELF__.post.title }}</h1>
 <p>{{ __SELF__.post.description }}</p>

@@ -2,11 +2,16 @@
 
 ## Introduction
 
-Dynamic class extension provides the following benefits:
+### Dynamic Class Extension
+
+Dynamic class extension is one of the most powerful features in Winter CMS. It is utilized in most core classes, can be added to any regular PHP class, and provides the following benefits:
 
 1. Add new properties and methods dynamically.
 1. Bind to local events fired in models, widgets, and other locations, even those in the core modules or other plugins.
 1. Add additional behaviours (private traits, see below) to classes.
+
+The following are some requirements and limitations:
+
 1. Must extend the `Winter\Storm\Extension\Extendable` class or implement the `Winter\Storm\Extension\ExtendableTrait`.
 1. Already-defined methods and properties cannot be overridden.
 1. Extendable classes are protected against having undefined properties set on first use and must use `$object->addDynamicProperty();` instead.
@@ -38,6 +43,8 @@ Post::extend(function ($model) {
 });
 ```
 
+### Behaviors
+
 Dynamic Class Extension also adds the ability for classes to have *private traits*, also known as Behaviors. These are similar to [native PHP Traits](https://php.net/manual/en/language.oop5.traits.php) except they have some distinct benefits:
 
 1. Behaviors have their own constructor.
@@ -66,8 +73,8 @@ A behavior is used in a similar fashion:
 class MyClass extends \Winter\Storm\Extension\Extendable
 {
     public $implement = [
-        'Winter.Storm.UtilityFunctions',
-        'Winter.Storm.DeferredBinding',
+        \Winter\Storm\UtilityFunctions::class,
+        \Winter\Storm\DeferredBinding::class,
     ];
 }
 ```

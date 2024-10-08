@@ -95,12 +95,17 @@ If you intend to use scheduled tasks, or install plugins that use scheduled task
 * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
 ```
 
-Be sure to replace `/path/to/artisan` with the absolute path to the `artisan` file in the root directory of your Winter installation. This cron task will call the command scheduler every minute, to which Winter will evaluate any scheduled tasks and run the tasks that are due for execution.
+This cron task will call the command scheduler every minute, to which Winter will evaluate any scheduled tasks and run the tasks that are due for execution.
 
+> **NOTE**: If `php` is not on your PATH, then make sure you provide the absolute path to the version of PHP you wish to run the scheduler with. `/path/to/artisan` should also reflect the absolute path to the `artisan` file in the root directory of your Winter installation.
 > **NOTE**: If you are adding this to the system crontab (`/etc/cron.d`), you'll need to specify the user to run the command as immediately after `* * * * *`.
 
 ### Setting up queue workers
 
 You may optionally set up an external queue for processing queued jobs. By default, Winter will run queued jobs asynchronously, which may cause slower performance and response times for users if the jobs are large. This behavior can be changed by setting the `default` parameter in the `config/queue.php`. Please review the [Queue service](../services/queues.md) documentation for more information on setting up a queue runner.
 
-If you decide to use the `database` queue driver, it is a good idea to add a crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue.
+If you decide to use the `database` queue driver, it is a good idea to add a crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue:
+
+```
+* * * * * php /path/to/artisan queue:work --once >> /dev/null 2>&1
+```

@@ -327,6 +327,29 @@ The `trustedProxyHeaders` value specifies which headers will be allowed to defin
 > 'trustedProxyHeaders' => Illuminate\Http\Request::HEADER_X_FORWARDED_AWS_ELB
 > ```
 
+### Allowed file types
+
+Winter CMS is preset to allow only certain file types in the media manager and file upload form widgets (see: `WinterStorm\Filesystem\Definitions`), but you can configure them to suit your needs by adding a `fileDefinitions` configuration value to your `config/cms.php` file.
+
+File types are grouped into five categories:
+
+- defaultExtensions: Extensions that are particularly benign.
+- assetExtensions: Extensions seen as public assets.
+- imageExtensions: Extensions typically used as images.
+- videoExtensions: Extensions typically used as videos.
+- audioExtensions: Extensions typically used as audios.
+
+The following example shows how to extend the default extensions group to add the `fig` and `jam` file extensions.
+
+```php
+'fileDefinitions' => [
+    'defaultExtensions' => array_merge(
+        \Winter\Storm\Filesystem\Definitions::get('defaultExtensions'),
+        ['fig', 'jam']
+    ),
+]
+```
+
 ## Environment configuration
 
 ### Defining a base environment

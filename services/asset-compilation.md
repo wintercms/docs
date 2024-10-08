@@ -34,6 +34,8 @@ $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
 
 If the path specified in the `addCss` and `addJs` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the directory referenced by the `$assetPath` property on the class currently implementing the `System\Traits\AssetMaker`.
 
+### System Attribute: `build`
+
 The `addCss` and `addJs` methods provide a second argument that defines the attributes of your injected asset as an array. A special attribute - `build` - is available, that will suffix your injected assets with the current version of the plugin specified. This can be used to refresh cached assets when a plugin is upgraded.
 
 ```php
@@ -48,6 +50,12 @@ You may also use a string as the second argument, which then defaults to using t
 ```php
 $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js', 'Acme.Test');
 ```
+
+### System Attribute: `order`
+
+Another special attribute `order` is reserved to be used when rendering the assets to ensure that assets can be rendered in a specific order. The default order priority assigned to most assets is `500` and assets with the same priority are ordered separately on a first-come first-served basis.
+
+>**NOTE:** Core assets provided by the current backend skin are generally provided with an order priority of `1` as they are technically added to the AssetMaker after the rest of the page has been processed, immediately before the call to `makeAssets()` but they need to be loaded before any assets added to the page dynamically. This is so that you can still use the `system.assets.beforeAddAsset` global event and / or `assets.beforeAddAsset` local event to interact with assets provided by the backend skin.
 
 ### Triggering Asset Compilation
 

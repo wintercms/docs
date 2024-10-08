@@ -42,6 +42,7 @@ Key | Description | Default | Options
 `offset` | Offset the crop of the resized image | `[0,0]` | `[left, top]`
 `quality` | Quality of the resized image | `90` | `0-100`
 `sharpen` | Amount to sharpen the image | `0` | `0-100`
+`extension` | Converts an image to the specified format | Inherits | `webp`, `jpg`, `png`, `gif`
 
 ## Available Modes
 

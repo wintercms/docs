@@ -65,10 +65,12 @@ The `create:settings` command generates the files needed for a new [Settings mod
 ## Create a backend controller
 
 ```bash
-php artisan create:controller <plugin code> <controller name>
+php artisan create:controller <plugin code> <controller name> [--sidebar]
 ```
 
 The `create:controller` command generates a controller, configuration and view files. The first argument specifies the plugin code of the plugin that this controller will be added into, and the second parameter specifies the controller class name, eg. `MyController`.
+
+The optional `--sidebar` flag will generate the controller with the Create, Update, & Preview views pre-configured to use the sidebar backend layout (like with the User Profile page).
 
 ## Create a form widget
 

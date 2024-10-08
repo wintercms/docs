@@ -3,11 +3,11 @@ title: "Controls: Form"
 ---
 # Form
 
-The form is the base element of data entry within Winter CMS. A form is made up of controls, which can be input fields or widgets. In general, the form is generally created by the [Form Widget](/v1.2/docs/backend/forms), but can also be manually created for custom uses.
+The form is the base element of data entry within Winter CMS. A form is made up of controls, which can be input fields or widgets. In general, the form is generally created by the [Form Widget](../../backend/forms), but can also be manually created for custom uses.
 
 ## The basics
 
-A form should be made up of a `<form">` tag. Each individual input or control within the form should be surrounded by a `<div class="form-group">` container, similar to the [Bootstrap v4](https://getbootstrap.com/docs/4.6/components/forms/) format.
+A form should be made up of a `<form>` tag. Each individual input or control within the form should be surrounded by a `<div class="form-group">` container, similar to the [Bootstrap v4](https://getbootstrap.com/docs/4.6/components/forms/) format.
 
 Within each form group, there should be a `<label>` tag for the field label, and a control or input that has the class `form-control` to identify the actual interactive element. For usability, you should endeavour to include a `for` attribute on the label that matches the `name` attribute of the field that label is for.
 

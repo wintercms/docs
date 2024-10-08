@@ -422,7 +422,7 @@ public function getStatusOptions($value, $formData)
     // Insert the actual form's model value to avoid it to vanish
     // on eventual AJAX call that would refresh the field partial like dependsOn
     if ($this->status) {
-    
+
         // The actual form's status could be a custom like ['status' => 'need review']
         $statuses->add(['status' => $this->status]);
     }
@@ -718,7 +718,7 @@ public function myColorList($fieldName, $value, $formData)
 }
 ```
 
-If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors. You can also define a custom set of default colors to be used in all color pickers that do not have the `availableColors` field specified. This can be managed in the **Customize back-end** area of the Settings.
+If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors. You can also define a custom set of default colors to be used in all color pickers that do not have the `availableColors` field specified. This can be managed in the **Customize backend** area of the Settings.
 
 ### Data table
 
@@ -875,6 +875,9 @@ Option | Description
 `attachOnUpload` | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
 
 > **NOTE:** Unlike the [Media Finder FormWidget](#media-finder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
+
+By default, the File Upload FormWidget only allows a limited set of file extensions. You can extend this list by adding a `fileDefinitions` config in `config/cms.php` file.  
+See [Allowed file types](../setup/configuration#allowed-file-types) for more information.
 
 ### Icon Picker
 

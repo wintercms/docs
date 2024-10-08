@@ -17,43 +17,37 @@ You may place icons just about anywhere by placing an inline tag (such as a `<i>
 
 ```html
 <i class="icon-camera-retro"></i> icon-camera-retro
-
 <span class="icon-flag-checkered"></span> wn-icon-flag-checkered
 ```
 
-<div class="frame" style="font-size: 22px;">
-    <i class="icon-camera-retro"></i> icon-camera-retro
-    <br />
-    <span class="icon-flag-checkered"></span> wn-icon-flag-checkered
-</div>
+```backend
+<i class="icon-camera-retro"></i> icon-camera-retro
+<span class="icon-flag-checkered"></span> wn-icon-flag-checkered
+```
 
 Using the `wn-` prefix will allow you to prefix content inside the given tag with an icon:
 
 ```html
 <i class="wn-icon-star">You're a star!</i>
-
 <strong class="wn-icon-snowflake">Winter is coming.</strong>
 ```
 
-<div class="frame" style="font-size: 22px;">
-    <i class="wn-icon-star">You're a star!</i>
-    <br>
-    <strong class="wn-icon-snowflake">Winter is coming.</strong>
-</div>
+```backend
+<i class="wn-icon-star">You're a star!</i>
+<strong class="wn-icon-snowflake">Winter is coming.</strong>
+```
 
 You may also opt to use the standard Font Awesome classes as well:
 
 ```html
 <i class="fas fa-star">You're a star!</i>
-
 <strong class="fas fa-snowflake">Winter is coming.</strong>
 ```
 
-<div class="frame" style="font-size: 22px;">
-    <i class="fas fa-star">You're a star!</i>
-    <br>
-    <strong class="fas fa-snowflake">Winter is coming.</strong>
-</div>
+```backend
+<i class="fas fa-star">You're a star!</i>
+<strong class="fas fa-snowflake">Winter is coming.</strong>
+```
 
 ### Icon styles
 
@@ -63,15 +57,13 @@ To use a regular style icon, which is less pronounced but also has much less ava
 
 ```html
 <i class="icon-star"></i> Solid
-
 <i class="icon-regular icon-star"></i> Regular
 ```
 
-<div class="frame" style="font-size: 22px;">
-    <i class="icon-star"></i> Solid
-    <br>
-    <i class="icon-regular icon-star"></i> Regular
-</div>
+```backend
+<i class="icon-star"></i> Solid
+<i class="icon-regular icon-star"></i> Regular
+```
 
 We also provide support for the Font Awesome style classes as well: `fas` for solid, `far` for regular and `fab` for brand.
 
@@ -82,6 +74,19 @@ Winter supports multiple sizing classes to control the size of the icons.
 You may size by 1-10 times the regular size of icons.
 
 ```html
+<i class="icon-camera-retro icon-10x"></i> icon-10x
+<i class="icon-camera-retro icon-9x"></i> icon-9x
+<i class="icon-camera-retro icon-8x"></i> icon-8x
+<i class="icon-camera-retro icon-7x"></i> icon-7x
+<i class="icon-camera-retro icon-6x"></i> icon-6x
+<i class="icon-camera-retro icon-5x"></i> icon-5x
+<i class="icon-camera-retro icon-4x"></i> icon-4x
+<i class="icon-camera-retro icon-3x"></i> icon-3x
+<i class="icon-camera-retro icon-2x"></i> icon-2x
+<i class="icon-camera-retro icon-1x"></i> icon-1x
+```
+
+```backend
 <i class="icon-camera-retro icon-10x"></i> icon-10x
 <i class="icon-camera-retro icon-9x"></i> icon-9x
 <i class="icon-camera-retro icon-8x"></i> icon-8x
@@ -105,6 +110,15 @@ We also provide more classes that match common sizing prefixes in CSS frameworks
 <i class="icon-camera-retro icon-2xl"></i> icon-2xl
 ```
 
+```backend
+<i class="icon-camera-retro icon-2xs"></i> icon-2xs
+<i class="icon-camera-retro icon-xs"></i> icon-xs
+<i class="icon-camera-retro icon-sm"></i> icon-sm
+<i class="icon-camera-retro icon-lg"></i> icon-lg
+<i class="icon-camera-retro icon-xl"></i> icon-xl
+<i class="icon-camera-retro icon-2xl"></i> icon-2xl
+```
+
 ### Icon list items
 
 You can apply icons to lists, allowing you to use the icon as the list item prefix as opposed to a standard circle.
@@ -120,11 +134,41 @@ You must include the `icon-ul` class to a `<ul>` tag, and then the `icon-li` cla
 </ul>
 ```
 
+```backend
+<ul class="icon-ul">
+    <li class="icon-li icon-battery-0">Empty</li>
+    <li class="icon-li icon-battery">Low</li>
+    <li class="icon-li icon-battery-half">Charging</li>
+    <li class="icon-li icon-battery-full">Full</li>
+</ul>
+```
+
 ### Icon buttons
 
 Feel free to use them alongside your buttons.
 
 ```html
+<a class="btn btn-default wn-icon-refresh" href="#">
+    Refresh
+</a>
+<a class="btn btn-success wn-icon-shopping" href="#">
+    Checkout
+</a>
+<a class="btn btn-primary wn-icon-comment" href="#">
+    Comment
+</a>
+<a class="btn btn-danger wn-icon-trash" href="#">
+    Delete
+</a>
+<a class="btn btn-default wn-icon-cog" href="#">
+    Settings
+</a>
+<a class="btn btn-info wn-icon-info" href="#">
+    More Info
+</a>
+```
+
+```backend
 <a class="btn btn-default wn-icon-refresh" href="#">
     Refresh
 </a>

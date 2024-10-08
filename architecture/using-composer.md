@@ -52,7 +52,7 @@ If you wish to install a specific version of Winter, you can also specify the ve
 composer create-project wintercms/winter <your installation directory> "<version>"
 
 # Example:
-#   composer create-project wintercms/winter mywinter "1.0.474"
+#   composer create-project wintercms/winter mywinter "1.2.6"
 ```
 
 ## Installing a plugin or theme using Composer
