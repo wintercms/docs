@@ -182,7 +182,7 @@ Another key difference between property style and method style relation definiti
 ```php
 public function posts(): HasMany
 {
-    return $this->hasMany('Acme\Blog\Models\Post')->dependent()->pushable();
+    return $this->hasMany('Acme\Blog\Models\Post')->dependent(true)->pushable();
 }
 ```
 
@@ -190,12 +190,9 @@ The following chained methods are available to define additional parameters abou
 
 Method | Description
 ------ | -----------
-`->dependent()` | Makes this relation "dependent" on the primary model. The related model records will be deleted when the primary model is deleted. This is only available for the following relation types: `attachOne`, `attachMany`, `hasOne`, `hasMany`, `morphOne` and `morphMany`.
-`->notDependent()` | Makes this relation independent of the primary model. The related model records will not be deleted when the primary model is deleted. This is the default behavior.
-`->detachable()` | Makes this relation detach from the primary model if the primary model is deleted or the relationship is broken. This is the default behavior, and is only available, for the following relation types: `belongsToMany`, `morphToMany` and `morphedByMany`.
-`->notDetachable()` | Prevents the relation from detaching from the primary model when the primary model is deleted or the relationship is broken.
-`->pushable()` | Sets this relation to save when `push()` is run on the primary model. This is the default behavior.
-`->notPushable()` | Sets this relation to not be saved when `push()` is run on the primary model.
+`->dependent(true/false)` | Defines if this relation is "dependent" on the primary model. The related model records will be deleted when the primary model is deleted. This is only available for the following relation types: `attachOne`, `attachMany`, `hasOne`, `hasMany`, `morphOne` and `morphMany`. Default: `false`.
+`->detachable(true/false)` | Defines if this relation detaches from the primary model if the primary model is deleted or the relationship is broken. This is only available for the following relation types: `belongsToMany`, `morphToMany` and `morphedByMany`. Default: `true`.
+`->pushable(true/false)` | Sets this relation to save when `push()` is run on the primary model. Default: `true`.
 
 You might have noticed that there are no chain methods for handling "constraint" options like the `order`, `conditions` and `scope` options available in the property style relations. That is because relations defined in this format are already [query builders](query) - you can simply add the constraints directly to the relation!
 
