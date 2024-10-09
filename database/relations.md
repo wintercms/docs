@@ -4,36 +4,52 @@
 
 Database tables are often related to one another. For example, a blog post may have many comments, or an order could be related to the user who placed it. Winter makes managing and working with these relationships easy and supports several different types of relationships.
 
-> **NOTE:** If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, Winter cannot connect the relations.
-
 ## Defining relationships
 
-Model relationships are defined as properties on your model classes. An example of defining relationships:
+Winter provides two methods of defining model relationships. Both provide the same level of functionality - which one you use is entirely up to your own preferences.
+
+- Property-based array configuration in the model class (Property style)
+- Relation methods defined in the model class, [synonymous with Laravel](https://laravel.com/docs/9.x/eloquent-relationships#defining-relationships) (Method style)
+
+### Property style relationship definition
+
+Model relationships can be defined as properties on your model classes. An example of defining relationships:
 
 ```php
 class User extends Model
 {
+    public $hasOne = [
+        'profile' => \Acme\Blog\Models\Profile::class,
+    ];
+
     public $hasMany = [
-        'posts' => 'Acme\Blog\Models\Post'
-    ]
+        'posts' => \Acme\Blog\Models\Post::class,
+    ];
 }
 ```
 
-Relationships like models themselves, also serve as powerful [query builders](query), accessing relationships as functions provides powerful method chaining and querying capabilities. For example:
+Winter CMS automatically converts relations defined in this way into method endpoints on the model. For example, the above `posts` relation can be accessed by calling the `posts()` method on an instance of the `User` model.
+
+```php
+$user->posts()
+```
+
+Relationships, like the models themselves, also serve as powerful [query builders](query) to allow accessing relationships as functions provides powerful method chaining and querying capabilities. For example:
 
 ```php
 $user->posts()->where('is_active', true)->get();
 ```
 
-Accessing a relationship as a property is also possible:
+Accessing a relationship as a property is also possible. Retrieving the relation as a property will give you the "value" of the relation. This means that a single-record relation (ie. `hasOne`) will provide you with the related model directly. In the case of a multiple-record relation (ie. `hasMany`), a collection is usually returned that contains all related records.
 
 ```php
-$user->posts;
+$user->profile; // The "Acme\Blog\Models\Profile" record attached to this user
+$user->posts; // A collection containing every "Acme\Blog\Models\Post" record attached to this user
 ```
 
 > **NOTE**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. The `load($relation)` method won't force cache to flush. To reload the memory cache use the `reloadRelations()` or the `reload()` methods on the model object.
 
-### Detailed definitions
+### Detailed property style definitions
 
 Each definition can be an array where the key is the relation name and the value is a detail array. The detail array's first value is always the related model class name and all other values are parameters that must have a key name.
 
@@ -98,6 +114,100 @@ public $belongsToMany = [
 ];
 ```
 
+### Method style relation definition
+
+> **NOTE:** Method style relation definition is available from Winter v1.2.7.
+
+Model relations can also be defined as methods in a model class, similar to the base Laravel framework.
+
+```php
+class User extends Model
+{
+    public function profile(): HasOne
+    {
+        return $this->hasOne('Acme\Blog\Models\Profile');
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany('Acme\Blog\Models\Post');
+    }
+}
+```
+
+This way provides a more familiar syntax for Laravel users, and allows for code editors and IDEs to provide syntax support for relations.
+
+One key difference between property style definitions and method style definitions is that a relation method must *explicitly* be defined as a relation method in order for it to be picked up in certain circumstances, for example, when determining all available relations for cascading deletions.
+
+In order to define a relation method, the method must have a single return type that matches one of the `Winter\Storm\Database\Relations` classes:
+
+```php
+use Winter\Storm\Database\Relations\HasMany;
+
+public function posts(): HasMany
+{
+    return $this->hasMany('Acme\Blog\Models\Post');
+}
+```
+
+Alternatively, you may also use the `Relation` attribute on the method to define it as a relation method, and include the relation type in the attribute:
+
+```php
+use Winter\Storm\Database\Attributes\Relation;
+
+#[Relation('hasMany')]
+public function posts()
+{
+    return $this->hasMany('Acme\Blog\Models\Post');
+}
+```
+
+Since the relation method is already a method, you may call the method to retrieve the relation, similar to the property style relations. This returns a [query builder](query) for the relation and allows powerful chaining capabilities.
+
+```php
+$user->posts()->where('is_active', true)->get();
+```
+
+As with the property style relations, you can also call the relation as a property of the model, which returns the relation "value". This means that a single-record relation (ie. `hasOne`) will provide you with the related model directly. In the case of a multiple-record relation (ie. `hasMany`), a collection is usually returned that contains all related records.
+
+```php
+$user->profile; // The "Acme\Blog\Models\Profile" record attached to this user
+$user->posts; // A collection containing every "Acme\Blog\Models\Post" record attached to this user
+```
+
+> **WARNING:** If you define a relation in both the relation properties of a class, and define a method relation with the same name, an exception will be thrown. You must only use one style to define a single relation. You can, however, define multiple unique relations in both the property style and the method style.
+
+### Detailed relation methods
+
+Another key difference between property style and method style relation definitions lies in the additional parameters that may be applied to the relation. With the property style, you can configure the relation by providing additional keys and values in the relation configuration array. With the method style, you define these parameters by using chained methods, for example:
+
+```php
+public function posts(): HasMany
+{
+    return $this->hasMany('Acme\Blog\Models\Post')->dependent(true)->pushable();
+}
+```
+
+The following chained methods are available to define additional parameters about the relation:
+
+Method | Description
+------ | -----------
+`->dependent(true/false)` | Defines if this relation is "dependent" on the primary model. The related model records will be deleted when the primary model is deleted. This is only available for the following relation types: `attachOne`, `attachMany`, `hasOne`, `hasMany`, `morphOne` and `morphMany`. Default: `false`.
+`->detachable(true/false)` | Defines if this relation detaches from the primary model if the primary model is deleted or the relationship is broken. This is only available for the following relation types: `belongsToMany`, `morphToMany` and `morphedByMany`. Default: `true`.
+`->pushable(true/false)` | Sets this relation to save when `push()` is run on the primary model. Default: `true`.
+
+You might have noticed that there are no chain methods for handling "constraint" options like the `order`, `conditions` and `scope` options available in the property style relations. That is because relations defined in this format are already [query builders](query) - you can simply add the constraints directly to the relation!
+
+```php
+#[Relation('hasMany')]
+public function posts()
+{
+    return $this->hasMany('Acme\Blog\Models\Post')->dependent()->published()->where('free_article', true);
+}
+```
+
+> **NOTE:** If your relation is constrained in this fashion, the object returned will be a query builder, not the original relation class. You will need to use the `Relation` attribute to mark methods that return query builders as a relation method.
+
 ## Relationship types
 
 The following relations types are available:
@@ -120,9 +230,16 @@ use Model;
 
 class User extends Model
 {
+    // Property style
     public $hasOne = [
         'phone' => 'Acme\Blog\Models\Phone'
     ];
+
+    // Method style
+    public function phone(): HasOne
+    {
+        return $this->hasOne('Acme\Blog\Models\Phone');
+    }
 }
 ```
 
@@ -135,17 +252,31 @@ $phone = User::find(1)->phone;
 The model assumes the foreign key of the relationship based on the model name. In this case, the `Phone` model is automatically assumed to have a `user_id` foreign key. If you wish to override this convention, you may pass the `key` parameter to the definition:
 
 ```php
+// Property style
 public $hasOne = [
     'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id']
 ];
+
+// Method style
+public function phone(): HasOne
+{
+    return $this->hasOne('Acme\Blog\Models\Phone', 'my_user_id');
+}
 ```
 
 Additionally, the model assumes that the foreign key should have a value matching the `id` column of the parent. In other words, it will look for the value of the user's `id` column in the `user_id` column of the `Phone` record. If you would like the relationship to use a value other than `id`, you may pass the `otherKey` parameter to the definition:
 
 ```php
+// Property style
 public $hasOne = [
     'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id', 'otherKey' => 'my_id']
 ];
+
+// Method style
+public function phone(): HasOne
+{
+    return $this->hasOne('Acme\Blog\Models\Phone', 'my_user_id', 'my_id');
+}
 ```
 
 #### Defining the inverse of a One To One relation
@@ -155,31 +286,52 @@ Now that we can access the `Phone` model from our `User`. Let's do the opposite 
 ```php
 class Phone extends Model
 {
+    // Property style
     public $belongsTo = [
         'user' => 'Acme\Blog\Models\User'
     ];
+
+    // Method style
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo('Acme\Blog\Models\User');
+    }
 }
 ```
 
 In the example above, the model will try to match the `user_id` from the `Phone` model to an `id` on the `User` model. It determines the default foreign key name by examining the name of the relationship definition and suffixing the name with `_id`. However, if the foreign key on the `Phone` model is not `user_id`, you may pass a custom key name using the `key` parameter on the definition:
 
 ```php
+// Property style
 public $belongsTo = [
     'user' => ['Acme\Blog\Models\User', 'key' => 'my_user_id']
 ];
+
+// Method style
+public function user(): BelongsTo
+{
+    return $this->belongsTo('Acme\Blog\Models\User', 'my_user_id');
+}
 ```
 
 If your parent model does not use `id` as its primary key, or you wish to join the child model to a different column, you may pass the `otherKey` parameter to the definition specifying your parent table's custom key:
 
 ```php
+// Property style
 public $belongsTo = [
     'user' => ['Acme\Blog\Models\User', 'key' => 'my_user_id', 'otherKey' => 'my_id']
 ];
+
+// Method style
+public function user(): BelongsTo
+{
+    return $this->belongsTo('Acme\Blog\Models\User', 'my_user_id', 'my_id');
+}
 ```
 
 #### Default models
 
-The `belongsTo` relationship lets you define a default model that will be returned if the given relationship is `null`. This pattern is often referred to as the [Null Object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) and can help remove conditional checks in your code. In the following example, the `user` relation will return an empty `Acme\Blog\Models\User` model if no `user` is attached to the post:
+The `belongsTo`, `hasOne`, `hasOneThrough`, and `morphOne` relationships allow you to define a default model that will be returned if the given relationship is `null`. This pattern is often referred to as the [Null Object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) and can help remove conditional checks in your code. In the following example, the `user` relation will return an empty `Acme\Blog\Models\User` model if no `user` is attached to the post:
 
 ```php
 public $belongsTo = [
@@ -198,6 +350,24 @@ public $belongsTo = [
 ];
 ```
 
+If you have defined the relation as a method, you may use the `withDefault()` method to define a default model:
+
+```php
+public function user(): BelongsTo
+{
+    return $this->belongsTo('Acme\Blog\Models\User')->withDefault();
+}
+
+// With attributes
+
+public function user(): BelongsTo
+{
+    return $this->belongsTo('Acme\Blog\Models\User')->withDefault([
+        'name' => 'Guest',
+    ]);
+}
+```
+
 ### One To Many
 
 A one-to-many relationship is used to define relationships where a single model owns any amount of other models. For example, a blog post may have an infinite number of comments. Like all other relationships, one-to-many relationships are defined adding an entry to the `$hasMany` property on your model:
@@ -205,9 +375,16 @@ A one-to-many relationship is used to define relationships where a single model 
 ```php
 class Post extends Model
 {
+    // Property style
     public $hasMany = [
         'comments' => 'Acme\Blog\Models\Comment'
     ];
+
+    // Method style
+    public function comments(): HasMany
+    {
+        return $this->hasMany('Acme\Blog\Models\Comment');
+    }
 }
 ```
 
@@ -232,9 +409,16 @@ $comments = Post::find(1)->comments()->where('title', 'foo')->first();
 Like the `hasOne` relation, you may also override the foreign and local keys by passing the `key` and `otherKey` parameters on the definition respectively:
 
 ```php
+// Property style
 public $hasMany = [
     'comments' => ['Acme\Blog\Models\Comment', 'key' => 'my_post_id', 'otherKey' => 'my_id']
 ];
+
+// Method style
+public function comments(): HasMany
+{
+    return $this->hasMany('Acme\Blog\Models\Comment', 'my_post_id', 'my_id');
+}
 ```
 
 #### Defining the inverse of a One To Many relation
@@ -244,9 +428,16 @@ Now that we can access all of a post's comments, let's define a relationship to 
 ```php
 class Comment extends Model
 {
+    // Property style
     public $belongsTo = [
         'post' => 'Acme\Blog\Models\Post'
     ];
+
+    // Method style
+    public function post(): BelongsTo
+    {
+        return $this->belongsTo('Acme\Blog\Models\Post');
+    }
 }
 ```
 
@@ -261,17 +452,31 @@ echo $comment->post->title;
 In the example above, the model will try to match the `post_id` from the `Comment` model to an `id` on the `Post` model. It determines the default foreign key name by examining the name of the relationship  and suffixing it with `_id`. However, if the foreign key on the `Comment` model is not `post_id`, you may pass a custom key name using the `key` parameter:
 
 ```php
+// Property style
 public $belongsTo = [
     'post' => ['Acme\Blog\Models\Post', 'key' => 'my_post_id']
 ];
+
+// Method style
+public function post(): BelongsTo
+{
+    return $this->belongsTo('Acme\Blog\Models\Post', 'my_post_id');
+}
 ```
 
 If your parent model does not use `id` as its primary key, or you wish to join the child model to a different column, you may pass the `otherKey` parameter to the definition specifying your parent table's custom key:
 
 ```php
+// Property style
 public $belongsTo = [
     'post' => ['Acme\Blog\Models\Post', 'key' => 'my_post_id', 'otherKey' => 'my_id']
 ];
+
+// Method style
+public function post(): BelongsTo
+{
+    return $this->belongsTo('Acme\Blog\Models\Post', 'my_post_id', 'my_id');
+}
 ```
 
 ### Many To Many
@@ -294,9 +499,16 @@ Many-to-many relationships are defined adding an entry to the `$belongsToMany` p
 ```php
 class User extends Model
 {
+    // Property style
     public $belongsToMany = [
         'roles' => 'Acme\Blog\Models\Role'
     ];
+
+    // Method style
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany('Acme\Blog\Models\Role');
+    }
 }
 ```
 
@@ -319,14 +531,22 @@ $roles = User::find(1)->roles()->orderBy('name')->get();
 As mentioned previously, to determine the table name of the relationship's joining table, the model will join the two related model names in alphabetical order. However, you are free to override this convention. You may do so by passing the `table` parameter to the `belongsToMany` definition:
 
 ```php
+// Property style
 public $belongsToMany = [
     'roles' => ['Acme\Blog\Models\Role', 'table' => 'acme_blog_role_user']
 ];
+
+// Method style
+public function roles(): BelongsToMany
+{
+    return $this->belongsToMany('Acme\Blog\Models\Role', 'acme_blog_role_user');
+}
 ```
 
 In addition to customizing the name of the joining table, you may also customize the column names of the keys on the table by passing additional parameters to the `belongsToMany` definition. The `key` parameter is the foreign key name of the model on which you are defining the relationship, while the `otherKey` parameter is the foreign key name of the model that you are joining to:
 
 ```php
+// Property style
 public $belongsToMany = [
     'roles' => [
         'Acme\Blog\Models\Role',
@@ -335,6 +555,12 @@ public $belongsToMany = [
         'otherKey' => 'my_role_id'
     ]
 ];
+
+// Method style
+public function roles(): BelongsToMany
+{
+    return $this->belongsToMany('Acme\Blog\Models\Role', 'acme_blog_role_user', 'my_user_id', 'my_role_id');
+}
 ```
 
 #### Defining the inverse of the relationship
@@ -344,9 +570,16 @@ To define the inverse of a many-to-many relationship, you simply place another `
 ```php
 class Role extends Model
 {
+    // Property style
     public $belongsToMany = [
         'users' => 'Acme\Blog\Models\User'
     ];
+
+    // Method style
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany('Acme\Blog\Models\User');
+    }
 }
 ```
 
@@ -369,20 +602,34 @@ Notice that each `Role` model we retrieve is automatically assigned a `pivot` at
 By default, only the model keys will be present on the `pivot` object. If your pivot table contains extra attributes, you must specify them when defining the relationship:
 
 ```php
+// Property style
 public $belongsToMany = [
-    'roles' => [
-        'Acme\Blog\Models\Role',
+    'users' => [
+        'Acme\Blog\Models\User',
         'pivot' => ['column1', 'column2']
     ]
 ];
+
+// Method style
+public function users(): BelongsToMany
+{
+    return $this->belongsToMany('Acme\Blog\Models\User')->withPivot('column1', 'column2');
+}
 ```
 
 If you want your pivot table to have automatically maintained `created_at` and `updated_at` timestamps, use the `timestamps` parameter on the relationship definition:
 
 ```php
+// Property style
 public $belongsToMany = [
-    'roles' => ['Acme\Blog\Models\Role', 'timestamps' => true]
+    'users' => ['Acme\Blog\Models\User', 'timestamps' => true]
 ];
+
+// Method style
+public function users(): BelongsToMany
+{
+    return $this->belongsToMany('Acme\Blog\Models\User')->withTimestamps();
+}
 ```
 
 These are the parameters supported for `belongsToMany` relations:
@@ -425,12 +672,19 @@ Now that we have examined the table structure for the relationship, let's define
 ```php
 class Country extends Model
 {
+    // Property style
     public $hasManyThrough = [
         'posts' => [
             'Acme\Blog\Models\Post',
             'through' => 'Acme\Blog\Models\User'
         ],
     ];
+
+    // Method style
+    public function posts(): HasManyThrough
+    {
+        return $this->hasManyThrough('Acme\Blog\Models\Post', 'Acme\Blog\Models\User');
+    }
 }
 ```
 
@@ -439,6 +693,7 @@ The first argument passed to the `$hasManyThrough` relation is the name of the f
 Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key`, `otherKey` and `throughKey` parameters to the `$hasManyThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, the `throughKey` parameter is the name of the foreign key on the final model, while the `otherKey` is the local key.
 
 ```php
+// Property style
 public $hasManyThrough = [
     'posts' => [
         'Acme\Blog\Models\Post',
@@ -448,6 +703,12 @@ public $hasManyThrough = [
         'otherKey'   => 'my_id'
     ],
 ];
+
+// Method style
+public function posts(): HasManyThrough
+{
+    return $this->hasManyThrough('Acme\Blog\Models\Post', 'Acme\Blog\Models\User', 'my_country_id', 'my_user_id', 'my_id');
+}
 ```
 
 ### Has One Through
@@ -472,12 +733,19 @@ Though the `history` table does not contain a `supplier_id` column, the `hasOneT
 ```php
 class Supplier extends Model
 {
+    // Property style
     public $hasOneThrough = [
         'userHistory' => [
             'Acme\Supplies\Model\History',
             'through' => 'Acme\Supplies\Model\User'
         ],
     ];
+
+    // Method style
+    public function userHistory(): HasOneThrough
+    {
+        return $this->hasOneThrough('Acme\Supplies\Model\History', 'Acme\Supplies\Model\User');
+    }
 }
 ```
 
@@ -486,6 +754,7 @@ The first array parameter passed to the `$hasOneThrough` property is the name of
 Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key`, `otherKey` and `throughKey` parameters to the `$hasManyThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, the `throughKey` parameter is the name of the foreign key on the final model, while the `otherKey` is the local key.
 
 ```php
+// Property style
 public $hasOneThrough = [
     'userHistory' => [
         'Acme\Supplies\Model\History',
@@ -495,6 +764,12 @@ public $hasOneThrough = [
         'otherKey'   => 'id'
     ],
 ];
+
+// Method style
+public function userHistory(): HasOneThrough
+{
+    return $this->hasOneThrough('Acme\Supplies\Model\History', 'Acme\Supplies\Model\User', 'supplier_id', 'user_id', 'id');
+}
 ```
 
 ### Polymorphic relations
@@ -528,23 +803,44 @@ Next, let's examine the model definitions needed to build this relationship:
 ```php
 class Photo extends Model
 {
+    // Property style
     public $morphTo = [
         'imageable' => []
     ];
+
+    // Method style
+    public function imageable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }
 
 class Staff extends Model
 {
+    // Property style
     public $morphOne = [
         'photo' => ['Acme\Blog\Models\Photo', 'name' => 'imageable']
     ];
+
+    // Method style
+    public function photo(): MorphOne
+    {
+        return $this->morphOne('Acme\Blog\Models\Photo', 'imageable');
+    }
 }
 
 class Product extends Model
 {
+    // Property style
     public $morphOne = [
         'photo' => ['Acme\Blog\Models\Photo', 'name' => 'imageable']
     ];
+
+    // Method style
+    public function photo(): MorphOne
+    {
+        return $this->morphOne('Acme\Blog\Models\Photo', 'imageable');
+    }
 }
 ```
 
@@ -595,23 +891,44 @@ Next, let's examine the model definitions needed to build this relationship:
 ```php
 class Comment extends Model
 {
+    // Property style
     public $morphTo = [
         'commentable' => []
     ];
+
+    // Method style
+    public function commentable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }
 
 class Post extends Model
 {
+    // Property style
     public $morphMany = [
         'comments' => ['Acme\Blog\Models\Comment', 'name' => 'commentable']
     ];
+
+    // Method style
+    public function comments(): MorphMany
+    {
+        return $this->morphMany('Acme\Blog\Models\Comment', 'commentable');
+    }
 }
 
 class Product extends Model
 {
+    // Property style
     public $morphMany = [
         'comments' => ['Acme\Blog\Models\Comment', 'name' => 'commentable']
     ];
+
+    // Method style
+    public function comments(): MorphMany
+    {
+        return $this->morphMany('Acme\Blog\Models\Comment', 'commentable');
+    }
 }
 ```
 
@@ -675,9 +992,16 @@ Next, we're ready to define the relationships on the model. The `Post` and `Vide
 ```php
 class Post extends Model
 {
+    // Property style
     public $morphToMany = [
         'tags' => ['Acme\Blog\Models\Tag', 'name' => 'taggable']
     ];
+
+    // Method style
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany('Acme\Blog\Models\Tag', 'taggable');
+    }
 }
 ```
 
@@ -688,10 +1012,21 @@ Next, on the `Tag` model, you should define a relation for each of its related m
 ```php
 class Tag extends Model
 {
+    // Property style
     public $morphedByMany = [
         'posts'  => ['Acme\Blog\Models\Post', 'name' => 'taggable'],
         'videos' => ['Acme\Blog\Models\Video', 'name' => 'taggable']
     ];
+
+    // Method style
+    public function posts(): MorphedByMany
+    {
+        return $this->morphedByMany('Acme\Blog\Models\Post', 'taggable');
+    }
+    public function videos(): MorphedByMany
+    {
+        return $this->morphedByMany('Acme\Blog\Models\Video', 'taggable');
+    }
 }
 ```
 
@@ -851,6 +1186,8 @@ select * from books
 
 select * from authors where id in (1, 2, 3, 4, 5, ...)
 ```
+
+> **NOTE:** If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, Winter cannot connect the relations.
 
 ### Eager loading multiple relationships
 
@@ -1125,6 +1462,59 @@ $comment->text = 'Edit to this comment!';
 
 $comment->save();
 ```
+
+## Dynamically defining a relation
+
+Using Winter's powerful [extension capabilities](../services/behaviors), you can dynamically add additional relations to models at run-time, in both the property style and the method style, allowing you to extend the functionality of models in other plugins, or in the core of Winter CMS.
+
+Within a [plugin boot method](../plugin/registration#registration-file), you can extend a given model to add additional relations like the following:
+
+```php
+<?php
+
+namespace Acme\Blog;
+
+use Winter\Storm\Database\Relations\HasMany;
+
+class Plugin extends \System\Classes\PluginBase
+{
+    // ...
+    public function boot()
+    {
+        \Acme\Blog\Post::extend(function ($model) {
+            // Property-style
+            $model->addHasManyRelation(\Acme\Blog\Comment::class, [
+                'delete' => true,
+            ]);
+
+            // Method-style
+            $model->addDynamicMethod('comments', function (): HasMany {
+                return $model->hasMany(\Acme\Blog\Comment::class)->dependent();
+            });
+        });
+    }
+}
+```
+
+When using the method style of defining a dynamic relation, you must ensure that the callback function has a return type of one of the applicable relation classes in order for it to be identified as a relation method.
+
+Winter provides helper methods to dynamically add relations. The following methods can be used to create relations:
+
+- `addHasOneRelation()`
+- `addHasManyRelation()`
+- `addBelongsToRelation()`
+- `addBelongsToManyRelation()`
+- `addHasOneThroughRelation()`
+- `addHasManyThroughRelation()`
+- `addAttachOneRelation()`
+- `addAttachManyRelation()`
+- `addMorphOneRelation()`
+- `addMorphManyRelation()`
+- `addMorphToRelation()`
+- `addMorphToManyRelation()`
+- `addMorphedByManyRelation()`
+
+In all methods above, the first parameter defines the related class, as a class string, and the second parameter provides the relation config as an array. Please note that using these methods results in the relation being defined in the relation properties.
 
 ## Deferred binding
 
