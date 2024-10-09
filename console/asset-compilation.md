@@ -107,37 +107,8 @@ BundleManager::instance()->registerBundle('tailwind', [
 ]);
 ```
 
-### Run a package script
+### NPM Utilities
 
-```bash
-php artisan npm:run <package> <script> [-f|--production] [-- <extra script args>]
-```
+Winter offers `npm` utilities that simplify and improve your development experience. These utilities are all accessible via the `artisan` interface.
 
-The `npm:run` command allows you to quickly run scripts defined in the `package.json` file of a Mix package.
-
-```json5
-// package.json
-{
-    // ...
-    "scripts": {
-        "scriptName": "script to execute"
-    }
-    // ...
-}
-```
-
-This can be useful for running arbitrary scripts that augment the capabilities of your plugin or theme, such as executing unit tests, making customised builds and much more. Note that scripts will run with the working directory set to the root folder of the package, not the root folder of the entire project that the `artisan` command normally executes within.
-
-By default, all package scripts are run in "development" mode. If you wish to run a script in "production" mode, add the `-f` or `--production` flag to the command.
-
-If you wish to pass extra arguments or options to your script, you can add `--` to the end of the command. Any arguments or options added after the `--` argument are interpreted as arguments and options to be sent to the script itself.
-
-### Update Node dependencies
-
-```bash
-php artisan npm:update [-p <package name>] [--npm <path to npm>]
-```
-
-The `npm:update` command will update Node dependencies for all registered packages.
-
-This allows you to keep dependencies up to date, especially in the case of security fixes or breaking updates from your Node dependencies.
+Full documentation of the [`npm` utilities can be found here](./asset-node-utilities.md)
