@@ -1070,6 +1070,19 @@ public function evalUppercaseListColumn($value, $column, $record)
 }
 ```
 
+It is also possible to extend the Lists widget class to add a new column type like this:
+```php
+public function boot()
+{
+    Backend\Widgets\Lists::extend(function ($widget) {
+        $widget->addDynamicMethod('evalUppercaseTypeValue', function ($record, $column, $value) {
+            return strtoupper($value);
+        });
+    });
+}
+```
+Note: the order of the arguments is different than when using `registerListColumnTypes()`
+
 Using the custom list column type is as simple as calling it by name using the `type` option.
 
 ```yaml
