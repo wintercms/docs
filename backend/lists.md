@@ -1081,7 +1081,8 @@ public function boot()
     });
 }
 ```
-Note: the order of the arguments is different than when using `registerListColumnTypes()`
+
+> **NOTE**: the order of the arguments is different than when using `registerListColumnTypes()`
 
 Using the custom list column type is as simple as calling it by name using the `type` option.
 
