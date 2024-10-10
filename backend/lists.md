@@ -1071,6 +1071,7 @@ public function evalUppercaseListColumn($value, $column, $record)
 ```
 
 It is also possible to extend the Lists widget class to add a new column type like this:
+
 ```php
 public function boot()
 {
