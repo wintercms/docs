@@ -465,3 +465,18 @@ You can dynamically disable sending mail using the `Mail::pretend` method. When 
 ```php
 Mail::pretend();
 ```
+
+### Unit testing
+
+When unit testing, you may want to utilize Laravel's `fake` method on the Mail facade.  This ensures your local configuration is ignored and mailing assertions can be performed without sending emails while your tests are running:
+
+```php
+Mail::fake();
+
+// ... Run code that sends email 'this.is.my.email' template.
+
+// Check that the email was sent
+Mail::assertSent('this.is.my.email', function ($mail) {
+    return $mail->hasTo('test@example.com');
+});
+```
