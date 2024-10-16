@@ -249,7 +249,7 @@ Option | Description
 `defaultFrom` | takes the default value from the value of another field.
 `tab` | assigns the field to a tab.
 `cssClass` | assigns a CSS class to the field container.
-`readOnly` | prevents the field from being modified. Options: `true`, `false`.
+`readOnly` | prevents the field from being modified. The Dropdown, Radio and Switch fields, furthermore Rich editor widget do not support it. Options: `true`, `false`.
 `disabled` | prevents the field from being modified and excludes it from the saved data. Options: `true`, `false`.
 `hidden` | hides the field from the view and excludes it from the saved data. Options: `true`, `false`.
 `stretch` | specifies if this field stretches to fit the parent height.
