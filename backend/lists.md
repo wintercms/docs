@@ -91,7 +91,7 @@ The toolbar configuration allows:
 
 Option | Description
 ------------- | -------------
-`buttons` | a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.htm**
+`buttons` | a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.php**
 `search` | reference to a Search Widget configuration file, or an array with configuration.
 
 The search configuration supports the following options:
@@ -441,7 +441,7 @@ group_id:
 content:
     label: Content
     type: partial
-    path: ~/plugins/acme/blog/models/comment/_content_column.htm
+    path: ~/plugins/acme/blog/models/comment/_content_column.php
 ```
 
 ### Color Picker
@@ -828,7 +828,7 @@ public function index()
 
 ### Overriding views
 
-The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.htm` in your controller directory. The following example will add a sidebar to the list:
+The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.php` in your controller directory. The following example will add a sidebar to the list:
 
 ```html
 <?php if ($toolbar): ?>
@@ -858,7 +858,7 @@ customViewPath: $/acme/blog/controllers/reviews/list
 
 > **NOTE**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
 
-For example, to modify the list body row markup, create a file called `list/_list_body_row.htm` in your controller directory.
+For example, to modify the list body row markup, create a file called `list/_list_body_row.php` in your controller directory.
 
 ```php
 <tr>
