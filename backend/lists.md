@@ -830,7 +830,7 @@ public function index()
 
 The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.php` in your controller directory. The following example will add a sidebar to the list:
 
-```html
+```php
 <?php if ($toolbar): ?>
     <?= $toolbar->render() ?>
 <?php endif ?>
