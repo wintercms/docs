@@ -16,7 +16,7 @@ A single file attachment:
 
 ```php
 public $attachOne = [
-    'avatar' => 'System\Models\File'
+    'avatar' => \System\Models\File::class,
 ];
 ```
 
@@ -24,7 +24,7 @@ Multiple file attachments:
 
 ```php
 public $attachMany = [
-    'photos' => 'System\Models\File'
+    'photos' => \System\Models\File::class,
 ];
 ```
 
@@ -34,7 +34,10 @@ Protected attachments are uploaded to the File Upload disk's **uploads/protected
 
 ```php
 public $attachOne = [
-    'avatar' => ['System\Models\File', 'public' => false]
+    'avatar' => [
+        \System\Models\File::class,
+        'public' => false,
+    ],
 ];
 ```
 
@@ -137,14 +140,14 @@ Inside your model define a relationship to the `System\Models\File` class, for e
 class Post extends Model
 {
     public $attachOne = [
-        'featured_image' => 'System\Models\File'
+        'featured_image' => \System\Models\File::class,
     ];
 }
 ```
 
 Build a form for uploading a file:
 
-```html
+```php
 <?= Form::open(['files' => true]) ?>
 
     <input name="example_file" type="file">
@@ -184,16 +187,18 @@ if ($fileFromPost) {
 Display the uploaded file on a page:
 
 ```php
-// Find the Blog Post model again
-$post = Post::find(1);
+<?php
+    // Find the Blog Post model again
+    $post = Post::find(1);
 
-// Look for the featured image address, otherwise use a default one
-if ($post->featured_image) {
-    $featuredImage = $post->featured_image->getPath();
-}
-else {
-    $featuredImage = 'http://placehold.it/220x300';
-}
+    // Look for the featured image address, otherwise use a default one
+    if ($post->featured_image) {
+        $featuredImage = $post->featured_image->getPath();
+    }
+    else {
+        $featuredImage = 'http://placehold.it/220x300';
+    }
+?>
 
 <img src="<?= $featuredImage ?>" alt="Featured Image">
 ```
