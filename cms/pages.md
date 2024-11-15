@@ -20,7 +20,7 @@ Parameter | Description
 `title` | the page title, required.
 `layout` | the page [layout](layouts), optional. If specified, should contain the name of the layout file, without extension, for example: `default`.
 `description` | the page description for the backend interface, optional.
-`hidden` | hidden pages are accessible only by logged-in backend users, optional.
+`is_hidden` | hidden pages are accessible only by logged-in backend users, optional.
 
 ### URL syntax
 
