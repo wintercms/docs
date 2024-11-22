@@ -316,6 +316,7 @@ const NEST_DEPTH = 'my_depth_column';
 - `$query->leaves();` - Filters as all final nodes without children.
 - `$query->getNested();` - Returns an eager loaded collection of results.
 - `$query->listsNested();` - Returns an indented array of key and value columns.
+- `$query->nestedArray();` - Returns an nested array of key and values columns.
 
 ### Flat result access methods
 
