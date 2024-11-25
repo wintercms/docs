@@ -105,7 +105,7 @@ Key | Description
 `title` | required, the property title, it is used by the component Inspector in the CMS backend.
 `description` | required, the property description, it is used by the component Inspector in the CMS backend.
 `default` | optional, the default property value to use when the component is added to a page or layout in the CMS backend.
-`type` | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are `string`, `checkbox`, `dropdown` and `set`. Default value: `string`.
+`type` | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are `string`, `text`, `stringList`, `autocomplete`, `checkbox`, `dropdown`, `dictionary`, `object`, `objectList` and `set`. Default value: `string`.
 `validationPattern` | optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with `string` properties.
 `validationMessage` | optional error message to display if the validation fails.
 `required` | optional, forces field to be filled. Uses validationMessage when left empty.
@@ -114,6 +114,8 @@ Key | Description
 `depends` | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-and-set-properties) below.
 `group` | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 `showExternalParam` | specifies visibility of the External Parameter editor for the property in the Inspector. Default value: `true`.
+
+> **NOTE:** You can find a more detailed description of the different types on the “[data inspector types](../ui/controls/inspector##data-schema-configuration)” page.
 
 Inside the component you can read the property value with the `property` method:
 
