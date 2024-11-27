@@ -402,6 +402,12 @@ You may also run a delete query on a set of models. In this example, we will del
 $deletedRows = Flight::where('active', 0)->delete();
 ```
 
+Deleting all records of a model:
+
+```php
+Flight::truncate();
+```
+
 > **NOTE**: It is important to mention that [model events](model#events) will not fire when deleting records directly from a query.
 
 ## Query scopes
