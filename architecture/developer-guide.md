@@ -257,7 +257,7 @@ $translations = [
 
 #### Templates
 
-Several of PSR-12's rules are relaxed for templates, including CMS templates, and partials, layouts and views in the Backend. Since coding style for mixed PHP/HTML files is not well defined by PSR-12, we have made some determinations on the best "style" for mixed files and have opted to relax the following rules:
+Several of PSR-12's rules are relaxed for templates, including partials, layouts, & views in the Backend as well as CMS templates. Since coding style for mixed PHP/HTML files is not well defined by PSR-12, we have made some determinations on the best "style" for mixed files and have opted to relax the following rules:
 
 - There is no requirement for a space after the opening of a control block (`if`, `switch`, `when`) and a curly brace or colon, as we generally use the "template" PHP format for templates and it looks neater (ie. `<?php if ($something === true): ?>`)
 - Templates may finish with a closing `?>` PHP tag if it is required to close off a control block or output block.
