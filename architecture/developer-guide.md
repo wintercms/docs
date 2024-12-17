@@ -172,36 +172,6 @@ use Cms\Classes\{
 };
 ```
 
-##### - We disallow using a `use` case for a class that exists in the same namespace as the current class
-
-**Valid:**
-
-```php
-namespace Acme\Blog\Classes;
-
-class Foo
-{
-    // ...
-    $bar = new Bar();
-    // ..
-}
-```
-
-**Invalid:**
-
-```php
-namespace Acme\Blog\Classes;
-
-use Acme\Blog\Classes\Bar;
-
-class Foo
-{
-    // ...
-    $bar = new Bar();
-    // ..
-}
-```
-
 ##### - We disallow a starting backslash for `use` cases, unless it is for importing a trait
 
 **Valid:**
