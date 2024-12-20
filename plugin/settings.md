@@ -147,7 +147,7 @@ public function registerSettings(): array
 ```
 #### Properties
 
-The optional `category` parameter is used by the backend settings page to organize links. If catergory is not provided, the new link will be added to the misc category.  
+The optional `category` parameter is used by the backend settings page to organize links. If a category is not provided, the new link will be added to the `Misc` category.  
 You can define your own link category or use one of the default provided by [`SettingsManager` constants](../../api/System/Classes/SettingsManager#constants).
 
 The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
