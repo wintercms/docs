@@ -759,7 +759,7 @@ public $hasOneThrough = [
     'userHistory' => [
         'Acme\Supplies\Model\History',
         'key'        => 'supplier_id',
-        'through' => 'Acme\Supplies\Model\User'
+        'through' => 'Acme\Supplies\Model\User',
         'throughKey' => 'user_id',
         'otherKey'   => 'id'
     ],
