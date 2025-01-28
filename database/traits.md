@@ -394,6 +394,123 @@ There are several methods for moving nodes around:
 - `makeChildOf($otherNode)`: Make the node a child of ...
 - `makeRoot()`: Make current node a root node.
 
+## Path Enumerable
+
+The Path Enumerable trait provides another method for storing hierarchical data, by using a single "path" field to determine an item's location in the hierarchy. It provides the benefits of the [Nested Tree](#nested-tree) model without requiring multiple new fields in your model.
+
+You can use the trait by including it in your model:
+
+```php
+class Category extends Model
+{
+    use \Winter\Storm\Database\Traits\PathEnumerable;
+}
+```
+
+By default, this trait will use a `parent_id` field to determine an item's parent record, and a `path` field to provide the location of the item. You must ensure that these fields are defined in your model's migration.
+
+```php
+$table->unsignedInteger('parent_id')->nullable();
+$table->string('path')->nullable();
+```
+
+You can customize which columns you wish to use by defining the following constants in your model:
+
+```php
+class Category extends Model
+{
+    // ...
+
+    // Defines the column used for storing the parent ID.
+    const PARENT_ID = 'parent_id';
+
+    // Defines the column used for storing the path.
+    const PATH_COLUMN = 'path';
+
+    // ...
+}
+```
+
+The trait creates two relations for your model automatically:
+
+- The `children` "has-many" relation gives you access to all records that are direct descendents of the current record (ie. they have your current record as the parent record).
+- The `parent` "belongs to" relation gives you access to the parent record of the current record. This may be `null` if the record is a top-level record.
+
+### Pathing
+
+As stated, this trait uses a "path" to determine the records' location in the hierarchy. The path is a string which contains each of the parent records in a direct path to the current record - by default, using the IDs of each record - separated by forward-slashes.
+
+For example, if a record with ID #1 had a child record with ID #2 and that child had a child record with ID #3, the path to record #3 would be `1/2/3`.
+
+For readability, the path can be determined by a customized field, such as a slug by setting a `$segmentColumn` property in your model.
+
+```php
+class Category extends Model
+{
+    // ...
+
+    // Defines the column used for determining pathing
+    protected string $segmentColumn = 'slug';
+
+    // ...
+}
+```
+
+> **NOTE:** Using a field with longer values, such as a slug, may cause a path that is several levels deep to exceed the maximum lengths of your path field. You may need to adjust the data type of your path field if you anticipate that paths may end up longer than a standard string field, which in certain cases can only be a maximum of 192 characters.
+
+### Saving records
+
+The Path Enumerable trait handles all necessary pathing automatically when you save a record - your only responsibility is to make sure the parent ID of the record is set (or not set, if you are creating a root node).
+
+```php
+// Root node
+$category = new Category([
+    'name' => 'Category',
+]);
+$category->save();
+
+// Child node
+$subcategory = new Category([
+    'name' => 'Sub-category',
+]);
+$subcategory->parent_id = $category->id;
+$subcategory->save();
+```
+
+### Retrieving records
+
+Alongside all the standard methods for retrieving records for your model, the Path Enumerable trait also includes several helper methods for handling hierarchical data.
+
+Method | Description
+------ | -----------
+`->getParent()` | Gets the parent record of the current record, if one exists. Returns a `Collection` with zero or one parent record. This is similar to the `parent` relation.
+`->getParents()` | Gets all ancestral records for the current record - this means not only the parent record, but its parent record, and so on. Returns a `Collection` with zero or more parent records.
+`->getChildren()` | Gets all direct child records of the current record. Returns a `Collection` with zero or more child records. This is similar to the `children` relation.
+`->getAllChildren()` | Gets all direct child records, and traverses each child, getting the children of those records, and so on. Returns a `Collection` with zero or more child records.
+`->getDepth()` | Gets the depth level of the current record, with `0` representing a root level node, `1` representing a child of a root node, and so on. Returns an `int` value.
+`->getNested()` | Gets all records for the model, eager loaded and organised so that records are nested in their corresponding location in the hierarchy. This means that all initial records are root records, and each root record contains their children in the `children` relation, and so on.
+`->listNested()` | Similar to the `getNested()` method, except this returns a simple key => value list of records organised in a hierarchy. The value will be indented depending on how many levels deep the record is.
+
+In addition, there are a few scopes available to you for creating custom queries using the [SQL builder](../database/query):
+
+Scope | Description
+----- | -----------
+`->root()` | Limits queried records to only root nodes.
+`->descendents()` | Limits queried records to records that are a direct child, or underneath, the current record. This only works when queried in the context of a model record (ie. `$record->newQuery()->descendents()`)
+`->ancestors()` | Limits queried records to records that are a parent, or above, the current record. This only works when queried in the context of a model record (ie. `$record->newQuery()->ancestors()`)
+
+### Moving records
+
+Moving a record to another part of the hierarchy is as simple as changing the parent ID for that record. When saved, the path of the record, as well as any descendent record, will be automatically updated to reflect the new location in the hierarchy.
+
+If you wish to change a record into a root record, simply set the parent ID to `null` and save the record.
+
+### Deleting records
+
+It is important to note that in order to keep the structural integrity of a hierarchy intact and to not create "orphaned" records, all descendent records are deleted when deleting a record that uses the Path Enumerable trait. This behavior cannot be disabled.
+
+If your model uses the [Soft Deleting](#soft-deleting) trait as well, all descendent records will be soft-deleted or restored when your current record is soft-deleted or restored.
+
 ## Validation
 
 Winter models uses the built-in [Validator class](../services/validation). The validation rules are defined in the model class as a public property named `$rules` and the class must use the trait `Winter\Storm\Database\Traits\Validation`:
