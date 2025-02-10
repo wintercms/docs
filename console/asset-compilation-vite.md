@@ -21,7 +21,8 @@ php artisan vite:create <package name> [--tailwind] [--vue]
 By default, the `vite:create` command will only generate the basic `vite.config.mjs` config file. If you would like Winter to pre-configure your package for a certain library / asset bundle, you can provide any of the following flags.
 
 - `--tailwind` will configure your package for [tailwindcss](https://tailwindcss.com/)
-- `--vue`  will configure your package for [vue.js](https://vuejs.org/)
+- `--vue`  will configure your package for [Vue.js](https://vuejs.org/)
+- `--react` will configure your package for [React](https://react.dev/)
 - Other custom bundles can be [registered by third party plugins](asset-compilation#supported-toolset-bundles)
 
 For example, the following with configure the plugin `Acme.Example` with tailwind and create `plugins/acme/example/assets/src/acme-example.css` with a tailwind setup.
@@ -67,6 +68,25 @@ The helper function takes 2 arguments, the first is a `array|string` of entry pa
     // The second param here is not required, Winter will attempt to guess the plugin based on the current namespace
     $this->addVite(['assets/css/example.css']);
     ```
+
+### Using hot file reloading (`vite:watch`) with React
+
+If you want to use hot reloading with React then you'll need to also include the [React refresh tag](https://laravel.com/docs/9.x/vite#react) prior to your scripts being loaded:
+
+- In `twig`:
+
+    ```twig
+    {{ viteReactRefresh('theme-example') }}
+    {{ vite(['assets/src/js/theme-example.js'], 'theme-example') }}
+    ```
+
+- In `php`:
+
+    ```php
+    \System\Classes\Vite::reactRefreshTag('theme-example');
+    ```
+
+>**NOTE:** If you are seeing `App.jsx:1 Uncaught (in promise) Error: @vitejs/plugin-react can't detect preamble. Something is wrong. See https://github.com/vitejs/vite-plugin-react/pull/11#discussion_r430879201 at App.jsx:1:26` in your developer console when running `artisan vite:watch packageName` then you are missing the React refresh tag listed above.
 
 ## Commands
 
