@@ -30,7 +30,8 @@ php artisan mix:create <package name> [--tailwind] [--vue]
 By default, the `mix:create` command will only generate the basic `winter.mix.js` config file. If you would like Winter to pre-configure your package for a certain library / asset bundle, you can provide any of the following flags:
 
 - `--tailwind` will configure your package for [tailwindcss](https://tailwindcss.com/)
-- `--vue`  will configure your package for [vue.js](https://vuejs.org/)
+- `--vue`  will configure your package for [Vue.js](https://vuejs.org/)
+- `--react` will configure your package for [React](https://react.dev/)
 - Other custom bundles can be [registered by third party plugins](asset-compilation#supported-toolset-bundles)
 
 For example, the following with configure the plugin `Acme.Example` with tailwind and create `plugins/acme/example/assets/src/acme-example.css` with a tailwind setup.
