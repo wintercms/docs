@@ -207,7 +207,7 @@ $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 
 ## Simple Tree
 
-A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To add the `parent_id` column to your table, you may use the `integer` method inside a migration.
+A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To add the `parent_id` column to your table, you may use the `unsignedInteger` method inside a migration.
 
 ```php
 Schema::table('categories', function ($table) {
