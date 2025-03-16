@@ -211,7 +211,7 @@ A simple tree model will use the `parent_id` column maintain a parent and child 
 
 ```php
 Schema::table('categories', function ($table) {
-    $table->integer('parent_id')->nullable()->unsigned();
+    $table->unsignedInteger('parent_id')->nullable();
 });
 ```
 
