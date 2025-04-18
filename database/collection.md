@@ -193,7 +193,7 @@ The `DataFeed` class mimics a regular model and supports `limit` and `paginate` 
 The next example will combine the User, Post and Comment models in to a single collection and returns the first 10 records.
 
 ```php
-$feed = new Winter\Storm\Database\DataFeed;
+$feed = new \Winter\Storm\Database\DataFeed;
 $feed->add('user', new User);
 $feed->add('post', Post::where('category_id', 7));
 
