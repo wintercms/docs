@@ -863,16 +863,16 @@ avatar:
 
 Option | Description
 ------------- | -------------
-`mode` | the expected file type, either file or image. Default: image.
+`mode` | the expected file type, either `file` or `image`. Default: `image`.
 `imageWidth` | if using image type, the image will be resized to this width, optional.
 `imageHeight` | if using image type, the image will be resized to this height, optional.
 `fileTypes` | file extensions that are accepted by the uploader, optional. Eg: `zip,txt`
 `mimeTypes` | MIME types that are accepted by the uploader, either as file extension or fully qualified name, optional. Eg: `bin,txt`
 `maxFilesize` | file size in Mb that are accepted by the uploader, optional. Default: from "upload_max_filesize" param value
-`useCaption` | allows a title and description to be set for the file. Default: true
+`useCaption` | allows a title and description to be set for the file. Default: `true`
 `prompt` | text to display for the upload button, applies to files only, optional.
 `thumbOptions` | options to pass to the thumbnail generating method for the file. See [Image Resizing](../services/image-resizing#available-parameters)
-`attachOnUpload` | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
+`attachOnUpload` | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to `false`.
 
 > **NOTE:** Unlike the [Media Finder FormWidget](#media-finder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
 
