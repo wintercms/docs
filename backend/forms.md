@@ -198,6 +198,7 @@ Option | Description
 ------------- | -------------
 `stretch` | specifies if this tab stretches to fit the parent height.
 `defaultTab` | the default tab to assign fields to. Default: Misc.
+`suppressTabs` | if set to true, fields will not be displayed in tabs. Default: false.
 `icons` | assign icons to tabs using tab names as the key.
 `lazy` | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
 `cssClass` | assigns a CSS class to the tab container.
