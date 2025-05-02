@@ -595,34 +595,51 @@ These types can be used to determine how the filter scope should be displayed.
 
 <div class="columned-list">
 
-- [Group](#group-scope)
+- [Button Group](#button-group-scope)
 - [Checkbox](#checkbox-scope)
-- [Switch](#switch-scope)
 - [Date](#date-scope)
 - [Date range](#date-range-scope)
+- [Dropdown](#dropdown-scope)
+- [Group](#group-scope)
 - [Number](#number-scope)
 - [Number range](#number-range-scope)
+- [Switch](#switch-scope)
 - [Text](#text-scope)
 
 </div>
 
-### Group scope
+### Button Group scope
 
-`group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+`button-group` – displays a row of buttons where only one option may be selected at a time. Ideal for small, mutually exclusive option sets (e.g., status filters like All / Active / Archived).
 
 ```yaml
 status:
     label: Status
-    type: group
-    conditions: status in (:filtered)
-    default:
-        pending: Pending
-        active: Active
+    type: button-group
+    default: active
+    conditions: status = :filtered
     options:
-        pending: Pending
+        all: All
         active: Active
+        archived: Archived
+```
+
+If a button is clicked again while it is already selected, it will deselect unless required: true is specified:
+
+```yaml
+status:
+    label: Status
+    type: button-group
+    required: true
+    default: active
+    conditions: status = :filtered
+    options:
+        active: Active
+        pending: Pending
         closed: Closed
 ```
+
+Supports dynamic options using a method name or `modelClass` with `nameFrom`, same as [`group`](#group-scope).
 
 ### Checkbox scope
 
@@ -636,42 +653,41 @@ published:
     conditions: is_published <> true
 ```
 
-### Switch scope
+### Dropdown scope
 
-`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
-
-Using conditions:
+`dropdown` - displays a compact single-select dropdown menu. Ideal for filtering by a single value from a short or medium-sized list, with an optional placeholder-like entry when no value is selected.
 
 ```yaml
-approved:
-    label: Approved
-    type: switch
-    default: 1
-    conditions:
-        - is_approved <> true
-        - is_approved = true
+status:
+    type: dropdown
+    emptyOption: Select status
+    default: active
+    conditions: status = :filtered
+    options:
+        all: All
+        active: Active
+        archived: Archived
 ```
 
-Using a scope method:
+You can also populate options dynamically:
 
 ```yaml
-approved:
-    label: Approved
-    type: switch
-    default: 0
-    scope: isApproved
+country:
+    type: dropdown
+    emptyOption: Select country
+    modelClass: Winter\Test\Models\Location
+    nameFrom: name
+    conditions: country_id = :filtered
 ```
 
-```php
-public function scopeIsApproved($query, $state)
-{
-    return match ($state) {
-        '0' => $query,
-        '1' => $query->where('is_approved', false),
-        '2' => $query->where('is_approved', true),
-    }
-}
-```
+Supported options:
+- `emptyOption`: The placeholder text for an unselected state (acts like a "none" or prompt).
+- `default`: The default selected value.
+- `options`: Static array or method name on modelClass for dynamic options.
+- `modelClass` + `nameFrom`: Dynamically populate options from a model.
+- `required`: (optional) Prevents deselecting the current value.
+
+> **NOTE:** When `required: true` is set, the `emptyOption` will be ignored. If no `default` is specified, the first available option will be automatically selected.
 
 ### Date scope
 
@@ -750,6 +766,24 @@ published_at:
 
 > **NOTE:** the `ignoreTimezone` option also applies to the `date` filter type as well.
 
+### Group scope
+
+`group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+
+```yaml
+status:
+    label: Status
+    type: group
+    conditions: status in (:filtered)
+    default:
+        pending: Pending
+        active: Active
+    options:
+        pending: Pending
+        active: Active
+        closed: Closed
+```
+
 ### Number scope
 
 `number` - displays input for a single number to be entered. The value is available to be used in the conditions property as `:filtered`.
@@ -786,6 +820,43 @@ visitors:
         0: 10
         1: 20
     conditions: visitors >= ':min' and visitors <= ':max'
+```
+
+### Switch scope
+
+`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
+
+Using conditions:
+
+```yaml
+approved:
+    label: Approved
+    type: switch
+    default: 1
+    conditions:
+        - is_approved <> true
+        - is_approved = true
+```
+
+Using a scope method:
+
+```yaml
+approved:
+    label: Approved
+    type: switch
+    default: 0
+    scope: isApproved
+```
+
+```php
+public function scopeIsApproved($query, $state)
+{
+    return match ($state) {
+        '0' => $query,
+        '1' => $query->where('is_approved', false),
+        '2' => $query->where('is_approved', true),
+    }
+}
 ```
 
 ### Text scope
