@@ -681,6 +681,7 @@ country:
 ```
 
 Supported options:
+
 - `emptyOption`: The placeholder text for an unselected state (acts like a "none" or prompt).
 - `default`: The default selected value.
 - `options`: Static array or method name on modelClass for dynamic options.
