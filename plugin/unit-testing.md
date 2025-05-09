@@ -128,11 +128,13 @@ In general, your automation should do the following:
 - Install all Composer dependencies.
 - Run the [`winter:test`](../console/utilities#run-unit-tests) Artisan command for your plugin.
 
-### Example GitHub Actions configuration
+### GitHub Actions
 
-This is an example of a configuration that you can use for GitHub Actions to test a Winter plugin whenever a new commit is added to your repository. Feel free to use this and adjust as necessary for your specific requirements.
+We have released a GitHub Action on the GitHub Actions Marketplace - [Setup Winter Action](https://github.com/marketplace/actions/setup-winter) - that streamlines the setup of a PHP environment and installs a fresh copy of Winter when running a Github Actions workflow. It can also be configured to check out your repository as a plugin, placing it inside the `plugins` folder. This makes it incredibly easy to run automated tests for your plugins.
 
-```yaml
+You can use this in your plugin repository by creating a `.github/workflows/tests.yml` file in the root folder of your repository and adding the following configuration:
+
+```yml
 name: Tests
 
 on:
@@ -144,29 +146,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Unit Tests
     steps:
-      - name: Checkout Winter CMS
-        uses: actions/checkout@v4
+      - name: Setup Winter
+        uses: wintercms/setup-winter-action@v1
         with:
-          repository: wintercms/winter
-          ref: develop   # change this to a different branch or tag name if you wish to test with a specific version of Winter CMS
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          path: plugins/my-author/my-plugin    # change this to the correct folder for your plugin
-
-      - name: Install PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.3    # change this if you wish to test a different PHP version
-          extensions: mbstring, intl, gd, xml, sqlite
-          tools: composer:v2
-
-      - name: Install Composer dependencies
-        run: |
-          sed -i 's|plugins/myauthor/\*/composer.json|plugins/*/*/composer.json|g' composer.json
-          composer install --no-interaction --no-progress --no-scripts
+          plugin-author: myauthor    # change this to your author name in lowercase
+          plugin-name: myplugin      # change this to your plugin name in lowercase
 
       - name: Run unit tests
         run: php artisan winter:test -p MyAuthor.MyPlugin    # change this to the correct plugin code
 ```
+
+For more information on using this Action, please view [Setup Winter Action](https://github.com/marketplace/actions/setup-winter) in the Github Actions marketplace.
