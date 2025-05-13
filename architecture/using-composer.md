@@ -11,10 +11,9 @@ Using [Composer](https://getcomposer.org/) as an alternative package manager to 
 
 Composer is the de-facto standard for package management in the PHP ecosystem, and can handle the downloading, installation and management of Winter CMS plugins and themes, as well as third-party Laravel packages and vendor libraries.
 
-```markdown
 ## Installing Winter via Composer
 
-For basic installation instructions using Composer, please refer to the [Installation via Composer](../setup/install.md) section.
+For basic installation steps using Composer, see the [Installation via Composer](../setup/installation.md#installation-via-composer) section.
 
 ### Configuring Winter
 
