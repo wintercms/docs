@@ -13,23 +13,7 @@ Composer is the de-facto standard for package management in the PHP ecosystem, a
 
 ## Installing Winter via Composer
 
-For basic installation steps using Composer, see the [Installation via Composer](../setup/installation.md#installation-via-composer) section.
-
-### Configuring Winter
-
-If you have used `create-project` to create your Winter project it will automatically run the following commands for you:
-
-- [`winter:install`](../console/setup-maintenance#install-winter-via-command-line) (the CLI installation wizard)
-- [`winter:env`](../console/setup-maintenance#configure-winter-through-an-environment-file) (populates the `.env` file from the configuration files)
-- [`winter:mirror public --relative`](../console/setup-maintenance#mirror-public-files) (sets up the project to use a public folder, recommended for security)
-
-You can either go through this wizard to configure your project or you can cancel with (`Ctrl+C`) and manually reviewing and make changes to the configuration files located in `config/*.php`. If you take the manual approach, note that you will also need to run `php artisan migrate` to migrate the database yourself after configuring the project.
-
-> **NOTE:** When running commands on your Winter project, make sure that you are located in the project root directory first (following the previous example you can run `cd mywinter`).
-
-### Completing installation
-
-Once the above commands have been run, refer to the [Post Installation steps](../setup/installation#post-installation-steps) on the Installation page to complete the process.
+For full Composer installation instructions, please refer to the [Installation via Composer](../setup/installation.md#installation-via-composer) section of the Installation guide.
 
 ## Installing a plugin or theme using Composer
 

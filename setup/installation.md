@@ -6,7 +6,7 @@ description: "Documentation on the different ways to install Winter CMS for your
 
 There are three ways you can install Winter:
 
-1. Using the [Composer package manager](../architecture/using-composer#installing-winter-via-composer) (if you are comfortable using the command line)
+1. Using the [Composer package manager](#installation-via-composer) (if you are comfortable using the command line)
 2. The [Web-based installer](#web-based-installation) (most similar to the WordPress web installer)
 3. Using the [Softaculous installler](https://www.softaculous.com/apps/cms/WinterCMS) (if your hosting provider supports it).
 
@@ -42,7 +42,7 @@ When using the SQL Server database engine, you will need to install the [group c
 
 The [Web Installer](https://github.com/wintercms/web-installer) is the recommended way to install Winter for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
 
-> **NOTE:** If you are a developer, we recommend that you [install via Composer instead](../architecture/using-composer#installing-winter-via-composer)
+> **NOTE:** If you are a developer, we recommend that you [install via Composer instead](#installation-via-composer)
 
 1. Prepare an empty directory on the web server that will host your Winter CMS installation. It can be a main domain, sub-domain or subfolder.
 2. [Download the "install.zip" file](https://github.com/wintercms/web-installer/releases/latest/download/install.zip) from the latest release of the Winter CMS Web Installer into this folder.
@@ -53,12 +53,10 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 
 ## Installation via Composer
 
-For users familiar with command-line tools, Composer offers an efficient way to install Winter CMS.
+For users familiar with command-line tools, Composer offers an efficient way to install Winter CMS:
 
 ```bash
-composer create-project wintercms/winter example.com "dev-develop"
-php artisan winter:env
-php artisan winter:up
+composer create-project wintercms/winter my-winter-site
 ```
 
 ![Winter CMS Installer](https://raw.githubusercontent.com/wintercms/docs/develop/images/web-installer.jpg)
