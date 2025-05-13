@@ -1,3 +1,5 @@
+# Installation
+
 ### Installation via Composer
 
 You can install Winter CMS using Composer by running the following commands:
