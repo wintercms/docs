@@ -56,7 +56,7 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 For users familiar with command-line tools, Composer offers an efficient way to install Winter CMS:
 
 ```bash
-composer create-project wintercms/winter my-winter-site
+composer create-project wintercms/winter my-project
 ```
 
 ![Winter CMS Installer](https://raw.githubusercontent.com/wintercms/docs/develop/images/web-installer.jpg)
