@@ -165,37 +165,37 @@ class Plugin extends \System\Classes\PluginBase
 
 The following methods are supported in the plugin registration class:
 
-| Method                      | Description                                                                                                                    |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `pluginDetails()`           | returns information about the plugin.                                                                                          |
-| `register()`                | register method, called when the plugin is first registered.                                                                   |
-| `boot()`                    | boot method, called right before the request route.                                                                            |
-| `registerComponents()`      | registers any [frontend components](components#component-registration) used by this plugin.                                    |
-| `registerFormWidgets()`     | registers any [backend form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.                     |
-| `registerListColumnTypes()` | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.                        |
-| `registerMailLayouts()`     | registers any [mail view layouts](../services/mail#registering-mail-layouts-templates-and-partials) supplied by this plugin.   |
-| `registerMailPartials()`    | registers any [mail view partials](../services/mail#registering-mail-layouts-templates-and-partials) supplied by this plugin.  |
-| `registerMailTemplates()`   | registers any [mail view templates](../services/mail#registering-mail-layouts-templates-and-partials) supplied by this plugin. |
-| `registerMarkupTags()`      | registers [additional markup tags](#extending-twig) that can be used in the CMS.                                               |
-| `registerNavigation()`      | registers [backend navigation menu items](#navigation-menus) for this plugin.                                                  |
-| `registerPermissions()`     | registers any [backend permissions](../backend/users#registering-permissions) used by this plugin.                             |
-| `registerReportWidgets()`   | registers any [backend report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.        |
-| `registerSchedule()`        | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.                     |
-| `registerSettings()`        | registers any [backend configuration links](settings#settings-link-registration) used by this plugin.                          |
-| `registerValidationRules()` | registers any [custom validators](../services/validation#custom-validation-rules) supplied by this plugin.                     |
+Method | Description
+------------- | -------------
+`pluginDetails()` | returns information about the plugin.
+`register()` | register method, called when the plugin is first registered.
+`boot()` | boot method, called right before the request route.
+`registerComponents()` | registers any [frontend components](components#component-registration) used by this plugin.
+`registerFormWidgets()` | registers any [backend form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
+`registerListColumnTypes()` | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
+`registerMailLayouts()` | registers any [mail view layouts](../services/mail#registering-mail-layouts-templates-and-partials) supplied by this plugin.
+`registerMailPartials()` | registers any [mail view partials](../services/mail#registering-mail-layouts-templates-and-partials) supplied by this plugin.
+`registerMailTemplates()` | registers any [mail view templates](../services/mail#registering-mail-layouts-templates-and-partials) supplied by this plugin.
+`registerMarkupTags()` | registers [additional markup tags](#extending-twig) that can be used in the CMS.
+`registerNavigation()` | registers [backend navigation menu items](#navigation-menus) for this plugin.
+`registerPermissions()` | registers any [backend permissions](../backend/users#registering-permissions) used by this plugin.
+`registerReportWidgets()` | registers any [backend report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
+`registerSchedule()` | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
+`registerSettings()` | registers any [backend configuration links](settings#settings-link-registration) used by this plugin.
+`registerValidationRules()` | registers any [custom validators](../services/validation#custom-validation-rules) supplied by this plugin.
 
 ### Basic plugin information
 
 The `pluginDetails` is a required method of the plugin registration class. It should return an array containing the following keys:
 
-| Key           | Description                                                                                                                                                                                                                                                             |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`        | the plugin name, required.                                                                                                                                                                                                                                              |
-| `description` | the plugin description, required.                                                                                                                                                                                                                                       |
-| `author`      | the plugin author name, required.                                                                                                                                                                                                                                       |
-| `icon`        | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](/docs/v1.2/ui/style/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**. This key is required if `iconSvg` is not set. |
-| `iconSvg`     | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors. This key is required if `icon` is not set.                                                                                                             |
-| `homepage`    | a link to the author's website address, optional.                                                                                                                                                                                                                       |
+Key | Description
+------------- | -------------
+`name` | the plugin name, required.
+`description` | the plugin description, required.
+`author` | the plugin author name, required.
+`icon` | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](/docs/v1.2/ui/style/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**. This key is required if `iconSvg` is not set.
+`iconSvg` | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors. This key is required if `icon` is not set.
+`homepage` | a link to the author's website address, optional.
 
 ## Routing and initialization
 
@@ -325,16 +325,16 @@ public function makeTextAllCaps($text)
 
 The following Twig custom options are available:
 
-| Option              | Type    | Default | Description                                                                                                                                                                                                                                                                                                                                 |
-| ------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `needs_environment` | boolean | `false` | if true provides the current `TwigEnvironment` as the first argument to the filter call                                                                                                                                                                                                                                                     |
-| `needs_context`     | boolean | `false` | if true provides the current `TwigContext` as the first argument (second if `needs_environment also set`) to the filter call                                                                                                                                                                                                                |
-| `is_safe`           | array   | `[]`    | array of languages (usually `html` or `all` are valid values) that the output of the filter / function is safe to be used on without escaping                                                                                                                                                                                               |
-| `pre_escape`        | string  | `''`    | (only filters) will pre-escape the value before it is passed to your filter for the language that you set (usually `'html'`)                                                                                                                                                                                                                |
-| `preserves_safety`  | array   | `[]`    | (only filters) array of languages (usually `html`) that the filter will preserve the safety setting of for previous filters in the chain. i.e. if the previous filter in the chain says that its safe and doesn't require escaping then neither will this one, but if it says that it's unsafe and requires escaping then so will this one. |
-| `is_variadic`       | boolean | `false` | if true will pass any extra arguments provided to the filter as a single array as the last argument to the filter call                                                                                                                                                                                                                      |
-| `deprecated`        | boolean | `false` | if true marks the current filter as being deprecated (usually used with `alternative` to provide an alternative option                                                                                                                                                                                                                      |
-| `alternative`       | string  | `''`    | if `deprecated` is true, provides a recommended alternative filter to use instead.                                                                                                                                                                                                                                                          |
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+`needs_environment` | boolean | `false` | if true provides the current `TwigEnvironment` as the first argument to the filter call
+`needs_context` | boolean | `false` | if true provides the current `TwigContext` as the first argument (second if `needs_environment also set`) to the filter call
+`is_safe` | array | `[]` | array of languages (usually `html` or `all` are valid values) that the output of the filter / function is safe to be used on without escaping
+`pre_escape` | string | `''` | (only filters) will pre-escape the value before it is passed to your filter for the language that you set (usually `'html'`)
+`preserves_safety` | array | `[]` | (only filters) array of languages (usually `html`) that the filter will preserve the safety setting of for previous filters in the chain. i.e. if the previous filter in the chain says that its safe and doesn't require escaping then neither will this one, but if it says that it's unsafe and requires escaping then so will this one.
+`is_variadic` | boolean | `false` | if true will pass any extra arguments provided to the filter as a single array as the last argument to the filter call
+`deprecated` | boolean | `false` | if true marks the current filter as being deprecated (usually used with `alternative`) to provide an alternative option
+`alternative` | string | `''` | if `deprecated` is true, provides a recommended alternative filter to use instead.
 
 ## Navigation menus
 
@@ -385,19 +385,19 @@ When you register the backend navigation you can use [localization strings](loca
 
 To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#setting-the-navigation-context) in the backend controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
-| Key            | Description                                                                                                                                                                                                     |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `label`        | specifies the menu label localization string key, required.                                                                                                                                                     |
-| `icon`         | an icon name from the [Winter CMS icon collection](/docs/v1.2/ui/style/icon), optional.                                                                                                                         |
-| `iconSvg`      | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.                                                                                      |
-| `url`          | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.                                                                                                         |
-| `counter`      | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.                                                                                          |
-| `counterLabel` | a string value to describe the numeric reference in counter, optional.                                                                                                                                          |
-| `badge`        | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.                                                                           |
-| `attributes`   | an associative array of attributes and values to apply to the menu item, optional.                                                                                                                              |
-| `permissions`  | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.                                            |
-| `code`         | a string value that acts as an unique identifier for that menu option. **NOTE**: This is a system generated value and should not be provided when registering the navigation items.                             |
-| `owner`        | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin". **NOTE**: This is a system generated value and should not be provided when registering the navigation items. |
+Key | Description
+------------- | -------------
+`label` | specifies the menu label localization string key, required.
+`icon` | an icon name from the [Winter CMS icon collection](/docs/v1.2/ui/style/icon), optional.
+`iconSvg` | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
+`url` | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action'`), required.
+`counter` | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
+`counterLabel` | a string value to describe the numeric reference in counter, optional.
+`badge` | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
+`attributes` | an associative array of attributes and values to apply to the menu item, optional.
+`permissions` | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.
+`code` | a string value that acts as an unique identifier for that menu option. **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
+`owner` | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin". **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
 
 ## Registering middleware
 
@@ -431,16 +431,16 @@ public function boot()
 
 By default plugins are restricted from running when operating in certain areas of the system. This is to prevent critical errors that may lock an administrator out from the backend. When these areas are accessed, the `boot` and `register` [initialization methods](#routing-and-initialization) will not fire for plugins that are not elevated.
 
-| Request                   | Description                                                                                 |
-| ------------------------- | ------------------------------------------------------------------------------------------- |
-| `/combine`                | the asset combiner generator URL                                                            |
-| `/backend/system/updates` | the site updates context                                                                    |
-| `/backend/system/install` | the installer path                                                                          |
-| `/backend/backend/auth`   | the backend authentication path (login, logout)                                             |
-| `winter:up`               | the CLI command that runs all pending migrations                                            |
-| `winter:update`           | the CLI command that triggers the update process                                            |
-| `winter:env`              | the CLI command that converts configuration files to environment variables in a `.env` file |
-| `winter:version`          | the CLI command that detects the version of Winter CMS that is installed                    |
+Request | Description
+------------- | -------------
+`/combine` | the asset combiner generator URL
+`/backend/system/updates` | the site updates context
+`/backend/system/install` | the installer path
+`/backend/backend/auth` | the backend authentication path (login, logout)
+`winter:up` | the CLI command that runs all pending migrations
+`winter:update` | the CLI command that triggers the update process
+`winter:env` | the CLI command that converts configuration files to environment variables in a `.env` file
+`winter:version` | the CLI command that detects the version of Winter CMS that is installed
 
 When running any commands from the CLI while your application has a database connection configured but the `migrations` table is not yet present on it, the application will also be considered in a protected state.
 
