@@ -283,7 +283,7 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
 
 [Twig options](https://twig.symfony.com/doc/2.x/advanced.html#filters) are also able to be passed to change the behavior of the registered filters & functions by providing an array with an `'options'` element containing the options to be passed at time of registration where the callable value would be provided normally. If options are provided, then the callable handler for the filter / function being registered must either be present in a `'callable'` element or as the first element of the array.
 
-> **IMPORTANT:** All custom Twig filters & functions registered via the `MarkupManager` (i.e. `registerMarkupTags()` will have the `is_safe` option set to `['html']` by default, which means that Twig's automatic escaping is disabled by default (effectively it's as if the `| raw` filter was always located after your filter or function's output) unless you provide the `is_safe` option during registration (`'options' => ['is_safe' => []]`).
+> **IMPORTANT:** All custom Twig filters and functions registered via the `MarkupManager` (e.g. `registerMarkupTags()`) have the `is_safe` option set to `['html']` by default. This disables Twig's automatic escaping for the output-similar to applying the `| raw` filter-unless you explicitly override it by providing the `is_safe` option in the registration options (e.g. `options: { is_safe: [] }`).
 
 The next example registers three Twig filters and three functions.
 
@@ -390,7 +390,7 @@ Key | Description
 `label` | specifies the menu label localization string key, required.
 `icon` | an icon name from the [Winter CMS icon collection](/docs/v1.2/ui/style/icon), optional.
 `iconSvg` | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
-`url` | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action'`), required.
+`url` | the URL the menu item should point to, for example `Backend::url('author/plugin/controller/action')`; required.
 `counter` | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
 `counterLabel` | a string value to describe the numeric reference in counter, optional.
 `badge` | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
