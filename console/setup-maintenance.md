@@ -27,9 +27,11 @@ The `winter:update` command will request updates from the Winter gateway. It wil
 ## Run database migrations
 
 The `winter:up` (or `migrate`) command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates). The migration command can be run multiple times - it will only execute a migration or seed script once, which means only new changes are applied.
+
 ```bash
 php artisan winter:up
 ```
+
 >**NOTE:**
 > - In production environments ([APP_ENV](../setup/configuration#defining-a-base-environment)=production), this command prompts for confirmation. Use `--force` to bypass the prompt, e.g. in CI/CD pipelines.
 > - The migration command supports the [`--isolated`](https://laravel.com/docs/11.x/artisan#isolatable-commands) flag for ensuring that only one instance of the command can be run at a time in a multi-server environment.
