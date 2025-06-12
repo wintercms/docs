@@ -32,7 +32,9 @@ The `winter:up` (or `migrate`) command will perform a database migration, creati
 php artisan winter:up
 ```
 
->**NOTE:** The migration command supports the [`--isolated`](https://laravel.com/docs/11.x/artisan#isolatable-commands) flag for ensuring that only one instance of the command can be run at a time in a multi-server environment.
+>**NOTE:**
+> - In production environments ([APP_ENV](../setup/configuration#defining-a-base-environment)=production), this command prompts for confirmation. Use `--force` to bypass the prompt, e.g. in CI/CD pipelines.
+> - The migration command supports the [`--isolated`](https://laravel.com/docs/11.x/artisan#isolatable-commands) flag for ensuring that only one instance of the command can be run at a time in a multi-server environment.
 
 The inverse command `winter:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](../console/plugin-management#refresh-a-plugin) is a useful alternative for debugging a single plugin.
 
