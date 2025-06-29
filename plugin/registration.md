@@ -389,7 +389,7 @@ Key | Description
 ------------- | -------------
 `label` | specifies the menu label localization string key, required.
 `icon` | an icon name from the [Winter CMS icon collection](/docs/v1.2/ui/style/icon), optional.
-`iconSvg` | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
+`iconSvg` | an image icon (svg, webp, png, jpg) to be used in place of the standard icon, the image icon should be a square and can support colors, optional.
 `url` | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
 `counter` | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
 `counterLabel` | a string value to describe the numeric reference in counter, optional.
