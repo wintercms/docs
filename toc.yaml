@@ -130,4 +130,4 @@ sections:
     "Further Reading":
         pages:
             "https://laravel.com/docs/9.x": "Laravel Docs"
-            "https://www.php.net/manual/en/intro-whatis.php": "PHP Docs"
+            "https://www.php.net/manual/en/introduction.php": "PHP Docs"
