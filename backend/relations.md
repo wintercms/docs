@@ -103,8 +103,6 @@ Option | Type | Description
 `noRecordsMessage` | List | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
 `conditions` | List | specifies a raw where query statement to apply to the list model query.
 `scope` | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The model that this relationship will be attached to (i.e. the **parent model**) is passed to this scope method as the second parameter (`$query` is the first).
-`allowDismiss` | List | closes the modal when clicking next to it. Default: `false`
-`cssClass` | List | Adds extra CSS classes to the modal. Default: `null`
 **filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists#using-list-filters).
 
 These configuration values can be specified only for the **view** options.
@@ -124,6 +122,8 @@ Option | Type | Description
 ------------- | ------------- | -------------
 `title` | Both | a popup title, can refer to a [localization string](../plugin/localization). <br/> Additionally, you can customize the title for each mode individually by setting this to an associative array, with the key being the mode and the value being the title used when displaying that mode. Eg: `form: acme.blog::lang.subcategory.FormTitle`.
 `context` | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
+`allowDismiss` | Both | closes the modal when clicking next to it. Default: `false`
+`cssClass` | Both | Adds extra CSS classes to the modal. Default: `null`
 
 ## Relationship types
 
