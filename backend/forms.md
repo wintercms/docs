@@ -1153,7 +1153,7 @@ Option | Description
 
 ### Relation
 
-`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list. The label used for displaying each relation is sourced by the `nameFrom` or `select` definition.
+`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display checkbox as an indented list or as a collapsable tree. The label used for displaying each relation is sourced by the `nameFrom` or `select` definition.
 
 ```yaml
 categories:
@@ -1180,6 +1180,9 @@ Option | Description
 `order` | an order clause to sort options by. Example: `name desc`.
 `emptyOption` | text to display when there is no available selections.
 `scope` | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
+`quickselect` | if true, controls allowing all/none checkboxes to be selected will be displayed.
+`displayTree` | if true and the related model implements [NestedTree](./database/traits#nested-tree) trait, display the list as a collapsable tree.
+`quickTreeActions` | if true and `displayTree` is true, display controls to open all, open selected or close all tree nodes.
 
 ### Relation Manager
 
