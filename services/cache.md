@@ -2,9 +2,9 @@
 
 ## Configuration
 
-Winter provides a unified API for various caching systems and the cache configuration is located at `config/cache.php`. In this file you may specify which cache driver you would like used by default throughout your application. Popular caching systems like [Memcached](http://memcached.org) and [Redis](http://redis.io) are supported out of the box.
+Winter provides a unified API for various caching systems and the cache configuration is located at `config/cache.php`. In this file you may specify which cache driver you would like used by default throughout your application. Popular caching systems like [Memcached](http://memcached.org), [Redis](http://redis.io), and [Valkey](https://valkey.io) are supported out of the box.
 
-The cache configuration file also contains various other options, which are documented within the file, so make sure to read over these options. By default, Winter CMS is configured to use the `file` cache driver which stores the serialized, cached objects in the filesystem. For larger applications, it is recommended that you use an in-memory cache such as Memcached or Redis. You may even configure multiple cache configurations for the same driver.
+The cache configuration file also contains various other options, which are documented within the file, so make sure to read over these options. By default, Winter CMS is configured to use the `file` cache driver which stores the serialized, cached objects in the filesystem. For larger applications, it is recommended that you use an in-memory cache such as Memcached, Redis, or Valkey. You may even configure multiple cache configurations for the same driver.
 
 ## Pre-requisites
 
@@ -12,7 +12,7 @@ The cache configuration file also contains various other options, which are docu
 
 The `database` cache driver uses the database in lieu of the file system. There is no other configuration required to use this type as the database structure is already available.
 
-Database caching can be less performant than using a dedicated caching system such as Memcached or Redis. For high-traffic or
+Database caching can be less performant than using a dedicated caching system such as Memcached, Redis, or Valkey. For high-traffic or
 larger applications, it is recommended to use one of these options instead.
 
 ### Memcached
@@ -113,6 +113,14 @@ When using `predis`, you may define an `options` array value in your Redis conne
 ```
 
 If your Redis server requires authentication, you may supply a password by adding a `password` configuration item to your Redis server configuration array.
+
+### Valkey
+
+[Valkey](https://valkey.io) is an open-source, high-performance key-value datastore that serves as a drop-in replacement for Redis. It offers the same functionality and performance as Redis while being community-driven with improved governance.
+
+Since Valkey is protocol-compatible with Redis, it uses the same configuration as Redis. You can use the existing Redis configuration section in `config/database.php` for Valkey connections. Both the `predis` and `phpredis` clients work seamlessly with Valkey, requiring no additional configuration changes.
+
+To use Valkey instead of Redis, simply point your Redis configuration to your Valkey server instance. All Redis configuration examples in this documentation apply equally to Valkey.
 
 ### APCu
 
