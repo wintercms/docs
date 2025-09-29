@@ -414,7 +414,7 @@ The field under validation must be unique on a given database table. If the `col
 'email' => 'unique:users'
 ```
 
-#### `Specifying a custom column name`
+#### Specifying a custom column name
 
 ```php
 'email' => 'unique:users,email_address'
