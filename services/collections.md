@@ -204,7 +204,7 @@ You may select any method from this table to see an example of its usage:
 
 ### Method Listing
 
-#### `all()`
+#### `all()` {#all}
 
 The `all` method simply returns the underlying array represented by the collection:
 
@@ -216,11 +216,11 @@ $collection->all();
 // [1, 2, 3]
 ```
 
-#### `average()`
+#### `average()` {#average}
 
 Alias for the [`avg`](#avg) method.
 
-#### `avg()`
+#### `avg()` {#avg}
 
 The `avg` method returns the [average value](https://en.wikipedia.org/wiki/Average) of a given key:
 
@@ -234,7 +234,7 @@ $average = collect([1, 1, 2, 4])->avg();
 // 2
 ```
 
-#### `chunk()`
+#### `chunk()` {#chunk}
 
 The `chunk` method breaks the collection into multiple, smaller collections of a given size:
 
@@ -260,7 +260,7 @@ This method is especially useful in [CMS pages](../cms/pages) when working with 
 {% endfor %}
 ```
 
-#### `chunkWhile()`
+#### `chunkWhile()` {#chunkwhile}
 
 The `chunkWhile` method breaks the collection into multiple, smaller collections based on the evaluation of the given callback. The `$chunk` variable passed to the closure may be used to inspect the previous element:
 
@@ -276,7 +276,7 @@ $chunks->all();
 // [['A', 'A'], ['B', 'B'], ['C', 'C', 'C'], ['D']]
 ```
 
-#### `collapse()`
+#### `collapse()` {#collapse}
 
 The `collapse` method collapses a collection of arrays into a flat collection:
 
@@ -290,7 +290,7 @@ $collapsed->all();
 // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-#### `combine()`
+#### `combine()` {#combine}
 
 The `combine` method combines the values of the collection, as keys, with the values of another array or collection:
 
@@ -304,7 +304,7 @@ $combined->all();
 // ['name' => 'George', 'age' => 29]
 ```
 
-#### `collect()`
+#### `collect()` {#collect}
 
 The `collect` method returns a new `Collection` instance with the items currently in the collection:
 
@@ -340,7 +340,7 @@ $collection->all();
 
 > **Tip:** The `collect` method is especially useful when you have an instance of `Enumerable` and need a non-lazy collection instance. Since `collect()` is part of the `Enumerable` contract, you can safely use it to get a `Collection` instance.
 
-#### `concat()`
+#### `concat()` {#concat}
 
 The `concat` method appends the given `array` or collection values onto the end of the collection:
 
@@ -354,7 +354,7 @@ $concatenated->all();
 // ['John Doe', 'Jane Doe', 'Johnny Doe']
 ```
 
-#### `contains()`
+#### `contains()` {#contains}
 
 The `contains` method determines whether the collection contains a given item:
 
@@ -397,7 +397,7 @@ $collection->contains(function ($value, $key) {
 
 The `contains` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`containsStrict`](#containsstrict) method to filter using "strict" comparisons.
 
-#### `containsOneItem()`
+#### `containsOneItem()` {#containsoneitem}
 
 The `containsOneItem` method determines whether the collection contains a single item:
 
@@ -415,11 +415,11 @@ collect(['1', '2'])->containsOneItem();
 // false
 ```
 
-#### `containsStrict()`
+#### `containsStrict()` {#containsstrict}
 
 This method has the same signature as the [`contains`](#contains) method; however, all values are compared using "strict" comparisons.
 
-#### `count()`
+#### `count()` {#count}
 
 The `count` method returns the total number of items in the collection:
 
@@ -431,7 +431,7 @@ $collection->count();
 // 4
 ```
 
-#### `countBy()`
+#### `countBy()` {#countby}
 
 The `countBy` method counts the occurrences of values in the collection. By default, the method counts the occurrences of every element:
 
@@ -459,7 +459,7 @@ $counted->all();
 // ['gmail.com' => 2, 'yahoo.com' => 1]
 ```
 
-#### `crossJoin()`
+#### `crossJoin()` {#crossjoin}
 
 The `crossJoin` method cross joins the collection's values among the given arrays or collections, returning a Cartesian product with all possible permutations:
 
@@ -499,7 +499,7 @@ $matrix->all();
 */
 ```
 
-#### `dd()`
+#### `dd()` {#dd}
 
 The `dd` method dumps the collection's items and ends execution of the script:
 
@@ -520,7 +520,7 @@ $collection->dd();
 
 If you do not want to stop executing the script, use the [`dump`](#dump) method instead.
 
-#### `diff()`
+#### `diff()` {#diff}
 
 The `diff` method compares the collection against another collection or a plain PHP `array`:
 
@@ -534,7 +534,7 @@ $diff->all();
 // [1, 3, 5]
 ```
 
-#### `diffAssoc()`
+#### `diffAssoc()` {#diffassoc}
 
 The `diffAssoc` method compares the collection against another collection or a plain PHP `array` based on its keys and values. This method will return the key / value pairs in the original collection that are not present in the given collection:
 
@@ -557,7 +557,7 @@ $diff->all();
 // ['color' => 'orange', 'remain' => 6]
 ```
 
-#### `diffKeys()`
+#### `diffKeys()` {#diffkeys}
 
 The `diffKeys` method compares the collection against another collection or a plain PHP `array` based on its keys. This method will return the key / value pairs in the original collection that are not present in the given collection:
 
@@ -582,7 +582,7 @@ $diff->all();
 // ['one' => 10, 'three' => 30, 'five' => 50]
 ```
 
-#### `doesntContain()`
+#### `doesntContain()` {#doesntcontain}
 
 The `doesntContain` method determines whether the collection does not contain a given item. You may pass a closure to the `doesntContain` method to determine if an element does not exist in the collection matching a given truth test:
 
@@ -625,7 +625,7 @@ $collection->doesntContain('product', 'Bookcase');
 
 The `doesntContain` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value.
 
-#### `dump()`
+#### `dump()` {#dump}
 
 The `dump` method dumps the collection's items:
 
@@ -646,7 +646,7 @@ $collection->dump();
 
 If you want to stop executing the script after dumping the collection, use the [`dd`](#dd) method instead.
 
-#### `duplicates()`
+#### `duplicates()` {#duplicates}
 
 The `duplicates` method retrieves and returns duplicate values from the collection:
 
@@ -672,11 +672,11 @@ $employees->duplicates('position');
 // [2 => 'Developer']
 ```
 
-#### `duplicatesStrict()`
+#### `duplicatesStrict()` {#duplicatesstrict}
 
 This method has the same signature as the [`duplicates`](#duplicates) method; however, all values are compared using "strict" comparisons.
 
-#### `each()`
+#### `each()` {#each}
 
 The `each` method iterates over the items in the collection and passes each item to a callback:
 
@@ -696,7 +696,7 @@ $collection->each(function ($item, $key) {
 });
 ```
 
-#### `eachSpread()`
+#### `eachSpread()` {#eachspread}
 
 The `eachSpread` method iterates over the collection's items, passing each nested item value into the given callback:
 
@@ -716,7 +716,7 @@ $collection->eachSpread(function ($name, $age) {
 });
 ```
 
-#### `every()`
+#### `every()` {#every}
 
 The `every` method creates a new collection consisting of every n-th element:
 
@@ -736,7 +736,7 @@ $collection->every(4, 1);
 // ['b', 'f']
 ```
 
-#### `except()`
+#### `except()` {#except}
 
 The `except` method returns all items in the collection except for those with the specified keys:
 
@@ -754,7 +754,7 @@ For the inverse of `except`, see the [only](#only) method.
 
 > **NOTE**  This method's behavior is modified when using [Model Collections](../database/collection#available-methods).
 
-#### `filter()`
+#### `filter()` {#filter}
 
 The `filter` method filters the collection by a given callback, keeping only those items that pass a given truth test:
 
@@ -772,7 +772,7 @@ $filtered->all();
 
 For the inverse of `filter`, see the [reject](#reject) method.
 
-#### `first()`
+#### `first()` {#first}
 
 The `first` method returns the first element in the collection that passes a given truth test:
 
@@ -792,7 +792,7 @@ new Collection([1, 2, 3, 4])->first();
 // 1
 ```
 
-#### `firstOrFail()`
+#### `firstOrFail()` {#firstorfail}
 
 The `firstOrFail` method is identical to the `first` method; however, if no result is found, an `Illuminate\Support\ItemNotFoundException` exception will be thrown:
 
@@ -812,7 +812,7 @@ collect([])->firstOrFail();
 // Throws ItemNotFoundException...
 ```
 
-#### `firstWhere()`
+#### `firstWhere()` {#firstwhere}
 
 The `firstWhere` method returns the first element in the collection with the given key / value pair:
 
@@ -845,7 +845,7 @@ $collection->firstWhere('age');
 // ['name' => 'Linda', 'age' => 14]
 ```
 
-#### `flatMap()`
+#### `flatMap()` {#flatmap}
 
 The `flatMap` method iterates through the collection and passes each value to the given callback. The callback is free to modify the item and return it, thus forming a new collection of modified items. Then, the array is flattened by a level:
 
@@ -865,7 +865,7 @@ $flattened->all();
 // ['name' => 'SALLY', 'school' => 'ARKANSAS', 'age' => '28'];
 ```
 
-#### `flatten()`
+#### `flatten()` {#flatten}
 
 The `flatten` method flattens a multi-dimensional collection into a single dimension:
 
@@ -879,7 +879,7 @@ $flattened->all();
 // ['peter', 'php', 'javascript'];
 ```
 
-#### `flip()`
+#### `flip()` {#flip}
 
 The `flip` method swaps the collection's keys with their corresponding values:
 
@@ -893,7 +893,7 @@ $flipped->all();
 // ['peter' => 'name', 'winter' => 'platform']
 ```
 
-#### `forget()`
+#### `forget()` {#forget}
 
 The `forget` method removes an item from the collection by its key:
 
@@ -909,7 +909,7 @@ $collection->all();
 
 > **NOTE:** Unlike most other collection methods, `forget` does not return a new modified collection; it modifies the collection it is called on.
 
-#### `forPage()`
+#### `forPage()` {#forpage}
 
 The `forPage` method returns a new collection containing the items that would be present on a given page number:
 
@@ -923,7 +923,7 @@ $collection->all();
 
 The method requires the page number and the number of items to show per page, respectively.
 
-#### `get()`
+#### `get()` {#get}
 
 The `get` method returns the item at a given key. If the key does not exist, `null` is returned:
 
@@ -955,7 +955,7 @@ $collection->get('email', function () {
 // default-value
 ```
 
-#### `groupBy()`
+#### `groupBy()` {#groupby}
 
 The `groupBy` method groups the collection's items by a given key:
 
@@ -1005,7 +1005,7 @@ $grouped->toArray();
 */
 ```
 
-#### `has()`
+#### `has()` {#has}
 
 The `has` method determines if a given key exists in the collection:
 
@@ -1017,7 +1017,7 @@ $collection->has('email');
 // false
 ```
 
-#### `hasAny()`
+#### `hasAny()` {#hasany}
 
 The `hasAny` method determines whether any of the given keys exist in the collection:
 
@@ -1033,7 +1033,7 @@ $collection->hasAny(['name', 'price']);
 // false
 ```
 
-#### `implode()`
+#### `implode()` {#implode}
 
 The `implode` method joins the items in a collection. Its arguments depend on the type of items in the collection.
 
@@ -1058,7 +1058,7 @@ new Collection([1, 2, 3, 4, 5])->implode('-');
 // '1-2-3-4-5'
 ```
 
-#### `intersect()`
+#### `intersect()` {#intersect}
 
 The `intersect` method removes any values that are not present in the given `array` or collection:
 
@@ -1074,7 +1074,7 @@ $intersect->all();
 
 As you can see, the resulting collection will preserve the original collection's keys.
 
-#### `intersectByKeys()`
+#### `intersectByKeys()` {#intersectbykeys}
 
 The `intersectByKeys` method removes any keys from the original collection that are not present in the given `array` or collection:
 
@@ -1092,7 +1092,7 @@ $intersect->all();
 // ['type' => 'screen', 'year' => 2009]
 ```
 
-#### `isEmpty()`
+#### `isEmpty()` {#isempty}
 
 The `isEmpty` method returns `true` if the collection is empty; otherwise `false` is returned:
 
@@ -1102,7 +1102,7 @@ new Collection([])->isEmpty();
 // true
 ```
 
-#### `isNotEmpty()`
+#### `isNotEmpty()` {#isnotempty}
 
 The `isNotEmpty` method returns `true` if the collection is not empty; otherwise, `false` is returned:
 
@@ -1112,7 +1112,7 @@ collect([])->isNotEmpty();
 // false
 ```
 
-#### `join()`
+#### `join()` {#join}
 
 The `join` method joins the collection's values with a string:
 
@@ -1124,7 +1124,7 @@ collect(['a'])->join(', ', ' and '); // 'a'
 collect([])->join(', ', ' and '); // ''
 ```
 
-#### `keyBy()`
+#### `keyBy()` {#keyby}
 
 Keys the collection by the given key:
 
@@ -1165,7 +1165,7 @@ $keyed->all();
 */
 ```
 
-#### `keys()`
+#### `keys()` {#keys}
 
 The `keys` method returns all of the collection's keys:
 
@@ -1182,7 +1182,7 @@ $keys->all();
 // ['prod-100', 'prod-200']
 ```
 
-#### `last()`
+#### `last()` {#last}
 
 The `last` method returns the last element in the collection that passes a given truth test:
 
@@ -1202,7 +1202,7 @@ new Collection([1, 2, 3, 4])->last();
 // 4
 ```
 
-#### `lazy()`
+#### `lazy()` {#lazy}
 
 The `lazy` method returns a new [`LazyCollection`](#lazy-collections) instance from the underlying array of items:
 
@@ -1230,15 +1230,15 @@ $count = $hugeCollection
 
 By converting the collection to a `LazyCollection`, we avoid having to allocate a ton of additional memory. Though the original collection still keeps _its_ values in memory, the subsequent filters will not. Therefore, virtually no additional memory will be allocated when filtering the collection's results.
 
-#### `macro()`
+#### `macro()` {#macro}
 
 The static `macro` method allows you to add methods to the `Collection` class at run time. Refer to the documentation on [extending collections](#extending-collections) for more information.
 
-#### `make()`
+#### `make()` {#make}
 
 The static `make` method creates a new collection instance. See the [Creating Collections](#creating-collections) section.
 
-#### `map()`
+#### `map()` {#map}
 
 The `map` method iterates through the collection and passes each value to the given callback. The callback is free to modify the item and return it, thus forming a new collection of modified items:
 
@@ -1256,7 +1256,7 @@ $multiplied->all();
 
 > **NOTE:** Like most other collection methods, `map` returns a new collection instance; it does not modify the collection it is called on. If you want to transform the original collection, use the [`transform`](#transform) method.
 
-#### `mapInto()`
+#### `mapInto()` {#mapinto}
 
 The `mapInto()` method iterates over the collection, creating a new instance of the given class by passing the value into the constructor:
 
@@ -1284,7 +1284,7 @@ $currencies->all();
 // [Currency('USD'), Currency('EUR'), Currency('GBP')]
 ```
 
-#### `mapSpread()`
+#### `mapSpread()` {#mapspread}
 
 The `mapSpread` method iterates over the collection's items, passing each nested item value into the given callback. The callback is free to modify the item and return it, thus forming a new collection of modified items:
 
@@ -1302,7 +1302,7 @@ $sequence->all();
 // [1, 5, 9, 13, 17]
 ```
 
-#### `mapToGroups()`
+#### `mapToGroups()` {#maptogroups}
 
 The `mapToGroups` method groups the collection's items by the given callback. The callback should return an associative array containing a single key / value pair, thus forming a new collection of grouped values:
 
@@ -1340,7 +1340,7 @@ $grouped->get('Sales')->all();
 // ['John Doe', 'Jane Doe']
 ```
 
-#### `mapWithKeys()`
+#### `mapWithKeys()` {#mapwithkeys}
 
 The `mapWithKeys` method iterates through the collection and passes each value to the given callback. The callback should return an associative array containing a single key / value pair:
 
@@ -1372,7 +1372,7 @@ $keyed->all();
 */
 ```
 
-#### `max()`
+#### `max()` {#max}
 
 The `max` method returns the maximum value of a given key:
 
@@ -1386,7 +1386,7 @@ $max = collect([1, 2, 3, 4, 5])->max();
 // 5
 ```
 
-#### `median()`
+#### `median()` {#median}
 
 The `median` method returns the [median value](https://en.wikipedia.org/wiki/Median) of a given key:
 
@@ -1400,7 +1400,7 @@ $median = collect([1, 1, 2, 4])->median();
 // 1.5
 ```
 
-#### `merge()`
+#### `merge()` {#merge}
 
 The `merge` method merges the given array or collection with the original collection. If a string key in the given items matches a string key in the original collection, the given items's value will overwrite the value in the original collection:
 
@@ -1426,7 +1426,7 @@ $merged->all();
 // ['Desk', 'Chair', 'Bookcase', 'Door']
 ```
 
-#### `mergeRecursive()`
+#### `mergeRecursive()` {#mergerecursive}
 
 The `mergeRecursive` method merges the given array or collection recursively with the original collection. If a string key in the given items matches a string key in the original collection, then the values for these keys are merged together into an array, and this is done recursively:
 
@@ -1440,7 +1440,7 @@ $merged->all();
 // ['product_id' => [1, 2], 'price' => [100, 200], 'discount' => false]
 ```
 
-#### `min()`
+#### `min()` {#min}
 
 The `min` method returns the minimum value of a given key:
 
@@ -1454,7 +1454,7 @@ $min = collect([1, 2, 3, 4, 5])->min();
 // 1
 ```
 
-#### `mode()`
+#### `mode()` {#mode}
 
 The `mode` method returns the [mode value](https://en.wikipedia.org/wiki/Mode_(statistics)) of a given key:
 
@@ -1468,7 +1468,7 @@ $mode = collect([1, 1, 2, 4])->mode();
 // [1]
 ```
 
-#### `nth()`
+#### `nth()` {#nth}
 
 The `nth` method creates a new collection consisting of every n-th element:
 
@@ -1488,7 +1488,7 @@ $collection->nth(4, 1);
 // ['b', 'f']
 ```
 
-#### `only()`
+#### `only()` {#only}
 
 The `only` method returns the items in the collection with the specified keys:
 
@@ -1504,7 +1504,7 @@ $filtered->all();
 
 For the inverse of `only`, see the [except](#except) method.
 
-#### `pad()`
+#### `pad()` {#pad}
 
 The `pad` method will fill the array with the given value until the array reaches the specified size. This method behaves like the [array_pad](https://secure.php.net/manual/en/function.array-pad.php) PHP function.
 
@@ -1526,7 +1526,7 @@ $filtered->all();
 // [0, 0, 'A', 'B', 'C']
 ```
 
-#### `partition()`
+#### `partition()` {#partition}
 
 The `partition` method may be combined with the `list` PHP function to separate elements that pass a given truth test from those that do not:
 
@@ -1546,7 +1546,7 @@ $equalOrAboveThree->all();
 // [3, 4, 5, 6]
 ```
 
-#### `pipe()`
+#### `pipe()` {#pipe}
 
 The `pipe` method passes the collection to the given callback and returns the result:
 
@@ -1560,7 +1560,7 @@ $piped = $collection->pipe(function ($collection) {
 // 6
 ```
 
-#### `pipeInto()`
+#### `pipeInto()` {#pipeinto}
 
 The `pipeInto` method creates a new instance of the given class and passes the collection into the constructor:
 
@@ -1593,7 +1593,7 @@ $resource->collection->all();
 // [1, 2, 3]
 ```
 
-#### `pipeThrough()`
+#### `pipeThrough()` {#pipethrough}
 
 The `pipeThrough` method passes the collection to the given array of closures and returns the result of the executed closures:
 
@@ -1612,7 +1612,7 @@ $result = $collection->pipeThrough([
 // 15
 ```
 
-#### `pluck()`
+#### `pluck()` {#pluck}
 
 The `pluck` method retrieves all of the collection values for a given key:
 
@@ -1639,7 +1639,7 @@ $plucked->all();
 // ['prod-100' => 'Desk', 'prod-200' => 'Chair']
 ```
 
-#### `pop()`
+#### `pop()` {#pop}
 
 The `pop` method removes and returns the last item from the collection:
 
@@ -1655,7 +1655,7 @@ $collection->all();
 // [1, 2, 3, 4]
 ```
 
-#### `prepend()`
+#### `prepend()` {#prepend}
 
 The `prepend` method adds an item to the beginning of the collection:
 
@@ -1669,7 +1669,7 @@ $collection->all();
 // [0, 1, 2, 3, 4, 5]
 ```
 
-#### `pull()`
+#### `pull()` {#pull}
 
 The `pull` method removes and returns an item from the collection by its key:
 
@@ -1685,7 +1685,7 @@ $collection->all();
 // ['product_id' => 'prod-100']
 ```
 
-#### `push()`
+#### `push()` {#push}
 
 The `push` method appends an item to the end of the collection:
 
@@ -1699,7 +1699,7 @@ $collection->all();
 // [1, 2, 3, 4, 5]
 ```
 
-#### `put()`
+#### `put()` {#put}
 
 The `put` method sets the given key and value in the collection:
 
@@ -1713,7 +1713,7 @@ $collection->all();
 // ['product_id' => 1, 'name' => 'Desk', 'price' => 100]
 ```
 
-#### `random()`
+#### `random()` {#random}
 
 The `random` method returns a random item from the collection:
 
@@ -1735,7 +1735,7 @@ $random->all();
 // [2, 4, 5] - (retrieved randomly)
 ```
 
-#### `range()`
+#### `range()` {#range}
 
 The `range` method returns a collection containing integers between the specified range:
 
@@ -1747,7 +1747,7 @@ $collection->all();
 // [3, 4, 5, 6]
 ```
 
-#### `reduce()`
+#### `reduce()` {#reduce}
 
 The `reduce` method reduces the collection to a single value, passing the result of each iteration into the subsequent iteration:
 
@@ -1771,7 +1771,7 @@ $collection->reduce(function ($carry, $item) {
 // 10
 ```
 
-#### `reduceSpread()`
+#### `reduceSpread()` {#reducespread}
 
 The `reduceSpread` method reduces the collection to an array of values, passing the results of each iteration into the subsequent iteration. This method is similar to the `reduce` method; however, it can accept multiple initial values:
 
@@ -1789,7 +1789,7 @@ The `reduceSpread` method reduces the collection to an array of values, passing 
     }, $creditsAvailable, collect());
 ```
 
-#### `reject()`
+#### `reject()` {#reject}
 
 The `reject` method filters the collection using the given callback. The callback should return `true` for any items it wishes to remove from the resulting collection:
 
@@ -1807,7 +1807,7 @@ $filtered->all();
 
 For the inverse of the `reject` method, see the [`filter`](#filter) method.
 
-#### `replace()`
+#### `replace()` {#replace}
 
 The `replace` method behaves similarly to `merge`; however, in addition to overwriting matching items with string keys, the `replace` method will also overwrite items in the collection that have matching numeric keys:
 
@@ -1821,7 +1821,7 @@ $replaced->all();
 // ['Taylor', 'Victoria', 'James', 'Finn']
 ```
 
-#### `replaceRecursive()`
+#### `replaceRecursive()` {#replacerecursive}
 
 This method works like `replace`, but it will recur into arrays and apply the same replacement process to the inner values:
 
@@ -1835,7 +1835,7 @@ $replaced->all();
 // ['Charlie', 'Abigail', ['James', 'King', 'Finn']]
 ```
 
-#### `reverse()`
+#### `reverse()` {#reverse}
 
 The `reverse` method reverses the order of the collection's items:
 
@@ -1849,7 +1849,7 @@ $reversed->all();
 // [5, 4, 3, 2, 1]
 ```
 
-#### `search()`
+#### `search()` {#search}
 
 The `search` method searches the collection for the given value and returns its key if found. If the item is not found, `false` is returned.
 
@@ -1879,7 +1879,7 @@ $collection->search(function ($item, $key) {
 // 2
 ```
 
-#### `shift()`
+#### `shift()` {#shift}
 
 The `shift` method removes and returns the first item from the collection:
 
@@ -1895,7 +1895,7 @@ $collection->all();
 // [2, 3, 4, 5]
 ```
 
-#### `shuffle()`
+#### `shuffle()` {#shuffle}
 
 The `shuffle` method randomly shuffles the items in the collection:
 
@@ -1909,7 +1909,7 @@ $shuffled->all();
 // [3, 2, 5, 1, 4] (generated randomly)
 ```
 
-#### `skip()`
+#### `skip()` {#skip}
 
 The `skip` method returns a new collection, without the first given amount of items:
 
@@ -1923,7 +1923,7 @@ $collection->all();
 // [5, 6, 7, 8, 9, 10]
 ```
 
-#### `skipUntil()`
+#### `skipUntil()` {#skipuntil}
 
 The `skipUntil` method skips over items from the collection until the given callback returns `true` and then returns the remaining items in the collection as a new collection instance:
 
@@ -1953,7 +1953,7 @@ $subset->all();
 
 > **WARNING:**  If the given value is not found or the callback never returns `true`, the `skipUntil` method will return an empty collection.
 
-#### `skipWhile()`
+#### `skipWhile()` {#skipwhile}
 
 The `skipWhile` method skips over items from the collection while the given callback returns `true` and then returns the remaining items in the collection as a new collection:
 
@@ -1969,7 +1969,7 @@ $subset->all();
 // [4]
 ```
 
-#### `slice()`
+#### `slice()` {#slice}
 
 The `slice` method returns a slice of the collection starting at the given index:
 
@@ -1995,7 +1995,7 @@ $slice->all();
 
 The returned slice will preserve keys by default. If you do not wish to preserve the original keys, you can use the [`values`](#values) method to reindex them.
 
-#### `sliding()`
+#### `sliding()` {#sliding}
 
 The `sliding` method returns a new collection of chunks representing a "sliding window" view of the items in the collection:
 
@@ -2029,7 +2029,7 @@ $chunks->toArray();
 // [[1, 2, 3], [3, 4, 5]]
 ```
 
-#### `sole()`
+#### `sole()` {#sole}
 
 The `sole` method returns the first element in the collection that passes a given truth test, but only if the truth test matches exactly one element:
 
@@ -2068,11 +2068,11 @@ $collection->sole();
 
 If there are no elements in the collection that should be returned by the `sole` method, an `\Illuminate\Collections\ItemNotFoundException` exception will be thrown. If there is more than one element that should be returned, an `\Illuminate\Collections\MultipleItemsFoundException` will be thrown.
 
-#### `some()`
+#### `some()` {#some}
 
 Alias for the [`contains`](#contains) method.
 
-#### `sort()`
+#### `sort()` {#sort}
 
 The `sort` method sorts the collection:
 
@@ -2092,7 +2092,7 @@ For sorting a collection of nested arrays or objects, see the [`sortBy`](#sortby
 
 If your sorting needs are more advanced, you may pass a callback to `sort` with your own algorithm. Refer to the PHP documentation on [`usort`](http://php.net/manual/en/function.usort.php#refsect1-function.usort-parameters), which is what the collection's `sort` method calls under the hood.
 
-#### `sortBy()`
+#### `sortBy()` {#sortby}
 
 The `sortBy` method sorts the collection by the given key:
 
@@ -2142,11 +2142,11 @@ $sorted->values()->all();
 */
 ```
 
-#### `sortByDesc()`
+#### `sortByDesc()` {#sortbydesc}
 
 This method has the same signature as the [`sortBy`](#sortby) method, but will sort the collection in the opposite order.
 
-#### `sortDesc()`
+#### `sortDesc()` {#sortdesc}
 
 This method will sort the collection in the opposite order as the [`sort`](#sort) method:
 
@@ -2162,7 +2162,7 @@ $sorted->values()->all();
 
 Unlike `sort`, you may not pass a closure to `sortDesc`. Instead, you should use the [`sort`](#sort) method and invert your comparison.
 
-#### `sortKeys()`
+#### `sortKeys()` {#sortkeys}
 
 The `sortKeys` method sorts the collection by the keys of the underlying associative array:
 
@@ -2186,11 +2186,11 @@ $sorted->all();
 */
 ```
 
-#### `sortKeysDesc()`
+#### `sortKeysDesc()` {#sortkeysdesc}
 
 This method has the same signature as the [`sortKeys`](#sortkeys) method, but will sort the collection in the opposite order.
 
-#### `sortKeysUsing()`
+#### `sortKeysUsing()` {#sortkeysusing}
 
 The `sortKeysUsing` method sorts the collection by the keys of the underlying associative array using a callback:
 
@@ -2216,7 +2216,7 @@ $sorted->all();
 
 The callback must be a comparison function that returns an integer less than, equal to, or greater than zero. For more information, refer to the PHP documentation on [`uksort`](https://www.php.net/manual/en/function.uksort.php#refsect1-function.uksort-parameters), which is the PHP function that `sortKeysUsing` method utilizes internally.
 
-#### `splice()`
+#### `splice()` {#splice}
 
 The `splice` method removes and returns a slice of items starting at the specified index:
 
@@ -2266,7 +2266,7 @@ $collection->all();
 // [1, 2, 10, 11, 4, 5]
 ```
 
-#### `split()`
+#### `split()` {#split}
 
 The `split` method breaks a collection into the given number of groups:
 
@@ -2280,7 +2280,7 @@ $groups->toArray();
 // [[1, 2], [3, 4], [5]]
 ```
 
-#### `splitIn()`
+#### `splitIn()` {#splitin}
 
 The `splitIn` method breaks a collection into the given number of groups, filling non-terminal groups completely before allocating the remainder to the final group:
 
@@ -2294,7 +2294,7 @@ $groups->all();
 // [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]
 ```
 
-#### `sum()`
+#### `sum()` {#sum}
 
 The `sum` method returns the sum of all items in the collection:
 
@@ -2333,7 +2333,7 @@ $collection->sum(function ($product) {
 // 6
 ```
 
-#### `take()`
+#### `take()` {#take}
 
 The `take` method returns a new collection with the specified number of items:
 
@@ -2359,7 +2359,7 @@ $chunk->all();
 // [4, 5]
 ```
 
-#### `takeUntil()`
+#### `takeUntil()` {#takeuntil}
 
 The `takeUntil` method returns items in the collection until the given callback returns `true`:
 
@@ -2389,7 +2389,7 @@ $subset->all();
 
 > **WARNING:** If the given value is not found or the callback never returns `true`, the `takeUntil` method will return all items in the collection.
 
-#### `takeWhile()`
+#### `takeWhile()` {#takewhile}
 
 The `takeWhile` method returns items in the collection until the given callback returns `false`:
 
@@ -2407,7 +2407,7 @@ $subset->all();
 
 > **WARNING:** If the callback never returns `false`, the `takeWhile` method will return all items in the collection.
 
-#### `tap()`
+#### `tap()` {#tap}
 
 The `tap` method passes the collection to the given callback, allowing you to "tap" into the collection at a specific point and do something with the items while not affecting the collection itself:
 
@@ -2422,7 +2422,7 @@ collect([2, 4, 3, 1, 5])
 // 1
 ```
 
-#### `times()`
+#### `times()` {#times}
 
 The static `times` method creates a new collection by invoking the callback a given amount of times:
 
@@ -2454,7 +2454,7 @@ $categories->all();
 */
 ```
 
-#### `toArray()`
+#### `toArray()` {#toarray}
 
 The `toArray` method converts the collection into a plain PHP `array`. If the collection's values are [database models](../database/model), the models will also be converted to arrays:
 
@@ -2472,7 +2472,7 @@ $collection->toArray();
 
 > **NOTE:** `toArray` also converts all of its nested objects to an array. If you want to get the underlying array as is, use the [`all`](#all) method instead.
 
-#### `toJson()`
+#### `toJson()` {#tojson}
 
 The `toJson` method converts the collection into JSON:
 
@@ -2484,7 +2484,7 @@ $collection->toJson();
 // '{"name":"Desk","price":200}'
 ```
 
-#### `transform()`
+#### `transform()` {#transform}
 
 The `transform` method iterates over the collection and calls the given callback with each item in the collection. The items in the collection will be replaced by the values returned by the callback:
 
@@ -2502,7 +2502,7 @@ $collection->all();
 
 > **NOTE:** Unlike most other collection methods, `transform` modifies the collection itself. If you wish to create a new collection instead, use the [`map`](#map) method.
 
-#### `undot()`
+#### `undot()` {#undot}
 
 The `undot` method expands a single-dimensional collection that uses "dot" notation into a multi-dimensional collection:
 
@@ -2538,7 +2538,7 @@ $person->toArray();
 */
 ```
 
-#### `union()`
+#### `union()` {#union}
 
 The `union` method adds the given array to the collection. If the given array contains keys that are already in the original collection, the original collection's values will be preferred:
 
@@ -2552,7 +2552,7 @@ $union->all();
 // [1 => ['a'], 2 => ['b'], 3 => ['c']]
 ```
 
-#### `unique()`
+#### `unique()` {#unique}
 
 The `unique` method returns all of the unique items in the collection. The returned collection keeps the original array keys, so in this example we'll use the [`values`](#values) method to reset the keys to consecutively numbered indexes:
 
@@ -2610,11 +2610,11 @@ $unique->values()->all();
 
 The `unique` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`uniqueStrict`](#uniquestrict) method to filter using "strict" comparisons.
 
-#### `uniqueStrict()`
+#### `uniqueStrict()` {#uniquestrict}
 
 This method has the same signature as the [`unique`](#unique) method; however, all values are compared using "strict" comparisons.
 
-#### `unless()`
+#### `unless()` {#unless}
 
 The `unless` method will execute the given callback unless the first argument given to the method evaluates to `true`:
 
@@ -2636,15 +2636,15 @@ $collection->all();
 
 For the inverse of `unless`, see the [`when`](#when) method.
 
-#### `unlessEmpty()`
+#### `unlessEmpty()` {#unlessempty}
 
 Alias for the [`whenNotEmpty`](#whennotempty) method.
 
-#### `unlessNotEmpty()`
+#### `unlessNotEmpty()` {#unlessnotempty}
 
 Alias for the [`whenEmpty`](#whenempty) method.
 
-#### `unwrap()`
+#### `unwrap()` {#unwrap}
 
 The static `unwrap` method returns the collection's underlying items from the given value when applicable:
 
@@ -2662,7 +2662,7 @@ Collection::unwrap('John Doe');
 // 'John Doe'
 ```
 
-#### `value()`
+#### `value()` {#value}
 
 The `value` method retrieves a given value from the first element of the collection:
 
@@ -2677,7 +2677,7 @@ $value = $collection->value('price');
 // 200
 ```
 
-#### `values()`
+#### `values()` {#values}
 
 The `values` method returns a new collection with the keys reset to consecutive integers:
 
@@ -2699,7 +2699,7 @@ $values->all();
 */
 ```
 
-#### `when()`
+#### `when()` {#when}
 
 The `when` method will execute the given callback when the first argument given to the method evaluates to `true`:
 
@@ -2721,7 +2721,7 @@ $collection->all();
 
 For the inverse of `when`, see the [`unless`](#unless) method.
 
-#### `whenEmpty()`
+#### `whenEmpty()` {#whenempty}
 
 The `whenEmpty` method will execute the given callback when the collection is empty:
 
@@ -2763,7 +2763,7 @@ $collection->all();
 
 For the inverse of `whenEmpty`, see the [`whenNotEmpty`](#whennotempty) method.
 
-#### `whenNotEmpty()`
+#### `whenNotEmpty()` {#whennotempty}
 
 The `whenNotEmpty` method will execute the given callback when the collection is not empty:
 
@@ -2805,7 +2805,7 @@ $collection->all();
 
 For the inverse of `whenNotEmpty`, see the [`whenEmpty`](#whenempty) method.
 
-#### `where()`
+#### `where()` {#where}
 
 The `where` method filters the collection by a given key / value pair:
 
@@ -2852,11 +2852,11 @@ $filtered->all();
 */
 ```
 
-#### `whereStrict()`
+#### `whereStrict()` {#wherestrict}
 
 This method has the same signature as the [`where`](#where) method; however, all values are compared using "strict" comparisons.
 
-#### `whereBetween()`
+#### `whereBetween()` {#wherebetween}
 
 The `whereBetween` method filters the collection within a given range:
 
@@ -2882,7 +2882,7 @@ $filtered->all();
 */
 ```
 
-#### `whereIn()`
+#### `whereIn()` {#wherein}
 
 The `whereIn` method filters the collection by a given key / value contained within the given array:
 
@@ -2908,11 +2908,11 @@ $filtered->all();
 
 The `whereIn` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereInStrict`](#whereinstrict) method to filter using "strict" comparisons.
 
-#### `whereInStrict()`
+#### `whereInStrict()` {#whereinstrict}
 
 This method has the same signature as the [`whereIn`](#wherein) method; however, all values are compared using "strict" comparisons.
 
-#### `whereInstanceOf()`
+#### `whereInstanceOf()` {#whereinstanceof}
 
 The `whereInstanceOf` method filters the collection by a given class type:
 
@@ -2933,7 +2933,7 @@ $filtered->all();
 // [App\User, App\User]
 ```
 
-#### `whereNotBetween()`
+#### `whereNotBetween()` {#wherenotbetween}
 
 The `whereNotBetween` method filters the collection within a given range:
 
@@ -2958,7 +2958,7 @@ $filtered->all();
 */
 ```
 
-#### `whereNotIn()`
+#### `whereNotIn()` {#wherenotin}
 
 The `whereNotIn` method filters the collection by a given key / value not contained within the given array:
 
@@ -2984,11 +2984,11 @@ $filtered->all();
 
 The `whereNotIn` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereNotInStrict`](#wherenotinstrict) method to filter using "strict" comparisons.
 
-#### `whereNotInStrict()`
+#### `whereNotInStrict()` {#wherenotinstrict}
 
 This method has the same signature as the [`whereNotIn`](#wherenotin) method; however, all values are compared using "strict" comparisons.
 
-#### `whereNotNull()`
+#### `whereNotNull()` {#wherenotnull}
 
 The `whereNotNull` method filters items where the given key is not null:
 
@@ -3011,7 +3011,7 @@ $filtered->all();
 */
 ```
 
-#### `whereNull()`
+#### `whereNull()` {#wherenull}
 
 The `whereNull` method filters items where the given key is null:
 
@@ -3033,7 +3033,7 @@ $filtered->all();
 */
 ```
 
-#### `wrap()`
+#### `wrap()` {#wrap}
 
 The static `wrap` method wraps the given value in a collection when applicable:
 
@@ -3057,7 +3057,7 @@ $collection->all();
 // ['John Doe']
 ```
 
-#### `zip()`
+#### `zip()` {#zip}
 
 The `zip` method merges together the values of the given array with the values of the original collection at the corresponding index:
 
@@ -3277,7 +3277,7 @@ Almost all methods available on the `Collection` class are also available on the
 
 In addition to the methods defined in the `Enumerable` contract, the `LazyCollection` class contains the following methods:
 
-#### `tapEach()`
+#### `tapEach()` {#tapeach}
 
 While the `each` method calls the given callback for each item in the collection right away, the `tapEach` method only calls the given callback as the items are being pulled out of the list one by one:
 
@@ -3295,7 +3295,7 @@ $array = $lazyCollection->take(3)->all();
 // 3
 ```
 
-#### `remember()`
+#### `remember()` {#remember}
 
 The `remember` method returns a new lazy collection that will remember any values that have already been enumerated and will not retrieve them again when the collection is enumerated again:
 

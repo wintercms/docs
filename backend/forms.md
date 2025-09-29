@@ -983,7 +983,8 @@ Option | Description
 `mimeTypes` | MIME types that are accepted by the uploader, either as file extension or fully qualified name, optional. Eg: `bin,txt`
 `maxFilesize` | file size in Mb that are accepted by the uploader, optional. Default: from "upload_max_filesize" param value
 `useCaption` | allows a title and description to be set for the file. Default: `true`
-`prompt` | text to display for the upload button, applies to files only, optional.
+`iconClass` | icon class to use for the upload button, applies to file mode only. Default: `icon-upload`
+`prompt` | text to display for the upload button, applies to file mode only, optional.
 `thumbOptions` | options to pass to the thumbnail generating method for the file. See [Image Resizing](../services/image-resizing#available-parameters)
 `attachOnUpload` | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to `false`.
 

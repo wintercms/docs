@@ -462,10 +462,10 @@ class MyPlugin extends PluginBase
 }
 ```
 
-Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place command registration logic. Within this file, you could use the `Artisan::add` method to register the command:
+Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place command registration logic. Within this file, you could use the `Artisan::registerCommand` method to register the command:
 
 ```php
-Artisan::add(new MyAuthor\MyPlugin\Console\MyCommand);
+Artisan::registerCommand(new \MyAuthor\MyPlugin\Console\MyCommand());
 ```
 
 ### Registering a command in the application container
