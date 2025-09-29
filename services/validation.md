@@ -408,7 +408,7 @@ The field under validation must be a valid timezone identifier according to the 
 
 The field under validation must be unique on a given database table. If the `column` option is not specified, the field name will be used.
 
-#### `Basic usage of unique rule` {#url}
+#### `Basic usage of unique rule`
 
 ```php
 'email' => 'unique:users'
