@@ -294,7 +294,7 @@ The field under validation must exist on a given database table.
 'state' => 'exists:states'
 ```
 
-#### `Specifying a custom column name` {#specifying_a_custom_column_name}
+#### `Specifying a custom column name`
 
 ```php
 'state' => 'exists:states,abbreviation'
