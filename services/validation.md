@@ -548,7 +548,7 @@ $messages = [
 ];
 ```
 
-### Specifying a custom message for a given attribute {#specifying a custom message for a given attirbute}
+### Specifying a custom message for a given attribute
 
 Sometimes you may wish to specify a custom error messages only for a specific field:
 
