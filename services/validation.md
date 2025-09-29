@@ -182,7 +182,7 @@ Below is a list of all available validation rules and their function:
 - [Boolean](#boolean)
 - [Confirmed](#confirmed)
 - [Date](#date)
-- [Date Format](#date_format_format)
+- [Date Format](#date_format)
 - [Different](#different_field)
 - [Digits](#digits_value)
 - [Digits Between](#digits_between_min_max)
@@ -204,7 +204,7 @@ Below is a list of all available validation rules and their function:
 - [Required With](#required_with_foo_bar)
 - [Required With All](#required_with_all_foo_bar)
 - [Required Without](#required_without_foo_bar)
-- [Required Without All](#required_without_foo_bar)
+- [Required Without All](#required_without_all_foo_bar)
 - [Same](#same_field)
 - [Size](#size_value)
 - [String](#string_value)
@@ -264,7 +264,7 @@ The field under validation must have a matching field of `foo_confirmation`. For
 
 The field under validation must be a valid date according to the `strtotime` PHP function.
 
-#### `date_format:_format_` {#date_format_format}
+#### `date_format:_format_` {#date_format}
 
 The field under validation must match the _format_ defined according to the `date_parse_from_format` PHP function.
 
