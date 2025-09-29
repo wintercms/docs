@@ -442,7 +442,7 @@ The field under validation must be formatted as an URL.
 
 > **NOTE:** This function uses PHP's `filter_var` method.
 
-## Conditionally adding rules {#conditionally_adding_rules}
+## Conditionally adding rules
 
 In some situations, you may wish to run validation checks against a field **only** if that field is present in the input array. To quickly accomplish this, add the `sometimes` rule to your rule list:
 
@@ -454,7 +454,7 @@ $v = Validator::make($data, [
 
 In the example above, the `email` field will only be validated if it is present in the `$data` array.
 
-### Complex conditional validation {#complex_conditional_validation}
+### Complex conditional validation
 
 Sometimes you may wish to require a given field only if another field has a greater value than 100. Or you may need two fields to have a given value only when another field is present. Adding these validation rules doesn't have to be a pain. First, create a `Validator` instance with your _static rules_ that never change:
 
@@ -483,7 +483,7 @@ $v->sometimes(['reason', 'cost'], 'required', function ($input) {
 
 > **NOTE:** The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used as an object to access your input and files.
 
-## Validating Arrays {#validating_arrays}
+## Validating Arrays
 
 Validating array based form input fields doesn't have to be a pain. You may use "dot notation" to validate attributes within an array. For example, if the incoming HTTP request contains a `photos[profile]` field, you may validate it like so:
 
@@ -521,7 +521,7 @@ $validator = Validator::make(Input::all(), [
 ]);
 ```
 
-## Custom error messages {#custom_error_messages}
+## Custom error messages
 
 If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages.
 
@@ -537,7 +537,7 @@ $validator = Validator::make($input, $rules, $messages);
 
 > **NOTE:** The `:attribute` place-holder will be replaced by the actual name of the field under validation. You may also utilize other place-holders in validation messages.
 
-### Other validation placeholders {#other_validation_placeholders}
+### Other validation placeholders
 
 ```php
 $messages = [
@@ -558,7 +558,7 @@ $messages = [
 ];
 ```
 
-### Specifying custom messages in language files {#specifying custom messages in language files}
+### Specifying custom messages in language files
 
 In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to an array in the `lang/xx/validation.php` language file for your plugin.
 
