@@ -194,7 +194,7 @@ Below is a list of all available validation rules and their function:
 - [IP Address](#ip)
 - [Max](#max_value)
 - [MIME Types](#mimes_foo_bar)
-- [Min](#min_value_)
+- [Min](#min_value)
 - [Not In](#not_in_foo_bar)
 - [Nullable](#nullable)
 - [Numeric](#numeric)
@@ -288,7 +288,7 @@ The field under validation must be formatted as an e-mail address.
 
 The field under validation must exist on a given database table.
 
-#### `Basic usage of exists rule` {#basic_usage_of_exists_rule}
+#### `Basic usage of exists rule`
 
 ```php
 'state' => 'exists:states'
@@ -336,7 +336,7 @@ The field under validation must be less than or equal to a maximum _value_. Stri
 
 The file under validation must have a MIME type corresponding to one of the listed extensions.
 
-#### `Basic usage of MIME rule` {#basic_usage_of_mime_rule}
+#### `Basic usage of MIME rule`
 
 ```php
 'photo' => 'mimes:jpeg,bmp,png'
