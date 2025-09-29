@@ -172,44 +172,44 @@ Below is a list of all available validation rules and their function:
 
 - [Accepted](#accepted)
 - [Active URL](#active_url)
-- [After (Date)](#after_date_)
+- [After (Date)](#after_date)
 - [Alpha](#alpha)
 - [Alpha Dash](#alpha_dash)
 - [Alpha Numeric](#alpha_num)
 - [Array](#array)
-- [Before (Date)](#before_date_)
-- [Between](#between_min__max_)
+- [Before (Date)](#before_date)
+- [Between](#between_min_max)
 - [Boolean](#boolean)
 - [Confirmed](#confirmed)
 - [Date](#date)
-- [Date Format](#date_format_format_)
-- [Different](#different_field_)
-- [Digits](#digits_value_)
-- [Digits Between](#digits_between_min__max_)
+- [Date Format](#date_format_format)
+- [Different](#different_field)
+- [Digits](#digits_value)
+- [Digits Between](#digits_between_min_max)
 - [E-Mail](#email)
-- [Exists (Database)](#exists_table__column_)
+- [Exists (Database)](#exists_table_column)
 - [Image (File)](#image)
 - [In](#in_foo__bar_)
 - [Integer](#integer)
 - [IP Address](#ip)
-- [Max](#max_value_)
-- [MIME Types](#mimes_foo__bar_)
+- [Max](#max_value)
+- [MIME Types](#mimes_foo_bar)
 - [Min](#min_value_)
-- [Not In](#not_in_foo__bar_)
+- [Not In](#not_in_foo_bar)
 - [Nullable](#nullable)
 - [Numeric](#numeric)
-- [Regular Expression](#regex_pattern_)
+- [Regular Expression](#regex_pattern)
 - [Required](#required)
-- [Required If](#required_if_field__value_)
-- [Required With](#required_with_foo__bar_)
-- [Required With All](#required_with_all_foo__bar_)
-- [Required Without](#required_without_foo__bar_)
-- [Required Without All](#required_without_foo__bar_)
-- [Same](#same_field_)
-- [Size](#size_value_)
-- [String](#string_value_)
+- [Required If](#required_if_field_value)
+- [Required With](#required_with_foo_bar)
+- [Required With All](#required_with_all_foo_bar)
+- [Required Without](#required_without_foo_bar)
+- [Required Without All](#required_without_foo__bar)
+- [Same](#same_field)
+- [Size](#size_value)
+- [String](#string_value)
 - [Timezone](#timezone)
-- [Unique (Database)](#unique_table__column__except__idcolumn_)
+- [Unique (Database)](#unique_table_column_except_idcolumn)
 - [URL](#url)
 
 </div>
@@ -408,25 +408,25 @@ The field under validation must be a valid timezone identifier according to the 
 
 The field under validation must be unique on a given database table. If the `column` option is not specified, the field name will be used.
 
-#### `Basic usage of unique rule` {#basic_usage_of_unique_rule}
+#### `Basic usage of unique rule` {#url}
 
 ```php
 'email' => 'unique:users'
 ```
 
-#### `Specifying a custom column name` {#specifying_a_custom_column_name}
+#### `Specifying a custom column name`
 
 ```php
 'email' => 'unique:users,email_address'
 ```
 
-#### `Forcing a unique rule to ignore a given ID` {#forcing_a_unique_rule_to_ignore_a_given_id}
+#### `Forcing a unique rule to ignore a given ID`
 
 ```php
 'email' => 'unique:users,email_address,10'
 ```
 
-#### `Adding additional where clauses` {#adding_additional_where_clauses}
+#### `Adding additional where clauses`
 
 You may also specify more conditions that will be added as "where" clauses to the query:
 
