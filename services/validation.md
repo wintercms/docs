@@ -216,85 +216,85 @@ Below is a list of all available validation rules and their function:
 
 ### Validation rules list
 
-#### `accepted`
+#### `accepted` {#accepted}
 
 The field under validation must be _yes_, _on_, or _1_. This is useful for validating "Terms of Service" acceptance.
 
-#### `active_url`
+#### `active_url` {#active_url}
 
 The field under validation must be a valid URL according to the `checkdnsrr` PHP function.
 
-#### `after:_date_`
+#### `after:_date_` {#after_date}
 
 The field under validation must be a value after a given date. The dates will be passed into the PHP `strtotime` function.
 
-#### `alpha`
+#### `alpha` {#alpha}
 
 The field under validation must be entirely alphabetic characters.
 
-#### `alpha_dash`
+#### `alpha_dash` {#alpha_dash}
 
 The field under validation may have alpha-numeric characters, as well as dashes and underscores.
 
-#### `alpha_num`
+#### `alpha_num` {#alpha_num}
 
 The field under validation must be entirely alpha-numeric characters.
 
-#### `array`
+#### `array` {#array}
 
 The field under validation must be of type array.
 
-#### `before:_date_`
+#### `before:_date_` {#before_date}
 
 The field under validation must be a value preceding the given date. The dates will be passed into the PHP `strtotime` function.
 
-#### `between:_min_,_max_`
+#### `between:_min_,_max_` {#between_min_max}
 
 The field under validation must have a size between the given _min_ and _max_. Strings, numerics, and files are evaluated in the same fashion as the `size` rule.
 
-#### `boolean`
+#### `boolean` {#boolean}
 
 The field under validation must be able to be cast as a boolean. Accepted input are `true`, `false`, `1`, `0`, `"1"` and `"0"`.
 
-#### `confirmed`
+#### `confirmed` {#confirmed}
 
 The field under validation must have a matching field of `foo_confirmation`. For example, if the field under validation is `password`, a matching `password_confirmation` field must be present in the input.
 
-#### `date`
+#### `date` {#date}
 
 The field under validation must be a valid date according to the `strtotime` PHP function.
 
-#### `date_format:_format_`
+#### `date_format:_format_` {#date_format_format}
 
 The field under validation must match the _format_ defined according to the `date_parse_from_format` PHP function.
 
-#### `different:_field_`
+#### `different:_field_` {#different_field}
 
 The given _field_ must be different than the field under validation.
 
-#### `digits:_value_`
+#### `digits:_value_` {#digits_value}
 
 The field under validation must be _numeric_ and must have an exact length of _value_.
 
-#### `digits_between:_min_,_max_`
+#### `digits_between:_min_,_max_` {#digits_between_min_max}
 
 The field under validation must have a length between the given _min_ and _max_.
 
-#### `email`
+#### `email` {#email}
 
 The field under validation must be formatted as an e-mail address.
 
-#### `exists:_table_,_column_`
+#### `exists:_table_,_column_` {#exists_table_column}
 
 The field under validation must exist on a given database table.
 
-#### `Basic usage of exists rule`
+#### `Basic usage of exists rule` {#basic_usage_of_exists_rule}
 
 ```php
 'state' => 'exists:states'
 ```
 
-#### `Specifying a custom column name`
+#### `Specifying a custom column name` {#specifying_a_custom_column_name}
 
 ```php
 'state' => 'exists:states,abbreviation'
@@ -312,121 +312,121 @@ Passing `NULL` as a "where" clause value will add a check for a `NULL` database 
 'email' => 'exists:staff,email,deleted_at,NULL'
 ```
 
-#### `image`
+#### `image` {#image}
 
 The file under validation must be an image (jpeg, png, bmp, or gif)
 
-#### `in:_foo_,_bar_,...`
+#### `in:_foo_,_bar_,...` {#in_foo_bar}
 
 The field under validation must be included in the given list of values.
 
-#### `integer`
+#### `integer` {#integer}
 
 The field under validation must have an integer value.
 
-#### `ip`
+#### `ip` {#ip}
 
 The field under validation must be formatted as an IP address.
 
-#### `max:_value_`
+#### `max:_value_` {#max_value}
 
 The field under validation must be less than or equal to a maximum _value_. Strings, numerics, and files are evaluated in the same fashion as the [`size`](#size_value_) rule.
 
-#### `mimes:_foo_,_bar_,...`
+#### `mimes:_foo_,_bar_,...` {#mimes_foo_bar}
 
 The file under validation must have a MIME type corresponding to one of the listed extensions.
 
-#### `Basic usage of MIME rule`
+#### `Basic usage of MIME rule` {#basic_usage_of_mime_rule}
 
 ```php
 'photo' => 'mimes:jpeg,bmp,png'
 ```
 
-#### `min:_value_`
+#### `min:_value_` {#min_value}
 
 The field under validation must have a minimum _value_. Strings, numerics, and files are evaluated in the same fashion as the [`size`](#size_value_) rule.
 
-#### `not_in:_foo_,_bar_,...`
+#### `not_in:_foo_,_bar_,...` {#not_in_foo_bar}
 
 The field under validation must not be included in the given list of values.
 
-#### `nullable`
+#### `nullable` {#nullable}
 
 The field under validation may be `null`. This is particularly useful when validating primitive such as strings and integers that can contain `null` values.
 
-#### `numeric`
+#### `numeric` {#numeric}
 
 The field under validation must have a numeric value.
 
-#### `regex:_pattern_`
+#### `regex:_pattern_` {#regex_pattern}
 
 The field under validation must match the given regular expression.
 
 **Note:** When using the `regex` pattern, it may be necessary to specify rules in an array instead of using pipe delimiters, especially if the regular expression contains a pipe character.
 
-#### `required`
+#### `required` {#required}
 
 The field under validation must be present in the input data.
 
-#### `required_if:_field_,_value_,...`
+#### `required_if:_field_,_value_,...` {#required_if_field_value}
 
 The field under validation must be present if the _field_ field is equal to any _value_.
 
-#### `required_with:_foo_,_bar_,...`
+#### `required_with:_foo_,_bar_,...` {#required_with_foo_bar}
 
 The field under validation must be present _only if_ any of the other specified fields are present.
 
-#### `required_with_all:_foo_,_bar_,...`
+#### `required_with_all:_foo_,_bar_,...` {#required_with_all_foo_bar}
 
 The field under validation must be present _only if_ all of the other specified fields are present.
 
-#### `required_without:_foo_,_bar_,...`
+#### `required_without:_foo_,_bar_,...` {#required_without_foo_bar}
 
 The field under validation must be present _only when_ any of the other specified fields are not present.
 
-#### `required_without_all:_foo_,_bar_,...`
+#### `required_without_all:_foo_,_bar_,...` {#required_without_all_foo_bar}
 
 The field under validation must be present _only when_ the all of the other specified fields are not present.
 
-#### `same:_field_`
+#### `same:_field_` {#same_field}
 
 The specified _field_ value must match the field's value under validation.
 
-#### `size:_value_`
+#### `size:_value_` {#size_value}
 
 The field under validation must have a size matching the given _value_. For string data, _value_ corresponds to the number of characters. For numeric data, _value_ corresponds to a given integer value. For files, _size_ corresponds to the file size in kilobytes.
 
-#### `string:_value_`
+#### `string:_value_` {#string_value}
 
 The field under validation must be a string type.
 
-#### `timezone`
+#### `timezone` {#timezone}
 
 The field under validation must be a valid timezone identifier according to the `timezone_identifiers_list` PHP function.
 
-#### `unique:_table_,_column_,_except_,_idColumn_`
+#### `unique:_table_,_column_,_except_,_idColumn_` {#unique_table_column_except_idcolumn}
 
 The field under validation must be unique on a given database table. If the `column` option is not specified, the field name will be used.
 
-#### Basic usage of unique rule
+#### `Basic usage of unique rule` {#basic_usage_of_unique_rule}
 
 ```php
 'email' => 'unique:users'
 ```
 
-#### Specifying a custom column name
+#### `Specifying a custom column name` {#specifying_a_custom_column_name}
 
 ```php
 'email' => 'unique:users,email_address'
 ```
 
-#### Forcing a unique rule to ignore a given ID
+#### `Forcing a unique rule to ignore a given ID` {#forcing_a_unique_rule_to_ignore_a_given_id}
 
 ```php
 'email' => 'unique:users,email_address,10'
 ```
 
-#### Adding additional where clauses
+#### `Adding additional where clauses` {#adding_additional_where_clauses}
 
 You may also specify more conditions that will be added as "where" clauses to the query:
 
@@ -436,13 +436,13 @@ You may also specify more conditions that will be added as "where" clauses to th
 
 In the rule above, only rows with an `account_id` of `1` would be included in the unique check.
 
-#### url
+#### url {#url}
 
 The field under validation must be formatted as an URL.
 
 > **NOTE:** This function uses PHP's `filter_var` method.
 
-## Conditionally adding rules
+## Conditionally adding rules {#conditionally_adding_rules}
 
 In some situations, you may wish to run validation checks against a field **only** if that field is present in the input array. To quickly accomplish this, add the `sometimes` rule to your rule list:
 
@@ -454,7 +454,7 @@ $v = Validator::make($data, [
 
 In the example above, the `email` field will only be validated if it is present in the `$data` array.
 
-### Complex conditional validation
+### Complex conditional validation {#complex_conditional_validation}
 
 Sometimes you may wish to require a given field only if another field has a greater value than 100. Or you may need two fields to have a given value only when another field is present. Adding these validation rules doesn't have to be a pain. First, create a `Validator` instance with your _static rules_ that never change:
 
@@ -483,7 +483,7 @@ $v->sometimes(['reason', 'cost'], 'required', function ($input) {
 
 > **NOTE:** The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used as an object to access your input and files.
 
-## Validating Arrays
+## Validating Arrays {#validating_arrays}
 
 Validating array based form input fields doesn't have to be a pain. You may use "dot notation" to validate attributes within an array. For example, if the incoming HTTP request contains a `photos[profile]` field, you may validate it like so:
 
@@ -521,7 +521,7 @@ $validator = Validator::make(Input::all(), [
 ]);
 ```
 
-## Custom error messages
+## Custom error messages {#custom_error_messages}
 
 If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages.
 
@@ -537,7 +537,7 @@ $validator = Validator::make($input, $rules, $messages);
 
 > **NOTE:** The `:attribute` place-holder will be replaced by the actual name of the field under validation. You may also utilize other place-holders in validation messages.
 
-### Other validation placeholders
+### Other validation placeholders {#other_validation_placeholders}
 
 ```php
 $messages = [
@@ -548,7 +548,7 @@ $messages = [
 ];
 ```
 
-### Specifying a custom message for a given attribute
+### Specifying a custom message for a given attribute {#specifying a custom message for a given attirbute}
 
 Sometimes you may wish to specify a custom error messages only for a specific field:
 
@@ -558,7 +558,7 @@ $messages = [
 ];
 ```
 
-### Specifying custom messages in language files
+### Specifying custom messages in language files {#specifying custom messages in language files}
 
 In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to an array in the `lang/xx/validation.php` language file for your plugin.
 
