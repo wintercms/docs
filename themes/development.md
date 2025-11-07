@@ -25,6 +25,7 @@ Field | Description
 `form` | a configuration array or reference to a form field definition file, used for [theme customization](#theme-customization), optional.
 `require` | an array of plugin names used for [theme dependencies](#theme-dependencies), optional.
 `mix` | an object that defines Mix packages contained in your theme for [asset compilation](../console/asset-compilation).
+`parent` | define a parent theme that this theme will use as a fallback if the file is not present
 
 Example of the theme information file:
 
