@@ -22,6 +22,7 @@ Field | Description
 `description` | the theme description, required.
 `previewImage` | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
 `code` | the theme code, optional. The value is used on the Winter CMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
+`parent` | the directory name of a parent theme to inherit from, used for [child themes](../cms/themes#child-themes), optional.
 `form` | a configuration array or reference to a form field definition file, used for [theme customization](#theme-customization), optional.
 `require` | an array of plugin names used for [theme dependencies](#theme-dependencies), optional.
 `mix` | an object that defines Mix packages contained in your theme for [asset compilation](../console/asset-compilation).
