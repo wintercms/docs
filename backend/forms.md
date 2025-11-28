@@ -426,7 +426,7 @@ status_type:
 
 See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
-### Add icon to dropdown options
+#### Add icon to dropdown options
 
 In order to add an icon or an image for every option which will be rendered in the dropdown field the options have to be provided as a multidimensional array with the following format `'key' => ['label-text', 'icon-class'],` in php or `key: [label-text, icon-class]` in yaml.
 
