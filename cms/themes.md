@@ -307,6 +307,7 @@ themes/
 ```
 
 In this example, when `my-custom-theme` is active:
+
 - `theme.css` and `logo.png` load from the child theme
 - `header.htm` loads from the child theme
 - `footer.htm` loads from the parent theme (inherited)
@@ -349,6 +350,7 @@ When [database templates](#database-driven-themes) are enabled, you can:
 3. Inherit all other files from the parent theme's filesystem
 
 This approach allows you to:
+
 - Manage hundreds of similar themes without duplicating files
 - Update the parent theme and have changes cascade to all child themes automatically
 - Store tenant-specific customizations in the database while sharing a common codebase
@@ -375,23 +377,27 @@ The child theme will now function without any physical directory, inheriting eve
 ### Best Practices
 
 **When to use child themes:**
+
 - Customizing a third-party theme while preserving the ability to update it
 - Creating multiple branded variations of a base theme
 - Building a multi-tenant application where each tenant needs minor customizations
 - Developing a theme framework where a base theme provides core functionality
 
 **When to create a new theme instead:**
+
 - Making extensive changes that affect most templates and assets
 - Building something significantly different from the original design
 - When you need to modify the theme structure itself
 
 **Organization tips:**
+
 - Keep child themes minimal - only override what's necessary
 - Document which files are overridden and why
 - Use clear, descriptive names for child themes (e.g., `mytheme-client-a`, `mytheme-blue-variant`)
 - Consider using [theme customization](../themes/development#theme-customization) for simple configuration changes before creating a child theme
 
 **Performance considerations:**
+
 - Child themes have minimal performance impact - file resolution is cached
 - Avoid deep nesting (grandparent/parent/child) - only one level of inheritance is supported
 - Database-driven templates are cached, so virtual child themes perform well
