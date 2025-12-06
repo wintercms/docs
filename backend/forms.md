@@ -458,6 +458,7 @@ status_type:
             opt5: [Option 5, icon-check-circle]
             opt6: Option 6
 ```
+
 >**NOTE:** individual items in the groups can also use icons or images as shown in "Option 5" above.
 
 To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
