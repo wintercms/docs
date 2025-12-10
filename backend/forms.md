@@ -440,6 +440,27 @@ status_type:
         draft: [Draft, icon-clock-o]
 ```
 
+#### Add option grouping (optgroup) to dropdown options
+
+In order to add option grouping, use a multidimensional array like below:
+
+```yaml
+status_type:
+    type: dropdown
+    label: Blog Post Status
+    options:
+        Group1:
+            opt1: Option 1
+            opt2: Option 2
+            opt3: Option 3
+        Group2:
+            opt4: Option 4
+            opt5: [Option 5, icon-check-circle]
+            opt6: Option 6
+```
+
+>**NOTE:** individual items in the groups can also use icons or images as shown in "Option 5" above.
+
 To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
 
 ```yaml
