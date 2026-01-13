@@ -180,6 +180,16 @@ An array of contextual data may also be passed to the log methods. This contextu
 Log::info('User failed to login.', ['id' => $user->id]);
 ```
 
+#### Skipping database logging
+
+You can set `'skipDatabaseLog' => true` in the context data array to disable database logging.
+
+```php
+Log::info('New user acces.', ['id' => $user->id, 'skipDatabaseLog' => true]);
+```
+
+> **NOTE**: It is not recommended to skip database logging for important or critical information, as they would then no longer be accessible to administrators authenticated in the backend, but only by reading log files.
+
 ### Helper functions
 
 There are some global helper methods available to make logging easier. The `trace_log` function is an alias for `Log::info` with support for using arrays and exceptions as the message.
