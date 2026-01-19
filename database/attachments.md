@@ -6,6 +6,8 @@ Winter CMS provides a few different ways to manage files depending on your needs
 
 When using the `System\Models\File` model, you are able to configure the disk and paths that are used to store and retrieve the files managed by that model by modifying the `storage.uploads` setting in the [`config/cms.php` file](https://github.com/wintercms/winter/blob/develop/config/cms.php#L317).
 
+> **Warning:** File attachments are **public by default** and accessible via direct URL without authentication. To protect sensitive files, you **must explicitly set** `'public' => false` in your attachment configuration. For truly public content that doesn't need database tracking (like theme assets), consider using the [Media Manager](../cms/mediamanager) instead.
+
 ## File attachments
 
 Models can support file attachments using a subset of the [polymorphic relationship](../database/relations#polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
@@ -30,16 +32,39 @@ public $attachMany = [
 
 > **NOTE:** If you have a column in your model's table with the same name as the attachment relationship it will not work. Attachments and the FileUpload FormWidget work using relationships, so if there is a column with the same name present in the table itself it will cause issues.
 
-Protected attachments are uploaded to the File Upload disk's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the *public* argument to `false`:
+### Protected attachments
+
+Protected attachments provide access control for sensitive files. Unlike public attachments, protected files cannot be accessed via direct URL and require backend authentication.
+
+**Key differences between public and protected attachments:**
+
+- **Storage location**: Protected files are stored in `storage/app/uploads/protected/` instead of `storage/app/uploads/public/`
+- **Web server access**: The protected directory is not configured for direct web access in server configuration
+- **Authentication**: Protected files can only be accessed by authenticated backend users with appropriate permissions
+- **URL access**: Protected files are served through Winter CMS's protected file route, not directly from the filesystem
+
+**When to use protected attachments:**
+
+- User-uploaded documents containing sensitive information
+- Files subject to privacy regulations (GDPR, CCPA, etc.)
+- Content that requires authentication or authorization
+- User-specific files (contracts, invoices, medical records)
+- Any file that should not be publicly accessible
+
+**Defining a protected attachment:**
+
+Set the `public` argument to `false` in your attachment configuration:
 
 ```php
 public $attachOne = [
-    'avatar' => [
+    'confidential_document' => [
         \System\Models\File::class,
         'public' => false,
     ],
 ];
 ```
+
+For comparison with other file management approaches, see the [Media Manager security considerations](../cms/mediamanager#security-considerations).
 
 ### Creating new attachments
 
@@ -74,16 +99,18 @@ foreach ($files as $file) {
 }
 ```
 
-Alternatively, you can prepare a File model before hand, then manually associate the relationship later. Notice the `is_public` attribute must be set explicitly using this approach.
+Alternatively, you can prepare a File model before hand, then manually associate the relationship later. When creating files this way, the `is_public` attribute must be set explicitly, as it won't automatically inherit from the attachment relationship configuration.
 
 ```php
 $file = new System\Models\File;
 $file->data = Input::file('file_input');
-$file->is_public = true;
+$file->is_public = true; // Set to false for protected files
 $file->save();
 
 $model->avatar()->add($file);
 ```
+
+> **Note:** Set `is_public` to `true` for publicly accessible files or `false` for protected files that require authentication. When using the relationship's `create()` method (shown earlier), the `is_public` value is automatically determined from the attachment configuration's `public` option.
 
 You can also add a file from a URL. To work this method, you need install cURL PHP Extension.
 

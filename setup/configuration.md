@@ -68,6 +68,13 @@ location ~ ^/humans\.txt { try_files $uri /index.php; }
 location ~ /\.(?!well-known).* { deny all; }
 
 ## Let nginx return 404 if static file not exists
+## These paths expose PUBLIC file storage directories:
+## - /storage/app/uploads/public: Public file attachments (attachments with 'public' => true)
+## - /storage/app/media: Media Manager files (always public, no access control)
+## - /storage/app/resized: Dynamically resized images (public)
+## - /storage/temp/public: Public temporary files
+## NOTE: /storage/app/uploads/protected is intentionally NOT listed here - those files
+##       require authentication and are served through Winter CMS, not directly by nginx
 location ~ ^/storage/app/uploads/public { try_files $uri 404; }
 location ~ ^/storage/app/media { try_files $uri 404; }
 location ~ ^/storage/app/resized { try_files $uri 404; }
@@ -123,6 +130,12 @@ Paste the following code in the editor and change the **host address** and  `ser
 $HTTP["host"] =~ "domain.example.com" {
     server.document-root = "/var/www/example/"
 
+    # Public file storage paths (publicly accessible without authentication):
+    # - /storage/app/uploads/public: Public file attachments
+    # - /storage/app/media: Media Manager files (always public)
+    # - /storage/app/resized: Dynamically resized images
+    # - /storage/temp/public: Public temporary files
+    # Note: /storage/app/uploads/protected is NOT exposed here
     url.rewrite-once = (
         "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
         "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
@@ -146,6 +159,14 @@ If your webserver is running Internet Information Services (IIS) you can use the
     <system.webServer>
         <rewrite>
             <rules>
+                <!--
+                    Public file storage paths (publicly accessible without authentication):
+                    - /storage/app/uploads/public: Public file attachments
+                    - /storage/app/media: Media Manager files (always public)
+                    - /storage/app/resized: Dynamically resized images
+                    - /storage/temp/public: Public temporary files
+                    Note: /storage/app/uploads/protected is NOT exposed here
+                -->
                 <rule name="Winter CMS to handle all non-whitelisted URLs" stopProcessing="true">
                     <match url="^index.php" negate="true" />
                     <conditions logicalGrouping="MatchAll">

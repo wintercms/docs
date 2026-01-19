@@ -1011,6 +1011,8 @@ Option | Description
 
 > **NOTE:** Unlike the [Media Finder FormWidget](#media-finder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
 
+> **Security:** File attachments are public by default. For sensitive files that require access control, set `'public' => false` in your model's attachment relationship configuration. See [Protected Attachments](../database/attachments#protected-attachments) for more information.
+
 By default, the File Upload FormWidget only allows a limited set of file extensions. You can extend this list by adding a `fileDefinitions` config in `config/cms.php` file.
 See [Allowed file types](../setup/configuration#allowed-file-types) for more information.
 
@@ -1085,6 +1087,8 @@ Option | Description
 `imageHeight` | if using image type, the preview image will be displayed to this height, optional.
 
 > **NOTE:** Unlike the [File Upload FormWidget](#file-upload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
+
+> **Warning:** Files selected from the Media Library are **publicly accessible via direct URL** without any authentication or access control. Do not use the Media Finder for sensitive or private files. For files requiring access control, use the [File Upload FormWidget](#file-upload) with [Protected Attachments](../database/attachments#protected-attachments) instead.
 
 ### Nested Form
 

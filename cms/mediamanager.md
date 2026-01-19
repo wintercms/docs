@@ -6,6 +6,8 @@ By default Media Manager works with the storage/app/media subdirectory of the in
 
 Please note that after you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
 
+> **Warning:** All files uploaded to the Media Library are **publicly accessible** via direct URL without any authentication. The Media Manager is designed for public assets like theme images, videos, and content that should be accessible to all website visitors. **Do not use the Media Library for sensitive files, user documents, or private content.** For files that require access control, use [File Attachments](../database/attachments) with the `public => false` option instead.
+
 ## Configuring Amazon S3 access
 
 To use Amazon S3 with Winter CMS, you should create S3 bucket, folder in the bucket and API user.
@@ -243,7 +245,7 @@ Parameter | Value
 
 ### Allowing more specific file extensions
 
-By default, the Media Manager only allows a limited set of file extensions. You can extend this list by adding a `fileDefinitions` config in `config/cms.php` file.  
+By default, the Media Manager only allows a limited set of file extensions. You can extend this list by adding a `fileDefinitions` config in `config/cms.php` file.
 See [Allowed file types](../setup/configuration#allowed-file-types) for more information.
 
 ## Events
@@ -278,6 +280,40 @@ Event::listen('media.file.rename', function ($widget, $originalPath, $newPath) {
     // Update custom references to path here
 });
 ```
+
+## Security considerations
+
+### Public access by default
+
+All files stored in the Media Library are publicly accessible via direct URL. This means:
+
+- **No authentication required**: Anyone who knows or can guess the file URL can access it
+- **No permission checks**: Backend user permissions do not affect access to media files
+- **Direct browser access**: Files can be accessed directly without going through Winter CMS
+
+For local storage, media files are served from `/storage/app/media/` and configured in your web server to be publicly accessible (see [Server Configuration](../setup/configuration) for details).
+
+### When to use Media Manager
+
+The Media Manager is appropriate for:
+
+- Theme assets (images, videos, fonts)
+- Public website content (blog images, product photos, downloadable brochures)
+- Files that are meant to be embedded in CMS pages or layouts
+- Content that should be accessible to all website visitors
+- Files that may be referenced from multiple places in your application
+
+### When NOT to use Media Manager
+
+**Do not use the Media Manager for:**
+
+- User-uploaded documents that should be private
+- Files containing sensitive or confidential information
+- Content that requires authentication or authorization
+- User-specific files (profile pictures, personal documents)
+- Files subject to privacy regulations (GDPR, CCPA, etc.)
+
+For these scenarios, use [File Attachments](../database/attachments) with the `public => false` option instead.
 
 ## Troubleshooting
 
