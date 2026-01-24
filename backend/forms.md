@@ -613,14 +613,14 @@ user_password:
     type: password
 ```
 
-### Phone
+### Tel
 
-`phone` – renders a single-line input for phone values with built-in browser validation.
+`tel` – renders a single-line input for phone values with built-in browser validation.
 
 ```yaml
 telephone:
     label: Phone number
-    type: phone
+    type: tel
     pattern: "[0-9]{3}[0-9]{3}[0-9]{4}"
     placeholder: xxx-xxx-xxxx
     maxlength: 20
