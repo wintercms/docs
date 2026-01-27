@@ -282,6 +282,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Range](#range)
 - [Section](#section)
 - [Switch](#switch)
+- [Tel](#tel)
 - [Text](#text)
 - [Textarea](#textarea)
 - [Widget](#widget)
@@ -613,35 +614,6 @@ user_password:
     type: password
 ```
 
-### Tel
-
-`tel` – renders a single-line input for phone values with built-in browser validation.
-
-```yaml
-telephone:
-    label: Phone number
-    type: tel
-    pattern: "[0-9]{3}[0-9]{3}[0-9]{4}"
-    placeholder: xxx-xxx-xxxx
-    maxlength: 20
-    minlength: 12
-    size: 20
-    required: true
-    options:
-        514-123-4567: First Test Phone Number
-        800-111-2222: Second Test Phone Number
-```
-
-- Displays a phone icon on the left in both edit and preview modes.
-- In preview mode, renders as a clickable link that opens a phone dialing screen on mobile.
-- Supports all standard HTML5 attributes for `<input type="tel">`:
-    - `placeholder`, `maxlength`, `minlength`, `pattern`, `size`, `list`, `autocomplete`, `required`, `readonly`, `disabled`
-- `options` will be rendered in a `<datalist>` element, enabling autocomplete suggestions.
-- If an option's value and label are identical, the label is omitted for brevity.
-
-See [Defining field options](#defining-field-options) for the different methods to specify the options.
-
-### Radio List
 
 `radio` - renders a list of radio options, where only one item can be selected at a time.
 
@@ -709,6 +681,35 @@ show_content:
     off: myauthor.myplugin::lang.models.mymodel.show_content.off
 ```
 
+### Tel
+
+`tel` – renders a single-line input for phone values with built-in browser validation.
+
+```yaml
+telephone:
+    label: Phone number
+    type: tel
+    pattern: "[0-9]{3}[0-9]{3}[0-9]{4}"
+    placeholder: xxx-xxx-xxxx
+    maxlength: 20
+    minlength: 12
+    size: 20
+    required: true
+    options:
+        514-123-4567: First Test Phone Number
+        800-111-2222: Second Test Phone Number
+```
+
+- Displays a phone icon on the left in both edit and preview modes.
+- In preview mode, renders as a clickable link that opens a phone dialing screen on mobile.
+- Supports all standard HTML5 attributes for `<input type="tel">`:
+    - `placeholder`, `maxlength`, `minlength`, `pattern`, `size`, `list`, `autocomplete`, `required`, `readonly`, `disabled`
+- `options` will be rendered in a `<datalist>` element, enabling autocomplete suggestions.
+- If an option's value and label are identical, the label is omitted for brevity.
+
+See [Defining field options](#defining-field-options) for the different methods to specify the options.
+
+### Radio List
 ### Text
 
 `text` - renders a single line text box. This is the default type used if none is specified.
