@@ -791,6 +791,7 @@ There are various form widgets included as standard, although it is common for p
 - [Color picker](#color-picker)
 - [Data table](#data-table)
 - [Date picker](#date-picker)
+- [Fieldset](#fieldset)
 - [File upload](#file-upload)
 - [Icon picker](#icon-picker)
 - [Markdown editor](#markdown-editor)
@@ -1002,6 +1003,36 @@ Option | Description
 `firstDay` | the first day of the week. Default: 0 (Sunday).
 `showWeekNumber` | show week numbers at head of row. Default: `false`
 `ignoreTimezone` | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
+
+### Fieldset
+
+`fieldset` - renders a group of fields in a <fieldset> tag.
+
+> **NOTE:** Contrary to nested forms, the fields defined in a fieldset are part of the main form. They are only grouped visually within the <fieldset> tag.
+
+```yaml
+groupedFields:
+    type: fieldset
+    label: Grouped Fields
+    form:
+        fields:
+            name:
+                label: Your name
+            address:
+                label: Your address
+            phone:
+                label: Your phone
+                type: tel
+            website:
+                label: Your website URL
+                type: url
+```
+
+A fieldset provides a way of ***visually*** grouping fields. The form definition does not support tabs or secondary tabs as it is only used to define the fields for grouping purpose.
+
+Option | Description
+------------- | -------------
+`form`  | contains the [form definition](#defining-form-fields) used to define the grouped fields.
 
 ### File upload
 
