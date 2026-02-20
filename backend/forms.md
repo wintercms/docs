@@ -285,6 +285,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Tel](#tel)
 - [Text](#text)
 - [Textarea](#textarea)
+- [URL](#url)
 - [Widget](#widget)
 
 </div>
@@ -614,6 +615,7 @@ user_password:
     type: password
 ```
 
+### Radio List
 
 `radio` - renders a list of radio options, where only one item can be selected at a time.
 
@@ -709,7 +711,6 @@ telephone:
 
 See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
-### Radio List
 ### Text
 
 `text` - renders a single line text box. This is the default type used if none is specified.
