@@ -691,7 +691,7 @@ show_content:
 telephone:
     label: Phone number
     type: tel
-    pattern: "[0-9]{3}[0-9]{3}[0-9]{4}"
+    pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}"
     placeholder: xxx-xxx-xxxx
     maxlength: 20
     minlength: 12
