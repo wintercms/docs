@@ -1006,7 +1006,7 @@ Option | Description
 
 ### Fieldset
 
-`fieldset` - renders a group of fields in a <fieldset> tag.
+`fieldset` - renders a group of fields in a `<fieldset>` tag.
 
 > **NOTE:** Contrary to the [nestedform](#nested-form), the fields defined in a fieldset are part of the main form. They are only grouped visually within the `<fieldset>` tag.
 
