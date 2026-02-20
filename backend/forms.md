@@ -1008,7 +1008,7 @@ Option | Description
 
 `fieldset` - renders a group of fields in a `<fieldset>` tag.
 
-> **NOTE:** Contrary to the [nestedform](#nested-form), the fields defined in a fieldset are part of the main form. They are only grouped visually within the `<fieldset>` tag.
+> **NOTE:** Contrary to the [nestedform](#nested-form), the fields defined in a fieldset are part of the parent form. They are only grouped visually within the `<fieldset>` tag, but will get submitted within the same array as the parent form in the POST data.
 
 ```yaml
 groupedFields:
@@ -1028,7 +1028,7 @@ groupedFields:
                 type: url
 ```
 
-A fieldset provides a way of ***visually*** grouping fields. The form definition does not support tabs or secondary tabs as it is only used to define the fields for grouping purpose.
+A fieldset provides a way of ***visually*** grouping fields. The form definition does not support tabs or secondary tabs as it is only used to define the fields for grouping purposes.
 
 Option | Description
 ------------- | -------------
@@ -1156,6 +1156,7 @@ Option | Description
 `nestedform` - renders a nested form as the contents of this field and returns the form data as an array.
 
 > **NOTE:** In order to use this with a model, the field should be defined as a `jsonable` attribute, or as another attribute that can handle storing arrayed data.
+> **NOTE:** The fields defined in a nestedform are separate from the main(parent) form. They will get submitted within a nested array named after the nestedform field's name in the POST data.
 
 ```yaml
 content:
