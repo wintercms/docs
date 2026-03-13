@@ -16,6 +16,7 @@ The project is considered a flat-level of management with equal responsibility o
 - [@bennothommo](https://github.com/bennothommo) - Ben Thomson
 - [@mjauvin](https://github.com/mjauvin) - Marc Jauvin
 - [@jaxwilko](https://github.com/jaxwilko) - Jack Wilkinson
+- [@damsfx](https://github.com/damsfx) - Damien Mathieu
 
 Luke Towers has been designated the Lead Maintainer by the maintainer group, as the longest-serving maintainer of October CMS.
 
