@@ -82,7 +82,7 @@ protected function loadAssets()
 {
     $this->addCss('css/form.css');
 
-    $this->addJs('css/form.js', 'Acme.Test');
+    $this->addJs('js/form.js', 'Acme.Test');
 }
 ```
 
