@@ -865,16 +865,16 @@ Ensure the pivot table has the sort order column, for example in a migration:
 $table->integer('sort_order')->default(0);
 ```
 
-When the trait boots it automatically adds the sort order column to the relation's pivot data and applies an `order by {pivot_table}.{column} asc` clause, so the relation is always returned in its stored order. Newly attached records are appended to the end of the relation automatically.
+You must create the column yourself (as in the migration above) — the trait does not create it. When the model boots, the trait includes that column in the relation's pivot data, so its value is loaded onto each record's `pivot`, and applies an `order by {pivot_table}.{column} asc` clause so the relation is always returned in its stored order. The trait also assigns the next sort order value to newly attached records, appending them to the end of the relation.
 
-Use the `setRelationOrder` method to reorder a relation programmatically. Pass the related record ids in their new order; an optional second argument provides the sort order value to assign to each (when omitted, a sequential `1..N` order is assigned in the given order):
+Use the `setRelationOrder` method to reorder a relation programmatically. The second argument is the related record ids in their new order; the optional third argument provides the sort order value to assign to each (when omitted, a sequential `1..N` order is assigned in the given order):
 
 ```php
-// Assign sort orders 1, 2, 3 to the given records, in this order
+// Reorder by ids only — assigns sort orders 1, 2, 3 in the given order
 $article->setRelationOrder('authors', [$author3->id, $author1->id, $author2->id]);
 
-// Assign explicit sort order values
-$article->setRelationOrder('authors', [1, 2, 3], [3, 2, 1]);
+// Reorder by ids (second argument) with explicit sort order values (third argument)
+$article->setRelationOrder('authors', [$author1->id, $author2->id, $author3->id], [3, 2, 1]);
 ```
 
 You can check whether a relation is configured as sortable with `isSortableRelation`:
