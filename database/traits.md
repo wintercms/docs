@@ -838,16 +838,49 @@ class ApiData extends Model
 
 ## HasSortableRelations
 
-Add this trait to your model in order to allow its relations to be sorted/reordered.
+Sorted relations store a sort order value in the pivot table of a `belongsToMany`, `morphToMany`, or `morphedByMany` relation, so the related records keep a custom order for each parent record. Apply the `Winter\Storm\Database\Traits\HasSortableRelations` trait and define a `$sortableRelations` property that maps each relation name to its pivot sort order column.
 
 ```php
-class MyModel extends model
+class Article extends \Winter\Storm\Database\Model
 {
     use \Winter\Storm\Database\Traits\HasSortableRelations;
 
     /**
-     * @var array Relations that can be sorted/reordered and the column name to use for sorting/reordering.
+     * @var array Relations that can be reordered and the pivot column used for sorting.
      */
-    public $sortableRelations = ['relation_name' => 'sort_order_column'];
-...
+    public $sortableRelations = ['authors' => 'sort_order'];
+
+    public $belongsToMany = [
+        'authors' => [
+            \Acme\Blog\Models\Author::class,
+            'table' => 'acme_blog_articles_authors',
+        ],
+    ];
 }
+```
+
+Ensure the pivot table has the sort order column, for example in a migration:
+
+```php
+$table->integer('sort_order')->default(0);
+```
+
+When the trait boots it automatically adds the sort order column to the relation's pivot data and applies an `order by {pivot_table}.{column} asc` clause, so the relation is always returned in its stored order. Newly attached records are appended to the end of the relation automatically.
+
+Use the `setRelationOrder` method to reorder a relation programmatically. Pass the related record ids in their new order; an optional second argument provides the sort order value to assign to each (when omitted, a sequential `1..N` order is assigned in the given order):
+
+```php
+// Assign sort orders 1, 2, 3 to the given records, in this order
+$article->setRelationOrder('authors', [$author3->id, $author1->id, $author2->id]);
+
+// Assign explicit sort order values
+$article->setRelationOrder('authors', [1, 2, 3], [3, 2, 1]);
+```
+
+You can check whether a relation is configured as sortable with `isSortableRelation`:
+
+```php
+$article->isSortableRelation('authors'); // true
+```
+
+> **NOTE:** To let backend users reorder a relation with drag-and-drop directly in a form, see [reordering relations](../backend/relations#reordering-relations) in the RelationController documentation.
