@@ -305,6 +305,8 @@ authors:
 
 A drag handle is shown on each related record; dropping persists the new order to the pivot's sort order column. Reordering also works while the parent record is being created, before it is saved — the order is stored against the [deferred binding](../database/relations#deferred-binding) and committed together with the record.
 
+As with sortable lists, the related records are shown as a single unpaginated set in their stored order, so `sortable` cannot be combined with searching, filtering, pagination, or a custom `defaultSort` on the relation's `view` configuration.
+
 ## Displaying a relation manager
 
 Before relations can be managed on any page, the target model must first be initialized in the controller by calling the `initRelation` method.

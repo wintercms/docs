@@ -86,7 +86,9 @@ Set `sortable` to `true` to let backend users reorder the list with drag-and-dro
 sortable: true
 ```
 
-When enabled, a drag handle is shown on each row, column header sorting and pagination are disabled (every record is shown in its stored order), and dropping a row persists the new order to the model's sort order column via AJAX.
+When enabled, a drag handle is shown on each row, column header sorting is disabled, the list is shown in its stored order without pagination, and dropping a row persists the new order to the model's sort order column via AJAX.
+
+Because the whole list must be visible in a single fixed order, `sortable` cannot be combined with searching, filtering, pagination, or a custom `defaultSort` — configuring any of these alongside it raises a configuration error.
 
 > **NOTE:** Reordering applies to flat lists. For reordering tree structures, or for a dedicated standalone reordering page, use the [Reorder behavior](reorder).
 
