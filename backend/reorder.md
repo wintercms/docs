@@ -4,6 +4,8 @@
 
 The **Reorder behavior** is a controller [behavior](../services/behaviors) that provides features for sorting and reordering database records. The behavior provides a page called Reorder using the controller action `reorder`. This page displays a list of records with a drag handle allowing them to be sorted and in some cases restructured.
 
+> **NOTE:** To let users reorder records inline with drag-and-drop without a dedicated page — directly in a [list](lists#reordering-records) or a [relation manager](relations#reordering-relations) — see those sections. The Reorder behavior documented here provides a dedicated standalone page, which is best suited to models with deep tree structures.
+
 The behavior depends on a [model class](../database/model) which must implement one of the following [model traits](../database/traits):
 
 1. [`Winter\Storm\Database\Traits\Sortable`](../database/traits#sortable)
