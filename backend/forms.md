@@ -1014,25 +1014,24 @@ Option | Description
 groupedFields:
     type: fieldset
     label: Grouped Fields
-    form:
-        fields:
-            name:
-                label: Your name
-            address:
-                label: Your address
-            phone:
-                label: Your phone
-                type: tel
-            website:
-                label: Your website URL
-                type: url
+    fields:
+        name:
+            label: Your name
+        address:
+            label: Your address
+        phone:
+            label: Your phone
+            type: tel
+        website:
+            label: Your website URL
+            type: url
 ```
 
 A fieldset provides a way of ***visually*** grouping fields. The form definition does not support tabs or secondary tabs as it is only used to define the fields for grouping purposes.
 
 Option | Description
 ------------- | -------------
-`form`  | contains the [form definition](#defining-form-fields) used to define the grouped fields.
+`fields`  | contains the [form fields definition](#defining-form-fields) used to define the grouped fields.
 
 ### File upload
 
