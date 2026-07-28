@@ -207,7 +207,15 @@ $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 
 ## Simple Tree
 
-A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To use the simple tree, apply the `Winter\Storm\Database\Traits\SimpleTree` trait.
+A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To add the `parent_id` column to your table, you may use the `unsignedInteger` method inside a migration.
+
+```php
+Schema::table('categories', function ($table) {
+    $table->unsignedInteger('parent_id')->nullable();
+});
+```
+
+To use the simple tree, apply the `Winter\Storm\Database\Traits\SimpleTree` trait.
 
 ```php
 class Category extends Model
@@ -316,6 +324,7 @@ const NEST_DEPTH = 'my_depth_column';
 - `$query->leaves();` - Filters as all final nodes without children.
 - `$query->getNested();` - Returns an eager loaded collection of results.
 - `$query->listsNested();` - Returns an indented array of key and value columns.
+- `$query->nestedArray();` - Returns an nested array of key and values columns.
 
 ### Flat result access methods
 
@@ -526,7 +535,9 @@ You can also create custom validation rules the [same way](../services/validatio
 
 ## Soft deleting
 
-When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `Winter\Storm\Database\Traits\SoftDelete` trait to the model and add the deleted_at column to your `$dates` property:
+Soft deleting allows for models to "act" as being deleted whilst still remaining in the database. Instead of removing a model record from the database on delete, a `deleted_at` timestamp is set on the record which, by default, will hide the record from any database query results.
+
+To enable soft deleting for a model, apply the `Winter\Storm\Database\Traits\SoftDelete` trait to the model and add the `deleted_at` column to your `$dates` property:
 
 ```php
 class User extends Model
@@ -552,6 +563,19 @@ To determine if a given model instance has been soft deleted, use the `trashed` 
 ```php
 if ($user->trashed()) {
     //
+}
+```
+
+If you wish, you may also change the column that the deleted timestamp is saved to, by specifying a `DELETED_AT` constant in your model. Make sure that you change the column in the `$dates` property as well.
+
+```php
+class User extends Model
+{
+    // ...
+    const DELETED_AT = 'hidden_at';
+
+    protected $dates = ['hidden_at'];
+    // ...
 }
 ```
 
@@ -611,7 +635,9 @@ $user->posts()->forceDelete();
 
 ### Soft deleting relations
 
-When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](relations#detailed-definitions). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+A model that uses the `SoftDelete` trait may also define that related models also be soft deleting when the primary model is soft delete. You can cascade the soft deletion by defining the `softDelete` option in the [relation definition](relations#detailed-definitions) if you are using property-style relation definitions.
+
+In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
 
 ```php
 class User extends Model
@@ -619,13 +645,57 @@ class User extends Model
     use \Winter\Storm\Database\Traits\SoftDelete;
 
     public $hasMany = [
-        'comments' => ['Acme\Blog\Models\Comment', 'softDelete' => true]
+        'comments' => ['Acme\Blog\Models\Comment', 'softDelete' => true],
     ];
 }
 ```
 
-> **NOTE:** If the soft deleting relation is using a pivot table, you can set the `deletedAtColumn` option on the relation definition to change the column that will hold the soft deletion date in the pivot table, otherwise, it defaults to `deleted_at`.
-> **NOTE:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
+If your related model uses a different column for storing the deleted timestamp, you may specify it in the `deletedAtColumn` option on the relation definition.
+
+```php
+class User extends Model
+{
+    use \Winter\Storm\Database\Traits\SoftDelete;
+
+    public $hasMany = [
+        'comments' => [
+            'Acme\Blog\Models\Comment',
+            'softDelete' => true,
+            'deletedAtColumn' => 'hidden_at',
+        ],
+    ];
+}
+```
+
+If you use method style relations, you can include the `->softDeletable()` chained method to the relation definition to indicate that this relation should also be soft deleted when the main model is soft deleted.
+
+```php
+class User extends Model
+{
+    use \Winter\Storm\Database\Traits\SoftDelete;
+
+    public function comments(): HasMany
+    {
+        $this->hasMany('Acme\Blog\Models\Comment')->softDeletable();
+    }
+}
+```
+
+If your related model uses a different column for storing the deleted timestamp, you may specify it in the first parameter of the chained method:
+
+```php
+class User extends Model
+{
+    use \Winter\Storm\Database\Traits\SoftDelete;
+
+    public function comments(): HasMany
+    {
+        $this->hasMany('Acme\Blog\Models\Comment')->softDeletable('hidden_at');
+    }
+}
+```
+
+> **WARNING:** If the related model does not also use the `SoftDelete` trait and you specify the relation as soft-deletable, the relation will be *permanently* deleted.
 
 Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.
 

@@ -99,7 +99,7 @@ function onFetchDataFromServer()
 Then, in JavaScript:
 
 ```js
-Snowboard.request(this, 'onHandleForm', {
+Snowboard.request(this, 'onFetchDataFromServer', {
     success: function(data) {
         console.log(data);
     }

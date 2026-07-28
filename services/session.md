@@ -49,7 +49,7 @@ $value = Session::get('key');
 
 $value = Session::get('key', 'default');
 
-$value = Session::get('key', function() { return 'default'; });
+$value = Session::get('key', function () { return 'default'; });
 ```
 
 ### Retrieving all data from the session

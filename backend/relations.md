@@ -97,6 +97,7 @@ Option | Type | Description
 `list` | List | a reference to list column definition file, see [backend list columns](lists#defining-list-columns).
 `showSetup` | List | displays the list column set up button.
 `showSearch` | List | display an input for searching the records. Default: `false`
+`search` | List | Search widget options array (prompt, mode, scope, searchOnEnter); see [search options](lists#adding-a-toolbar).
 `showSorting` | List | displays the sorting link on each column. Default: `true`
 `defaultSort` | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 `recordsPerPage` | List | maximum rows to display for each page.

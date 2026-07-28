@@ -270,7 +270,7 @@ You may pass a default value as the second argument:
 It's easy to define your own custom Form class helpers called "macros". Here's how it works. First, simply register the macro with a given name and a Closure:
 
 ```php
-Form::macro('myField', function() {
+Form::macro('myField', function () {
     return '<input type="awesome">';
 })
 ```

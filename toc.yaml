@@ -114,7 +114,10 @@ sections:
             console/setup-maintenance: "Setup & Maintenance"
             console/plugin-management: "Plugin Management"
             console/theme-management: "Theme Management"
-            console/asset-compilation: "Asset Compilation (Mix)"
+            console/asset-compilation: "Asset Compilation"
+            console/asset-compilation-mix: "Asset Compilation (Mix)"
+            console/asset-compilation-vite: "Asset Compilation (Vite)"
+            console/asset-node-utilities: "Asset Compilation - Node Utilities"
             console/scaffolding: "Scaffolding"
             console/utilities: "Utilities"
 
@@ -127,4 +130,4 @@ sections:
     "Further Reading":
         pages:
             "https://laravel.com/docs/9.x": "Laravel Docs"
-            "https://www.php.net/manual/en/intro-whatis.php": "PHP Docs"
+            "https://www.php.net/manual/en/introduction.php": "PHP Docs"

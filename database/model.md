@@ -4,18 +4,18 @@
 
 Winter provides a beautiful and simple Active Record implementation for working with your database, based on [Eloquent by Laravel](http://laravel.com/docs/eloquent). Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records into the table.
 
-Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
+Model classes reside in the `models` subdirectory of a plugin directory. An example of a model directory structure:
 
-```css
-📂 plugins
- ┗ 📂 acme
-   ┗ 📂 blog
-     ┣ 📂 models
-     ┃ ┣ 📂 user              <=== Model config directory
-     ┃ ┃ ┣ 📜 columns.yaml    <=== Model config files
-     ┃ ┃ ┗ 📜 fields.yaml     <==^
-     ┃ ┗ 📜 User.php          <=== Model class
-     ┗ 📜 Plugin.php
+```treeview
+plugins/
+`-- acme/
+    `-- blog/
+       |-- models/                 # Plugin models directory
+       |   |-- user/               # Model configuration directory
+       |   |   |-- columns.yaml    # Model list columns config file
+       |   |   `-- fields.yaml     # Model form fields config file
+       |   `-- User.php            # Model class
+       `-- Plugin.php
 ```
 
 The model configuration directory could contain the model's [list column](../backend/lists#defining-list-columns) and [form field](../backend/forms#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
@@ -402,6 +402,12 @@ You may also run a delete query on a set of models. In this example, we will del
 $deletedRows = Flight::where('active', 0)->delete();
 ```
 
+Deleting all records of a model:
+
+```php
+Flight::truncate();
+```
+
 > **NOTE**: It is important to mention that [model events](model#events) will not fire when deleting records directly from a query.
 
 ## Query scopes
@@ -662,7 +668,7 @@ You can externally bind to [local events](../events/introduction) for a single i
 
 ```php
 $flight = new Flight;
-$flight->bindEvent('model.beforeCreate', function() use ($model) {
+$flight->bindEvent('model.beforeCreate', function () use ($model) {
     $model->slug = Str::slug($model->name);
 })
 ```
@@ -674,7 +680,7 @@ Since models are [equipped to use behaviors](../services/behaviors), they can be
 Inside the closure you can add relations to the model. Here we extend the `Backend\Models\User` model to include a profile (has one) relationship referencing the `Acme\Demo\Models\Profile` model.
 
 ```php
-\Backend\Models\User::extend(function($model) {
+\Backend\Models\User::extend(function ($model) {
     $model->hasOne['profile'] = ['Acme\Demo\Models\Profile', 'key' => 'user_id'];
 });
 ```
@@ -682,8 +688,8 @@ Inside the closure you can add relations to the model. Here we extend the `Backe
 This approach can also be used to bind to [local events](#events), the following code listens for the `model.beforeSave` event.
 
 ```php
-\Backend\Models\User::extend(function($model) {
-    $model->bindEvent('model.beforeSave', function() use ($model) {
+\Backend\Models\User::extend(function ($model) {
+    $model->bindEvent('model.beforeSave', function () use ($model) {
         // ...
     });
 });
@@ -696,7 +702,7 @@ This approach can also be used to bind to [local events](#events), the following
 Additionally, a few methods exist to extend protected model properties.
 
 ```php
-\Backend\Models\User::extend(function($model) {
+\Backend\Models\User::extend(function ($model) {
     // add cast attributes
     $model->addCasts([
         'some_extended_field' => 'int',
@@ -741,7 +747,7 @@ It is strongly suggested to use the above methods to add relations when extendin
 Example usage:
 
 ```php
-\Backend\Models\User::extend(function($model) {
+\Backend\Models\User::extend(function ($model) {
     $model->addHasOne('profile', ['Acme\Demo\Models\Profile', 'key' => 'user_id']);
 });
 ```

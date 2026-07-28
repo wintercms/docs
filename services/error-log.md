@@ -103,7 +103,7 @@ All exceptions are handled by the `Winter\Storm\Foundation\Exception\Handler` cl
 However, you may specify custom handlers if needed using the `App::error` method. Handlers are called based on the type-hint of the Exception they handle. For example, you may create a handler that only handles `RuntimeException` instances:
 
 ```php
-App::error(function(RuntimeException $exception) {
+App::error(function (RuntimeException $exception) {
     // Handle the exception...
 });
 ```
@@ -111,7 +111,7 @@ App::error(function(RuntimeException $exception) {
 If an exception handler returns a response, that response will be sent to the browser and no other error handlers will be called:
 
 ```php
-App::error(function(InvalidUserException $exception) {
+App::error(function (InvalidUserException $exception) {
     return 'Sorry! Something is wrong with this account!';
 });
 ```
@@ -119,7 +119,7 @@ App::error(function(InvalidUserException $exception) {
 To listen for PHP fatal errors, you may use the `App::fatal` method:
 
 ```php
-App::fatal(function($exception) {
+App::fatal(function ($exception) {
     //
 });
 ```
@@ -179,6 +179,16 @@ An array of contextual data may also be passed to the log methods. This contextu
 ```php
 Log::info('User failed to login.', ['id' => $user->id]);
 ```
+
+#### Skipping database logging
+
+You can set `'skipDatabaseLog' => true` in the context data array to disable database logging.
+
+```php
+Log::info('New user acces.', ['id' => $user->id, 'skipDatabaseLog' => true]);
+```
+
+> **NOTE**: It is not recommended to skip database logging for important or critical information, as they would then no longer be accessible to administrators authenticated in the backend, but only by reading log files.
 
 ### Helper functions
 

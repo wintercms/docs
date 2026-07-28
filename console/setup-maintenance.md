@@ -26,11 +26,13 @@ The `winter:update` command will request updates from the Winter gateway. It wil
 
 ## Run database migrations
 
-The `winter:up` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates). The migration command can be run multiple times - it will only execute a migration or seed script once, which means only new changes are applied.
+The `winter:up` (or `migrate`) command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates). The migration command can be run multiple times - it will only execute a migration or seed script once, which means only new changes are applied.
 
 ```bash
 php artisan winter:up
 ```
+
+>**NOTE:** The migration command supports the [`--isolated`](https://laravel.com/docs/11.x/artisan#isolatable-commands) flag for ensuring that only one instance of the command can be run at a time in a multi-server environment.
 
 The inverse command `winter:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](../console/plugin-management#refresh-a-plugin) is a useful alternative for debugging a single plugin.
 
@@ -63,7 +65,7 @@ You are not restricted from providing environment variables through another meth
 ## Get the installed Winter version
 
 ```bash
-php artisan winter:version [--changes]
+php artisan winter:version [--changes] [--only-version]
 ```
 
 The `winter:version` command displays the installed version of Winter. This is determined by querying a [central build manifest](https://github.com/wintercms/meta/blob/master/manifest/builds.json) and verifying the integrity of each system file in Winter against each build in this manifest. This allows the command to determine if any modifications have been made to the system files.
@@ -71,6 +73,8 @@ The `winter:version` command displays the installed version of Winter. This is d
 If modifications are detected, this command will try and best-guess which version is installed, but will alert you that modifications have been made.
 
 If you wish to review the files that have been modified, you can add the `--changes` flag to be provided with a list of files that have been added, modified or removed from Winter.
+
+If you wish to retrieve just the build version - for example, for automated scripts - you may use the `-o` or `--only-version` option. Note that this will suppress all other output, including the missing database warning or changes list if you are also using the `--changes` flag.
 
 ## Remove the demo plugin and theme
 

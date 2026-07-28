@@ -128,7 +128,7 @@ The default author code offered by the Marketplace consists of the author first 
 
 ## Registration file
 
-The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. This file is read in the boot process of Winter CMS when determining available plugins. Registration files can provide the following:
+The **Plugin.php** file, called the _Plugin registration file_, is an initialization script that declares a plugin's core functions and information. This file is read in the boot process of Winter CMS when determining available plugins. Registration files can provide the following:
 
 1. Information about the plugin, its name, and author.
 1. Registration methods for extending the CMS and stating the intentions of the plugin.
@@ -199,39 +199,57 @@ Key | Description
 
 ## Routing and initialization
 
-Plugin registration files can contain two methods: `boot` and `register`. These methods are run at separate points in the Winter CMS boot process.
+Plugin registration files may include two optional methods: `register()` and `boot()`. These methods are executed at different stages during the Winter CMS boot process and serve distinct purposes.
 
-The `register` method is called immediately when the plugin is found and the Plugin registration file is read. It can be used to register or provide global services, define functionality within the underlying framework or initialize functionality for the plugin.
+### `register()`
+
+This method is called **early** in the application's lifecycle—before other plugins and most services are fully initialized. Use it for:
+
+- Binding services or singletons to the Laravel container.
+- Registering custom service providers.
+- Defining low-level functionality that does not depend on other plugins or CMS services.
+
+**Example:**
 
 ```php
 public function register()
 {
-    App::register(MyProviderClass::class, function ($app) {
-        return new MyProviderClass();
+    App::bind('acme.myplugin.service', function () {
+        return new \Acme\MyPlugin\Services\MyService();
     });
 }
 ```
 
 > **NOTE:** The `register` method is run very early on in the Winter CMS boot process, and some functions within Winter CMS or Laravel may not be available at that stage, especially in respect to third-party plugins or services. You should use the `boot` method for any functionality that is dependent on third-party plugins or services.
 
-The `boot` method is called after all services are loaded and all plugins are registered. This method should be used to define functionality that is to be run on each page load, such as extending plugins or attaching to events.
+### `boot()`
+
+This method is called after all services are loaded and all plugins are registered. Use it for:
+
+- Extending models, backend controllers, or form widgets.
+- Listening to events or interacting with other plugins.
+- Adding logic that depends on the full CMS context.
+
+**Example:**
 
 ```php
+use Backend\Models\User;
+
 public function boot()
 {
-    User::extend(function($model) {
+    User::extend(function ($model) {
         $model->hasOne['author'] = ['Acme\Blog\Models\Author'];
     });
 }
 ```
 
-The `boot` and `register` methods are not called during the update process, or within some critical Backend sections and command-line tools, to protect the system from critical errors. To overcome this limitation, use [elevated permissions](#elevated-permissions).
+> **NOTE:** The `boot()` and `register()` methods are not executed during critical backend operations or CLI update commands, unless the plugin has elevated permissions. See [elevated permissions](#elevated-permissions) for more details.
 
 Plugins can also supply a file named **routes.php** that may contain custom routing logic, as defined in the [router service](../services/router). For example:
 
 ```php
-Route::group(['prefix' => 'api_acme_blog'], function() {
-    Route::get('cleanup_posts', function(){ return Posts::cleanUp(); });
+Route::group(['prefix' => 'api_acme_blog'], function () {
+    Route::get('cleanup_posts', function (){ return Posts::cleanUp(); });
 });
 ```
 
@@ -265,7 +283,7 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
 
 [Twig options](https://twig.symfony.com/doc/2.x/advanced.html#filters) are also able to be passed to change the behavior of the registered filters & functions by providing an array with an `'options'` element containing the options to be passed at time of registration where the callable value would be provided normally. If options are provided, then the callable handler for the filter / function being registered must either be present in a `'callable'` element or as the first element of the array.
 
->**IMPORTANT:** All custom Twig filters & functions registered via the `MarkupManager` (i.e. `registerMarkupTags()` will have the `is_safe` option set to `['html']` by default, which means that Twig's automatic escaping is disabled by default (effectively it's as if the `| raw` filter was always located after your filter or function's output) unless you provide the `is_safe` option during registration (`'options' => ['is_safe' => []]`).
+> **IMPORTANT:** All custom Twig filters and functions registered via the `MarkupManager` (e.g. `registerMarkupTags()`) have the `is_safe` option set to `['html']` by default. This disables Twig's automatic escaping for the output-similar to applying the `| raw` filter-unless you explicitly override it by providing the `is_safe` option in the registration options (e.g. `options: { is_safe: [] }`).
 
 The next example registers three Twig filters and three functions.
 
@@ -288,7 +306,7 @@ public function registerMarkupTags()
             'form_open' => ['Winter\Storm\Html\Form', 'open'],
 
             // Using an inline closure
-            'helloWorld' => function() { return 'Hello World!'; },
+            'helloWorld' => function () { return 'Hello World!'; },
 
             // Any callable with custom options defined - named 'callable' method
             'goodbyeWorld' => [
@@ -371,7 +389,7 @@ Key | Description
 ------------- | -------------
 `label` | specifies the menu label localization string key, required.
 `icon` | an icon name from the [Winter CMS icon collection](/docs/v1.2/ui/style/icon), optional.
-`iconSvg` | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
+`iconSvg` | an image icon (svg, webp, png, jpg) to be used in place of the standard icon, the image icon should be a square and can support colors, optional. The value will be passed to `Url::asset()` before rendering.
 `url` | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
 `counter` | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
 `counterLabel` | a string value to describe the numeric reference in counter, optional.
@@ -388,7 +406,7 @@ To register a custom middleware, you can apply it directly to a backend controll
 ```php
 public function boot()
 {
-    \Cms\Classes\CmsController::extend(function($controller) {
+    \Cms\Classes\CmsController::extend(function ($controller) {
         $controller->middleware('Path\To\Custom\Middleware');
     });
 }

@@ -198,6 +198,7 @@ Option | Description
 ------------- | -------------
 `stretch` | specifies if this tab stretches to fit the parent height.
 `defaultTab` | the default tab to assign fields to. Default: Misc.
+`suppressTabs` | if set to true, fields will not be displayed in tabs. Default: false.
 `icons` | assign icons to tabs using tab names as the key.
 `lazy` | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
 `cssClass` | assigns a CSS class to the tab container.
@@ -303,6 +304,79 @@ gender:
 
 See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
+### Button
+
+`button` - renders a single [button](../../ui/controls/button). Supports triggering an [AJAX request](../ajax/introduction), acting as a link to a URL, or [opening a popup](../../ui/controls/popup#remote-popups).
+
+The `action` of the button (`button`, `link`, or `popup`) is determined by the configuration of the button. If the value of the field is a valid URL, or the `href` property is set, then it will be a `link` action. If a `handler` property is set, it will be a `popup` action. All other cases will result in the `button` action.
+
+```yaml
+button:
+    type: button
+    buttonLabel: # The label of the button itself.
+    buttonType: # default | primary | success | info | warning | danger | link
+    path: # Use a custom partial to render the button
+    handler: # popup action only
+    href: # link action only
+    target: # link action only
+    request: # button action only
+    loading: # message to display while waiting for the request
+    icon: 'icon-pencil'
+```
+
+The partial used to render the partial can be manually specified by providing the `path` property, the same as a [`partial`](#partial) field. This partial will receive the same variables as a regular `partial` field, with the addition of the following variables:
+
+Variable | Description
+------------- | -------------
+`$action` | The action of the button. One of `button`, `link`, `popup`.
+`$element` | The HTML element recommended to use for the button. Either `a` or `button`.
+`$label` | The label of the button itself.
+`$buttonType` | The type of button to render. One of `default`, `primary`, `success`, `info`, `warning`, `danger`, `link`.
+`$classes` | The CSS classes that should be applied to the button element.
+`$handler` | The popup AJAX handler.
+`$request` | The AJAX request to send when the button is clicked.
+`$href` | The URL to link to for a `link` action button.
+`$target` | The `target` attribute for the `link` action button.
+`$loading` | The loading message to display when the button has been clicked. Populates the `data-load-indicator` attribute on the button element.
+`$icon` | The [icon class](../../ui/style/icon) to use for the icon element inside the button.
+
+#### Examples
+
+Simple button with AJAX request:
+
+```yaml
+_sync_ics:
+    label: Actions
+    buttonLabel: Sync
+    type: button
+    request: onSyncICS
+    icon: 'icon-rotate'
+    loading: Syncing...
+```
+
+Simple Link button:
+
+```yaml
+places_url:
+    type: button
+    buttonType: primary
+    buttonLabel: View on Google Maps
+    icon: icon-map-location-dot
+    target: _blank
+```
+
+Button triggering popup:
+
+```yaml
+_btn_autofill:
+    label: Autofill
+    buttonLabel: Autofill Club Information
+    type: button
+    handler: onRenderAutofillPopup
+    buttonType: primary
+    icon: icon-map-location-dot
+```
+
 ### Checkbox
 
 `checkbox` - renders a single checkbox.
@@ -352,7 +426,7 @@ status_type:
 
 See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
-### Add icon to dropdown options
+#### Add icon to dropdown options
 
 In order to add an icon or an image for every option which will be rendered in the dropdown field the options have to be provided as a multidimensional array with the following format `'key' => ['label-text', 'icon-class'],` in php or `key: [label-text, icon-class]` in yaml.
 
@@ -365,6 +439,27 @@ status_type:
         unpublished: [Unpublished, icon-minus-circle]
         draft: [Draft, icon-clock-o]
 ```
+
+#### Add option grouping (optgroup) to dropdown options
+
+In order to add option grouping, use a multidimensional array like below:
+
+```yaml
+status_type:
+    type: dropdown
+    label: Blog Post Status
+    options:
+        Group1:
+            opt1: Option 1
+            opt2: Option 2
+            opt3: Option 3
+        Group2:
+            opt4: Option 4
+            opt5: [Option 5, icon-check-circle]
+            opt6: Option 6
+```
+
+>**NOTE:** individual items in the groups can also use icons or images as shown in "Option 5" above.
 
 To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
 
@@ -391,6 +486,45 @@ status:
     label: Blog Post Status
     type: dropdown
     showSearch: false
+```
+
+Dropdowns can also allow users to provide a new value. This can be activated by setting the `allowCustom` option to `true`.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    allowCustom: true
+```
+
+The `allowCustom` option can be useful to provide a preset list of options without preventing the user from adding a new or custom value.
+
+When using the `get*Options` method for defining options, you would be able to take into consideration any custom options present in the data:
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    allowCustom: true
+```
+
+```php
+public function getStatusOptions($value, $formData)
+{
+    // Prefill the dropdown with the already used statuses: [['status' => 'draft'], ['status' => 'published']]
+    $statuses = self::distinct('status')->get();
+
+    // Insert the actual form's model value to avoid it to vanish
+    // on eventual AJAX call that would refresh the field partial like dependsOn
+    if ($this->status) {
+
+        // The actual form's status could be a custom like ['status' => 'need review']
+        $statuses->add(['status' => $this->status]);
+    }
+
+    // Return a list of statuses: [['status' => 'draft'], ['status' => 'published'], ['status' => 'need review']]
+    return $statuses->pluck('status', 'status');
+}
 ```
 
 ### Email
@@ -568,6 +702,45 @@ blog_contents:
     size: large
 ```
 
+### URL
+
+`url` – renders a single-line input for URL values with built-in browser validation.
+
+```yaml
+website:
+    label: Website
+    type: url
+    placeholder: https://example.com
+    required: true
+    maxlength: 2048
+    pattern: https://.*
+    size: 50
+    options:
+        https://wintercms.com: Winter CMS
+        https://laravel.com: Laravel
+```
+
+- Displays a link icon on the left in both edit and preview modes.
+- In preview mode, renders as a clickable link that opens in a new tab.
+- Supports all standard HTML5 attributes for `<input type="url">`:
+    - `placeholder`, `maxlength`, `minlength`, `pattern`, `size`, `list`, `autocomplete`, `required`, `readonly`, `disabled`
+- `options` will be rendered in a `<datalist>` element, enabling autocomplete suggestions.
+- If an option's value and label are identical, the label is omitted for brevity.
+
+See [Defining field options](#defining-field-options) for the different methods to specify the options.
+
+#### Server-side validation
+
+To validate this field on save, define a validation rule in your model:
+
+```php
+public $rules = [
+    'website' => 'nullable|url|max:2048',
+];
+```
+
+> **Tip:** Use `nullable` if the field is not required but must still be a valid URL when provided.
+
 ### Widget
 
 `widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
@@ -723,7 +896,7 @@ Option | Description
 `fieldName` | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
 `height` | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the field container.
 `keyFrom` | the data attribute to use for keying each record. This should usually be set to `id`. Only supports integer values.
-`postbackHandlerName` | specifies the AJAX handler name in which the data table content will be sent with. When set to `null` (default), the handler name will be auto-detected from the request name used by the form which contains the data table. It is recommended to keep this as `null`.
+`postbackHandlerName` | comma-separated list of AJAX handler names with which the data table content will be sent. When set to `null` (default), the handler name will be auto-detected from the request name used by the form which contains the data table. It is recommended to keep this as `null`.
 `recordsPerPage` | the number of records to show per page. If set to `false`, the pagination will be disabled.
 `searching` | allow records to be searched via a search box. Default: `false`.
 `toolbar` | an array representing the toolbar configuration of the data table.
@@ -824,18 +997,24 @@ avatar:
 
 Option | Description
 ------------- | -------------
-`mode` | the expected file type, either file or image. Default: image.
+`mode` | the expected file type, either `file` or `image`. Default: `image`.
 `imageWidth` | if using image type, the image will be resized to this width, optional.
 `imageHeight` | if using image type, the image will be resized to this height, optional.
 `fileTypes` | file extensions that are accepted by the uploader, optional. Eg: `zip,txt`
 `mimeTypes` | MIME types that are accepted by the uploader, either as file extension or fully qualified name, optional. Eg: `bin,txt`
 `maxFilesize` | file size in Mb that are accepted by the uploader, optional. Default: from "upload_max_filesize" param value
-`useCaption` | allows a title and description to be set for the file. Default: true
-`prompt` | text to display for the upload button, applies to files only, optional.
+`useCaption` | allows a title and description to be set for the file. Default: `true`
+`iconClass` | icon class to use for the upload button, applies to file mode only. Default: `icon-upload`
+`prompt` | text to display for the upload button, applies to file mode only, optional.
 `thumbOptions` | options to pass to the thumbnail generating method for the file. See [Image Resizing](../services/image-resizing#available-parameters)
-`attachOnUpload` | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
+`attachOnUpload` | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to `false`.
 
 > **NOTE:** Unlike the [Media Finder FormWidget](#media-finder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
+
+**Security:** File attachments are public by default. For sensitive files that require access control, set `'public' => false` in your model's attachment relationship configuration. See [Protected Attachments](../database/attachments#protected-attachments) for more information.
+
+By default, the File Upload FormWidget only allows a limited set of file extensions. You can extend this list by adding a `fileDefinitions` config in `config/cms.php` file.
+See [Allowed file types](../setup/configuration#allowed-file-types) for more information.
 
 ### Icon Picker
 
@@ -908,6 +1087,8 @@ Option | Description
 `imageHeight` | if using image type, the preview image will be displayed to this height, optional.
 
 > **NOTE:** Unlike the [File Upload FormWidget](#file-upload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
+
+**Warning:** Files selected from the Media Library are **publicly accessible via direct URL** without any authentication or access control. Do not use the Media Finder for sensitive or private files. For files requiring access control, use the [File Upload FormWidget](#file-upload) with [Protected Attachments](../database/attachments#protected-attachments) instead.
 
 ### Nested Form
 
@@ -1334,7 +1515,7 @@ status:
 Supplying the dropdown options to the model class:
 
 ```php
-public function listStatuses($fieldName, $value, $formData)
+public function listStatuses(string $value, string $fieldName, array|Model $formData)
 {
     return ['published' => 'Published', ...];
 }
@@ -1694,7 +1875,7 @@ class Categories extends \Backend\Classes\Controller
 Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. Since this has the potential to affect all forms used by this controller, it is a good idea to check the **$model** is of the correct type. Here is an example:
 
 ```php
-Categories::extendFormFields(function($form, $model, $context)
+Categories::extendFormFields(function ($form, $model, $context)
 {
     if (!$model instanceof MyModel) {
         return;

@@ -66,13 +66,14 @@ Option | Description
 `noRecordsDeletedMessage` | a message to display when a bulk delete action is triggered, but no records were deleted, can refer to a [localization string](../plugin/localization).
 `recordsPerPage` | records to display per page, use 0 to disable the pagination. Default: 0
 `perPageOptions` | options to provide the user when selecting how many records to display per page. Default: `[20, 40, 80, 100, 120]`
-`showPageNumbers` | displays page numbers with pagination. Disable this to improve list performance when working with large tables. Default: `true`
+`showPageNumbers` | displays page numbers with pagination. Default: `true`
 `toolbar` | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
 `showSorting` | displays the sorting link on each column. Default: `true`
 `defaultSort` | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 `showCheckboxes` | displays checkboxes next to each record. Default: `false`.
 `showSetup` | displays the list column set up button. Default: `false`.
 `showTree` | displays a tree hierarchy for parent/child records. Default: `false`.
+`showTotals` | displays the summed values for the columns in the form of `totalOnPage (totalForQuery)` in the list header and footer. Default: `true`.
 `treeExpanded` | if tree nodes should be expanded by default. Default: `false`.
 `customViewPath` | specify a custom view path to override partials used by the list, optional.
 
@@ -91,7 +92,7 @@ The toolbar configuration allows:
 
 Option | Description
 ------------- | -------------
-`buttons` | a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.htm**
+`buttons` | a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.php**
 `search` | reference to a Search Widget configuration file, or an array with configuration.
 
 The search configuration supports the following options:
@@ -161,6 +162,7 @@ Option | Description
 `searchable` | include this column in the list search results. Default: `false`.
 `invisible` | specifies if this column is hidden by default. Default: `false`.
 `sortable` | specifies if this column can be sorted. Default: `true`.
+`summable` | specifies if this column can be summed (requires column to be of `type: number`). Default: `false`.
 `clickable` | if set to false, disables the default click behavior when the column is clicked. Default: `true`.
 `select` | defines a custom SQL select statement to use for the value.
 `valueFrom` | defines a model attribute to use for the value.
@@ -441,7 +443,7 @@ group_id:
 content:
     label: Content
     type: partial
-    path: ~/plugins/acme/blog/models/comment/_content_column.htm
+    path: ~/plugins/acme/blog/models/comment/_content_column.php
 ```
 
 ### Color Picker
@@ -593,34 +595,51 @@ These types can be used to determine how the filter scope should be displayed.
 
 <div class="columned-list">
 
-- [Group](#group-scope)
+- [Button Group](#button-group-scope)
 - [Checkbox](#checkbox-scope)
-- [Switch](#switch-scope)
 - [Date](#date-scope)
 - [Date range](#date-range-scope)
+- [Dropdown](#dropdown-scope)
+- [Group](#group-scope)
 - [Number](#number-scope)
 - [Number range](#number-range-scope)
+- [Switch](#switch-scope)
 - [Text](#text-scope)
 
 </div>
 
-### Group scope
+### Button Group scope
 
-`group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+`button-group` – displays a row of buttons where only one option may be selected at a time. Ideal for small, mutually exclusive option sets (e.g., status filters like All / Active / Archived).
 
 ```yaml
 status:
     label: Status
-    type: group
-    conditions: status in (:filtered)
-    default:
-        pending: Pending
-        active: Active
+    type: button-group
+    default: active
+    conditions: status = :filtered
     options:
-        pending: Pending
+        all: All
         active: Active
+        archived: Archived
+```
+
+If a button is clicked again while it is already selected, it will deselect unless required: true is specified:
+
+```yaml
+status:
+    label: Status
+    type: button-group
+    required: true
+    default: active
+    conditions: status = :filtered
+    options:
+        active: Active
+        pending: Pending
         closed: Closed
 ```
+
+Supports dynamic options using a method name or `modelClass` with `nameFrom`, same as [`group`](#group-scope).
 
 ### Checkbox scope
 
@@ -634,42 +653,42 @@ published:
     conditions: is_published <> true
 ```
 
-### Switch scope
+### Dropdown scope
 
-`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
-
-Using conditions:
+`dropdown` - displays a compact single-select dropdown menu. Ideal for filtering by a single value from a short or medium-sized list, with an optional placeholder-like entry when no value is selected.
 
 ```yaml
-approved:
-    label: Approved
-    type: switch
-    default: 1
-    conditions:
-        - is_approved <> true
-        - is_approved = true
+status:
+    type: dropdown
+    emptyOption: Select status
+    default: active
+    conditions: status = :filtered
+    options:
+        all: All
+        active: Active
+        archived: Archived
 ```
 
-Using a scope method:
+You can also populate options dynamically:
 
 ```yaml
-approved:
-    label: Approved
-    type: switch
-    default: 0
-    scope: isApproved
+country:
+    type: dropdown
+    emptyOption: Select country
+    modelClass: Winter\Test\Models\Location
+    nameFrom: name
+    conditions: country_id = :filtered
 ```
 
-```php
-public function scopeIsApproved($query, $state)
-{
-    return match ($state) {
-        '0' => $query,
-        '1' => $query->where('is_approved', false),
-        '2' => $query->where('is_approved', true),
-    }
-}
-```
+Supported options:
+
+- `emptyOption`: The placeholder text for an unselected state (acts like a "none" or prompt).
+- `default`: The default selected value.
+- `options`: Static array or method name on modelClass for dynamic options.
+- `modelClass` + `nameFrom`: Dynamically populate options from a model.
+- `required`: (optional) Prevents deselecting the current value.
+
+> **NOTE:** When `required: true` is set, the `emptyOption` will be ignored. If no `default` is specified, the first available option will be automatically selected.
 
 ### Date scope
 
@@ -711,7 +730,7 @@ published_at:
 To use default value for Date and Date Range
 
 ```php
-myController::extendListFilterScopes(function($filter)
+myController::extendListFilterScopes(function ($filter)
 {
     $filter->addScopes([
         'Date Test' => [
@@ -747,6 +766,24 @@ published_at:
 ```
 
 > **NOTE:** the `ignoreTimezone` option also applies to the `date` filter type as well.
+
+### Group scope
+
+`group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+
+```yaml
+status:
+    label: Status
+    type: group
+    conditions: status in (:filtered)
+    default:
+        pending: Pending
+        active: Active
+    options:
+        pending: Pending
+        active: Active
+        closed: Closed
+```
 
 ### Number scope
 
@@ -784,6 +821,43 @@ visitors:
         0: 10
         1: 20
     conditions: visitors >= ':min' and visitors <= ':max'
+```
+
+### Switch scope
+
+`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
+
+Using conditions:
+
+```yaml
+approved:
+    label: Approved
+    type: switch
+    default: 1
+    conditions:
+        - is_approved <> true
+        - is_approved = true
+```
+
+Using a scope method:
+
+```yaml
+approved:
+    label: Approved
+    type: switch
+    default: 0
+    scope: isApproved
+```
+
+```php
+public function scopeIsApproved($query, $state)
+{
+    return match ($state) {
+        '0' => $query,
+        '1' => $query->where('is_approved', false),
+        '2' => $query->where('is_approved', true),
+    }
+}
 ```
 
 ### Text scope
@@ -828,9 +902,9 @@ public function index()
 
 ### Overriding views
 
-The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.htm` in your controller directory. The following example will add a sidebar to the list:
+The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.php` in your controller directory. The following example will add a sidebar to the list:
 
-```html
+```php
 <?php if ($toolbar): ?>
     <?= $toolbar->render() ?>
 <?php endif ?>
@@ -858,7 +932,7 @@ customViewPath: $/acme/blog/controllers/reviews/list
 
 > **NOTE**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
 
-For example, to modify the list body row markup, create a file called `list/_list_body_row.htm` in your controller directory.
+For example, to modify the list body row markup, create a file called `list/_list_body_row.php` in your controller directory.
 
 ```php
 <tr>
@@ -887,7 +961,7 @@ class Categories extends \Backend\Classes\Controller
 Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
 
 ```php
-Categories::extendListColumns(function($list, $model)
+Categories::extendListColumns(function ($list, $model)
 {
     if (!$model instanceof MyModel) {
         return;
@@ -960,7 +1034,7 @@ public function listInjectRowClass($record, $value)
 You can extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
 
 ```php
-Categories::extendListFilterScopes(function($filter) {
+Categories::extendListFilterScopes(function ($filter) {
     // Add custom CSS classes to the Filter widget itself
     $filter->cssClasses = array_merge($filter->cssClasses, ['my', 'array', 'of', 'classes']);
 
@@ -1060,7 +1134,7 @@ public function registerListColumnTypes()
         'uppercase' => [$this, 'evalUppercaseListColumn'],
 
         // Using an inline closure
-        'loveit' => function($value) { return 'I love '. $value; }
+        'loveit' => function ($value) { return 'I love '. $value; }
     ];
 }
 
@@ -1069,6 +1143,21 @@ public function evalUppercaseListColumn($value, $column, $record)
     return strtoupper($value);
 }
 ```
+
+It is also possible to extend the Lists widget class to add a new column type like this:
+
+```php
+public function boot()
+{
+    Backend\Widgets\Lists::extend(function ($widget) {
+        $widget->addDynamicMethod('evalUppercaseTypeValue', function ($record, $column, $value) {
+            return strtoupper($value);
+        });
+    });
+}
+```
+
+> **NOTE**: the order of the arguments is different than when using `registerListColumnTypes()`
 
 Using the custom list column type is as simple as calling it by name using the `type` option.
 

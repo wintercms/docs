@@ -3,7 +3,7 @@ title: "Controls: Form"
 ---
 # Form
 
-The form is the base element of data entry within Winter CMS. A form is made up of controls, which can be input fields or widgets. In general, the form is generally created by the [Form Widget](/v1.2/docs/backend/forms), but can also be manually created for custom uses.
+The form is the base element of data entry within Winter CMS. A form is made up of controls, which can be input fields or widgets. In general, the form is generally created by the [Form Widget](../../backend/forms), but can also be manually created for custom uses.
 
 ## The basics
 

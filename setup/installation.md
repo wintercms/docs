@@ -9,6 +9,7 @@ There are three ways you can install Winter:
 1. Using the [Composer package manager](../architecture/using-composer#installing-winter-via-composer) (if you are comfortable using the command line)
 2. The [Web-based installer](#web-based-installation) (most similar to the WordPress web installer)
 3. Using the [Softaculous installler](https://www.softaculous.com/apps/cms/WinterCMS) (if your hosting provider supports it).
+4. Using the [Winter CMS Docker image](https://hub.docker.com/r/wintercms/winter).
 
 Before you proceed, check that your server meets the minimum system requirements:
 
@@ -16,7 +17,7 @@ Before you proceed, check that your server meets the minimum system requirements
 
 Winter CMS has some server requirements for web hosting:
 
-- PHP version 8.0 or above. (we recommend at least PHP 8.1)
+- PHP version 8.1 or above. (we recommend at least PHP 8.2)
 - The following PHP extensions installed and enabled:
     - cURL
     - GD
@@ -69,6 +70,16 @@ The [Web Installer](https://github.com/wintercms/web-installer) is the recommend
 
 If you feel more comfortable with a command-line or want to use Composer, there is a CLI install process on the [Using Composer page](../architecture/using-composer).
 
+## Docker image
+
+We provide an official Winter CMS Docker image, available either on the [Docker Hub](https://hub.docker.com/r/wintercms/winter) or the [GitHub Container Repository](https://github.com/wintercms/docker/pkgs/container/winter).
+
+This Docker image is built upon the [FrankenPHP web server](https://frankenphp.dev) using PHP 8.4, and is pre-configured to be production-ready and supports all major database server types and caching servers.
+
+To run the Docker image, you must have [Docker](https://www.docker.com/) installed on your server or desktop.
+
+You may find documentation of the usage of this image on the [Winter Docker Image README](https://github.com/wintercms/docker/blob/main/README.md).
+
 ## Post-installation steps
 
 Once your Winter CMS installation is complete, there are a couple of post-installation steps that we recommend that you review before proceeding.
@@ -101,12 +112,17 @@ If you intend to use scheduled tasks, or install plugins that use scheduled task
 * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
 ```
 
-Be sure to replace `/path/to/artisan` with the absolute path to the `artisan` file in the root directory of your Winter installation. This cron task will call the command scheduler every minute, to which Winter will evaluate any scheduled tasks and run the tasks that are due for execution.
+This cron task will call the command scheduler every minute, to which Winter will evaluate any scheduled tasks and run the tasks that are due for execution.
 
+> **NOTE**: If `php` is not on your PATH, then make sure you provide the absolute path to the version of PHP you wish to run the scheduler with. `/path/to/artisan` should also reflect the absolute path to the `artisan` file in the root directory of your Winter installation.
 > **NOTE**: If you are adding this to the system crontab (`/etc/cron.d`), you'll need to specify the user to run the command as immediately after `* * * * *`.
 
 ### Setting up queue workers
 
 You may optionally set up an external queue for processing queued jobs. By default, Winter will run queued jobs asynchronously, which may cause slower performance and response times for users if the jobs are large. This behavior can be changed by setting the `default` parameter in the `config/queue.php`. Please review the [Queue service](../services/queues.md) documentation for more information on setting up a queue runner.
 
-If you decide to use the `database` queue driver, it is a good idea to add a crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue.
+If you decide to use the `database` queue driver, it is a good idea to add a crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue:
+
+```
+* * * * * php /path/to/artisan queue:work --once >> /dev/null 2>&1
+```

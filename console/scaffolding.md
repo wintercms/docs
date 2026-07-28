@@ -5,10 +5,13 @@ The following commands allow you to quickly scaffold additional code into your W
 ## Create a theme
 
 ```bash
-php artisan create:theme <theme code>
+php artisan create:theme <theme code> [scaffold]
 ```
 
-The `create:theme` command generates a theme folder and basic files for the theme. The first argument specifies the theme code, eg. `myauthor-mytheme`.
+The `create:theme` command generates a theme folder and basic files for the theme. The first argument specifies the theme code, eg. `myauthor-mytheme`. The second argument (`[scaffold]`) is optional and allows you to choose a base theme to start from:
+
+- `tailwind`: (default) Creates an empty theme using [TailwindCSS](https://tailwindcss.com/) and [Vite](../console/asset-compilation-vite)
+- `less`: Creates an empty theme using LESS and the [Asset Compiler](../services/asset-compilation)
 
 ## Create a plugin
 
@@ -54,6 +57,14 @@ php artisan create:model <plugin code> <model name>
 
 The `create:model` command generates the files needed for a new model. The first argument specifies the plugin code of the plugin that this model will be added into, and the second parameter specifies the model class name, eg. `MyModel`.
 
+## Create a factory
+
+```bash
+php artisan create:factory <plugin code> <factory name> --model=Post
+```
+
+The `create:factory` command generates a [Model Factory](https://laravel.com/docs/9.x/eloquent-factories#introduction) in the plugin's `database/factories` folder. The first argument specifies the plugin code of the plugin that this factory will be added into, and the second parameter specifies the name of the Factory class to generate. The `--m|model` option specifies the model that will be targeted by the factory, eg. `MyModel`.
+
 ## Create a settings model
 
 ```bash
@@ -65,10 +76,12 @@ The `create:settings` command generates the files needed for a new [Settings mod
 ## Create a backend controller
 
 ```bash
-php artisan create:controller <plugin code> <controller name>
+php artisan create:controller <plugin code> <controller name> [--sidebar]
 ```
 
 The `create:controller` command generates a controller, configuration and view files. The first argument specifies the plugin code of the plugin that this controller will be added into, and the second parameter specifies the controller class name, eg. `MyController`.
+
+The optional `--sidebar` flag will generate the controller with the Create, Update, & Preview views pre-configured to use the sidebar backend layout (like with the User Profile page).
 
 ## Create a form widget
 
@@ -93,6 +106,17 @@ The `create:job` command generates a job. The first argument specifies the plugi
 ```bash
 php artisan create:job <plugin code> <job name>
 ```
+
+By default the created job will be queueable and managed by queue worker.
+
+The following options are supported:
+
+short | long | description
+----- | ---- | -----------
+`-b` | `--batchable` | Generates a batchable queue job.
+`-s` | `--sync` | Generates a non-queueable job.
+`-f` | `--force` | Overwrites existing files with generated files
+n/a | `--uninspiring` | Disables inspirational quotes
 
 ## Create a console command
 

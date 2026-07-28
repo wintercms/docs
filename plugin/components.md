@@ -28,7 +28,7 @@ namespace Acme\Blog\Components;
 
 class BlogPosts extends \Cms\Classes\ComponentBase
 {
-    public function componentDetails()
+    public function componentDetails(): array
     {
         return [
             'name' => 'Blog Posts',
@@ -68,10 +68,10 @@ You would be able to access its `posts` method through the `blogPosts` variable.
 Components must be registered by overriding the `registerComponents` method inside the [Plugin registration class](registration#registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
 
 ```php
-public function registerComponents()
+public function registerComponents(): array
 {
     return [
-        'Winter\Demo\Components\Todo' => 'demoTodo'
+        \Acme\Blog\Components\Todo::class => 'demoTodo'
     ];
 }
 ```
@@ -83,16 +83,16 @@ This will register the Todo component class with the default alias name **demoTo
 When you add a component to a page or layout you can configure it using properties. The properties are defined with the `defineProperties` method of the component class. The next example shows how to define a component property:
 
 ```php
-public function defineProperties()
+public function defineProperties(): array
 {
     return [
         'maxItems' => [
-                'title'             => 'Max items',
-                'description'       => 'The most amount of todo items allowed',
-                'default'           => 10,
-                'type'              => 'string',
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'The Max Items property can contain only numeric symbols'
+            'title'             => 'Max items',
+            'description'       => 'The most amount of todo items allowed',
+            'default'           => 10,
+            'type'              => 'string',
+            'validationPattern' => '^[0-9]+$',
+            'validationMessage' => 'The Max Items property can contain only numeric symbols',
         ]
     ];
 }
@@ -105,7 +105,7 @@ Key | Description
 `title` | required, the property title, it is used by the component Inspector in the CMS backend.
 `description` | required, the property description, it is used by the component Inspector in the CMS backend.
 `default` | optional, the default property value to use when the component is added to a page or layout in the CMS backend.
-`type` | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are `string`, `checkbox`, `dropdown` and `set`. Default value: `string`.
+`type` | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are `string`, `text`, `stringList`, `autocomplete`, `checkbox`, `dropdown`, `dictionary`, `object`, `objectList` and `set`. Default value: `string`.
 `validationPattern` | optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with `string` properties.
 `validationMessage` | optional error message to display if the validation fails.
 `required` | optional, forces field to be filled. Uses validationMessage when left empty.
@@ -114,6 +114,8 @@ Key | Description
 `depends` | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-and-set-properties) below.
 `group` | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 `showExternalParam` | specifies visibility of the External Parameter editor for the property in the Inspector. Default value: `true`.
+
+> **NOTE:** You can find a more detailed description of the different types on the “[data inspector types](../ui/controls/inspector##data-schema-configuration)” page.
 
 Inside the component you can read the property value with the `property` method:
 
@@ -146,7 +148,7 @@ A `dropdown` allows you to select a single value from a series of options. A `se
 The option list for `dropdown` and `set` properties can be static or dynamic. Static options are defined with the `options` property for dropdowns and the `items` property for sets. Example:
 
 ```php
-public function defineProperties()
+public function defineProperties(): array
 {
     return [
         'units' => [
@@ -173,7 +175,7 @@ public function defineProperties()
 The list of options or items could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted for dropdowns or the `items` parameter is omitted for sets, the list is considered dynamic. The component class must define a method returning this list. The method should have a name in the following format: `get*Property*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition:
 
 ```php
-public function defineProperties()
+public function defineProperties(): array
 {
     return [
         'country' => [
@@ -193,7 +195,7 @@ public function getCountryOptions()
 Dynamic `dropdown` and `set` lists can depend on other properties. For example, the state list could depend on the selected country. The dependencies are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
 
 ```php
-public function defineProperties()
+public function defineProperties(): array
 {
     return [
         'country' => [
@@ -233,7 +235,7 @@ public function getStateOptions()
 Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](/docs/v1.2/markup/filters/page)). Winter includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
 
 ```php
-public function defineProperties()
+public function defineProperties(): array
 {
     return [
         'postPage' => [

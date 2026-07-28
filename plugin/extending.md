@@ -162,7 +162,7 @@ class Plugin extends PluginBase
     public function boot()
     {
         // Extend all backend form usage
-        Event::listen('backend.form.extendFields', function($widget) {
+        Event::listen('backend.form.extendFields', function ($widget) {
             // Only apply this listener when the Users controller is being used
             if (!$widget->getController() instanceof \Winter\User\Controllers\Users) {
                 return;
@@ -262,7 +262,7 @@ slug = "{{ :slug }}"
 ==
 function onInit()
 {
-    $this['topic']->bindEvent('topic.post', function($post, $postUrl) {
+    $this['topic']->bindEvent('topic.post', function ($post, $postUrl) {
         trace_log('A post has been submitted at '.$postUrl);
     });
 }
@@ -279,7 +279,7 @@ class Plugin extends PluginBase
 
     public function boot()
     {
-        Event::listen('backend.menu.extendItems', function($manager) {
+        Event::listen('backend.menu.extendItems', function ($manager) {
 
             $manager->addMainMenuItems('Winter.Cms', [
                 'cms' => [
@@ -301,7 +301,7 @@ class Plugin extends PluginBase
 Similarly we can remove the menu items with the same event:
 
 ```php
-Event::listen('backend.menu.extendItems', function($manager) {
+Event::listen('backend.menu.extendItems', function ($manager) {
 
     $manager->removeMainMenuItem('Winter.Cms', 'cms');
     $manager->removeSideMenuItem('Winter.Cms', 'cms', 'pages');

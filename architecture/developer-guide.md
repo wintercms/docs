@@ -118,6 +118,26 @@ $items = [
 ];
 ```
 
+#### Use of single / double quotes
+
+Winter CMS highly recommends the use of single quotes around strings, instead of double quotes. If the string itself contains a single quote as an apostrophe, you should escape that single quote within the string.
+
+**Recommended:**
+
+```php
+$translations = [
+    'key1' => 'key1\'s value',
+];
+```
+
+**Not recommended**:
+
+```php
+$translations = [
+    'key1' => "key1's value",
+];
+```
+
 ## Developer standards and patterns
 
 ### Vendor naming
@@ -387,7 +407,7 @@ ProductCategory
 When dynamically extending other plugin's models, you should prefix the field with at least the plugin name. This helps to avoid potential future conflicts if that plugin is updated to add new relationships that could conflict with your dynamic relationships.
 
 ```php
-User::extend(function($model) {
+User::extend(function ($model) {
     $model->hasOne['forum_member'] = ['Winter\Forum\Models\Member'];
 });
 ```

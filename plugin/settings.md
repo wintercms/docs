@@ -108,7 +108,7 @@ The backend contains a dedicated area for housing settings and configuration, it
 The backend settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific backend page, or create a link to a settings model. The next example shows how to create a link to a backend page.
 
 ```php
-public function registerSettings()
+public function registerSettings(): array
 {
     return [
         'location' => [
@@ -129,7 +129,7 @@ public function registerSettings()
 The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#database-settings) section.
 
 ```php
-public function registerSettings()
+public function registerSettings(): array
 {
     return [
         'settings' => [
@@ -145,6 +145,11 @@ public function registerSettings()
     ];
 }
 ```
+
+#### Properties
+
+The optional `category` parameter is used by the backend settings page to organize links. If a category is not provided, the new link will be added to the `Misc` category.  
+You can define your own link category or use one of the default provided by [`SettingsManager` constants](../../api/System/Classes/SettingsManager#constants).
 
 The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
 

@@ -57,7 +57,7 @@ To send a message, use the `send` method on the `Mail` facade which accepts thre
 // These variables are available inside the message as Twig
 $vars = ['name' => 'Joe', 'user' => 'Mary'];
 
-Mail::send('acme.blog::mail.message', $vars, function($message) {
+Mail::send('acme.blog::mail.message', $vars, function ($message) {
 
     $message->to('admin@domain.tld', 'Admin Person');
     $message->subject('This is a reminder');
@@ -122,7 +122,7 @@ The following custom sending `$options` are supported
 As previously mentioned, the third argument given to the `send` method is a `Closure` allowing you to specify various options on the e-mail message itself. Using this Closure you may specify other attributes of the message, such as carbon copies, blind carbon copies, etc:
 
 ```php
-Mail::send('acme.blog::mail.welcome', $vars, function($message) {
+Mail::send('acme.blog::mail.welcome', $vars, function ($message) {
 
     $message->from('us@example.com', 'Winter');
     $message->to('foo@example.com')->cc('bar@example.com');
@@ -366,7 +366,7 @@ Mail templates reside in the database and can be created in the backend area via
 The process for sending these emails is the same. For example, if you create a template with code *this.is.my.email* you can send it using this PHP code:
 
 ```php
-Mail::send('this.is.my.email', $data, function($message) use ($user)
+Mail::send('this.is.my.email', $data, function ($message) use ($user)
 {
     [...]
 });
@@ -465,3 +465,20 @@ You can dynamically disable sending mail using the `Mail::pretend` method. When 
 ```php
 Mail::pretend();
 ```
+
+### Unit testing
+
+When unit testing, you may want to utilize Laravel's `fake` method on the Mail facade.  This ensures your local configuration is ignored and mailing assertions can be performed without sending emails while your tests are running:
+
+```php
+Mail::fake();
+
+// ... Run code that sends email 'this.is.my.email' template.
+
+// Check that the email was sent
+Mail::assertSent('this.is.my.email', function ($mail) {
+    return $mail->hasTo('test@example.com');
+});
+```
+
+>**NOTE:** Laravel does not support rendering the mail when using the fake mailer so it is necessary to test the contents of the sent email in another way. See https://github.com/laravel/framework/issues/24005.

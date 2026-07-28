@@ -32,7 +32,7 @@ public function onDoSomething()
 Returning a string from a [route definition](../services/router) will act the same as a CMS method and display the string as the response.
 
 ```php
-Route::get('/', function() {
+Route::get('/', function () {
     return 'Hello World';
 });
 ```
@@ -160,7 +160,7 @@ return Redirect::refresh();
 If you would like to define a custom response that you can re-use in a variety of your routes and controllers, you may use the `Response::macro` method:
 
 ```php
-Response::macro('caps', function($value) {
+Response::macro('caps', function ($value) {
     return Response::make(strtoupper($value));
 });
 ```

@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
 {
     public function up()
     {
-        Schema::create('winter_blog_posts', function($table)
+        Schema::create('winter_blog_posts', function ($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');

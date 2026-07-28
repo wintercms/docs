@@ -1,3 +1,8 @@
+---
+title: "Architecture Concepts: Composer"
+description: "Documentation on using Composer within Winter CMS projects."
+---
+
 # Using Composer
 
 ## Introduction
@@ -6,56 +11,34 @@ Using [Composer](https://getcomposer.org/) as an alternative package manager to 
 
 Composer is the de-facto standard for package management in the PHP ecosystem, and can handle the downloading, installation and management of Winter CMS plugins and themes, as well as third-party Laravel packages and vendor libraries.
 
-### Missing `composer.json`?
-
-If you have created your Winter CMS project recently, using either Composer or the Web Installer, then you should have a `composer.json` present in your proejct root.
-
-If you are missing your `composer.json` file, simply copy the latest [`composer.json`](https://github.com/wintercms/winter/tree/develop/composer.json) file from [GitHub](https://github.com/wintercms/winter/tree/develop) into your Winter instance and then run `composer install` within the root directory of the project.
-
-> **NOTE:** If you have made modifications to the files within the `modules` directory, these will be overwritten by Composer if an update to those modules is installed. It is recommended that you *do not* make modifications to the modules directly.
-
-### Development branch
-
-If you plan on submitting pull requests to the Winter CMS project via GitHub, or are actively developing a project based on Winter CMS and want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place. Doing this will allow you to catch any potential issues that may be introduced (as rare as they are) right when they happen and get them fixed while you're still actively working on your project instead of only discovering them several months down the road if they eventually make it into production.
-
-```json
-"winter/storm": "dev-develop as 1.2.999",
-"winter/wn-system-module": "dev-develop as 1.2.999",
-"winter/wn-backend-module": "dev-develop as 1.2.999",
-"winter/wn-cms-module": "dev-develop as 1.2.999",
-"laravel/framework": "~9.0",
-```
-
-> **NOTE:** Do not commit the changes to `composer.json`, as this file is handled by the Winter CMS maintainers.
-
-### Deployment best practices
-
-Using the following best practices with Composer and Winter CMS will make deployment of your Winter CMS installation much smoother:
-
-- Store the `composer.lock` file in your source control. This file is ignored by Git by default in the `.gitignore` file included by Winter CMS, but should be deployed with your application to speed up the install and update process.
-- Add a `.gitignore` file inside the `modules` folder to ignore all changes within this folder, as the modules will be installed and updated by Composer.
-- Add a `.gitignore` file inside the `plugins` folder to ignore all changes within this folder if you install your plugins via Composer. You can optionally allow custom plugins that are only being used for that specific project.
-- Use `composer install --no-dev` on your production instance to specifically exclude any "development" packages and libraries that won't be used in production.
-
 ## Installing Winter via Composer
 
 Installing Winter via Composer is easy. You can use the `create-project` command through Composer to quickly set up a new Winter installation.
 
 ```bash
-composer create-project wintercms/winter <your installation directory>
+composer create-project wintercms/winter <your installation directory> [version]
 
 # Example:
 #   composer create-project wintercms/winter mywinter
+# or
+#   composer create-project wintercms/winter ./ "dev-develop"
 ```
 
-If you wish to install a specific version of Winter, you can also specify the version.
+### Configuring Winter
 
-```bash
-composer create-project wintercms/winter <your installation directory> "<version>"
+If you have used `create-project` to create your Winter project it will automatically run the following commands for you:
 
-# Example:
-#   composer create-project wintercms/winter mywinter "1.0.474"
-```
+- [`winter:install`](../console/setup-maintenance#install-winter-via-command-line) (the CLI installation wizard)
+- [`winter:env`](../console/setup-maintenance#configure-winter-through-an-environment-file) (populates the `.env` file from the configuration files)
+- [`winter:mirror public --relative`](../console/setup-maintenance#mirror-public-files) (sets up the project to use a public folder, recommended for security)
+
+You can either go through this wizard to configure your project or you can cancel with (`Ctrl+C`) and manually reviewing and make changes to the configuration files located in `config/*.php`. If you take the manual approach, note that you will also need to run `php artisan migrate` to migrate the database yourself after configuring the project.
+
+> **NOTE:** When running commands on your Winter project, make sure that you are located in the project root directory first (following the previous example you can run `cd mywinter`).
+
+### Completing installation
+
+Once the above commands have been run, refer to the [Post Installation steps](../setup/installation#post-installation-steps) on the Installation page to complete the process.
 
 ## Installing a plugin or theme using Composer
 
@@ -87,6 +70,41 @@ composer require --dev <your package name> "<version constraint>"
 # Example:
 #   composer require --dev winter/wn-builder-plugin "^2.0.0"
 ```
+
+After installing any packages via composer it is important to ensure that any included migrations are run and if you are [using a public folder](../setup/configuration#using-a-public-folder) that the public folder is regenerated. Use the following commands to accomplish that:
+
+```bash
+php artisan migrate && php artisan winter:mirror public --relative
+```
+
+### Missing `composer.json`?
+
+If you have created your Winter CMS project recently, using either Composer or the Web Installer, then you should have a `composer.json` present in your proejct root.
+
+If you are missing your `composer.json` file, simply copy the latest [`composer.json`](https://github.com/wintercms/winter/tree/develop/composer.json) file from [GitHub](https://github.com/wintercms/winter/tree/develop) into your Winter instance and then run `composer install` within the root directory of the project.
+
+> **NOTE:** If you have made modifications to the files within the `modules` directory, these will be overwritten by Composer if an update to those modules is installed. It is recommended that you *do not* make modifications to the modules directly.
+
+### Development branch
+
+If you plan on submitting pull requests to the Winter CMS project via GitHub, or are actively developing a project based on Winter CMS and want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place. Doing this will allow you to catch any potential issues that may be introduced (as rare as they are) right when they happen and get them fixed while you're still actively working on your project instead of only discovering them several months down the road if they eventually make it into production.
+
+```json
+"winter/storm": "dev-develop as 1.2.999",
+"winter/wn-system-module": "dev-develop as 1.2.999",
+"winter/wn-backend-module": "dev-develop as 1.2.999",
+"winter/wn-cms-module": "dev-develop as 1.2.999",
+"laravel/framework": "~9.0",
+```
+
+### Deployment best practices
+
+Using the following best practices with Composer and Winter CMS will make deployment of your Winter CMS installation much smoother:
+
+- Store the `composer.lock` file in your source control. This file is ignored by Git by default in the `.gitignore` file included by Winter CMS, but should be deployed with your application to speed up the install and update process.
+- Add a `.gitignore` file inside the `modules` folder to ignore all changes within this folder, as the modules will be installed and updated by Composer.
+- Add a `.gitignore` file inside the `plugins` folder to ignore all changes within this folder if you install your plugins via Composer. You can optionally allow custom plugins that are only being used for that specific project.
+- Use `composer install --no-dev` on your production instance to specifically exclude any "development" packages and libraries that won't be used in production.
 
 ## Publishing plugins or themes
 
@@ -136,6 +154,8 @@ There are many different moving parts that come together to make the Winter CMS 
 - **Themes** contain static file content that is used to manage the front end structure of your website and use the package type `winter-theme`. They are located within the `/themes` directory. The `Cms` module is responsible for managing themes and determining what theme is currently active.
 
 - **Vendor** packages are included via Composer in either the project's `/vendor` directory or can sometimes be found in plugin-specific `/vendor` directories. The project vendor directory takes priority over and plugin vendor directories that appear in the system.
+
+> **NOTE:** Refer to the [Architecture documentation](../architecture/introduction) for more detailed information on how Winter CMS is structured.
 
 ## Marketplace builds
 
