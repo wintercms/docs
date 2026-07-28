@@ -125,7 +125,7 @@ Option | Type | Description
 `context` | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 `size` | Both | the size of the popup used to manage records. Available sizes: `giant`, `huge`, `large`, `small`, `tiny`, `adaptive`. Default: `huge`
 `popupClass` | Both | custom CSS class(es) to apply to the popup used to manage records. Default: `null`
-`allowDismiss` | Both | allows the popup to be dismissed by clicking the backdrop area next to it. The popup stays open if it contains unsaved changes tracked by the change monitor (`data-change-monitor`). Default: `false`
+`allowDismiss` | Both | allows the popup to be dismissed by clicking the backdrop area next to it. If the popup contains unsaved changes, it stays open, shakes and shows a warning flash message instead. Default: `false`
 
 ## Relationship types
 
