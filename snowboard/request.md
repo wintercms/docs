@@ -71,7 +71,7 @@ Finally, the following option parameters define override functionality for vario
 Option | Parameters | Description
 ------ | ---------- | -----------
 `handleConfirmMessage` | `(string) confirmationMessage` | Handles any confirmations requested of the user.
-`handleErrorMessage` | `(string) errorMessage` | Handles any errors occuring during the request
+`handleErrorMessage` | `(string) errorMessage` | Handles any errors occurring during the request
 `handleValidationMessage` | `(string) message, (Object) fieldMessages` | Handles validation errors occurring during the request. `fieldMessages` has field names as the key and messages as the value.
 `handleFlashMessage` | `(string) message, (string) type` | Handles flash messages.
 `handleRedirectResponse` | `(string) redirectUrl` | Handles redirect responses.

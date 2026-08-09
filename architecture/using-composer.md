@@ -185,7 +185,7 @@ Laravel packages will often provide configuration files, and they will usually c
 
 However, this can create problems with Winter's plugin oriented design, since there would now be random config files in the core `/config` directory. In order to solve this problem, it is recommended that you proxy the included package's configuration through your plugin instead.
 
-You may place this code in your Plugin registration file and call it from the  the `boot()` method.
+You may place this code in your Plugin registration file and call it from the `boot()` method.
 
 ```php
 public function bootPackages()
