@@ -4,7 +4,7 @@
 
 The Winter CMS backend implements the MVC pattern. Controllers manage backend pages and implement various features like forms and lists. This article describes how to develop backend controllers and how to configure controller behaviors.
 
-Each controller consists of a PHP file which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are `.php` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
+Each controller consists of a PHP file which resides in the **/controllers** subdirectory of a Plugin directory. Controller views are `.php` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
 
 ```treeview
 plugins/
@@ -44,7 +44,7 @@ The backend controller base class defines a number of properties that allow to c
 Property | Description
 ------------- | -------------
 `$fatalError` | allows to store a fatal exception generated in an action method in order to display it in the view.
-`$user` | contains a reference to the the backend user object.
+`$user` | contains a reference to the backend user object.
 `$suppressView` | allows to prevent the view display. Can be updated in the action method or in the controller constructor.
 `$params` | an array of the routed parameters.
 `$action` | a name of the action method being executed in the current request.

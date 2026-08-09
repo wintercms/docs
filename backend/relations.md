@@ -114,6 +114,7 @@ Option | Type | Description
 `recordUrl` | List | link each list record to another page. Eg: **users/update/:id**. The `:id` part is replaced with the record identifier.
 `customViewPath` | List | specify a custom view path to override partials used by the list.
 `recordOnClick` | List | custom JavaScript code to execute when clicking on a record.
+`sortable` | List | enables drag-and-drop reordering of the related records, see [reordering relations](#reordering-relations). Requires the parent model to use the [`HasSortableRelations` trait](../database/traits#hassortablerelations). Default: `false`.
 `toolbarPartial` | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
 `toolbarButtons` | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `refresh`, `link`, & `unlink`. Example: `add\|remove`. <br/> Additionally, you can customize the text inside these buttons by setting this property to an associative array, with the key being the button type and the value being the text for that button. Example: `create: 'Assign User'`. The value also supports translation.
 
@@ -288,6 +289,23 @@ phone:
         form: $/acme/user/models/phone/fields.yaml
         list: $/acme/user/models/phone/columns.yaml
 ```
+
+### Reordering relations
+
+Pivot-based relations (`belongsToMany`, `morphToMany`, `morphedByMany`) can be reordered with drag-and-drop directly in the relation manager. The parent model must use the [`HasSortableRelations` trait](../database/traits#hassortablerelations) and declare the relation in its `$sortableRelations` property, and the pivot table must have a sort order column. Then set `sortable: true` on the relation's `view` configuration:
+
+```yaml
+authors:
+    label: Author
+    view:
+        list: $/acme/blog/models/author/columns.yaml
+        toolbarButtons: link|unlink
+        sortable: true
+```
+
+A drag handle is shown on each related record; dropping persists the new order to the pivot's sort order column. Reordering also works while the parent record is being created, before it is saved — the order is stored against the [deferred binding](../database/relations#deferred-binding) and committed together with the record.
+
+As with sortable lists, the related records are shown as a single unpaginated set in their stored order, so `sortable` cannot be combined with searching, filtering, pagination, or a custom `defaultSort` on the relation's `view` configuration.
 
 ## Displaying a relation manager
 

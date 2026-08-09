@@ -76,6 +76,21 @@ Option | Description
 `showTotals` | displays the summed values for the columns in the form of `totalOnPage (totalForQuery)` in the list header and footer. Default: `true`.
 `treeExpanded` | if tree nodes should be expanded by default. Default: `false`.
 `customViewPath` | specify a custom view path to override partials used by the list, optional.
+`sortable` | enables drag-and-drop reordering of records directly in the list, see [reordering records](#reordering-records). Default: `false`.
+
+### Reordering records
+
+Set `sortable` to `true` to let backend users reorder the list with drag-and-drop. The list model must use the [`Sortable` trait](../database/traits#sortable) so it has a `sort_order` column.
+
+```yaml
+sortable: true
+```
+
+When enabled, a drag handle is shown on each row, column header sorting is disabled, the list is shown in its stored order without pagination, and dropping a row persists the new order to the model's sort order column via AJAX.
+
+Because the whole list must be visible in a single fixed order, `sortable` cannot be combined with searching, filtering, pagination, or a custom `defaultSort` — configuring any of these alongside it raises a configuration error.
+
+> **NOTE:** Reordering applies to flat lists. For reordering tree structures, or for a dedicated standalone reordering page, use the [Reorder behavior](reorder).
 
 ### Adding a toolbar
 

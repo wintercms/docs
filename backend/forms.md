@@ -282,8 +282,10 @@ There are various native field types that can be used for the **type** setting. 
 - [Range](#range)
 - [Section](#section)
 - [Switch](#switch)
+- [Tel](#tel)
 - [Text](#text)
 - [Textarea](#textarea)
+- [URL](#url)
 - [Widget](#widget)
 
 </div>
@@ -680,6 +682,34 @@ show_content:
     on: myauthor.myplugin::lang.models.mymodel.show_content.on
     off: myauthor.myplugin::lang.models.mymodel.show_content.off
 ```
+
+### Tel
+
+`tel` – renders a single-line input for phone values with built-in browser validation.
+
+```yaml
+telephone:
+    label: Phone number
+    type: tel
+    pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}"
+    placeholder: xxx-xxx-xxxx
+    maxlength: 20
+    minlength: 12
+    size: 20
+    required: true
+    options:
+        514-123-4567: First Test Phone Number
+        800-111-2222: Second Test Phone Number
+```
+
+- Displays a phone icon on the left in both edit and preview modes.
+- In preview mode, renders as a clickable link that opens a phone dialing screen on mobile.
+- Supports all standard HTML5 attributes for `<input type="tel">`:
+    - `placeholder`, `maxlength`, `minlength`, `pattern`, `size`, `list`, `autocomplete`, `required`, `readonly`, `disabled`
+- `options` will be rendered in a `<datalist>` element, enabling autocomplete suggestions.
+- If an option's value and label are identical, the label is omitted for brevity.
+
+See [Defining field options](#defining-field-options) for the different methods to specify the options.
 
 ### Text
 
@@ -1816,7 +1846,7 @@ Sometimes you may wish to modify the default form behavior and there are several
 
 Several controller methods can called at various points during the lifecycle of the `FormController` to provide injection points for custom logic. See the [API docs](/docs/v1.2/api/Backend/Behaviors/FormController#method-formbeforesave) for a full reference of what they are. Generally speaking any method in the API docs prefixed with `form` can be overridden in your controller to change the default behaviour or act as an injection point for custom logic.
 
-> **NOTE:** It may be more desirable to use [model events](/docs/v1.2/api/events/model/beforeSave) to implement your logic instead as those are always run when applicable if the model is being affected, no matter where the interaction with the model is occuring.
+> **NOTE:** It may be more desirable to use [model events](/docs/v1.2/api/events/model/beforeSave) to implement your logic instead as those are always run when applicable if the model is being affected, no matter where the interaction with the model is occurring.
 
 ### Overriding controller action
 
