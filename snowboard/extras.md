@@ -413,7 +413,7 @@ class Gallery extends Snowboard.PluginBase {
 }
 ```
 
-In the example above, even if the gallery element defines a `data-num-images` data attribute, this will be overriden by the `userNumImages` parameter that is used in constructing the gallery. This `userNumImages` parameter could be populated by a user configuration source.
+In the example above, even if the gallery element defines a `data-num-images` data attribute, this will be overridden by the `userNumImages` parameter that is used in constructing the gallery. This `userNumImages` parameter could be populated by a user configuration source.
 
 ### Methods
 
@@ -429,7 +429,7 @@ this.config.get(); // Returns an object of all configuration options and their v
 
 #### `get(configName: string)`
 
-Gets the configuration value for the given configuration name. This will be retrieved from the local configuration first, then the data attribute of the element providing the configuration then finally from the the defaults if not specified on the element.
+Gets the configuration value for the given configuration name. This will be retrieved from the local configuration first, then the data attribute of the element providing the configuration then finally from the defaults if not specified on the element.
 
 If the configuration has been provided a local configuration value for the config name, it will be returned over all other sources.
 
