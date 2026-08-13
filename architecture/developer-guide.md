@@ -10,28 +10,46 @@ Winter follows the [PSR-2 Coding Style Guide](https://www.php-fig.org/psr/psr-2/
 
 Due to historical choices and technical limitations, we have some exceptions to these guidelines in Winter.
 
-#### Controller methods can have a single underscore
+#### Controller action and AJAX handler names
 
-The PSR-2 guidelines state that methods must be in **camelCase** format. However, in [Backend controllers](../backend/controllers-ajax.md) in Winter, AJAX handlers can be created using a suffix notation if they are connected to a "main" action. For example:
+The PSR-2 guidelines state that methods must be in **camelCase** format. [Backend controllers](../backend/controllers-ajax.md) in Winter deviate from this in two ways, and an exception must be granted for each.
+
+Firstly, methods that are reachable as a URL — *actions* — must be named entirely in **lowercase**. Actions made up of more than one word use **snake_case**, or run the words together:
 
 ```php
 public function index()
 {
-    // This is the index page (index action)
+    // This is the index page, at /author/plugin/controller/index
+}
+
+public function my_action()
+{
+    // Reachable at /author/plugin/controller/my-action
+}
+
+public function myaccount()
+{
+    // Reachable at /author/plugin/controller/myaccount
+}
+```
+
+URL segments containing dashes are normalised to snake_case, so `/my-action` resolves to `my_action()`. A camelCase method such as `myAction()` is not reachable as an action at all.
+
+Secondly, AJAX handlers are named with an `on` prefix in camelCase, and may carry an action prefix separated by a single underscore if they are connected to a "main" action:
+
+```php
+public function onDoSomethingElse()
+{
+    // AJAX handler works globally for all actions
 }
 
 public function index_onDoSomething()
 {
     // AJAX handler only works on the index action
 }
-
-public function onDoSomethingElse()
-{
-    // AJAX handler works globally for all actions
-}
 ```
 
-An exception must be granted for this scenario. In other scenarios, underscores should be avoided in method names.
+Handler names are deliberately excluded from URL dispatch. As of v1.2.14 only lowercase method names are routable as actions, which prevents an AJAX handler being triggered by a plain link rather than by a proper AJAX request. In other scenarios, underscores should be avoided in method names.
 
 #### Curly braces for condition blocks
 
