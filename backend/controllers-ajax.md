@@ -57,7 +57,7 @@ Property | Description
 
 ## Actions, views and routing
 
-Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.php** view file contents, corresponding to the **index** action method:
+Public controller methods with lowercase names, called **actions**, are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.php** view file contents, corresponding to the **index** action method:
 
 ```html
 <h1>Hello World</h1>
@@ -74,6 +74,10 @@ The above Controller results in the following:
 ```
 https://example.com/backend/acme/blog/users/index
 ```
+
+> **NOTE:** Action methods must be named entirely in **lowercase**. Actions made up of more than one word use **snake_case** (`my_action`), or run the words together (`myaccount`). Dashes in the URL are normalised to snake_case, so `/my-action` resolves to the `my_action()` method. A camelCase method such as `myAction()` is not reachable as an action.
+>
+> This is what keeps [AJAX handlers](#using-ajax-handlers) — which are named `onDoSomething` or `index_onDoSomething` — from being reachable as URLs, so that they can only be triggered by a proper AJAX request. Prior to v1.2.14, any public controller method was reachable as an action.
 
 ## Passing data to views
 
