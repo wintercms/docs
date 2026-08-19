@@ -791,6 +791,7 @@ There are various form widgets included as standard, although it is common for p
 - [Color picker](#color-picker)
 - [Data table](#data-table)
 - [Date picker](#date-picker)
+- [Fieldset](#fieldset)
 - [File upload](#file-upload)
 - [Icon picker](#icon-picker)
 - [Markdown editor](#markdown-editor)
@@ -1003,6 +1004,37 @@ Option | Description
 `showWeekNumber` | show week numbers at head of row. Default: `false`
 `ignoreTimezone` | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
 
+### Fieldset
+
+`fieldset` - renders a group of fields in a `<fieldset>` tag.
+
+> **NOTE:** Contrary to the [nestedform](#nested-form), the fields defined in a fieldset are part of the parent form. They are only grouped visually within the `<fieldset>` tag, but will get submitted within the same array as the parent form in the POST data.
+
+```yaml
+groupedFields:
+    type: fieldset
+    label: Grouped Fields
+    fields:
+        name:
+            label: Your name
+        address:
+            label: Your address
+        phone:
+            label: Your phone
+            type: tel
+        website:
+            label: Your website URL
+            type: url
+```
+
+A fieldset provides a way of ***visually*** grouping fields. The form definition does not support tabs or secondary tabs as it is only used to define the fields for grouping purposes. The field's `label` is used as the `<fieldset>`'s `<legend>`.
+
+> **TIP:** Use a `fieldset` when you want to visually group fields that are still saved as regular top-level attributes on the model (a flat structure). Use a [nestedform](#nested-form) instead when you want the grouped fields stored together as a single nested (arrayed) attribute.
+
+Option | Description
+------------- | -------------
+`fields`  | contains the [form fields definition](#defining-form-fields) used to define the grouped fields.
+
 ### File upload
 
 `fileupload` - renders a file uploader for images or regular files.
@@ -1125,6 +1157,9 @@ Option | Description
 `nestedform` - renders a nested form as the contents of this field and returns the form data as an array.
 
 > **NOTE:** In order to use this with a model, the field should be defined as a `jsonable` attribute, or as another attribute that can handle storing arrayed data.
+> **NOTE:** The fields defined in a nestedform are separate from the main(parent) form. They will get submitted within a nested array named after the nestedform field's name in the POST data.
+>
+> **TIP:** Use a `nestedform` when you want the grouped fields stored together as a single nested (arrayed) attribute. Use a [fieldset](#fieldset) instead when you only want to visually group fields that are still saved as regular top-level attributes on the model.
 
 ```yaml
 content:
