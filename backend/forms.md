@@ -1158,7 +1158,7 @@ Option | Description
 
 > **NOTE:** In order to use this with a model, the field should be defined as a `jsonable` attribute, or as another attribute that can handle storing arrayed data.
 > **NOTE:** The fields defined in a nestedform are separate from the main(parent) form. They will get submitted within a nested array named after the nestedform field's name in the POST data.
-
+>
 > **TIP:** Use a `nestedform` when you want the grouped fields stored together as a single nested (arrayed) attribute. Use a [fieldset](#fieldset) instead when you only want to visually group fields that are still saved as regular top-level attributes on the model.
 
 ```yaml
