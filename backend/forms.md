@@ -683,6 +683,12 @@ show_content:
     off: myauthor.myplugin::lang.models.mymodel.show_content.off
 ```
 
+Option | Description
+------------- | -------------
+`on` | a custom label shown for the "on" (checked) state, defaults to `Yes`. Can be a [localization key](../plugin/localization).
+`off` | a custom label shown for the "off" (unchecked) state, defaults to `No`. Can be a [localization key](../plugin/localization).
+`default` | the default state, either `true` (on) or `false` (off).
+
 ### Tel
 
 `tel` – renders a single-line input for phone values with built-in browser validation.
@@ -1000,6 +1006,7 @@ Option | Description
 `format` | provide an explicit date display format. Eg: `Y-m-d`
 `minDate` | the minimum/earliest date that can be selected.
 `maxDate` | the maximum/latest date that can be selected.
+`yearRange` | the number of years either side of the current year to show, or an explicit `[from, to]` range of years. Eg: `50` or `[1900, 2000]`.
 `firstDay` | the first day of the week. Default: 0 (Sunday).
 `showWeekNumber` | show week numbers at head of row. Default: `false`
 `ignoreTimezone` | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
@@ -1129,6 +1136,7 @@ md_content:
 Option | Description
 ------------- | -------------
 `mode` | the expected view mode, either tab or split. Default: `tab`.
+`safe` | render the preview using safe markdown, stripping potentially unsafe HTML from the output. Default: `false`
 
 ### Media finder
 
@@ -1399,7 +1407,8 @@ html_content:
 
 Option | Description
 ------------- | -------------
-`toolbarButtons` | which buttons to show on the editor toolbar.
+`toolbarButtons` | which buttons to show on the editor toolbar, as a pipe-delimited list. Eg: `bold|italic|insertLink`
+`fullPage` | store a complete HTML document (including `<head>` and `<html>` tags) instead of an HTML fragment. Default: `false`
 
 The available toolbar buttons are:
 
