@@ -175,9 +175,9 @@ echo $this->foo;
 
 ### Twig markup section
 
-The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by Winter](../markup), all the [native Twig features](https://twig.symfony.com/doc/2.x/), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
+The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by Winter](../markup/templating/templating), all the [native Twig features](https://twig.symfony.com/doc/2.x/), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
 
-More information can be found [in the Markup guide](../markup).
+More information can be found [in the Markup guide](../markup/templating/templating).
 
 ## Theme Logging
 
@@ -332,7 +332,7 @@ In your templates:
 
 #### Asset Compilation
 
-When using the [asset combiner](../markup/filter/theme#combiner-aliases), child theme assets are resolved first:
+When using the [asset combiner](../markup/filters/theme), child theme assets are resolved first:
 
 ```twig
 {# If custom.css exists in child theme, it will be used; otherwise parent's version #}
