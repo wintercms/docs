@@ -47,7 +47,9 @@ location / {
     rewrite ^/.*$ /index.php last;
 }
 
-# Pass the PHP scripts to FastCGI server
+# Pass the PHP scripts to FastCGI server.
+# Note this matches `/index.php` only, and deliberately so: it is what stops any other PHP
+# file in the document root from being executed. Do not broaden it to `location ~ \.php$`.
 location ~ ^/index.php {
     # Write your FPM configuration here
 
@@ -137,6 +139,10 @@ $HTTP["host"] =~ "domain.example.com" {
     # - /storage/temp/public: Public temporary files
     # Note: /storage/app/uploads/protected is NOT exposed here
     url.rewrite-once = (
+        # Block all PHP files, except index. This must come first: the passthrough rules
+        # below serve their paths as-is, so without this a PHP file written anywhere under
+        # them would be handed to the PHP handler.
+        "^/(?!index\.php(\?.*|)$).*\.php(\?.*|)$" => "/index.php",
         "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
         "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
         "^/storage/app/uploads/public/[\w-]+/.*$" => "$0",
@@ -167,6 +173,20 @@ If your webserver is running Internet Information Services (IIS) you can use the
                     - /storage/temp/public: Public temporary files
                     Note: /storage/app/uploads/protected is NOT exposed here
                 -->
+                <!--
+                    Block all PHP files, except index. This must come first: the rule below
+                    excludes several paths from being handled by Winter so that the server
+                    serves them directly, and without this a PHP file written anywhere under
+                    those paths would be handed to the PHP handler.
+                -->
+                <rule name="Block all PHP files, except index" stopProcessing="true">
+                    <match url="\.php$" />
+                    <conditions>
+                        <add input="{REQUEST_FILENAME}" pattern="(^|/)index\.php$" ignoreCase="true" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="index.php" />
+                </rule>
+
                 <rule name="Winter CMS to handle all non-whitelisted URLs" stopProcessing="true">
                     <match url="^index.php" negate="true" />
                     <conditions logicalGrouping="MatchAll">
