@@ -71,6 +71,7 @@ Option | Description
 `showSorting` | displays the sorting link on each column. Default: `true`
 `defaultSort` | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 `showCheckboxes` | displays checkboxes next to each record. Default: `false`.
+`selectAllMatching` | once every record on the page is checked, offers to select all records matching the current search and filters, see [selecting all matching records](#selecting-all-matching-records). Requires `showCheckboxes`. Default: `false`.
 `showSetup` | displays the list column set up button. Default: `false`.
 `showTree` | displays a tree hierarchy for parent/child records. Default: `false`.
 `showTotals` | displays the summed values for the columns in the form of `totalOnPage (totalForQuery)` in the list header and footer. Default: `true`.
@@ -127,6 +128,87 @@ The toolbar buttons partial referred above should contain the toolbar control de
         href="<?= Backend::url('acme/blog/posts/create') ?>"
         class="btn btn-primary wn-icon-plus">New Post</a>
 </div>
+```
+
+### Bulk actions
+
+When `showCheckboxes` is enabled, toolbar buttons can act on the records the user has checked. The list behavior provides a bulk delete handler, `index_onDelete`, that a toolbar button can call directly:
+
+```php
+<div data-control="toolbar">
+    <button
+        class="btn btn-danger wn-icon-trash-o"
+        disabled="disabled"
+        onclick="$(this).data('request-data', { checked: $('.control-list').listWidget('getChecked') })"
+        data-request="onDelete"
+        data-request-confirm="<?= e(trans('backend::lang.list.delete_selected_confirm')); ?>"
+        data-trigger-action="enable"
+        data-trigger=".control-list input[type=checkbox]"
+        data-trigger-condition="checked"
+        data-request-success="$(this).prop('disabled', 'disabled')"
+        data-stripe-load-indicator>
+        <?= e(trans('backend::lang.list.delete_selected')); ?>
+    </button>
+</div>
+```
+
+The button posts the checked record IDs as `checked`, and is only enabled while at least one record is checked. Each record is deleted individually, so model events such as `beforeDelete` still run, and the flash messages can be customized with the `deleteMessage` and `noRecordsDeletedMessage` options, where `:count` is replaced with the number of records deleted.
+
+The selected records are always resolved through the list's own query, including the active search, filters and any [query extensions](#extending-the-model-query). A posted ID that the list is not currently showing is ignored rather than acted on.
+
+#### Selecting all matching records
+
+The checkboxes can only select records on the current page. To let users act on every record that matches the current search and filters, enable `selectAllMatching` alongside `showCheckboxes`:
+
+```yaml
+showCheckboxes: true
+selectAllMatching: true
+```
+
+Once every record on the page is checked and more records match than fit on it, a banner above the list offers to **select all N matching records**. The selection survives pagination, re-sorting and changes to the visible columns. It is cleared when the search or filters change, or when a single record is unchecked. It is not available for tree lists (`showTree`) or for lists rendered by the [relation behavior](relations).
+
+Any button that posts `checked` picks up an all-matching selection automatically, with no markup changes, and a note stating how many records will be affected is appended to its confirmation message. The built-in `index_onDelete` handler supports it.
+
+> **NOTE:** A handler that reads `post('checked')` only ever receives the IDs of the records on the current page, so it would act on those records alone while the user was told every matching record was selected. Only enable `selectAllMatching` on a list whose bulk action handlers all resolve their records through the [selection API](#writing-bulk-action-handlers).
+
+#### Writing bulk action handlers
+
+A bulk action handler should resolve the records it acts on with `listGetSelectionQuery()` instead of reading `post('checked')`. It returns a query restricted to the selected records, whether the user checked individual records or selected all matching records, with the list's search, filters and query extensions applied. Because an all-matching selection can include every record in the table, process the query in chunks rather than loading it at once:
+
+```php
+public function index_onPublish()
+{
+    $count = 0;
+
+    $this->listGetSelectionQuery()->chunkById(100, function ($posts) use (&$count) {
+        foreach ($posts as $post) {
+            $post->publish();
+            $count++;
+        }
+    });
+
+    Flash::success("Published {$count} posts.");
+
+    return $this->listRefresh();
+}
+```
+
+The returned query has no ordering applied, which `chunkById()` requires to page through every record. If a filter scope or `listExtendQuery()` joins another table, pass the qualified key to `chunkById()` (e.g. `chunkById(100, $callback, 'acme_blog_posts.id', 'id')`), and note that a one-to-many join returns a record once for each joined row.
+
+When an array of keys is more convenient, `listGetSelectedKeys()` returns the key of each selected record once. It is a drop-in replacement for `post('checked')`, but prefer `listGetSelectionQuery()` for actions that may run against large selections.
+
+Both methods accept an optional list definition name, and default to the primary list. When a controller renders [multiple list definitions](#multiple-list-definitions), include the definition in the request data (e.g. `{ checked: ..., definition: 'secondary' }`) so the selection is taken from the correct list, and pass it on with `listGetSelectionQuery(post('definition'))`.
+
+Both methods throw an `ApplicationException` rather than act on the wrong records when:
+
+- the definition does not name a list on the controller;
+- an all-matching selection is posted to a list that does not have `selectAllMatching` enabled;
+- the list's search or filters have changed since the records were selected, for example in another browser tab sharing the same session.
+
+Requests built in JavaScript rather than with the `data-request` attributes can get the selection to post with the list widget's `getSelection` method, which returns the `checked`, `checked_all` and `checked_fingerprint` values the server expects:
+
+```js
+var data = $('.control-list').listWidget('getSelection')
 ```
 
 ### Filtering the list
