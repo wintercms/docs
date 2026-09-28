@@ -90,7 +90,7 @@ function onStart()
 <h3>{{ hello }}</h3>
 ```
 
-The templating language provided by Winter is described in the [Markup Guide](../markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
+The templating language provided by Winter is described in the [Markup Guide](../markup/templating/templating). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
 
 ### Life cycle limitations
 
