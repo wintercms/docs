@@ -529,6 +529,17 @@ public function getStatusOptions($value, $formData)
 }
 ```
 
+By default the dropdown has a clearing feature when placeholder is set. This can be disabled by setting the `allowClear` option to `false`.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    allowClear: false
+```
+
+>**NOTE:** This is useful in case you cast the model field that use ad dropdown with an Enumerator class to avoid `not a valid backing value for enum`  
+
 ### Email
 
 `email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
