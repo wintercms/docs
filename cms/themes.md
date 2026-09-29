@@ -52,7 +52,7 @@ themes/
     |   |-- html-header.htm
     |   `-- navbar.htm
     |-- theme.yaml              # Theme information file
-    `-- version.yaml            # Theme updates file
+    `-- version.yaml            # Theme version file
 ```
 
 > The active theme is set with the `activeTheme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Frontend Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
