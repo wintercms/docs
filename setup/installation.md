@@ -16,7 +16,7 @@ Before you proceed, check that your server meets the minimum system requirements
 
 Winter CMS has some server requirements for web hosting:
 
-- PHP version 8.1 or above. (we recommend at least PHP 8.2)
+- PHP version 8.2 or above.
 - The following PHP extensions installed and enabled:
     - cURL
     - GD
@@ -30,10 +30,10 @@ We also recommend the installation of the PDO SQLite extension, regardless of yo
 
 ### Supported Databases
 
-- MariaDB 10.2+ ([Version Policy](https://mariadb.org/about/#maintenance-policy))
+- MariaDB 10.3+ ([Version Policy](https://mariadb.org/about/#maintenance-policy))
 - MySQL 5.7+ ([Version Policy](https://en.wikipedia.org/wiki/MySQL#Release_history))
-- PostgreSQL 9.6+ ([Version Policy](https://www.postgresql.org/support/versioning/))
-- SQLite 3.8.8+
+- PostgreSQL 10.0+ ([Version Policy](https://www.postgresql.org/support/versioning/))
+- SQLite 3.35.0+
 - SQL Server 2017+ ([Version Policy](https://docs.microsoft.com/en-us/lifecycle/products/?products=sql-server))
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://github.com/orlando-colamatteo/ms-sql-server-group-concat-sqlclr) user-defined aggregate.
