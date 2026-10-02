@@ -178,6 +178,12 @@ In Laravel 11, calling `->change()` on a column in a migration resets any column
 $table->integer('votes')->unsigned()->default(1)->comment('The vote count')->change();
 ```
 
+To remove the default value of a column while you modify it, pass `NULL` as a raw expression. Winter currently treats `->default(null)` as if no default was specified, and keeps the existing default:
+
+```php
+$table->string('status', 20)->nullable()->default(DB::raw('NULL'))->change();
+```
+
 ### Column types
 
 The following changes to the schema builder affect new migrations, but also your existing migrations whenever they run on an empty database, for example on a fresh installation or in your test suite:
