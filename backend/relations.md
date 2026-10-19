@@ -77,6 +77,28 @@ items:
         recordsPerPage: 10
 ```
 
+A button can also be defined as an array with an optional `label` and `permissions`. The [permissions](users#users-and-permissions) work the same as for [form fields](forms#field-options): only one of them is needed to grant access. A button the user has no access to is hidden, and the AJAX handlers that perform its action abort with a 403 error.
+
+```yaml
+items:
+    label: Invoice Line Item
+    view:
+        list: $/acme/pay/models/invoiceitem/columns.yaml
+        toolbarButtons:
+            create: Add a line item
+            delete:
+                label: Remove line item
+                permissions: [acme.pay.delete_invoice_items]
+```
+
+Button | Protected handlers
+------------- | -------------
+`create` | `onRelationManageCreate`
+`update` | `onRelationManageUpdate`
+`delete` | `onRelationManageDelete`
+`add`, `link` | `onRelationManageAdd`, `onRelationManagePivotCreate`
+`remove`, `unlink` | `onRelationManageRemove`
+
 The following options are then used for each relationship name definition:
 
 Option | Description
@@ -116,7 +138,7 @@ Option | Type | Description
 `recordOnClick` | List | custom JavaScript code to execute when clicking on a record.
 `sortable` | List | enables drag-and-drop reordering of the related records, see [reordering relations](#reordering-relations). Requires the parent model to use the [`HasSortableRelations` trait](../database/traits#hassortablerelations). Default: `false`.
 `toolbarPartial` | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
-`toolbarButtons` | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `refresh`, `link`, & `unlink`. Example: `add\|remove`. <br/> Additionally, you can customize the text inside these buttons by setting this property to an associative array, with the key being the button type and the value being the text for that button. Example: `create: 'Assign User'`. The value also supports translation.
+`toolbarButtons` | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `refresh`, `link`, & `unlink`. Example: `add\|remove`. <br/> Additionally, you can customize the text inside these buttons by setting this property to an associative array, with the key being the button type and the value being the text for that button. Example: `create: 'Assign User'`. The value also supports translation. Each button can also be restricted with `permissions`, see [above](#configuring-the-relation-behavior).
 
 These configuration values can be specified only for the **manage** options.
 
