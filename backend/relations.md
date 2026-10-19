@@ -96,8 +96,10 @@ Button | Protected handlers
 `create` | `onRelationManageCreate`
 `update` | `onRelationManageUpdate`
 `delete` | `onRelationManageDelete`
-`add`, `link` | `onRelationManageAdd`, `onRelationManagePivotCreate`
-`remove`, `unlink` | `onRelationManageRemove`
+`add` | `onRelationManageAdd` (multi), `onRelationManagePivotCreate`
+`link` | `onRelationManageAdd` (single)
+`remove` | `onRelationManageRemove` (multi)
+`unlink` | `onRelationManageRemove` (single)
 
 The following options are then used for each relationship name definition:
 
