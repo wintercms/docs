@@ -227,6 +227,33 @@ born_at:
     maxDate: 2014-04-23
 ```
 
+### Preview mode and AJAX handlers
+
+A form widget carries a `previewMode` property that is `true` whenever its field is not editable. It is raised from several places and you do not set it yourself:
+
+- the parent form propagates its own `previewMode` to every field widget it builds, so a form rendered in a preview context raises it on all of them;
+- a field declared `disabled` raises it on that field's widget;
+- a [read only relation](relations#read-only-relations) raises it on the widgets in its view, manage and pivot forms.
+
+Widgets already honour `previewMode` when they render, by hiding the controls that would change anything. **A widget's AJAX handlers must honour it too.** A handler is dispatched straight to the widget by its alias — `mywidget::onDoSomething` — so it does not pass through whatever authorized the page, and a handler that writes will happily write to a field the page is showing as uneditable.
+
+Any handler that changes something must therefore refuse when the widget is in preview mode. `Backend\Classes\FormWidgetBase` provides the guard:
+
+```php
+public function onDeleteSomething()
+{
+    $this->abortIfPreviewMode();
+
+    // ...
+}
+```
+
+`abortIfPreviewMode()` aborts the request with a `403` when `previewMode` is set, and does nothing otherwise.
+
+Handlers that only read should **not** call it — a preview form is still meant to be looked at, so refreshing a preview, loading a library or rendering a picker must keep working. The core widgets follow this rule: `FileUpload::onUpload`, `onRemoveAttachment`, `onSortAttachments` and `onSaveAttachmentConfig` are guarded while `onLoadAttachmentConfig` is not; `Repeater::onAddItem` and `onRemoveItem` are guarded while `onRefresh` is not; `MarkdownEditor::onRefresh`, `RichEditor::onLoadPageLinksForm` and `IconPicker::onLoadIconLibrary` are reads and are left alone.
+
+> **NOTE**: this is a contract, not an enforcement — nothing stops a widget from ignoring `previewMode`. A third-party widget that does not call `abortIfPreviewMode()` in its write handlers remains writable on a preview form, just as it already renders its editable controls there.
+
 ### Form widget registration
 
 Plugins should register form widgets by overriding the `registerFormWidgets` method inside the [Plugin registration class](../plugin/registration#registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:

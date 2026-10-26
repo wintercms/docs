@@ -1294,7 +1294,7 @@ records:
 
 Option | Description
 ------------- | -------------
-`readOnly` | forces the relation controller in readOnly mode. (defaults to parent previewMode)
+`readOnly` | forces the relation controller in readOnly mode. (defaults to parent previewMode). This is presentational only, like the `relationRender` option it is passed to — to forbid writes, set `readOnly` in the [relation configuration](relations#read-only-relations).
 `recordUrl` | path to controller action to open a record (e.g. `author/plugin/controller/update/:id`). `:id` will get replaced with the record id.
 `recordOnClick` | custom Javascript code to execute when a record is clicked.
 `relation` | relation name if different from the field name.
