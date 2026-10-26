@@ -334,7 +334,7 @@ You may instruct the relation manager to render in read only mode by passing the
 <?= $this->relationRender('comments', ['readOnly' => true]) ?>
 ```
 
-> **IMPORTANT**: this is presentational, not an authorization control. The value travels to the browser and back with each AJAX request, so a request that omits it falls back to the relation's configuration. It can only make a relation *more* restricted, never less.
+> **IMPORTANT**: this styles that one render and nothing else. It is not an authorization control and is not remembered: the relation's AJAX handlers read `readOnly` from the relation configuration alone, so passing it here neither forbids a write nor allows one.
 >
 > To forbid writes, set `readOnly` in the relation configuration, or per request from [`relationExtendConfig()`](#extending-relation-configuration). Both are enforced server-side.
 
