@@ -86,7 +86,7 @@ Option | Description
 `manage` | configuration specific to the management popup, see below.
 `pivot` | a reference to form field definition file, used for [relations with pivot table data](#belongs-to-many-with-pivot-data).
 `emptyMessage` | a message to display when the relationship is empty, optional.
-`readOnly` | disables the ability to add, update, delete or create relations. default: `false`
+`readOnly` | forbids adding, updating, deleting and creating, and is enforced server-side. See [Read only relations](#read-only-relations). default: `false`
 `deferredBinding` | [defers all binding actions using a session key](../database/relations#deferred-binding) when it is available. default: `false`
 
 These configuration values can be specified for the **view** or **manage** options, where applicable to the render type of list, form or both.
@@ -105,6 +105,8 @@ Option | Type | Description
 `conditions` | List | specifies a raw where query statement to apply to the list model query.
 `scope` | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The model that this relationship will be attached to (i.e. the **parent model**) is passed to this scope method as the second parameter (`$query` is the first).
 **filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists#using-list-filters).
+
+> **NOTE:** `conditions`, `scope` and `relationExtendManageWidget()` narrow the manage list that **Add** and **Link** select from, and only a record appearing in it may be attached - so they restrict what may be attached, not just what is shown. Every other record the relation manager touches is resolved through the relation itself.
 
 These configuration values can be specified only for the **view** options.
 
@@ -331,6 +333,20 @@ You may instruct the relation manager to render in read only mode by passing the
 ```php
 <?= $this->relationRender('comments', ['readOnly' => true]) ?>
 ```
+
+> **IMPORTANT**: this styles that one render and nothing else. It is not an authorization control and is not remembered: the relation's AJAX handlers read `readOnly` from the relation configuration alone, so passing it here neither forbids a write nor allows one.
+>
+> To forbid writes, set `readOnly` in the relation configuration, or per request from [`relationExtendConfig()`](#extending-relation-configuration). Both are enforced server-side.
+
+## Read only relations
+
+Every relation management handler - create, update, delete, add, remove and the pivot handlers - refuses with HTTP 403, drag-and-drop reordering is disabled, and the view, manage and pivot forms render in preview mode.
+
+Only writing is forbidden. The relation still renders and its list can still be searched, filtered, sorted and paged.
+
+Preview mode propagates to every field widget in those forms, so a widget's own write handlers refuse too - they are addressed by widget alias and would otherwise reach the relation without passing through its authorization.
+
+> **NOTE**: a third-party widget that does not call `abortIfPreviewMode()` in its write handlers will still write inside a read only relation. See [preview mode and AJAX handlers](widgets#preview-mode-and-ajax-handlers) if you maintain one.
 
 ## Extending relation behavior
 

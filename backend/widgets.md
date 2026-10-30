@@ -227,6 +227,27 @@ born_at:
     maxDate: 2014-04-23
 ```
 
+### Preview mode and AJAX handlers
+
+A form widget carries a `previewMode` property that is `true` whenever its field is not editable. You do not set it yourself; it is raised by the parent form on every field widget it builds, by a `disabled` field, and by a [read only relation](relations#read-only-relations) on its forms.
+
+Widgets already hide their controls in that state, but a handler is dispatched straight to the widget by alias - `mywidget::onDoSomething` - so it never passes through whatever authorized the page. **Any handler that writes must refuse:**
+
+```php
+public function onDeleteSomething()
+{
+    $this->abortIfPreviewMode();
+
+    // ...
+}
+```
+
+`abortIfPreviewMode()` aborts with a `403` when `previewMode` is set, and does nothing otherwise.
+
+Handlers that only read must **not** call it - a preview form is still meant to be looked at, so refreshing a preview or loading a picker keeps working. Core widgets follow this: `FileUpload::onUpload` and `Repeater::onAddItem` are guarded, `FileUpload::onLoadAttachmentConfig` and `MarkdownEditor::onRefresh` are not.
+
+> **NOTE**: this is a contract, not an enforcement. A widget that ignores `previewMode` stays writable on a preview form, just as it already renders its editable controls there.
+
 ### Form widget registration
 
 Plugins should register form widgets by overriding the `registerFormWidgets` method inside the [Plugin registration class](../plugin/registration#registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
