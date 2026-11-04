@@ -50,9 +50,9 @@ themes/
 The file format is following:
 
 ```yaml
-"v1.0.1": Theme initialization
-"v1.0.2": Added more features
-"v1.0.3": Some features are removed
+"1.0.1": Theme initialization
+"1.0.2": Added more features
+"1.0.3": Some features are removed
 ```
 
 ## Theme preview image
