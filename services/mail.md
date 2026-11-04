@@ -300,6 +300,8 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 
 Mail messages can be sent in Winter using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the backend interface via *System > Mail templates*. All mail messages support using Twig for markup.
 
+> **IMPORTANT:** Mail content is **not** sandboxed, whether it is a view file or a database row edited in the backend. A mail template is code: it may use every markup tag, filter and function a theme template may, and it reaches the same application. Editing one requires `system.manage_mail_templates`, which belongs to the Developer role, so grant it only to the people you would trust with the source code. If you need to render a mail body that one of *your users* wrote, render that fragment yourself in a [sandboxed environment](../plugin/registration#rendering-user-supplied-templates) and pass the result in as data.
+
 Optionally, mail views can be [registered in the Plugin registration file](#registering-mail-layouts-templates-and-partials) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the backend interface.
 
 ### Mail views

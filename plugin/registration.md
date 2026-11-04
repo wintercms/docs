@@ -336,6 +336,41 @@ The following Twig custom options are available:
 | `deprecated` | boolean | `false` | if true marks the current filter as being deprecated (usually used with `alternative` to provide an alternative option |
 | `alternative` | string | `''` | if `deprecated` is true, provides a recommended alternative filter to use instead. |
 
+> **NOTE:** Markup tags registered this way are available to theme templates and to your own views. They are deliberately *not* available inside a [sandboxed Twig environment](#rendering-user-supplied-templates), so registering a markup tag can never widen somebody else's sandbox.
+
+## Rendering user-supplied templates
+
+Theme templates, plugin views and module views are code: they are written by a developer and they are not sandboxed. If your plugin renders Twig that one of *its users* wrote — a notification body edited in a form field, a document template stored against a record, anything typed into a `codeeditor` — ask for a sandboxed environment instead of the default one:
+
+```php
+use System\Classes\MarkupManager;
+
+$twig = MarkupManager::makeSandboxedTwigEnvironment();
+
+$html = $twig->createTemplate($userEditedTemplate)->render([
+    'order' => $order,
+]);
+```
+
+The sandbox is an allowlist (`System\Twig\SandboxPolicy`). A sandboxed template may use the tags, filters, functions and tests the policy names, read the values you passed to `render()`, and nothing else. It cannot call a function you registered with `registerMarkupTags`, pull in another template with `extends`, `include`, `import` or `use`, or call a method on an object you passed in beyond `__toString()` and `count()`. On a Winter model it can read the attributes and relations the model exposes, and not the raw `attributes` bag, anything the model lists in `$hidden`, or any of the model's own methods.
+
+So the contract is a single rule: **pass only the values you are willing to expose.** What you pass is readable; nothing else is reachable.
+
+Widen the allowlist when your own templates legitimately need more than the baseline:
+
+```php
+$twig = MarkupManager::makeSandboxedTwigEnvironment([
+    'filters' => ['my_plugin_filter'],
+    'methods' => [\Acme\Shop\Models\Order::class => ['subtotal']],
+]);
+```
+
+The accepted keys are `tags`, `filters`, `functions`, `tests` and `methods`; any other key throws rather than being silently ignored. Each one adds to the baseline, so widening filters leaves the rest of the policy where it was.
+
+Two things to know before you widen it. A filter or function you allow is allowed with whatever arguments the template chooses, so do not allow one that takes a callable, a file path or a template name. A method you allow is allowed on every instance of that class that reaches the template, including instances you did not pass in yourself.
+
+Winter itself renders nothing in a sandbox. Theme templates, module and plugin views, and [mail content](../services/mail#message-content) are all managed by permissions that belong to the Developer role, so they are code and are treated as code. This factory is for the one case core does not have: a template that somebody without any Winter permission wrote.
+
 ## Navigation menus
 
 Plugins can extend the backend navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the backend navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
