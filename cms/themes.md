@@ -125,6 +125,8 @@ parameter = "value"
 
 The code in the PHP section executes every time before the template is rendered. The PHP section is optional for all CMS templates and its contents depend on the template type where it is defined. The PHP code section can contain optional open and close PHP tags to enable syntax highlighting in text editors. The open and close tags should always be specified on a different line to the section separator `==`.
 
+> **IMPORTANT:** A CMS template is code, and Winter treats it as code. Editing a page, layout or partial requires `cms.manage_pages`, `cms.manage_layouts` or `cms.manage_partials`, which also grant direct access to the theme's files and to this PHP section, and which belong to the Developer role. As of v1.2.15 theme templates are not rendered in a Twig sandbox and are not intended to be: their Twig markup reaches the same application as their PHP section does. Grant these permissions only to the people you would trust with the source code. If you need to render a template that someone *without* those permissions wrote, use [a sandboxed Twig environment](../plugin/registration#rendering-user-supplied-templates) instead.
+
 ```twig
 url = "/blog"
 layout = "default"

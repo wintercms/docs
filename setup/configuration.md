@@ -201,15 +201,8 @@ The following features are enabled when debug mode is enabled:
 1. [Detailed error pages](../cms/pages#error-page) are displayed.
 1. Failed user authentication provides a specific reason.
 1. [Combined assets](/docs/v1.2/markup/filters/theme) are not minified by default.
-1. [Safe mode](#safe-mode) is disabled by default.
 
 > **IMPORTANT**: Always set the `app.debug` setting to `false` for production environments.
-
-### Safe mode
-
-The safe mode setting is found in the `config/cms.php` configuration file with the `enableSafeMode` parameter. The default value is `null`.
-
-If safe mode is enabled, editing the PHP code section is disabled in CMS templates for security reasons. If set to `null`, safe mode is on when [debug mode](#debug-mode) is disabled.
 
 ### CSRF protection
 
