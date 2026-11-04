@@ -103,7 +103,7 @@ For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brow
 
 ## Dynamic pages
 
-Inside the [Twig section](themes#twig-markup-section) of a page template, you can use any [functions, filters, and tags provided by Winter](../markup). Any dynamic page requires **variables**. In Winter, variables may be prepared by the page, layout [PHP section](themes#php-code-section), or by [Components](../cms/components). In this article, we describe how to prepare variables in the PHP section.
+Inside the [Twig section](themes#twig-markup-section) of a page template, you can use any [functions, filters, and tags provided by Winter](../markup/templating/templating). Any dynamic page requires **variables**. In Winter, variables may be prepared by the page, layout [PHP section](themes#php-code-section), or by [Components](../cms/components). In this article, we describe how to prepare variables in the PHP section.
 
 ### Page execution life cycle
 
@@ -141,7 +141,7 @@ function onStart()
 </ul>
 ```
 
-The default variables and Twig extensions provided by Winter are described in the [Markup Guide](../markup). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts#dynamic-layouts) article.
+The default variables and Twig extensions provided by Winter are described in the [Markup Guide](../markup/templating/templating). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts#dynamic-layouts) article.
 
 ### Sending a custom response
 
@@ -165,7 +165,7 @@ public function onStart()
 
 ### Handling forms
 
-You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-code-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction) article). Use the [`form_open()`](../markup#standard-form) function to define a form that refers to an event handler. Example:
+You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-code-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction) article). Use the [`form_open()`](../markup/functions/form#form_open) function to define a form that refers to an event handler. Example:
 
 ```twig
 {{ form_open({ request: 'onHandleForm' }) }}
