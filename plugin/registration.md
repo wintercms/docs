@@ -369,7 +369,7 @@ The accepted keys are `tags`, `filters`, `functions`, `tests` and `methods`; any
 
 Two things to know before you widen it. A filter or function you allow is allowed with whatever arguments the template chooses, so do not allow one that takes a callable, a file path or a template name. A method you allow is allowed on every instance of that class that reaches the template, including instances you did not pass in yourself.
 
-In Winter's own code the one sandboxed surface is mail: mail templates, layouts and partials are edited in the backend under `system.manage_mail_templates`, which grants no file access and no ability to author PHP, so all mail content renders through this policy. As of v1.2.15 that includes mail views your plugin ships, so a mail view that used `str_*`, `array_*`, `url_*`, `html_*` or `form_*`, or `{% include %}`, needs the value prepared in PHP and passed in instead.
+In Winter's own code the one sandboxed surface is mail content that a backend user wrote — a mail template, layout or partial stored in the database and edited under `system.manage_mail_templates`, a permission that grants no file access and no ability to author PHP. [Mail views](../services/mail#message-content) your plugin *ships* are files in your repository, so they are not sandboxed and may use anything a view may use. The one exception is a mail **layout**, which is always rendered sandboxed because a layout row is copied out of its view file once and edited in place from then on, so write a layout to the baseline above even when you ship it as a view.
 
 ## Navigation menus
 
