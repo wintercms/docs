@@ -369,7 +369,7 @@ The accepted keys are `tags`, `filters`, `functions`, `tests` and `methods`; any
 
 Two things to know before you widen it. A filter or function you allow is allowed with whatever arguments the template chooses, so do not allow one that takes a callable, a file path or a template name. A method you allow is allowed on every instance of that class that reaches the template, including instances you did not pass in yourself.
 
-In Winter's own code the one sandboxed surface is mail content that a backend user wrote — a mail template, layout or partial stored in the database and edited under `system.manage_mail_templates`, a permission that grants no file access and no ability to author PHP. [Mail views](../services/mail#message-content) your plugin *ships* are files in your repository, so they are not sandboxed and may use anything a view may use. The one exception is a mail **layout**, which is always rendered sandboxed because a layout row is copied out of its view file once and edited in place from then on, so write a layout to the baseline above even when you ship it as a view.
+Winter itself renders nothing in a sandbox. Theme templates, module and plugin views, and [mail content](../services/mail#message-content) are all managed by permissions that belong to the Developer role, so they are code and are treated as code. This factory is for the one case core does not have: a template that somebody without any Winter permission wrote.
 
 ## Navigation menus
 
